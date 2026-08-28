@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="AnalogLab: teoría, circuitos, simulación y práctica interactiva de Electrónica Analógica.">
-<title>AnalogLab V2 · Electrónica Analógica y Laboratorio</title>
+<title>AnalogLab · Electrónica Analógica y Laboratorio</title>
 <link rel="stylesheet" href="css/styles.css">
 <script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
@@ -19,14 +19,14 @@
 <aside id="sidebar">
   <div class="progress"><div><span>Ruta completada</span><strong id="progressText">0%</strong></div><div class="track"><i id="progressBar"></i></div></div>
   <nav>
-    <a href="#inicio">Inicio</a><a href="#m1">1 · Semiconductores</a><a href="#m2">2 · Unión PN</a><a href="#m3">3 · Curva I–V</a><a href="#m4">4 · Modelos</a><a href="#m5">5 · Circuitos DC</a><a href="#m6">6 · Recta de carga</a><a href="#m7">7 · LED y laboratorio</a><a href="#m8">8 · Banco de ejercicios</a><a href="#m9">9 · Autoevaluación</a><a href="#m10">10 · Puente hacia AC</a>
+    <a href="#inicio">Inicio</a><a href="#m1">1 · Semiconductores</a><a href="#m2">2 · Unión PN</a><a href="#m3">3 · Curva I–V</a><a href="#m4">4 · Modelos</a><a href="#m5">5 · Circuitos DC</a><a href="#m6">6 · Recta de carga</a><a href="#m7">7 · LED</a><a href="#m8">8 · Banco DC</a><a href="#m9">9 · Autoevaluación</a><a href="#m10">10 · Media onda</a><a href="#m11">11 · Puente</a><a href="#m12">12 · Filtro y rizado</a><a href="#m13">13 · Recortadores</a><a href="#m14">14 · Clamper</a><a href="#m15">15 · Zener</a><a href="#m16">16 · Taller</a>
   </nav>
-  <div class="side-note"><small>Próxima expansión</small><b>Diodos en AC</b><span>Apuntes + taller del curso</span></div>
+  <div class="side-note"><small>Recursos</small><a href="assets/Taller_01_AnalogLab.pdf" target="_blank">Taller PDF</a></div>
 </aside>
 <main>
-<section id="inicio" class="chapter hero">
- <div><span class="kicker">PARTE I · DIODOS EN DC · VERSIÓN 2</span><h1>Aprender electrónica <em>viendo, pensando y probando.</em></h1><p>Un libro interactivo para estudiar la teoría, interpretar circuitos, cometer errores útiles, pedir pistas y comprobar resultados.</p><div class="actions"><a href="#m1" class="primary">Comenzar</a><a href="#m8" class="secondary">Practicar ejercicios</a></div><div class="badges"><span>Teoría visual</span><span>Circuitos SVG</span><span>Simulación</span><span>Quiz</span><span>Laboratorio</span></div></div>
- <div class="route-card"><h3>Así se trabaja cada tema</h3><ol><li>Comprende.</li><li>Predice antes de mirar.</li><li>Calcula.</li><li>Comprueba con el circuito.</li><li>Explica qué ocurrió.</li></ol><div class="formula">\(I_D=I_S(e^{V_D/(nV_T)}-1)\)</div></div>
+<section id="inicio" class="chapter hero sober-hero">
+ <div><span class="kicker">ELECTRÓNICA ANALÓGICA Y LABORATORIO</span><h1>AnalogLab</h1><p>Plataforma académica interactiva para el estudio de diodos en DC y AC. Integra fundamentos, análisis matemático, circuitos, formas de onda, ejemplos resueltos, práctica con retroalimentación y taller de repaso.</p><div class="actions"><a href="#m1" class="primary">Iniciar estudio</a><a href="#m16" class="secondary">Ir al taller</a></div><div class="badges"><span>Diodos DC</span><span>Rectificación</span><span>Filtros y rizado</span><span>Zener</span><span>Ejercicios interactivos</span></div></div>
+ <div class="route-card"><h3>Ruta sugerida</h3><ol><li>Comprende el concepto y el circuito.</li><li>Predice el comportamiento antes de revelar.</li><li>Resuelve con el modelo adecuado.</li><li>Comprueba con la gráfica o simulación.</li><li>Explica por qué el resultado es físicamente consistente.</li></ol><p class="muted">Bibliografía de apoyo: Boylestad & Nashelsky; Malvino & Bates. El desarrollo visual y pedagógico de AnalogLab es propio.</p></div>
 </section>
 
 <section id="m1" class="chapter">
@@ -35,12 +35,16 @@
  <div class="two"><article><h3>No memorices N y P: constrúyelos</h3><p>Un semiconductor puro puede modificar radicalmente su comportamiento al introducir impurezas controladas. Usa el selector y observa qué cambia.</p><div class="segmented" id="dopingButtons"><button data-mode="intrinsic" class="active">Intrínseco</button><button data-mode="n">Tipo N</button><button data-mode="p">Tipo P</button></div><div id="dopingExplain" class="explain"></div></article><article class="visual-card"><svg id="lattice" viewBox="0 0 620 350" aria-label="Red cristalina simplificada"></svg></article></div>
  <div class="predict"><b>Antes de revelar</b><p>Si se agrega una impureza pentavalente al silicio, ¿qué portador adicional esperas?</p><div class="choices" data-q="dop"><button data-v="h">Hueco</button><button data-v="e">Electrón</button><button data-v="none">Ninguno</button></div><p id="dopFb" class="feedback"></p></div>
  <div class="concept-grid"><article><b>Ge</b><p>Semiconductor elemental históricamente importante.</p></article><article><b>Si</b><p>Material de referencia para gran parte del análisis del curso.</p></article><article><b>GaAs</b><p>Material compuesto útil para relacionar brecha de energía y emisión.</p></article></div>
+
+ <div class="v3-practice" data-v3bank="semiconductors"></div>
 </section>
 
 <section id="m2" class="chapter">
  <div class="heading"><div><span class="num">2</span><div><span class="kicker">DEL MATERIAL AL DIODO</span><h2>Unión PN y polarización</h2></div></div><button class="done" data-done="m2">Marcar estudiado</button></div>
  <p class="lead">La unión PN no debe reducirse a “directa conduce e inversa no”. La región de agotamiento permite entender por qué cambia la conducción.</p>
  <div class="two"><div><div class="segmented" id="biasButtons"><button data-bias="reverse">Inversa</button><button data-bias="zero" class="active">Sin polarizar</button><button data-bias="forward">Directa</button></div><div id="biasExplain" class="explain"></div><div class="thought"><b>Pregunta de pensamiento</b><p>¿Qué variable externa estamos usando realmente para modificar la barrera?</p><button class="reveal" data-reveal="biasThought">Ver explicación</button><p id="biasThought" class="hidden"></p></div></div><div class="visual-card"><svg id="pnSvg" viewBox="0 0 700 330"></svg></div></div>
+
+ <div class="v3-practice" data-v3bank="pn"></div>
 </section>
 
 <section id="m3" class="chapter">
@@ -48,12 +52,15 @@
  <div class="formula-strip">\[I_D=I_S\left(e^{V_D/(nV_T)}-1\right),\qquad V_T=\frac{kT}{q}\]</div>
  <div class="lab"><div class="controls"><label>Temperatura <strong><span id="ivTOut">25</span> °C</strong><input id="ivT" type="range" min="0" max="100" value="25" step="5"></label><label>\(I_S\) <strong><span id="ivIsOut">1.0</span> pA</strong><input id="ivIs" type="range" min=".1" max="10" value="1" step=".1"></label><label>Factor \(n\) <strong><span id="ivNOut">1.8</span></strong><input id="ivN" type="range" min="1" max="2.2" value="1.8" step=".1"></label><label>\(V_D\) de prueba <strong><span id="ivVOut">0.650</span> V</strong><input id="ivV" type="range" min="0" max=".9" value=".65" step=".005"></label><div class="metric"><span>\(I_D\)</span><b id="ivI">—</b></div><div class="metric"><span>\(r_d \approx nV_T/I_D\)</span><b id="ivRd">—</b></div></div><div class="chart"><svg id="ivChart" viewBox="0 0 760 430"></svg></div></div>
  <div class="predict"><b>Piensa antes de mover la temperatura</b><p>¿Esperas que una misma corriente directa se alcance con exactamente el mismo \(V_D\) cuando cambia la temperatura?</p><button class="reveal" data-reveal="tempExplain">Comparar explicación</button><p id="tempExplain" class="hidden">No necesariamente. La característica del dispositivo depende de la temperatura; por eso el modelo de caída fija es una aproximación y no una ley exacta.</p></div>
+ <div class="v3-practice" data-v3bank="curve"></div>
 </section>
 
 <section id="m4" class="chapter">
  <div class="heading"><div><span class="num">4</span><div><span class="kicker">APROXIMAR CON CRITERIO</span><h2>Cuatro modelos, un mismo diodo</h2></div></div><button class="done" data-done="m4">Marcar estudiado</button></div>
  <div class="segmented wrap" id="modelTabs"><button data-model="ideal" class="active">Ideal</button><button data-model="constant">Caída constante</button><button data-model="piecewise">Lineal por tramos</button><button data-model="shockley">Shockley</button></div><div id="modelText" class="explain big"></div>
  <div class="compare"><h3>Compara el mismo circuito</h3><svg class="circuit small-circuit" viewBox="0 0 760 220"><circle cx="100" cy="110" r="42" class="source"/><text x="100" y="101" class="svgtxt">+</text><text x="100" y="131" class="svgtxt">−</text><line x1="142" y1="110" x2="250" y2="110" class="wire"/><polyline points="250,110 270,90 290,130 310,90 330,130 350,90 370,110" class="wire nofill"/><line x1="370" y1="110" x2="480" y2="110" class="wire"/><polygon points="480,80 480,140 535,110" class="diodefill"/><line x1="542" y1="78" x2="542" y2="142" class="wire"/><line x1="542" y1="110" x2="650" y2="110" class="wire"/><line x1="650" y1="110" x2="650" y2="180" class="wire"/><line x1="650" y1="180" x2="100" y2="180" class="wire"/><line x1="100" y1="180" x2="100" y2="152" class="wire"/><text x="286" y="68" class="svglabel">R</text><text x="496" y="68" class="svglabel">D</text><text x="62" y="45" class="svglabel">Vₛ</text></svg><div class="inline-inputs"><label>Vₛ [V]<input id="cmpVs" type="number" value="10" step=".1"></label><label>R [Ω]<input id="cmpR" type="number" value="1000" step="10"></label><label>Vγ [V]<input id="cmpVg" type="number" value=".7" step=".01"></label><label>rᵈ [Ω]<input id="cmpRd" type="number" value="10" step="1"></label></div><div class="table-scroll"><table><thead><tr><th>Modelo</th><th>VD</th><th>ID</th><th>Error vs. Shockley</th></tr></thead><tbody id="modelRows"></tbody></table></div></div>
+
+ <div class="v3-practice" data-v3bank="models"></div>
 </section>
 
 <section id="m5" class="chapter">
@@ -62,6 +69,8 @@
  <div class="segmented wrap" id="circuitTabs"><button data-circuit="series" class="active">Serie</button><button data-circuit="two">Dos diodos</button><button data-circuit="sources">Dos potenciales</button><button data-circuit="parallel">Paralelo</button></div><div class="circuit-stage"><svg id="circuitSvg" class="circuit" viewBox="0 0 900 360"></svg><div id="circuitInfo" class="circuit-info"></div></div>
  <h3 class="subhead">Ejemplos guiados</h3><div class="examples"><article class="guided" data-example="0"><span class="example-tag">Ejemplo 1 · Serie</span><h4>9 V · 1.2 kΩ · Si, modelo 0.7 V</h4><button class="stepBtn">Comenzar solución</button><div class="stepOut"></div></article><article class="guided" data-example="1"><span class="example-tag">Ejemplo 2 · Dos diodos</span><h4>12 V · 1 kΩ · dos diodos de 0.7 V</h4><button class="stepBtn">Comenzar solución</button><div class="stepOut"></div></article><article class="guided" data-example="2"><span class="example-tag">Ejemplo 3 · Dos potenciales</span><h4>+5 V y −2 V · 1 kΩ · un diodo</h4><button class="stepBtn">Comenzar solución</button><div class="stepOut"></div></article><article class="guided" data-example="3"><span class="example-tag">Ejemplo 4 · Hipótesis</span><h4>VA=0.3 V, VK=0 V, Vγ=0.7 V</h4><button class="stepBtn">Comenzar solución</button><div class="stepOut"></div></article></div>
  <div class="practice"><span class="practice-tag">Intenta sin mirar</span><p>Fuente de 15 V, resistencia de 2.2 kΩ y un diodo de silicio con \(V_D=0.7\,V\). Calcula \(I_D\).</p><div class="answer"><input id="dcAns" type="number" step=".01" placeholder="mA"><button id="dcCheck">Comprobar</button><button id="dcHint1">Pista 1</button><button id="dcHint2">Pista 2</button><button id="dcShow">Respuesta</button></div><p id="dcFb" class="feedback"></p></div>
+
+ <div class="v3-practice" data-v3bank="dcnet"></div>
 </section>
 
 <section id="m6" class="chapter">
@@ -70,12 +79,16 @@
  <div class="predict"><b>Predicción obligatoria</b><p>Si mantengo \(V_S\) y duplico \(R\), ¿la recta se hace más o menos inclinada en magnitud?</p><div class="choices" data-q="slope"><button data-v="more">Más</button><button data-v="less">Menos</button></div><p id="slopeFb" class="feedback"></p></div>
  <div class="lab"><div class="controls"><label>Vₛ <strong><span id="llVsOut">10.0</span> V</strong><input id="llVs" type="range" min="1" max="20" value="10" step=".5"></label><label>R <strong><span id="llROut">1.00</span> kΩ</strong><input id="llR" type="range" min=".1" max="5" value="1" step=".05"></label><label>Modelo<select id="llModel"><option value="shockley">Shockley</option><option value="constant">0.7 V</option><option value="ideal">Ideal</option></select></label><div class="metric"><span>Punto Q</span><b id="qOut">—</b></div><div class="metric"><span>Intercepto corriente</span><b id="imaxOut">—</b></div><div class="metric"><span>Intercepto voltaje</span><b id="vmaxOut">—</b></div></div><div class="chart"><svg id="loadChart" viewBox="0 0 760 430"></svg></div></div>
  <div class="worked"><span class="example-tag">Construcción paso a paso</span><button id="loadStepBtn">Mostrar paso 1</button><div id="loadStepOut"></div></div>
+
+ <div class="v3-practice" data-v3bank="loadline"></div>
 </section>
 
 <section id="m7" class="chapter">
  <div class="heading"><div><span class="num">7</span><div><span class="kicker">DISEÑO Y LABORATORIO</span><h2>LED: de la ecuación a la protoboard</h2></div></div><button class="done" data-done="m7">Marcar estudiado</button></div>
  <div class="two"><div class="controls"><label>Fuente <strong><span id="ledVsOut">12</span> V</strong><input id="ledVs" type="range" min="3" max="24" value="12" step="1"></label><label>Corriente objetivo <strong><span id="ledIOut">20</span> mA</strong><input id="ledI" type="range" min="2" max="30" value="20" step="1"></label><label>Tipo<select id="ledType"><option value="1.8">Rojo ~1.8 V</option><option value="2.1">Amarillo ~2.1 V</option><option value="2.2">Verde ~2.2 V</option><option value="3.0">Azul ~3.0 V</option><option value="3.1">Blanco ~3.1 V</option></select></label></div><div class="led-board"><svg viewBox="0 0 700 280" id="ledSvg"></svg><div class="led-results"><div><span>R calculada</span><b id="ledR">—</b></div><div><span>Potencia</span><b id="ledP">—</b></div></div></div></div>
  <div class="lab-entry"><h3>Compara teoría y medición</h3><p>Cuando realices el montaje, introduce un valor teórico y uno medido para calcular el error porcentual.</p><div class="inline-inputs"><label>Teórico<input id="theoryVal" type="number" step=".001" placeholder="Ej. 0.700"></label><label>Medido<input id="measuredVal" type="number" step=".001" placeholder="Ej. 0.684"></label></div><button id="errorBtn" class="primary mini">Calcular error</button><p id="errorOut" class="feedback"></p></div>
+
+ <div class="v3-practice" data-v3bank="led"></div>
 </section>
 
 <section id="m8" class="chapter">
@@ -86,8 +99,67 @@
 
 <section id="m9" class="chapter"><div class="heading"><div><span class="num">9</span><div><span class="kicker">REPASO</span><h2>Autoevaluación</h2></div></div><button class="done" data-done="m9">Marcar estudiado</button></div><div class="quiz"><div class="quizbar"><span id="quizCount"></span><strong id="quizScore"></strong></div><h3 id="quizQ"></h3><div id="quizOpts"></div><p id="quizFb" class="feedback"></p><button id="quizNext" class="primary mini" disabled>Siguiente</button></div></section>
 
-<section id="m10" class="chapter provisional"><div class="heading"><div><span class="num">10</span><div><span class="kicker">PARTE II · VISTA PREVIA</span><h2>Puente hacia Diodos en AC</h2></div></div><button class="done" data-done="m10">Marcar estudiado</button></div><div class="notice"><b>Módulo provisional</b><p>Este laboratorio básico será ampliado y alineado con los apuntes y el taller de rectificación del curso.</p></div><div class="two"><div><h3>Rectificador de media onda</h3><svg class="circuit" id="acCircuit" viewBox="0 0 800 300"></svg><div class="controls compact"><label>Vp <strong><span id="acAmpOut">10</span> V</strong><input id="acAmp" type="range" min="2" max="20" value="10" step="1"></label><label>Fase <strong><span id="acPhaseOut">60</span>°</strong><input id="acPhase" type="range" min="0" max="360" value="60" step="1"></label><label>Modelo<select id="acModel"><option value="ideal">Ideal</option><option value="drop">0.7 V</option></select></label></div><div id="acState" class="result-banner"></div></div><div class="chart"><svg id="acChart" viewBox="0 0 760 430"></svg></div></div><div class="predict"><b>Pregunta previa a AC</b><p>¿Durante qué semiciclo conduce el diodo con esta orientación?</p><div class="choices" data-q="ac"><button data-v="pos">Positivo</button><button data-v="neg">Negativo</button><button data-v="both">Ambos</button></div><p id="acFb" class="feedback"></p></div></section>
-<footer><div><b>AnalogLab V2</b><span>Electrónica Analógica y Laboratorio</span></div><a href="#inicio">Volver al inicio ↑</a></footer>
+<section id="m10" class="chapter">
+ <div class="heading"><div><span class="num">10</span><div><span class="kicker">DIODOS EN AC</span><h2>Rectificación de media onda</h2></div></div><button class="done" data-done="m10">Marcar estudiado</button></div>
+ <p class="lead">El análisis se realiza por intervalos: primero decide si el diodo está ON u OFF para cada semiciclo; después construye la forma de onda de salida.</p>
+ <div class="formula-strip">\[v_i(t)=V_p\sin(\omega t),\qquad V_{DC,ideal}=\frac{V_p}{\pi}\approx0.318V_p,\qquad f_r=f_{in}\]</div>
+ <div class="two"><div><svg class="circuit" id="acCircuit" viewBox="0 0 800 300"></svg><div class="controls compact"><label>V<sub>p</sub> <strong><span id="acAmpOut">10</span> V</strong><input id="acAmp" type="range" min="2" max="30" value="10" step="1"></label><label>Fase <strong><span id="acPhaseOut">60</span>°</strong><input id="acPhase" type="range" min="0" max="360" value="60" step="1"></label><label>Modelo<select id="acModel"><option value="ideal">Ideal</option><option value="drop">0.7 V</option></select></label></div><div id="acState" class="result-banner"></div></div><div class="chart"><svg id="acChart" viewBox="0 0 760 430"></svg></div></div>
+ <div class="pedagogy-grid"><div class="concept-box"><b>Semiciclo positivo</b><p>Con la orientación mostrada, el diodo puede conducir. En segunda aproximación, mientras conduce: \(v_o\approx v_i-0.7\,V\).</p></div><div class="concept-box"><b>Semiciclo negativo</b><p>El diodo queda inversamente polarizado y la salida se aproxima a cero.</p></div></div>
+ <div class="v3-practice" data-v3bank="halfwave"></div>
+</section>
+
+<section id="m11" class="chapter">
+ <div class="heading"><div><span class="num">11</span><div><span class="kicker">DIODOS EN AC</span><h2>Onda completa y puente rectificador</h2></div></div><button class="done" data-done="m11">Marcar estudiado</button></div>
+ <p class="lead">El puente cambia el par de diodos que conduce entre semiciclos, pero mantiene la misma polaridad sobre la carga. Así se aprovechan ambos semiciclos.</p>
+ <div class="two"><div><svg id="bridgeCircuit" class="circuit" viewBox="0 0 820 360"></svg><div class="controls compact"><label>Fase <strong><span id="bridgePhaseOut">45</span>°</strong><input id="bridgePhase" type="range" min="0" max="360" value="45" step="1"></label><label>V<sub>p</sub> secundario <strong><span id="bridgeAmpOut">10</span> V</strong><input id="bridgeAmp" type="range" min="2" max="30" value="10" step="1"></label><label>Modelo<select id="bridgeModel"><option value="ideal">Ideal</option><option value="drop">0.7 V por diodo</option></select></label></div><div id="bridgeState" class="result-banner"></div></div><div class="chart"><svg id="bridgeChart" viewBox="0 0 760 430"></svg></div></div>
+ <div class="formula-strip">\[V_{DC,ideal}=\frac{2V_p}{\pi}\approx0.636V_p,\qquad f_r=2f_{in}\]</div>
+ <div class="notice"><b>Segunda aproximación.</b><p>En un puente conducen dos diodos en serie; por ello, para silicio se usa con frecuencia \(V_{p(out)}\approx V_{p(in)}-1.4\,V\).</p></div>
+ <div class="v3-practice" data-v3bank="fullwave"></div>
+</section>
+
+<section id="m12" class="chapter">
+ <div class="heading"><div><span class="num">12</span><div><span class="kicker">FUENTE DC</span><h2>Filtro capacitivo y voltaje de rizado</h2></div></div><button class="done" data-done="m12">Marcar estudiado</button></div>
+ <div class="notice correction"><b>Verificación de unidades.</b><p>Si \(R_L=10\,k\Omega\) y \(C=10\,\mu F\), entonces \(\tau=R_LC=100\,ms\). En AnalogLab se verifican las unidades antes de calcular la descarga del condensador.</p></div>
+ <div class="two"><div><svg id="filterCircuit" class="circuit" viewBox="0 0 820 310"></svg><div class="controls compact"><label>V<sub>p</sub> rectificado <strong><span id="filterVOut">12</span> V</strong><input id="filterV" type="range" min="5" max="30" value="12" step="1"></label><label>R<sub>L</sub> <strong><span id="filterROut">1.0</span> kΩ</strong><input id="filterR" type="range" min="0.2" max="10" value="1" step="0.1"></label><label>C <strong><span id="filterCOut">1000</span> µF</strong><input id="filterC" type="range" min="100" max="4700" value="1000" step="100"></label><label>Rectificación<select id="filterMode"><option value="full">Onda completa · 60 Hz</option><option value="half">Media onda · 60 Hz</option></select></label></div><div class="metrics-v3"><div><span>τ</span><b id="tauOutV3">—</b></div><div><span>f<sub>r</sub></span><b id="freqRippleOut">—</b></div><div><span>V<sub>r(pp)</sub> aprox.</span><b id="rippleV3">—</b></div></div></div><div class="chart"><svg id="filterChart" viewBox="0 0 760 430"></svg></div></div>
+ <div class="formula-strip">\[V_{r(pp)}\approx\frac{I_L}{f_rC},\qquad \tau=R_LC,\qquad v_C(t)=V_0e^{-t/\tau}\]</div>
+ <div class="pedagogy-grid"><div class="concept-box"><b>Recarga</b><p>Cerca de los picos, cuando la señal rectificada supera la tensión del capacitor más las caídas de los diodos, éstos conducen y reponen carga.</p></div><div class="concept-box"><b>Descarga</b><p>Entre picos, los diodos se bloquean y el capacitor entrega corriente a la carga; esa pérdida de tensión origina el rizado.</p></div></div>
+ <div class="v3-practice" data-v3bank="filters"></div>
+</section>
+
+<section id="m13" class="chapter">
+ <div class="heading"><div><span class="num">13</span><div><span class="kicker">PROCESAMIENTO DE SEÑALES</span><h2>Recortadores y limitadores</h2></div></div><button class="done" data-done="m13">Marcar estudiado</button></div>
+ <p class="lead">Un recortador limita regiones de una forma de onda. Al polarizar el diodo con una fuente DC, el nivel de recorte se traslada a una referencia distinta de cero.</p>
+ <div class="two"><div><svg id="clipCircuit" class="circuit" viewBox="0 0 800 290"></svg><div class="controls compact"><label>V<sub>p</sub> <strong><span id="clipAmpOut">8</span> V</strong><input id="clipAmp" type="range" min="2" max="15" value="8" step="1"></label><label>Límite <strong><span id="clipLevelOut">3.0</span> V</strong><input id="clipLevel" type="range" min="0" max="8" value="3" step="0.5"></label><label>Configuración<select id="clipType"><option value="upper">Recorte superior</option><option value="lower">Recorte inferior</option><option value="double">Doble extremo ±V</option></select></label></div></div><div class="chart"><svg id="clipChart" viewBox="0 0 760 430"></svg></div></div>
+ <div class="notice"><b>Interpretación.</b><p>El diodo conduce sólo cuando la señal intenta superar el nivel fijado por la orientación, la polarización y el modelo de caída directa.</p></div>
+ <div class="v3-practice" data-v3bank="clippers"></div>
+</section>
+
+<section id="m14" class="chapter">
+ <div class="heading"><div><span class="num">14</span><div><span class="kicker">PROCESAMIENTO DE SEÑALES</span><h2>Cambiadores de nivel (clamper)</h2></div></div><button class="done" data-done="m14">Marcar estudiado</button></div>
+ <p class="lead">A diferencia del recortador, el clamper intenta conservar aproximadamente el valor pico a pico y desplazar verticalmente la señal mediante la carga almacenada en un capacitor.</p>
+ <div class="two"><div><svg id="clamperCircuit" class="circuit" viewBox="0 0 820 300"></svg><div class="controls compact"><label>V<sub>p</sub> <strong><span id="clampAmpOut">5</span> V</strong><input id="clampAmp" type="range" min="1" max="10" value="5" step="1"></label><label>Tipo<select id="clampType"><option value="positive">Desplazamiento positivo</option><option value="negative">Desplazamiento negativo</option></select></label></div></div><div class="chart"><svg id="clamperChart" viewBox="0 0 760 430"></svg></div></div>
+ <div class="formula-strip">\[R_LC\gg T\quad\text{para que el capacitor conserve aproximadamente su carga entre ciclos}\]</div>
+ <div class="v3-practice" data-v3bank="clampers"></div>
+</section>
+
+<section id="m15" class="chapter">
+ <div class="heading"><div><span class="num">15</span><div><span class="kicker">DIODO ZENER</span><h2>Ruptura controlada y regulación</h2></div></div><button class="done" data-done="m15">Marcar estudiado</button></div>
+ <p class="lead">El Zener se diseña para operar en ruptura inversa de manera controlada. La plataforma distingue tres condiciones: OFF, regulación y sobrecorriente.</p>
+ <div class="two"><div><svg id="zenerCircuit" class="circuit" viewBox="0 0 820 330"></svg><div class="controls compact"><label>V<sub>S</sub> <strong><span id="zVsOut">15</span> V</strong><input id="zVs" type="range" min="0" max="30" value="15" step="0.5"></label><label>R<sub>S</sub> <strong><span id="zRsOut">500</span> Ω</strong><input id="zRs" type="range" min="100" max="1500" value="500" step="50"></label><label>V<sub>Z</sub> <strong><span id="zVzOut">5.1</span> V</strong><input id="zVz" type="range" min="2.4" max="12" value="5.1" step="0.1"></label><label>R<sub>L</sub> <strong><span id="zRlOut">1000</span> Ω</strong><input id="zRl" type="range" min="100" max="5000" value="1000" step="100"></label><label>I<sub>Zmax</sub> de práctica <strong><span id="zIzmOut">70</span> mA</strong><input id="zIzm" type="range" min="10" max="150" value="70" step="5"></label></div></div><div><div id="zenerState" class="result-banner"></div><div class="metrics-v3"><div><span>V<sub>L</sub></span><b id="zVLout">—</b></div><div><span>I<sub>S</sub></span><b id="zISout">—</b></div><div><span>I<sub>L</sub></span><b id="zILout">—</b></div><div><span>I<sub>Z</sub></span><b id="zIZout">—</b></div><div><span>P<sub>Z</sub></span><b id="zPout">—</b></div><div><span>V<sub>TH</sub> sin Zener</span><b id="zVthOut">—</b></div></div><div class="pedagogy-grid"><div class="concept-box"><b>OFF</b><p>La tensión disponible no alcanza V<sub>Z</sub>.</p></div><div class="concept-box"><b>Regulación</b><p>V<sub>L</sub>≈V<sub>Z</sub> y existe corriente Zener positiva.</p></div><div class="concept-box"><b>Sobrecorriente</b><p>I<sub>Z</sub> o P<sub>Z</sub> exceden el límite seleccionado.</p></div></div></div></div>
+ <div class="formula-strip">\[I_S=\frac{V_S-V_Z}{R_S},\qquad I_L=\frac{V_Z}{R_L},\qquad I_Z=I_S-I_L\]</div>
+ <div class="notice"><b>Condiciones límite.</b><p>Fuente demasiado baja, carga demasiado pesada o resistencia serie demasiado grande pueden hacer \(I_Z\to0\) y perder regulación. En el extremo opuesto, una corriente excesiva puede superar la potencia permitida.</p></div>
+ <div class="v3-practice" data-v3bank="zener"></div>
+</section>
+
+<section id="m16" class="chapter">
+ <div class="heading"><div><span class="num">16</span><div><span class="kicker">TALLER INTEGRADO</span><h2>Taller #1 · Diodos DC y AC</h2></div></div><button class="done" data-done="m16">Marcar estudiado</button></div>
+ <p class="lead">El taller oficial de AnalogLab reúne 45 actividades organizadas por tema. La versión web y el PDF imprimible conservan exactamente la misma numeración y los mismos enunciados.</p>
+ <div class="resource-strip"><a href="assets/Taller_01_AnalogLab.pdf" target="_blank">Abrir / descargar Taller #1 en PDF</a></div>
+ <div class="notice"><b>Cómo trabajar el taller.</b><p>Primero registra un intento. Después puedes consultar Pista 1, Pista 2 y una respuesta orientativa. En los ejercicios numéricos la plataforma comprueba el resultado con tolerancia y explica el procedimiento.</p></div>
+ <div id="workshopQuestions" class="workshop-list workshop-final"></div>
+</section>
+
+<footer><div><b>AnalogLab</b><span>Electrónica Analógica y Laboratorio</span></div><a href="#inicio">Volver al inicio ↑</a></footer>
 </main></div>
-<script src="data/questions.js"></script><script src="js/app.js"></script>
+<script src="data/questions.js"></script><script src="data/module_questions.js"></script><script src="data/workshop.js"></script><script src="js/app.js"></script><script src="js/v3.js"></script>
 </body></html>

@@ -1,134 +1,22 @@
-window.ANALOG_QUESTIONS=[
-  {
-    "q": "En un semiconductor tipo N, ¿qué portadores son mayoritarios?",
-    "o": [
-      "Huecos",
-      "Electrones",
-      "Iones positivos",
-      "Fotones"
-    ],
-    "a": 1,
-    "e": "El dopaje donador aporta electrones disponibles para conducción."
-  },
-  {
-    "q": "En polarización directa de una unión PN, la región de agotamiento tiende a:",
-    "o": [
-      "Aumentar",
-      "Disminuir",
-      "Permanecer idéntica",
-      "Convertirse en un conductor ideal"
-    ],
-    "a": 1,
-    "e": "La polarización directa reduce la barrera efectiva y estrecha la región de agotamiento."
-  },
-  {
-    "q": "La ecuación de Shockley relaciona principalmente:",
-    "o": [
-      "Potencia y resistencia",
-      "Corriente y voltaje del diodo",
-      "Frecuencia y fase",
-      "Capacitancia y carga"
-    ],
-    "a": 1,
-    "e": "Describe la relación exponencial entre ID y VD."
-  },
-  {
-    "q": "Si se usa el modelo ideal y el diodo está ON, se representa por:",
-    "o": [
-      "Circuito abierto",
-      "Fuente de 0.7 V",
-      "Cortocircuito",
-      "Resistencia infinita"
-    ],
-    "a": 2,
-    "e": "En el modelo ideal, un diodo ON tiene VD=0."
-  },
-  {
-    "q": "El modelo lineal por tramos agrega principalmente:",
-    "o": [
-      "Una inductancia",
-      "Una resistencia dinámica",
-      "Una fuente AC",
-      "Una capacitancia infinita"
-    ],
-    "a": 1,
-    "e": "Se aproxima con Vγ más una caída ID·rd."
-  },
-  {
-    "q": "En un circuito serie Vs–R–D con el diodo ON, la corriente se obtiene a partir de:",
-    "o": [
-      "(Vs+VD)/R",
-      "(Vs−VD)/R",
-      "R/(Vs−VD)",
-      "Vs·R"
-    ],
-    "a": 1,
-    "e": "KVL da VR=Vs−VD y luego I=VR/R."
-  },
-  {
-    "q": "Si VA−VK=0.2 V y se usa Vγ=0.7 V, la hipótesis más razonable es:",
-    "o": [
-      "ON",
-      "OFF",
-      "Ruptura",
-      "Saturación"
-    ],
-    "a": 1,
-    "e": "No existe voltaje suficiente para sostener el modelo ON de 0.7 V."
-  },
-  {
-    "q": "La recta de carga representa:",
-    "o": [
-      "Solo el diodo",
-      "Las restricciones del circuito externo",
-      "Solo la resistencia interna",
-      "La señal AC"
-    ],
-    "a": 1,
-    "e": "La red externa impone una relación lineal entre VD e ID."
-  },
-  {
-    "q": "El punto Q es:",
-    "o": [
-      "El valor máximo de corriente",
-      "La intersección curva I–V/recta de carga",
-      "El valor RMS",
-      "El voltaje de ruptura"
-    ],
-    "a": 1,
-    "e": "Satisface simultáneamente el dispositivo y el circuito externo."
-  },
-  {
-    "q": "Si Vs permanece constante y R aumenta, |−1/R|:",
-    "o": [
-      "Aumenta",
-      "Disminuye",
-      "No cambia",
-      "Se hace infinita"
-    ],
-    "a": 1,
-    "e": "La magnitud de la pendiente disminuye cuando R aumenta."
-  },
-  {
-    "q": "Para un LED, la resistencia serie se usa principalmente para:",
-    "o": [
-      "Aumentar VF",
-      "Limitar corriente",
-      "Crear ruptura",
-      "Convertir DC en AC"
-    ],
-    "a": 1,
-    "e": "La resistencia fija la corriente a un nivel seguro de operación."
-  },
-  {
-    "q": "En un rectificador ideal de media onda, durante el semiciclo que polariza inversamente el diodo:",
-    "o": [
-      "La salida sigue la entrada",
-      "La salida se aproxima a cero",
-      "La corriente se duplica",
-      "El diodo conduce más"
-    ],
-    "a": 1,
-    "e": "El diodo bloquea ese semiciclo en el modelo ideal."
-  }
+window.ANALOG_QUESTIONS = [
+ {q:'En un semiconductor tipo N, ¿cuál es el portador mayoritario?',options:['Huecos','Electrones','Protones','Iones aceptores'],answer:1,explain:'El dopaje donador aporta electrones disponibles para conducción.'},
+ {q:'En polarización directa de una unión PN, la región de agotamiento tiende a:',options:['Aumentar','Disminuir','Permanecer igual','Volverse infinita'],answer:1,explain:'La barrera efectiva disminuye y la región se estrecha.'},
+ {q:'En el modelo ideal, un diodo ON se representa por:',options:['Circuito abierto','Cortocircuito','Fuente de 0.7 V','Resistencia infinita'],answer:1,explain:'El modelo ideal supone VD=0 en conducción.'},
+ {q:'El modelo lineal por tramos incorpora:',options:['Una inductancia','Vγ y una resistencia dinámica','Una fuente AC','Solo una resistencia infinita'],answer:1,explain:'Se aproxima VD≈Vγ+ID·rd.'},
+ {q:'Si VA−VK=0.2 V y se usa un modelo de 0.7 V, el diodo se considera inicialmente:',options:['ON','OFF','En ruptura','Saturado'],answer:1,explain:'No hay suficiente VAK para sostener la hipótesis ON.'},
+ {q:'El punto Q de un diodo en una red DC es:',options:['El máximo de corriente','La intersección curva I–V/recta de carga','El valor RMS','La tensión de ruptura'],answer:1,explain:'Q satisface simultáneamente dispositivo y red.'},
+ {q:'Si R aumenta con VS constante, la magnitud de la pendiente de la recta de carga:',options:['Aumenta','Disminuye','No cambia','Se hace infinita'],answer:1,explain:'La pendiente es −1/R.'},
+ {q:'La resistencia serie de un LED se usa para:',options:['Limitar corriente','Aumentar VF','Invertir polaridad','Crear AC'],answer:0,explain:'Limita la corriente a un valor seguro.'},
+ {q:'El valor medio ideal de una media onda rectificada es:',options:['Vp/π','2Vp/π','Vp/2','0'],answer:0,explain:'VDC=Vp/π≈0.318Vp.'},
+ {q:'En un puente rectificador conducen típicamente por semiciclo:',options:['Un diodo','Dos diodos','Tres diodos','Los cuatro'],answer:1,explain:'Cada semiciclo establece una trayectoria por dos diodos.'},
+ {q:'En un puente de silicio, la caída total aproximada durante conducción es:',options:['0.7 V','1.4 V','2.8 V','0 V'],answer:1,explain:'Hay dos diodos en serie en la trayectoria.'},
+ {q:'Si la entrada de un rectificador de onda completa es 60 Hz, la frecuencia de rizado es:',options:['30 Hz','60 Hz','120 Hz','240 Hz'],answer:2,explain:'La onda completa produce dos pulsos por ciclo.'},
+ {q:'En un filtro capacitivo, entre picos el capacitor principalmente:',options:['Se recarga desde la fuente','Se descarga a través de la carga','Invierte polaridad','Se abre'],answer:1,explain:'Con los diodos bloqueados, el capacitor alimenta la carga.'},
+ {q:'Una aproximación útil para el rizado pico a pico es:',options:['IL/(frC)','IL·fr·C','RL/IL','Vp·C'],answer:0,explain:'Vr(pp)≈IL/(frC).'},
+ {q:'Si la capacidad del filtro aumenta y todo lo demás permanece constante, el rizado:',options:['Aumenta','Disminuye','No cambia','Cambia de signo'],answer:1,explain:'Una capacidad mayor pierde menos tensión entre recargas.'},
+ {q:'Un recortador se utiliza para:',options:['Limitar partes de una señal','Desplazar toda la señal sin recortar','Crear un transformador','Eliminar toda componente DC'],answer:0,explain:'El clipper limita picos o regiones respecto de uno o más niveles.'},
+ {q:'Un clamper se caracteriza principalmente por:',options:['Desplazar el nivel DC conservando aproximadamente Vpp','Recortar siempre ambos picos','Rectificar onda completa','Aumentar frecuencia'],answer:0,explain:'El cambiador de nivel traslada verticalmente la señal.'},
+ {q:'Para que un clamper conserve mejor el nivel entre ciclos conviene:',options:['RLC << T','RLC >> T','R=0','C=0'],answer:1,explain:'Una constante de tiempo grande reduce la descarga del capacitor.'},
+ {q:'Cuando un Zener regula con carga, aproximadamente:',options:['VL=0','VL≈VZ','VL=VS siempre','IZ=0 siempre'],answer:1,explain:'La carga está en paralelo con el Zener.'},
+ {q:'En un regulador Zener con carga se cumple:',options:['IS=IZ+IL','IZ=IS+IL','IL=IS+IZ','IS=0'],answer:0,explain:'La corriente serie se divide entre la rama Zener y la carga.'}
 ];

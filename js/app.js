@@ -6,7 +6,7 @@ function typeset(el){if(window.MathJax?.typesetPromise) MathJax.typesetPromise(e
 
 /* navegación, tema y progreso */
 const completed=new Set(JSON.parse(localStorage.getItem("analoglab-v2-done")||"[]"));
-function progress(){ $$(".done").forEach(b=>{let yes=completed.has(b.dataset.done);b.classList.toggle("complete",yes);b.textContent=yes?"✓ Estudiado":"Marcar estudiado"});let p=Math.round(completed.size/10*100);$("#progressText").textContent=p+"%";$("#progressBar").style.width=p+"%"}
+function progress(){ $$(".done").forEach(b=>{let yes=completed.has(b.dataset.done);b.classList.toggle("complete",yes);b.textContent=yes?"✓ Estudiado":"Marcar estudiado"});let p=Math.min(100,Math.round(completed.size/16*100));$("#progressText").textContent=p+"%";$("#progressBar").style.width=p+"%"}
 $$(".done").forEach(b=>b.addEventListener("click",()=>{completed.has(b.dataset.done)?completed.delete(b.dataset.done):completed.add(b.dataset.done);localStorage.setItem("analoglab-v2-done",JSON.stringify([...completed]));progress()}));progress();
 $("#menuBtn").addEventListener("click",()=>$("#sidebar").classList.toggle("open"));
 $$("aside nav a").forEach(a=>a.addEventListener("click",()=>$("#sidebar").classList.remove("open")));
