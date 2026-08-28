@@ -27,14 +27,12 @@ La plataforma sigue la secuencia:
 
 **Comprender → visualizar → predecir → calcular → comprobar → explicar.**
 
-Las respuestas del taller se presentan como apoyo después del intento del estudiante; el PDF imprimible contiene los enunciados y espacios de trabajo, no una clave de respuestas.
 
-## Bibliografía de apoyo
+## Bibliografía
 
 - Boylestad, R. L. & Nashelsky, L. *Electrónica: teoría de circuitos y dispositivos electrónicos*.
 - Malvino, A. & Bates, D. *Principios de Electrónica*.
 
-Los apuntes personales del docente se utilizan como insumo para el desarrollo de los módulos, pero no se distribuyen como archivos desde el sitio.
 
 ## Tecnologías
 
