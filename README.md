@@ -1,39 +1,30 @@
 # AnalogLab
 
-### Electrónica Analógica y Laboratorio · Plataforma interactiva de apoyo académico
+**Electrónica Analógica y Laboratorio**
 
-**AnalogLab** integra teoría, análisis matemático, circuitos SVG, formas de onda, simuladores, práctica con retroalimentación y un taller de repaso para el estudio de diodos en DC y AC.
+AnalogLab es un recurso interactivo de apoyo académico para complementar las clases, el estudio independiente y la preparación de evaluaciones.
 
-## Contenido
+## Estructura
 
-- Fundamentos de semiconductores y unión PN.
-- Curva I-V y modelos del diodo.
-- Análisis DC: serie, paralelo, redes mixtas y múltiples fuentes.
-- Recta de carga y punto Q.
-- LED.
-- Rectificación de media onda y onda completa.
-- Puente rectificador.
-- Filtros capacitivos, constante de tiempo y rizado.
-- PIV.
-- Recortadores.
-- Cambiadores de nivel (clampers).
-- Diodo Zener y regulación básica.
-- Ejercicios y autoevaluaciones por módulo.
-- **Taller #1 oficial de 45 actividades**, disponible tanto de forma interactiva como en PDF imprimible con la misma numeración y los mismos enunciados.
+- `index.html`: presentación y ruta de estudio.
+- `dc.html`: semiconductores, unión PN, curva I–V, modelos, redes DC, recta de carga y LED.
+- `ac.html`: conceptos AC, media onda, onda completa, puente, filtros, rizado, PIV, recortadores y clampers.
+- `zener.html`: módulo posterior de diodo Zener; no corresponde a la evaluación actual.
+- `taller.html`: Taller #1 teórico interactivo y espacio preparado para las respuestas del taller práctico externo.
 
-## Enfoque
+## Enfoque pedagógico
 
-La plataforma sigue la secuencia:
+Cada módulo sigue la secuencia: **teoría → interpretación física → matemáticas → ejemplo resuelto → visualización/interacción → autoevaluación**.
 
-**Comprender → visualizar → predecir → calcular → comprobar → explicar.**
+Las expresiones matemáticas se renderizan con MathJax. Los circuitos simples se dibujan en SVG; los ejercicios complejos del taller práctico se mantienen en el documento del docente para conservar su simbología y orientación exactas.
 
-
-## Bibliografía
+## Referencias de apoyo
 
 - Boylestad, R. L. & Nashelsky, L. *Electrónica: teoría de circuitos y dispositivos electrónicos*.
 - Malvino, A. & Bates, D. *Principios de Electrónica*.
 
+Los apuntes del docente se utilizan como insumo para desarrollar y revisar los módulos, pero no se distribuyen desde el sitio.
 
-## Tecnologías
+## Publicación
 
-HTML5 · CSS3 · JavaScript · SVG · MathJax · GitHub Pages
+El contenido puede alojarse directamente en la raíz del repositorio `AnalogLab` mediante GitHub Pages.
