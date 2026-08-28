@@ -1,223 +1,72 @@
-(() => {
-  const $ = s => document.querySelector(s);
-  const $$ = s => [...document.querySelectorAll(s)];
+(()=>{"use strict";
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const fmt=(x,d=2)=>Number.isFinite(x)?x.toFixed(d):"—";
+function feedback(id,msg,ok=true){const e=$(id);e.textContent=msg;e.className="feedback "+(ok?"good":"bad")}
+function typeset(el){if(window.MathJax?.typesetPromise) MathJax.typesetPromise(el?[el]:undefined).catch(()=>{})}
 
-  const completed = new Set(JSON.parse(localStorage.getItem('analoglab-completed') || '[]'));
-  function updateProgress(){
-    $$('.complete-btn').forEach(btn=>{
-      const done=completed.has(btn.dataset.complete);
-      btn.classList.toggle('done',done);
-      btn.textContent=done?'✓ Estudiado':'Marcar como estudiado';
-    });
-    const pct=Math.round(completed.size/16*100);
-    $('#progressText').textContent=pct+'%';
-    $('#progressBar').style.width=pct+'%';
-  }
-  $$('.complete-btn').forEach(btn=>btn.addEventListener('click',()=>{
-    const id=btn.dataset.complete;
-    completed.has(id)?completed.delete(id):completed.add(id);
-    localStorage.setItem('analoglab-completed',JSON.stringify([...completed]));
-    updateProgress();
-  }));
-  updateProgress();
+/* navegación, tema y progreso */
+const completed=new Set(JSON.parse(localStorage.getItem("analoglab-v2-done")||"[]"));
+function progress(){ $$(".done").forEach(b=>{let yes=completed.has(b.dataset.done);b.classList.toggle("complete",yes);b.textContent=yes?"✓ Estudiado":"Marcar estudiado"});let p=Math.round(completed.size/10*100);$("#progressText").textContent=p+"%";$("#progressBar").style.width=p+"%"}
+$$(".done").forEach(b=>b.addEventListener("click",()=>{completed.has(b.dataset.done)?completed.delete(b.dataset.done):completed.add(b.dataset.done);localStorage.setItem("analoglab-v2-done",JSON.stringify([...completed]));progress()}));progress();
+$("#menuBtn").addEventListener("click",()=>$("#sidebar").classList.toggle("open"));
+$$("aside nav a").forEach(a=>a.addEventListener("click",()=>$("#sidebar").classList.remove("open")));
+$("#themeBtn").addEventListener("click",()=>document.body.classList.toggle("dark"));
+$("#classMode").addEventListener("click",()=>{document.body.classList.toggle("class-view");$("#classMode").textContent=document.body.classList.contains("class-view")?"Salir modo clase":"Modo clase"});
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)$$("aside nav a").forEach(a=>a.classList.toggle("active",a.getAttribute("href")==="#"+e.target.id))}),{rootMargin:"-28% 0px -64% 0px"});$$(".chapter").forEach(s=>obs.observe(s));
+$$(".reveal").forEach(b=>b.addEventListener("click",()=>{const e=$("#"+b.dataset.reveal);e.classList.toggle("hidden");b.textContent=e.classList.contains("hidden")?"Ver explicación":"Ocultar explicación"}));
 
-  $('#menuBtn').addEventListener('click',()=>$('#sidebar').classList.toggle('open'));
-  $$('.chapter-nav a').forEach(a=>a.addEventListener('click',()=>$('#sidebar').classList.remove('open')));
-  $('#themeBtn').addEventListener('click',()=>document.body.classList.toggle('dark'));
-  $('#classModeBtn').addEventListener('click',()=>{
-    document.body.classList.toggle('class-mode');
-    $('#classModeBtn').textContent=document.body.classList.contains('class-mode')?'Salir modo clase':'Modo clase';
-  });
+/* módulo 1: red cristalina simplificada */
+function lattice(mode){const svg=$("#lattice"),nodes=[];let h=`<rect x="0" y="0" width="620" height="350" rx="18" fill="var(--panel)"/>`;const xs=[90,210,330,450,570],ys=[70,175,280];for(let y of ys)for(let x of xs)nodes.push({x,y});for(let y of ys)for(let i=0;i<xs.length-1;i++)h+=`<line x1="${xs[i]+26}" y1="${y}" x2="${xs[i+1]-26}" y2="${y}" stroke="var(--line)" stroke-width="4"/>`;for(let x of xs)for(let i=0;i<ys.length-1;i++)h+=`<line x1="${x}" y1="${ys[i]+26}" x2="${x}" y2="${ys[i+1]-26}" stroke="var(--line)" stroke-width="4"/>`;nodes.forEach((n,i)=>{let special=(i===7&&mode!=="intrinsic"),label=special?(mode==="n"?"P⁵":"B³"):"Si",fill=special?"var(--soft)":"var(--panel2)";h+=`<circle cx="${n.x}" cy="${n.y}" r="26" fill="${fill}" stroke="var(--primary)" stroke-width="2"/><text x="${n.x}" y="${n.y+6}" text-anchor="middle" fill="var(--text)" font-size="16" font-weight="800">${label}</text>`});if(mode==="n")h+=`<circle cx="390" cy="175" r="10" fill="var(--accent)"/><text x="405" y="180" fill="var(--text)" font-size="15">e⁻ adicional</text>`;if(mode==="p")h+=`<circle cx="390" cy="175" r="12" fill="none" stroke="var(--bad)" stroke-width="4"/><text x="410" y="180" fill="var(--text)" font-size="15">hueco</text>`;svg.innerHTML=h;const texts={intrinsic:["Material intrínseco","La red representa un cristal semiconductor sin dopaje intencional. La conducción depende de portadores generados en el propio material."],n:["Material tipo N","Una impureza donadora aporta un electrón adicional disponible para conducción. Los electrones son mayoritarios."],p:["Material tipo P","Una impureza aceptora deja una vacante efectiva o hueco. Los huecos son mayoritarios."]};$("#dopingExplain").innerHTML=`<b>${texts[mode][0]}</b><p>${texts[mode][1]}</p>`}
+$("#dopingButtons").addEventListener("click",e=>{if(!e.target.dataset.mode)return;$$("#dopingButtons button").forEach(b=>b.classList.toggle("active",b===e.target));lattice(e.target.dataset.mode)});lattice("intrinsic");
+$$('[data-q="dop"] button').forEach(b=>b.addEventListener("click",()=>feedback("#dopFb",b.dataset.v==="e"?"Correcto. Una impureza pentavalente actúa como donadora y deja un electrón adicional disponible.":"Revisa el número de electrones de valencia: una impureza pentavalente aporta un electrón adicional.",b.dataset.v==="e")));
 
-  const observer=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        $$('.chapter-nav a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));
-      }
-    });
-  },{rootMargin:'-25% 0px -65% 0px'});
-  $$('.chapter').forEach(s=>observer.observe(s));
+/* módulo 2: unión PN */
+function pn(bias){const svg=$("#pnSvg");let width=bias==="reverse"?170:bias==="forward"?55:105;let h=`<rect width="700" height="330" rx="18" fill="var(--panel)"/><rect x="55" y="55" width="${295-width/2}" height="220" rx="14" fill="#ffe7ee"/><rect x="${350+width/2}" y="55" width="${295-width/2}" height="220" rx="14" fill="#e5efff"/><rect x="${350-width/2}" y="55" width="${width}" height="220" fill="var(--panel2)" stroke="var(--line)" stroke-width="2"/><text x="120" y="92" fill="#8c2947" font-size="26" font-weight="900">P</text><text x="580" y="92" fill="#264e91" font-size="26" font-weight="900">N</text>`;for(let i=0;i<6;i++){h+=`<circle cx="${105+i*35}" cy="${150+(i%2)*52}" r="10" fill="none" stroke="#a63a58" stroke-width="3"/><circle cx="${595-i*35}" cy="${150+(i%2)*52}" r="8" fill="#2b5fb4"/>`}h+=`<text x="350" y="300" text-anchor="middle" fill="var(--muted)" font-size="15">Región de agotamiento · ancho relativo: ${width}</text>`;if(bias==="forward")h+=`<text x="72" y="35" fill="var(--text)" font-size="18">+</text><text x="620" y="35" fill="var(--text)" font-size="18">−</text>`;if(bias==="reverse")h+=`<text x="72" y="35" fill="var(--text)" font-size="18">−</text><text x="620" y="35" fill="var(--text)" font-size="18">+</text>`;svg.innerHTML=h;const tx={zero:["Sin polarización","Existe una barrera interna asociada con la redistribución de carga cercana a la unión."],forward:["Polarización directa","La fuente externa reduce la barrera efectiva y la región de agotamiento se estrecha."],reverse:["Polarización inversa","La fuente externa incrementa la barrera efectiva y ensancha la región de agotamiento."]};$("#biasExplain").innerHTML=`<b>${tx[bias][0]}</b><p>${tx[bias][1]}</p>`}
+$("#biasButtons").addEventListener("click",e=>{if(!e.target.dataset.bias)return;$$("#biasButtons button").forEach(b=>b.classList.toggle("active",b===e.target));pn(e.target.dataset.bias)});pn("zero");$("#biasThought").textContent="La tensión externa cambia el potencial relativo entre las regiones P y N; esa polarización modifica la barrera efectiva de la unión.";
 
-  function setFeedback(id,msg,good){
-    const el=$(id); el.textContent=msg; el.className='feedback '+(good?'good':'bad');
-  }
-  $$('[data-question="semiconductor"] button').forEach(b=>b.addEventListener('click',()=>setFeedback('#semiconductorFeedback',b.dataset.value==='electrons'?'Correcto. El dopaje donador aporta electrones libres.':'Revisa: en material tipo N, los electrones son mayoritarios.',b.dataset.value==='electrons')));
-  $$('[data-question="pn"] button').forEach(b=>b.addEventListener('click',()=>setFeedback('#pnFeedback',b.dataset.value==='decrease'?'Correcto. La polarización directa reduce la barrera efectiva.':'No. En polarización directa la región de agotamiento se estrecha.',b.dataset.value==='decrease')));
-  $$('[data-question="onoff"] button').forEach(b=>b.addEventListener('click',()=>setFeedback('#onoffFeedback',b.dataset.value==='off'?'Correcto. 0.2 V es insuficiente para el modelo de 0.7 V.':'No es consistente con el modelo de caída constante.',b.dataset.value==='off')));
-  $$('[data-question="slope"] button').forEach(b=>b.addEventListener('click',()=>setFeedback('#slopeFeedback',b.dataset.value==='decrease'?'Correcto: |-1/R| disminuye.':'Recuerda que la pendiente es -1/R.',b.dataset.value==='decrease')));
+/* funciones de gráfica y Shockley */
+function axes(xmax,ymax,xlabel="V_D [V]",ylabel="I_D [mA]"){const W=760,H=430,L=64,R=24,T=24,B=54,gw=W-L-R,gh=H-T-B,x=v=>L+v/xmax*gw,y=i=>T+gh-i/ymax*gh;let h=`<rect width="${W}" height="${H}" rx="16" fill="var(--panel)"/><line x1="${L}" y1="${T+gh}" x2="${L+gw}" y2="${T+gh}" stroke="currentColor"/><line x1="${L}" y1="${T}" x2="${L}" y2="${T+gh}" stroke="currentColor"/>`;for(let k=0;k<=5;k++){let xv=xmax*k/5,iv=ymax*k/5,xx=x(xv),yy=y(iv);h+=`<line x1="${xx}" y1="${T+gh}" x2="${xx}" y2="${T+gh+6}" stroke="currentColor"/><text x="${xx}" y="${T+gh+24}" text-anchor="middle" fill="currentColor" font-size="12">${xv.toFixed(xmax<2?2:1)}</text><line x1="${L-6}" y1="${yy}" x2="${L}" y2="${yy}" stroke="currentColor"/><text x="${L-10}" y="${yy+4}" text-anchor="end" fill="currentColor" font-size="12">${iv.toFixed(1)}</text>`}h+=`<text x="${L+gw/2}" y="${H-9}" text-anchor="middle" fill="currentColor" font-size="14">${xlabel}</text><text x="18" y="${T+gh/2}" transform="rotate(-90 18 ${T+gh/2})" text-anchor="middle" fill="currentColor" font-size="14">${ylabel}</text>`;return{W,H,L,R,T,B,gw,gh,x,y,h}}
+function shockley(v,Tc=25,IsPa=1,n=1.8){let Is=IsPa*1e-12,Vt=8.617333262e-5*(Tc+273.15);return Is*(Math.exp(Math.min(v/(n*Vt),40))-1)}
+function solveShockleySeries(Vs,R){let lo=0,hi=Math.min(Vs,1.5);for(let i=0;i<80;i++){let v=(lo+hi)/2,d=shockley(v),l=(Vs-v)/R;if(d>l)hi=v;else lo=v}let vd=(lo+hi)/2;return{vd,id:(Vs-vd)/R}}
+function renderIV(){let T=+$("#ivT").value,Is=+$("#ivIs").value,n=+$("#ivN").value,vd=+$("#ivV").value,id=shockley(vd,T,Is,n),Vt=8.617333262e-5*(T+273.15),rd=id>1e-12?n*Vt/id:Infinity;$("#ivTOut").textContent=T;$("#ivIsOut").textContent=fmt(Is,1);$("#ivNOut").textContent=fmt(n,1);$("#ivVOut").textContent=fmt(vd,3);$("#ivI").textContent=id<1e-6?fmt(id*1e9,2)+" nA":id<1e-3?fmt(id*1e6,2)+" µA":fmt(id*1e3,2)+" mA";$("#ivRd").textContent=Number.isFinite(rd)?(rd>=1000?fmt(rd/1000,2)+" kΩ":fmt(rd,1)+" Ω"):"muy alta";let a=axes(.9,25),p=[];for(let j=0;j<=260;j++){let v=.9*j/260,im=shockley(v,T,Is,n)*1000;if(im<=28)p.push(`${p.length?"L":"M"}${a.x(v).toFixed(1)},${a.y(Math.min(im,25)).toFixed(1)}`)}$("#ivChart").innerHTML=a.h+`<path d="${p.join(" ")}" fill="none" stroke="#d14b61" stroke-width="3"/><circle cx="${a.x(vd)}" cy="${a.y(Math.min(id*1000,25))}" r="7" fill="var(--accent)"/><text x="${a.L+12}" y="${a.T+18}" fill="#d14b61" font-size="13">Característica I–V</text>`}
+["#ivT","#ivIs","#ivN","#ivV"].forEach(s=>$(s).addEventListener("input",renderIV));renderIV();
 
-  function drawAxes(svg,xmax,ymax){
-    const W=760,H=430,L=62,R=22,T=22,B=52,gw=W-L-R,gh=H-T-B;
-    const x=v=>L+(v/xmax)*gw, y=i=>T+gh-(i/ymax)*gh;
-    let h=`<line x1="${L}" y1="${T+gh}" x2="${L+gw}" y2="${T+gh}" stroke="currentColor"/>
-      <line x1="${L}" y1="${T}" x2="${L}" y2="${T+gh}" stroke="currentColor"/>`;
-    for(let k=0;k<=5;k++){
-      const xv=xmax*k/5, xx=x(xv), iv=ymax*k/5, yy=y(iv);
-      h+=`<line x1="${xx}" y1="${T+gh}" x2="${xx}" y2="${T+gh+6}" stroke="currentColor"/>
-          <text x="${xx}" y="${T+gh+24}" text-anchor="middle" font-size="12" fill="currentColor">${xv.toFixed(2)}</text>
-          <line x1="${L-6}" y1="${yy}" x2="${L}" y2="${yy}" stroke="currentColor"/>
-          <text x="${L-10}" y="${yy+4}" text-anchor="end" font-size="12" fill="currentColor">${iv.toFixed(1)}</text>`;
-    }
-    h+=`<text x="${L+gw/2}" y="${H-9}" text-anchor="middle" font-size="14" fill="currentColor">V_D [V]</text>
-        <text x="18" y="${T+gh/2}" transform="rotate(-90 18 ${T+gh/2})" text-anchor="middle" font-size="14" fill="currentColor">I_D [mA]</text>`;
-    return {W,H,L,R,T,B,gw,gh,x,y,h};
-  }
+/* módulo 4: modelos */
+const modelTexts={ideal:["Modelo ideal","Diodo ON → VD=0. Diodo OFF → circuito abierto. Útil para entender estados y topología."],constant:["Caída constante","Diodo ON → VD≈Vγ. Permite resolver rápidamente muchos circuitos DC."],piecewise:["Lineal por tramos","Incluye Vγ y una resistencia dinámica: VD=Vγ+ID·rd."],shockley:["Shockley","Usa la relación exponencial y permite estudiar la no linealidad del dispositivo."]};
+function setModel(k){$$("#modelTabs button").forEach(b=>b.classList.toggle("active",b.dataset.model===k));let t=modelTexts[k];$("#modelText").innerHTML=`<h3>${t[0]}</h3><p>${t[1]}</p>`}
+$("#modelTabs").addEventListener("click",e=>{if(e.target.dataset.model)setModel(e.target.dataset.model)});setModel("ideal");
+function modelTable(){let Vs=Math.max(.01,+$("#cmpVs").value||10),R=Math.max(1,+$("#cmpR").value||1000),Vg=Math.max(0,+$("#cmpVg").value||.7),rd=Math.max(0,+$("#cmpRd").value||10),sh=solveShockleySeries(Vs,R),ip=(Vs>Vg)?(Vs-Vg)/(R+rd):0;let rows=[["Ideal",0,Vs/R],["Caída constante",Vs>Vg?Vg:Vs,Vs>Vg?(Vs-Vg)/R:0],["Lineal por tramos",Vs>Vg?Vg+ip*rd:Vs,ip],["Shockley",sh.vd,sh.id]];$("#modelRows").innerHTML=rows.map((r,i)=>{let er=i===3?null:Math.abs(r[2]-sh.id)/(Math.abs(sh.id)||1)*100;return`<tr><td><b>${r[0]}</b></td><td>${fmt(r[1],3)} V</td><td>${fmt(r[2]*1000,3)} mA</td><td>${er===null?"Referencia":fmt(er,2)+" %"}</td></tr>`}).join("")}
+["#cmpVs","#cmpR","#cmpVg","#cmpRd"].forEach(s=>$(s).addEventListener("input",modelTable));modelTable();
 
-  function shockley(v,Tc,IsPa=1,n=1.8){
-    const Is=IsPa*1e-12, Vt=8.617333262e-5*(Tc+273.15);
-    return Is*(Math.exp(Math.min(v/(n*Vt),40))-1);
-  }
-  function renderIV(){
-    const T=+$('#ivT').value, Is=+$('#ivIs').value, n=+$('#ivN').value, vd=+$('#ivV').value;
-    $('#ivTOut').textContent=T; $('#ivIsOut').textContent=Is.toFixed(1); $('#ivNOut').textContent=n.toFixed(1); $('#ivVOut').textContent=vd.toFixed(3);
-    const id=shockley(vd,T,Is,n);
-    $('#ivCurrent').textContent=id<1e-3?(id*1e6).toFixed(2)+' µA':(id*1e3).toFixed(2)+' mA';
-    const ymax=25, xmax=.9, a=drawAxes($('#ivChart'),xmax,ymax);
-    let p=[]; for(let j=0;j<=260;j++){const v=xmax*j/260,im=shockley(v,T,Is,n)*1000;if(im<=ymax*1.15)p.push(`${p.length?'L':'M'}${a.x(v).toFixed(1)},${a.y(Math.min(im,ymax)).toFixed(1)}`)}
-    const point=Math.min(id*1000,ymax);
-    $('#ivChart').innerHTML=a.h+`<path d="${p.join(' ')}" fill="none" stroke="#d14a61" stroke-width="3"/>
-      <circle cx="${a.x(vd)}" cy="${a.y(point)}" r="7" fill="#13a188"/>
-      <text x="${a.L+12}" y="${a.T+18}" font-size="13" fill="#d14a61">Shockley</text>`;
-  }
-  ['#ivT','#ivIs','#ivN','#ivV'].forEach(id=>$(id).addEventListener('input',renderIV)); renderIV();
+/* módulo 5: galería de circuitos */
+function circuitSvg(type,target="#circuitSvg"){let h=`<rect width="900" height="360" rx="18" fill="var(--panel)"/>`,info="";if(type==="series"){h+=`<circle cx="150" cy="180" r="45" class="source"/><text x="150" y="170" class="svgtxt">+</text><text x="150" y="205" class="svgtxt">−</text><line x1="195" y1="180" x2="290" y2="180" class="wire"/><polyline points="290,180 315,155 340,205 365,155 390,205 415,155 440,180" class="wire"/><line x1="440" y1="180" x2="535" y2="180" class="wire"/><polygon points="535,145 535,215 595,180" class="diodefill"/><line x1="603" y1="143" x2="603" y2="217" class="wire"/><line x1="603" y1="180" x2="735" y2="180" class="wire"/><line x1="735" y1="180" x2="735" y2="300" class="wire"/><line x1="735" y1="300" x2="150" y2="300" class="wire"/><line x1="150" y1="300" x2="150" y2="225" class="wire"/><path class="current-path" d="M195 180 H735 V300 H150"/><text x="330" y="120" class="svglabel">R</text><text x="555" y="120" class="svglabel">D</text>`;info=`<h3>Serie</h3><p>La misma corriente circula por la fuente, R y el diodo.</p><p>\(I_D=(V_S-V_D)/R\)</p><p><b>Lectura física:</b> verifica primero que la polaridad permita conducción.</p>`}else if(type==="two"){h+=`<circle cx="130" cy="180" r="45" class="source"/><text x="130" y="170" class="svgtxt">+</text><text x="130" y="205" class="svgtxt">−</text><line x1="175" y1="180" x2="255" y2="180" class="wire"/><polyline points="255,180 280,155 305,205 330,155 355,205 380,155 405,180" class="wire"/><line x1="405" y1="180" x2="465" y2="180" class="wire"/><polygon points="465,145 465,215 520,180" class="diodefill"/><line x1="528" y1="143" x2="528" y2="217" class="wire"/><line x1="528" y1="180" x2="600" y2="180" class="wire"/><polygon points="600,145 600,215 655,180" class="diodefill"/><line x1="663" y1="143" x2="663" y2="217" class="wire"/><line x1="663" y1="180" x2="745" y2="180" class="wire"/><line x1="745" y1="180" x2="745" y2="300" class="wire"/><line x1="745" y1="300" x2="130" y2="300" class="wire"/><line x1="130" y1="300" x2="130" y2="225" class="wire"/><text x="290" y="120" class="svglabel">R</text><text x="480" y="120" class="svglabel">D₁</text><text x="615" y="120" class="svglabel">D₂</text>`;info=`<h3>Dos diodos en serie</h3><p>Si ambos están ON, la caída total aproximada es la suma de las caídas individuales.</p><p>\(I=(V_S-V_{D1}-V_{D2})/R\)</p>`}else if(type==="sources"){h+=`<circle cx="125" cy="180" r="45" class="source"/><text x="125" y="170" class="svgtxt">+</text><text x="125" y="205" class="svgtxt">−</text><line x1="170" y1="180" x2="280" y2="180" class="wire"/><polyline points="280,180 305,155 330,205 355,155 380,205 405,155 430,180" class="wire"/><line x1="430" y1="180" x2="535" y2="180" class="wire"/><polygon points="535,145 535,215 595,180" class="diodefill"/><line x1="603" y1="143" x2="603" y2="217" class="wire"/><line x1="603" y1="180" x2="720" y2="180" class="wire"/><circle cx="765" cy="180" r="45" class="source"/><text x="765" y="170" class="svgtxt">+</text><text x="765" y="205" class="svgtxt">−</text><text x="80" y="105" class="svglabel">V₁</text><text x="748" y="105" class="svglabel">V₂</text><text x="315" y="120" class="svglabel">R</text><text x="555" y="120" class="svglabel">D</text>`;info=`<h3>Diodo entre dos potenciales</h3><p>Empieza por \(V_{AK}=V_A-V_K\).</p><p>Después decide si la hipótesis ON es consistente con el modelo elegido.</p>`}else{h+=`<circle cx="120" cy="180" r="45" class="source"/><text x="120" y="170" class="svgtxt">+</text><text x="120" y="205" class="svgtxt">−</text><line x1="165" y1="180" x2="280" y2="180" class="wire"/><polyline points="280,180 305,155 330,205 355,155 380,205 405,155 430,180" class="wire"/><line x1="430" y1="180" x2="500" y2="180" class="wire"/><line x1="500" y1="180" x2="500" y2="100" class="wire"/><line x1="500" y1="180" x2="500" y2="260" class="wire"/><polygon points="540,65 540,135 595,100" class="diodefill"/><line x1="603" y1="63" x2="603" y2="137" class="wire"/><polygon points="540,225 540,295 595,260" class="diodefill"/><line x1="603" y1="223" x2="603" y2="297" class="wire"/><line x1="500" y1="100" x2="540" y2="100" class="wire"/><line x1="603" y1="100" x2="720" y2="100" class="wire"/><line x1="500" y1="260" x2="540" y2="260" class="wire"/><line x1="603" y1="260" x2="720" y2="260" class="wire"/><line x1="720" y1="100" x2="720" y2="300" class="wire"/><line x1="720" y1="300" x2="120" y2="300" class="wire"/><line x1="120" y1="300" x2="120" y2="225" class="wire"/>`;info=`<h3>Ramas en paralelo</h3><p>Las ramas comparten los mismos nodos y, por tanto, el mismo voltaje.</p><p><b>Atención:</b> en dispositivos reales no asumas reparto idéntico de corriente sin analizar características.</p>`}$(target).innerHTML=h;if(target==="#circuitSvg"){$("#circuitInfo").innerHTML=info;typeset($("#circuitInfo"))}}
+$("#circuitTabs").addEventListener("click",e=>{if(!e.target.dataset.circuit)return;$$("#circuitTabs button").forEach(b=>b.classList.toggle("active",b===e.target));circuitSvg(e.target.dataset.circuit)});circuitSvg("series");
+const exSteps=[["Leemos la polaridad: el diodo puede quedar en directa.","KVL: 9 = V_R + V_D.","Modelo: V_D=0.7 V → V_R=8.3 V.","I_D=8.3/1.2 kΩ≈6.92 mA. Verificación: corriente positiva, hipótesis consistente."],["Ambos diodos tienen la misma orientación y suponemos ON.","Caída total: 0.7+0.7=1.4 V.","V_R=12−1.4=10.6 V.","I=10.6/1 kΩ=10.6 mA."],["Calculamos la diferencia de potencial disponible: 5−(−2)=7 V.","Suponemos el diodo ON con 0.7 V.","La resistencia recibe aproximadamente 7−0.7=6.3 V.","I≈6.3/1 kΩ=6.3 mA; la corriente positiva confirma la hipótesis."],["Hipótesis ON: exigiría aproximadamente V_AK=0.7 V.","Pero V_AK=0.3−0=0.3 V.","La hipótesis ON no puede sostenerse.","Conclusión: D está OFF en el modelo de caída constante."]];
+$$(".guided").forEach(card=>{let i=0,btn=card.querySelector(".stepBtn"),out=card.querySelector(".stepOut");btn.addEventListener("click",()=>{if(i===0&&out.dataset.finished){out.innerHTML="";out.dataset.finished="";btn.textContent="Comenzar solución"}out.innerHTML+=`<p><b>Paso ${i+1}.</b> ${exSteps[+card.dataset.example][i]}</p>`;i++;if(i>=exSteps[+card.dataset.example].length){btn.textContent="Reiniciar";i=0;out.dataset.finished="1"}else btn.textContent=`Mostrar paso ${i+1}`})});
+const dcCorr=(15-.7)/2200*1000;$("#dcCheck").addEventListener("click",()=>{let x=+$("#dcAns").value,ok=Math.abs(x-dcCorr)<.08;feedback("#dcFb",ok?`Correcto: I_D≈${fmt(dcCorr,2)} mA.`:"Aún no. Revisa primero qué voltaje queda sobre R.",ok)});$("#dcHint1").addEventListener("click",()=>feedback("#dcFb","Pista 1: si D está ON, usa V_D≈0.7 V.",true));$("#dcHint2").addEventListener("click",()=>feedback("#dcFb","Pista 2: V_R=15−0.7=14.3 V; luego aplica Ohm.",true));$("#dcShow").addEventListener("click",()=>feedback("#dcFb",`Respuesta: I_D≈${fmt(dcCorr,2)} mA. La corriente resulta positiva, por lo que la hipótesis ON es consistente.`,true));
 
-  const modelText={
-    ideal:`<h3>Modelo ideal</h3><p>ON → cortocircuito, OFF → circuito abierto. Es útil para entender topología y estados sin introducir caída directa.</p><p>En conducción: \\(V_D=0\\).</p>`,
-    constant:`<h3>Modelo de caída constante</h3><p>Cuando está ON, el diodo se representa por una caída fija \\(V_\\gamma\\). Para silicio suele emplearse 0.7 V en ejercicios introductorios.</p>`,
-    piecewise:`<h3>Modelo lineal por tramos</h3><p>Mejora la aproximación incluyendo una resistencia dinámica: \\(V_D=V_\\gamma+I_Dr_d\\).</p>`,
-    shockley:`<h3>Modelo exponencial</h3><p>Representa la característica no lineal: \\(I_D=I_S(e^{V_D/(nV_T)}-1)\\). Es el referente de comparación en este módulo.</p>`
-  };
-  function showModel(k){
-    $$('.model-tabs button').forEach(b=>b.classList.toggle('active',b.dataset.modelTab===k));
-    $('#modelExplanation').innerHTML=modelText[k];
-    if(window.MathJax?.typesetPromise) MathJax.typesetPromise([$('#modelExplanation')]);
-  }
-  $$('.model-tabs button').forEach(b=>b.addEventListener('click',()=>showModel(b.dataset.modelTab))); showModel('ideal');
+/* módulo 6: recta de carga */
+function solveLoad(Vs,Rk,m){let R=Rk*1000;if(m==="ideal")return{vd:0,id:Vs/R};if(m==="constant")return{vd:Vs>.7?.7:Vs,id:Vs>.7?(Vs-.7)/R:0};return solveShockleySeries(Vs,R)}
+function renderLoad(){let Vs=+$("#llVs").value,Rk=+$("#llR").value,m=$("#llModel").value,s=solveLoad(Vs,Rk,m);$("#llVsOut").textContent=fmt(Vs,1);$("#llROut").textContent=fmt(Rk,2);$("#qOut").textContent=`(${fmt(s.vd,3)} V, ${fmt(s.id*1000,2)} mA)`;$("#imaxOut").textContent=fmt(Vs/Rk,2)+" mA";$("#vmaxOut").textContent=fmt(Vs,1)+" V";let xmax=Math.max(1.2,Vs*1.05),ymax=Math.max(2,Vs/Rk*1.15),a=axes(xmax,ymax),p=[];for(let j=0;j<=260;j++){let v=xmax*j/260,im=m==="ideal"?(v<=0?0:ymax):m==="constant"?(v<.7?0:ymax):shockley(v)*1000;if(im<=ymax*1.15)p.push(`${p.length?"L":"M"}${a.x(v).toFixed(1)},${a.y(Math.min(im,ymax)).toFixed(1)}`)}$("#loadChart").innerHTML=a.h+`<path d="${p.join(" ")}" fill="none" stroke="#d14b61" stroke-width="3"/><line x1="${a.x(0)}" y1="${a.y(Vs/Rk)}" x2="${a.x(Vs)}" y2="${a.y(0)}" stroke="var(--primary)" stroke-width="3"/><circle cx="${a.x(s.vd)}" cy="${a.y(s.id*1000)}" r="7" fill="var(--accent)"/><text x="${a.x(s.vd)+10}" y="${a.y(s.id*1000)-10}" fill="currentColor" font-size="13" font-weight="850">Q</text>`}
+["#llVs","#llR","#llModel"].forEach(s=>$(s).addEventListener("input",renderLoad));renderLoad();
+$$('[data-q="slope"] button').forEach(b=>b.addEventListener("click",()=>feedback("#slopeFb",b.dataset.v==="less"?"Correcto. Al aumentar R, |−1/R| disminuye y cambia la inclinación de la recta.":"Revisa la expresión de la pendiente: −1/R.",b.dataset.v==="less")));
+const loadSteps=["Aplicamos KVL: V_S=V_D+RI_D.","Despejamos: I_D=(V_S−V_D)/R.","Primer intercepto: si V_D=0, entonces I_D=V_S/R.","Segundo intercepto: si I_D=0, entonces V_D=V_S.","Unimos los interceptos. La intersección con la característica I–V define Q."];let li=0;$("#loadStepBtn").addEventListener("click",()=>{let o=$("#loadStepOut");if(li===0&&o.dataset.finished){o.innerHTML="";o.dataset.finished=""}o.innerHTML+=`<p><b>Paso ${li+1}.</b> ${loadSteps[li]}</p>`;li++;if(li>=loadSteps.length){$("#loadStepBtn").textContent="Reiniciar";li=0;o.dataset.finished="1"}else $("#loadStepBtn").textContent=`Mostrar paso ${li+1}`});
 
-  function solveShockleySeries(Vs,R){
-    let lo=0,hi=Math.min(Vs,1.5);
-    for(let i=0;i<80;i++){let v=(lo+hi)/2,d=shockley(v,25,1,1.8),l=(Vs-v)/R; if(d>l)hi=v;else lo=v;}
-    let vd=(lo+hi)/2; return {vd,id:(Vs-vd)/R};
-  }
-  function renderModelTable(){
-    const Vs=Math.max(.01,+$('#cmpVs').value||10), R=Math.max(1,+$('#cmpR').value||1000), Vg=Math.max(0,+$('#cmpVg').value||.7), rd=Math.max(0,+$('#cmpRd').value||10);
-    const sh=solveShockleySeries(Vs,R);
-    const rows=[
-      ['Ideal',0,Vs/R],
-      ['Caída constante',Vs>Vg?Vg:Vs,Vs>Vg?(Vs-Vg)/R:0],
-      ['Lineal por tramos',0,0],
-      ['Shockley',sh.vd,sh.id]
-    ];
-    const ipw=Vs>Vg?(Vs-Vg)/(R+rd):0; rows[2][2]=ipw; rows[2][1]=Vs>Vg?Vg+ipw*rd:Vs;
-    $('#modelTable').innerHTML=rows.map((r,i)=>{
-      const err=i===3?0:Math.abs(r[2]-sh.id)/(Math.abs(sh.id)||1)*100;
-      return `<tr><td><strong>${r[0]}</strong></td><td>${r[1].toFixed(3)} V</td><td>${(r[2]*1000).toFixed(3)} mA</td><td>${i===3?'Referencia':err.toFixed(2)+' %'}</td></tr>`;
-    }).join('');
-  }
-  ['#cmpVs','#cmpR','#cmpVg','#cmpRd'].forEach(id=>$(id).addEventListener('input',renderModelTable)); renderModelTable();
+/* módulo 7: LED */
+function led(){let Vs=+$("#ledVs").value,I=+$("#ledI").value/1000,Vf=+$("#ledType").value,R=Math.max(0,(Vs-Vf)/I),P=I*I*R;$("#ledVsOut").textContent=Vs;$("#ledIOut").textContent=fmt(I*1000,0);$("#ledR").textContent=fmt(R,0)+" Ω";$("#ledP").textContent=fmt(P*1000,1)+" mW";let c=["#ef4444","#eab308","#22c55e","#3b82f6","#e5e7eb"][$("#ledType").selectedIndex];$("#ledSvg").innerHTML=`<rect width="700" height="280" rx="18" fill="var(--panel)"/><circle cx="95" cy="140" r="38" class="source"/><text x="95" y="130" class="svgtxt">+</text><text x="95" y="162" class="svgtxt">−</text><line x1="133" y1="140" x2="220" y2="140" class="wire"/><polyline points="220,140 245,115 270,165 295,115 320,165 345,115 370,140" class="wire"/><line x1="370" y1="140" x2="470" y2="140" class="wire"/><circle cx="510" cy="140" r="33" fill="${c}" opacity=".8" stroke="currentColor" stroke-width="3"/><line x1="543" y1="140" x2="610" y2="140" class="wire"/><line x1="610" y1="140" x2="610" y2="225" class="wire"/><line x1="610" y1="225" x2="95" y2="225" class="wire"/><line x1="95" y1="225" x2="95" y2="178" class="wire"/><text x="258" y="86" class="svglabel">${fmt(R,0)} Ω</text><text x="485" y="86" class="svglabel">LED</text>`}
+["#ledVs","#ledI","#ledType"].forEach(s=>$(s).addEventListener("input",led));led();
+$("#errorBtn").addEventListener("click",()=>{let t=Math.abs(+$("#theoryVal").value),m=+$("#measuredVal").value;if(!(t>0)){feedback("#errorOut","Ingresa un valor teórico mayor que cero.",false);return}let e=Math.abs(m-t)/t*100;feedback("#errorOut",`Error porcentual ≈ ${fmt(e,2)} %. Ahora pregunta: ¿la diferencia es razonable para el modelo empleado y la tolerancia de los componentes?`,true)});
 
-  const seriesSteps=[
-    'Paso 1: aplique KVL: 9 V = V_R + V_D.',
-    'Paso 2: con V_D = 0.7 V, entonces V_R = 9 − 0.7 = 8.3 V.',
-    'Paso 3: I_D = V_R/R = 8.3 V / 1.2 kΩ = 6.92 mA.',
-    'Resultado final: V_D = 0.7 V, V_R = 8.3 V e I_D ≈ 6.92 mA.'
-  ];
-  let seriesStep=0;
-  $('.step-reveal[data-example="series"] button').addEventListener('click',e=>{
-    const out=$('.step-reveal[data-example="series"] .reveal-output');
-    if(seriesStep>=seriesSteps.length){
-      out.innerHTML='';
-      seriesStep=0;
-      e.target.textContent='Mostrar paso 1';
-      return;
-    }
-    out.innerHTML+=`<p>${seriesSteps[seriesStep]}</p>`;
-    seriesStep++;
-    e.target.textContent=seriesStep<seriesSteps.length?`Mostrar paso ${seriesStep+1}`:'Reiniciar ejemplo';
-  });
-  $('#seriesCheck').addEventListener('click',()=>{
-    const ans=+$('#seriesAns').value, correct=(15-.7)/2200*1000, ok=Math.abs(ans-correct)<.08;
-    setFeedback('#seriesFeedback',ok?`Correcto: I_D ≈ ${correct.toFixed(2)} mA.`:'Revisa V_R=V_S−V_D antes de aplicar I=V_R/R.',ok);
-  });
-  $('[data-hint="series"]').addEventListener('click',()=>setFeedback('#seriesFeedback','Pista: primero calcule V_R = 15 − 0.7 = 14.3 V.',true));
-  $('[data-answer="parallel"]').addEventListener('click',()=>$('#parallelAnswer').classList.toggle('visible'));
+/* módulo 8: banco de ejercicios */
+const pools={series:[{v:5,r:470,vd:.7},{v:9,r:1000,vd:.7},{v:12,r:2200,vd:.7},{v:15,r:3300,vd:.7},{v:10,r:680,vd:.7},{v:18,r:1500,vd:.7}],twodiode:[{v:9,r:1000,drops:[.7,.7]},{v:12,r:820,drops:[.7,.7]},{v:15,r:2200,drops:[.7,.7]},{v:10,r:680,drops:[.7,.7]}],sources:[{va:5,vk:-2,r:1000,vd:.7},{va:8,vk:1,r:1500,vd:.7},{va:3,vk:-3,r:820,vd:.7},{va:1.2,vk:0,r:470,vd:.7}],led:[{v:5,vf:1.8,r:220},{v:9,vf:2.1,r:330},{v:12,vf:3.0,r:470},{v:15,vf:2.2,r:680}]};let cur;
+function genEx(){let topic=$("#exTopic").value,level=+$("#exLevel").value,a=pools[topic][Math.floor(Math.random()*pools[topic].length)],text,title,ans,h1,h2,unit="mA";cur={topic,level,...a};if(topic==="series"){ans=(a.v-a.vd)/a.r*1000;title="Diodo serie";text=`Vₛ=${a.v} V, R=${a.r} Ω y V_D=${a.vd} V. Determine I_D.`;h1="Supón el diodo ON y determina el voltaje sobre R.";h2=`V_R=${a.v}−${a.vd}=${fmt(a.v-a.vd,1)} V.`}if(topic==="twodiode"){let d=a.drops.reduce((x,y)=>x+y,0);ans=(a.v-d)/a.r*1000;title="Dos diodos en serie";text=`Vₛ=${a.v} V, R=${a.r} Ω y dos diodos de 0.7 V orientados en directa. Determine I.`;h1="Suma primero las caídas de los diodos.";h2=`La caída total es ${fmt(d,1)} V; el resto queda en R.`}if(topic==="sources"){let avail=a.va-a.vk;ans=Math.max(0,(avail-a.vd)/a.r*1000);title="Diodo entre dos potenciales";text=`V_A=${a.va} V, V_K=${a.vk} V, R=${a.r} Ω y Vγ=${a.vd} V. Determine la corriente si la hipótesis ON es consistente.`;h1="Calcula primero el potencial disponible entre los extremos de la red.";h2=`Diferencia bruta: ${fmt(avail,1)} V. Después descuenta Vγ.`}if(topic==="led"){ans=(a.v-a.vf)/a.r*1000;title="LED con resistencia";text=`Fuente de ${a.v} V, LED con V_F≈${a.vf} V y R=${a.r} Ω. Calcule la corriente.`;h1="La resistencia no recibe todo Vₛ.";h2=`V_R=${a.v}−${a.vf}=${fmt(a.v-a.vf,1)} V.`}cur.ans=ans;cur.h1=h1;cur.h2=h2;cur.unit=unit;$("#exBadge").textContent=`Nivel ${level}`;$("#exTitle").textContent=title;$("#exText").textContent=text;$("#exUnit").textContent=unit;$("#exAns").value="";$("#exFb").textContent="";circuitSvg(topic==="twodiode"?"two":topic==="sources"?"sources":"series","#exCircuit")}
+$("#newEx").addEventListener("click",genEx);$("#exTopic").addEventListener("change",genEx);$("#exLevel").addEventListener("change",genEx);$("#exCheck").addEventListener("click",()=>{let x=+$("#exAns").value,ok=Math.abs(x-cur.ans)<Math.max(.08,.02*Math.abs(cur.ans));feedback("#exFb",ok?`Correcto: ${fmt(cur.ans,2)} ${cur.unit}. Ahora justifica por qué el estado supuesto es consistente.`:"Aún no. Revisa primero la distribución de voltajes antes de usar Ohm.",ok)});$("#exHint1").addEventListener("click",()=>feedback("#exFb","Pista 1: "+cur.h1,true));$("#exHint2").addEventListener("click",()=>feedback("#exFb","Pista 2: "+cur.h2,true));$("#exShow").addEventListener("click",()=>feedback("#exFb",`Respuesta: ${fmt(cur.ans,2)} ${cur.unit}.`,true));genEx();
 
-  $('#checkBias').addEventListener('click',()=>{
-    const va=+$('#vaInput').value,vk=+$('#vkInput').value,vg=Math.max(0,+$('#vgInput').value),vak=va-vk,on=vak>=vg;
-    $('#biasResult').innerHTML=`<strong>V_AK = ${vak.toFixed(2)} V</strong><br>${on?`La polarización disponible supera ${vg.toFixed(2)} V: la hipótesis ON puede ser consistente.`:`No alcanza ${vg.toFixed(2)} V: con este modelo el diodo se considera OFF.`}`;
-  });
+/* módulo 9: autoevaluación */
+let qi=0,score=0,locked=false;function quiz(){let q=window.ANALOG_QUESTIONS[qi];locked=false;$("#quizCount").textContent=`Pregunta ${qi+1} de ${window.ANALOG_QUESTIONS.length}`;$("#quizScore").textContent=`Puntaje: ${score}`;$("#quizQ").textContent=q.q;$("#quizFb").textContent="";$("#quizNext").disabled=true;$("#quizNext").textContent="Siguiente";$("#quizOpts").innerHTML=q.o.map((o,i)=>`<button data-i="${i}">${String.fromCharCode(65+i)}. ${o}</button>`).join("");$$("#quizOpts button").forEach(b=>b.addEventListener("click",()=>{if(locked)return;locked=true;let ok=+b.dataset.i===q.a;if(ok)score++;feedback("#quizFb",(ok?"Correcto. ":"No exactamente. ")+q.e,ok);$("#quizScore").textContent=`Puntaje: ${score}`;$("#quizNext").disabled=false}))}
+$("#quizNext").addEventListener("click",()=>{qi++;if(qi>=window.ANALOG_QUESTIONS.length){$("#quizQ").textContent=`Resultado: ${score}/${window.ANALOG_QUESTIONS.length}`;$("#quizOpts").innerHTML="";$("#quizFb").textContent=score>=10?"Dominio muy bueno. Puedes pasar a ejercicios de integración.":score>=7?"Buen avance. Repite los módulos con más errores.":"Conviene volver a fundamentos, modelos y ON/OFF antes de continuar.";$("#quizNext").textContent="Reiniciar";$("#quizNext").disabled=false;qi=-1;score=0}else quiz()});quiz();
 
-  function renderLed(){
-    const Vs=+$('#ledVs').value, I=+$('#ledI').value/1000, Vf=+$('#ledType').value;
-    const R=Math.max(0,(Vs-Vf)/I),P=I*I*R;
-    $('#ledVsOut').textContent=Vs;$('#ledIOut').textContent=(I*1000).toFixed(0);
-    $('#ledR').textContent=R.toFixed(0)+' Ω'; $('#ledP').textContent=(P*1000).toFixed(1)+' mW';
-    $('#ledNote').textContent=Vs<=Vf?'La fuente no supera la caída estimada del LED.':'Seleccione un valor comercial igual o ligeramente superior y verifique la corriente real.';
-  }
-  ['#ledVs','#ledI','#ledType'].forEach(id=>$(id).addEventListener('input',renderLed));renderLed();
-
-  function solveLoad(Vs,Rk,model){
-    const R=Rk*1000;
-    if(model==='ideal') return {vd:0,id:Vs/R};
-    if(model==='constant') return {vd:Vs>.7?.7:Vs,id:Vs>.7?(Vs-.7)/R:0};
-    return solveShockleySeries(Vs,R);
-  }
-  function renderLoad(){
-    const Vs=+$('#llVs').value,Rk=+$('#llR').value,m=$('#llModel').value,s=solveLoad(Vs,Rk,m);
-    $('#llVsOut').textContent=Vs.toFixed(1);$('#llROut').textContent=Rk.toFixed(2);
-    $('#llQ').textContent=`(${s.vd.toFixed(3)} V, ${(s.id*1000).toFixed(2)} mA)`;
-    $('#llImax').textContent=(Vs/Rk).toFixed(2)+' mA';
-    const xmax=Math.max(1.2,Vs*1.05),ymax=Math.max(2,Vs/Rk*1.15),a=drawAxes($('#loadChart'),xmax,ymax);
-    let p=[]; for(let j=0;j<=260;j++){const v=xmax*j/260;let im=m==='ideal'?(v<=0?0:ymax):m==='constant'?(v<.7?0:ymax):shockley(v,25,1,1.8)*1000;if(im<=ymax*1.15)p.push(`${p.length?'L':'M'}${a.x(v).toFixed(1)},${a.y(Math.min(im,ymax)).toFixed(1)}`)}
-    $('#loadChart').innerHTML=a.h+`<path d="${p.join(' ')}" fill="none" stroke="#d14a61" stroke-width="3"/>
-      <line x1="${a.x(0)}" y1="${a.y(Vs/Rk)}" x2="${a.x(Vs)}" y2="${a.y(0)}" stroke="#2156d8" stroke-width="3"/>
-      <circle cx="${a.x(s.vd)}" cy="${a.y(s.id*1000)}" r="7" fill="#14a38b"/>
-      <text x="${a.x(s.vd)+10}" y="${a.y(s.id*1000)-10}" fill="currentColor" font-size="13" font-weight="800">Q</text>
-      <text x="${a.L+12}" y="${a.T+18}" fill="#d14a61" font-size="13">Curva I–V</text>
-      <text x="${a.L+12}" y="${a.T+38}" fill="#2156d8" font-size="13">Recta de carga</text>`;
-  }
-  ['#llVs','#llR','#llModel'].forEach(id=>$(id).addEventListener('input',renderLoad));renderLoad();
-
-  const exercisePool=[
-    {vs:5,r:470,vd:.7},{vs:9,r:1000,vd:.7},{vs:12,r:2200,vd:.7},{vs:15,r:3300,vd:.7},
-    {vs:10,r:680,vd:.7},{vs:6,r:820,vd:.7}
-  ];
-  let currentExercise;
-  function newExercise(){
-    currentExercise=exercisePool[Math.floor(Math.random()*exercisePool.length)];
-    $('#exerciseText').innerHTML=`Una fuente de <strong>${currentExercise.vs} V</strong> alimenta un diodo de silicio mediante <strong>${currentExercise.r} Ω</strong>. Use el modelo de caída constante de ${currentExercise.vd} V. Determine \\(I_D\\) en mA.`;
-    $('#exerciseAnswer').value='';$('#exerciseFeedback').textContent='';
-    if(window.MathJax?.typesetPromise) MathJax.typesetPromise([$('#exerciseText')]);
-  }
-  $('#newExercise').addEventListener('click',newExercise);
-  $('#exerciseCheck').addEventListener('click',()=>{
-    const ans=+$('#exerciseAnswer').value, corr=(currentExercise.vs-currentExercise.vd)/currentExercise.r*1000,ok=Math.abs(ans-corr)<.08;
-    setFeedback('#exerciseFeedback',ok?'Correcto. El procedimiento y las unidades son consistentes.':'Todavía no. Verifique primero el voltaje sobre la resistencia.',ok);
-  });
-  $('#exerciseHint').addEventListener('click',()=>setFeedback('#exerciseFeedback',`Pista: V_R = ${currentExercise.vs} − ${currentExercise.vd} = ${(currentExercise.vs-currentExercise.vd).toFixed(1)} V.`,true));
-  $('#exerciseShow').addEventListener('click',()=>setFeedback('#exerciseFeedback',`Respuesta: I_D = ${((currentExercise.vs-currentExercise.vd)/currentExercise.r*1000).toFixed(2)} mA.`,true));
-  newExercise();
-
-  let qi=0,score=0,locked=false;
-  function renderQuiz(){
-    const q=window.ANALOG_QUESTIONS[qi];locked=false;
-    $('#quizCount').textContent=`Pregunta ${qi+1} de ${window.ANALOG_QUESTIONS.length}`;
-    $('#quizScore').textContent=`Puntaje: ${score}`;
-    $('#quizQuestion').textContent=q.q;$('#quizFeedback').textContent='';$('#quizNext').disabled=true;
-    $('#quizOptions').innerHTML=q.options.map((o,i)=>`<button data-i="${i}">${String.fromCharCode(65+i)}. ${o}</button>`).join('');
-    $$('#quizOptions button').forEach(b=>b.addEventListener('click',()=>{
-      if(locked)return;locked=true;const ok=+b.dataset.i===q.answer;if(ok)score++;
-      setFeedback('#quizFeedback',(ok?'Correcto. ':'Respuesta incorrecta. ')+q.explain,ok);
-      $('#quizScore').textContent=`Puntaje: ${score}`;$('#quizNext').disabled=false;
-    }));
-  }
-  $('#quizNext').addEventListener('click',()=>{
-    qi++;
-    if(qi>=window.ANALOG_QUESTIONS.length){
-      $('#quizQuestion').textContent=`Resultado final: ${score}/${window.ANALOG_QUESTIONS.length}`;
-      $('#quizOptions').innerHTML='';$('#quizFeedback').textContent=score>=4?'Muy buen dominio del bloque.':'Conviene volver a curva I–V, modelos y análisis ON/OFF.';
-      $('#quizNext').textContent='Reiniciar';$('#quizNext').disabled=false;qi=-1;score=0;
-    }else{if(qi===0)$('#quizNext').textContent='Siguiente';renderQuiz()}
-  });
-  renderQuiz();
+/* módulo 10: vista previa AC */
+function ac(){let A=+$("#acAmp").value,deg=+$("#acPhase").value,drop=$("#acModel").value==="drop"?.7:0,vin=A*Math.sin(deg*Math.PI/180),on=vin>drop,vout=on?vin-drop:0;$("#acAmpOut").textContent=A;$("#acPhaseOut").textContent=deg;$("#acState").innerHTML=`<b>${on?"Diodo ON":"Diodo OFF"}</b><br>vᵢ=${fmt(vin,2)} V · vₒ≈${fmt(vout,2)} V`;$("#acCircuit").innerHTML=`<rect width="800" height="300" rx="18" fill="var(--panel)"/><circle cx="110" cy="150" r="43" class="source"/><path d="M82 150 C92 115,102 185,112 150 S132 115,142 150" fill="none" stroke="currentColor" stroke-width="3"/><line x1="153" y1="150" x2="285" y2="150" class="${on?"current-path":"wire"}"/><polygon points="285,115 285,185 345,150" class="diodefill"/><line x1="353" y1="113" x2="353" y2="187" class="wire"/><line x1="353" y1="150" x2="465" y2="150" class="${on?"current-path":"wire"}"/><polyline points="465,150 490,125 515,175 540,125 565,175 590,125 615,150" class="wire"/><line x1="615" y1="150" x2="690" y2="150" class="wire"/><line x1="690" y1="150" x2="690" y2="245" class="wire"/><line x1="690" y1="245" x2="110" y2="245" class="wire"/><line x1="110" y1="245" x2="110" y2="193" class="wire"/><text x="300" y="90" class="svglabel">D</text><text x="510" y="90" class="svglabel">Rₗ</text>`;let W=760,H=430,L=55,R=20,T=22,B=50,gw=W-L-R,gh=H-T-B,x=t=>L+t/(2*Math.PI)*gw,y=v=>T+gh/2-v/(A*1.25)*gh/2;let h=`<rect width="${W}" height="${H}" rx="16" fill="var(--panel)"/><line x1="${L}" y1="${T+gh/2}" x2="${L+gw}" y2="${T+gh/2}" stroke="currentColor"/><line x1="${L}" y1="${T}" x2="${L}" y2="${T+gh}" stroke="currentColor"/>`,p1=[],p2=[];for(let j=0;j<=280;j++){let t=2*Math.PI*j/280,v=A*Math.sin(t),o=Math.max(0,v-drop);p1.push(`${j?"L":"M"}${x(t).toFixed(1)},${y(v).toFixed(1)}`);p2.push(`${j?"L":"M"}${x(t).toFixed(1)},${y(o).toFixed(1)}`)}let tt=deg/360*2*Math.PI;h+=`<path d="${p1.join(" ")}" fill="none" stroke="#7c8aa4" stroke-width="2.5"/><path d="${p2.join(" ")}" fill="none" stroke="var(--primary)" stroke-width="3"/><circle cx="${x(tt)}" cy="${y(vin)}" r="6" fill="var(--bad)"/><circle cx="${x(tt)}" cy="${y(vout)}" r="6" fill="var(--accent)"/><text x="${L+12}" y="${T+18}" fill="#7c8aa4" font-size="13">Entrada</text><text x="${L+12}" y="${T+38}" fill="var(--primary)" font-size="13">Salida</text><text x="${L+gw/2}" y="${H-10}" text-anchor="middle" fill="currentColor" font-size="14">0 → 360°</text>`;$("#acChart").innerHTML=h}
+["#acAmp","#acPhase","#acModel"].forEach(s=>$(s).addEventListener("input",ac));ac();$$('[data-q="ac"] button').forEach(b=>b.addEventListener("click",()=>feedback("#acFb",b.dataset.v==="pos"?"Correcto para la orientación mostrada: conduce cuando la entrada polariza el diodo en directa.":"Observa la orientación del diodo y relaciónala con la polaridad instantánea de la fuente.",b.dataset.v==="pos")));
 })();

@@ -1,32 +1,134 @@
-window.ANALOG_QUESTIONS = [
+window.ANALOG_QUESTIONS=[
   {
-    q:"En el modelo de caída constante para un diodo de silicio en conducción, ¿qué se aproxima normalmente?",
-    options:["I_D = 0","V_D ≈ 0.7 V","V_D = V_S","R_D = ∞"],
-    answer:1,
-    explain:"Se reemplaza el diodo ON por una caída aproximadamente constante, típicamente 0.7 V para silicio en ejercicios introductorios."
+    "q": "En un semiconductor tipo N, ¿qué portadores son mayoritarios?",
+    "o": [
+      "Huecos",
+      "Electrones",
+      "Iones positivos",
+      "Fotones"
+    ],
+    "a": 1,
+    "e": "El dopaje donador aporta electrones disponibles para conducción."
   },
   {
-    q:"En una recta de carga I_D=(V_S−V_D)/R, ¿qué ocurre si R aumenta y V_S permanece constante?",
-    options:["La magnitud de la pendiente aumenta","La magnitud de la pendiente disminuye","La recta se vuelve vertical","El intercepto V_D=V_S desaparece"],
-    answer:1,
-    explain:"La pendiente es −1/R; al aumentar R, su magnitud disminuye."
+    "q": "En polarización directa de una unión PN, la región de agotamiento tiende a:",
+    "o": [
+      "Aumentar",
+      "Disminuir",
+      "Permanecer idéntica",
+      "Convertirse en un conductor ideal"
+    ],
+    "a": 1,
+    "e": "La polarización directa reduce la barrera efectiva y estrecha la región de agotamiento."
   },
   {
-    q:"Si V_A−V_K = 0.2 V y se usa un modelo de 0.7 V, el diodo se considera inicialmente:",
-    options:["ON","OFF","En ruptura","Imposible de analizar"],
-    answer:1,
-    explain:"0.2 V no alcanza la caída asumida de 0.7 V, por lo que la hipótesis ON no es consistente."
+    "q": "La ecuación de Shockley relaciona principalmente:",
+    "o": [
+      "Potencia y resistencia",
+      "Corriente y voltaje del diodo",
+      "Frecuencia y fase",
+      "Capacitancia y carga"
+    ],
+    "a": 1,
+    "e": "Describe la relación exponencial entre ID y VD."
   },
   {
-    q:"El punto Q corresponde a:",
-    options:["La máxima corriente del diodo","La intersección de la curva I–V y la recta de carga","El voltaje de la fuente","La resistencia dinámica únicamente"],
-    answer:1,
-    explain:"El punto Q satisface simultáneamente el comportamiento del dispositivo y la restricción impuesta por el circuito."
+    "q": "Si se usa el modelo ideal y el diodo está ON, se representa por:",
+    "o": [
+      "Circuito abierto",
+      "Fuente de 0.7 V",
+      "Cortocircuito",
+      "Resistencia infinita"
+    ],
+    "a": 2,
+    "e": "En el modelo ideal, un diodo ON tiene VD=0."
   },
   {
-    q:"¿Cuál expresión corresponde a la ecuación de Shockley?",
-    options:["I_D=V_D/R","I_D=I_S(e^{V_D/(nV_T)}−1)","V_D=V_S−R","I_D=V_S·R"],
-    answer:1,
-    explain:"Shockley modela la relación exponencial entre voltaje y corriente del diodo."
+    "q": "El modelo lineal por tramos agrega principalmente:",
+    "o": [
+      "Una inductancia",
+      "Una resistencia dinámica",
+      "Una fuente AC",
+      "Una capacitancia infinita"
+    ],
+    "a": 1,
+    "e": "Se aproxima con Vγ más una caída ID·rd."
+  },
+  {
+    "q": "En un circuito serie Vs–R–D con el diodo ON, la corriente se obtiene a partir de:",
+    "o": [
+      "(Vs+VD)/R",
+      "(Vs−VD)/R",
+      "R/(Vs−VD)",
+      "Vs·R"
+    ],
+    "a": 1,
+    "e": "KVL da VR=Vs−VD y luego I=VR/R."
+  },
+  {
+    "q": "Si VA−VK=0.2 V y se usa Vγ=0.7 V, la hipótesis más razonable es:",
+    "o": [
+      "ON",
+      "OFF",
+      "Ruptura",
+      "Saturación"
+    ],
+    "a": 1,
+    "e": "No existe voltaje suficiente para sostener el modelo ON de 0.7 V."
+  },
+  {
+    "q": "La recta de carga representa:",
+    "o": [
+      "Solo el diodo",
+      "Las restricciones del circuito externo",
+      "Solo la resistencia interna",
+      "La señal AC"
+    ],
+    "a": 1,
+    "e": "La red externa impone una relación lineal entre VD e ID."
+  },
+  {
+    "q": "El punto Q es:",
+    "o": [
+      "El valor máximo de corriente",
+      "La intersección curva I–V/recta de carga",
+      "El valor RMS",
+      "El voltaje de ruptura"
+    ],
+    "a": 1,
+    "e": "Satisface simultáneamente el dispositivo y el circuito externo."
+  },
+  {
+    "q": "Si Vs permanece constante y R aumenta, |−1/R|:",
+    "o": [
+      "Aumenta",
+      "Disminuye",
+      "No cambia",
+      "Se hace infinita"
+    ],
+    "a": 1,
+    "e": "La magnitud de la pendiente disminuye cuando R aumenta."
+  },
+  {
+    "q": "Para un LED, la resistencia serie se usa principalmente para:",
+    "o": [
+      "Aumentar VF",
+      "Limitar corriente",
+      "Crear ruptura",
+      "Convertir DC en AC"
+    ],
+    "a": 1,
+    "e": "La resistencia fija la corriente a un nivel seguro de operación."
+  },
+  {
+    "q": "En un rectificador ideal de media onda, durante el semiciclo que polariza inversamente el diodo:",
+    "o": [
+      "La salida sigue la entrada",
+      "La salida se aproxima a cero",
+      "La corriente se duplica",
+      "El diodo conduce más"
+    ],
+    "a": 1,
+    "e": "El diodo bloquea ese semiciclo en el modelo ideal."
   }
 ];
