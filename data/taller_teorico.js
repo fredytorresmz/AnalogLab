@@ -158,13 +158,13 @@ window.TALLER_TEORICO=[
     "n": 15,
     "section": "D · Rectificación básica en AC",
     "type": "numeric",
-    "prompt": "Un rectificador ideal de media onda tiene Vp=10 V. Calcule el valor medio VDC.",
+    "prompt": "Un rectificador ideal de media onda tiene \\(V_p=10\\,\\mathrm{V}\\). Calcule el valor medio \\(V_{DC}\\).",
     "unit": "V",
     "answer": 3.18,
     "tol": 0.05,
-    "h1": "Para media onda ideal: VDC=Vp/π.",
-    "h2": "Sustituya Vp=10 V.",
-    "guide": "VDC=10/π≈3.18 V."
+    "h1": "Para media onda ideal: \\(V_{DC}=V_p/\\pi\\).",
+    "h2": "Sustituya \\(V_p=10\\,\\mathrm{V}\\).",
+    "guide": "\\(V_{DC}=10/\\pi\\approx3.18\\,\\mathrm{V}\\)."
   },
   {
     "n": 16,
@@ -198,13 +198,13 @@ window.TALLER_TEORICO=[
     "n": 18,
     "section": "D · Rectificación básica en AC",
     "type": "numeric",
-    "prompt": "Un rectificador ideal de onda completa recibe Vp=10 V. Calcule VDC.",
+    "prompt": "Un rectificador ideal de onda completa recibe \\(V_p=10\\,\\mathrm{V}\\). Calcule \\(V_{DC}\\).",
     "unit": "V",
     "answer": 6.37,
     "tol": 0.06,
-    "h1": "Para onda completa ideal: VDC=2Vp/π.",
-    "h2": "Sustituya Vp=10 V.",
-    "guide": "VDC=20/π≈6.37 V."
+    "h1": "Para onda completa ideal: \\(V_{DC}=2V_p/\\pi\\).",
+    "h2": "Sustituya \\(V_p=10\\,\\mathrm{V}\\).",
+    "guide": "\\(V_{DC}=20/\\pi\\approx6.37\\,\\mathrm{V}\\)."
   },
   {
     "n": 19,
@@ -212,7 +212,7 @@ window.TALLER_TEORICO=[
     "type": "open",
     "prompt": "Compare media onda y onda completa respecto al aprovechamiento de la entrada, valor medio y frecuencia de pulsación.",
     "h1": "Uno aprovecha un semiciclo; el otro, ambos.",
-    "h2": "Relacione esa diferencia con VDC y fr.",
+    "h2": "Relacione esa diferencia con \\(V_{DC}\\) y \\(f_r\\).",
     "guide": "Media onda aprovecha un semiciclo, tiene menor valor medio y fr=fin. Onda completa utiliza ambos semiciclos, tiene mayor valor medio y fr=2fin, lo que también favorece el filtrado posterior."
   },
   {

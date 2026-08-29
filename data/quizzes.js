@@ -138,19 +138,19 @@ window.ANALOG_QUIZZES={
       "q": "Para decidir la polarización de un diodo, conviene evaluar:",
       "options": [
         {
-          "text": "V_AK = V_A - V_K.",
+          "text": "\\(V_{AK}=V_A-V_K\\).",
           "feedback": "Correcto."
         },
         {
-          "text": "V_A + V_K.",
+          "text": "\\(V_A+V_K\\).",
           "feedback": "La suma de potenciales no determina directamente la polarización del dispositivo."
         },
         {
-          "text": "Solo V_A.",
+          "text": "Solo \\(V_A\\).",
           "feedback": "También importa el potencial del cátodo."
         },
         {
-          "text": "Solo V_K.",
+          "text": "Solo \\(V_K\\).",
           "feedback": "También importa el potencial del ánodo."
         }
       ],
@@ -172,7 +172,7 @@ window.ANALOG_QUIZZES={
           "feedback": "Eso corresponde a un dispositivo diseñado para ruptura controlada, como el Zener."
         },
         {
-          "text": "Hacer V_D=0.",
+          "text": "Hacer \\(V_D=0\\).",
           "feedback": "No."
         }
       ],

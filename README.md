@@ -240,3 +240,8 @@ Los apuntes preparados para las clases se utilizan como insumo para construir y 
 ## Tecnologías utilizadas
 
 HTML5 · CSS3 · JavaScript · SVG · MathJax · GitHub Pages
+
+
+## Renderizado matemático y visual
+
+Las expresiones matemáticas se procesan con **MathJax 3 (salida SVG)** incluido localmente en el proyecto. Los diagramas y formas de onda se construyen con SVG y JavaScript. Los archivos CSS, JavaScript y datos incorporan una versión de caché para evitar que GitHub Pages mezcle recursos antiguos con una actualización nueva.
