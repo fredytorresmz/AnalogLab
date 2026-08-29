@@ -20,3 +20,11 @@ details{border:1px solid var(--line);border-radius:11px;background:var(--bg);mar
 mjx-container{color:var(--ink)}
 svg.diagram,svg.chart{min-height:220px;overflow:visible}
 @media(max-width:620px){svg.diagram,svg.chart{min-height:190px}.formula{font-size:.96rem}}
+
+.answer-group{margin-top:20px}
+.answer-group>h3{font-family:Georgia,"Times New Roman",serif;color:var(--navy);margin:0 0 10px}
+.answer-detail>.formula{margin:8px 0 12px}
+.analysis-detail{background:var(--paper);margin-top:10px}
+.analysis-detail>summary{font-size:.88rem;color:var(--blue)}
+.answer-warning{border-color:color-mix(in srgb,var(--amber) 55%,var(--line))}
+.answer-warning>summary{color:var(--amber)}

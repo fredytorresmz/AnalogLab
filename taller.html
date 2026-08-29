@@ -1,4 +1,4 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="AnalogLab: recurso interactivo de apoyo académico para Electrónica Analógica y Laboratorio."><title>AnalogLab · Taller #1</title><link rel="stylesheet" href="css/styles.css?v=5.2"><script>
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="AnalogLab: recurso interactivo de apoyo académico para Electrónica Analógica y Laboratorio."><title>AnalogLab · Taller #1</title><link rel="stylesheet" href="css/styles.css?v=5.4"><script>
 window.MathJax = {
   tex: {
     inlineMath: [['\\(', '\\)']],
@@ -6,8 +6,61 @@ window.MathJax = {
   },
   svg: { fontCache: 'global' }
 };
-</script><script id="MathJax-script" defer src="vendor/mathjax/tex-svg.js?v=3.2.1"></script></head><body><header><button class="menu">☰</button><a class="brand" href="index.html"><strong>AnalogLab</strong><span>Electrónica Analógica y Laboratorio</span></a><nav class="topnav"><a class="" href="index.html">Inicio</a><a class="" href="dc.html">Diodos DC</a><a class="" href="ac.html">Diodos AC</a><a class="" href="zener.html">Zener</a><a class="active" href="taller.html">Taller 1</a></nav><div class="header-actions"><button id="class">Modo clase</button><button id="theme">◐</button></div></header><div class="layout"><aside><div class="progress-card"><div><span>Progreso de estudio</span><strong class="progress-value">0%</strong></div><div class="track"><span class="progress-fill"></span></div></div><h4>Contenido</h4><nav><a href="#teorico">T1 · Repaso teórico</a><a href="#practico">T2 · Respuestas del taller práctico</a></nav><div class="side-info">Las preguntas aparecen al final de cada módulo, después de la teoría, ejemplos y recursos interactivos.</div></aside><main>
+</script><script id="MathJax-script" defer src="vendor/mathjax/tex-svg.js?v=3.2.1"></script></head><body><header><button class="menu">☰</button><a class="brand" href="index.html"><strong>AnalogLab</strong><span>Electrónica Analógica y Laboratorio</span></a><nav class="topnav"><a class="" href="index.html">Inicio</a><a class="" href="dc.html">Diodos DC</a><a class="" href="ac.html">Diodos AC</a><a class="" href="zener.html">Zener</a><a class="active" href="taller.html">Taller 1</a></nav><div class="header-actions"><button id="class">Modo clase</button><button id="theme">◐</button></div></header><div class="layout"><aside><div class="progress-card"><div><span>Progreso de estudio</span><strong class="progress-value">0%</strong></div><div class="track"><span class="progress-fill"></span></div></div><h4>Contenido</h4><nav><a href="#teorico">T1 · Repaso teórico</a><a href="#conexion">T2 · Guía del taller práctico</a><a href="#practico">T3 · Respuestas del taller práctico</a></nav><div class="side-info">Las preguntas aparecen al final de cada módulo, después de la teoría, ejemplos y recursos interactivos.</div></aside><main>
 <section class="hero small"><span class="eyebrow">Taller #1 · Evaluación actual</span><h1>Repaso guiado: fundamentos, diodos DC y rectificación básica</h1><p>La parte teórica del taller se trabaja directamente en AnalogLab. Los ejercicios gráficos más extensos se entregan en el documento práctico del curso. La página sirve para estudiar, solicitar pistas y comparar resultados.</p></section>
 <section class="module" id="teorico"><div class="module-head"><div class="module-title"><span class="no">T1</span><div><span class="eyebrow">Parte teórica interactiva</span><h2>Preguntas de comprensión y cálculo</h2></div></div><button class="mark" data-mark="taller">Marcar estudiado</button></div><div class="box remember"><small>Modo de trabajo</small>Primero intenta responder con tus propias palabras o procedimiento. Después utiliza Pista 1 y Pista 2. La respuesta orientativa se habilita después de registrar un intento.</div><div id="tallerList" class="taller-list" style="margin-top:15px"></div></section>
-<section class="module" id="practico"><div class="module-head"><div class="module-title"><span class="no">T2</span><div><span class="eyebrow">Taller práctico externo</span><h2>Comprobación de resultados</h2></div></div></div><p class="lead">Los circuitos complejos del taller práctico se mantendrán en el documento entregado por el docente, donde la simbología y la orientación original pueden conservarse sin simplificaciones. Cuando la versión definitiva del taller quede numerada y con enunciados completos, esta sección mostrará una lista desplegable con las respuestas finales y, para ejercicios seleccionados, el análisis matemático.</p><div class="unlock"><b>Esta sección se habilitará cuando el taller práctico definitivo quede sincronizado.</b><p>No se publican respuestas provisionales para evitar que una ambigüedad de orientación, modelo de diodo o polaridad produzca una solución incorrecta.</p></div><div id="practicalAnswers"></div></section>
-<div class="footer"><div><b>AnalogLab</b><span>Recurso interactivo de apoyo académico</span></div><span>Electrónica Analógica y Laboratorio</span></div></main></div><script src="data/quizzes.js?v=5.2"></script><script src="js/core.js?v=5.2"></script><script src="data/taller_teorico.js?v=5.2"></script><script src="data/respuestas_taller_practico.js?v=5.2"></script><script src="js/taller.js?v=5.2"></script></body></html>
+
+
+<section class="module" id="conexion">
+  <div class="module-head">
+    <div class="module-title"><span class="no">T2</span><div><span class="eyebrow">Conexión AnalogLab ↔ Taller práctico</span><h2>Aclaraciones para trabajar los circuitos</h2></div></div>
+  </div>
+  <p class="lead">El documento entregado en Teams conserva los circuitos originales del taller. AnalogLab reúne aquí las convenciones y las precisiones de lectura necesarias para que los procedimientos y las respuestas puedan compararse utilizando el mismo criterio de análisis.</p>
+
+  <div class="grid2">
+    <div class="box remember"><small>Convenciones generales</small>
+      <div class="vars">
+        <span><b>Si</b> sobre un diodo: \(V_D=0.7\,\mathrm{V}\).</span>
+        <span><b>Ge</b> sobre un diodo: \(V_D=0.3\,\mathrm{V}\).</span>
+        <span><b>Diodo sin material indicado</b>: ideal; cuando está ON, \(V_D=0\,\mathrm{V}\).</span>
+        <span>El valor escrito sobre una senoide es su valor máximo: \(V_m=V_p\).</span>
+        <span>En AC, salvo indicación contraria, analiza cada semiciclo por separado y determina los diodos <b>ON/OFF</b>.</span>
+      </div>
+    </div>
+    <div class="box key"><small>Secuencia de análisis</small>
+      <ol>
+        <li>Identifica ánodo, cátodo, material y polaridades.</li>
+        <li>En AC, fija primero el semiciclo que estás analizando.</li>
+        <li>Propón los estados ON/OFF.</li>
+        <li>Sustituye cada diodo por su modelo equivalente.</li>
+        <li>Resuelve con KVL, KCL, divisores y ley de Ohm según corresponda.</li>
+        <li>Verifica que voltajes y corrientes confirmen los estados supuestos.</li>
+        <li>En AC, reconstruye \(v_o(t)\) y calcula el nivel \(V_{DC}\).</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>Precisiones asociadas a los ejercicios del documento</h3>
+    <div class="grid2">
+      <div class="panel paper"><b>AC · A, B, B★ y C</b><p>Determina la forma de onda de salida, los estados de conducción por semiciclo y el nivel de continua. El número escrito junto a la senoide corresponde a \(V_m=V_p\).</p></div>
+      <div class="panel paper"><b>DC · Ejercicio 1</b><p>Determina \(V_{o1}\), \(V_{o2}\) y la corriente de cada diodo. Usa Si \( \rightarrow 0.7\,\mathrm{V}\) y Ge \( \rightarrow 0.3\,\mathrm{V}\).</p></div>
+      <div class="panel paper"><b>DC · Ejercicio 2</b><p>Determina \(V_o\) e \(I_D\). Para el LED azul usa \(V_{F,\text{azul}}=3.2\,\mathrm{V}\). AnalogLab incluye en las respuestas una observación de consistencia del circuito bajo el modelo simplificado.</p></div>
+      <div class="panel paper"><b>DC · Ejercicio 3</b><p>Determina \(V_o\) y la corriente \(I_D\) indicada en la rama superior. Antes de calcular, comprueba el estado de ambos diodos Si.</p></div>
+      <div class="panel paper"><b>DC · Ejercicios 4 y 5</b><p>Determina las variables indicadas en el dibujo. En el ejercicio 4 compara qué rama puede fijar el mayor \(V_o\); en el ejercicio 5 verifica la hipótesis ON con la polaridad de \(+20\,\mathrm{V}\) y \(-5\,\mathrm{V}\).</p></div>
+      <div class="panel paper"><b>DC · Ejercicio 6</b><p>Calcula la corriente \(I\) en cada configuración. Presta especial atención a la polaridad de la fuente en 6a y a los diodos conectados en oposición en 6b.</p></div>
+      <div class="panel paper"><b>DC · Ejercicio 7</b><p>Usa \(V_{F,\text{rojo}}=1.8\,\mathrm{V}\) y \(V_{F,\text{verde}}=2.2\,\mathrm{V}\). Determina el estado de los LED, sus corrientes, la corriente por el Ge y \(V_o\).</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="practico">
+  <div class="module-head">
+    <div class="module-title"><span class="no">T3</span><div><span class="eyebrow">Comprobación del taller práctico</span><h2>Resultados y análisis matemático</h2></div></div>
+  </div>
+  <p class="lead">Esta sección corresponde a los circuitos del documento práctico disponible en Teams. Las respuestas permanecen plegadas para que puedas utilizarlas como comprobación después de desarrollar cada ejercicio en el cuaderno.</p>
+  <div class="box remember"><small>Antes de desplegar una respuesta</small>Compara primero tus estados ON/OFF, tu circuito equivalente y tu resultado numérico. Si el valor no coincide, abre también el análisis para identificar en qué paso aparece la diferencia.</div>
+  <div class="box warn" style="margin-top:14px"><small>Ejercicio DC–2</small>La revisión matemática encontró una condición especial: con los modelos de caída constante indicados, existe una trayectoria fuente–tierra sin resistencia limitadora. La respuesta explica por qué no debe forzarse una corriente numérica finita.</div>
+  <div id="practicalAnswers" style="margin-top:16px"></div>
+</section>
+<div class="footer"><div><b>AnalogLab</b><span>Recurso interactivo de apoyo académico</span></div><span>Electrónica Analógica y Laboratorio</span></div></main></div><script src="data/quizzes.js?v=5.4"></script><script src="js/core.js?v=5.4"></script><script src="data/taller_teorico.js?v=5.4"></script><script src="data/respuestas_taller_practico.js?v=5.4"></script><script src="js/taller.js?v=5.4"></script></body></html>

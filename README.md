@@ -226,6 +226,11 @@ La interacción complementa la explicación teórica y no sustituye el desarroll
 
 ---
 
+
+## Relación con el Taller #1
+
+La parte teórica, los ejemplos y las actividades de comprensión se desarrollan en AnalogLab. Los circuitos gráficos del Taller #1 se distribuyen por Teams y se resuelven en el cuaderno. La página incluye una guía de lectura con las convenciones utilizadas en el documento (Si, Ge, diodo ideal, valor pico y análisis por semiciclos) y una sección destinada a comprobar los resultados del taller una vez resueltos.
+
 ## Referencias académicas de apoyo
 
 El contenido se desarrolla tomando como referencia principal la metodología del curso y los siguientes textos:
@@ -245,3 +250,19 @@ HTML5 · CSS3 · JavaScript · SVG · MathJax · GitHub Pages
 ## Renderizado matemático y visual
 
 Las expresiones matemáticas se procesan con **MathJax 3 (salida SVG)** incluido localmente en el proyecto. Los diagramas y formas de onda se construyen con SVG y JavaScript. Los archivos CSS, JavaScript y datos incorporan una versión de caché para evitar que GitHub Pages mezcle recursos antiguos con una actualización nueva.
+
+
+## Taller práctico y comprobación de resultados
+
+El Taller #1 práctico se distribuye por separado en Teams para conservar los circuitos originales.  
+AnalogLab contiene:
+
+- las convenciones de análisis usadas en el documento;
+- aclaraciones asociadas a ejercicios concretos;
+- la parte teórica interactiva;
+- resultados de referencia plegables;
+- análisis matemático de los circuitos del taller.
+
+Las respuestas están pensadas para **comprobar** el procedimiento después de resolver el ejercicio, no para sustituirlo.
+
+La auditoría del ejercicio DC–2 detecta una trayectoria fuente–tierra sin resistencia limitadora. Bajo el modelo de caída constante no existe una corriente finita determinada; AnalogLab lo señala explícitamente en lugar de asignar un valor artificial.
