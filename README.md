@@ -266,3 +266,31 @@ AnalogLab contiene:
 Las respuestas están pensadas para **comprobar** el procedimiento después de resolver el ejercicio, no para sustituirlo.
 
 La auditoría del ejercicio DC–2 detecta una trayectoria fuente–tierra sin resistencia limitadora. Bajo el modelo de caída constante no existe una corriente finita determinada; AnalogLab lo señala explícitamente en lugar de asignar un valor artificial.
+
+---
+
+## Licencia y reutilización
+
+AnalogLab se publica como recurso educativo abierto.
+
+- **Código fuente:** licencia **MIT**. Consulte `LICENSE`.
+- **Contenido académico original:** licencia **Creative Commons Attribution 4.0 International (CC BY 4.0)**. Consulte `LICENSE-CONTENT.md`.
+- **Componentes de terceros:** conservan sus respectivas licencias.
+
+Se permite reutilizar, adaptar y compartir el proyecto respetando las
+condiciones de cada licencia y manteniendo la atribución correspondiente.
+
+**Atribución sugerida:**  
+*AnalogLab — Electrónica Analógica y Laboratorio. Fredy Torres, 2026.*
+## Actualización 6.0 · Filtro, Zener y Proyecto 1
+
+La actualización profundiza dos bloques del curso y añade una actividad integradora:
+
+- **Filtro capacitivo:** carga y descarga exponencial, constante de tiempo, cálculo de tiempo, rizado, valor medio, comparación de capacitores y visualización interactiva de entrada, rectificación, salida filtrada y ventanas de recarga.
+- **Zener:** método ON/OFF, caso fijo, resistencia serie variable, carga variable, fuente variable, potencia, corriente mínima/máxima de diseño y lectura de hoja de datos.
+- **Proyecto 1:** diseño, simulación y montaje de una fuente regulada con Zener desde un transformador aislado, puente, capacitor, resistencia serie, Zener y carga. Incluye un ejemplo de referencia y un verificador interactivo.
+
+El ejemplo comercial del Proyecto 1 utiliza un **1N4736A (6.8 V)** exclusivamente como referencia; el estudiante debe seleccionar otro Zener comercial y justificarlo con su hoja de datos.
+
+> Seguridad: los 120 V rms se usan únicamente como dato del primario del transformador. El montaje de laboratorio se realiza desde una fuente secundaria aislada de baja tensión.
+

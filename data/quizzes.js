@@ -897,6 +897,50 @@ window.ANALOG_QUIZZES={
         }
       ],
       "answer": 0
+    },
+    {
+      "q": "Si se mantiene la carga y se aumenta considerablemente C, ¿qué combinación describe mejor el efecto?",
+      "options": [
+        {
+          "text": "Disminuye el rizado y puede aumentar la corriente pico de recarga.",
+          "feedback": "Correcto: la tensión cae menos entre picos, pero la recarga puede concentrarse en un intervalo más corto."
+        },
+        {
+          "text": "Aumentan el rizado y el tiempo de conducción.",
+          "feedback": "No. El rizado normalmente disminuye."
+        },
+        {
+          "text": "No cambia el rizado porque la frecuencia es constante.",
+          "feedback": "El rizado depende también de C."
+        },
+        {
+          "text": "El capacitor deja de descargarse completamente.",
+          "feedback": "Siempre existe descarga si la carga consume corriente."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "En una descarga libre RC, el tiempo necesario para pasar de V0 a VC se obtiene con:",
+      "options": [
+        {
+          "text": "t=RC ln(V0/VC).",
+          "feedback": "Correcto, se obtiene despejando la ecuación exponencial."
+        },
+        {
+          "text": "t=VC/(RC).",
+          "feedback": "No conserva ni la forma exponencial ni las unidades."
+        },
+        {
+          "text": "t=1/(RC).",
+          "feedback": "Eso tiene unidades de frecuencia, no de tiempo."
+        },
+        {
+          "text": "t=V0·VC.",
+          "feedback": "No."
+        }
+      ],
+      "answer": 0
     }
   ],
   "recortadores": [
@@ -1164,6 +1208,96 @@ window.ANALOG_QUIZZES={
         {
           "text": "La resistencia serie deja de importar.",
           "feedback": "No."
+        }
+      ],
+      "answer": 0
+    }
+  ],
+  "zenercasos": [
+    {
+      "q": "Con Vi, VZ y RS fijos, si RL disminuye, ¿qué ocurre mientras el Zener sigue regulando?",
+      "options": [
+        {
+          "text": "IL aumenta e IZ disminuye.",
+          "feedback": "Correcto: IS es casi fija y se reparte entre carga y Zener."
+        },
+        {
+          "text": "IL disminuye e IZ aumenta.",
+          "feedback": "Es el comportamiento opuesto."
+        },
+        {
+          "text": "IS se hace cero.",
+          "feedback": "No."
+        },
+        {
+          "text": "VZ aumenta indefinidamente.",
+          "feedback": "No dentro del modelo de regulación."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "El valor máximo de RS está asociado principalmente con:",
+      "options": [
+        {
+          "text": "Mantener al menos IZ,min en la condición más exigente de carga/entrada.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "Evitar que el capacitor explote.",
+          "feedback": "No es la relación que define RS,max."
+        },
+        {
+          "text": "Hacer IL igual a cero.",
+          "feedback": "No."
+        },
+        {
+          "text": "Aumentar VZ.",
+          "feedback": "VZ es propiedad del dispositivo y su punto de operación."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "Para determinar Vi,min con carga fija se usa:",
+      "options": [
+        {
+          "text": "Vi,min=VZ+RS(IL+IZ,min).",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "Vi,min=VZ-RSIL.",
+          "feedback": "No."
+        },
+        {
+          "text": "Vi,min=IL/RS.",
+          "feedback": "No tiene unidades de voltaje correctamente."
+        },
+        {
+          "text": "Vi,min=VZ solamente.",
+          "feedback": "Falta la caída necesaria en RS."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "En carga muy ligera o circuito sin carga, el riesgo principal del regulador Zener en paralelo es:",
+      "options": [
+        {
+          "text": "Que una fracción mayor de IS circule por el Zener y aumente su disipación.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "Que IZ siempre sea cero.",
+          "feedback": "Ocurre lo contrario si la fuente mantiene tensión suficiente."
+        },
+        {
+          "text": "Que VZ se convierta en 0 V.",
+          "feedback": "No."
+        },
+        {
+          "text": "Que RS deje de conducir.",
+          "feedback": "No necesariamente."
         }
       ],
       "answer": 0
