@@ -1,11 +1,19 @@
 
 (()=>{"use strict";const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];window.AL={$, $$};
 const KEY='analoglab-complete-v4';let saved=[];try{saved=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(_){saved=[]}const done=new Set(saved);
-function progress(){const marks=$$('[data-mark]');marks.forEach(b=>{const y=done.has(b.dataset.mark);b.classList.toggle('done',y);b.textContent=y?'✓ Estudiado':'Marcar estudiado'});const total=18,p=Math.min(100,Math.round(done.size/total*100));$$('.progress-value').forEach(e=>e.textContent=p+'%');$$('.progress-fill').forEach(e=>e.style.width=p+'%');try{localStorage.setItem(KEY,JSON.stringify([...done]))}catch(_){}window.dispatchEvent(new CustomEvent('al-progress',{detail:{count:done.size,pct:p}}))}
+function progress(){const marks=$$('[data-mark]');marks.forEach(b=>{const y=done.has(b.dataset.mark);b.classList.toggle('done',y);b.textContent=y?'✓ Estudiado':'Marcar estudiado'});const total=20,p=Math.min(100,Math.round(done.size/total*100));$$('.progress-value').forEach(e=>e.textContent=p+'%');$$('.progress-fill').forEach(e=>e.style.width=p+'%');try{localStorage.setItem(KEY,JSON.stringify([...done]))}catch(_){}window.dispatchEvent(new CustomEvent('al-progress',{detail:{count:done.size,pct:p}}))}
 $$('[data-mark]').forEach(b=>b.addEventListener('click',()=>{done.has(b.dataset.mark)?done.delete(b.dataset.mark):done.add(b.dataset.mark);progress()}));progress();window.AL.done=done;window.AL.progress=progress;
 const menu=$('.menu'),side=$('aside');if(menu&&side){menu.addEventListener('click',()=>side.classList.toggle('open'));$$('aside nav a').forEach(a=>a.addEventListener('click',()=>side.classList.remove('open')))}
 $('#theme')?.addEventListener('click',()=>document.body.classList.toggle('dark'));$('#class')?.addEventListener('click',()=>{document.body.classList.toggle('classmode');$('#class').textContent=document.body.classList.contains('classmode')?'Salir modo clase':'Modo clase'});
-const ob=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)$$('aside nav a').forEach(a=>a.classList.toggle('current',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-28% 0px -64% 0px'});$$('.module[id]').forEach(m=>ob.observe(m));
+const LAST='analoglab-last-v8';
+const ob=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){
+  $$('aside nav a').forEach(a=>a.classList.toggle('current',a.getAttribute('href')==='#'+e.target.id));
+  const h=e.target.querySelector('h2,h3')?.textContent?.trim()||e.target.id;
+  try{localStorage.setItem(LAST,JSON.stringify({page:location.pathname.split('/').pop()||'index.html',hash:'#'+e.target.id,label:h}))}catch(_){}
+}}),{rootMargin:'-28% 0px -64% 0px'});$$('.module[id]').forEach(m=>ob.observe(m));
+const resume=$('#continueStudy'),resumeLabel=$('#continueLabel');
+if(resume){try{const x=JSON.parse(localStorage.getItem(LAST)||'null');if(x?.page&&x.page!=='index.html'){resume.href=x.page+(x.hash||'');resumeLabel.textContent='Última sección: '+(x.label||x.page);}}catch(_){}}
+
 function typeset(target){const nodes=(Array.isArray(target)?target:[target]).filter(Boolean);if(!nodes.length)return;const run=()=>{if(window.MathJax?.typesetPromise){window.MathJax.typesetPromise(nodes).catch(()=>{})}};if(window.MathJax?.startup?.promise)window.MathJax.startup.promise.then(run).catch(()=>{});else setTimeout(run,0)}
 window.AL.typeset=typeset;
 function fb(el,msg,ok){el.innerHTML=msg;el.className='feedback '+(ok?'ok':'bad');typeset(el)}

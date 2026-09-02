@@ -1303,4 +1303,11 @@ window.ANALOG_QUIZZES={
       "answer": 0
     }
   ]
+,
+  "reactivos":[
+    {"q":"En un circuito RC de carga, después de un tiempo igual a una constante de tiempo, el capacitor alcanza aproximadamente:","options":[{"text":"36.8 % del valor final.","feedback":"Ese porcentaje corresponde a lo que falta por alcanzar durante la carga."},{"text":"63.2 % del valor final.","feedback":"Correcto: en t=τ, 1-e^{-1}≈0.632."},{"text":"100 % exactamente.","feedback":"La respuesta exponencial se aproxima asintóticamente al valor final."},{"text":"5 % del valor final.","feedback":"No corresponde a una constante de tiempo."}],"answer":1},
+    {"q":"Si R permanece fija y C aumenta diez veces, la constante de tiempo:","options":[{"text":"Disminuye diez veces.","feedback":"τ=RC: aumenta con C."},{"text":"No cambia.","feedback":"τ depende directamente de C."},{"text":"Aumenta diez veces.","feedback":"Correcto."},{"text":"Se hace cero.","feedback":"No."}],"answer":2},
+    {"q":"En un transformador ideal reductor, si Np/Ns=8 y Vp=120 V rms, Vs es:","options":[{"text":"960 V rms.","feedback":"Eso invierte la relación."},{"text":"15 V rms.","feedback":"Correcto: Vs=120/8."},{"text":"8 V rms.","feedback":"La relación 8 es adimensional, no el voltaje de salida."},{"text":"120 V rms.","feedback":"Solo ocurriría para relación 1:1."}],"answer":1},
+    {"q":"Durante la descarga ideal de un capacitor por una resistencia, su voltaje:","options":[{"text":"Cae linealmente hasta cero.","feedback":"La respuesta RC es exponencial."},{"text":"Sigue una exponencial decreciente.","feedback":"Correcto."},{"text":"Cambia instantáneamente a cero.","feedback":"El voltaje de un capacitor ideal no cambia instantáneamente."},{"text":"Aumenta indefinidamente.","feedback":"No."}],"answer":1}
+  ]
 };
