@@ -70,3 +70,16 @@ svg.diagram,svg.chart{min-height:220px;overflow:visible}
   .table-scroll .compare-table{min-width:690px}
   .module p,.panel p,.box{line-height:1.62}
 }
+
+
+/* v9 · datasheets, trabajo opcional y retroalimentación */
+.datasheet-task,.reflection-card{border:1px solid var(--line);background:var(--bg);border-radius:14px;padding:16px;margin-top:16px}
+.datasheet-task h3,.reflection-card h3{font-family:Georgia,"Times New Roman",serif;color:var(--navy);margin:0 0 6px}
+.extract-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:12px 0}
+.extract-grid label{border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:9px;display:grid;gap:5px;font-size:.8rem;color:var(--muted)}
+.extract-grid label span{font-size:.68rem}
+.extract-grid input{width:100%;border:1px solid var(--line);border-radius:8px;padding:9px;background:var(--bg);color:var(--ink)}
+.reflection-card textarea{width:100%;min-height:120px;border:1px solid var(--line);border-radius:10px;padding:11px;background:var(--paper);color:var(--ink);resize:vertical;margin:8px 0}
+.buttons a.btn{display:inline-flex;align-items:center;text-decoration:none}
+@media(max-width:900px){.extract-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.extract-grid{grid-template-columns:1fr}.datasheet-task,.reflection-card{padding:12px}}

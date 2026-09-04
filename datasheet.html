@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="AnalogLab: lectura e interpretación de hojas de datos de semiconductores.">
+<title>AnalogLab · Lectura de datasheets</title>
+<link rel="stylesheet" href="css/styles.css?v=9.0">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};
+</script>
+<script id="MathJax-script" defer src="vendor/mathjax/tex-svg.js?v=3.2.1"></script>
+</head>
+<body>
+<header>
+<button class="menu">☰</button>
+<a class="brand" href="index.html"><strong>AnalogLab</strong><span>Electrónica Analógica y Laboratorio</span></a>
+<nav class="topnav">
+<a href="index.html">Inicio</a><a href="dc.html">Diodos DC</a><a href="ac.html">Diodos AC</a><a href="zener.html">Zener</a><a href="taller.html">Taller 1</a><a class="active" href="datasheet.html">Datasheets</a><a href="proyecto1.html">Trabajo opcional</a>
+</nav>
+<div class="header-actions"><button id="class">Modo clase</button><button id="theme">◐</button></div>
+</header>
+
+<div class="layout">
+<aside>
+<div class="progress-card"><div><span>Progreso de estudio</span><strong class="progress-value">0%</strong></div><div class="track"><span class="progress-fill"></span></div></div>
+<h4>Lectura de datasheets</h4>
+<nav>
+<a href="#mapa">D1 · Estructura</a>
+<a href="#reglas">D2 · Reglas de lectura</a>
+<a href="#rectificador">D3 · 1N4007</a>
+<a href="#zenerdata">D4 · 1N4736A</a>
+<a href="#seleccion">D5 · Selección industrial</a>
+<a href="#actividad">D6 · Actividad guiada</a>
+</nav>
+<div class="side-info">La nomenclatura cambia entre fabricantes. El objetivo es aprender a reconocer el significado del dato, su condición de prueba y si representa un límite, un valor típico o un criterio de diseño.</div>
+</aside>
+
+<main>
+<section class="hero small">
+<span class="eyebrow">Laboratorio · Selección de componentes</span>
+<h1>Cómo leer un datasheet de semiconductores</h1>
+<p>Una hoja de datos no se lee de principio a fin como un texto. Se consulta para responder preguntas de ingeniería: ¿soporta la tensión?, ¿cuánta corriente puede manejar?, ¿en qué condición se especifica ese valor?, ¿qué potencia puede disipar?, ¿qué encapsulado y polaridad tiene? Este módulo utiliza dos hojas de datos reales para entrenar ese procedimiento.</p>
+<div class="meta"><span>Límites absolutos</span><span>Condiciones de prueba</span><span>Min / Typ / Max</span><span>Curvas</span><span>Encapsulado</span><span>Selección práctica</span></div>
+</section>
+
+<section class="module" id="mapa">
+<div class="module-head"><div class="module-title"><span class="no">D1</span><div><span class="eyebrow">Mapa de lectura</span><h2>Qué partes buscar primero</h2></div></div><button class="mark" data-mark="datasheet-mapa">Marcar estudiado</button></div>
+<p class="lead">Los fabricantes organizan las tablas de forma diferente, pero casi siempre encontrarás las mismas familias de información.</p>
+<div class="grid3">
+<div class="box"><small>1 · Identificación</small><b>Nombre, familia y función.</b><br>¿Es rectificador, Zener, transistor, MOSFET, regulador?</div>
+<div class="box"><small>2 · Absolute Maximum Ratings</small><b>Límites que no se deben exceder.</b><br>No son necesariamente condiciones recomendadas de operación continua.</div>
+<div class="box"><small>3 · Electrical Characteristics</small><b>Parámetros medidos.</b><br>Lee siempre la condición que acompaña al valor.</div>
+<div class="box"><small>4 · Thermal</small><b>Potencia, temperatura y resistencia térmica.</b><br>La capacidad del dispositivo cambia con el montaje y la temperatura.</div>
+<div class="box"><small>5 · Curvas típicas</small><b>Comportamiento, no garantía individual.</b><br>Útiles para estimar \(V_F\), corriente, temperatura y capacitancia.</div>
+<div class="box"><small>6 · Mechanical / Ordering</small><b>Encapsulado, dimensiones, banda, sufijos y empaque.</b><br>Muy importante al reemplazar un componente.</div>
+</div>
+</section>
+
+<section class="module" id="reglas">
+<div class="module-head"><div class="module-title"><span class="no">D2</span><div><span class="eyebrow">Método</span><h2>Tres reglas para no leer mal una especificación</h2></div></div></div>
+<div class="grid3">
+<div class="box error"><small>Regla 1</small><b>Máximo absoluto ≠ punto normal de trabajo.</b><br>Trabajar exactamente en el máximo deja sin margen térmico, eléctrico o de tolerancia.</div>
+<div class="box key"><small>Regla 2</small><b>Todo número tiene una condición.</b><br>Ejemplo: \(V_F=1.1V\) puede estar especificado a una corriente y temperatura concretas.</div>
+<div class="box remember"><small>Regla 3</small><b>Min / Typ / Max no significan lo mismo.</b><br>Para verificar seguridad se privilegia el peor caso pertinente, no el valor típico más conveniente.</div>
+</div>
+
+<div class="table-scroll">
+<table class="compare-table">
+<thead><tr><th>Pregunta de ingeniería</th><th>Dato que suele buscarse</th><th>Qué revisar al lado</th></tr></thead>
+<tbody>
+<tr><td>¿Soporta la tensión inversa?</td><td>\(V_{RRM}\), \(V_R\), PIV</td><td>Tipo de tensión, repetitiva/no repetitiva y temperatura.</td></tr>
+<tr><td>¿Soporta la corriente?</td><td>\(I_O\), \(I_F\), \(I_Z\), \(I_D\)</td><td>Continua, promedio, pulso, condiciones térmicas.</td></tr>
+<tr><td>¿Cuánto cae al conducir?</td><td>\(V_F\), \(V_Z\), \(V_{CE(sat)}\)</td><td>Corriente de prueba y temperatura.</td></tr>
+<tr><td>¿Cuánto puede disipar?</td><td>\(P_D\), \(P_Z\), \(P_{tot}\)</td><td>Temperatura, longitud de terminal, encapsulado y derating.</td></tr>
+<tr><td>¿Cómo lo conecto?</td><td>Pinout / polarity / marking</td><td>Banda del cátodo, número de pin, orientación del encapsulado.</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section class="module" id="rectificador">
+<div class="module-head"><div class="module-title"><span class="no">D3</span><div><span class="eyebrow">Caso real 1</span><h2>Rectificador 1N4007</h2></div></div><button class="mark" data-mark="datasheet-rectificador">Marcar estudiado</button></div>
+<p>La familia 1N4001–1N4007 es un buen ejemplo porque una sola hoja de datos reúne varios dispositivos con distintas tensiones inversas. Para el 1N4007, identifica primero la columna correspondiente y no mezcles valores de otros miembros de la familia.</p>
+<div class="buttons">
+<a class="btn primary" href="https://www.onsemi.com/download/data-sheet/pdf/1n4001-d.pdf" target="_blank" rel="noopener">Abrir datasheet oficial · onsemi</a>
+</div>
+<div class="table-scroll">
+<table class="compare-table">
+<thead><tr><th>Parámetro</th><th>Símbolo</th><th>Dato 1N4007</th><th>Interpretación</th></tr></thead>
+<tbody>
+<tr><td>Tensión inversa repetitiva máxima</td><td>\(V_{RRM}\)</td><td>1000 V</td><td>Límite de tensión inversa repetitiva de la columna 1N4007.</td></tr>
+<tr><td>Corriente rectificada promedio</td><td>\(I_O\)</td><td>1.0 A</td><td>Especificada con carga resistiva, 60 Hz y condición térmica indicada por el fabricante.</td></tr>
+<tr><td>Corriente de sobrecarga no repetitiva</td><td>\(I_{FSM}\)</td><td>30 A</td><td>Pulso de un ciclo; no debe confundirse con corriente continua.</td></tr>
+<tr><td>Caída directa instantánea máxima</td><td>\(V_F\)</td><td>1.1 V máx.</td><td>Especificada a \(I_F=1A\), \(T_J=25^\circ C\). El modelo de aula de 0.7 V es una aproximación distinta.</td></tr>
+<tr><td>Polaridad</td><td>—</td><td>Banda = cátodo</td><td>Permite verificar orientación antes del montaje.</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="datasheet-task" data-device="1n4007">
+<h3>Extrae los datos del documento</h3>
+<p>Abre el PDF, busca las tablas y escribe los valores sin mirar primero la tabla de arriba si quieres usarlo como reto.</p>
+<div class="extract-grid">
+<label>\(V_{RRM}\) <span>V</span><input data-key="vrrm" type="number" step="any" placeholder="valor"></label>
+<label>\(I_O\) <span>A</span><input data-key="io" type="number" step="any" placeholder="valor"></label>
+<label>\(I_{FSM}\) <span>A</span><input data-key="ifsm" type="number" step="any" placeholder="valor"></label>
+<label>\(V_F(max)\) @ 1 A <span>V</span><input data-key="vf" type="number" step="any" placeholder="valor"></label>
+</div>
+<button class="btn small primary check-extract">Comprobar lectura</button><p class="feedback extract-feedback"></p>
+</div>
+</section>
+
+<section class="module" id="zenerdata">
+<div class="module-head"><div class="module-title"><span class="no">D4</span><div><span class="eyebrow">Caso real 2</span><h2>Zener 1N4736A</h2></div></div><button class="mark" data-mark="datasheet-zener">Marcar estudiado</button></div>
+<p>En un Zener la lectura cambia: no basta con conocer \(V_Z\). Debes mirar a qué corriente se especifica esa tensión, su tolerancia, impedancia, potencia y parámetros de rodilla.</p>
+<div class="buttons">
+<a class="btn primary" href="https://www.onsemi.com/download/data-sheet/pdf/1n4736at-d.pdf" target="_blank" rel="noopener">Abrir datasheet oficial · onsemi</a>
+<a class="btn" href="https://www.vishay.com/docs/85816/1n4728a.pdf" target="_blank" rel="noopener">Comparar familia equivalente · Vishay</a>
+</div>
+
+<div class="table-scroll">
+<table class="compare-table">
+<thead><tr><th>Parámetro</th><th>Símbolo</th><th>1N4736A</th><th>Qué significa</th></tr></thead>
+<tbody>
+<tr><td>Tensión Zener</td><td>\(V_Z\)</td><td>6.46 / 6.8 / 7.14 V</td><td>Min / Typ / Max bajo la corriente de prueba indicada.</td></tr>
+<tr><td>Corriente de prueba</td><td>\(I_Z\)</td><td>37 mA</td><td>Condición bajo la cual se especifica \(V_Z\). No es automáticamente la única corriente válida de operación.</td></tr>
+<tr><td>Impedancia Zener máxima</td><td>\(Z_Z\)</td><td>3.5 Ω</td><td>Indica cuánto cambia la tensión ante cambios de corriente alrededor de la condición especificada.</td></tr>
+<tr><td>Corriente de rodilla</td><td>\(I_{ZK}\)</td><td>1 mA</td><td>Se usa junto con \(Z_{ZK}\); ayuda a entender la zona cercana a la rodilla.</td></tr>
+<tr><td>Potencia máxima indicada</td><td>\(P_D\)</td><td>1.0 W</td><td>Depende de la condición térmica indicada; hay reducción por temperatura.</td></tr>
+<tr><td>Derating sobre 50 °C</td><td>—</td><td>6.67 mW/°C</td><td>La potencia admisible disminuye cuando sube la temperatura.</td></tr>
+<tr><td>Corriente inversa de pico no repetitiva</td><td>\(I_{ZSM}\)</td><td>660 mA</td><td>Es un pulso de sobrecorriente, no un valor continuo de diseño.</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="box warn"><small>Error frecuente</small>No calcules una “corriente máxima continua” usando únicamente \(I_{ZSM}\). Para operación continua debes verificar potencia, temperatura, tolerancia, corriente de carga y margen de diseño.</div>
+
+<div class="datasheet-task" data-device="1n4736a">
+<h3>Lectura dirigida</h3>
+<div class="extract-grid">
+<label>\(V_Z(typ)\) <span>V</span><input data-key="vz" type="number" step="any"></label>
+<label>\(I_Z\) de prueba <span>mA</span><input data-key="izt" type="number" step="any"></label>
+<label>\(Z_Z(max)\) <span>Ω</span><input data-key="zz" type="number" step="any"></label>
+<label>\(P_D(max)\) <span>W</span><input data-key="pd" type="number" step="any"></label>
+</div>
+<button class="btn small primary check-extract">Comprobar lectura</button><p class="feedback extract-feedback"></p>
+</div>
+</section>
+
+<section class="module" id="seleccion">
+<div class="module-head"><div class="module-title"><span class="no">D5</span><div><span class="eyebrow">Aplicación industrial</span><h2>De la hoja de datos a una decisión de selección</h2></div></div></div>
+<p class="lead">En mantenimiento y diseño no basta con encontrar “un diodo parecido”. Un reemplazo debe cumplir la función y soportar las condiciones reales del circuito.</p>
+<div class="steps">
+<div class="step"><i>1</i><b>Identifica la función</b><p>Rectificación, protección, regulación, conmutación, señal, potencia.</p></div>
+<div class="step"><i>2</i><b>Define el peor caso</b><p>Tensión máxima, corriente máxima, temperatura, transitorios y carga.</p></div>
+<div class="step"><i>3</i><b>Busca margen</b><p>No diseñes sobre el máximo absoluto. Deja margen eléctrico y térmico.</p></div>
+<div class="step"><i>4</i><b>Comprueba el montaje</b><p>Encapsulado, polaridad, disipación, disponibilidad y compatibilidad mecánica.</p></div>
+</div>
+<div class="box key"><small>Ejemplo de taller</small>Si una fuente utiliza un puente rectificador y eliges un 1N4007, \(V_{RRM}=1000V\) no significa que el circuito deba trabajar cerca de 1000 V. Significa que ese límite es muy superior al secundario de baja tensión y proporciona margen respecto a la tensión inversa del puente.</div>
+</section>
+
+<section class="module" id="actividad">
+<div class="module-head"><div class="module-title"><span class="no">D6</span><div><span class="eyebrow">Retroalimentación</span><h2>Actividad de lectura y criterio de ingeniería</h2></div></div></div>
+
+<div class="reflection-card">
+<h3>Pregunta abierta</h3>
+<p>Un compañero afirma: “el 1N4007 es un diodo de 1 A, por tanto puede trabajar siempre a 1 A sin revisar nada más”. Explica por qué esa interpretación es incompleta.</p>
+<textarea id="datasheetReflection" placeholder="Escribe tu explicación antes de consultar la guía..."></textarea>
+<div class="buttons"><button id="showDatasheetGuide" class="btn small">Comparar con guía</button></div>
+<div id="datasheetGuide" class="guide"></div>
+</div>
+
+<div class="quiz" data-quiz="datasheet"></div>
+</section>
+
+<div class="footer"><div><b>AnalogLab</b><span>Recurso interactivo de apoyo académico</span></div><span>Electrónica Analógica y Laboratorio</span></div>
+</main>
+</div>
+<script src="data/quizzes.js?v=9.0"></script>
+<script src="js/core.js?v=9.0"></script>
+<script src="js/datasheet.js?v=9.0"></script>
+</body>
+</html>

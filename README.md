@@ -94,3 +94,26 @@ La secuencia recomendada es:
 **teoría → interpretación física → matemática → ejemplo resuelto → interacción → ejercicio → retroalimentación.**
 
 En el bloque de fuentes se utiliza deliberadamente un capacitor pequeño o moderado como configuración didáctica inicial, de forma que la carga, descarga, \(t_1\), el tiempo total de descarga y el rizado sean claramente visibles antes de estudiar la regulación Zener.
+
+## Lectura de hojas de datos
+
+La versión 9 incorpora un módulo específico de **lectura e interpretación de datasheets** orientado al laboratorio y a la selección práctica de componentes. Utiliza como ejemplos:
+
+- la familia rectificadora **1N4001–1N4007**;
+- la familia Zener **1N4728A–1N4758A**, con énfasis en el **1N4736A**.
+
+El estudiante aprende a diferenciar:
+
+- límites absolutos;
+- condiciones de prueba;
+- valores mínimo, típico y máximo;
+- corriente promedio frente a corriente de pulso;
+- potencia y reducción térmica;
+- impedancia Zener y corriente de rodilla;
+- encapsulado, marcación y polaridad.
+
+## Trabajo propuesto opcional
+
+La actividad integradora de fuente regulada se presenta públicamente como **Trabajo propuesto opcional**. Las condiciones de valoración o uso dentro de la asignatura se comunican en clase. El sitio conserva la ruta `proyecto1.html` para no romper enlaces anteriores.
+
+La actividad incorpora comprobación interactiva de resultados y preguntas abiertas para relacionar cálculo, simulación y comportamiento físico.

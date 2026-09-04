@@ -1,11 +1,11 @@
 
 (()=>{"use strict";const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];window.AL={$, $$};
 const KEY='analoglab-complete-v4';let saved=[];try{saved=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(_){saved=[]}const done=new Set(saved);
-function progress(){const marks=$$('[data-mark]');marks.forEach(b=>{const y=done.has(b.dataset.mark);b.classList.toggle('done',y);b.textContent=y?'✓ Estudiado':'Marcar estudiado'});const total=20,p=Math.min(100,Math.round(done.size/total*100));$$('.progress-value').forEach(e=>e.textContent=p+'%');$$('.progress-fill').forEach(e=>e.style.width=p+'%');try{localStorage.setItem(KEY,JSON.stringify([...done]))}catch(_){}window.dispatchEvent(new CustomEvent('al-progress',{detail:{count:done.size,pct:p}}))}
+function progress(){const marks=$$('[data-mark]');marks.forEach(b=>{const y=done.has(b.dataset.mark);b.classList.toggle('done',y);b.textContent=y?'✓ Estudiado':'Marcar estudiado'});const total=23,p=Math.min(100,Math.round(done.size/total*100));$$('.progress-value').forEach(e=>e.textContent=p+'%');$$('.progress-fill').forEach(e=>e.style.width=p+'%');try{localStorage.setItem(KEY,JSON.stringify([...done]))}catch(_){}window.dispatchEvent(new CustomEvent('al-progress',{detail:{count:done.size,pct:p}}))}
 $$('[data-mark]').forEach(b=>b.addEventListener('click',()=>{done.has(b.dataset.mark)?done.delete(b.dataset.mark):done.add(b.dataset.mark);progress()}));progress();window.AL.done=done;window.AL.progress=progress;
 const menu=$('.menu'),side=$('aside');if(menu&&side){menu.addEventListener('click',()=>side.classList.toggle('open'));$$('aside nav a').forEach(a=>a.addEventListener('click',()=>side.classList.remove('open')))}
 $('#theme')?.addEventListener('click',()=>document.body.classList.toggle('dark'));$('#class')?.addEventListener('click',()=>{document.body.classList.toggle('classmode');$('#class').textContent=document.body.classList.contains('classmode')?'Salir modo clase':'Modo clase'});
-const LAST='analoglab-last-v8';
+const LAST='analoglab-last-v9';
 const ob=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){
   $$('aside nav a').forEach(a=>a.classList.toggle('current',a.getAttribute('href')==='#'+e.target.id));
   const h=e.target.querySelector('h2,h3')?.textContent?.trim()||e.target.id;

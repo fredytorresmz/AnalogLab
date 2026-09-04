@@ -1310,4 +1310,47 @@ window.ANALOG_QUIZZES={
     {"q":"En un transformador ideal reductor, si Np/Ns=8 y Vp=120 V rms, Vs es:","options":[{"text":"960 V rms.","feedback":"Eso invierte la relación."},{"text":"15 V rms.","feedback":"Correcto: Vs=120/8."},{"text":"8 V rms.","feedback":"La relación 8 es adimensional, no el voltaje de salida."},{"text":"120 V rms.","feedback":"Solo ocurriría para relación 1:1."}],"answer":1},
     {"q":"Durante la descarga ideal de un capacitor por una resistencia, su voltaje:","options":[{"text":"Cae linealmente hasta cero.","feedback":"La respuesta RC es exponencial."},{"text":"Sigue una exponencial decreciente.","feedback":"Correcto."},{"text":"Cambia instantáneamente a cero.","feedback":"El voltaje de un capacitor ideal no cambia instantáneamente."},{"text":"Aumenta indefinidamente.","feedback":"No."}],"answer":1}
   ]
+,
+  "datasheet": [
+    {
+      "q":"¿Cuál es la interpretación correcta de una tabla titulada <i>Absolute Maximum Ratings</i>?",
+      "options":[
+        {"text":"Son valores recomendados para operar continuamente sin margen.","feedback":"No. Son límites que no deben excederse; el diseño debe dejar margen."},
+        {"text":"Son límites del dispositivo y no equivalen necesariamente a condiciones normales de operación.","feedback":"Correcto. Deben combinarse con condiciones eléctricas y térmicas."},
+        {"text":"Son únicamente valores típicos de laboratorio.","feedback":"No. La palabra maximum indica límites, no valores típicos."},
+        {"text":"Solo importan si el circuito usa AC.","feedback":"No. Aplican según el parámetro independientemente de que la señal sea AC o DC."}
+      ],
+      "answer":1
+    },
+    {
+      "q":"En el 1N4736A, los 37 mA asociados a \\(V_Z\\) deben interpretarse como:",
+      "options":[
+        {"text":"La única corriente a la que el Zener puede funcionar.","feedback":"No. Es la corriente de prueba usada para especificar la tensión Zener."},
+        {"text":"La corriente de prueba para la especificación de \\(V_Z\\).","feedback":"Correcto."},
+        {"text":"La corriente máxima de pulso.","feedback":"No. Esa es otra especificación."},
+        {"text":"La corriente de carga obligatoria.","feedback":"No corresponde a la carga externa."}
+      ],
+      "answer":1
+    },
+    {
+      "q":"¿Por qué no debe usarse \\(I_{ZSM}\\) como si fuera la corriente continua máxima del Zener?",
+      "options":[
+        {"text":"Porque corresponde a una condición de pico no repetitiva.","feedback":"Correcto. La corriente continua debe verificarse con potencia, temperatura y condiciones de operación."},
+        {"text":"Porque está expresada en voltios.","feedback":"No, es una corriente."},
+        {"text":"Porque solo existe en polarización directa.","feedback":"No."},
+        {"text":"Porque es siempre menor que \\(I_Z\\).","feedback":"No necesariamente."}
+      ],
+      "answer":0
+    },
+    {
+      "q":"Un valor \\(V_F(max)=1.1V\\) especificado a 1 A en el 1N4007 indica que:",
+      "options":[
+        {"text":"Todo diodo de silicio cae exactamente 1.1 V.","feedback":"No. Depende del dispositivo, corriente y temperatura."},
+        {"text":"La caída directa tiene una especificación máxima bajo esa condición de prueba.","feedback":"Correcto."},
+        {"text":"El modelo de aula de 0.7 V es falso y nunca debe usarse.","feedback":"No. Es una aproximación útil para análisis, pero no reemplaza la hoja de datos en diseño."},
+        {"text":"1.1 V es la tensión inversa máxima.","feedback":"No."}
+      ],
+      "answer":1
+    }
+  ]
 };
