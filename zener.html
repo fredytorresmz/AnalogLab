@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="AnalogLab: teoría, diseño, simulación y evaluación del regulador paralelo con diodo Zener.">
 <title>AnalogLab · Diodo Zener</title>
-<link rel="stylesheet" href="css/styles.css?v=10.0">
+<link rel="stylesheet" href="css/styles.css?v=10.1">
 <script>
 window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};
 </script>
@@ -125,7 +125,7 @@ V_{TH}=\frac{R_L}{R_S+R_L}V_i}
 \]</div>
 
 <div class="grid2">
-<div class="box warn"><small>Si \(V_{TH}<V_Z\)</small>
+<div class="box warn"><small>Si \(V_{TH}&lt;V_Z\)</small>
 \[
 I_Z=0,\qquad V_L=V_{TH}
 \]
@@ -164,38 +164,55 @@ I_L=\frac{V_Z}{R_L}
 
 <div class="example">
 <span class="example-label">Ejemplo base</span>
-<h3>\(V_i=18V\), \(V_Z=6.8V\), \(R_S=330\Omega\), \(R_L=680\Omega\)</h3>
+<h3>\(V_i=18\,\mathrm{V}\), \(V_Z=6.8\,\mathrm{V}\), \(R_S=330\,\Omega\), \(R_L=680\,\Omega\)</h3>
 
-<div class="steps">
-<div class="step"><i>1</i><b>¿Puede encender?</b><div>\[
-V_{TH}=18\frac{680}{330+680}=12.12V
+<div class="z-calc-steps">
+<div class="step"><i>1</i><b>¿Puede encender?</b><div class="mini-math">\[
+V_{TH}=(18\,\mathrm{V})
+\frac{680\,\Omega}{330\,\Omega+680\,\Omega}
+=12.12\,\mathrm{V}
 \]</div></div>
-<div class="step"><i>2</i><b>Hipótesis</b><div>\(12.12V>6.8V\), por lo que probamos regulación: \(V_L=6.8V\).</div></div>
-<div class="step"><i>3</i><b>Corrientes</b><div>\[
-I_S=\frac{18-6.8}{330}=33.94mA
+
+<div class="step"><i>2</i><b>Hipótesis</b><div>
+Como \(12.12\,\mathrm{V}&gt;6.8\,\mathrm{V}\), la regulación es posible. Probamos entonces \(V_L\approx V_Z=6.8\,\mathrm{V}\).
+</div></div>
+
+<div class="step"><i>3</i><b>Corrientes</b><div class="mini-math">\[
+I_S=
+\frac{18\,\mathrm{V}-6.8\,\mathrm{V}}
+{330\,\Omega}
+=33.94\,\mathrm{mA}
 \]
 \[
-I_L=\frac{6.8}{680}=10.00mA
+I_L=
+\frac{6.8\,\mathrm{V}}
+{680\,\Omega}
+=10.00\,\mathrm{mA}
 \]</div></div>
-<div class="step"><i>4</i><b>Zener y potencia</b><div>\[
-I_Z=33.94-10=23.94mA
+
+<div class="step"><i>4</i><b>Zener y potencia</b><div class="mini-math">\[
+I_Z=(33.94-10.00)\,\mathrm{mA}
+=23.94\,\mathrm{mA}
 \]
 \[
-P_Z=6.8(23.94mA)=162.8mW
+P_Z=(6.8\,\mathrm{V})(23.94\,\mathrm{mA})
+=162.8\,\mathrm{mW}
 \]</div></div>
 </div>
 
 <div class="formula">\[
-\boxed{V_L=6.8V},\quad
-\boxed{I_Z=23.94mA},\quad
-\boxed{P_Z\approx0.163W}
+\begin{aligned}
+V_L&\approx\boxed{6.8\,\mathrm{V}},\\
+I_Z&=\boxed{23.94\,\mathrm{mA}},\\
+P_Z&\approx\boxed{0.163\,\mathrm{W}}
+\end{aligned}
 \]</div>
 </div>
 
 <div class="box remember"><small>Antes de terminar</small>
 También calcula la potencia de \(R_S\):
 \[
-P_{R_S}=I_S^2R_S\approx0.38W.
+P_{R_S}=I_S^2R_S\approx0.38\,\mathrm{W}.
 \]
 El circuito puede tener un Zener seguro y, aun así, una resistencia serie mal dimensionada.
 </div>
@@ -243,16 +260,16 @@ R_S=\frac{V_i-V_Z}{I_Z+I_L}
 </div>
 
 <div class="example"><span class="example-label">Mismo circuito · criterios didácticos</span>
-<p>Supongamos \(I_{Z,min}=5mA\) e \(I_{Z,max}=50mA\). Como \(I_L=10mA\):</p>
+<p>Supongamos \(I_{Z,\min}=5\,\mathrm{mA}\) e \(I_{Z,\max}=50\,\mathrm{mA}\). Como \(I_L=10\,\mathrm{mA}\):</p>
 <div class="formula">\[
-R_{S,min}=\frac{11.2}{60mA}=\boxed{186.7\Omega}
+R_{S,\min}=\frac{11.2\,\mathrm{V}}{60\,\mathrm{mA}}=\boxed{186.7\,\Omega}
 \]</div>
 <div class="formula">\[
-R_{S,max}=\frac{11.2}{15mA}=\boxed{746.7\Omega}
+R_{S,\max}=\frac{11.2\,\mathrm{V}}{15\,\mathrm{mA}}=\boxed{746.7\,\Omega}
 \]</div>
 <p>Entonces:</p>
 <div class="formula">\[
-\boxed{186.7\Omega\le R_S\le746.7\Omega}
+\boxed{186.7\,\Omega\le R_S\le746.7\,\Omega}
 \]</div>
 <p>Después se elige un valor comercial dentro del rango y se recalculan \(I_Z\), \(P_Z\) y \(P_{R_S}\).</p>
 </div>
@@ -294,16 +311,16 @@ I_{L,max}=I_S-I_{Z,min}
 
 <div class="example"><span class="example-label">Ejemplo</span>
 <div class="formula">\[
-I_S=\frac{18-6.8}{330}=33.94mA
+I_S=\frac{18\,\mathrm{V}-6.8\,\mathrm{V}}{330\,\Omega}=33.94\,\mathrm{mA}
 \]</div>
 <div class="formula">\[
-I_{L,max}=33.94-5=28.94mA
+I_{L,\max}=(33.94-5.00)\,\mathrm{mA}=28.94\,\mathrm{mA}
 \]</div>
 <div class="formula">\[
-\boxed{R_{L,min}=
-\frac{6.8}{28.94mA}\approx235\Omega}
+\boxed{R_{L,\min}=
+\frac{6.8\,\mathrm{V}}{28.94\,\mathrm{mA}}\approx235\,\Omega}
 \]</div>
-<p>Si \(R_L<235\Omega\), el Zener ya no conserva el margen de \(5mA\) elegido.</p>
+<p>Si \(R_L&lt;235\,\Omega\), el Zener ya no conserva el margen de \(5\,\mathrm{mA}\) elegido.</p>
 </div>
 
 <div class="box warn"><small>Extremo opuesto: carga ligera</small>
@@ -350,15 +367,15 @@ V_Z+R_S(I_L+I_{Z,max})}
 </div>
 
 <div class="example"><span class="example-label">Ejemplo</span>
-<p>Con \(I_L=10mA\), \(I_{Z,min}=5mA\) e \(I_{Z,max}=50mA\):</p>
+<p>Con \(I_L=10\,\mathrm{mA}\), \(I_{Z,\min}=5\,\mathrm{mA}\) e \(I_{Z,\max}=50\,\mathrm{mA}\):</p>
 <div class="formula">\[
-V_{i,min}=6.8+330(15mA)=\boxed{11.75V}
+V_{i,\min}=6.8\,\mathrm{V}+(330\,\Omega)(15\,\mathrm{mA})=\boxed{11.75\,\mathrm{V}}
 \]</div>
 <div class="formula">\[
-V_{i,max}=6.8+330(60mA)=\boxed{26.60V}
+V_{i,\max}=6.8\,\mathrm{V}+(330\,\Omega)(60\,\mathrm{mA})=\boxed{26.60\,\mathrm{V}}
 \]</div>
 <div class="formula">\[
-\boxed{11.75V\le V_i\le26.60V}
+\boxed{11.75\,\mathrm{V}\le V_i\le26.60\,\mathrm{V}}
 \]</div>
 </div>
 
@@ -382,13 +399,13 @@ En una fuente rectificada y filtrada, la entrada del Zener no es perfectamente c
 <span class="example-label">Condición sin carga del ejemplo base</span>
 <div class="formula">\[
 I_L=0,\qquad
-I_Z=I_S=\frac{18-6.8}{330}=33.94mA
+I_Z=I_S=\frac{18\,\mathrm{V}-6.8\,\mathrm{V}}{330\,\Omega}=33.94\,\mathrm{mA}
 \]</div>
 <div class="formula">\[
-P_Z=6.8(33.94mA)=\boxed{0.231W}
+P_Z=(6.8\,\mathrm{V})(33.94\,\mathrm{mA})=\boxed{0.231\,\mathrm{W}}
 \]</div>
 <div class="formula">\[
-P_{R_S}=I_S^2R_S\approx\boxed{0.38W}
+P_{R_S}=I_S^2R_S\approx\boxed{0.38\,\mathrm{W}}
 \]</div>
 <p>El valor nominal de potencia del componente debe superar la disipación calculada con margen y respetando las condiciones térmicas del datasheet.</p>
 </div>
@@ -445,16 +462,16 @@ P_{R_S}=I_S^2R_S\approx\boxed{0.38W}
 <section class="module" id="zaplicacion">
 <div class="module-head"><div class="module-title"><span class="no">Z10</span><div><span class="eyebrow">Contexto industrial</span><h2>Referencia Zener en una etapa de automatización</h2></div></div><button class="mark" data-mark="zener-aplicacion">Marcar estudiado</button></div>
 
-<p>Una empresa de automatización dispone de una línea DC nominal de 24 V para sensores. Una etapa de comparación necesita una referencia cercana a 6.8 V; la salida del comparador será leída por un microcontrolador. El Zener se utiliza como <b>referencia de baja potencia</b>, no para alimentar directamente el microcontrolador.</p>
+<p>Una empresa de automatización dispone de una línea DC nominal de \(24\,\mathrm{V}\) para sensores. Una etapa de comparación necesita una referencia cercana a \(6.8\,\mathrm{V}\); la salida del comparador será leída por un microcontrolador. El Zener se utiliza como <b>referencia de baja potencia</b>, no para alimentar directamente el microcontrolador.</p>
 
 <div class="grid2">
 <div class="panel paper">
 <b>Datos de diseño</b>
 <div class="vars">
-<span>\(V_i=24V\) nominal, con variación aproximada \(21.6\) a \(26.4V\).</span>
-<span>\(V_Z=6.8V\).</span>
-<span>\(R_S=390\Omega\).</span>
-<span>Carga equivalente de la referencia \(R_L=2.2k\Omega\).</span>
+<span>\(V_i=24\,\mathrm{V}\) nominal, con variación aproximada de \(21.6\,\mathrm{V}\) a \(26.4\,\mathrm{V}\).</span>
+<span>\(V_Z=6.8\,\mathrm{V}\).</span>
+<span>\(R_S=390\,\Omega\).</span>
+<span>Carga equivalente de la referencia \(R_L=2.2\,\mathrm{k}\Omega\).</span>
 </div>
 </div>
 <div class="box warn"><small>Qué se debe comprobar</small>
@@ -463,23 +480,42 @@ Regulación al mínimo de entrada, potencia del Zener al máximo de entrada, pot
 </div>
 
 <div class="formula">\[
-I_L=\frac{6.8}{2.2k}\approx3.09mA
+I_L=\frac{6.8\,\mathrm{V}}{2.2\,\mathrm{k}\Omega}
+\approx3.09\,\mathrm{mA}
 \]</div>
+
 <div class="formula">\[
-I_Z(21.6V)=\frac{21.6-6.8}{390}-3.09mA
-\approx34.86mA
+\begin{aligned}
+I_Z(21.6\,\mathrm{V})
+&=\frac{21.6\,\mathrm{V}-6.8\,\mathrm{V}}{390\,\Omega}
+-3.09\,\mathrm{mA}\\
+&\approx\boxed{34.86\,\mathrm{mA}}
+\end{aligned}
 \]</div>
+
 <div class="formula">\[
-I_Z(26.4V)=\frac{26.4-6.8}{390}-3.09mA
-\approx47.17mA
+\begin{aligned}
+I_Z(26.4\,\mathrm{V})
+&=\frac{26.4\,\mathrm{V}-6.8\,\mathrm{V}}{390\,\Omega}
+-3.09\,\mathrm{mA}\\
+&\approx\boxed{47.17\,\mathrm{mA}}
+\end{aligned}
 \]</div>
+
 <div class="formula">\[
-P_Z(26.4V)\approx6.8(47.17mA)=\boxed{0.321W}
+P_Z(26.4\,\mathrm{V})
+\approx(6.8\,\mathrm{V})(47.17\,\mathrm{mA})
+=\boxed{0.321\,\mathrm{W}}
 \]</div>
+
 <div class="formula">\[
-P_{R_S}(26.4V)=
-\left(\frac{26.4-6.8}{390}\right)^2(390)
-\approx\boxed{0.985W}
+\begin{aligned}
+I_S(26.4\,\mathrm{V})
+&=\frac{26.4\,\mathrm{V}-6.8\,\mathrm{V}}{390\,\Omega},\\
+P_{R_S}
+&=I_S^2R_S
+\approx\boxed{0.985\,\mathrm{W}}
+\end{aligned}
 \]</div>
 
 <div class="box key"><small>Lectura de ingeniería</small>
@@ -525,8 +561,8 @@ El cálculo muestra algo que suele pasar desapercibido: la resistencia serie pue
 </main>
 </div>
 
-<script src="data/quizzes.js?v=10.0"></script>
-<script src="js/core.js?v=10.0"></script>
-<script src="js/zener.js?v=10.0"></script>
+<script src="data/quizzes.js?v=10.1"></script>
+<script src="js/core.js?v=10.1"></script>
+<script src="js/zener.js?v=10.1"></script>
 </body>
 </html>

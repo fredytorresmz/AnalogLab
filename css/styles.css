@@ -96,3 +96,17 @@ svg.diagram,svg.chart{min-height:220px;overflow:visible}
 .z-check-grid input{width:100%;border:1px solid var(--line);border-radius:8px;padding:9px;background:var(--bg);color:var(--ink)}
 @media(max-width:850px){.z-check-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.z-check-grid{grid-template-columns:1fr}.prediction-buttons button{flex:1}}
+
+
+/* v10.1 · correcciones visuales Zener */
+.z-calc-steps{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:13px 0}
+.z-calc-steps .step{min-width:0}
+.mini-math{overflow-x:auto;padding-top:4px}
+.mini-math mjx-container[display="true"]{min-width:max-content;margin:.35rem 0!important;font-size:.96em}
+#zaplicacion .formula mjx-container[display="true"]{font-size:.96em}
+@media(max-width:700px){
+  .z-calc-steps{grid-template-columns:1fr}
+  .formula mjx-container[display="true"]{font-size:.91em}
+  .mini-math mjx-container[display="true"]{font-size:.88em}
+  #zaplicacion .formula mjx-container[display="true"]{font-size:.86em}
+}

@@ -1311,89 +1311,6 @@ window.ANALOG_QUIZZES={
     {"q":"Durante la descarga ideal de un capacitor por una resistencia, su voltaje:","options":[{"text":"Cae linealmente hasta cero.","feedback":"La respuesta RC es exponencial."},{"text":"Sigue una exponencial decreciente.","feedback":"Correcto."},{"text":"Cambia instantáneamente a cero.","feedback":"El voltaje de un capacitor ideal no cambia instantáneamente."},{"text":"Aumenta indefinidamente.","feedback":"No."}],"answer":1}
   ]
 ,
-,
-  "zeneravanzado": [
-    {
-      "q":"Un regulador está en regulación. Se disminuye \\(R_L\\) mientras \\(V_i\\), \\(R_S\\) y \\(V_Z\\) permanecen fijos. ¿Cuál secuencia describe mejor lo que ocurre?",
-      "options":[
-        {"text":"\\(I_L\\uparrow\\), \\(I_Z\\downarrow\\), y puede perderse regulación.","feedback":"Correcto. La corriente serie es aproximadamente fija y se redistribuye entre carga y Zener."},
-        {"text":"\\(I_L\\downarrow\\), \\(I_Z\\uparrow\\), y siempre mejora la regulación.","feedback":"Es la tendencia opuesta."},
-        {"text":"\\(I_S\\) se hace cero inmediatamente.","feedback":"No. Mientras exista tensión suficiente, la resistencia serie sigue conduciendo."},
-        {"text":"\\(V_Z\\) aumenta proporcionalmente con la corriente de carga.","feedback":"No dentro del modelo de regulación usado para el análisis."}
-      ],
-      "answer":0
-    },
-    {
-      "q":"Para calcular \\(R_{S,min}\\) en el método de resistencia variable se utiliza \\(I_{Z,max}\\) porque:",
-      "options":[
-        {"text":"Una resistencia menor produce mayor corriente total y puede llevar al Zener al límite superior.","feedback":"Correcto."},
-        {"text":"Una resistencia menor siempre reduce la corriente Zener.","feedback":"Ocurre lo contrario."},
-        {"text":"\\(I_{Z,max}\\) sirve para calcular la carga mínima, no la resistencia.","feedback":"También interviene en el límite inferior de RS."},
-        {"text":"Es una convención sin relación física con el circuito.","feedback":"El límite se deriva directamente de la relación corriente-resistencia."}
-      ],
-      "answer":0
-    },
-    {
-      "q":"Con carga fija, ¿qué condición define \\(V_{i,min}\\) para un diseño que exige \\(I_Z\\ge I_{Z,min}\\)?",
-      "options":[
-        {"text":"\\(I_S=I_L+I_{Z,min}\\).","feedback":"Correcto: es el límite inferior de regulación."},
-        {"text":"\\(I_Z=I_{Z,max}\\).","feedback":"Esa condición se relaciona con el límite superior."},
-        {"text":"\\(I_L=0\\).","feedback":"Eso representa carga abierta, no la condición mínima de entrada."},
-        {"text":"\\(V_i=V_Z\\) siempre.","feedback":"Hace falta además la caída necesaria en RS."}
-      ],
-      "answer":0
-    },
-    {
-      "q":"Un datasheet indica \\(I_{ZT}=37mA\\) para un Zener. ¿Cuál interpretación es correcta?",
-      "options":[
-        {"text":"Es la corriente de prueba bajo la cual se especifica la tensión Zener correspondiente.","feedback":"Correcto."},
-        {"text":"Es necesariamente la corriente máxima continua.","feedback":"No. Debes consultar los límites de potencia/corriente y condiciones térmicas."},
-        {"text":"Es la corriente mínima universal para cualquier circuito.","feedback":"No. La región de regulación y el criterio de diseño deben comprobarse."},
-        {"text":"Es la corriente de la carga externa.","feedback":"No corresponde a IL."}
-      ],
-      "answer":0
-    },
-    {
-      "q":"En el ejemplo base, la carga se desconecta sin cambiar \\(V_i\\) ni \\(R_S\\). ¿Qué variable se vuelve especialmente crítica?",
-      "options":[
-        {"text":"La potencia del Zener, porque una fracción mayor de \\(I_S\\) circula por él.","feedback":"Correcto."},
-        {"text":"La corriente de carga, porque aumenta hasta infinito.","feedback":"Con carga abierta, IL tiende a cero."},
-        {"text":"La tensión del transformador, que necesariamente cae a cero.","feedback":"No está implicado por la desconexión de RL."},
-        {"text":"El valor nominal de VZ deja de existir.","feedback":"No."}
-      ],
-      "answer":0
-    },
-    {
-      "q":"Un estudiante verifica que \\(V_{TH}>V_Z\\) y concluye que el circuito ya está correctamente regulado. ¿Qué falta?",
-      "options":[
-        {"text":"Calcular \\(I_Z\\) y comprobar que cumple el margen de corriente y potencia.","feedback":"Correcto. VTH solo permite decidir si la hipótesis de conducción es posible."},
-        {"text":"Nada: VTH>VZ garantiza cualquier condición de diseño.","feedback":"No. Puede quedar una corriente Zener insuficiente o excesiva."},
-        {"text":"Cambiar siempre RS por cero ohmios.","feedback":"Eso eliminaría la limitación de corriente."},
-        {"text":"Hacer RL infinita obligatoriamente.","feedback":"No."}
-      ],
-      "answer":0
-    },
-    {
-      "q":"Una fuente rectificada con capacitor alimenta el regulador Zener. ¿Cuál condición es más útil para comprobar que no se pierda regulación por el rizado?",
-      "options":[
-        {"text":"Comparar el valle \\(V_{C,min}\\) con el \\(V_{i,min}\\) requerido por el regulador.","feedback":"Correcto."},
-        {"text":"Usar solo el valor pico del capacitor.","feedback":"El pico no representa el peor caso para mantener corriente mínima."},
-        {"text":"Ignorar el rizado porque el Zener siempre lo elimina completamente.","feedback":"No. Si el valle es demasiado bajo puede perderse regulación."},
-        {"text":"Comparar únicamente la frecuencia de red con VZ.","feedback":"No son magnitudes comparables."}
-      ],
-      "answer":0
-    },
-    {
-      "q":"En una etapa industrial de referencia Zener, el cálculo da \\(P_Z=0.32W\\) y \\(P_{R_S}=0.99W\\). ¿Qué conclusión es técnicamente razonable?",
-      "options":[
-        {"text":"Debe revisarse la selección térmica de ambos componentes; la resistencia serie puede ser tan crítica como el Zener.","feedback":"Correcto."},
-        {"text":"Solo importa la potencia del Zener.","feedback":"No. La resistencia también disipa potencia real."},
-        {"text":"Una resistencia de 1/4 W sería automáticamente suficiente.","feedback":"No: el cálculo ya supera ampliamente 0.25 W."},
-        {"text":"La potencia no depende de la tensión de entrada.","feedback":"Sí depende del punto de operación."}
-      ],
-      "answer":0
-    }
-  ],
   "datasheet": [
     {
       "q":"¿Cuál es la interpretación correcta de una tabla titulada <i>Absolute Maximum Ratings</i>?",
@@ -1434,6 +1351,90 @@ window.ANALOG_QUIZZES={
         {"text":"1.1 V es la tensión inversa máxima.","feedback":"No."}
       ],
       "answer":1
+    }
+  ]
+
+,
+  "zeneravanzado": [
+    {
+      "q":"Un regulador está en regulación. Se disminuye \\(R_L\\) mientras \\(V_i\\), \\(R_S\\) y \\(V_Z\\) permanecen fijos. ¿Cuál secuencia describe mejor lo que ocurre?",
+      "options":[
+        {"text":"\\(I_L\\uparrow\\), \\(I_Z\\downarrow\\), y puede perderse regulación.","feedback":"Correcto. La corriente serie es aproximadamente fija y se redistribuye entre carga y Zener."},
+        {"text":"\\(I_L\\downarrow\\), \\(I_Z\\uparrow\\), y siempre mejora la regulación.","feedback":"Es la tendencia opuesta."},
+        {"text":"\\(I_S\\) se hace cero inmediatamente.","feedback":"No. Mientras exista tensión suficiente, la resistencia serie sigue conduciendo."},
+        {"text":"\\(V_Z\\) aumenta proporcionalmente con la corriente de carga.","feedback":"No dentro del modelo de regulación usado para el análisis."}
+      ],
+      "answer":0
+    },
+    {
+      "q":"Para calcular \\(R_{S,min}\\) se utiliza \\(I_{Z,max}\\). ¿Cuál es la razón física?",
+      "options":[
+        {"text":"Una resistencia menor produce mayor corriente total y puede llevar al Zener al límite superior.","feedback":"Correcto. Por eso el límite inferior de resistencia se obtiene con la corriente máxima admisible."},
+        {"text":"Una resistencia menor siempre reduce la corriente Zener.","feedback":"Ocurre lo contrario."},
+        {"text":"\\(I_{Z,max}\\) solo sirve para calcular \\(R_L\\).","feedback":"También determina el límite inferior de la resistencia serie."},
+        {"text":"Es una convención matemática sin relación con el circuito.","feedback":"Se deriva directamente de \\(I_S=(V_i-V_Z)/R_S\\)."}
+      ],
+      "answer":0
+    },
+    {
+      "q":"Con carga fija, ¿qué condición define \\(V_{i,min}\\) si se exige \\(I_Z\\ge I_{Z,min}\\)?",
+      "options":[
+        {"text":"\\(I_S=I_L+I_{Z,min}\\).","feedback":"Correcto: es la frontera inferior para conservar el margen de regulación."},
+        {"text":"\\(I_Z=I_{Z,max}\\).","feedback":"Esa condición corresponde al extremo superior."},
+        {"text":"\\(I_L=0\\).","feedback":"Eso representa carga abierta."},
+        {"text":"\\(V_i=V_Z\\) siempre.","feedback":"Además de \\(V_Z\\), debe existir caída en \\(R_S\\) para suministrar corriente."}
+      ],
+      "answer":0
+    },
+    {
+      "q":"Un datasheet indica \\(I_{ZT}=37\\,\\mathrm{mA}\\). ¿Cuál interpretación es correcta?",
+      "options":[
+        {"text":"Es la corriente de prueba bajo la cual se especifica la tensión Zener correspondiente.","feedback":"Correcto."},
+        {"text":"Es necesariamente la corriente máxima continua.","feedback":"No. Deben consultarse potencia, límites de corriente y condiciones térmicas."},
+        {"text":"Es la corriente mínima universal de cualquier diseño.","feedback":"No. El criterio de corriente mínima depende del dispositivo y del diseño."},
+        {"text":"Es la corriente de la carga externa.","feedback":"No corresponde a \\(I_L\\)."}
+      ],
+      "answer":0
+    },
+    {
+      "q":"En el ejemplo base, la carga se desconecta sin cambiar \\(V_i\\) ni \\(R_S\\). ¿Qué variable se vuelve especialmente crítica?",
+      "options":[
+        {"text":"La potencia del Zener, porque una fracción mayor de \\(I_S\\) circula por él.","feedback":"Correcto. Con carga abierta, \\(I_L\\to0\\) y aumenta la corriente disponible para el Zener."},
+        {"text":"La corriente de carga, porque aumenta hasta infinito.","feedback":"Con carga abierta, \\(I_L\\) tiende a cero."},
+        {"text":"La tensión del transformador, que necesariamente cae a cero.","feedback":"No está implicado por la desconexión de la carga."},
+        {"text":"El valor nominal de \\(V_Z\\) deja de existir.","feedback":"No."}
+      ],
+      "answer":0
+    },
+    {
+      "q":"Un estudiante verifica que \\(V_{TH}>V_Z\\) y concluye que el circuito ya está correctamente regulado. ¿Qué falta?",
+      "options":[
+        {"text":"Calcular \\(I_Z\\) y comprobar que cumple los márgenes de corriente y potencia.","feedback":"Correcto. \\(V_{TH}>V_Z\\) solo indica que la hipótesis de conducción es posible."},
+        {"text":"Nada: esa comparación garantiza cualquier condición de diseño.","feedback":"No. La corriente puede ser insuficiente o excesiva."},
+        {"text":"Cambiar siempre \\(R_S\\) por cero ohmios.","feedback":"Eso eliminaría la limitación de corriente."},
+        {"text":"Hacer \\(R_L\\) infinita obligatoriamente.","feedback":"No."}
+      ],
+      "answer":0
+    },
+    {
+      "q":"Una fuente rectificada con capacitor alimenta el regulador Zener. ¿Qué condición es más útil para comprobar que el rizado no provoque pérdida de regulación?",
+      "options":[
+        {"text":"Comparar \\(V_{C,min}\\) con el \\(V_{i,min}\\) requerido por el regulador.","feedback":"Correcto. El valle es el peor punto para mantener la corriente mínima del Zener."},
+        {"text":"Usar únicamente el valor pico del capacitor.","feedback":"El pico no representa el peor caso para mantener regulación."},
+        {"text":"Ignorar el rizado porque el Zener siempre lo elimina por completo.","feedback":"Si el valle es demasiado bajo, el Zener puede salir de regulación."},
+        {"text":"Comparar únicamente la frecuencia de red con \\(V_Z\\).","feedback":"No son magnitudes comparables."}
+      ],
+      "answer":0
+    },
+    {
+      "q":"En una etapa de referencia Zener se calcula \\(P_Z=0.32\\,\\mathrm{W}\\) y \\(P_{R_S}=0.99\\,\\mathrm{W}\\). ¿Cuál conclusión es técnicamente correcta?",
+      "options":[
+        {"text":"Debe revisarse la selección térmica de ambos componentes; la resistencia serie puede ser tan crítica como el Zener.","feedback":"Correcto."},
+        {"text":"Solo importa la potencia del Zener.","feedback":"La resistencia también disipa potencia real."},
+        {"text":"Una resistencia de \\(1/4\\,\\mathrm{W}\\) es automáticamente suficiente.","feedback":"No: el cálculo supera ampliamente \\(0.25\\,\\mathrm{W}\\)."},
+        {"text":"La potencia no depende de la tensión de entrada.","feedback":"Sí depende del punto de operación."}
+      ],
+      "answer":0
     }
   ]
 };
