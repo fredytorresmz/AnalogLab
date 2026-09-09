@@ -83,3 +83,16 @@ svg.diagram,svg.chart{min-height:220px;overflow:visible}
 .buttons a.btn{display:inline-flex;align-items:center;text-decoration:none}
 @media(max-width:900px){.extract-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.extract-grid{grid-template-columns:1fr}.datasheet-task,.reflection-card{padding:12px}}
+
+
+/* v10 · Zener detallado */
+.prediction-card{border:1px solid var(--line);border-left:5px solid #7b5aa6;border-radius:13px;background:color-mix(in srgb,var(--blue2) 68%,var(--paper));padding:13px 14px;margin-top:12px}
+.prediction-card p{margin:5px 0 9px;color:var(--muted);font-size:.86rem}
+.prediction-buttons{display:flex;gap:7px;flex-wrap:wrap}
+.prediction-buttons button{border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:9px;padding:8px 11px;cursor:pointer}
+.z-check-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:12px 0}
+.z-check-grid label{border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:10px;display:grid;gap:4px;color:var(--muted);font-size:.82rem}
+.z-check-grid label span{font-size:.68rem}
+.z-check-grid input{width:100%;border:1px solid var(--line);border-radius:8px;padding:9px;background:var(--bg);color:var(--ink)}
+@media(max-width:850px){.z-check-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.z-check-grid{grid-template-columns:1fr}.prediction-buttons button{flex:1}}

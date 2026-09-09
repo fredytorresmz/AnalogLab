@@ -1,46 +1,532 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="AnalogLab: análisis profesional e interactivo del diodo Zener y reguladores en paralelo."><title>AnalogLab · Diodo Zener</title><link rel="stylesheet" href="css/styles.css?v=9.0"><script>
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="AnalogLab: teoría, diseño, simulación y evaluación del regulador paralelo con diodo Zener.">
+<title>AnalogLab · Diodo Zener</title>
+<link rel="stylesheet" href="css/styles.css?v=10.0">
+<script>
 window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};
-</script><script id="MathJax-script" defer src="vendor/mathjax/tex-svg.js?v=3.2.1"></script></head><body>
-<header><button class="menu">☰</button><a class="brand" href="index.html"><strong>AnalogLab</strong><span>Electrónica Analógica y Laboratorio</span></a><nav class="topnav"><a href="index.html">Inicio</a><a href="dc.html">Diodos DC</a><a href="ac.html">Diodos AC</a><a class="active" href="zener.html">Zener</a><a href="taller.html">Taller 1</a><a href="proyecto1.html">Proyecto 1</a></nav><div class="header-actions"><button id="class">Modo clase</button><button id="theme">◐</button></div></header>
-<div class="layout"><aside><div class="progress-card"><div><span>Progreso de estudio</span><strong class="progress-value">0%</strong></div><div class="track"><span class="progress-fill"></span></div></div><h4>Contenido</h4><nav><a href="#zfund">15 · Fundamentos</a><a href="#zmetodo">16 · Método y caso fijo</a><a href="#zcasos">17 · Casos de diseño</a><a href="#zdatasheet">18 · Datos y diseño real</a></nav><div class="side-info">Primero estudia la teoría y los ejemplos. Después utiliza el simulador para comprobar los límites de regulación.</div></aside><main>
-<section class="hero small"><span class="eyebrow">Diodos especiales · Regulación</span><h1>Diodo Zener y regulación en paralelo</h1><p>Este bloque desarrolla el Zener desde su curva característica hasta el diseño de una fuente regulada con carga. Se parte del método usado en clase, se corrigen las aproximaciones matemáticas y se amplía el análisis a variaciones de resistencia serie, carga y tensión de entrada.</p><div class="meta"><span>Teoría</span><span>Matemática paso a paso</span><span>4 casos de diseño</span><span>Simulador</span><span>Hoja de datos</span></div></section>
+</script>
+<script id="MathJax-script" defer src="vendor/mathjax/tex-svg.js?v=3.2.1"></script>
+</head>
+<body>
+<header>
+<button class="menu">☰</button>
+<a class="brand" href="index.html"><strong>AnalogLab</strong><span>Electrónica Analógica y Laboratorio</span></a>
+<nav class="topnav"><a href="index.html">Inicio</a><a href="dc.html">Diodos DC</a><a href="ac.html">Diodos AC</a><a class="active" href="zener.html">Zener</a><a href="taller.html">Taller 1</a><a href="datasheet.html">Datasheets</a><a href="proyecto1.html">Trabajo opcional</a></nav>
+<div class="header-actions"><button id="class">Modo clase</button><button id="theme">◐</button></div>
+</header>
 
-<section class="module" id="zfund"><div class="module-head"><div class="module-title"><span class="no">15</span><div><span class="eyebrow">Fundamentos</span><h2>Qué hace diferente al Zener</h2></div></div><button class="mark" data-mark="zener">Marcar estudiado</button></div>
-<div class="objectives"><span>Identificar ruptura inversa controlada</span><span>Distinguir OFF / regulación / sobrecorriente</span><span>Interpretar \(V_Z\), \(I_Z\) y potencia</span></div>
-<p>Un Zener está diseñado para trabajar en polarización inversa dentro de una región donde la tensión cambia poco frente a variaciones importantes de corriente. Esa propiedad permite usarlo como referencia o como regulador en paralelo.</p>
-<div class="grid2"><div><svg id="zCurve" class="chart" viewBox="0 0 760 420"></svg><div class="legend-row"><span class="lg off">OFF</span><span class="lg knee">Rodilla</span><span class="lg capv">Regulación</span><span class="lg danger">Límite</span></div></div><div class="stack"><div class="box"><small>OFF</small>La tensión inversa disponible no alcanza la condición de regulación. En el modelo ideal de análisis, \(I_Z=0\).</div><div class="box key"><small>Regulación</small>El dispositivo conduce en inversa y \(V_L\approx V_Z\), siempre que \(I_Z\) permanezca dentro del intervalo de diseño.</div><div class="box error"><small>Sobrecorriente</small>Si \(I_Z\) o \(P_Z\) exceden los límites del dispositivo, la regulación deja de ser una condición segura.</div></div></div>
-<div class="subsection"><h3>Modelo introductorio y modelo de diseño</h3><div class="grid2"><div class="panel paper"><b>Modelo de aula</b><div class="formula">\[V_Z\approx\text{constante}\]</div><p>Es útil para aprender KVL/KCL y deducir los límites del circuito.</p></div><div class="panel paper"><b>Diseño con hoja de datos</b><div class="formula">\[I_{Z,min}\le I_Z\le I_{Z,max},\qquad P_Z=V_ZI_Z\]</div><p>La corriente mínima, tolerancia, potencia y resistencia dinámica deben comprobarse en el componente real.</p></div></div></div>
+<div class="layout">
+<aside>
+<div class="progress-card"><div><span>Progreso de estudio</span><strong class="progress-value">0%</strong></div><div class="track"><span class="progress-fill"></span></div></div>
+<h4>Diodo Zener</h4>
+<nav>
+<a href="#zfund">Z1 · Fundamentos</a>
+<a href="#zdatasheet">Z2 · Qué leer del datasheet</a>
+<a href="#zmetodo">Z3 · Método universal</a>
+<a href="#zfijo">Z4 · Caso fijo</a>
+<a href="#zr">Z5 · Método 1: R variable</a>
+<a href="#zrl">Z6 · Método 2: RL variable</a>
+<a href="#zvi">Z7 · Método 3: Vi variable</a>
+<a href="#zpotencia">Z8 · Potencia y límites</a>
+<a href="#zsim">Z9 · Simulador por casos</a>
+<a href="#zaplicacion">Z10 · Aplicación</a>
+<a href="#zeval">Z11 · Practica y verifica</a>
+</nav>
+<div class="side-info">Si faltaste a clase, sigue el orden Z1→Z11. Si estás repasando, puedes ir directamente al método que necesites y después comprobarlo en el simulador.</div>
+</aside>
+
+<main>
+<section class="hero small">
+<span class="eyebrow">Diodos especiales · Regulación en paralelo</span>
+<h1>Diodo Zener: del concepto al diseño</h1>
+<p>Este módulo desarrolla el procedimiento completo para analizar y diseñar un regulador Zener: primero se decide si el dispositivo puede entrar en regulación, luego se calculan las corrientes y finalmente se determinan los rangos permitidos de resistencia, carga y tensión de entrada. Cada fórmula aparece a partir del razonamiento del circuito, no como una expresión aislada.</p>
+<div class="meta"><span>Método ON/OFF</span><span>Caso fijo</span><span>R variable</span><span>RL variable</span><span>Vi variable</span><span>Potencia</span><span>Simulación</span></div>
 </section>
 
-<section class="module" id="zmetodo"><div class="module-head"><div class="module-title"><span class="no">16</span><div><span class="eyebrow">Procedimiento</span><h2>Método de análisis y caso con valores fijos</h2></div></div><button class="mark" data-mark="zener-metodo">Marcar estudiado</button></div>
-<div class="subsection"><h3>15.1 Antes de imponer \(V_L=V_Z\)</h3><p>El primer paso es comprobar si el circuito podría alcanzar la tensión Zener. Se retira conceptualmente el Zener y se calcula el divisor formado por \(R_S\) y \(R_L\):</p>
-<div class="formula">\[\boxed{V_{TH}=\frac{R_L}{R_S+R_L}V_i}\]</div>
-<div class="grid2"><div class="box warn"><small>Si \(V_{TH}&lt;V_Z\)</small>El Zener permanece OFF. Se resuelve la red como un divisor de tensión.</div><div class="box key"><small>Si \(V_{TH}\ge V_Z\)</small>La hipótesis de regulación es posible. Después se calculan corrientes y se verifica que \(I_Z\) sea suficiente.</div></div></div>
-<div class="subsection"><h3>15.2 Ecuaciones cuando está regulando</h3><div class="formula">\[\boxed{V_L\approx V_Z}\]</div><div class="formula">\[\boxed{I_S=\frac{V_i-V_Z}{R_S}},\qquad \boxed{I_L=\frac{V_Z}{R_L}},\qquad \boxed{I_Z=I_S-I_L}\]</div><div class="formula">\[\boxed{P_Z=V_ZI_Z},\qquad \boxed{P_R=I_S^2R_S}\]</div>
-<div class="box remember"><small>Idea clave</small>La resistencia serie no es un accesorio: limita la corriente total. La corriente que no consume la carga debe circular por el Zener.</div></div>
-<div class="subsection"><h3>15.3 Ejemplo resuelto · diferente a los apuntes</h3><div class="example"><span class="example-label">Caso fijo</span><h3>\(V_i=18\,V\), \(V_Z=6.8\,V\), \(R_S=330\,\Omega\), \(R_L=680\,\Omega\)</h3>
-<div class="steps"><div class="step"><i>1</i><b>Comprobar estado</b><div>\(V_{TH}=18(680)/(330+680)=12.12\,V\)</div></div><div class="step"><i>2</i><b>Salida</b><div>Como \(12.12&gt;6.8\), se prueba regulación: \(V_L=6.8\,V\).</div></div><div class="step"><i>3</i><b>Corrientes</b><div>\(I_S=33.94\,mA\), \(I_L=10.00\,mA\).</div></div><div class="step"><i>4</i><b>Zener</b><div>\(I_Z=23.94\,mA\), \(P_Z\approx162.8\,mW\).</div></div></div>
-<div class="formula">\[\boxed{V_L=6.8\,V},\quad \boxed{I_Z\approx23.94\,mA},\quad \boxed{P_Z\approx0.163\,W}\]</div>
-<div class="box key"><small>Verificación final</small>El resultado solo es válido como diseño real si la hoja de datos confirma que esa corriente está dentro de la región de regulación y que la potencia es segura.</div></div></div>
-<div class="quiz" data-quiz="zener"></div></section>
+<div class="study-note">
+<b>Ruta recomendada.</b>
+<span>Lee primero la explicación física, reproduce el ejemplo con calculadora y solo después utiliza el simulador. En la evaluación final se mezclan interpretación, cálculo y lectura de datasheet.</span>
+</div>
 
-<section class="module" id="zcasos"><div class="module-head"><div class="module-title"><span class="no">17</span><div><span class="eyebrow">Diseño</span><h2>Qué ocurre cuando cambia R, la carga o la fuente</h2></div></div><button class="mark" data-mark="zener-casos">Marcar estudiado</button></div>
-<p class="lead">Para diseñar no basta con comprobar un único punto. Debemos encontrar el intervalo donde el Zener conserva regulación sin superar su corriente de diseño.</p>
-<div class="subsection"><h3>17.1 Resistencia serie \(R_S\) variable</h3><p>Con \(V_i\), \(V_Z\) y \(R_L\) fijos:</p>
-<div class="formula">\[\boxed{R_{S,max}=\frac{V_i-V_Z}{I_L+I_{Z,min}}}\]</div><div class="formula">\[\boxed{R_{S,min}=\frac{V_i-V_Z}{I_L+I_{Z,max}}}\]</div>
-<div class="example"><b>Ejemplo.</b> Con el circuito anterior y criterios de diseño \(I_{Z,min}=5\,mA\), \(I_{Z,max}=50\,mA\):<div class="formula">\[R_{S,min}=186.7\,\Omega,\qquad R_{S,max}=746.7\,\Omega\]</div><p>Por tanto, \(330\,\Omega\) es una elección compatible con esos criterios.</p></div></div>
-<div class="subsection"><h3>17.2 Carga \(R_L\) variable</h3><div class="formula">\[I_S=\frac{V_i-V_Z}{R_S}\]</div><div class="formula">\[\boxed{I_{L,max}=I_S-I_{Z,min}},\qquad \boxed{R_{L,min}=\frac{V_Z}{I_{L,max}}}\]</div><p>Cuando \(R_L\) disminuye, la carga demanda más corriente y \(I_Z\) disminuye. El límite inferior aparece cuando el Zener llega a su corriente mínima de regulación.</p><div class="example"><span class="example-label">Ejemplo · carga variable</span><p>Para \(V_i=18V\), \(V_Z=6.8V\), \(R_S=330\Omega\) e \(I_{Z,min}=5mA\):</p><div class="formula">\[I_S=\frac{18-6.8}{330}=33.94mA\]</div><div class="formula">\[I_{L,max}=33.94-5=28.94mA\]</div><div class="formula">\[\boxed{R_{L,min}=\frac{6.8}{28.94mA}\approx235\Omega}\]</div><p>Para \(R_L&lt;235\Omega\), la carga exige más corriente que la disponible manteniendo el margen elegido.</p></div><div class="box remember"><small>Extremo de carga ligera</small>Cuando \(R_L\to\infty\), \(I_L\to0\) y casi toda la corriente de \(R_S\) circula por el Zener. Debe verificarse \(I_Z\le I_{Z,max}\) y \(P_Z\le P_{Z,max}\).</div></div>
-<div class="subsection"><h3>17.3 Fuente \(V_i\) variable</h3><div class="formula">\[\boxed{V_{i,min}=V_Z+R_S(I_L+I_{Z,min})}\]</div><div class="formula">\[\boxed{V_{i,max}=V_Z+R_S(I_L+I_{Z,max})}\]</div>
-<div class="example"><b>Ejemplo.</b> Para \(R_S=330\,\Omega\), \(R_L=680\,\Omega\), \(V_Z=6.8\,V\), \(I_{Z,min}=5\,mA\), \(I_{Z,max}=50\,mA\):<div class="formula">\[\boxed{11.75\,V\le V_i\le26.60\,V}\]</div></div></div>
-<div class="subsection"><h3>17.4 Carga fija y condición sin carga</h3><div class="example"><span class="example-label">Comprobación de potencia</span><p>Con el mismo circuito, si la carga se desconecta:</p><div class="formula">\[I_L=0,\qquad I_Z=I_S=\frac{18-6.8}{330}=33.94mA\]</div><div class="formula">\[P_Z=6.8(33.94mA)\approx\boxed{0.231W}\]</div><p>La condición sin carga puede ser más exigente para el Zener que la carga nominal. Por eso la potencia debe verificarse en ambos extremos.</p></div></div>
-<div class="subsection"><h3>17.5 Simulador de límites</h3><div class="grid2"><div class="interactive controls">
-<label>\(V_i\) <strong><span id="zViTxt">18.0</span> V</strong><input id="zVi" type="range" min="5" max="35" value="18" step="0.1"></label><label>\(R_S\) <strong><span id="zRsTxt">330</span> Ω</strong><input id="zRs" type="range" min="100" max="1200" value="330" step="10"></label><label>\(V_Z\) <strong><span id="zVzTxt">6.8</span> V</strong><input id="zVz" type="range" min="3.3" max="15" value="6.8" step="0.1"></label><label>\(R_L\) <strong><span id="zRlTxt">680</span> Ω</strong><input id="zRl" type="range" min="100" max="5000" value="680" step="10"></label><label>\(I_{Z,min}\) <strong><span id="zIminTxt">5</span> mA</strong><input id="zImin" type="range" min="0" max="30" value="5" step="1"></label><label>\(I_{Z,max}\) de diseño <strong><span id="zImaxTxt">50</span> mA</strong><input id="zImax" type="range" min="10" max="150" value="50" step="5"></label>
-</div><div><div id="zState" class="status-card"></div><div class="metric-grid"><div class="metric"><span>\(V_L\)</span><b id="zVL">—</b></div><div class="metric"><span>\(I_S\)</span><b id="zIS">—</b></div><div class="metric"><span>\(I_L\)</span><b id="zIL">—</b></div></div><div class="metric-grid" style="margin-top:8px"><div class="metric"><span>\(I_Z\)</span><b id="zIZ">—</b></div><div class="metric"><span>\(P_Z\)</span><b id="zP">—</b></div><div class="metric"><span>\(V_{TH}\)</span><b id="zTH">—</b></div></div><svg id="zRangeChart" class="chart" viewBox="0 0 760 360" style="margin-top:10px"></svg></div></div></div>
-<div class="quiz" data-quiz="zenercasos"></div></section>
+<section class="module" id="zfund">
+<div class="module-head"><div class="module-title"><span class="no">Z1</span><div><span class="eyebrow">Teoría esencial</span><h2>Qué hace realmente un Zener</h2></div></div><button class="mark" data-mark="zener">Marcar estudiado</button></div>
+<div class="objectives"><span>Ruptura inversa controlada</span><span>Regulación en paralelo</span><span>Rodilla y margen de corriente</span><span>Potencia</span></div>
 
-<section class="module" id="zdatasheet"><div class="module-head"><div class="module-title"><span class="no">18</span><div><span class="eyebrow">Componente real</span><h2>Hoja de datos y comprobación de ingeniería</h2></div></div><button class="mark" data-mark="zener-datos">Marcar estudiado</button></div>
-<p>Antes de montar una fuente regulada, identifica en la hoja de datos del Zener seleccionado, como mínimo:</p><div class="grid3"><div class="box"><small>Tensión</small>\(V_Z\) nominal y tolerancia.</div><div class="box"><small>Corriente</small>Corriente de prueba, corriente de rodilla o corriente mínima recomendada, según la hoja de datos.</div><div class="box"><small>Potencia</small>\(P_{Z,max}\), condiciones térmicas y reducción por temperatura cuando aplique.</div><div class="box"><small>Dinámica</small>Impedancia o resistencia dinámica \(r_Z\).</div><div class="box"><small>Encapsulado</small>Polaridad, banda del cátodo y límites del montaje.</div><div class="box"><small>Margen</small>No diseñar exactamente sobre el máximo absoluto.</div></div>
-<div class="formula">\[V_Z\approx V_{Z0}+I_Zr_Z\]</div><p>Esta segunda aproximación explica por qué la tensión regulada no es perfectamente constante: una variación de corriente produce una pequeña variación de tensión.</p>
-<div class="box warn"><small>Puente hacia el trabajo opcional</small>En el trabajo de fuente regulada tendrás que seleccionar un Zener comercial diferente del utilizado en el ejemplo de referencia, justificarlo con su hoja de datos y comprobarlo en teoría, simulación y montaje.</div><div class="buttons"><a class="btn primary" href="datasheet.html">Ir al módulo de lectura de datasheets →</a></div>
+<div class="grid2">
+<div>
+<p>En directa, un Zener se comporta como un diodo de silicio convencional. La diferencia aparece en inversa: está construido para trabajar de forma controlada alrededor de una tensión característica \(V_Z\).</p>
+<p>En un regulador paralelo, cuando el Zener está en su región de regulación:</p>
+<div class="formula">\[\boxed{V_L\approx V_Z}\]</div>
+<p>La tensión se mantiene aproximadamente constante porque las variaciones de corriente son absorbidas por el Zener dentro de un intervalo permitido.</p>
+</div>
+<div>
+<svg id="zCurve" class="chart" viewBox="0 0 760 420"></svg>
+<div class="legend-row"><span class="lg off">OFF</span><span class="lg knee">Rodilla</span><span class="lg capv">Regulación</span><span class="lg danger">Exceso</span></div>
+</div>
+</div>
+
+<div class="grid3">
+<div class="box"><small>OFF</small>La tensión disponible no alcanza la región Zener. En el modelo introductorio, \(I_Z\approx0\).</div>
+<div class="box key"><small>Regulación</small>\(V_L\approx V_Z\) y la corriente del Zener permanece dentro del intervalo elegido para diseño.</div>
+<div class="box error"><small>Fuera del diseño</small>Puede haber pérdida de regulación por corriente insuficiente o riesgo térmico por exceso de corriente/potencia.</div>
+</div>
+
+<div class="box remember"><small>Modelo de aula vs. componente real</small>
+Para aprender el procedimiento usamos \(V_Z\) aproximadamente constante. En un dispositivo real \(V_Z\) depende de corriente, tolerancia y temperatura; por eso después se consulta el datasheet.
+</div>
 </section>
-<div class="footer"><div><b>AnalogLab</b><span>Recurso interactivo de apoyo académico</span></div><span>Electrónica Analógica y Laboratorio</span></div></main></div><script src="data/quizzes.js?v=9.0"></script><script src="js/core.js?v=9.0"></script><script src="js/zener.js?v=9.0"></script></body></html>
+
+<section class="module" id="zdatasheet">
+<div class="module-head"><div class="module-title"><span class="no">Z2</span><div><span class="eyebrow">Antes de diseñar</span><h2>Qué buscar —y qué no asumir— en el datasheet</h2></div></div><button class="mark" data-mark="zener-datos">Marcar estudiado</button></div>
+
+<p class="lead">En esta página solo se muestran los datos que afectan directamente al análisis Zener. El entrenamiento completo de lectura está en el módulo de Datasheets.</p>
+
+<div class="table-scroll">
+<table class="compare-table">
+<thead><tr><th>Dato</th><th>Para qué sirve</th><th>No significa...</th></tr></thead>
+<tbody>
+<tr><td>\(V_Z\)</td><td>Tensión nominal o rango de tensión Zener.</td><td>Que todos los dispositivos tengan exactamente el valor típico.</td></tr>
+<tr><td>\(I_{ZT}\)</td><td>Corriente de prueba usada para caracterizar \(V_Z\) y normalmente \(Z_{ZT}\).</td><td>La corriente máxima o la única corriente válida.</td></tr>
+<tr><td>\(Z_{ZT}\)</td><td>Impedancia dinámica alrededor de la condición de prueba.</td><td>Una resistencia serie física constante para cualquier corriente.</td></tr>
+<tr><td>\(I_{ZK}\), \(Z_{ZK}\)</td><td>Información de la región de rodilla.</td><td>Que \(I_{ZK}\) deba usarse automáticamente como único \(I_{Z,min}\) de todo diseño.</td></tr>
+<tr><td>\(P_Z\) o \(P_D\)</td><td>Límite de potencia bajo condiciones térmicas especificadas.</td><td>Que pueda disiparse esa potencia sin revisar temperatura y derating.</td></tr>
+<tr><td>Tolerancia / TC</td><td>Variación de \(V_Z\) por fabricación y temperatura.</td><td>Que el valor nominal sea exacto en todo ambiente.</td></tr>
+<tr><td>\(I_{ZM}\), si aparece</td><td>Corriente máxima de regulación definida por ese fabricante/dispositivo.</td><td>Una corriente universal para todos los Zener.</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="grid2">
+<div class="box key"><small>Busca</small>\(V_Z\), condición de prueba, impedancia, rodilla, potencia, tolerancia, temperatura, encapsulado y polaridad.</div>
+<div class="box warn"><small>No busques una “fórmula mágica”</small>El datasheet no reemplaza KCL/KVL. Primero entiendes el circuito; después compruebas que el componente real soporte el punto de operación.</div>
+</div>
+<div class="buttons"><a class="btn primary" href="datasheet.html">Abrir módulo completo de Datasheets →</a></div>
+</section>
+
+<section class="module" id="zmetodo">
+<div class="module-head"><div class="module-title"><span class="no">Z3</span><div><span class="eyebrow">Procedimiento común</span><h2>Método universal: primero decide el estado</h2></div></div><button class="mark" data-mark="zener-metodo">Marcar estudiado</button></div>
+
+<p>El error más frecuente es escribir \(V_L=V_Z\) antes de comprobar que el circuito puede alcanzar esa tensión. El procedimiento debe comenzar sin imponer la regulación.</p>
+
+<div class="steps">
+<div class="step"><i>1</i><b>Retira conceptualmente el Zener</b><p>Deja la red \(R_S-R_L\) y calcula el voltaje que aparecería en el nodo.</p></div>
+<div class="step"><i>2</i><b>Compara con \(V_Z\)</b><p>Si no se alcanza \(V_Z\), el Zener está OFF. Si se alcanza, la regulación es posible.</p></div>
+<div class="step"><i>3</i><b>Sustituye el modelo</b><p>En regulación usa \(V_L\approx V_Z\).</p></div>
+<div class="step"><i>4</i><b>Comprueba corrientes y potencia</b><p>La hipótesis solo es válida si \(I_Z\) y \(P_Z\) son aceptables.</p></div>
+</div>
+
+<div class="formula">\[
+\boxed{V_{\text{sin Zener}}=
+V_{TH}=\frac{R_L}{R_S+R_L}V_i}
+\]</div>
+
+<div class="grid2">
+<div class="box warn"><small>Si \(V_{TH}<V_Z\)</small>
+\[
+I_Z=0,\qquad V_L=V_{TH}
+\]
+No utilices las ecuaciones de regulación.</div>
+<div class="box key"><small>Si \(V_{TH}\ge V_Z\)</small>
+La regulación es posible, pero todavía falta verificar \(I_Z\).</div>
+</div>
+
+<div class="subsection"><h3>Cuando el Zener está regulando</h3>
+<p>En el nodo de salida se aplica KCL:</p>
+<div class="formula">\[\boxed{I_S=I_Z+I_L}\]</div>
+<p>Como \(V_L\approx V_Z\):</p>
+<div class="formula">\[
+I_S=\frac{V_i-V_Z}{R_S},
+\qquad
+I_L=\frac{V_Z}{R_L}
+\]</div>
+<p>Por tanto:</p>
+<div class="formula">\[
+\boxed{I_Z=
+\frac{V_i-V_Z}{R_S}-\frac{V_Z}{R_L}}
+\]</div>
+<p>Y finalmente:</p>
+<div class="formula">\[
+\boxed{P_Z=V_ZI_Z},
+\qquad
+\boxed{P_{R_S}=I_S^2R_S}
+\]</div>
+</div>
+</section>
+
+<section class="module" id="zfijo">
+<div class="module-head"><div class="module-title"><span class="no">Z4</span><div><span class="eyebrow">Punto de partida</span><h2>Caso fijo: hallar el punto de operación</h2></div></div><button class="mark" data-mark="zener-fijo">Marcar estudiado</button></div>
+
+<p class="lead">Este ejemplo será la base de los tres métodos posteriores. Los valores son diferentes a los usados en los apuntes de clase.</p>
+
+<div class="example">
+<span class="example-label">Ejemplo base</span>
+<h3>\(V_i=18V\), \(V_Z=6.8V\), \(R_S=330\Omega\), \(R_L=680\Omega\)</h3>
+
+<div class="steps">
+<div class="step"><i>1</i><b>¿Puede encender?</b><div>\[
+V_{TH}=18\frac{680}{330+680}=12.12V
+\]</div></div>
+<div class="step"><i>2</i><b>Hipótesis</b><div>\(12.12V>6.8V\), por lo que probamos regulación: \(V_L=6.8V\).</div></div>
+<div class="step"><i>3</i><b>Corrientes</b><div>\[
+I_S=\frac{18-6.8}{330}=33.94mA
+\]
+\[
+I_L=\frac{6.8}{680}=10.00mA
+\]</div></div>
+<div class="step"><i>4</i><b>Zener y potencia</b><div>\[
+I_Z=33.94-10=23.94mA
+\]
+\[
+P_Z=6.8(23.94mA)=162.8mW
+\]</div></div>
+</div>
+
+<div class="formula">\[
+\boxed{V_L=6.8V},\quad
+\boxed{I_Z=23.94mA},\quad
+\boxed{P_Z\approx0.163W}
+\]</div>
+</div>
+
+<div class="box remember"><small>Antes de terminar</small>
+También calcula la potencia de \(R_S\):
+\[
+P_{R_S}=I_S^2R_S\approx0.38W.
+\]
+El circuito puede tener un Zener seguro y, aun así, una resistencia serie mal dimensionada.
+</div>
+
+<div class="quiz" data-quiz="zener"></div>
+</section>
+
+<section class="module" id="zr">
+<div class="module-head"><div class="module-title"><span class="no">Z5</span><div><span class="eyebrow">Método 1</span><h2>Resistencia serie \(R_S\) variable</h2></div></div><button class="mark" data-mark="zener-casos">Marcar estudiado</button></div>
+
+<p>Ahora \(V_i\), \(V_Z\) y \(R_L\) permanecen fijos. Lo que queremos es encontrar el intervalo de \(R_S\) que mantiene la corriente Zener entre dos límites de diseño.</p>
+
+<div class="concept-flow">
+<div class="stage-card s1"><b>\(R_S\downarrow\)</b><span>La corriente total \(I_S\) aumenta.</span></div>
+<div class="stage-arrow">→</div>
+<div class="stage-card s2"><b>\(I_Z\uparrow\)</b><span>Puede aparecer sobrecorriente.</span></div>
+<div class="stage-arrow">|</div>
+<div class="stage-card s3"><b>\(R_S\uparrow\)</b><span>\(I_S\) disminuye.</span></div>
+<div class="stage-arrow">→</div>
+<div class="stage-card s4"><b>\(I_Z\downarrow\)</b><span>Puede perderse regulación.</span></div>
+</div>
+
+<p>Partimos de:</p>
+<div class="formula">\[
+R_S=\frac{V_i-V_Z}{I_Z+I_L}
+\]</div>
+
+<div class="grid2">
+<div>
+<h3>Límite inferior de \(R_S\)</h3>
+<p>La resistencia más pequeña produce la corriente más grande. Por eso usamos \(I_{Z,max}\):</p>
+<div class="formula">\[
+\boxed{R_{S,min}=
+\frac{V_i-V_Z}{I_L+I_{Z,max}}}
+\]</div>
+</div>
+<div>
+<h3>Límite superior de \(R_S\)</h3>
+<p>La resistencia más grande produce la corriente más pequeña. Para no perder regulación usamos \(I_{Z,min}\):</p>
+<div class="formula">\[
+\boxed{R_{S,max}=
+\frac{V_i-V_Z}{I_L+I_{Z,min}}}
+\]</div>
+</div>
+</div>
+
+<div class="example"><span class="example-label">Mismo circuito · criterios didácticos</span>
+<p>Supongamos \(I_{Z,min}=5mA\) e \(I_{Z,max}=50mA\). Como \(I_L=10mA\):</p>
+<div class="formula">\[
+R_{S,min}=\frac{11.2}{60mA}=\boxed{186.7\Omega}
+\]</div>
+<div class="formula">\[
+R_{S,max}=\frac{11.2}{15mA}=\boxed{746.7\Omega}
+\]</div>
+<p>Entonces:</p>
+<div class="formula">\[
+\boxed{186.7\Omega\le R_S\le746.7\Omega}
+\]</div>
+<p>Después se elige un valor comercial dentro del rango y se recalculan \(I_Z\), \(P_Z\) y \(P_{R_S}\).</p>
+</div>
+
+<div class="box error"><small>Error frecuente</small>
+No intercambies los límites: \(R_{S,min}\) se obtiene con la corriente Zener máxima y \(R_{S,max}\) con la corriente Zener mínima.
+</div>
+</section>
+
+<section class="module" id="zrl">
+<div class="module-head"><div class="module-title"><span class="no">Z6</span><div><span class="eyebrow">Método 2</span><h2>Carga \(R_L\) variable</h2></div></div><button class="mark" data-mark="zener-carga">Marcar estudiado</button></div>
+
+<p>Ahora \(V_i\), \(R_S\) y \(V_Z\) permanecen fijos. Mientras regula:</p>
+<div class="formula">\[
+I_S=\frac{V_i-V_Z}{R_S}=\text{constante}
+\]</div>
+
+<p>Pero:</p>
+<div class="formula">\[
+I_L=\frac{V_Z}{R_L}
+\]</div>
+
+<div class="box key"><small>Razonamiento antes de la fórmula</small>
+Si \(R_L\) disminuye, \(I_L\) aumenta. Como \(I_S=I_Z+I_L\) y \(I_S\) permanece casi fija, necesariamente \(I_Z\) disminuye.
+</div>
+
+<p>El límite de carga pesada aparece cuando:</p>
+<div class="formula">\[
+I_Z=I_{Z,min}
+\]</div>
+<p>Entonces:</p>
+<div class="formula">\[
+I_{L,max}=I_S-I_{Z,min}
+\]</div>
+<div class="formula">\[
+\boxed{R_{L,min}=
+\frac{V_Z}{I_S-I_{Z,min}}}
+\]</div>
+
+<div class="example"><span class="example-label">Ejemplo</span>
+<div class="formula">\[
+I_S=\frac{18-6.8}{330}=33.94mA
+\]</div>
+<div class="formula">\[
+I_{L,max}=33.94-5=28.94mA
+\]</div>
+<div class="formula">\[
+\boxed{R_{L,min}=
+\frac{6.8}{28.94mA}\approx235\Omega}
+\]</div>
+<p>Si \(R_L<235\Omega\), el Zener ya no conserva el margen de \(5mA\) elegido.</p>
+</div>
+
+<div class="box warn"><small>Extremo opuesto: carga ligera</small>
+Cuando \(R_L\to\infty\), \(I_L\to0\). Entonces casi toda \(I_S\) circula por el Zener. En este extremo se debe verificar la corriente y, especialmente, \(P_Z\).
+</div>
+</section>
+
+<section class="module" id="zvi">
+<div class="module-head"><div class="module-title"><span class="no">Z7</span><div><span class="eyebrow">Método 3</span><h2>Fuente \(V_i\) variable</h2></div></div><button class="mark" data-mark="zener-fuente">Marcar estudiado</button></div>
+
+<p>Ahora \(R_S\), \(R_L\) y \(V_Z\) permanecen fijos. Mientras regula, \(I_L\) es aproximadamente constante:</p>
+<div class="formula">\[
+I_L=\frac{V_Z}{R_L}
+\]</div>
+
+<p>La corriente serie cambia con la fuente:</p>
+<div class="formula">\[
+I_S=\frac{V_i-V_Z}{R_S}
+\]</div>
+
+<div class="grid2">
+<div>
+<h3>Fuente mínima</h3>
+<p>Para conservar regulación en el límite inferior:</p>
+<div class="formula">\[
+I_S=I_L+I_{Z,min}
+\]</div>
+<div class="formula">\[
+\boxed{V_{i,min}=
+V_Z+R_S(I_L+I_{Z,min})}
+\]</div>
+</div>
+<div>
+<h3>Fuente máxima</h3>
+<p>Para no superar el límite de corriente elegido:</p>
+<div class="formula">\[
+I_S=I_L+I_{Z,max}
+\]</div>
+<div class="formula">\[
+\boxed{V_{i,max}=
+V_Z+R_S(I_L+I_{Z,max})}
+\]</div>
+</div>
+</div>
+
+<div class="example"><span class="example-label">Ejemplo</span>
+<p>Con \(I_L=10mA\), \(I_{Z,min}=5mA\) e \(I_{Z,max}=50mA\):</p>
+<div class="formula">\[
+V_{i,min}=6.8+330(15mA)=\boxed{11.75V}
+\]</div>
+<div class="formula">\[
+V_{i,max}=6.8+330(60mA)=\boxed{26.60V}
+\]</div>
+<div class="formula">\[
+\boxed{11.75V\le V_i\le26.60V}
+\]</div>
+</div>
+
+<div class="box remember"><small>Conexión con el filtro capacitivo</small>
+En una fuente rectificada y filtrada, la entrada del Zener no es perfectamente constante. El valle \(V_{C,min}\) debe quedar por encima de \(V_{i,min}\), y el pico debe verificarse frente a corriente y potencia.
+</div>
+</section>
+
+<section class="module" id="zpotencia">
+<div class="module-head"><div class="module-title"><span class="no">Z8</span><div><span class="eyebrow">Comprobación final</span><h2>Potencia y peores condiciones</h2></div></div><button class="mark" data-mark="zener-potencia">Marcar estudiado</button></div>
+
+<p>No existe un único “peor caso” para todas las variables. Para la regulación, suele preocupar la combinación que reduce \(I_Z\); para la potencia del Zener, preocupa la condición que aumenta \(I_Z\).</p>
+
+<div class="grid3">
+<div class="panel paper"><b>Carga pesada</b><p>\(R_L\downarrow\Rightarrow I_L\uparrow\Rightarrow I_Z\downarrow\). Puede perderse regulación.</p></div>
+<div class="panel paper"><b>Carga ligera</b><p>\(R_L\uparrow\Rightarrow I_L\downarrow\Rightarrow I_Z\uparrow\). Puede aumentar \(P_Z\).</p></div>
+<div class="panel paper"><b>Fuente alta</b><p>\(V_i\uparrow\Rightarrow I_S\uparrow\). Aumentan \(I_Z\), \(P_Z\) y la potencia de \(R_S\).</p></div>
+</div>
+
+<div class="example">
+<span class="example-label">Condición sin carga del ejemplo base</span>
+<div class="formula">\[
+I_L=0,\qquad
+I_Z=I_S=\frac{18-6.8}{330}=33.94mA
+\]</div>
+<div class="formula">\[
+P_Z=6.8(33.94mA)=\boxed{0.231W}
+\]</div>
+<div class="formula">\[
+P_{R_S}=I_S^2R_S\approx\boxed{0.38W}
+\]</div>
+<p>El valor nominal de potencia del componente debe superar la disipación calculada con margen y respetando las condiciones térmicas del datasheet.</p>
+</div>
+</section>
+
+<section class="module" id="zsim">
+<div class="module-head"><div class="module-title"><span class="no">Z9</span><div><span class="eyebrow">Exploración</span><h2>Simulador por casos de diseño</h2></div></div><button class="mark" data-mark="zener-simulador">Marcar estudiado</button></div>
+
+<p class="lead">Selecciona qué variable quieres estudiar. La misma red se analiza de cuatro formas: punto fijo, \(R_S\) variable, \(R_L\) variable o \(V_i\) variable.</p>
+
+<div class="grid2">
+<div class="interactive controls">
+<label>Modo de estudio
+<select id="zMode">
+<option value="fixed">Punto fijo</option>
+<option value="r">R serie variable</option>
+<option value="rl">Carga RL variable</option>
+<option value="vi">Fuente Vi variable</option>
+</select>
+</label>
+<label>\(V_i\) <strong><span id="zViTxt">18.0</span> V</strong><input id="zVi" type="range" min="5" max="35" value="18" step=".1"></label>
+<label>\(R_S\) <strong><span id="zRsTxt">330</span> Ω</strong><input id="zRs" type="range" min="100" max="1000" value="330" step="5"></label>
+<label>\(V_Z\) <strong><span id="zVzTxt">6.8</span> V</strong><input id="zVz" type="range" min="3.3" max="12" value="6.8" step=".1"></label>
+<label>\(R_L\) <strong><span id="zRlTxt">680</span> Ω</strong><input id="zRl" type="range" min="100" max="3000" value="680" step="20"></label>
+<label>\(I_{Z,min}\) <strong><span id="zIminTxt">5</span> mA</strong><input id="zImin" type="range" min="0" max="30" value="5" step="1"></label>
+<label>\(I_{Z,max}\) <strong><span id="zImaxTxt">50</span> mA</strong><input id="zImax" type="range" min="10" max="120" value="50" step="2"></label>
+</div>
+
+<div>
+<div id="zState" class="status-card"></div>
+<div class="metric-grid">
+<div class="metric"><span>\(V_L\)</span><b id="zVL">—</b></div>
+<div class="metric"><span>\(I_S\)</span><b id="zIS">—</b></div>
+<div class="metric"><span>\(I_L\)</span><b id="zIL">—</b></div>
+</div>
+<div class="metric-grid">
+<div class="metric"><span>\(I_Z\)</span><b id="zIZ">—</b></div>
+<div class="metric"><span>\(P_Z\)</span><b id="zP">—</b></div>
+<div class="metric"><span>\(V_{TH}\)</span><b id="zTH">—</b></div>
+</div>
+<div id="zPrediction" class="prediction-card">
+<b id="zPredictionTitle">Predicción</b>
+<p id="zPredictionText">Selecciona un modo y predice qué debe ocurrir antes de mover el control.</p>
+<div class="prediction-buttons"><button data-pred="up">Aumenta</button><button data-pred="down">Disminuye</button><button data-pred="same">No cambia</button></div>
+<p id="zPredictionFb" class="feedback"></p>
+</div>
+</div>
+</div>
+
+<svg id="zCaseChart" class="chart" viewBox="0 0 760 430"></svg>
+<div id="zRangeSummary" class="box key"></div>
+</section>
+
+<section class="module" id="zaplicacion">
+<div class="module-head"><div class="module-title"><span class="no">Z10</span><div><span class="eyebrow">Contexto industrial</span><h2>Referencia Zener en una etapa de automatización</h2></div></div><button class="mark" data-mark="zener-aplicacion">Marcar estudiado</button></div>
+
+<p>Una empresa de automatización dispone de una línea DC nominal de 24 V para sensores. Una etapa de comparación necesita una referencia cercana a 6.8 V; la salida del comparador será leída por un microcontrolador. El Zener se utiliza como <b>referencia de baja potencia</b>, no para alimentar directamente el microcontrolador.</p>
+
+<div class="grid2">
+<div class="panel paper">
+<b>Datos de diseño</b>
+<div class="vars">
+<span>\(V_i=24V\) nominal, con variación aproximada \(21.6\) a \(26.4V\).</span>
+<span>\(V_Z=6.8V\).</span>
+<span>\(R_S=390\Omega\).</span>
+<span>Carga equivalente de la referencia \(R_L=2.2k\Omega\).</span>
+</div>
+</div>
+<div class="box warn"><small>Qué se debe comprobar</small>
+Regulación al mínimo de entrada, potencia del Zener al máximo de entrada, potencia de \(R_S\) y condiciones térmicas del datasheet.
+</div>
+</div>
+
+<div class="formula">\[
+I_L=\frac{6.8}{2.2k}\approx3.09mA
+\]</div>
+<div class="formula">\[
+I_Z(21.6V)=\frac{21.6-6.8}{390}-3.09mA
+\approx34.86mA
+\]</div>
+<div class="formula">\[
+I_Z(26.4V)=\frac{26.4-6.8}{390}-3.09mA
+\approx47.17mA
+\]</div>
+<div class="formula">\[
+P_Z(26.4V)\approx6.8(47.17mA)=\boxed{0.321W}
+\]</div>
+<div class="formula">\[
+P_{R_S}(26.4V)=
+\left(\frac{26.4-6.8}{390}\right)^2(390)
+\approx\boxed{0.985W}
+\]</div>
+
+<div class="box key"><small>Lectura de ingeniería</small>
+El cálculo muestra algo que suele pasar desapercibido: la resistencia serie puede requerir tanta atención térmica como el propio Zener. La selección final debe revisarse contra el datasheet y el margen de diseño.
+</div>
+</section>
+
+<section class="module" id="zeval">
+<div class="module-head"><div class="module-title"><span class="no">Z11</span><div><span class="eyebrow">Retroalimentación</span><h2>Calcula, simula y explica</h2></div></div></div>
+
+<div class="subsection"><h3>1. Verificador numérico del ejemplo base</h3>
+<p>Resuelve sin mirar los resultados anteriores. Se aceptan pequeñas diferencias por redondeo.</p>
+<div class="z-check-grid">
+<label>\(I_S\) <span>mA</span><input id="zcIs" type="number" step="any"></label>
+<label>\(I_L\) <span>mA</span><input id="zcIl" type="number" step="any"></label>
+<label>\(I_Z\) <span>mA</span><input id="zcIz" type="number" step="any"></label>
+<label>\(P_Z\) <span>mW</span><input id="zcPz" type="number" step="any"></label>
+<label>\(R_{S,min}\) <span>Ω</span><input id="zcRmin" type="number" step="any"></label>
+<label>\(R_{S,max}\) <span>Ω</span><input id="zcRmax" type="number" step="any"></label>
+<label>\(R_{L,min}\) <span>Ω</span><input id="zcRlmin" type="number" step="any"></label>
+<label>\(V_{i,min}\) <span>V</span><input id="zcVimin" type="number" step="any"></label>
+<label>\(V_{i,max}\) <span>V</span><input id="zcVimax" type="number" step="any"></label>
+</div>
+<button id="zCheckNumbers" class="btn small primary">Comprobar cálculos</button>
+<p id="zCheckFb" class="feedback"></p>
+</div>
+
+<div class="subsection"><h3>2. Pregunta abierta</h3>
+<div class="reflection-card">
+<p><b>Situación:</b> el regulador funciona correctamente y luego \(R_L\) disminuye. Explica, sin comenzar por una fórmula, por qué el Zener puede perder regulación aunque \(V_i\) permanezca igual.</p>
+<textarea id="zOpen" placeholder="Explica el reparto de corriente y el cambio físico que ocurre..."></textarea>
+<div class="buttons"><button id="zOpenGuideBtn" class="btn small">Comparar con guía</button></div>
+<div id="zOpenGuide" class="guide"></div>
+</div>
+</div>
+
+<div class="subsection"><h3>3. Selección múltiple razonada</h3>
+<div class="quiz" data-quiz="zeneravanzado"></div>
+</div>
+</section>
+
+<div class="footer"><div><b>AnalogLab</b><span>Recurso interactivo de apoyo académico</span></div><span>Electrónica Analógica y Laboratorio</span></div>
+</main>
+</div>
+
+<script src="data/quizzes.js?v=10.0"></script>
+<script src="js/core.js?v=10.0"></script>
+<script src="js/zener.js?v=10.0"></script>
+</body>
+</html>

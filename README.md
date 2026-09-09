@@ -117,3 +117,21 @@ El estudiante aprende a diferenciar:
 La actividad integradora de fuente regulada se presenta públicamente como **Trabajo propuesto opcional**. Las condiciones de valoración o uso dentro de la asignatura se comunican en clase. El sitio conserva la ruta `proyecto1.html` para no romper enlaces anteriores.
 
 La actividad incorpora comprobación interactiva de resultados y preguntas abiertas para relacionar cálculo, simulación y comportamiento físico.
+
+## Módulo Zener ampliado (v10)
+
+El módulo Zener se reorganizó como capítulo de estudio autónomo:
+
+1. fundamentos breves;
+2. datos esenciales del datasheet;
+3. método universal ON/OFF;
+4. punto de operación con valores fijos;
+5. diseño con resistencia serie variable;
+6. diseño con carga variable;
+7. diseño con fuente variable;
+8. potencia y peores condiciones;
+9. simulador por casos;
+10. aplicación industrial de baja potencia;
+11. verificación numérica, pregunta abierta y selección múltiple razonada.
+
+Las deducciones parten de KCL/KVL y del procedimiento de comprobar primero el estado del Zener. La página distingue explícitamente entre parámetros de prueba del datasheet y límites de diseño.
