@@ -201,13 +201,46 @@ $('#zCheckNumbers')?.addEventListener('click',()=>{
   window.AL.fb($('#zCheckFb'),(ok===9?'Todos los cálculos coinciden. ':'Hay resultados por revisar. ')+parts.join(' · '),ok===9);
 });
 
+const openPrompts=[
+  {
+    prompt:'<b>Situación:</b> el regulador funciona correctamente y luego \(R_L\) disminuye. Explica, sin comenzar por una fórmula, por qué el Zener puede perder regulación aunque \(V_i\) permanezca igual.',
+    guide:'<b>Guía de comparación.</b> Mientras el Zener regula y \(V_i\), \(R_S\) y \(V_Z\) permanecen fijos, la corriente serie \(I_S\) es aproximadamente constante. Al disminuir \(R_L\), la carga demanda más corriente porque \(I_L=V_Z/R_L\). Como \(I_S=I_Z+I_L\), el aumento de \(I_L\) deja menos corriente para \(I_Z\). Si \(I_Z\) cae por debajo del mínimo necesario, el Zener abandona la región de regulación y la salida deja de mantenerse aproximadamente en \(V_Z\).'
+  },
+  {
+    prompt:'<b>Situación:</b> un estudiante aumenta \(R_S\) pensando que así “protege mejor” al Zener. Explica qué ventaja y qué riesgo aparecen al aumentar demasiado \(R_S\).',
+    guide:'<b>Guía de comparación.</b> Aumentar \(R_S\) reduce la corriente total \(I_S\), lo cual puede ayudar a limitar la corriente máxima del Zener. Sin embargo, si \(R_S\) se hace demasiado grande, la corriente disponible para la rama de salida disminuye y el Zener puede quedar con una corriente menor que \(I_{Z,min}\), perdiéndose la regulación. En resumen: más protección frente a sobrecorriente, pero menos margen de regulación.'
+  },
+  {
+    prompt:'<b>Situación:</b> la carga se desconecta mientras la fuente permanece igual. Explica por qué esta condición suele ser crítica para la potencia del Zener.',
+    guide:'<b>Guía de comparación.</b> Cuando la carga se desconecta, \(I_L	o0\). La corriente serie no desaparece automáticamente; en un modelo de regulación se mantiene aproximadamente \(I_S=(V_i-V_Z)/R_S\). Como \(I_S=I_Z+I_L\), al hacerse \(I_L\) casi cero, una fracción mayor de la corriente pasa por el Zener. Eso incrementa \(I_Z\) y, por tanto, la potencia \(P_Z=V_ZI_Z\), por lo que esta condición es crítica para la verificación térmica.'
+  },
+  {
+    prompt:'<b>Situación:</b> en una fuente rectificada con capacitor, el estudiante solo verifica el valor pico del capacitor. Explica por qué también debe revisar el valor valle \(V_{C,min}\) antes del regulador Zener.',
+    guide:'<b>Guía de comparación.</b> El valor pico del capacitor no representa el peor caso para conservar la regulación. Cuando el capacitor se descarga entre recargas, la tensión cae hasta un valor valle \(V_{C,min}\). Si ese valle queda por debajo de la tensión mínima requerida por el regulador, la corriente del Zener puede ser insuficiente y el circuito salir de regulación. Por eso se verifica tanto el máximo para potencia como el mínimo para margen de corriente.'
+  }
+];
+let currentOpen=0;
+function setOpenPrompt(force){
+  let next=Math.floor(Math.random()*openPrompts.length);
+  if(force!==true && openPrompts.length>1){while(next===currentOpen)next=Math.floor(Math.random()*openPrompts.length)}
+  currentOpen=next;
+  const p=openPrompts[currentOpen];
+  $('#zOpenPrompt').innerHTML=p.prompt;
+  $('#zOpen').value='';
+  const g=$('#zOpenGuide');
+  g.innerHTML='';
+  g.className='guide';
+  window.AL.typeset($('#zOpenPrompt'));
+}
+$('#zOpenNew')?.addEventListener('click',()=>setOpenPrompt(false));
 $('#zOpenGuideBtn')?.addEventListener('click',()=>{
   const ta=$('#zOpen'),g=$('#zOpenGuide');
   if((ta?.value.trim().length||0)<45){
-    g.innerHTML='Escribe primero una explicación completa: menciona qué ocurre con la corriente de carga, la corriente serie y la corriente disponible para el Zener.';
+    g.innerHTML='Escribe primero una explicación completa: menciona el comportamiento físico del circuito y luego compara con la guía.';
     g.className='guide show';return;
   }
-  g.innerHTML='<b>Guía de comparación.</b> Mientras el Zener regula y Vi, RS y VZ permanecen fijos, la corriente serie IS es aproximadamente constante. Al disminuir RL, la carga demanda más corriente porque IL=VZ/RL. Como IS=IZ+IL, el aumento de IL deja menos corriente para IZ. Si IZ cae por debajo del mínimo necesario, el Zener abandona la región de regulación y la salida deja de mantenerse aproximadamente en VZ.';
+  g.innerHTML=openPrompts[currentOpen].guide;
   g.className='guide show';window.AL.typeset(g);
 });
+setOpenPrompt(true);
 })();

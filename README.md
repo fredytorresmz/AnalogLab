@@ -135,3 +135,7 @@ El módulo Zener se reorganizó como capítulo de estudio autónomo:
 11. verificación numérica, pregunta abierta y selección múltiple razonada.
 
 Las deducciones parten de KCL/KVL y del procedimiento de comprobar primero el estado del Zener. La página distingue explícitamente entre parámetros de prueba del datasheet y límites de diseño.
+
+
+## v10.2
+- Refuerzo pedagógico del módulo Zener: nuevas gráficas conceptuales, cuadro resumen de fórmulas por caso, bancos ampliados de preguntas y enunciados abiertos aleatorios para estudio autónomo.
