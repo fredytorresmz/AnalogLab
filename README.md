@@ -139,3 +139,7 @@ Las deducciones parten de KCL/KVL y del procedimiento de comprobar primero el es
 
 ## v10.2
 - Refuerzo pedagógico del módulo Zener: nuevas gráficas conceptuales, cuadro resumen de fórmulas por caso, bancos ampliados de preguntas y enunciados abiertos aleatorios para estudio autónomo.
+
+
+## BJT en DC (v11)
+Nuevo capítulo universitario de estudio autónomo: construcción NPN/PNP, operación física, corrientes, alpha/beta, modelo DC, regiones de operación, curvas características, procedimiento de análisis por regiones, conmutación, recta de carga, punto Q, lectura de datasheet 2N3904, simulador y evaluación aleatoria.

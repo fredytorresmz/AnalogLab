@@ -124,3 +124,15 @@ svg.diagram,svg.chart{min-height:220px;overflow:visible}
 .formula-summary td:nth-child(5){min-width:210px}
 #zOpenPrompt{margin-bottom:8px}
 @media(max-width:620px){.formula-summary{min-width:980px}}
+
+
+/* v11 · BJT DC */
+.bjt-use-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}.bjt-use-grid>div{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--bg);display:grid;gap:5px}.bjt-use-grid b{color:var(--navy);font-size:1.05rem}.bjt-use-grid span{color:var(--muted);font-size:.85rem}
+.bjt-structure,.bjt-symbol,.carrier-flow{width:100%;min-height:250px}.svg-title{font-size:21px;font-weight:800;fill:currentColor}.small-current{stroke-width:2}
+.bjt-region-table td{vertical-align:top}.region-strip{display:grid;grid-template-columns:1fr 2fr 1fr;gap:6px;margin:15px 0}.region-strip>div{padding:16px;border-radius:12px;display:grid;gap:4px;text-align:center}.region-strip b{font-size:.92rem}.region-strip span{font-size:.75rem}.r-cut{background:var(--bg);border:1px solid var(--line)}.r-act{background:var(--green2);border:1px solid color-mix(in srgb,var(--green) 35%,var(--line))}.r-sat{background:var(--red2);border:1px solid color-mix(in srgb,var(--red) 35%,var(--line))}
+.bjt-flow{display:grid;gap:8px;max-width:900px;margin:15px auto}.flow-card{border:1px solid var(--line);border-radius:13px;padding:14px;background:var(--paper);display:grid;gap:4px}.flow-card b{color:var(--navy)}.flow-card span{color:var(--muted);font-size:.85rem}.flow-arrow{text-align:center;font-size:1.3rem;color:var(--muted)}.flow-split{display:grid;grid-template-columns:1fr 1fr;gap:10px}.flow-card.ok{border-left:5px solid var(--green)}.flow-card.bad{border-left:5px solid var(--red)}
+.bjt-example-steps{grid-template-columns:repeat(2,1fr)}.exercise-generator{border:1px solid var(--line);background:var(--bg);border-radius:14px;padding:15px}
+@media(max-width:760px){.bjt-use-grid,.region-strip,.flow-split,.bjt-example-steps{grid-template-columns:1fr}.bjt-structure,.bjt-symbol,.carrier-flow{min-height:220px}.bjt-region-table{min-width:760px}}
+
+/* v11.1 · ayudas visuales BJT */
+.bjt-glossary{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}.bjt-glossary details{border:1px solid var(--line);border-radius:11px;background:var(--paper);padding:10px}.bjt-glossary summary{font-weight:750;color:var(--navy);cursor:pointer}.bjt-glossary p{font-size:.82rem;color:var(--muted);margin:8px 0 0}.bjt-current-map{width:100%;min-height:280px}@media(max-width:900px){.bjt-glossary{grid-template-columns:1fr 1fr}}@media(max-width:520px){.bjt-glossary{grid-template-columns:1fr}}

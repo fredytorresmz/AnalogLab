@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="AnalogLab: transistores BJT en DC, teoría, regiones de operación, curvas, punto Q, datasheet, simulación y autoevaluación.">
+<title>AnalogLab · BJT en DC</title>
+<link rel="stylesheet" href="css/styles.css?v=11.1">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};
+</script>
+<script id="MathJax-script" defer src="vendor/mathjax/tex-svg.js?v=3.2.1"></script>
+</head>
+<body>
+<header>
+<button class="menu">☰</button>
+<a class="brand" href="index.html"><strong>AnalogLab</strong><span>Electrónica Analógica y Laboratorio</span></a>
+<nav class="topnav"><a href="index.html">Inicio</a><a href="dc.html">Diodos DC</a><a href="ac.html">Diodos AC</a><a href="zener.html">Zener</a><a class="active" href="bjt-dc.html">BJT DC</a><a href="taller.html">Taller 1</a><a href="datasheet.html">Datasheets</a><a href="proyecto1.html">Trabajo opcional</a></nav>
+<div class="header-actions"><button id="class">Modo clase</button><button id="theme">◐</button></div>
+</header>
+<div class="layout">
+<aside>
+<div class="progress-card"><div><span>Progreso de estudio</span><strong class="progress-value">0%</strong></div><div class="track"><span class="progress-fill"></span></div></div>
+<h4>BJT · análisis DC</h4>
+<nav>
+<a href="#bpanorama">B1 · Panorama</a>
+<a href="#bconstruccion">B2 · NPN y PNP</a>
+<a href="#bsimbolos">B3 · Símbolos y corrientes</a>
+<a href="#boperacion">B4 · Operación física</a>
+<a href="#bcorrientes">B5 · Corrientes, α y β</a>
+<a href="#bmodelo">B6 · Modelo DC</a>
+<a href="#bregiones">B7 · Regiones de operación</a>
+<a href="#bcurvas">B8 · Curvas características</a>
+<a href="#bmetodo">B9 · Método de análisis</a>
+<a href="#bejemplo">B10 · Ejemplo completo</a>
+<a href="#binterruptor">B11 · Como interruptor</a>
+<a href="#brecta">B12 · Recta de carga y Q</a>
+<a href="#bdatasheet">B13 · Datasheet 2N3904</a>
+<a href="#bsimulador">B14 · Simulador DC</a>
+<a href="#bpractica">B15 · Ejercicios y quiz</a>
+</nav>
+<div class="side-info">Si faltaste a clase, sigue B1→B15. El capítulo está diseñado para reconstruir el tema antes de llegar a polarización avanzada o análisis AC.</div>
+</aside>
+<main>
+<section class="hero small">
+<span class="eyebrow">Parte III · Dispositivos activos</span>
+<h1>Transistor BJT en corriente continua</h1>
+<p>Este capítulo introduce el transistor bipolar desde la estructura física hasta su análisis matemático en DC. El objetivo no es memorizar símbolos: es comprender cómo una corriente de base pequeña se relaciona con la corriente de colector, cómo identificar corte, activa y saturación, y cómo comprobar el resultado sobre las curvas y el circuito real.</p>
+<div class="meta"><span>NPN / PNP</span><span>\(I_E=I_C+I_B\)</span><span>\(\beta_{DC}\)</span><span>Corte · activa · saturación</span><span>Curvas \(I_C-V_{CE}\)</span><span>Punto Q</span><span>Datasheet</span></div>
+</section>
+<div class="study-note"><b>Ruta de aprendizaje autónomo.</b><span>Concepto → estructura → corrientes → modelo matemático → regiones → curvas → método de análisis → ejemplo → simulación → ejercicios. Si una etapa no está clara, no avances solo por llegar al quiz.</span></div>
+
+<section class="module" id="bpanorama">
+<div class="module-head"><div class="module-title"><span class="no">B1</span><div><span class="eyebrow">Panorama</span><h2>Qué es un transistor BJT y por qué importa</h2></div></div><button class="mark" data-mark="bjt-panorama">Marcar estudiado</button></div>
+<div class="grid2"><div>
+<p>Un <b>transistor de unión bipolar (BJT)</b> es un dispositivo semiconductor de tres terminales y tres regiones dopadas. Se utiliza como elemento activo en conmutación, amplificación, fuentes de corriente, control de cargas y numerosas etapas de circuitos integrados.</p>
+<div class="box key"><small>Idea central</small>Una variación pequeña en la corriente de base puede asociarse con una corriente de colector considerablemente mayor. En región activa, el modelo introductorio se expresa mediante \(I_C\approx\beta I_B\).</div>
+<p>En este capítulo trabajaremos únicamente el <b>comportamiento DC</b>. Las configuraciones amplificadoras y el análisis de pequeña señal se estudiarán después.</p>
+</div><div class="panel paper">
+<h3>Dos usos, tres regiones</h3>
+<div class="bjt-use-grid"><div><b>Interruptor</b><span>Corte ↔ Saturación</span></div><div><b>Amplificador</b><span>Región activa</span></div></div>
+<div class="box remember"><small>Ten en cuenta</small>“Transistor encendido” no siempre significa saturación. Un BJT puede estar conduciendo y permanecer en región activa.</div>
+</div></div>
+<div class="bjt-glossary">
+<details><summary>BJT</summary><p><b>Bipolar Junction Transistor.</b> Dispositivo de tres terminales en el que participan electrones y huecos en el proceso de conducción.</p></details>
+<details><summary>Polarización</summary><p>Conjunto de tensiones y corrientes DC que fija la condición de operación del transistor.</p></details>
+<details><summary>Región de operación</summary><p>Estado eléctrico del BJT —corte, activa o saturación— determinado por la polarización de sus dos uniones y por las restricciones del circuito externo.</p></details>
+<details><summary>Ganancia de corriente</summary><p>En DC y región activa, \(\beta_{DC}=I_C/I_B\). No es una constante universal: depende del dispositivo y del punto de operación.</p></details>
+</div>
+</section>
+
+<section class="module" id="bconstruccion">
+<div class="module-head"><div class="module-title"><span class="no">B2</span><div><span class="eyebrow">Construcción</span><h2>NPN, PNP y una base deliberadamente delgada</h2></div></div><button class="mark" data-mark="bjt-construccion">Marcar estudiado</button></div>
+<p class="lead">Un BJT tiene dos uniones PN. La secuencia de materiales define si es NPN o PNP. La base es mucho más delgada que las regiones exteriores; el emisor se diseña para inyectar portadores con eficacia.</p>
+<div class="grid2">
+<div class="panel paper"><h3>NPN</h3>
+<svg class="bjt-structure" viewBox="0 0 720 260" aria-label="Estructura didáctica de un transistor NPN">
+<rect width="720" height="260" rx="16" fill="var(--paper)"/><rect x="90" y="72" width="230" height="110" rx="10" fill="var(--blue2)"/><rect x="320" y="72" width="65" height="110" rx="6" fill="var(--amber2)"/><rect x="385" y="72" width="245" height="110" rx="10" fill="var(--blue2)"/><text x="205" y="132" class="svg-title">N+</text><text x="352" y="132" class="svg-title">P</text><text x="505" y="132" class="svg-title">N</text><text x="195" y="210" class="svgtext">Emisor</text><text x="333" y="210" class="svgtext">Base</text><text x="490" y="210" class="svgtext">Colector</text><text x="96" y="42" class="svgtext">inyección</text><text x="322" y="42" class="svgtext">muy delgada</text><text x="480" y="42" class="svgtext">recoge portadores</text>
+</svg></div>
+<div class="panel paper"><h3>PNP</h3>
+<svg class="bjt-structure" viewBox="0 0 720 260" aria-label="Estructura didáctica de un transistor PNP">
+<rect width="720" height="260" rx="16" fill="var(--paper)"/><rect x="90" y="72" width="230" height="110" rx="10" fill="var(--amber2)"/><rect x="320" y="72" width="65" height="110" rx="6" fill="var(--blue2)"/><rect x="385" y="72" width="245" height="110" rx="10" fill="var(--amber2)"/><text x="205" y="132" class="svg-title">P+</text><text x="352" y="132" class="svg-title">N</text><text x="505" y="132" class="svg-title">P</text><text x="195" y="210" class="svgtext">Emisor</text><text x="333" y="210" class="svgtext">Base</text><text x="490" y="210" class="svgtext">Colector</text>
+</svg></div>
+</div>
+<div class="box warn"><small>Representación didáctica</small>Los dibujos muestran proporciones cualitativas para enfatizar la base delgada y la función de cada región; no son una sección física a escala de un transistor comercial.</div>
+</section>
+
+<section class="module" id="bsimbolos">
+<div class="module-head"><div class="module-title"><span class="no">B3</span><div><span class="eyebrow">Identificación</span><h2>Símbolos, terminales y sentido convencional de corriente</h2></div></div><button class="mark" data-mark="bjt-simbolos">Marcar estudiado</button></div>
+<div class="grid2">
+<div class="panel paper"><h3>NPN · la flecha sale</h3><svg class="bjt-symbol" viewBox="0 0 440 320"><defs><marker id="arrow-npn" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--red)"/></marker></defs><line x1="210" y1="80" x2="210" y2="245" class="wire strong"/><line x1="80" y1="162" x2="210" y2="162" class="wire"/><line x1="210" y1="122" x2="320" y2="55" class="wire"/><line x1="210" y1="205" x2="320" y2="272" class="wire"/><line x1="252" y1="231" x2="302" y2="262" stroke="var(--red)" stroke-width="5" marker-end="url(#arrow-npn)"/><text x="68" y="150" class="svg-title">B</text><text x="333" y="57" class="svg-title">C</text><text x="333" y="286" class="svg-title">E</text><text x="98" y="296" class="svgtext">NPN: flecha hacia afuera</text></svg></div>
+<div class="panel paper"><h3>PNP · la flecha entra</h3><svg class="bjt-symbol" viewBox="0 0 440 320"><defs><marker id="arrow-pnp" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--red)"/></marker></defs><line x1="210" y1="80" x2="210" y2="245" class="wire strong"/><line x1="80" y1="162" x2="210" y2="162" class="wire"/><line x1="210" y1="122" x2="320" y2="55" class="wire"/><line x1="210" y1="205" x2="320" y2="272" class="wire"/><line x1="302" y1="262" x2="252" y2="231" stroke="var(--red)" stroke-width="5" marker-end="url(#arrow-pnp)"/><text x="68" y="150" class="svg-title">B</text><text x="333" y="57" class="svg-title">C</text><text x="333" y="286" class="svg-title">E</text><text x="98" y="296" class="svgtext">PNP: flecha hacia adentro</text></svg></div>
+</div>
+<div class="grid3"><div class="box"><small>Colector C</small>Terminal asociado a la corriente controlada \(I_C\).</div><div class="box"><small>Base B</small>Terminal de control; normalmente \(I_B\) es mucho menor que \(I_C\).</div><div class="box"><small>Emisor E</small>La flecha está en el emisor e indica el sentido de corriente convencional.</div></div>
+<div class="box remember"><small>Ayuda de memoria</small><b>NPN: “Not Pointing iN”</b> → la flecha no apunta hacia dentro. Úsalo como recordatorio, no como sustituto de entender el símbolo.</div>
+</section>
+
+<section class="module" id="boperacion">
+<div class="module-head"><div class="module-title"><span class="no">B4</span><div><span class="eyebrow">Interpretación física</span><h2>Cómo aparece la acción transistor</h2></div></div><button class="mark" data-mark="bjt-operacion">Marcar estudiado</button></div>
+<p>Para estudiar el BJT conviene recordar que contiene <b>dos uniones PN</b>. En región activa de un NPN, la unión base-emisor está polarizada en directa y la unión colector-base en inversa.</p>
+<div class="grid2">
+<div class="panel paper"><h3>NPN en región activa</h3><svg class="carrier-flow" viewBox="0 0 760 330"><rect width="760" height="330" rx="16" fill="var(--paper)"/><rect x="80" y="75" width="250" height="120" fill="var(--blue2)"/><rect x="330" y="75" width="70" height="120" fill="var(--amber2)"/><rect x="400" y="75" width="270" height="120" fill="var(--blue2)"/><text x="185" y="140" class="svg-title">N+</text><text x="355" y="140" class="svg-title">P</text><text x="520" y="140" class="svg-title">N</text><path d="M150 230 C260 260 460 260 590 225" class="current"/><text x="247" y="290" class="svgtext">gran parte de los portadores atraviesa la base y alcanza el colector</text><path d="M345 225 C350 255 360 270 375 287" class="current small-current"/><text x="385" y="295" class="svgtext">pequeña recombinación → I_B</text></svg></div>
+<div>
+<div class="box key"><small>La idea física</small>El emisor inyecta portadores hacia una base muy delgada. Una fracción pequeña se recombina y está asociada a la corriente de base; la mayor parte contribuye a la corriente que llega al colector.</div>
+<div class="box warn"><small>No lo interpretes como una “válvula mágica”</small>La relación \(I_C=\beta I_B\) es un modelo útil en región activa. \(\beta\) depende del transistor y de su punto de operación.</div>
+</div></div>
+</section>
+
+<section class="module" id="bcorrientes">
+<div class="module-head"><div class="module-title"><span class="no">B5</span><div><span class="eyebrow">Relaciones fundamentales</span><h2>Corrientes, \(\alpha\) y \(\beta\)</h2></div></div><button class="mark" data-mark="bjt-corrientes">Marcar estudiado</button></div>
+<div class="grid2"><div>
+<p>Aplicando KCL al transistor:</p><div class="formula">\[\boxed{I_E=I_C+I_B}\]</div>
+<p>En DC, la ganancia de corriente de emisor común se define como:</p><div class="formula">\[\boxed{\beta_{DC}=\frac{I_C}{I_B}}\]</div>
+<p>Por tanto, en activa:</p><div class="formula">\[\boxed{I_C=\beta I_B},\qquad \boxed{I_E=(\beta+1)I_B}\]</div>
+</div><div>
+<p>La ganancia \(\alpha\) relaciona colector y emisor:</p><div class="formula">\[\boxed{\alpha_{DC}=\frac{I_C}{I_E}}\]</div>
+<div class="formula">\[\boxed{\alpha=\frac{\beta}{\beta+1}},\qquad \boxed{\beta=\frac{\alpha}{1-\alpha}}\]</div>
+<div class="box remember"><small>Orden de magnitud</small>En un BJT práctico, \(\alpha\) está muy cerca de 1, mientras \(\beta\) puede estar en decenas o cientos y varía con el dispositivo y el punto de operación.</div>
+</div></div>
+<div class="grid2 current-figure"><div class="panel paper"><h3>Corrientes convencionales en un NPN</h3><svg class="bjt-current-map" viewBox="0 0 640 340"><defs><marker id="iarr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--blue)"/></marker></defs><line x1="310" y1="70" x2="310" y2="260" class="wire strong"/><line x1="120" y1="165" x2="310" y2="165" class="wire"/><line x1="310" y1="120" x2="450" y2="55" class="wire"/><line x1="310" y1="210" x2="450" y2="285" class="wire"/><line x1="450" y1="55" x2="380" y2="88" stroke="var(--blue)" stroke-width="4" marker-end="url(#iarr)"/><line x1="120" y1="165" x2="235" y2="165" stroke="var(--blue)" stroke-width="4" marker-end="url(#iarr)"/><line x1="380" y1="247" x2="450" y2="285" stroke="var(--blue)" stroke-width="4" marker-end="url(#iarr)"/><text x="440" y="45" class="svg-title">I_C</text><text x="75" y="150" class="svg-title">I_B</text><text x="458" y="305" class="svg-title">I_E</text><text x="250" y="318" class="svgtext">I_E = I_C + I_B</text></svg></div><div class="box key"><small>Observa las escalas</small>En muchos ejercicios \(I_B\) aparece en microamperios, mientras \(I_C\) e \(I_E\) aparecen en miliamperios. Antes de calcular \(\beta\), expresa las corrientes en unidades compatibles.</div></div>
+<div class="example"><span class="example-label">Ejemplo complementario</span><p>Si \(\beta=120\) e \(I_B=25\,\mu\mathrm{A}\):</p><div class="formula">\[I_C=(120)(25\,\mu\mathrm{A})=\boxed{3.00\,\mathrm{mA}}\]</div><div class="formula">\[I_E=3.00\,\mathrm{mA}+0.025\,\mathrm{mA}=\boxed{3.025\,\mathrm{mA}}\]</div><div class="formula">\[\alpha=\frac{120}{121}\approx\boxed{0.9917}\]</div></div>
+</section>
+
+<section class="module" id="bmodelo">
+<div class="module-head"><div class="module-title"><span class="no">B6</span><div><span class="eyebrow">Modelo matemático</span><h2>Modelo DC de primera aproximación útil</h2></div></div><button class="mark" data-mark="bjt-modelo">Marcar estudiado</button></div>
+<div class="grid3"><div class="box key"><small>Base-emisor ON</small>Para silicio, en análisis introductorio usamos \(V_{BE}\approx0.7\,\mathrm{V}\).</div><div class="box"><small>Región activa</small>\(I_C\approx\beta I_B\), siempre que el circuito de colector pueda suministrar esa corriente.</div><div class="box warn"><small>Saturación</small>Cuando el colector limita la corriente, ya no debes imponer \(I_C=\beta I_B\).</div></div>
+<div class="box remember"><small>Modelo ≠ datasheet</small>El valor \(0.7\,\mathrm{V}\) facilita el cálculo DC, pero \(V_{BE}\), \(h_{FE}\) y \(V_{CE(sat)}\) varían con corriente, temperatura y dispositivo. En diseño se verifican las condiciones de la hoja de datos.</div>
+</section>
+
+<section class="module" id="bregiones">
+<div class="module-head"><div class="module-title"><span class="no">B7</span><div><span class="eyebrow">Regiones de operación</span><h2>Corte, activa y saturación</h2></div></div><button class="mark" data-mark="bjt-regiones">Marcar estudiado</button></div>
+<div class="table-scroll"><table class="compare-table bjt-region-table"><thead><tr><th>Región</th><th>Unión B-E</th><th>Unión B-C</th><th>Modelo útil</th><th>Uso típico</th></tr></thead><tbody>
+<tr><td><b>Corte</b></td><td>No polarizada en directa</td><td>Inversa</td><td>\(I_B\approx0\), \(I_C\approx0\)</td><td>Interruptor abierto</td></tr>
+<tr><td><b>Activa</b></td><td>Directa</td><td>Inversa</td><td>\(V_{BE}\approx0.7\,V\), \(I_C\approx\beta I_B\)</td><td>Amplificación</td></tr>
+<tr><td><b>Saturación</b></td><td>Directa</td><td>Directa</td><td>\(V_{CE}\approx V_{CE(sat)}\)</td><td>Interruptor cerrado</td></tr>
+</tbody></table></div>
+<div class="region-strip"><div class="r-cut"><b>CORTE</b><span>casi sin corriente</span></div><div class="r-act"><b>ACTIVA</b><span>control de corriente</span></div><div class="r-sat"><b>SATURACIÓN</b><span>conmutación ON</span></div></div>
+<div class="box error"><small>Error frecuente</small>No uses \(I_C=\beta I_B\) para “demostrar” saturación. Esa relación se usa para obtener el <b>candidato activo</b>; luego se compara con la corriente máxima que permite la malla de colector.</div>
+</section>
+
+<section class="module" id="bcurvas">
+<div class="module-head"><div class="module-title"><span class="no">B8</span><div><span class="eyebrow">Visualización</span><h2>Curvas características de emisor común</h2></div></div><button class="mark" data-mark="bjt-curvas">Marcar estudiado</button></div>
+<p class="lead">Las curvas de salida representan \(I_C\) frente a \(V_{CE}\) para diferentes corrientes de base \(I_B\). En este módulo las usamos como mapa visual de regiones, no para estudiar todavía configuraciones amplificadoras.</p>
+<div class="grid2"><div class="interactive controls"><label>\(\beta\) didáctica <strong><span id="curveBetaTxt">120</span></strong><input id="curveBeta" type="range" min="50" max="250" value="120" step="10"></label><label>Curva destacada \(I_B\) <strong><span id="curveIbTxt">30</span> µA</strong><input id="curveIb" type="range" min="0" max="60" value="30" step="10"></label><div class="box key"><small>Lee la gráfica</small>A la izquierda está la rodilla de saturación; en la zona casi horizontal aparece la región activa. La curva \(I_B=0\) representa el entorno de corte.</div></div><div><svg id="bjtCurveChart" class="chart" viewBox="0 0 760 430"></svg><div class="legend-row"><span class="lg danger">Saturación</span><span class="lg capv">Activa</span><span class="lg off">Corte</span></div></div></div>
+<div class="box warn"><small>Gráfica didáctica</small>Las curvas del simulador reproducen cualitativamente la forma de una familia BJT. Para valores reales de un transistor concreto deben utilizarse las curvas del datasheet.</div>
+</section>
+
+<section class="module" id="bmetodo">
+<div class="module-head"><div class="module-title"><span class="no">B9</span><div><span class="eyebrow">Procedimiento</span><h2>Cómo determinar la región de operación</h2></div></div><button class="mark" data-mark="bjt-metodo">Marcar estudiado</button></div>
+<p>Un procedimiento muy útil es <b>suponer una región, resolver y verificar</b>. Para los primeros circuitos NPN puede seguirse la secuencia:</p>
+<div class="bjt-flow">
+<div class="flow-card"><b>1 · ¿hay excitación de base?</b><span>Si \(V_{BB}\le V_{BE(on)}\), el candidato natural es corte.</span></div><div class="flow-arrow">↓</div>
+<div class="flow-card"><b>2 · Supón ACTIVA</b><span>Calcula \(I_B\), luego \(I_C^*=\beta I_B\).</span></div><div class="flow-arrow">↓</div>
+<div class="flow-card"><b>3 · Calcula el límite del colector</b><span>\(I_{C(sat)}\approx\frac{V_{CC}-V_{CE(sat)}}{R_C}\).</span></div><div class="flow-arrow">↓</div>
+<div class="flow-split"><div class="flow-card ok"><b>Si \(I_C^*&lt;I_{C(sat)}\)</b><span>La hipótesis activa es consistente. Calcula \(V_{CE}=V_{CC}-I_CR_C\).</span></div><div class="flow-card bad"><b>Si \(I_C^*\ge I_{C(sat)}\)</b><span>El colector limita la corriente: usa saturación y \(V_{CE}\approx V_{CE(sat)}\).</span></div></div>
+</div>
+<div class="formula">\[\boxed{I_B=\frac{V_{BB}-V_{BE}}{R_B}}\qquad \boxed{I_C^*=\beta I_B}\qquad \boxed{I_{C(sat)}\approx\frac{V_{CC}-V_{CE(sat)}}{R_C}}\]</div>
+</section>
+
+<section class="module" id="bejemplo">
+<div class="module-head"><div class="module-title"><span class="no">B10</span><div><span class="eyebrow">Ejemplo completo</span><h2>Del circuito al punto de operación</h2></div></div><button class="mark" data-mark="bjt-ejemplo">Marcar estudiado</button></div>
+<div class="grid2"><div class="panel paper"><b>Datos</b><div class="vars"><span>\(V_{BB}=5\,V\)</span><span>\(R_B=180\,k\Omega\)</span><span>\(V_{CC}=12\,V\)</span><span>\(R_C=2.2\,k\Omega\)</span><span>\(\beta=120\)</span><span>\(V_{BE}=0.7\,V\)</span><span>\(V_{CE(sat)}=0.2\,V\)</span></div></div><div class="box remember"><small>Objetivo</small>Calcular \(I_B\), el candidato \(I_C^*\), el límite de saturación, decidir la región y hallar \(V_{CE}\).</div></div>
+<div class="steps bjt-example-steps">
+<div class="step"><i>1</i><b>Base</b><div class="mini-math">\[I_B=\frac{5-0.7}{180\,k\Omega}=\boxed{23.89\,\mu A}\]</div></div>
+<div class="step"><i>2</i><b>Candidato activo</b><div class="mini-math">\[I_C^*=120(23.89\,\mu A)=\boxed{2.87\,mA}\]</div></div>
+<div class="step"><i>3</i><b>Límite del colector</b><div class="mini-math">\[I_{C(sat)}=\frac{12-0.2}{2.2\,k\Omega}=\boxed{5.36\,mA}\]</div></div>
+<div class="step"><i>4</i><b>Región</b><div>Como \(2.87\,mA&lt;5.36\,mA\), el circuito puede sostener la corriente predicha por \(\beta\). El BJT está en <b>activa</b>.</div></div>
+</div>
+<div class="formula">\[V_{CE}=12\,V-(2.87\,mA)(2.2\,k\Omega)=\boxed{5.69\,V}\]</div>
+<div class="formula">\[I_E=I_C+I_B\approx\boxed{2.89\,mA}\qquad P_C=V_{CE}I_C\approx\boxed{16.3\,mW}\]</div>
+</section>
+
+<section class="module" id="binterruptor">
+<div class="module-head"><div class="module-title"><span class="no">B11</span><div><span class="eyebrow">Aplicación</span><h2>El BJT como interruptor: por qué aparece la saturación</h2></div></div><button class="mark" data-mark="bjt-switch">Marcar estudiado</button></div>
+<p>Supongamos ahora un BJT NPN controlado por una señal de \(5\,V\), con \(R_B=10\,k\Omega\), \(R_C=1\,k\Omega\), \(V_{CC}=5\,V\) y \(\beta=120\).</p>
+<div class="grid2"><div>
+<div class="formula">\[I_B=\frac{5-0.7}{10\,k\Omega}=\boxed{0.43\,mA}\]</div>
+<div class="formula">\[I_C^*=\beta I_B=120(0.43\,mA)=\boxed{51.6\,mA}\]</div>
+</div><div>
+<div class="formula">\[I_{C(sat)}=\frac{5-0.2}{1\,k\Omega}=\boxed{4.8\,mA}\]</div>
+<div class="box key"><small>Conclusión</small>El cálculo activo pide \(51.6\,mA\), pero la malla de colector solo permite aproximadamente \(4.8\,mA\). El transistor está <b>saturado</b> y \(I_C=\beta I_B\) deja de ser la ecuación de operación.</div>
+</div></div>
+<div class="formula">\[\beta_{forzado}=\frac{I_C}{I_B}\approx\frac{4.8}{0.43}=\boxed{11.2}\]</div>
+<div class="box remember"><small>Conmutación práctica</small>En diseño de interruptores se suele proporcionar corriente de base suficiente para asegurar saturación aun cuando el \(h_{FE}\) real sea menor que un valor típico.</div>
+</section>
+
+<section class="module" id="brecta">
+<div class="module-head"><div class="module-title"><span class="no">B12</span><div><span class="eyebrow">Representación gráfica</span><h2>Recta de carga DC y punto Q</h2></div></div><button class="mark" data-mark="bjt-loadline">Marcar estudiado</button></div>
+<p>Para una malla de colector con \(R_C\):</p><div class="formula">\[\boxed{V_{CE}=V_{CC}-I_CR_C}\]</div>
+<p>Los dos interceptos que definen la recta son:</p><div class="grid2"><div class="formula">\[I_C=0\Rightarrow V_{CE}=V_{CC}\]</div><div class="formula">\[V_{CE}=0\Rightarrow I_C=\frac{V_{CC}}{R_C}\]</div></div>
+<div class="grid2"><div><svg id="loadLineChart" class="chart" viewBox="0 0 760 430"></svg></div><div class="panel paper"><h3>¿Qué representa Q?</h3><p>El punto de operación DC se expresa como:</p><div class="formula">\[\boxed{Q=(V_{CEQ},I_{CQ})}\]</div><p>Para el ejemplo anterior:</p><div class="formula">\[Q\approx(5.69\,V,\ 2.87\,mA)\]</div><div class="box key"><small>Puente hacia amplificación</small>Más adelante, una señal AC hará que el punto instantáneo se mueva alrededor de Q. Por ahora solo necesitamos saber dónde queda el transistor en DC.</div></div></div>
+</section>
+
+<section class="module" id="bdatasheet">
+<div class="module-head"><div class="module-title"><span class="no">B13</span><div><span class="eyebrow">Componente real</span><h2>Qué buscar en el datasheet de un BJT</h2></div></div><button class="mark" data-mark="bjt-datasheet">Marcar estudiado</button></div>
+<p class="lead">Como ejemplo usamos el 2N3904, un transistor NPN de propósito general. No memorices sus números: aprende a localizar el parámetro y, sobre todo, su condición de prueba.</p>
+<div class="buttons"><a class="btn primary" href="https://www.onsemi.com/pdf/datasheet/2n3904-d.pdf" target="_blank" rel="noopener">Abrir datasheet oficial 2N3904 · onsemi</a><a class="btn" href="datasheet.html">Repasar lectura de datasheets →</a></div>
+<div class="table-scroll"><table class="compare-table"><thead><tr><th>Dato</th><th>2N3904 (ejemplo actual)</th><th>Por qué importa</th></tr></thead><tbody>
+<tr><td>Polaridad / encapsulado</td><td>NPN · TO-92</td><td>Identificación y montaje.</td></tr>
+<tr><td>\(V_{CEO}\)</td><td>40 V</td><td>Límite colector-emisor con base abierta.</td></tr>
+<tr><td>\(V_{CBO}\)</td><td>60 V</td><td>Límite colector-base con emisor abierto.</td></tr>
+<tr><td>\(V_{EBO}\)</td><td>6 V</td><td>Límite inverso de la unión base-emisor.</td></tr>
+<tr><td>\(I_C\) continuo</td><td>200 mA</td><td>Límite absoluto, no corriente recomendada universal.</td></tr>
+<tr><td>\(h_{FE}\)</td><td>100–300 a \(I_C=10\,mA\), \(V_{CE}=1\,V\)</td><td>Demuestra que \(\beta\) es un rango y depende del punto de prueba.</td></tr>
+<tr><td>\(V_{CE(sat)}\)</td><td>máx. 0.2 V a \(I_C=10\,mA\), \(I_B=1\,mA\)</td><td>Condición útil para conmutación; siempre lee la corriente de prueba.</td></tr>
+<tr><td>\(P_D\)</td><td>625 mW a \(T_A=25^\circ C\)</td><td>Debe analizarse junto con temperatura y derating.</td></tr>
+</tbody></table></div>
+<div class="box warn"><small>Error frecuente</small>No diseñes suponiendo \(h_{FE}=300\) porque sea el extremo alto de una tabla. Para conmutación y para polarización estable se trabaja con márgenes y con las condiciones reales del circuito.</div>
+</section>
+
+<section class="module" id="bsimulador">
+<div class="module-head"><div class="module-title"><span class="no">B14</span><div><span class="eyebrow">Exploración interactiva</span><h2>Simulador DC: predice la región antes de calcularla</h2></div></div><button class="mark" data-mark="bjt-simulator">Marcar estudiado</button></div>
+<div class="grid2"><div class="interactive controls">
+<label>\(V_{BB}\) <strong><span id="bVbbTxt">5.0</span> V</strong><input id="bVbb" type="range" min="0" max="12" value="5" step=".1"></label>
+<label>\(R_B\) <strong><span id="bRbTxt">180</span> kΩ</strong><input id="bRb" type="range" min="10" max="1000" value="180" step="10"></label>
+<label>\(V_{CC}\) <strong><span id="bVccTxt">12.0</span> V</strong><input id="bVcc" type="range" min="3" max="24" value="12" step=".5"></label>
+<label>\(R_C\) <strong><span id="bRcTxt">2.2</span> kΩ</strong><input id="bRc" type="range" min="0.22" max="10" value="2.2" step=".11"></label>
+<label>\(\beta\) <strong><span id="bBetaTxt">120</span></strong><input id="bBeta" type="range" min="40" max="300" value="120" step="10"></label>
+<label>\(V_{BE}\) <strong><span id="bVbeTxt">0.70</span> V</strong><input id="bVbe" type="range" min="0.55" max="0.85" value="0.70" step=".01"></label>
+<label>\(V_{CE(sat)}\) <strong><span id="bVcesTxt">0.20</span> V</strong><input id="bVces" type="range" min="0.05" max="0.40" value="0.20" step=".01"></label>
+</div><div>
+<div id="bState" class="status-card"></div>
+<div class="metric-grid"><div class="metric"><span>\(I_B\)</span><b id="bIb">—</b></div><div class="metric"><span>\(I_C\)</span><b id="bIc">—</b></div><div class="metric"><span>\(I_E\)</span><b id="bIe">—</b></div></div>
+<div class="metric-grid"><div class="metric"><span>\(V_{CE}\)</span><b id="bVce">—</b></div><div class="metric"><span>\(I_{C(sat)}\)</span><b id="bIcsat">—</b></div><div class="metric"><span>\(P_C\)</span><b id="bPc">—</b></div></div>
+<div class="prediction-card"><b>Antes de mover un control</b><p>Predice qué ocurrirá con la región si disminuyes \(R_B\): ¿tiende hacia corte, activa o saturación?</p><div class="prediction-buttons"><button data-bpred="cut">Corte</button><button data-bpred="active">Activa</button><button data-bpred="sat">Saturación</button></div><p id="bPredFb" class="feedback"></p></div>
+</div></div>
+<svg id="bjtSimChart" class="chart" viewBox="0 0 760 430"></svg>
+</section>
+
+<section class="module" id="bpractica">
+<div class="module-head"><div class="module-title"><span class="no">B15</span><div><span class="eyebrow">Retroalimentación</span><h2>Calcula, clasifica y explica</h2></div></div><button class="mark" data-mark="bjt-practice">Marcar estudiado</button></div>
+<div class="subsection"><h3>1. Ejercicio numérico aleatorio</h3><div class="exercise-generator"><div id="bExStatement" class="box key"></div><div class="z-check-grid"><label>\(I_B\) <span>µA</span><input id="bExIb" type="number" step="any"></label><label>\(I_C\) <span>mA</span><input id="bExIc" type="number" step="any"></label><label>\(V_{CE}\) <span>V</span><input id="bExVce" type="number" step="any"></label><label>Región<select id="bExRegion"><option value="">Selecciona</option><option value="cutoff">Corte</option><option value="active">Activa</option><option value="saturation">Saturación</option></select></label></div><div class="buttons"><button id="bExCheck" class="btn small primary">Comprobar</button><button id="bExNew" class="btn small">Nuevo ejercicio</button></div><p id="bExFb" class="feedback"></p></div></div>
+<div class="subsection"><h3>2. Pregunta abierta aleatoria</h3><div class="reflection-card"><p id="bOpenPrompt"></p><textarea id="bOpen" placeholder="Explica con lenguaje físico y después apóyate en las ecuaciones..."></textarea><div class="buttons"><button id="bOpenNew" class="btn small">Nuevo enunciado</button><button id="bOpenGuideBtn" class="btn small">Comparar con guía</button></div><div id="bOpenGuide" class="guide"></div></div></div>
+<div class="subsection"><h3>3. Selección múltiple razonada</h3><div class="quiz" data-quiz="bjt-dc" data-limit="7"></div></div>
+<div class="box remember"><small>Qué sigue</small>Cuando domines este capítulo, el siguiente paso será estudiar cómo las distintas redes de polarización fijan un punto Q estable y cómo ese punto condiciona la amplificación AC.</div>
+</section>
+
+<div class="footer"><div><b>AnalogLab</b><span>Recurso interactivo de apoyo académico</span></div><span>Electrónica Analógica y Laboratorio</span></div>
+</main></div>
+<script src="data/quizzes.js?v=11.1"></script><script src="js/core.js?v=11.1"></script><script src="js/bjt-dc.js?v=11.1"></script>
+</body></html>

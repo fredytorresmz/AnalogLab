@@ -1792,5 +1792,315 @@ window.ANALOG_QUIZZES={
       ],
       "answer": 0
     }
+  ],
+  "bjt-dc": [
+    {
+      "q": "En un BJT NPN en región activa, ¿qué combinación de polarización describe las dos uniones?",
+      "options": [
+        {
+          "text": "Base-emisor directa y base-colector inversa.",
+          "feedback": "Correcto: es la condición fundamental de la región activa."
+        },
+        {
+          "text": "Ambas uniones en directa.",
+          "feedback": "Esa condición corresponde a saturación."
+        },
+        {
+          "text": "Ambas uniones en inversa.",
+          "feedback": "Esa condición se asocia al corte."
+        },
+        {
+          "text": "Base-emisor inversa y base-colector directa.",
+          "feedback": "No corresponde a la región activa de un NPN."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "Si \\(I_C=4.5\\,\\mathrm{mA}\\) e \\(I_B=30\\,\\mu\\mathrm{A}\\), ¿cuál es aproximadamente \\(\\beta_{DC}\\)?",
+      "options": [
+        {
+          "text": "15",
+          "feedback": "Revisa las unidades: 4.5 mA / 30 µA."
+        },
+        {
+          "text": "150",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "0.0067",
+          "feedback": "Ese valor no corresponde a beta."
+        },
+        {
+          "text": "4500",
+          "feedback": "No: convierte ambas corrientes a las mismas unidades."
+        }
+      ],
+      "answer": 1
+    },
+    {
+      "q": "¿Cuál relación de corrientes es siempre la referencia básica por KCL en un BJT?",
+      "options": [
+        {
+          "text": "\\(I_E=I_C+I_B\\).",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "\\(I_C=I_E+I_B\\).",
+          "feedback": "La corriente de emisor es la suma."
+        },
+        {
+          "text": "\\(I_B=I_C+I_E\\).",
+          "feedback": "No."
+        },
+        {
+          "text": "\\(I_C=I_E\\) exactamente en todos los casos.",
+          "feedback": "Es una aproximación útil en algunos contextos, no la identidad KCL exacta."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "Un cálculo en activa predice \\(I_C^*=12\\,\\mathrm{mA}\\), pero la malla de colector solo permite \\(5\\,\\mathrm{mA}\\). ¿Cuál es la conclusión correcta?",
+      "options": [
+        {
+          "text": "El transistor está necesariamente en corte.",
+          "feedback": "No: hay excitación de base."
+        },
+        {
+          "text": "El transistor se encuentra en saturación y la malla de colector limita la corriente.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "Debe circular 12 mA porque \\(\\beta\\) siempre domina el circuito.",
+          "feedback": "No. En saturación, \\(I_C=\\beta I_B\\) deja de ser la ecuación de operación."
+        },
+        {
+          "text": "\\(V_{CE}\\) aumenta indefinidamente.",
+          "feedback": "No."
+        }
+      ],
+      "answer": 1
+    },
+    {
+      "q": "¿Qué efecto produce disminuir \\(R_B\\) manteniendo las demás variables iguales?",
+      "options": [
+        {
+          "text": "Reduce \\(I_B\\) y lleva hacia corte.",
+          "feedback": "Ocurre lo contrario."
+        },
+        {
+          "text": "Aumenta \\(I_B\\) y puede desplazar el transistor hacia saturación.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "No cambia ninguna corriente.",
+          "feedback": "RB forma parte directa de la malla de base."
+        },
+        {
+          "text": "Solo modifica \\(V_{CC}\\).",
+          "feedback": "No."
+        }
+      ],
+      "answer": 1
+    },
+    {
+      "q": "¿Qué representa \\(h_{FE}\\) en una hoja de datos BJT?",
+      "options": [
+        {
+          "text": "Una ganancia DC de corriente especificada bajo condiciones de prueba.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "La potencia máxima del transistor.",
+          "feedback": "No."
+        },
+        {
+          "text": "La tensión exacta base-emisor.",
+          "feedback": "No."
+        },
+        {
+          "text": "Una constante idéntica para todos los transistores del mismo número.",
+          "feedback": "No: suele aparecer como rango y depende de la condición de prueba."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "En corte ideal para conmutación, el BJT se aproxima a:",
+      "options": [
+        {
+          "text": "Un interruptor abierto.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "Un cortocircuito colector-emisor.",
+          "feedback": "Eso se aproxima más a saturación."
+        },
+        {
+          "text": "Una fuente de corriente ideal.",
+          "feedback": "No."
+        },
+        {
+          "text": "Un Zener.",
+          "feedback": "No."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "En saturación, ¿cuál afirmación es más importante?",
+      "options": [
+        {
+          "text": "Siempre se cumple \\(I_C=\\beta I_B\\) con exactitud.",
+          "feedback": "No. Esa relación deja de ser la ecuación de operación."
+        },
+        {
+          "text": "Las dos uniones están polarizadas en directa y \\(V_{CE}\\) es pequeño.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "La corriente de base es cero.",
+          "feedback": "No."
+        },
+        {
+          "text": "El transistor está listo para amplificación lineal de máxima calidad.",
+          "feedback": "No; la saturación es un extremo de conmutación."
+        }
+      ],
+      "answer": 1
+    },
+    {
+      "q": "Para una recta de carga con \\(V_{CC}=12\\,\\mathrm{V}\\) y \\(R_C=2\\,\\mathrm{k}\\Omega\\), ¿cuál es el intercepto aproximado sobre el eje de \\(I_C\\) cuando \\(V_{CE}=0\\)?",
+      "options": [
+        {
+          "text": "2 mA",
+          "feedback": "Revisa \\(I_C=V_{CC}/R_C\\)."
+        },
+        {
+          "text": "6 mA",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "12 mA",
+          "feedback": "No."
+        },
+        {
+          "text": "24 mA",
+          "feedback": "No."
+        }
+      ],
+      "answer": 1
+    },
+    {
+      "q": "¿Qué significa el punto Q en análisis DC?",
+      "options": [
+        {
+          "text": "El par \\((V_{CEQ},I_{CQ})\\) que define el punto de operación en reposo.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "La corriente máxima absoluta del datasheet.",
+          "feedback": "No."
+        },
+        {
+          "text": "La frecuencia de corte del transistor.",
+          "feedback": "No."
+        },
+        {
+          "text": "Solo el valor de \\(\\beta\\).",
+          "feedback": "No."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "Para el 2N3904, que un datasheet indique \\(h_{FE}=100\\) a 300 a cierta condición significa que:",
+      "options": [
+        {
+          "text": "Puede asumirse 300 en cualquier diseño.",
+          "feedback": "No: es un rango bajo una condición de prueba."
+        },
+        {
+          "text": "La ganancia DC varía entre dispositivos/condiciones y debe diseñarse con margen.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "La corriente de colector siempre es 100–300 mA.",
+          "feedback": "No."
+        },
+        {
+          "text": "\\(V_{CE(sat)}\\) vale entre 100 y 300 V.",
+          "feedback": "No."
+        }
+      ],
+      "answer": 1
+    },
+    {
+      "q": "¿Por qué la base del BJT se representa físicamente mucho más delgada que las otras regiones?",
+      "options": [
+        {
+          "text": "Para favorecer que la mayoría de portadores inyectados atraviesen la base y alcancen el colector.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "Para bloquear completamente la corriente de colector.",
+          "feedback": "No."
+        },
+        {
+          "text": "Solo por razones mecánicas del encapsulado.",
+          "feedback": "No."
+        },
+        {
+          "text": "Para eliminar la unión base-emisor.",
+          "feedback": "No."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "Si \\(\\beta=99\\), ¿cuánto vale aproximadamente \\(\\alpha\\)?",
+      "options": [
+        {
+          "text": "0.50",
+          "feedback": "No."
+        },
+        {
+          "text": "0.99",
+          "feedback": "Correcto: \\(\\alpha=\\beta/(\\beta+1)=99/100\\)."
+        },
+        {
+          "text": "99",
+          "feedback": "Alpha es menor que 1."
+        },
+        {
+          "text": "100",
+          "feedback": "No."
+        }
+      ],
+      "answer": 1
+    },
+    {
+      "q": "¿Cuál es la mejor interpretación de \\(V_{BE}\\approx0.7\\,\\mathrm{V}\\) en este capítulo?",
+      "options": [
+        {
+          "text": "Una aproximación de análisis DC para un BJT de silicio conduciendo.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "Una constante física exacta para cualquier transistor y temperatura.",
+          "feedback": "No."
+        },
+        {
+          "text": "El valor de saturación \\(V_{CE}\\).",
+          "feedback": "No."
+        },
+        {
+          "text": "La tensión máxima absoluta de base-emisor.",
+          "feedback": "No."
+        }
+      ],
+      "answer": 0
+    }
   ]
 };
