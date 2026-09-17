@@ -2101,6 +2101,270 @@ window.ANALOG_QUIZZES={
         }
       ],
       "answer": 0
+    },
+    {
+      "q": "En un NPN se supone activa y el cálculo produce \\(V_C<V_B\\). ¿Qué indica esta verificación?",
+      "options": [
+        {
+          "text": "La unión B-C ya no está en inversa; la hipótesis activa debe rechazarse.",
+          "feedback": "Correcto. Para activa directa en un NPN la unión base-colector debe estar polarizada en inversa."
+        },
+        {
+          "text": "El transistor está necesariamente en corte.",
+          "feedback": "No: con B-E directa, el resultado apunta hacia saturación, no corte."
+        },
+        {
+          "text": "Debe aumentarse β hasta que VC sea mayor.",
+          "feedback": "β es un parámetro del transistor, no una variable que se ajuste arbitrariamente."
+        },
+        {
+          "text": "No importa mientras VBE sea 0.7 V.",
+          "feedback": "Sí importa: hay que verificar ambas uniones."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "Para una malla con \\(R_C\\) y \\(R_E\\), usando \\(I_E\\approx I_C\\), ¿cuál es la recta de carga aproximada?",
+      "options": [
+        {
+          "text": "\\(V_{CE}=V_{CC}-I_C(R_C+R_E)\\).",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "\\(V_{CE}=V_{CC}+I_C(R_C+R_E)\\).",
+          "feedback": "El signo de las caídas es incorrecto."
+        },
+        {
+          "text": "\\(I_C=β/R_C\\).",
+          "feedback": "No representa la malla de salida."
+        },
+        {
+          "text": "\\(V_{CE}=V_{BE}\\) siempre.",
+          "feedback": "No."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "¿Qué representa físicamente el intercepto \\(I_C=V_{CC}/R_C\\) de una recta de carga simple?",
+      "options": [
+        {
+          "text": "La corriente aproximada máxima de la malla cuando VCE se aproxima a cero.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "La corriente de base máxima del datasheet.",
+          "feedback": "No."
+        },
+        {
+          "text": "La corriente de fuga en corte.",
+          "feedback": "No."
+        },
+        {
+          "text": "El valor exacto de IC en cualquier región.",
+          "feedback": "No; es un extremo de la recta de carga."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "En una polarización con divisor, ¿qué ventaja tiene sustituir R1–R2 por su equivalente de Thévenin?",
+      "options": [
+        {
+          "text": "Permite incluir de forma directa la carga que ejerce la corriente de base sobre el divisor.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "Hace que β deje de existir físicamente.",
+          "feedback": "No."
+        },
+        {
+          "text": "Garantiza saturación.",
+          "feedback": "No."
+        },
+        {
+          "text": "Convierte el BJT en un FET.",
+          "feedback": "No."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "Si una red con resistencia de emisor experimenta un aumento de IE, ¿qué mecanismo ayuda a estabilizarla?",
+      "options": [
+        {
+          "text": "Aumenta VE y, con VB aproximadamente fijo, disminuye VBE, oponiéndose al aumento de corriente.",
+          "feedback": "Correcto: es realimentación negativa de DC."
+        },
+        {
+          "text": "Aumenta VBE sin límite.",
+          "feedback": "No."
+        },
+        {
+          "text": "RE desaparece del circuito.",
+          "feedback": "No."
+        },
+        {
+          "text": "β se hace infinito.",
+          "feedback": "No."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "En saturación, el cociente IC/IB calculado con las corrientes reales de conmutación se denomina con frecuencia:",
+      "options": [
+        {
+          "text": "β forzado.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "α térmico.",
+          "feedback": "No."
+        },
+        {
+          "text": "hFE máximo garantizado.",
+          "feedback": "No; el β forzado lo impone el diseño."
+        },
+        {
+          "text": "resistencia de Early.",
+          "feedback": "No."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "Un 2N3904 tiene hFE=100–300 especificado a IC=10 mA y VCE=1 V. ¿Qué conclusión es correcta?",
+      "options": [
+        {
+          "text": "El rango corresponde a esa condición de prueba; hFE puede ser diferente en otros puntos de operación.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "Todos los 2N3904 tienen hFE exactamente 200.",
+          "feedback": "No."
+        },
+        {
+          "text": "300 es el valor que siempre debe usarse en diseño.",
+          "feedback": "No."
+        },
+        {
+          "text": "hFE es una tensión de saturación.",
+          "feedback": "No."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "En el método de suposición de región, ¿qué debe hacerse si el modelo activo predice una corriente de colector mayor que la permitida por la recta de carga?",
+      "options": [
+        {
+          "text": "Rechazar la hipótesis activa y analizar saturación.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "Aceptar el valor porque βIB siempre domina.",
+          "feedback": "No: la red externa limita la corriente."
+        },
+        {
+          "text": "Declarar corte.",
+          "feedback": "No si existe fuerte excitación B-E."
+        },
+        {
+          "text": "Cambiar las unidades hasta que coincidan.",
+          "feedback": "No."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "En una polarización fija, si β se duplica y la corriente de base permanece prácticamente igual, ¿qué tendencia tiene IC mientras el transistor siga en activa?",
+      "options": [
+        {
+          "text": "Tiende a duplicarse.",
+          "feedback": "Correcto, de ahí la sensibilidad de la polarización fija a β."
+        },
+        {
+          "text": "Permanece exactamente igual.",
+          "feedback": "No."
+        },
+        {
+          "text": "Se reduce a la mitad.",
+          "feedback": "No."
+        },
+        {
+          "text": "Se hace cero.",
+          "feedback": "No."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "¿Cuál es la mejor secuencia de trabajo para un circuito BJT desconocido en DC?",
+      "options": [
+        {
+          "text": "Identificar topología y polaridades → suponer región → aplicar KVL/KCL → verificar región y límites.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "Aplicar IC=βIB sin revisar ninguna tensión.",
+          "feedback": "Ese procedimiento falla en corte y saturación."
+        },
+        {
+          "text": "Buscar primero un valor típico de β y terminar el ejercicio.",
+          "feedback": "No es suficiente."
+        },
+        {
+          "text": "Suponer saturación en todos los circuitos.",
+          "feedback": "No."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "¿Cuál ecuación es exacta por KCL independientemente de si el transistor está en activa o saturación, respetando los sentidos definidos?",
+      "options": [
+        {
+          "text": "\\(I_E=I_C+I_B\\).",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "\\(I_C=βI_B\\).",
+          "feedback": "Esta es una relación de región activa, no universal."
+        },
+        {
+          "text": "\\(V_{CE}=0.2V\\).",
+          "feedback": "Es una aproximación de saturación."
+        },
+        {
+          "text": "\\(V_{BE}=0.7V\\) exactamente.",
+          "feedback": "Es un modelo aproximado."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "En el punto Q, la letra Q proviene de la idea de condición:",
+      "options": [
+        {
+          "text": "quiescente o de reposo DC.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "cuántica exclusivamente.",
+          "feedback": "No en este contexto."
+        },
+        {
+          "text": "de ruptura.",
+          "feedback": "No."
+        },
+        {
+          "text": "de carga máxima.",
+          "feedback": "No."
+        }
+      ],
+      "answer": 0
     }
   ]
 };

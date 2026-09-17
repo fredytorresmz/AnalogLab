@@ -2,7 +2,7 @@
 
 ## Electrónica Analógica y Laboratorio
 
-**AnalogLab** es un recurso interactivo de apoyo académico para complementar las clases, facilitar el repaso independiente y conectar teoría, análisis matemático, simulación y práctica de laboratorio.
+**AnalogLab** es un recurso universitario abierto de apoyo para el estudio de Electrónica Analógica y Laboratorio. Está pensado para conectar teoría, análisis matemático, simulación, lectura de datasheets y práctica de laboratorio, sin depender de una institución o curso específico.
 
 ## Ruta de aprendizaje
 
@@ -68,7 +68,7 @@ El objetivo didáctico del filtro no es eliminar completamente el rizado: se bus
 - Malvino, A. & Bates, D. *Principios de Electrónica*.
 - Pleite Guerra, J.; Vergaz Benito, R.; Ruiz de Marcos, J. M. *Electrónica Analógica para Ingenieros*.
 
-Los apuntes del docente se utilizan como insumo para conservar la secuencia de clase; antes de incorporarlos al sitio, las expresiones y ejemplos se revisan y se presentan con notación matemática normalizada.
+Los materiales de clase pueden utilizarse como insumo pedagógico, pero antes de incorporarlos al sitio las expresiones, ejemplos y modelos se contrastan con las referencias guía y se presentan con notación matemática normalizada.
 
 ## Tecnologías
 HTML5 · CSS3 · JavaScript · SVG · MathJax · GitHub Pages
@@ -114,7 +114,7 @@ El estudiante aprende a diferenciar:
 
 ## Trabajo propuesto opcional
 
-La actividad integradora de fuente regulada se presenta públicamente como **Trabajo propuesto opcional**. Las condiciones de valoración o uso dentro de la asignatura se comunican en clase. El sitio conserva la ruta `proyecto1.html` para no romper enlaces anteriores.
+La actividad integradora de fuente regulada se presenta públicamente como **Trabajo propuesto opcional** y puede utilizarse como ejercicio complementario de diseño. El sitio conserva la ruta `proyecto1.html` para no romper enlaces anteriores.
 
 La actividad incorpora comprobación interactiva de resultados y preguntas abiertas para relacionar cálculo, simulación y comportamiento físico.
 
@@ -143,3 +143,15 @@ Las deducciones parten de KCL/KVL y del procedimiento de comprobar primero el es
 
 ## BJT en DC (v11)
 Nuevo capítulo universitario de estudio autónomo: construcción NPN/PNP, operación física, corrientes, alpha/beta, modelo DC, regiones de operación, curvas características, procedimiento de análisis por regiones, conmutación, recta de carga, punto Q, lectura de datasheet 2N3904, simulador y evaluación aleatoria.
+
+
+## v12 · BJT DC completo
+- El sitio se presenta explícitamente como recurso universitario abierto, no ligado a una evaluación o institución concreta.
+- El capítulo BJT DC integra fundamentos físicos, modelos, regiones, curvas, recta de carga, punto Q, ejemplos revisados, polarización fija, resistencia de emisor, divisor de tensión, formulario de configuraciones, conmutación, datasheet, simuladores y problemas aplicados.
+- Se ampliaron los ejercicios aleatorios, el diseño de punto Q y el banco de selección múltiple.
+
+
+## v12.1
+- El capítulo BJT DC refuerza la recta de carga como primer mapa de la malla de salida antes de validar una hipótesis activa.
+- La presentación general del sitio se mantiene abierta a estudiantes universitarios de cualquier institución.
+- Se eliminan referencias públicas a exámenes o evaluación de un curso específico.

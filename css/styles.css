@@ -136,3 +136,9 @@ svg.diagram,svg.chart{min-height:220px;overflow:visible}
 
 /* v11.1 · ayudas visuales BJT */
 .bjt-glossary{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}.bjt-glossary details{border:1px solid var(--line);border-radius:11px;background:var(--paper);padding:10px}.bjt-glossary summary{font-weight:750;color:var(--navy);cursor:pointer}.bjt-glossary p{font-size:.82rem;color:var(--muted);margin:8px 0 0}.bjt-current-map{width:100%;min-height:280px}@media(max-width:900px){.bjt-glossary{grid-template-columns:1fr 1fr}}@media(max-width:520px){.bjt-glossary{grid-template-columns:1fr}}
+
+/* v12 · BJT DC completo */
+.bjt-formula-table td{vertical-align:top}.bjt-formula-table td:nth-child(1){min-width:150px}.bjt-formula-table td:nth-child(2){min-width:250px}.bjt-formula-table td:nth-child(3){min-width:210px}.bjt-formula-table td:nth-child(4){min-width:230px}.bjt-formula-table td:nth-child(5){min-width:220px}
+.problem-card{border:1px solid var(--line);border-radius:14px;background:var(--paper);margin:10px 0;overflow:hidden}.problem-card summary{padding:14px 16px;font-weight:700;color:var(--navy);cursor:pointer;background:var(--bg)}.problem-body{padding:14px 16px}.problem-body p:first-child{margin-top:0}
+#bnotas .formula,#bfija .formula,#bemisor .formula,#bdivisor .formula,#binterruptor .formula{overflow-x:auto}
+@media(max-width:650px){.bjt-formula-table{min-width:1100px}.bjt-structure{min-height:210px}.problem-body{padding:12px}}
