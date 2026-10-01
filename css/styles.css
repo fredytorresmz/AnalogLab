@@ -142,3 +142,14 @@ svg.diagram,svg.chart{min-height:220px;overflow:visible}
 .problem-card{border:1px solid var(--line);border-radius:14px;background:var(--paper);margin:10px 0;overflow:hidden}.problem-card summary{padding:14px 16px;font-weight:700;color:var(--navy);cursor:pointer;background:var(--bg)}.problem-body{padding:14px 16px}.problem-body p:first-child{margin-top:0}
 #bnotas .formula,#bfija .formula,#bemisor .formula,#bdivisor .formula,#binterruptor .formula{overflow-x:auto}
 @media(max-width:650px){.bjt-formula-table{min-width:1100px}.bjt-structure{min-height:210px}.problem-body{padding:12px}}
+
+
+/* v13 · BJT DC II */
+.bjt2-map{display:grid;grid-template-columns:1fr 1fr;gap:10px}.bjt2-map>div{border:1px solid var(--line);background:var(--paper);border-radius:12px;padding:13px;display:grid;gap:3px}.bjt2-map b{color:var(--navy)}.bjt2-map span{font-size:.8rem;color:var(--muted)}
+.traffic-legend{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:10px 13px;margin-top:14px;background:var(--paper);font-size:.82rem}.traffic{font-size:1.35rem;line-height:1}.traffic.green{color:#159447}.traffic.yellow{color:#c58a00}.traffic.red{color:#c33a34}
+.traffic-result{border:1px solid var(--line);border-left:6px solid var(--muted);border-radius:12px;padding:11px 13px;margin-top:10px;background:var(--paper)}.traffic-result.green{border-left-color:#159447;background:color-mix(in srgb,#eaf8ef 80%,var(--paper))}.traffic-result.yellow{border-left-color:#d39a10;background:color-mix(in srgb,#fff6dc 80%,var(--paper))}.traffic-result.red{border-left-color:#c33a34;background:color-mix(in srgb,#fdeceb 80%,var(--paper))}
+.bjt2-diagram{width:100%;min-height:260px}.hbridge-controls{display:flex;flex-wrap:wrap;gap:8px;margin:13px 0}.hbridge-controls button{border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:9px;padding:9px 13px;cursor:pointer}.hbridge-controls button:hover{border-color:var(--blue)}
+.sim-stack{display:grid;gap:14px}.mini-sim{border:1px solid var(--line);border-radius:14px;background:var(--bg);padding:15px}.mini-sim h3{margin:0 0 10px;color:var(--navy)}
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.problem-grid details{border:1px solid var(--line);border-radius:12px;background:var(--paper);padding:12px}.problem-grid summary{cursor:pointer;font-weight:700;color:var(--navy)}.problem-grid p{margin:10px 0 0}
+@media(max-width:850px){.problem-grid,.bjt2-map{grid-template-columns:1fr}}
+@media(max-width:620px){.traffic-legend{align-items:flex-start}.bjt2-diagram{min-height:220px}.hbridge-controls button{flex:1;min-width:42%}}

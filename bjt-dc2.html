@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="AnalogLab: BJT en DC II, redes compuestas, Darlington, espejos de corriente, drivers, motores, puente H, potencia, datasheets, simulación y problemas de ingeniería.">
+<title>AnalogLab · BJT en DC II</title>
+<link rel="stylesheet" href="css/styles.css?v=13.0">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script id="MathJax-script" defer src="vendor/mathjax/tex-svg.js?v=3.2.1"></script>
+</head>
+<body>
+<header>
+<button class="menu">☰</button>
+<a class="brand" href="index.html"><strong>AnalogLab</strong><span>Electrónica Analógica y Laboratorio</span></a>
+<nav class="topnav"><a href="index.html">Inicio</a><a href="dc.html">Diodos DC</a><a href="ac.html">Diodos AC</a><a href="zener.html">Zener</a><a href="bjt-dc.html">BJT DC I</a><a class="active" href="bjt-dc2.html">BJT DC II</a><a href="taller.html">Taller 1</a><a href="datasheet.html">Datasheets</a><a href="proyecto1.html">Trabajo opcional</a></nav>
+<div class="header-actions"><button id="class">Modo clase</button><button id="theme">◐</button></div>
+</header>
+<div class="layout">
+<aside>
+<div class="progress-card"><div><span>Progreso de estudio</span><strong class="progress-value">0%</strong></div><div class="track"><span class="progress-fill"></span></div></div>
+<h4>BJT · DC II</h4>
+<nav>
+<a href="#c1">C1 · Redes BJT en DC</a>
+<a href="#c2">C2 · Darlington</a>
+<a href="#c3">C3 · Darlington integrado</a>
+<a href="#c4">C4 · Sziklai / CFP</a>
+<a href="#c5">C5 · Acoplamiento directo</a>
+<a href="#c6">C6 · Espejo de corriente</a>
+<a href="#c7">C7 · Driver de relé</a>
+<a href="#c8">C8 · Motor DC</a>
+<a href="#c9">C9 · Puente H</a>
+<a href="#c10">C10 · Protección inductiva</a>
+<a href="#c11">C11 · Potencia y SOA</a>
+<a href="#c12">C12 · Datasheets</a>
+<a href="#c13">C13 · Simuladores</a>
+<a href="#c14">C14 · Problemas</a>
+<a href="#c15">C15 · Practica y verifica</a>
+</nav>
+<div class="side-info">Este módulo continúa BJT DC I y permanece en análisis de corriente continua. No utiliza todavía modelos de pequeña señal, ganancia de tensión AC ni respuesta en frecuencia.</div>
+</aside>
+<main>
+<section class="hero small">
+<span class="eyebrow">Transistores BJT · Aplicaciones DC</span>
+<h1>BJT en DC II: redes compuestas, conmutación y actuadores</h1>
+<p>Un BJT aislado ya no es el objetivo. Ahora se estudia cómo varios transistores cooperan para aumentar capacidad de corriente, fijar corrientes, controlar cargas inductivas y construir funciones de potencia. Cada circuito sigue la misma ruta: <b>interpretar → modelar → calcular → verificar región → simular → comparar → concluir</b>.</p>
+<div class="meta"><span>Darlington</span><span>Sziklai</span><span>Redes directas</span><span>Espejo de corriente</span><span>Relé</span><span>Motor</span><span>Puente H</span><span>Potencia / SOA</span><span>Datasheet</span></div>
+</section>
+<div class="study-note"><b>Alcance.</b><span>Boylestad desarrolla redes múltiples, espejos, fuentes de corriente, conmutación y aplicaciones dentro del análisis DC antes de iniciar el capítulo formal de BJT en AC. En esta página se mantiene esa frontera: se analizan niveles, corrientes y regiones DC; la pequeña señal quedará en otro módulo.</span></div>
+
+<section class="module" id="c1">
+<div class="module-head"><div class="module-title"><span class="no">C1</span><div><span class="eyebrow">Panorama</span><h2>De un transistor a una red BJT</h2></div></div><button class="mark" data-mark="bjt2-panorama">Marcar estudiado</button></div>
+<div class="grid2"><div>
+<p>En BJT DC I se aprendió a obtener el punto de operación de una sola etapa. En una <b>red de varios BJT</b>, la salida DC de una parte puede convertirse en la entrada DC de otra, o dos dispositivos pueden comportarse como una unidad compuesta.</p>
+<div class="box key"><small>Pregunta que guía el análisis</small>¿Qué variable del primer transistor alimenta, limita o polariza al siguiente? La respuesta puede ser una corriente de base, un voltaje de nodo o una corriente de referencia.</div>
+</div><div class="bjt2-map">
+<div><b>Más ganancia de corriente</b><span>Darlington / Sziklai</span></div>
+<div><b>Corriente controlada</b><span>Espejo de corriente</span></div>
+<div><b>Conmutar una carga</b><span>Relé / motor / solenoide</span></div>
+<div><b>Invertir polaridad</b><span>Puente H</span></div>
+</div></div>
+<div class="traffic-legend"><span class="traffic green">●</span><b>Verde:</b> coherente y con margen <span class="traffic yellow">●</span><b>Amarillo:</b> funciona pero exige revisión <span class="traffic red">●</span><b>Rojo:</b> no cumple o la hipótesis es inválida</div>
+</section>
+
+<section class="module" id="c2">
+<div class="module-head"><div class="module-title"><span class="no">C2</span><div><span class="eyebrow">Transistor compuesto</span><h2>Conexión Darlington: por qué aumenta tanto la ganancia</h2></div></div><button class="mark" data-mark="bjt2-darlington">Marcar estudiado</button></div>
+<div class="grid2"><div>
+<p>En un Darlington NPN, el emisor de \(Q_1\) alimenta la base de \(Q_2\) y los colectores se conectan al mismo nodo. La primera etapa amplifica la corriente de entrada que recibe la segunda.</p>
+<div class="formula">\[I_{B2}=I_{E1}=(\beta_1+1)I_{B1}\]</div>
+<div class="formula">\[I_{C2}=\beta_2(\beta_1+1)I_{B1}\]</div>
+<p>La ganancia equivalente entre la base de entrada y la corriente total de colector es:</p>
+<div class="formula">\[\boxed{\beta_D=\beta_1\beta_2+\beta_1+\beta_2\approx\beta_1\beta_2}\]</div>
+<p>La aproximación del producto es excelente cuando ambos \(\beta\) son grandes.</p>
+</div><div class="panel paper">
+<h3>Dos uniones base-emisor</h3>
+<div class="formula">\[\boxed{V_{BE,D}\approx V_{BE1}+V_{BE2}}\]</div>
+<p>Con el modelo de silicio de aula puede utilizarse aproximadamente \(1.4\,V\), pero un Darlington real debe revisarse en su hoja de datos.</p>
+<svg class="bjt2-diagram" viewBox="0 0 620 300" aria-label="Conexión Darlington NPN"><rect width="620" height="300" rx="15" fill="var(--paper)"/><text x="35" y="48" class="svg-title">B</text><line x1="60" y1="55" x2="145" y2="55" class="wire"/><circle cx="185" cy="105" r="54" fill="none" stroke="var(--blue)" stroke-width="3"/><text x="168" y="111" class="svg-title">Q₁</text><line x1="145" y1="55" x2="145" y2="105" class="wire"/><line x1="185" y1="51" x2="185" y2="22" class="wire"/><line x1="185" y1="159" x2="285" y2="205" class="wire"/><circle cx="350" cy="205" r="54" fill="none" stroke="var(--blue)" stroke-width="3"/><text x="333" y="211" class="svg-title">Q₂</text><line x1="285" y1="205" x2="296" y2="205" class="wire"/><line x1="350" y1="151" x2="350" y2="22" class="wire"/><line x1="185" y1="22" x2="350" y2="22" class="wire"/><text x="260" y="17" class="svgtext">C</text><line x1="350" y1="259" x2="350" y2="286" class="wire"/><text x="366" y="286" class="svg-title">E</text><text x="204" y="181" class="svgtext">I_E1 = I_B2</text></svg>
+</div></div>
+<div class="example"><span class="example-label">Ejemplo guiado</span><h3>Darlington con resistencia de emisor</h3><p>Datos: \(V_{in}=5V\), \(R_B=220k\Omega\), \(R_E=470\Omega\), \(V_{CC}=12V\), \(\beta_1=80\), \(\beta_2=120\), \(V_{BE1}=V_{BE2}=0.7V\).</p>
+<p>La corriente del emisor de \(Q_2\) es:</p><div class="formula">\[I_{E2}=(\beta_1+1)(\beta_2+1)I_{B1}\]</div>
+<p>Aplicando KVL desde la entrada:</p><div class="formula">\[I_{B1}=\frac{V_{in}-1.4}{R_B+(\beta_1+1)(\beta_2+1)R_E}\]</div>
+<div class="formula">\[I_{B1}\approx0.746\,\mu A,\quad I_{E2}\approx7.31\,mA\]</div>
+<div class="formula">\[V_E\approx3.44V,\qquad V_{CE2}\approx12-3.44=8.56V\]</div>
+<div class="traffic-result green"><b>✓ Activa.</b> El resultado conserva margen de \(V_{CE}\) y muestra cómo una corriente de entrada submicroamperio puede producir varios miliamperios en la salida.</div></div>
+<div class="box warn"><small>No confundas alta ganancia con saturación garantizada</small>Un Darlington puede tener un \(h_{FE}\) enorme en región activa y, sin embargo, requerir una relación de corriente de base mucho más conservadora para garantizar saturación en conmutación.</div>
+</section>
+
+<section class="module" id="c3">
+<div class="module-head"><div class="module-title"><span class="no">C3</span><div><span class="eyebrow">Industria</span><h2>Darlington integrado: un dispositivo, dos BJT internos</h2></div></div><button class="mark" data-mark="bjt2-darlington-pack">Marcar estudiado</button></div>
+<p class="lead">La conexión es tan común que se fabrica monolíticamente. Desde fuera aparecen tres terminales, pero internamente existen dos transistores y, según la familia, resistencias auxiliares u otros elementos.</p>
+<div class="grid3">
+<div class="panel paper"><b>Ganancia</b><p>Puede alcanzar valores muy altos; se consulta como \(h_{FE}\) bajo condiciones de prueba.</p></div>
+<div class="panel paper"><b>Caídas</b><p>Hay dos uniones B-E y la saturación puede ser bastante mayor que en un BJT individual.</p></div>
+<div class="panel paper"><b>Térmica</b><p>La potencia de ambos transistores termina concentrada en el mismo encapsulado.</p></div>
+</div>
+<div class="box key"><small>Ejemplo actual: TIP122</small>La hoja de datos de ST especifica TIP122 como Darlington NPN de potencia. No uses su \(h_{FE}\ge1000\) como si fuera una garantía de saturación. El fabricante especifica \(V_{CE(sat)}\) con pares concretos \(I_C/I_B\): por ejemplo, 3 A con 12 mA de base.</div>
+<div class="buttons"><a class="btn primary" href="https://www.st.com/resource/en/datasheet/tip122.pdf" target="_blank" rel="noopener">Abrir datasheet TIP122 · ST</a></div>
+</section>
+
+<section class="module" id="c4">
+<div class="module-head"><div class="module-title"><span class="no">C4</span><div><span class="eyebrow">Extensión</span><h2>Par complementario con realimentación: Sziklai / CFP</h2></div></div><button class="mark" data-mark="bjt2-sziklai">Marcar estudiado</button></div>
+<div class="grid2"><div>
+<p>El <b>complementary feedback pair (CFP)</b>, también llamado par Sziklai, utiliza transistores de polaridades opuestas para obtener un comportamiento compuesto de alta ganancia. Es otra respuesta al mismo problema: controlar una corriente grande con una excitación pequeña.</p>
+<div class="formula">\[\beta_{CFP}\approx\beta_1\beta_2\]</div>
+<p>En muchos montajes la tensión de control vista desde la entrada se aproxima a una sola unión B-E, a diferencia del Darlington que suma dos. La tensión de saturación y los límites reales dependen del circuito concreto.</p>
+</div><div class="box remember"><small>Por qué aparece aquí</small>No es necesario memorizar una nueva colección de fórmulas. El objetivo es reconocer que existen <b>transistores compuestos</b> y que la estrategia de análisis sigue siendo KCL/KVL + regiones + datasheet.</div></div>
+<div class="box warn"><small>Alcance</small>El CFP se presenta como extensión DC. Su estudio detallado como etapa amplificadora se reserva para el módulo AC.</div>
+</section>
+
+<section class="module" id="c5">
+<div class="module-head"><div class="module-title"><span class="no">C5</span><div><span class="eyebrow">Redes múltiples</span><h2>Acoplamiento directo: el punto DC de una etapa afecta a la siguiente</h2></div></div><button class="mark" data-mark="bjt2-direct">Marcar estudiado</button></div>
+<p>Cuando dos etapas se conectan sin capacitor de aislamiento DC, el nodo de salida de la primera puede polarizar directamente la segunda. A diferencia del acoplamiento por capacitor, <b>las etapas no pueden analizarse como si fueran independientes</b>.</p>
+<div class="example"><span class="example-label">Ejemplo con carga de la segunda base</span>
+<p>\(Q_1\): \(V_{BB}=5V\), \(R_{B1}=220k\Omega\), \(\beta_1=100\), \(R_{C1}=3.3k\Omega\), \(V_{CC}=12V\). El colector de \(Q_1\) alimenta la base de un seguidor \(Q_2\) con \(\beta_2=80\) y \(R_{E2}=1k\Omega\).</p>
+<div class="formula">\[I_{B1}=\frac{5-0.7}{220k}=19.55\,\mu A,\qquad I_{C1}\approx1.955\,mA\]</div>
+<p>Sea \(V_X=V_{C1}=V_{B2}\). La corriente de base de \(Q_2\) carga el mismo nodo:</p>
+<div class="formula">\[\frac{12-V_X}{3.3k}=I_{C1}+\frac{V_X-0.7}{(\beta_2+1)R_{E2}}\]</div>
+<div class="formula">\[\boxed{V_X\approx5.36V}\]</div>
+<div class="formula">\[V_{E2}\approx4.66V,\quad I_{E2}\approx4.66mA,\quad I_{B2}\approx57.5\,\mu A\]</div>
+<div class="traffic-result green"><b>✓ Resultado coherente.</b> La segunda etapa bajó el nodo respecto al cálculo “sin carga”. Esta es la idea central del acoplamiento directo.</div>
+</div>
+</section>
+
+<section class="module" id="c6">
+<div class="module-head"><div class="module-title"><span class="no">C6</span><div><span class="eyebrow">Fuente de corriente</span><h2>Espejo de corriente BJT</h2></div></div><button class="mark" data-mark="bjt2-mirror">Marcar estudiado</button></div>
+<div class="grid2"><div>
+<p>Si dos NPN similares comparten \(V_{BE}\), sus corrientes de colector pueden ser aproximadamente iguales. En el transistor de referencia, colector y base se unen para establecer el \(V_{BE}\) necesario.</p>
+<div class="formula">\[I_{REF}\approx\frac{V_{CC}-V_{BE}}{R_{REF}}\]</div>
+<p>Si ambos transistores tienen el mismo \(\beta\), la corriente de referencia también alimenta las dos bases:</p>
+<div class="formula">\[I_{REF}=I_O+\frac{I_O}{\beta}+\frac{I_O}{\beta}\]</div>
+<div class="formula">\[\boxed{I_O=\frac{\beta}{\beta+2}I_{REF}}\]</div>
+</div><div class="box key"><small>Condición olvidada</small>El transistor de salida debe conservar suficiente \(V_{CE}\) para permanecer en activa. Si el voltaje de salida cae demasiado, entra en saturación y el espejo deja de comportarse como fuente de corriente.</div></div>
+<div class="example"><span class="example-label">Ejemplo</span><p>Para \(V_{CC}=12V\), \(R_{REF}=5.6k\Omega\), \(V_{BE}=0.7V\) y \(\beta=120\):</p>
+<div class="formula">\[I_{REF}=\frac{11.3}{5.6k}=2.018mA\]</div><div class="formula">\[I_O=\frac{120}{122}(2.018mA)=\boxed{1.985mA}\]</div>
+<p>El error debido solo a las corrientes de base es cercano al 1.6 %. En la práctica se suman desajustes de \(V_{BE}\), temperatura y \(\beta\).</p></div>
+</section>
+
+<section class="module" id="c7">
+<div class="module-head"><div class="module-title"><span class="no">C7</span><div><span class="eyebrow">Conmutación práctica</span><h2>Arduino / salida lógica → driver de relé</h2></div></div><button class="mark" data-mark="bjt2-relay">Marcar estudiado</button></div>
+<div class="grid2"><div>
+<p>Una salida lógica no debería alimentar directamente una bobina. El BJT permite que la señal de control maneje la corriente de la carga desde una fuente independiente.</p>
+<div class="formula">\[I_C\approx I_{bobina}=\frac{V_{CC}-V_{CE(sat)}}{R_{bobina}}\]</div>
+<p>Para diseñar con saturación robusta se elige un <b>\(\beta\) forzado</b>, por ejemplo 10 en un ejercicio didáctico:</p>
+<div class="formula">\[I_B\ge\frac{I_C}{\beta_F},\qquad R_B=\frac{V_{logic}-V_{BE(sat)}}{I_B}\]</div>
+</div><div class="panel paper"><h3>Protección obligatoria en DC</h3><p>Una bobina almacena energía magnética. Al apagar el transistor intenta mantener la corriente y puede generar una sobretensión:</p><div class="formula">\[v_L=L\frac{di}{dt}\]</div><p>El diodo flyback proporciona una trayectoria de descarga para esa corriente.</p></div></div>
+<div class="example"><span class="example-label">Ejemplo resuelto</span><p>Salida lógica de 5 V, relé de 12 V con bobina de 150 Ω, modelo \(V_{CE(sat)}=0.2V\), \(V_{BE(sat)}=0.8V\), \(\beta_F=10\).</p>
+<div class="formula">\[I_C\approx\frac{12-0.2}{150}=78.7mA\]</div><div class="formula">\[I_B\ge7.87mA\]</div><div class="formula">\[R_B\le\frac{5-0.8}{7.87mA}=534\Omega\]</div><p>Un valor comercial de 510 Ω da aproximadamente 8.24 mA de base.</p>
+<div class="traffic-result yellow"><b>⚠ Verificar.</b> El cálculo del transistor es coherente, pero antes de construir debe verificarse que el microcontrolador concreto pueda suministrar esa corriente de GPIO y debe añadirse el diodo flyback.</div></div>
+</section>
+
+<section class="module" id="c8">
+<div class="module-head"><div class="module-title"><span class="no">C8</span><div><span class="eyebrow">Actuadores</span><h2>Motor DC: la corriente de arranque cambia el diseño</h2></div></div><button class="mark" data-mark="bjt2-motor">Marcar estudiado</button></div>
+<p class="lead">Un error muy común es diseñar el transistor con la corriente nominal del motor e ignorar la corriente de arranque o de rotor bloqueado. Para el semiconductor, ese instante puede ser el peor caso.</p>
+<div class="example"><span class="example-label">Problema tipo Raspberry Pi</span><p>Una señal de 3.3 V debe controlar un motor de 12 V mediante un TIP122. El motor consume 0.30 A en régimen y 1.20 A al arrancar/bloquearse. Para el ejercicio se limita la excitación directa a 3 mA.</p>
+<p>Si alguien usa el \(h_{FE}\ge1000\) de región activa para concluir que “1.2 mA es suficiente”, está mezclando regiones. La propia hoja de datos especifica saturación con relaciones mucho más conservadoras. Por ejemplo, 3 A con 12 mA implica:</p>
+<div class="formula">\[\beta_F=\frac{I_C}{I_B}=\frac{3A}{12mA}=250\]</div>
+<p>Usando ese criterio como referencia didáctica:</p><div class="formula">\[I_B(1.2A)\approx\frac{1.2A}{250}=4.8mA\]</div>
+<div class="traffic-result red"><b>✗ No garantizado con el límite de 3 mA.</b> El diseño que parecía cómodo usando \(h_{FE}\) activo no garantiza el estado de conmutación elegido durante el arranque. Debe rediseñarse la interfaz o escogerse otra solución de potencia.</div>
+</div>
+<div class="box remember"><small>Aprendizaje transferible</small>En motores, relés y solenoides, diseña con la condición crítica de corriente y después verifica tensión, potencia, temperatura y protección inductiva.</div>
+</section>
+
+<section class="module" id="c9">
+<div class="module-head"><div class="module-title"><span class="no">C9</span><div><span class="eyebrow">Movimiento bidireccional</span><h2>Puente H con BJT</h2></div></div><button class="mark" data-mark="bjt2-hbridge">Marcar estudiado</button></div>
+<p>Un puente H cambia la polaridad aplicada al motor sin invertir físicamente los cables. En una versión BJT clásica se pueden usar PNP en el lado alto y NPN en el lado bajo.</p>
+<div class="grid2"><div>
+<table class="compare-table"><thead><tr><th>Estado</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>Motor</th></tr></thead><tbody><tr><td>Avance</td><td>ON</td><td>OFF</td><td>OFF</td><td>ON</td><td>→</td></tr><tr><td>Reversa</td><td>OFF</td><td>ON</td><td>ON</td><td>OFF</td><td>←</td></tr><tr><td>Libre</td><td>OFF</td><td>OFF</td><td>OFF</td><td>OFF</td><td>coast</td></tr><tr><td>Prohibido</td><td>ON</td><td>—</td><td>ON</td><td>—</td><td>shoot-through</td></tr></tbody></table>
+</div><div class="box error"><small>Estado destructivo</small>Encender simultáneamente el transistor superior y el inferior de la misma rama crea una trayectoria de muy baja impedancia entre la alimentación y tierra. A esto se le llama <b>shoot-through</b>.</div></div>
+<div class="formula">\[V_M\approx V_{CC}-|V_{CE(sat),alto}|-V_{CE(sat),bajo}\]</div>
+<div class="box warn"><small>Interfaz de control</small>Un GPIO de 3.3 V o 5 V no debe conectarse ingenuamente a una base PNP high-side de 12 V. Se requiere una etapa de nivel/driver adecuada. El esquema conceptual del puente no sustituye el diseño de la interfaz.</div>
+<div class="hbridge-controls"><button data-hstate="forward">Avance</button><button data-hstate="reverse">Reversa</button><button data-hstate="coast">Libre</button><button data-hstate="shoot">Shoot-through</button></div>
+<svg id="hBridgeSvg" class="chart" viewBox="0 0 760 420"></svg>
+<div id="hBridgeState" class="status-card"></div>
+</section>
+
+<section class="module" id="c10">
+<div class="module-head"><div class="module-title"><span class="no">C10</span><div><span class="eyebrow">Cargas inductivas</span><h2>Diodos de rueda libre y trayectorias de corriente</h2></div></div><button class="mark" data-mark="bjt2-flyback">Marcar estudiado</button></div>
+<div class="grid2"><div>
+<p>Cuando se interrumpe una corriente inductiva, la energía \(\tfrac12LI^2\) no desaparece instantáneamente. Si no existe una ruta alternativa, el inductor eleva su tensión hasta encontrarla, pudiendo superar \(V_{CEO}\) del transistor.</p>
+<div class="formula">\[W_L=\frac12LI^2\]</div><div class="formula">\[v_L=L\frac{di}{dt}\]</div>
+</div><div class="box key"><small>Relé</small>Un solo diodo en antiparalelo con la bobina suele proporcionar la ruta de descarga en una conmutación DC unidireccional. El cátodo se conecta al positivo de la bobina para que permanezca inversamente polarizado mientras el transistor está ON.</div></div>
+<div class="box remember"><small>Puente H</small>Como el motor puede conducir en ambos sentidos, se necesitan trayectorias de recirculación compatibles con cada estado. Un BJT discreto no posee el “body diode” inherente de un MOSFET. Si un Darlington o arreglo incluye diodos internos, debe confirmarse en el esquema del datasheet, no suponerse.</div>
+</section>
+
+<section class="module" id="c11">
+<div class="module-head"><div class="module-title"><span class="no">C11</span><div><span class="eyebrow">Diseño térmico</span><h2>Potencia, temperatura y área segura de operación</h2></div></div><button class="mark" data-mark="bjt2-power">Marcar estudiado</button></div>
+<div class="grid2"><div>
+<p>En DC, la disipación instantánea del transistor se aproxima por:</p><div class="formula">\[\boxed{P_Q\approx V_{CE}I_C}\]</div>
+<p>Con información térmica del datasheet pueden hacerse estimaciones:</p><div class="formula">\[T_J\approx T_A+P_D R_{\theta JA}\]</div><div class="formula">\[T_J\approx T_C+P_D R_{\theta JC}\]</div>
+</div><div class="panel paper"><h3>SOA no es solo \(I_C(max)\)</h3><p>El área segura de operación combina corriente, tensión y tiempo. Un transistor puede cumplir \(I_C<I_{C,max}\) y \(V_{CE}<V_{CEO}\) por separado, pero quedar fuera del SOA por disipación.</p></div></div>
+<div class="box error"><small>Lectura peligrosa</small>Si un datasheet de TO-220 dice \(P_{TOT}=65W\) a \(T_C=25^\circ C\), eso <b>no significa</b> que una pieza montada sin disipador pueda disipar 65 W en el aire. La condición “case at 25 °C” es parte de la especificación.</div>
+</section>
+
+<section class="module" id="c12">
+<div class="module-head"><div class="module-title"><span class="no">C12</span><div><span class="eyebrow">Selección real</span><h2>Qué buscar en datasheets de BJT de señal, potencia y Darlington</h2></div></div><button class="mark" data-mark="bjt2-datasheet">Marcar estudiado</button></div>
+<div class="table-scroll"><table class="compare-table"><thead><tr><th>Dispositivo</th><th>Tipo</th><th>Dato útil</th><th>Qué enseña</th></tr></thead><tbody>
+<tr><td>2N3904</td><td>NPN propósito general</td><td>\(V_{CEO}=40V\), \(I_C(max)=200mA\)</td><td>\(h_{FE}\) depende de \(I_C\) y \(V_{CE}\); los máximos no son puntos recomendados.</td></tr>
+<tr><td>TIP41C / TIP42C</td><td>NPN / PNP de potencia</td><td>\(V_{CEO}=100V\), \(I_C=6A\), TO-220</td><td>Potencia, SOA, condiciones de saturación y grupos de \(h_{FE}\).</td></tr>
+<tr><td>TIP122</td><td>Darlington NPN de potencia</td><td>\(V_{CEO}=100V\), \(I_C=5A\), \(h_{FE}\ge1000\) bajo prueba</td><td>Alta ganancia activa no equivale a saturación con corriente de base arbitrariamente pequeña.</td></tr>
+</tbody></table></div>
+<div class="buttons"><a class="btn" href="datasheet.html#bjt-signal">2N3904</a><a class="btn" href="datasheet.html#bjt-power">TIP41C/TIP42C</a><a class="btn" href="datasheet.html#bjt-darlington">TIP122</a></div>
+</section>
+
+<section class="module" id="c13">
+<div class="module-head"><div class="module-title"><span class="no">C13</span><div><span class="eyebrow">Exploración</span><h2>Cuatro simuladores DC</h2></div></div><button class="mark" data-mark="bjt2-simulators">Marcar estudiado</button></div>
+<div class="sim-stack">
+<div class="mini-sim"><h3>1 · Darlington</h3><div class="grid2"><div class="interactive controls"><label>\(\beta_1\) <strong><span id="dB1Txt">80</span></strong><input id="dB1" type="range" min="20" max="250" value="80" step="5"></label><label>\(\beta_2\) <strong><span id="dB2Txt">120</span></strong><input id="dB2" type="range" min="20" max="250" value="120" step="5"></label><label>\(I_{B1}\) <strong><span id="dIbTxt">1.0</span> µA</strong><input id="dIb" type="range" min="0.1" max="20" value="1" step="0.1"></label></div><div class="metric-grid"><div class="metric"><span>\(\beta_D\) exacta</span><b id="dGain">—</b></div><div class="metric"><span>\(I_{C,total}\)</span><b id="dIc">—</b></div><div class="metric"><span>\(I_{E2}\)</span><b id="dIe">—</b></div></div></div></div>
+<div class="mini-sim"><h3>2 · Espejo de corriente</h3><div class="grid2"><div class="interactive controls"><label>\(V_{CC}\) <strong><span id="mVTxt">12</span> V</strong><input id="mV" type="range" min="3" max="24" value="12" step="0.5"></label><label>\(R_{REF}\) <strong><span id="mRTxt">5.6</span> kΩ</strong><input id="mR" type="range" min="1" max="20" value="5.6" step="0.1"></label><label>\(\beta\) <strong><span id="mBTxt">120</span></strong><input id="mB" type="range" min="30" max="300" value="120" step="5"></label></div><div class="metric-grid"><div class="metric"><span>\(I_{REF}\)</span><b id="mIref">—</b></div><div class="metric"><span>\(I_O\)</span><b id="mIo">—</b></div><div class="metric"><span>Error base</span><b id="mErr">—</b></div></div></div></div>
+<div class="mini-sim"><h3>3 · Driver de carga</h3><div class="grid2"><div class="interactive controls"><label>\(V_{logic}\) <strong><span id="drvVTxt">5.0</span> V</strong><input id="drvV" type="range" min="3.3" max="5" value="5" step="0.1"></label><label>Corriente de carga <strong><span id="drvITxt">80</span> mA</strong><input id="drvI" type="range" min="20" max="1500" value="80" step="10"></label><label>\(R_B\) <strong><span id="drvRTxt">510</span> Ω</strong><input id="drvR" type="range" min="100" max="3300" value="510" step="10"></label><label>\(\beta_F\) objetivo <strong><span id="drvBTxt">10</span></strong><input id="drvB" type="range" min="5" max="250" value="10" step="5"></label></div><div><div id="drvState" class="status-card"></div><div class="metric-grid"><div class="metric"><span>\(I_B\)</span><b id="drvIb">—</b></div><div class="metric"><span>\(\beta_F\) real</span><b id="drvForced">—</b></div><div class="metric"><span>Margen</span><b id="drvMargin">—</b></div></div></div></div></div>
+<div class="mini-sim"><h3>4 · Puente H</h3><p>Utiliza los botones del bloque C9 para estudiar las trayectorias de corriente y detectar shoot-through.</p></div>
+</div>
+</section>
+
+<section class="module" id="c14">
+<div class="module-head"><div class="module-title"><span class="no">C14</span><div><span class="eyebrow">Problemas de ingeniería</span><h2>Problemas propuestos para calcular y después simular</h2></div></div><button class="mark" data-mark="bjt2-problems">Marcar estudiado</button></div>
+<div class="problem-grid">
+<details><summary>Problema A · Electroválvula industrial de 24 V</summary><p>Una salida digital de 5 V debe accionar una electroválvula de 24 V cuya bobina consume 220 mA. Diseña una etapa BJT en saturación con \(\beta_F=10\), determina \(R_B\), potencia aproximada del transistor para \(V_{CE(sat)}=0.25V\) y especifica la protección inductiva. Después simula y compara.</p></details>
+<details><summary>Problema B · Motor de banda transportadora</summary><p>Motor de 12 V: 350 mA nominales y 1.4 A de arranque. La interfaz solo puede entregar 4 mA. Compara un BJT individual y un Darlington. No uses \(h_{FE}\) de región activa como garantía de saturación.</p></details>
+<details><summary>Problema C · Fuente de referencia con espejo</summary><p>Diseña un espejo NPN para \(I_O\approx2.5mA\) desde 15 V con transistores de \(\beta\approx100\). Calcula \(R_{REF}\) incluyendo corrientes de base y determina el error si se usara la aproximación ideal.</p></details>
+<details><summary>Problema D · Interfaz directa entre dos BJT</summary><p>El colector de \(Q_1\) polariza directamente la base de un seguidor \(Q_2\). Determina ambos puntos DC incluyendo la corriente de base de \(Q_2\) como carga del colector de \(Q_1\).</p></details>
+<details><summary>Problema E · Robot móvil con puente H</summary><p>Motor de 9 V y 500 mA. Propón estados de avance, reversa y libre. Calcula la tensión aproximada del motor si cada transistor saturado cae 0.25 V. Identifica todas las combinaciones de shoot-through.</p></details>
+<details><summary>Problema F · Selección por datasheet</summary><p>Para una carga de 1.5 A a 24 V, compara 2N3904, TIP41C y TIP122 usando límites, condiciones de \(h_{FE}\), saturación, potencia y encapsulado. Justifica qué dispositivos descartarías sin limitarte al valor de corriente máxima.</p></details>
+</div>
+<div class="box key"><small>Regla de la práctica</small>Primero entrega el cálculo teórico. Luego construye el circuito en el simulador de la asignatura y registra los valores simulados. Finalmente vuelve a AnalogLab para calcular la diferencia y explicar por qué el modelo ideal y el modelo del simulador no coinciden exactamente.</div>
+</section>
+
+<section class="module" id="c15">
+<div class="module-head"><div class="module-title"><span class="no">C15</span><div><span class="eyebrow">Autoevaluación</span><h2>Calcula, simula, compara y explica</h2></div></div><button class="mark" data-mark="bjt2-practice">Marcar estudiado</button></div>
+<div class="grid2">
+<div class="panel paper"><h3>Reto numérico aleatorio</h3><p id="cExStatement"></p><div class="extract-grid"><label>Resultado principal<input id="cExValue" type="number" step="any"><span id="cExUnit">—</span></label><label>Región / conclusión<select id="cExChoice"><option value="">Seleccionar</option><option value="ok">Cumple</option><option value="review">Revisar</option><option value="fail">No cumple</option></select></label></div><div class="buttons"><button id="cExNew" class="btn small">Nuevo problema</button><button id="cExCheck" class="btn small primary">Comprobar</button></div><p id="cExFb" class="feedback"></p></div>
+<div class="panel paper"><h3>Teórico ↔ simulación</h3><p id="compareStatement">Selecciona un ejercicio, simúlalo externamente y registra la misma magnitud teórica y simulada.</p><div class="extract-grid"><label>Teórico<input id="cmpTheo" type="number" step="any"></label><label>Simulado<input id="cmpSim" type="number" step="any"></label></div><button id="cmpCheck" class="btn small primary">Calcular diferencia</button><div id="cmpTraffic" class="traffic-result">Esperando datos.</div></div>
+</div>
+<div class="reflection-card"><h3>Pregunta abierta aleatoria</h3><p id="cOpenPrompt"></p><textarea id="cOpen" placeholder="Explica el mecanismo físico y después apóyate en las ecuaciones..."></textarea><div class="buttons"><button id="cOpenNew" class="btn small">Nuevo enunciado</button><button id="cOpenGuideBtn" class="btn small">Comparar con guía</button></div><div id="cOpenGuide" class="guide"></div></div>
+<div class="quiz" data-quiz="bjt-dc2" data-limit="8"></div>
+</section>
+
+<section class="module" id="c-ref"><div class="module-head"><div class="module-title"><span class="no">R</span><div><span class="eyebrow">Base académica</span><h2>Referencias empleadas en este módulo</h2></div></div></div><div class="grid2"><div class="panel"><b>Boylestad & Nashelsky</b><p><i>Electronic Devices and Circuit Theory</i>, 11th ed. Redes BJT múltiples, espejos de corriente, fuentes de corriente, conmutación, aplicaciones y conexión Darlington.</p></div><div class="panel"><b>Malvino, Bates & Hoppe</b><p><i>Electronic Principles</i>. Conexiones Darlington, aplicaciones de potencia/conmutación, fundamentos y polarización BJT. La referencia editorial vigente es la 2025 Release.</p></div><div class="panel"><b>Pleite Guerra, Vergaz Benito & Ruiz de Marcos</b><p><i>Electrónica Analógica para Ingenieros</i>. Fuentes/espejos de corriente y análisis de redes analógicas.</p></div><div class="panel"><b>Fabricantes</b><p>onsemi 2N3904; STMicroelectronics TIP41C/TIP42C y TIP122. Las especificaciones se consultan siempre junto con sus condiciones de prueba.</p></div></div></section>
+
+<div class="footer"><div><b>AnalogLab</b><span>Recurso universitario abierto de estudio</span></div><span>Electrónica Analógica y Laboratorio</span></div>
+</main></div>
+<script src="data/quizzes.js?v=13.0"></script><script src="js/core.js?v=13.0"></script><script src="js/bjt-dc2.js?v=13.0"></script>
+</body></html>

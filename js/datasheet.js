@@ -1,7 +1,10 @@
 (()=>{"use strict";const {$,$$}=window.AL;
 const expected={
   "1n4007":{vrrm:[1000,1],io:[1,0.01],ifsm:[30,0.1],vf:[1.1,0.03]},
-  "1n4736a":{vz:[6.8,0.03],izt:[37,0.2],zz:[3.5,0.05],pd:[1,0.02]}
+  "1n4736a":{vz:[6.8,0.03],izt:[37,0.2],zz:[3.5,0.05],pd:[1,0.02]},
+  "2n3904":{vceo:[40,0.2],ic:[200,1],hfe:[100,1],vces:[0.2,0.02]},
+  "tip41c":{vceo:[100,0.5],ic:[6,0.05],hfemin:[15,1],vces:[1.5,0.05]},
+  "tip122":{vceo:[100,0.5],ic:[5,0.05],hfe:[1000,5],vces:[2,0.05]}
 };
 $$('.datasheet-task').forEach(card=>{
   $('.check-extract',card)?.addEventListener('click',()=>{

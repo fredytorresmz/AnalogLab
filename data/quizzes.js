@@ -1213,7 +1213,7 @@ window.ANALOG_QUIZZES={
       "answer": 0
     },
     {
-      "q": "Antes de usar \\(V_L\u0007pprox V_Z\\), el primer paso correcto es:",
+      "q": "Antes de usar \\(V_L\\approx V_Z\\), el primer paso correcto es:",
       "options": [
         {
           "text": "Calcular el voltaje del nodo sin imponer aún la regulación.",
@@ -1525,6 +1525,94 @@ window.ANALOG_QUIZZES={
         }
       ],
       "answer": 1
+    },
+    {
+      "q": "En un datasheet BJT, \\(h_{FE}\\) debe leerse junto con:",
+      "options": [
+        {
+          "text": "las condiciones de \\(I_C\\), \\(V_{CE}\\) y temperatura asociadas.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "solo el nombre comercial.",
+          "feedback": "No."
+        },
+        {
+          "text": "la tensión de red eléctrica.",
+          "feedback": "No."
+        },
+        {
+          "text": "ninguna condición; es constante.",
+          "feedback": "No."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "\\(V_{CE(sat)}\\) en una hoja de datos normalmente se especifica con:",
+      "options": [
+        {
+          "text": "una pareja concreta \\(I_C\\) e \\(I_B\\).",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "solo VCC.",
+          "feedback": "No."
+        },
+        {
+          "text": "la frecuencia de red.",
+          "feedback": "No."
+        },
+        {
+          "text": "IB=0 siempre.",
+          "feedback": "No."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "Un BJT de potencia indica \\(P_{TOT}\\) a \\(T_C=25^\\circ C\\). ¿Qué debes concluir?",
+      "options": [
+        {
+          "text": "La capacidad de potencia depende de mantener la carcasa en la condición térmica indicada.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "No necesita disipador.",
+          "feedback": "No."
+        },
+        {
+          "text": "Puede trabajar a esa potencia a cualquier temperatura.",
+          "feedback": "No."
+        },
+        {
+          "text": "PTOT es corriente.",
+          "feedback": "No."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "En un Darlington integrado, ¿qué conviene buscar además de \\(h_{FE}\\)?",
+      "options": [
+        {
+          "text": "\\(V_{BE(on)}\\), \\(V_{CE(sat)}\\), condiciones de corriente, potencia y esquema interno.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "Solo el color del encapsulado.",
+          "feedback": "No."
+        },
+        {
+          "text": "Únicamente el nombre TIP.",
+          "feedback": "No."
+        },
+        {
+          "text": "Nada más porque es equivalente ideal a un BJT.",
+          "feedback": "No."
+        }
+      ],
+      "answer": 0
     }
   ],
   "zeneravanzado": [
@@ -1753,7 +1841,7 @@ window.ANALOG_QUIZZES={
       "options": [
         {
           "text": "\\(I_L\\).",
-          "feedback": "Correcto: mientras \\(V_L\u0007pprox V_Z\\), la corriente de carga es aproximadamente \\(V_Z/R_L\\)."
+          "feedback": "Correcto: mientras \\(V_L\\approx V_Z\\), la corriente de carga es aproximadamente \\(V_Z/R_L\\)."
         },
         {
           "text": "\\(I_S\\).",
@@ -2361,6 +2449,448 @@ window.ANALOG_QUIZZES={
         },
         {
           "text": "de carga máxima.",
+          "feedback": "No."
+        }
+      ],
+      "answer": 0
+    }
+  ],
+  "bjt-dc2": [
+    {
+      "q": "Un Darlington discreto tiene \\(\\beta_1=80\\) y \\(\\beta_2=120\\). ¿Cuál afirmación es más precisa?",
+      "options": [
+        {
+          "text": "La ganancia compuesta simple es \\(\\beta_1\\beta_2+\\beta_1+\\beta_2\\), aproximadamente el producto para ganancias grandes.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "La ganancia siempre es exactamente 200.",
+          "feedback": "No se suman simplemente las ganancias."
+        },
+        {
+          "text": "Solo importa \\(\\beta_2\\).",
+          "feedback": "La primera etapa amplifica la excitación de la segunda."
+        },
+        {
+          "text": "El Darlington elimina la necesidad de verificar saturación.",
+          "feedback": "La región y la malla de salida siempre deben verificarse."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "¿Qué diferencia práctica importante tiene un Darlington respecto a un BJT individual?",
+      "options": [
+        {
+          "text": "Normalmente presenta dos caídas B-E y puede tener mayor \\(V_{CE(sat)}\\).",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "Siempre tiene menor tensión B-E.",
+          "feedback": "No; hay dos uniones B-E."
+        },
+        {
+          "text": "No disipa potencia.",
+          "feedback": "Sí disipa potencia."
+        },
+        {
+          "text": "No necesita resistencia de base.",
+          "feedback": "La excitación de base debe diseñarse."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "En una red acoplada directamente, la base de la segunda etapa toma corriente del colector de la primera. ¿Qué implica?",
+      "options": [
+        {
+          "text": "El punto DC de la primera etapa puede desplazarse por la carga de la segunda.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "Las etapas siempre son independientes.",
+          "feedback": "Eso sería más propio de un capacitor que bloquee DC."
+        },
+        {
+          "text": "La segunda etapa nunca puede saturarse.",
+          "feedback": "Sí puede."
+        },
+        {
+          "text": "La corriente de base de Q2 es siempre cero.",
+          "feedback": "No."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "En un espejo de corriente simple con transistores iguales y \\(\\beta\\) finita, ¿por qué \\(I_O<I_{REF}\\)?",
+      "options": [
+        {
+          "text": "Porque parte de \\(I_{REF}\\) alimenta las dos corrientes de base.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "Porque Q2 está necesariamente en corte.",
+          "feedback": "No."
+        },
+        {
+          "text": "Porque VBE siempre es cero.",
+          "feedback": "No."
+        },
+        {
+          "text": "Porque la resistencia no conduce.",
+          "feedback": "No."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "¿Qué condición puede hacer fallar el comportamiento de un espejo de corriente aunque los BJT estén bien emparejados?",
+      "options": [
+        {
+          "text": "Un voltaje de salida tan bajo que Q2 entre en saturación.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "Aumentar ligeramente \\(\\beta\\).",
+          "feedback": "Eso reduce el error de base."
+        },
+        {
+          "text": "Usar una resistencia de referencia.",
+          "feedback": "Es necesaria para fijar la corriente."
+        },
+        {
+          "text": "Conectar las bases entre sí.",
+          "feedback": "Es parte de la topología."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "Para un driver BJT de relé, ¿por qué se usa con frecuencia un \\(\\beta\\) forzado menor que el \\(h_{FE}\\) típico?",
+      "options": [
+        {
+          "text": "Para garantizar margen de saturación sin depender de una ganancia activa favorable.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "Porque hFE se mide en voltios.",
+          "feedback": "Es una ganancia adimensional."
+        },
+        {
+          "text": "Porque la bobina no consume corriente.",
+          "feedback": "Sí consume."
+        },
+        {
+          "text": "Porque así se elimina el diodo flyback.",
+          "feedback": "Son problemas diferentes."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "¿Cuál es la función principal del diodo flyback en una bobina DC?",
+      "options": [
+        {
+          "text": "Dar una trayectoria a la corriente inductiva al apagar el transistor y limitar la sobretensión.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "Aumentar la frecuencia del motor.",
+          "feedback": "No."
+        },
+        {
+          "text": "Duplicar la corriente de base.",
+          "feedback": "No."
+        },
+        {
+          "text": "Convertir el BJT en PNP.",
+          "feedback": "No."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "Un motor consume 0.3 A nominales y 1.2 A de stall. ¿Qué corriente debe considerarse al verificar el semiconductor?",
+      "options": [
+        {
+          "text": "También la corriente de stall/arranque, porque puede ser la condición crítica.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "Solo 0.3 A.",
+          "feedback": "Eso puede subdimensionar el diseño."
+        },
+        {
+          "text": "La mitad de 0.3 A.",
+          "feedback": "No."
+        },
+        {
+          "text": "Ninguna; el motor limita solo.",
+          "feedback": "El transistor debe soportar la condición de carga."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "Un TIP122 tiene \\(h_{FE}\\ge1000\\) en ciertas condiciones activas. ¿Puede usarse 1000 directamente como \\(\\beta_F\\) garantizado de saturación?",
+      "options": [
+        {
+          "text": "No; deben consultarse las condiciones específicas de \\(V_{CE(sat)}\\) e \\(I_B\\).",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "Sí, en cualquier corriente.",
+          "feedback": "No."
+        },
+        {
+          "text": "Sí, si VCC es 5 V.",
+          "feedback": "La fuente no cambia la naturaleza de la especificación."
+        },
+        {
+          "text": "Solo si no hay carga.",
+          "feedback": "No."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "En un puente H, ¿qué combinación produce shoot-through en una rama?",
+      "options": [
+        {
+          "text": "El transistor high-side y low-side de la misma rama encendidos simultáneamente.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "Los dos transistores diagonales.",
+          "feedback": "Esa es la combinación usada para hacer circular corriente por el motor."
+        },
+        {
+          "text": "Los cuatro OFF.",
+          "feedback": "Eso deja el motor libre."
+        },
+        {
+          "text": "Un solo transistor ON.",
+          "feedback": "No crea por sí solo un corto de fuente a tierra."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "En avance de un puente H BJT conducen dos transistores saturados. ¿Cuál aproximación de \\(V_M\\) es apropiada?",
+      "options": [
+        {
+          "text": "\\(V_M\\approx V_{CC}-V_{CE(sat),alto}-V_{CE(sat),bajo}\\).",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "\\(V_M=0\\) siempre.",
+          "feedback": "No."
+        },
+        {
+          "text": "\\(V_M=2V_{CC}\\).",
+          "feedback": "No."
+        },
+        {
+          "text": "\\(V_M=V_{BE}\\).",
+          "feedback": "No."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "¿Por qué un GPIO de 3.3 V no debe conectarse sin análisis a la base de un PNP high-side de 12 V?",
+      "options": [
+        {
+          "text": "Porque los niveles y corrientes de base requieren una interfaz adecuada y pueden exceder el dominio del GPIO.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "Porque los PNP no tienen base.",
+          "feedback": "Sí tienen."
+        },
+        {
+          "text": "Porque 3.3 V siempre destruye un PNP.",
+          "feedback": "No es una regla universal; el problema es la interfaz y referencia de niveles."
+        },
+        {
+          "text": "Porque un puente H no usa transistores.",
+          "feedback": "Sí puede usar BJT."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "Para un BJT en DC, \\(P_Q\\approx V_{CE}I_C\\). ¿Qué demuestra esto?",
+      "options": [
+        {
+          "text": "Una corriente moderada puede producir mucha potencia si VCE también es grande.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "La potencia solo depende de IB.",
+          "feedback": "No."
+        },
+        {
+          "text": "La potencia siempre es cero en región activa.",
+          "feedback": "No."
+        },
+        {
+          "text": "IC(max) basta para verificar térmica.",
+          "feedback": "No."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "Un TIP41C indica \\(P_{TOT}=65W\\) a \\(T_C=25^\\circ C\\). ¿Qué interpretación es correcta?",
+      "options": [
+        {
+          "text": "Es una especificación condicionada a la temperatura de la carcasa; no equivale a 65 W sin disipación térmica.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "Puede disipar 65 W siempre en protoboard.",
+          "feedback": "No."
+        },
+        {
+          "text": "Es la potencia que consume la base.",
+          "feedback": "No."
+        },
+        {
+          "text": "Es la potencia mínima.",
+          "feedback": "No."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "¿Qué es el SOA de un transistor de potencia?",
+      "options": [
+        {
+          "text": "La región de combinaciones de tensión, corriente y duración permitidas de forma segura.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "Solo la corriente máxima absoluta.",
+          "feedback": "Es más amplio."
+        },
+        {
+          "text": "El pinout.",
+          "feedback": "No."
+        },
+        {
+          "text": "El valor de beta típico.",
+          "feedback": "No."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "En un Darlington, ¿por qué \\(V_{BE(on)}\\) puede ser mayor que 1.4 V en un datasheet real?",
+      "options": [
+        {
+          "text": "Porque las uniones no tienen una caída fija de 0.7 V; depende de corriente, temperatura y dispositivo.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "Porque el datasheet está equivocado.",
+          "feedback": "No."
+        },
+        {
+          "text": "Porque no existen dos uniones.",
+          "feedback": "Sí existen."
+        },
+        {
+          "text": "Porque hFE tiene unidades de voltio.",
+          "feedback": "No."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "¿Qué debe hacerse antes de usar un BJT de potencia como sustituto de otro?",
+      "options": [
+        {
+          "text": "Comparar polaridad, pinout, tensiones, corriente, potencia/SOA, ganancia, saturación, térmica y encapsulado.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "Comparar solo el nombre.",
+          "feedback": "Insuficiente."
+        },
+        {
+          "text": "Comparar solo IC(max).",
+          "feedback": "Insuficiente."
+        },
+        {
+          "text": "Elegir siempre el de mayor tamaño.",
+          "feedback": "El tamaño no garantiza compatibilidad."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "¿Cuál afirmación separa correctamente DC II del futuro módulo AC?",
+      "options": [
+        {
+          "text": "Aquí se estudian niveles y regiones DC; la ganancia de pequeña señal y respuesta en frecuencia se dejan para AC.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "Aquí ya se calcula Av con re.",
+          "feedback": "Eso corresponde al análisis AC posterior."
+        },
+        {
+          "text": "Aquí se ignora el punto Q.",
+          "feedback": "Sigue siendo importante."
+        },
+        {
+          "text": "Aquí no se usan datasheets.",
+          "feedback": "Sí se usan."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "Una bobina almacena energía \\(W=\\tfrac12LI^2\\). ¿Qué ocurre al abrir bruscamente el circuito?",
+      "options": [
+        {
+          "text": "El inductor intenta mantener la corriente y puede elevar mucho su tensión.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "La energía desaparece instantáneamente.",
+          "feedback": "No."
+        },
+        {
+          "text": "La corriente cambia instantáneamente sin tensión.",
+          "feedback": "Contradice v=Ldi/dt."
+        },
+        {
+          "text": "El BJT se vuelve Zener por definición.",
+          "feedback": "No."
+        }
+      ],
+      "answer": 0
+    },
+    {
+      "q": "¿Qué significa que un BJT de potencia cumpla IC(max) pero quede fuera del SOA?",
+      "options": [
+        {
+          "text": "Que la combinación real de corriente y tensión puede producir estrés o disipación no segura.",
+          "feedback": "Correcto."
+        },
+        {
+          "text": "Que el datasheet no sirve.",
+          "feedback": "No."
+        },
+        {
+          "text": "Que IC(max) es una corriente mínima.",
+          "feedback": "No."
+        },
+        {
+          "text": "Que el transistor está necesariamente en corte.",
           "feedback": "No."
         }
       ],

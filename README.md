@@ -155,3 +155,12 @@ Nuevo capítulo universitario de estudio autónomo: construcción NPN/PNP, opera
 - El capítulo BJT DC refuerza la recta de carga como primer mapa de la malla de salida antes de validar una hipótesis activa.
 - La presentación general del sitio se mantiene abierta a estudiantes universitarios de cualquier institución.
 - Se eliminan referencias públicas a exámenes o evaluación de un curso específico.
+
+
+## v13 · BJT DC II
+
+Se incorpora un segundo capítulo BJT de corriente continua dedicado a redes compuestas, Darlington, par complementario/Sziklai, acoplamiento directo, espejos de corriente, drivers de relé y motor, puente H, protección inductiva, potencia/SOA, selección por datasheet y ejercicios con comparación teoría-simulación.
+
+La página de datasheets se amplía con 2N3904, TIP41C/TIP42C y TIP122. El capítulo mantiene fuera el análisis de pequeña señal y respuesta en frecuencia, que se desarrollará posteriormente en BJT AC.
+
+Referencias de estudio: Boylestad & Nashelsky (11th ed.); Malvino, Bates & Hoppe (2025 Release como referencia editorial actual); Pleite Guerra et al.; datasheets de onsemi y STMicroelectronics.

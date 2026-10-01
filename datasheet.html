@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="AnalogLab: lectura e interpretación de hojas de datos de semiconductores.">
 <title>AnalogLab · Lectura de datasheets</title>
-<link rel="stylesheet" href="css/styles.css?v=12.1">
+<link rel="stylesheet" href="css/styles.css?v=13.0">
 <script>
 window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};
 </script>
@@ -15,7 +15,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
 <header>
 <button class="menu">☰</button>
 <a class="brand" href="index.html"><strong>AnalogLab</strong><span>Electrónica Analógica y Laboratorio</span></a>
-<nav class="topnav"><a href="index.html">Inicio</a><a href="dc.html">Diodos DC</a><a href="ac.html">Diodos AC</a><a href="zener.html">Zener</a><a href="bjt-dc.html">BJT DC</a><a href="taller.html">Taller 1</a><a class="active" href="datasheet.html">Datasheets</a><a href="proyecto1.html">Trabajo opcional</a></nav>
+<nav class="topnav"><a href="index.html">Inicio</a><a href="dc.html">Diodos DC</a><a href="ac.html">Diodos AC</a><a href="zener.html">Zener</a><a href="bjt-dc.html">BJT DC I</a><a href="bjt-dc2.html">BJT DC II</a><a href="taller.html">Taller 1</a><a class="active" href="datasheet.html">Datasheets</a><a href="proyecto1.html">Trabajo opcional</a></nav>
 <div class="header-actions"><button id="class">Modo clase</button><button id="theme">◐</button></div>
 </header>
 
@@ -29,7 +29,11 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
 <a href="#rectificador">D3 · 1N4007</a>
 <a href="#zenerdata">D4 · 1N4736A</a>
 <a href="#seleccion">D5 · Selección industrial</a>
-<a href="#actividad">D6 · Actividad guiada</a>
+<a href="#bjt-signal">D6 · BJT de señal</a>
+<a href="#bjt-power">D7 · BJT de potencia</a>
+<a href="#bjt-darlington">D8 · Darlington</a>
+<a href="#bjt-compare">D9 · Comparación BJT</a>
+<a href="#actividad">D10 · Actividad guiada</a>
 </nav>
 <div class="side-info">La nomenclatura cambia entre fabricantes. El objetivo es aprender a reconocer el significado del dato, su condición de prueba y si representa un límite, un valor típico o un criterio de diseño.</div>
 </aside>
@@ -158,8 +162,38 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
 <div class="box key"><small>Ejemplo de taller</small>Si una fuente utiliza un puente rectificador y eliges un 1N4007, \(V_{RRM}=1000V\) no significa que el circuito deba trabajar cerca de 1000 V. Significa que ese límite es muy superior al secundario de baja tensión y proporciona margen respecto a la tensión inversa del puente.</div>
 </section>
 
+
+<section class="module" id="bjt-signal">
+<div class="module-head"><div class="module-title"><span class="no">D6</span><div><span class="eyebrow">Caso real 3</span><h2>2N3904 · BJT NPN de propósito general</h2></div></div><button class="mark" data-mark="datasheet-bjt-signal">Marcar estudiado</button></div>
+<p>El 2N3904 permite aprender la diferencia entre <b>máximos absolutos</b>, ganancia DC y condiciones de saturación. La hoja actual de onsemi lo describe como amplificador e interruptor de propósito general.</p>
+<div class="buttons"><a class="btn primary" href="https://www.onsemi.com/pdf/datasheet/2n3904-d.pdf" target="_blank" rel="noopener">Abrir datasheet 2N3904 · onsemi</a></div>
+<div class="table-scroll"><table class="compare-table"><thead><tr><th>Parámetro</th><th>Valor/condición</th><th>Interpretación</th></tr></thead><tbody><tr><td>\(V_{CEO}\)</td><td>40 V</td><td>Máximo colector-emisor con base abierta.</td></tr><tr><td>\(I_C\) continuo</td><td>200 mA</td><td>Máximo absoluto, no corriente recomendada universal.</td></tr><tr><td>\(P_D\)</td><td>625 mW a \(T_A=25^\circ C\)</td><td>Depende de la condición térmica y del derating.</td></tr><tr><td>\(h_{FE}\)</td><td>100–300 a \(I_C=10mA, V_{CE}=1V\)</td><td>Ganancia DC bajo esa condición de prueba.</td></tr><tr><td>\(V_{CE(sat)}\)</td><td>máx. 0.2 V a \(I_C=10mA, I_B=1mA\)</td><td>Observe que la saturación incluye explícitamente la corriente de base.</td></tr></tbody></table></div>
+<div class="datasheet-task" data-device="2n3904"><h3>Extrae los datos</h3><div class="extract-grid"><label>\(V_{CEO}\) <span>V</span><input data-key="vceo" type="number" step="any"></label><label>\(I_C(max)\) <span>mA</span><input data-key="ic" type="number" step="any"></label><label>\(h_{FE,min}\) @ 10 mA <span>—</span><input data-key="hfe" type="number" step="any"></label><label>\(V_{CE(sat),max}\) @ 10 mA <span>V</span><input data-key="vces" type="number" step="any"></label></div><button class="btn small primary check-extract">Comprobar lectura</button><p class="feedback extract-feedback"></p></div>
+</section>
+
+<section class="module" id="bjt-power">
+<div class="module-head"><div class="module-title"><span class="no">D7</span><div><span class="eyebrow">Caso real 4</span><h2>TIP41C / TIP42C · BJT complementarios de potencia</h2></div></div><button class="mark" data-mark="datasheet-bjt-power">Marcar estudiado</button></div>
+<p>Estos dispositivos TO-220 permiten discutir corriente, SOA, disipación y pares complementarios NPN/PNP.</p>
+<div class="buttons"><a class="btn primary" href="https://www.st.com/resource/en/datasheet/tip41c.pdf" target="_blank" rel="noopener">Abrir TIP41C/TIP42C · ST</a></div>
+<div class="table-scroll"><table class="compare-table"><thead><tr><th>Parámetro</th><th>Especificación</th><th>Lección</th></tr></thead><tbody><tr><td>\(V_{CEO}\)</td><td>100 V</td><td>Límite de tensión, no tensión de trabajo obligatoria.</td></tr><tr><td>\(I_C\)</td><td>6 A</td><td>Máximo absoluto; revisar SOA y temperatura.</td></tr><tr><td>\(P_{TOT}\)</td><td>65 W a \(T_C=25^\circ C\)</td><td>La condición de carcasa es esencial.</td></tr><tr><td>\(h_{FE}\)</td><td>15–75 a \(I_C=3A,V_{CE}=4V\)</td><td>La ganancia de potencia puede ser mucho menor que en un transistor de señal.</td></tr><tr><td>\(V_{CE(sat)}\)</td><td>máx. 1.5 V a 6 A / 0.6 A de base</td><td>La saturación se especifica con un β forzado de 10.</td></tr></tbody></table></div>
+<div class="datasheet-task" data-device="tip41c"><h3>Lectura de potencia</h3><div class="extract-grid"><label>\(V_{CEO}\) <span>V</span><input data-key="vceo" type="number" step="any"></label><label>\(I_C\) <span>A</span><input data-key="ic" type="number" step="any"></label><label>\(h_{FE,min}\) @ 3 A <span>—</span><input data-key="hfemin" type="number" step="any"></label><label>\(V_{CE(sat),max}\) <span>V</span><input data-key="vces" type="number" step="any"></label></div><button class="btn small primary check-extract">Comprobar lectura</button><p class="feedback extract-feedback"></p></div>
+</section>
+
+<section class="module" id="bjt-darlington">
+<div class="module-head"><div class="module-title"><span class="no">D8</span><div><span class="eyebrow">Caso real 5</span><h2>TIP122 · Darlington NPN de potencia</h2></div></div><button class="mark" data-mark="datasheet-bjt-darlington">Marcar estudiado</button></div>
+<div class="buttons"><a class="btn primary" href="https://www.st.com/resource/en/datasheet/tip122.pdf" target="_blank" rel="noopener">Abrir TIP122 · ST</a></div>
+<div class="table-scroll"><table class="compare-table"><thead><tr><th>Parámetro</th><th>TIP122</th><th>Interpretación</th></tr></thead><tbody><tr><td>\(V_{CEO}\)</td><td>100 V</td><td>Máximo absoluto.</td></tr><tr><td>\(I_C\)</td><td>5 A</td><td>Corriente continua máxima de la tabla de límites.</td></tr><tr><td>\(h_{FE}\)</td><td>mín. 1000 a 0.5 A y 3 A, \(V_{CE}=3V\)</td><td>Región activa bajo prueba.</td></tr><tr><td>\(V_{CE(sat)}\)</td><td>máx. 2 V a 3 A / 12 mA; 4 V a 5 A / 20 mA</td><td>Muestra la relación entre corriente de colector y excitación necesaria para la prueba de saturación.</td></tr><tr><td>\(P_{TOT}\)</td><td>65 W a \(T_C\le25^\circ C\); 2 W a \(T_A\le25^\circ C\)</td><td>Excelente ejemplo de por qué la condición térmica cambia por completo la lectura.</td></tr></tbody></table></div>
+<div class="datasheet-task" data-device="tip122"><h3>Lectura Darlington</h3><div class="extract-grid"><label>\(V_{CEO}\) <span>V</span><input data-key="vceo" type="number" step="any"></label><label>\(I_C\) <span>A</span><input data-key="ic" type="number" step="any"></label><label>\(h_{FE,min}\) <span>—</span><input data-key="hfe" type="number" step="any"></label><label>\(V_{CE(sat),max}\) @ 3 A <span>V</span><input data-key="vces" type="number" step="any"></label></div><button class="btn small primary check-extract">Comprobar lectura</button><p class="feedback extract-feedback"></p></div>
+</section>
+
+<section class="module" id="bjt-compare">
+<div class="module-head"><div class="module-title"><span class="no">D9</span><div><span class="eyebrow">Selección comparativa</span><h2>Señal, potencia o Darlington: no los compares con un solo número</h2></div></div><button class="mark" data-mark="datasheet-bjt-compare">Marcar estudiado</button></div>
+<div class="grid3"><div class="box"><small>2N3904</small><b>Señal / pequeña potencia.</b><br>Alta ganancia útil a corrientes pequeñas; TO-92.</div><div class="box"><small>TIP41C/TIP42C</small><b>Potencia discreta.</b><br>Mayor corriente y disipación, menor hFE en corriente alta, TO-220.</div><div class="box"><small>TIP122</small><b>Darlington de potencia.</b><br>Muy alta ganancia activa, pero mayores caídas y condiciones propias de saturación.</div></div>
+<div class="box key"><small>Checklist de sustitución</small>Polaridad → pinout → \(V_{CEO}\) → corriente/SOA → potencia/térmica → \(h_{FE}\) con condición → \(V_{CE(sat)}\) con \(I_B\) → encapsulado → disponibilidad.</div>
+</section>
+
 <section class="module" id="actividad">
-<div class="module-head"><div class="module-title"><span class="no">D6</span><div><span class="eyebrow">Retroalimentación</span><h2>Actividad de lectura y criterio de ingeniería</h2></div></div></div>
+<div class="module-head"><div class="module-title"><span class="no">D10</span><div><span class="eyebrow">Retroalimentación</span><h2>Actividad de lectura y criterio de ingeniería</h2></div></div></div>
 
 <div class="reflection-card">
 <h3>Pregunta abierta</h3>
@@ -169,14 +203,14 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
 <div id="datasheetGuide" class="guide"></div>
 </div>
 
-<div class="quiz" data-quiz="datasheet"></div>
+<div class="quiz" data-quiz="datasheet" data-limit="6"></div>
 </section>
 
 <div class="footer"><div><b>AnalogLab</b><span>Recurso interactivo de apoyo académico</span></div><span>Electrónica Analógica y Laboratorio</span></div>
 </main>
 </div>
-<script src="data/quizzes.js?v=12.1"></script>
-<script src="js/core.js?v=12.1"></script>
-<script src="js/datasheet.js?v=12.1"></script>
+<script src="data/quizzes.js?v=13.0"></script>
+<script src="js/core.js?v=13.0"></script>
+<script src="js/datasheet.js?v=13.0"></script>
 </body>
 </html>
