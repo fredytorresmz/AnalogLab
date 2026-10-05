@@ -157,9 +157,11 @@ Nuevo capítulo universitario de estudio autónomo: construcción NPN/PNP, opera
 - Se eliminan referencias públicas a exámenes o evaluación de un curso específico.
 
 
-## v13 · BJT DC II
+## v13.1 · BJT DC II
 
-Se incorpora un segundo capítulo BJT de corriente continua dedicado a redes compuestas, Darlington, par complementario/Sziklai, acoplamiento directo, espejos de corriente, drivers de relé y motor, puente H, protección inductiva, potencia/SOA, selección por datasheet y ejercicios con comparación teoría-simulación.
+Se incorpora un segundo capítulo BJT de corriente continua dedicado a redes compuestas, Darlington, par complementario/Sziklai, acoplamiento directo, espejos de corriente, drivers de relé y motor, puente H, protección inductiva, potencia/SOA, selección por datasheet y comparación teoría-simulación.
+
+La revisión v13.1 fortalece el enfoque pedagógico: diagramas funcionales simplificados para las redes complejas, separación visual de etapas, guía paso a paso y problemas con pistas progresivas, comprobaciones y criterios de decisión. La práctica no se limita a obtener un resultado numérico: cada ejercicio conduce por esquema, malla de carga, excitación, región de operación, potencia/protección, simulación y conclusión.
 
 La página de datasheets se amplía con 2N3904, TIP41C/TIP42C y TIP122. El capítulo mantiene fuera el análisis de pequeña señal y respuesta en frecuencia, que se desarrollará posteriormente en BJT AC.
 
