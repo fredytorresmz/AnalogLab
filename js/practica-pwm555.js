@@ -130,9 +130,51 @@ data.text.push(
  ['¿Qué protección de 3 A identifica el artículo original?',['fusible','fuse'],'El artículo identifica el elemento como fusible F1.']
 );
 
+// v14.4: repaso orientado a las etapas y actividades que sí se realizan en esta guía.
+data.mc.push(
+ ['¿Qué debes hacer primero con el motor del grupo?',['Leer su tensión nominal y elegir una fuente compatible','Poner la fuente siempre a 12 V','Bloquear el eje para medir corriente'],0,'Los motores de 6, 9 y 12 V requieren fuente compatible.'],
+ ['¿Por qué se mide primero el pin 3 del NE555 sin motor?',['Para comprobar el PWM sin cargar aún la etapa de potencia','Para medir la resistencia del motor','Para invertir automáticamente el giro'],0,'Se comprueba primero la generación y después la potencia.'],
+ ['¿Cuál componente del esquema modifica el ciclo útil?',['Potenciómetro de 10 kΩ (REG)','Capacitor de filtrado de 100 µF','Fusible del motor'],0,'REG interviene en los tiempos de carga y descarga.'],
+ ['¿Dónde debes colocar los datos de frecuencia, período y duty?',['Tabla A de la guía','Tabla de velocidad nominal del motor','Directamente en los datasheets'],0,'La Tabla A documenta tres posiciones de REG.'],
+ ['¿Qué diferencia hay entre las tablas A y B?',['A caracteriza el NE555 y B registra el comportamiento del motor','A mide la masa del motor y B cuenta transistores','Son iguales'],0,'Se estudia primero la señal y luego la respuesta de la carga.'],
+ ['¿Qué indica un promedio de tensión leído con multímetro en la salida PWM?',['Un promedio de una señal que alterna alto y bajo','Un nivel DC idéntico al valor instantáneo','Que el puente está en reversa'],0,'Para ver la forma temporal se prefiere osciloscopio.'],
+ ['¿Qué significa la referencia BC556 en la etapa de mando?',['Transistor PNP de pequeña señal','Darlington NPN de potencia','Regulador de 12 V'],0,'El BC556 se utiliza como transistor PNP de señal.'],
+ ['¿Cuál sería una compra razonable si no se encuentra BYV26E?',['Un diodo rápido candidato y revisar su hoja de datos para el motor','Cualquier 1N4148 usado como diodo de potencia','Eliminar los diodos'],0,'FR307/HER308 son candidatos locales para comparar; no reemplazos automáticos.'],
+ ['¿Qué debe hacer el grupo si no dispone de osciloscopio?',['Simular la etapa y declarar que los datos son simulados','Inventar una medición','Afirmar que el voltaje promedio es el duty exacto'],0,'No se debe confundir un dato simulado con uno medido.'],
+ ['Si el motor no gira durante una prueba, ¿qué debes comprobar antes que nada?',['Interrumpir alimentación y revisar fuente, polaridad, mando y conexiones','Aumentar ilimitadamente la corriente de fuente','Puentear el fusible'],0,'Primero se detiene y se revisan las condiciones eléctricas.'],
+ ['¿Qué unidad corresponde a la capacitancia de temporización 22 nF?',['Nanofaradios','Microamperios','Vatios'],0,'El componente señalado es un capacitor de 22 nF.'],
+ ['¿Qué dato debe explicar tu conclusión final?',['Relación entre PWM, dirección y respuesta del motor','Solo el nombre comercial del motor','Únicamente un puntaje del cuestionario'],0,'La práctica busca interpretar funcionamiento y mediciones.']
+);
+data.tf.push(
+ ['La etapa de control NE555 debe estudiarse antes de unirla a la carga de potencia.',true,'El montaje por etapas permite localizar errores con mayor seguridad.'],
+ ['Un motor de 6 V puede conectarse directamente a 12 V por utilizar duty de 50 %, sin más comprobaciones.',false,'Los pulsos siguen pudiendo llegar a la amplitud de la fuente.'],
+ ['Una resistencia de 470 Ω y un zener de 15 V regulan automáticamente a 15 V con fuente de 12 V.',false,'La entrada es insuficiente para regular a 15 V.'],
+ ['El fusible reemplaza las rutas de recirculación del motor.',false,'Son protecciones distintas.'],
+ ['Un capacitor de 100 nF y uno de 100 µF tienen la misma capacitancia.',false,'Son mil veces diferentes.'],
+ ['La tabla de medición permite comparar resultados medidos o simulados con los cálculos.',true,'Se debe indicar claramente el origen del valor.'],
+ ['El pin 7 del NE555 participa en la descarga del capacitor de temporización.',true,'La descarga está asociada con la generación de pulsos.'],
+ ['Cambiar sentido de giro y cambiar ciclo útil son exactamente la misma operación.',false,'El sentido depende del mando del puente y el duty regula la conducción.']
+);
+data.num.push(
+ ['Si tON=3 ms y tOFF=9 ms, calcula el duty en %.',25,1,'T=12 ms y D=3/12·100=25%.'],
+ ['Si la frecuencia es 400 Hz, ¿cuál es T en ms?',2.5,0.1,'T=1000/400=2,5 ms.'],
+ ['Una caída de 2 V a 1 A en un Darlington implica potencia instantánea de cuántos W?',2,0.05,'P=V·I=2·1=2 W.'],
+ ['Con fuente de 12 V y motor con tensión máxima de 6 V, ¿cuántos voltios excede la fuente?',6,0,'12−6=6 V; no conectarlo directamente.']
+);
+data.text.push(
+ ['¿Qué pin del NE555 debes comprobar para observar el PWM? Solo número.',['3'],'El pin 3 es OUT.'],
+ ['¿Cómo se llama la tabla de caracterización del NE555: A o B?',['a'],'La Tabla A registra f, T y D.'],
+ ['¿Qué dispositivo del circuito cambia la polaridad sobre el motor? Responde con dos palabras.',['puente h','puenteh'],'El puente H invierte la polaridad mediante la conmutación de sus ramas.']
+);
+
+// Prioridad formativa: el cuestionario evalúa lo que se aprende en la práctica,
+// no la procedencia editorial del dibujo ni los pendientes de documentación.
+for(const type of ['mc','tf','num','text']){
+ data[type]=data[type].filter(entry=> !/(autor|atribuci[oó]n|propiedad intelectual|publicar su imagen|copiar el jpg|art[ií]culo de referencia atribuye|dise[nñ]o a Jean|apellido del autor|autor[ií]a del esquema)/i.test(entry[0]));
+}
 const seenInCurrentSession={};
 function pickFresh(type,k){
-  const n=data[type].length,key='analoglab_pwm555_v14_seen_'+type;
+  const n=data[type].length,key='analoglab_pwm555_v144_seen_'+type;
   let seen=Array.isArray(seenInCurrentSession[type]) ? [...seenInCurrentSession[type]] : [];
   if(!seen.length)try{const saved=JSON.parse(localStorage.getItem(key)||'[]');if(Array.isArray(saved))seen=saved.filter(i=>Number.isInteger(i)&&i>=0&&i<n)}catch(e){}
   // Al agotarse el banco de esta categoría comienza un nuevo ciclo sin repetir en el mismo intento.
@@ -166,12 +208,12 @@ function checkMotor(){
  if(!out)return;
  const read=id=>{const v=$(id).value.trim();return v===''?NaN:Number(v.replace(',','.'));};
  const vs=read('motorSupply'), vm=read('motorMaxVolt'), ir=read('motorRatedCurrent'), is=read('motorStallCurrent');
- if(!Number.isFinite(vs)||vs<10||vs>12){out.textContent='La fuente propuesta debe ajustarse entre 10 y 12 V. Revísala con el docente.';return;}
+ if(!Number.isFinite(vs)||vs<6||vs>12){out.textContent='Ajusta la fuente a una tensión compatible con el motor (en el formulario: 6–12 V).';return;}
  if(!Number.isFinite(vm)||vm<=0){out.textContent='Falta la máxima tensión permitida del motor: todavía no se debe energizar.';return;}
  if(vs>vm+0.000001){out.textContent=`NO conectar: la fuente de ${vs} V supera el límite indicado para el motor (${vm} V). Utiliza una fuente apropiada o cambia de motor.`;return;}
  if(!Number.isFinite(ir)||ir<=0||!Number.isFinite(is)||is<=0){out.textContent='El voltaje puede ser compatible, pero faltan la corriente nominal y/o la de arranque de la ficha técnica: solo análisis/simulación.';return;}
  if(is<ir){out.textContent='Revisa los datos: la corriente indicada de bloqueo/arranque es menor que la corriente nominal. No energizar sin aclarar la ficha.';return;}
- out.textContent=`Preverificación documental: ${vs} V no exceden los ${vm} V indicados; corriente nominal ${ir} A, arranque/bloqueo ${is} A. NO es aprobación de montaje: falta comprobar el límite de la fuente, el fusible, los diodos, disipadores y el nuevo riel del 555 con el docente.`;
+ out.textContent=`Preverificación documental: ${vs} V no exceden los ${vm} V indicados; corriente nominal ${ir} A, arranque/bloqueo ${is} A. NO es aprobación de montaje: falta comprobar el límite de la fuente, el fusible, los diodos, disipadores y la alimentación adaptada del 555.`;
 }
 function init(){['pwmDuty','pwmFreq'].forEach(id=>$(id).addEventListener('input',drawing));drawing();$('quizNext').addEventListener('click',next);$('quizRepeat').addEventListener('click',start);const mc=$('motorCheck');if(mc)mc.addEventListener('click',checkMotor);start();}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();

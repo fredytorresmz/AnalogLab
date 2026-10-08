@@ -209,3 +209,17 @@ Sube **el contenido de la raíz del ZIP** a la raíz del repositorio de GitHub P
 Actualización v14.3: la edición pública enlaza la obra atribuida a Jean-Bernard Guiot; las imágenes JPG de terceros no se incluyen. El material original de AnalogLab conserva su licencia según `LICENSE-CONTENT.md`.
 
 La página diferencia componentes identificados de datos aún pendientes. El circuito NO se declara aprobado para montaje de potencia. 555, control BC546/BC556, Darlington, fusible 3 A y BYV26E requieren las comprobaciones descritas en la guía.
+
+## v14.4 · Guía de laboratorio progresiva (8 octubre 2026)
+
+Se reestructura `practica-pwm555.html` con un diseño didáctico propio, inspirado solamente en la **idea organizativa general** de la guía institucional proporcionada por el docente (objetivos, materiales, procedimiento, mediciones y comparación). No reproduce texto, figuras, numeración, encabezados ni las actividades de esa guía previa.
+
+- Presenta **once apartados**: visión del sistema, PWM/NE555, selección del motor 6/9/12 V, puente H, función de las etapas, materiales accesibles en Colombia, **nueve fases de trabajo**, ejercicios tutor resueltos, tablas de resultados, cuestionario y bibliografía.
+- El apartado de materiales incluye referencias originales y candidatos observados en catálogos colombianos, especialmente Didácticas Electrónicas I+D y Suconel. Existencias y precios no están garantizados; los reemplazos de dispositivos de potencia exigen comparar hojas de datos.
+- Incorpora hoja de mediciones editable por el estudiante y opción para copiar un resumen, con guardado local cuando el navegador lo permite (`js/lab-report.js`). No envía datos a un servidor.
+- El cuestionario mantiene preguntas aleatorias, nota de 0 a 5 y repetición; se agregan reactivos del procedimiento y se reduce la presencia de cuestiones editoriales.
+- La figura de Jean-Bernard Guiot se **enlaza** a RadioLocman en lugar de redistribuirse. El SVG propio presente es un **mapa de funcionamiento**, no un esquema eléctrico de cableado.
+- Se diferencia de forma expresa entre prueba segura del 555, interfaz de mando y ensayo de potencia. Con 10–12 V de entrada, la red del circuito original **470 Ω + zener 15 V no puede regular a 15 V** y necesita adaptación antes de construir el montaje completo.
+- La fuente utilizada debe ser compatible con cada motor: para un motor 6 V o 9 V es necesario usar alimentación que no exceda lo que admite, no conectar 10–12 V directamente.
+
+**Nota técnica**: el HTML enseña la secuencia de laboratorio y permite registrar resultados; no constituye homologación eléctrica de todas las posibles combinaciones motor–transistores–diodos. Para pasar de esquema publicado a montaje concreto se debe contrastar con las hojas de datos y medir las condiciones de trabajo.
