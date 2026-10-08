@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="510" viewBox="0 0 960 510" role="img" aria-label="Circuitos equivalentes BJT de pequeña señal modelo re y modelo híbrido pi">
+<style>text{font:16px Arial,sans-serif;fill:#1c3450}.heading{font:bold 22px Arial}.tag{font:bold 19px Arial;fill:#155aa8}.wire{stroke:#25354a;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}.res{stroke:#25354a;stroke-width:3;fill:#fff}.source{fill:#e7f5ed;stroke:#13824c;stroke-width:3}.node{fill:#25354a}.fine{font-size:14px;fill:#62758b}</style><rect width="960" height="510" rx="18" fill="#fff"/>
+<text x="32" y="42" class="heading">Equivalentes de pequeña señal en emisor común</text><text x="32" y="70" class="fine">Ambos circuitos modelan el mismo transistor polarizado en región activa. Se omite rₒ para simplificar.</text>
+<rect x="30" y="106" width="438" height="336" rx="14" fill="#f3f8ff" stroke="#d7e7f7" stroke-width="2"/>
+<text x="52" y="144" class="tag">Modelo rₑ (aproximado)</text>
+<text x="50" y="187">B</text><path class="wire" d="M70 182 H168 V224"/><rect x="153" y="224" width="30" height="82" class="res"/><text x="190" y="264">(β+1)rₑ</text><path class="wire" d="M168 306 V382 H374 M374 182 V250"/>
+<text x="386" y="187">C</text><circle cx="374" cy="288" r="36" class="source"/>
+<path class="wire" d="M374 324 V382"/><path d="M374 264 V306 M368 299 L374 308 L380 299" fill="none" stroke="#13824c" stroke-width="3"/>
+<text x="300" y="346">β · iᵦ</text><text x="62" y="424">E · tierra AC</text>
+<path class="wire" d="M270 382 V397 M255 397 H285 M260 405 H280 M265 413 H275"/>
+<circle cx="168" cy="382" r="4.5" class="node"/><circle cx="374" cy="382" r="4.5" class="node"/>
+<rect x="492" y="106" width="438" height="336" rx="14" fill="#f3f8ff" stroke="#d7e7f7" stroke-width="2"/>
+<text x="514" y="144" class="tag">Modelo híbrido-π (aproximado)</text>
+<text x="512" y="187">B</text><path class="wire" d="M532 182 H630 V224"/><rect x="615" y="224" width="30" height="82" class="res"/><text x="652" y="264">rπ</text><path class="wire" d="M630 306 V382 H838 M838 182 V250"/>
+<text x="852" y="187">C</text><circle cx="838" cy="288" r="36" class="source"/>
+<path class="wire" d="M838 324 V382"/><path d="M838 264 V306 M832 299 L838 308 L844 299" fill="none" stroke="#13824c" stroke-width="3"/>
+<text x="754" y="346">gₘ · vπ</text><text x="516" y="424">E · tierra AC</text>
+<path class="wire" d="M724 382 V397 M709 397 H739 M714 405 H734 M719 413 H729"/>
+<circle cx="630" cy="382" r="4.5" class="node"/><circle cx="838" cy="382" r="4.5" class="node"/>
+<rect x="30" y="460" width="900" height="34" rx="8" fill="#eaf6ee" stroke="#a8d0b4"/>
+<text x="480" y="482" text-anchor="middle">Relación: (β+1)rₑ ≈ rπ; con α ≈ 1, β · iᵦ ≈ gₘ · vπ</text>
+</svg>

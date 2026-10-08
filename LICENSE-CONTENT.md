@@ -35,3 +35,11 @@ Esta licencia no cambia los derechos ni las licencias de:
 
 Cada componente de terceros conserva su propia licencia. En particular,
 MathJax mantiene la licencia incluida en `vendor/mathjax/LICENSE`.
+
+
+## Esquema citado en el módulo PWM 555 — tercero no redistribuido (v14.3)
+
+Se cita el circuito atribuido a **Jean-Bernard Guiot**, artículo *Circuit Provides Bidirectional, Variable-Speed Motor Control*, publicado en EDN y disponible en RadioLocman:
+https://www.radiolocman.com/shem/schematics.html?di=648713
+
+La edición pública del sitio contiene explicaciones y representaciones funcionales originales y un enlace a la obra de referencia. No incluye el JPG original ni sus recortes porque la atribución no otorga por sí sola derechos de reproducción.

@@ -153,3 +153,51 @@ svg.diagram,svg.chart{min-height:220px;overflow:visible}
 .problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.problem-grid details{border:1px solid var(--line);border-radius:12px;background:var(--paper);padding:12px}.problem-grid summary{cursor:pointer;font-weight:700;color:var(--navy)}.problem-grid p{margin:10px 0 0}
 @media(max-width:850px){.problem-grid,.bjt2-map{grid-template-columns:1fr}}
 @media(max-width:620px){.traffic-legend{align-items:flex-start}.bjt2-diagram{min-height:220px}.hbridge-controls button{flex:1;min-width:42%}}
+
+/* BJT AC v14 — figuras separadas, ancho controlado y sin texto dentro de caminos eléctricos */
+.ac-figure{margin:12px 0 18px;padding:8px;border:1px solid var(--line);border-radius:14px;background:#fff;overflow-x:auto}
+.ac-figure img{width:100%;max-width:960px;display:block;height:auto;margin:0 auto;min-width:580px}
+.ac-result,.ac-sim-results{padding:20px;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
+.ac-result span,.ac-sim-results span{display:block;color:var(--muted);font-size:.87rem}.ac-result strong,.ac-sim-results strong{display:block;font-size:clamp(1.3rem,2.2vw,1.9rem);color:var(--navy);margin:8px 0}
+.ac-sim{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;padding:14px;background:var(--bg);border-radius:15px;border:1px solid var(--line)}
+.ac-sim-controls{display:grid;gap:16px}.ac-sim-controls label{display:grid;gap:7px}.ac-sim-controls input[type=range]{width:100%}
+.ac-sim-results>div{padding:8px 0;border-bottom:1px solid var(--line)}
+.ac-table-wrap{overflow-x:auto}.ac-table{width:100%;border-collapse:collapse;min-width:640px}.ac-table th,.ac-table td{border-bottom:1px solid var(--line);text-align:left;padding:10px 12px;vertical-align:top}.ac-table th{background:var(--blue2);color:var(--navy)}
+#ac8 details>div{line-height:1.65}#ac8 details>div details{background:var(--paper)}
+@media(max-width:850px){.ac-sim{grid-template-columns:1fr}}@media(max-width:620px){.ac-figure img{min-width:580px}}
+/* Evita que los SVG de lectura ampliable ensanchen la cuadrícula en pantallas pequeñas */
+.grid2>*,.grid3>*{min-width:0}
+.ac-figure{min-width:0;max-width:100%;box-sizing:border-box}
+.ac-table-wrap{max-width:100%}
+@media(max-width:620px){html,body{overflow-x:clip}.layout{overflow-x:clip}.ac-table-wrap{display:block;width:100%;max-width:100%;overflow-x:auto}.ac-table{min-width:680px}}
+/* v14: PWM 555 and guided BJT AC modules */
+.practice-shell{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.practice-shell>*{min-width:0}.practice-card{border:1px solid var(--line);border-radius:14px;padding:16px;background:var(--paper)}
+.practice-card h3{margin:0 0 8px}.practice-card p{line-height:1.62}.practice-table-wrap{max-width:100%;overflow-x:auto}
+.practice-table{width:100%;min-width:550px;border-collapse:collapse}.practice-table th,.practice-table td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.practice-table th{background:var(--blue2)}
+.practice-figure{margin:14px 0;background:white;border:1px solid var(--line);border-radius:14px;overflow-x:auto;padding:10px}.practice-figure svg{display:block;width:100%;max-width:960px;min-width:630px;height:auto;margin:0 auto}
+.practice-q{padding:18px;background:var(--bg);border:1px solid var(--line);border-radius:14px}.practice-q h3{margin:10px 0}.practice-choices{display:grid;gap:8px}.practice-choice{display:block;width:100%;padding:12px 15px;border:1px solid var(--line);background:var(--paper);border-radius:9px;text-align:left;color:var(--text);font:inherit;cursor:pointer}.practice-choice:not(:disabled):hover{border-color:var(--blue);background:var(--blue2)}.practice-choices input{width:100%;max-width:400px;padding:11px 13px;border:1px solid var(--line);border-radius:9px;background:var(--paper);font:inherit}.practice-feedback{font-weight:650;min-height:2rem}.practice-feedback.success{color:var(--green)}.practice-feedback.retry{color:var(--red)}
+.practice-small{font-size:.85rem;color:var(--muted)}.practice-pwm{padding:14px;border:1px solid var(--line);border-radius:13px;background:var(--paper)}.practice-pwm svg{width:100%;height:auto;display:block}.practice-stats{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}.practice-stat{flex:1;min-width:95px;border:1px solid var(--line);background:var(--bg);padding:12px;border-radius:9px}.practice-stat b{display:block;font-size:1.2rem;color:var(--navy)}
+.practice-label{display:block;font-weight:750;margin:10px 0 6px}.practice-slider{width:100%}.practice-inline{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.practice-inline input{width:220px;max-width:100%;padding:10px;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:var(--text)}
+@media(max-width:850px){.practice-shell{grid-template-columns:1fr}.practice-figure{max-width:100%}}
+/* Práctica 555 / puente H · v14.1 */
+.practice-quiz{padding:20px;border:1px solid var(--line);background:var(--paper);border-radius:16px;max-width:920px}
+.practice-quiz>label{display:block;font-weight:750;margin-bottom:7px}
+.practice-quiz>input,.practice-short{max-width:100%;width:420px;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink)}
+.practice-quiz h3{margin:18px 0 12px}
+.practice-options{display:grid;gap:9px;margin:15px 0}
+.practice-option{display:flex;align-items:start;gap:10px;border:1px solid var(--line);border-radius:10px;padding:12px;background:var(--paper);cursor:pointer}
+.practice-option input{margin-top:4px;flex:0 0 auto}
+.practice-option:has(input:checked){border-color:var(--blue);background:var(--blue2)}
+.practice-message{font-size:.92rem;color:var(--muted);margin:14px 0}
+.practice-grade{font-size:1.5rem;font-weight:850;color:var(--blue);margin:12px 0}
+.practice-quiz .btn{margin:7px 8px 7px 0}
+.practice-quiz textarea{width:100%;max-width:100%;padding:12px}
+.practice-quiz [hidden]{display:none !important}
+.ac-figure svg{display:block;width:100%;max-width:960px;min-width:650px;height:auto;margin:0 auto}
+@media(max-width:640px){.practice-quiz{padding:13px}.practice-quiz>input,.practice-short{width:100%}.ac-figure svg{min-width:650px}}
+
+/* AnalogLab v14.3: ficha de compatibilidad del motor, responsive */
+.pwh-entry{display:block;width:100%;max-width:440px;box-sizing:border-box;margin:5px 0 15px;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--navy);font:inherit}
+#motorResult{display:block;max-width:860px;line-height:1.5;font-weight:600}
+@media(max-width:680px){.pwh-entry{max-width:100%}}

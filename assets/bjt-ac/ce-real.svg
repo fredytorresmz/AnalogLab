@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="570" viewBox="0 0 960 570" role="img" aria-label="Amplificador emisor común"><style>text{font:16px Arial, sans-serif;fill:#18304b}.heading{font:bold 21px Arial;fill:#18304b}.label{font:bold 17px Arial;fill:#174d83}.wire{stroke:#26384b;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}.res{stroke:#26384b;stroke-width:3;fill:#fff}.cap{stroke:#26384b;stroke-width:4}.node{fill:#26384b}.bjt{stroke:#155aa8;stroke-width:3.5;fill:none;stroke-linejoin:round}.arrow{fill:#155aa8}.muted{fill:#627387}.soft{fill:#f2f7fc;stroke:#dce5ef;stroke-width:1.5}</style><rect width="960" height="570" rx="18" fill="#fff"/>
+<text x="38" y="40" class="heading">Emisor común NPN · circuito original</text>
+<text x="38" y="70" class="muted">Fuente DC, polarización por divisor y capacitores de acoplamiento / bypass</text>
+<path class="wire" d="M445 97 H540"/><text x="552" y="102" class="label">+VCC</text>
+<path class="wire" d="M445 97 V138 M445 204 V280 M445 280 V336 M445 408 V465"/>
+<rect x="432" y="138" width="26" height="66" class="res"/><text x="383" y="177" class="label">R1</text>
+<rect x="432" y="336" width="26" height="72" class="res"/><text x="382" y="376" class="label">R2</text>
+<path class="wire" d="M540 97 V138 M540 205 V220"/><rect x="527" y="138" width="26" height="67" class="res"/><text x="562" y="173" class="label">RC</text>
+<path class="wire" d="M540 220 V246 M540 357 V376 M540 432 V465"/>
+<rect x="527" y="376" width="26" height="56" class="res"/><text x="560" y="412" class="label">RE</text>
+<!-- Standard NPN sign: base vertical, upper collector diagonal, lower emitter diagonal with arrow out -->
+<circle cx="491" cy="299" r="65" fill="#f2f7fc" stroke="#cbd9ea" stroke-width="1.6"/>
+<path class="bjt" d="M466 260 V336 M466 276 L505 248 L540 220 M466 321 L506 350 L540 360 M445 299 H466"/>
+<polygon class="arrow" points="491,338 505,350 489,351"/>
+<text x="553" y="293" class="label">Q1 · NPN</text>
+<text x="458" y="245" class="muted">B</text><text x="550" y="225" class="muted">C</text><text x="550" y="359" class="muted">E</text>
+<path class="wire" d="M445 280 V299 H445 M175 299 H445"/>
+<path class="wire" d="M56 299 H155 M175 299 H445"/>
+<path class="cap" d="M155 279 V319 M175 279 V319"/><text x="141" y="265" class="label">C1</text>
+<text x="43" y="338" class="label">vin~</text><circle cx="56" cy="299" r="5" class="node"/>
+<!-- C2 from collector x540 y220 to x810 y220 -->
+<path class="wire" d="M540 220 H665 M686 220 H828"/><path class="cap" d="M665 200 V240 M686 200 V240"/><text x="653" y="189" class="label">C2</text>
+<path class="wire" d="M805 220 V284 M805 353 V465"/><rect x="792" y="284" width="26" height="69" class="res"/><text x="827" y="323" class="label">RL</text>
+<text x="829" y="205" class="label">vout~</text>
+<!-- CE parallel with RE-->
+<path class="wire" d="M540 376 H670 V395 M670 418 V465 H540"/><path class="cap" d="M650 395 H690 M650 418 H690"/><text x="688" y="410" class="label">CE</text>
+<path class="wire" d="M445 465 H805"/>
+<path class="wire" d="M611 465 V479 M596 479 H626 M601 486 H621 M606 493 H616"/>
+<circle class="node" cx="445" cy="299" r="5"/><circle class="node" cx="540" cy="220" r="5"/><circle class="node" cx="540" cy="376" r="5"/>
+<text x="45" y="532" class="muted">C1 y C2 acoplan la señal. CE puentea RE cuando su reactancia es suficientemente pequeña.</text></svg>

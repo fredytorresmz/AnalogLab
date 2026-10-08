@@ -1,0 +1,3 @@
+El esquema usado como referencia para la práctica de NE555 + puente H corresponde al artículo atribuido a Jean-Bernard Guiot, "Circuit Provides Bidirectional, Variable-Speed Motor Control" (EDN, versión RadioLocman).
+https://www.radiolocman.com/shem/schematics.html?di=648713
+No se incluye la imagen JPG ni recortes en el paquete público porque no se ha comprobado autorización para republicarlos. El profesor puede consultar/proyectar el artículo enlazado.

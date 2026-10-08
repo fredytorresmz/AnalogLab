@@ -1,3 +1,13 @@
+# AnalogLab v14.3 · Acuerdo de laboratorio 10–12 V y atribución
+
+- **Motor:** alimentación de laboratorio propuesta de 10 a 12 V DC solo para motores cuya ficha admita el voltaje seleccionado. Se requiere corriente nominal/de bloqueo y fuente limitada; no se autoriza ningún circuito solo por presentar una tensión nominal compatible.
+- **Temporizador:** a 10–12 V, la rama original con resistencia 470 Ω y zener 15 V **no regula a 15 V**. El 555 y su etapa de mando deben alimentarse mediante una solución revisada y estable, con tierras comunes y compatibilidad eléctrica comprobada. No construir sin adaptación supervisada.
+- **Autoría:** se localizó el artículo de **Jean-Bernard Guiot**, *Circuit Provides Bidirectional, Variable-Speed Motor Control*, EDN / RadioLocman: https://www.radiolocman.com/shem/schematics.html?di=648713. La edición pública enlaza la publicación original, sin incorporar/copiar el JPG ni los recortes de terceros.
+- **Evaluación:** 98 preguntas en cuatro modalidades, 10 por intento, calificación de 0 a 5; mejores notas guardadas solo localmente en el navegador.
+- **Alcance:** siguen pendientes las corrientes por grupo, la especificación del fusible de 3 A, las características de los diodos, el diseño final de alimentación del 555, excitación, disipación y estado seguro de las entradas antes de energizar.
+
+---
+
 # AnalogLab
 
 ## Electrónica Analógica y Laboratorio
@@ -166,3 +176,36 @@ La revisión v13.1 fortalece el enfoque pedagógico: diagramas funcionales simpl
 La página de datasheets se amplía con 2N3904, TIP41C/TIP42C y TIP122. El capítulo mantiene fuera el análisis de pequeña señal y respuesta en frecuencia, que se desarrollará posteriormente en BJT AC.
 
 Referencias de estudio: Boylestad & Nashelsky (11th ed.); Malvino, Bates & Hoppe (2025 Release como referencia editorial actual); Pleite Guerra et al.; datasheets de onsemi y STMicroelectronics.
+
+
+## v14 · BJT en AC y preparación de práctica PWM
+- `bjt-ac.html`: guía de análisis en AC a pequeña señal, modelo r_e primero, introducción a híbrido-π, configuración CE/CC/CB, equivalentes dibujados, calculadoras de parámetros, ejercicios con pistas y autoevaluación de 20 preguntas (10 por intento). Basado en el cap. 5 de Boylestad (10.ª ed.); capítulos 9–11 de Malvino; tema 3 de Pleite Guerra y colaboradores como base conceptual.
+- `practica-pwm555.html`: módulo **preparatorio** de 555+PWM+puente H, pinout, gráfico PWM interactivo, diagrama funcional de puente H, criterios de reemplazo, procedimiento seguro y cuestionario de 40 preguntas (10 por intento), selección múltiple, V/F, numéricas y respuestas breves, nota 0–5 con mejor resultado por grupo guardado localmente en navegador.
+- **Pendiente obligatorio de docente:** esquemático descargado de internet. Cuando se adjunte, se debe auditar transistores, pines, circuito 555 concreto, redes temporizadoras, diodos, interruptores, condiciones térmicas, corriente de arranque, inventario exacto, valores y reemplazos. Los diagramas de bloques de la práctica NO sustituyen un esquema de cableado.
+- Fuentes de fabricante: [Texas Instruments NE555](https://www.ti.com/lit/ds/symlink/ne555.pdf) y [ST TIP41C/TIP42C](https://www.st.com/resource/en/datasheet/tip41c.pdf) como ejemplo de lectura de hoja de datos, sin afirmar que sean los transistores del esquema original.
+- Licencia del código MIT y del contenido propio CC BY 4.0. Los libros guía no se redistribuyen.
+
+## Novedades v14 · BJT AC y práctica PWM 555
+
+- `bjt-ac.html`: análisis AC del BJT a partir del punto Q, conversión al equivalente de banda media, modelo `r_e`, híbrido-π, configuraciones CE/CC/CB, simulador, ejercicios progresivos y cuestionario. Los ejemplos y diagramas son elaboración didáctica propia basada en los capítulos citados de Boylestad, Malvino y Pleite Guerra.
+- `practica-pwm555.html`: guía preliminar para controlar un motor DC con PWM generado por 555 y puente H de transistores. **No es un esquema de montaje validado**: aún se requiere el diagrama original del docente para inventario, valores, conexiones y sustituciones.
+- La evaluación de práctica selecciona **10 preguntas de un banco de 40**, con selección múltiple, verdadero/falso, ejercicios numéricos y respuestas breves. La calificación es **0–5** y la mejor nota por grupo se conserva solo en el navegador local. No hay envío automático de resultados al docente.
+- `pwm555-puenteh.html` es un enlace de compatibilidad que redirige a `practica-pwm555.html`; **no** constituye otra evaluación.
+
+### Antes del montaje real de la práctica
+
+1. Adjuntar el esquema fuente del puente H/555 con referencia o URL de origen.
+2. Revisar correspondencia entre pinout, límites eléctricos, corriente de arranque del motor, disipación y protecciones.
+3. Validar etapas por separado con fuente limitada en corriente antes de conectar al motor.
+4. Confirmar las referencias sustitutas exclusivamente contra los datasheets de los elementos del montaje real.
+
+### Publicación
+
+Sube **el contenido de la raíz del ZIP** a la raíz del repositorio de GitHub Pages, preservando las carpetas `css/`, `js/`, `data/`, `vendor/` y `assets/`. En GitHub Pages el archivo inicial es `index.html`.
+
+
+## Complemento octubre 2026 · Esquemático real de PWM 555 y puente H
+
+Actualización v14.3: la edición pública enlaza la obra atribuida a Jean-Bernard Guiot; las imágenes JPG de terceros no se incluyen. El material original de AnalogLab conserva su licencia según `LICENSE-CONTENT.md`.
+
+La página diferencia componentes identificados de datos aún pendientes. El circuito NO se declara aprobado para montaje de potencia. 555, control BC546/BC556, Darlington, fusible 3 A y BYV26E requieren las comprobaciones descritas en la guía.
