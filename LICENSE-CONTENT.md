@@ -43,3 +43,7 @@ Se cita el circuito atribuido a **Jean-Bernard Guiot**, artículo *Circuit Provi
 https://www.radiolocman.com/shem/schematics.html?di=648713
 
 La edición pública del sitio contiene explicaciones y representaciones funcionales originales y un enlace a la obra de referencia. No incluye el JPG original ni sus recortes porque la atribución no otorga por sí sola derechos de reproducción.
+
+
+## Figuras BJT AC v14.5
+Las figuras `rama-emisor-bypass.svg`, `fase-inversion-ce.svg` y `cadena-sensor-etapa-carga.svg` son esquemas pedagógicos originales de AnalogLab. Los casos contextualizados (I–M) son ejercicios didácticos diseñados a partir de métodos de los textos de referencia, sin reproducción de figuras o problemas de sus ediciones.

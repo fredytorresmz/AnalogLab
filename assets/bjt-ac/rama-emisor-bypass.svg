@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="425" viewBox="0 0 940 425" role="img" aria-label="Comparación de la rama de emisor con capacitor de bypass en paralelo con RE y sin capacitor">
+<rect width="940" height="425" rx="18" fill="#fff"/><style>text{font-family:Arial,sans-serif;fill:#18304b}.title{font-size:22px;font-weight:700}.lbl{font-size:17px;font-weight:700}.sub{font-size:15px;fill:#5d7287}.wire{fill:none;stroke:#273d53;stroke-width:3;stroke-linejoin:round}.res{fill:#fff;stroke:#273d53;stroke-width:3}.cap{stroke:#273d53;stroke-width:4}</style>
+<text x="38" y="42" class="title">¿Qué ocurre con Rₑ cuando se coloca Cₑ?</text>
+<text x="38" y="71" class="sub">Detalle de la rama del emisor (no es el circuito amplificador completo).</text>
+<rect x="42" y="99" width="402" height="274" rx="14" fill="#f1f7fd" stroke="#cfdfea"/>
+<rect x="496" y="99" width="402" height="274" rx="14" fill="#f1f8f4" stroke="#cbded0"/>
+<text x="243" y="131" text-anchor="middle" class="lbl">Con capacitor de bypass</text>
+<text x="697" y="131" text-anchor="middle" class="lbl">Sin capacitor de bypass</text>
+<text x="170" y="175" class="lbl">E</text><path class="wire" d="M196 169 H254 V197"/>
+<rect class="res" x="241" y="197" width="26" height="70"/><text x="276" y="237" class="lbl">Rₑ</text>
+<path class="wire" d="M254 267 V300 H348 V261 M254 186 H348 V229"/>
+<path class="cap" d="M326 229 H370 M326 261 H370"/><text x="375" y="252" class="lbl">Cₑ</text>
+<path class="wire" d="M254 300 V316 M238 316 H270 M243 324 H265 M248 332 H260"/>
+<text x="180" y="355" class="sub">En banda media: Cₑ ≈ corto.</text>
+<text x="624" y="175" class="lbl">E</text><path class="wire" d="M649 169 H710 V197"/>
+<rect class="res" x="697" y="197" width="26" height="70"/><text x="737" y="237" class="lbl">Rₑ</text>
+<path class="wire" d="M710 267 V316 M694 316 H726 M699 324 H721 M704 332 H716"/>
+<text x="585" y="355" class="sub">Rₑ permanece en la señal AC.</text>
+<text x="470" y="404" text-anchor="middle" class="sub">En ambos casos, Rₑ continúa influyendo en la polarización DC.</text>
+</svg>

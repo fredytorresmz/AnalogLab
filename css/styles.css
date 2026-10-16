@@ -201,3 +201,20 @@ svg.diagram,svg.chart{min-height:220px;overflow:visible}
 .pwh-entry{display:block;width:100%;max-width:440px;box-sizing:border-box;margin:5px 0 15px;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--navy);font:inherit}
 #motorResult{display:block;max-width:860px;line-height:1.5;font-weight:600}
 @media(max-width:680px){.pwh-entry{max-width:100%}}
+
+/* v14.5 — Preparación de parcial BJT AC */
+.ac145{margin-top:14px}.ac145-route{display:flex;flex-wrap:wrap;gap:9px;margin:12px 0}.ac145-route a{display:inline-block;border:1px solid var(--line);border-radius:20px;background:var(--bg);color:var(--blue);padding:8px 12px;font-size:.88rem;font-weight:700;text-decoration:none}
+.ac145-route a:hover{border-color:var(--blue);background:var(--blue2)}
+.ac145-challenge{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:15px 0}
+.ac145-task{background:var(--bg);border:1px solid var(--line);padding:16px;border-radius:13px;min-width:0}
+.ac145-task label{display:block;font-weight:700;margin:9px 0;color:var(--navy)}
+.ac145-task input{width:180px;max-width:100%;padding:10px 11px;border-radius:9px;border:1px solid var(--line);background:var(--paper);color:var(--ink);font:inherit}
+.ac145-task p{margin:5px 0 10px;line-height:1.55}
+.ac145-result{margin-top:11px;min-height:2em;font-size:.88rem;line-height:1.5}.ac145-result.good{color:var(--green)}.ac145-result.bad{color:var(--red)}
+.ac145-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}.ac145-actions button{cursor:pointer}
+#ac145Grade{font-weight:750;margin-top:12px}
+#ac8 details.ac145{border:1px solid var(--line);border-radius:12px;background:var(--paper);padding:14px;margin:12px 0}
+#ac8 details.ac145>summary{font-weight:800;font-size:1rem;color:var(--navy);cursor:pointer}
+#ac8 details.ac145>div{padding:10px 5px 2px}
+@media(max-width:750px){.ac145-challenge{grid-template-columns:1fr}.ac145-route a{font-size:.81rem}}
+@media print{.ac145-task{break-inside:avoid}#ac145New,#ac145Check{display:none}}

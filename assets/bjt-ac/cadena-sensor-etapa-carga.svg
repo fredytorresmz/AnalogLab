@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="380" viewBox="0 0 940 380" role="img" aria-label="Ruta de una señal de sensor con resistencia interna hacia entrada y salida de un amplificador BJT">
+<rect width="940" height="380" rx="18" fill="#fff"/><style>text{font-family:Arial,sans-serif;fill:#18304b}.title{font-size:22px;font-weight:700}.sub{font-size:15px;fill:#53677e}.card{stroke-width:2;rx:14}.txt{font-size:18px;font-weight:700}.small{font-size:16px}</style>
+<text x="38" y="45" class="title">Cadena de medición: no confundas ganancia de etapa y ganancia total</text>
+<text x="38" y="75" class="sub">Modelo funcional de una interfaz de sensor. Los valores dependen de la etapa real.</text>
+<rect x="50" y="120" width="190" height="104" class="card" fill="#edf5ff" stroke="#8fb1d4"/><text x="145" y="159" text-anchor="middle" class="txt">Señal del sensor</text><text x="145" y="186" text-anchor="middle" class="small">vₛ + resistencia Rₛ</text>
+<rect x="368" y="120" width="220" height="104" class="card" fill="#f4f5fc" stroke="#c7d0e3"/><text x="478" y="159" text-anchor="middle" class="txt">Etapa BJT</text><text x="478" y="186" text-anchor="middle" class="small">Zin y Aᵥ = vₒ/vᵢ</text>
+<rect x="710" y="120" width="190" height="104" class="card" fill="#edf8f2" stroke="#a7cfb8"/><text x="805" y="159" text-anchor="middle" class="txt">Carga Rᴸ</text><text x="805" y="186" text-anchor="middle" class="small">Salida vₒ</text>
+<path d="M240 172 H366 M350 163 L367 172 L350 181 M588 172 H707 M691 163 L708 172 L691 181" fill="none" stroke="#2e597f" stroke-width="3"/>
+<text x="302" y="155" text-anchor="middle" class="small">vᵢ</text>
+<rect x="99" y="268" width="740" height="80" rx="12" fill="#f7fafc" stroke="#d3dde6"/>
+<text x="469" y="296" text-anchor="middle" class="txt">Ganancia total de fuente a carga</text>
+<text x="469" y="326" text-anchor="middle" class="small">vₒ/vₛ = [ Zin /(Rₛ + Zin) ] · [ vₒ/vᵢ ]</text>
+</svg>

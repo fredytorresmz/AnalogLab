@@ -1,3 +1,19 @@
+# AnalogLab v14.5 · Preparación para el parcial de BJT en AC (15 octubre 2026)
+
+**Actualización educativa en `bjt-ac.html` exclusivamente.** Se conserva la versión de la práctica NE555/puente H de v14.4 sin cambiar su procedimiento.
+
+- Se refuerza la transición entre polarización DC, equivalente incremental y cálculo de ganancia/impedancias.
+- Se prioriza el modelo `r_e = 26 mV / I_EQ` y se conserva el modelo híbrido-π como alternativa equivalente (diferencia `I_CQ` vs `I_EQ`).
+- Tres nuevas figuras originales en `assets/bjt-ac/`: detalle del bypass de emisor, inversión de fase del CE y cadena sensor–etapa–carga; no contienen ilustraciones copiadas de los libros.
+- Se agrega una tabla de transformación para fuentes/capacitores y una tabla de identificación de configuraciones CE/CC/CB.
+- Cinco nuevos problemas de escenario aplicado (I–M): polarización y carga desde sensor; seguidor; base común; reactancia; cascada CE + CC. Cada caso contiene hipótesis, pistas, solución y comprobación física. Se conservan los ocho problemas previos y el ejemplo integrador.
+- Nueva evaluación formativa con **cuatro problemas numéricos** cuyos datos cambian al reintentar, nota de 0 a 5 y retroalimentación procedimental; **48 preguntas** de opción múltiple en el banco BJT AC, 10 al azar por intento.
+- Referencias reforzadas con capítulos y secciones de Boylestad/Nashelsky, Malvino/Bates y Pleite Guerra y colaboradores. Los enunciados aplicados son **originales e ilustrativos**; no afirman describir una instalación industrial real ni reproducen ejercicios editoriales.
+- Los modelos son aproximaciones de banda media en región activa; se deben comprobar siempre amplitud de salida, impedancia del generador, limitaciones de frecuencia y punto Q.
+- Para publicar: cargar **todo el contenido del ZIP en la raíz del repositorio**, conservando carpetas `css/`, `js/`, `data/`, `assets/` y `vendor/`.
+
+---
+
 # AnalogLab v14.3 · Acuerdo de laboratorio 10–12 V y atribución
 
 - **Motor:** alimentación de laboratorio propuesta de 10 a 12 V DC solo para motores cuya ficha admita el voltaje seleccionado. Se requiere corriente nominal/de bloqueo y fuente limitada; no se autoriza ningún circuito solo por presentar una tensión nominal compatible.
