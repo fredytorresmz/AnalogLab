@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" role="img" aria-label="Amplificador Cascode CE CB">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .title { font: bold 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
+      .subtitle { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #627d98; }
+      .wire { stroke: #243b53; stroke-width: 2.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.5; }
+      .cap { stroke: #0b69a3; stroke-width: 3.5; }
+      .node { fill: #102a43; }
+      .trans-circle { fill: #f0f4f8; stroke: #9fb3c8; stroke-width: 1.8; }
+      .trans-line { stroke: #0b69a3; stroke-width: 3; stroke-linecap: round; }
+      .trans-arrow { fill: #0b69a3; }
+      .lbl { font: bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #0b69a3; }
+      .val { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
+      .gnd { stroke: #243b53; stroke-width: 2.5; stroke-linecap: round; }
+    </style>
+  </defs>
+
+  <rect width="900" height="560" rx="14" class="bg"/>
+  <rect x="15" y="15" width="870" height="530" rx="10" fill="none" stroke="#d9e2ec" stroke-width="1.5"/>
+
+  <text x="35" y="48" class="title">Esquemático 5 · Configuración Cascode (CE + CB)</text>
+  <text x="35" y="72" class="subtitle">Etapa CE inferior + CB superior: anulación del efecto Miller y gran ancho de banda</text>
+
+  <!-- Rail VCC -->
+  <path class="wire" d="M360 95 H520 M520 95 H600"/>
+  <circle cx="600" cy="95" r="5" class="node"/>
+  <text x="612" y="100" class="lbl">+VCC = 18V</text>
+
+  <!-- Divisor triple de base R1, R2, R3 -->
+  <path class="wire" d="M360 95 V125"/>
+  <rect x="347" y="125" width="26" height="50" class="res"/>
+  <text x="300" y="155" class="lbl">R1</text>
+  <path class="wire" d="M360 175 V215 M360 215 V255"/>
+  <circle cx="360" cy="215" r="5" class="node"/>
+
+  <rect x="347" y="255" width="26" height="50" class="res"/>
+  <text x="300" y="285" class="lbl">R2</text>
+  <path class="wire" d="M360 305 V345 M360 345 V385"/>
+  <circle cx="360" cy="345" r="5" class="node"/>
+
+  <rect x="347" y="385" width="26" height="50" class="res"/>
+  <text x="300" y="415" class="lbl">R3</text>
+  <path class="wire" d="M360 435 V495"/>
+
+  <!-- RC superior -->
+  <path class="wire" d="M520 95 V125"/>
+  <rect x="507" y="125" width="26" height="50" class="res"/>
+  <text x="545" y="155" class="lbl">RC</text>
+  <text x="545" y="172" class="val">2.7 kΩ</text>
+  <path class="wire" d="M520 175 V195"/>
+  <circle cx="520" cy="195" r="5" class="node"/>
+
+  <!-- Transistor Q2 superior (Base Común) -->
+  <circle cx="485" cy="215" r="38" class="trans-circle"/>
+  <path class="trans-line" d="M465 195 V235"/>
+  <!-- Conexión de base de Q2 al nodo intermedio de polarización -->
+  <path class="wire" d="M360 215 H465"/>
+  <!-- Capacitor de desacoplo de base de Q2 a tierra -->
+  <path class="wire" d="M410 215 V240 M410 260 V310"/>
+  <circle cx="410" cy="215" r="5" class="node"/>
+  <path class="cap" d="M395 240 H425 M395 260 H425"/>
+  <text x="430" y="255" class="lbl">CB2</text>
+  <path class="wire" d="M410 310 H360"/>
+  <!-- Colector y Emisor de Q2 -->
+  <path class="trans-line" d="M465 205 L520 195"/>
+  <path class="trans-line" d="M465 225 L520 250"/>
+  <polygon points="508,246 520,250 516,238" class="trans-arrow"/>
+  <text x="535" y="220" class="lbl">Q2 (CB)</text>
+
+  <!-- Nodo intermedio Colector Q1 a Emisor Q2 directo -->
+  <path class="wire" d="M520 250 V325"/>
+  <circle cx="520" cy="285" r="5" class="node"/>
+  <text x="535" y="290" class="val" style="font-size:11px;fill:#d97706;">(Acoplo directo)</text>
+
+  <!-- Transistor Q1 inferior (Emisor Común) -->
+  <circle cx="485" cy="345" r="38" class="trans-circle"/>
+  <path class="trans-line" d="M465 325 V365"/>
+  <path class="wire" d="M360 345 H465"/>
+  <!-- Colector de Q1 -->
+  <path class="trans-line" d="M465 335 L520 325"/>
+  <!-- Emisor de Q1 -->
+  <path class="trans-line" d="M465 355 L520 380"/>
+  <polygon points="508,376 520,380 516,368" class="trans-arrow"/>
+  <text x="535" y="355" class="lbl">Q1 (CE)</text>
+
+  <!-- RE y CE inferior -->
+  <path class="wire" d="M520 380 V405 M520 405 H600"/>
+  <circle cx="520" cy="405" r="5" class="node"/>
+  <rect x="507" y="415" width="26" height="50" class="res"/>
+  <text x="460" y="445" class="lbl">RE</text>
+  <text x="455" y="462" class="val">1.0 kΩ</text>
+  <path class="wire" d="M520 405 V415 M520 465 V495"/>
+
+  <!-- Bypass CE1 -->
+  <path class="wire" d="M600 405 V435 M600 455 V495"/>
+  <path class="cap" d="M585 435 H615 M585 455 H615"/>
+  <text x="625" y="448" class="lbl">CE1</text>
+
+  <!-- Entrada en Base de Q1 -->
+  <path class="cap" d="M245 327 V363 M260 327 V363"/>
+  <text x="235" y="317" class="lbl">C1</text>
+  <path class="wire" d="M190 345 H245 M260 345 H360"/>
+  <circle cx="180" cy="345" r="5" fill="#fff" stroke="#0b69a3" stroke-width="2.5"/>
+  <text x="135" y="350" class="lbl">vi (in)</text>
+
+  <!-- Salida en Colector de Q2 -->
+  <path class="wire" d="M520 195 H670"/>
+  <path class="cap" d="M670 177 V213 M685 177 V213"/>
+  <text x="665" y="167" class="lbl">C2</text>
+  <path class="wire" d="M685 195 H760"/>
+  <circle cx="760" cy="195" r="5" class="node"/>
+  <path class="wire" d="M760 195 H810"/>
+  <circle cx="810" cy="195" r="5" fill="#fff" stroke="#0b69a3" stroke-width="2.5"/>
+  <text x="822" y="200" class="lbl">vo (out)</text>
+
+  <path class="wire" d="M760 195 V255"/>
+  <rect x="747" y="255" width="26" height="50" class="res"/>
+  <text x="785" y="285" class="lbl">RL</text>
+  <path class="wire" d="M760 305 V495"/>
+
+  <!-- Tierra -->
+  <path class="wire" d="M360 495 H760"/>
+  <path class="wire" d="M520 495 V515"/>
+  <path class="gnd" d="M500 515 H540 M508 522 H532 M516 529 H524"/>
+</svg>

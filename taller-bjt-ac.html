@@ -45,6 +45,110 @@
       flex-wrap: wrap;
       margin: 14px 0;
     }
+    .problem-context-box {
+      background: #f8fafc;
+      border-left: 4px solid #0284c7;
+      padding: 10px 14px;
+      margin: 10px 0 14px 0;
+      border-radius: 0 6px 6px 0;
+    }
+    .context-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #0369a1;
+      margin-bottom: 4px;
+    }
+    .context-desc {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #334155;
+    }
+    .circuit-data-box {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin: 12px 0;
+      font-size: 0.92rem;
+    }
+    .circuit-data-box .box-title {
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 4px;
+      font-size: 0.92rem;
+    }
+    .circuit-data-box .box-body {
+      color: #1e293b;
+      line-height: 1.45;
+    }
+    .target-questions-box {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 6px;
+      padding: 12px 14px;
+      margin: 14px 0;
+    }
+    .target-questions-box .box-title {
+      font-weight: 700;
+      color: #166534;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+    .target-questions-list {
+      margin: 0;
+      padding-left: 20px;
+      color: #14532d;
+    }
+    .target-questions-list li {
+      margin-bottom: 6px;
+      line-height: 1.45;
+      font-size: 0.93rem;
+    }
+    .reference-answer-box {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin: 12px 0;
+    }
+    .reference-answer-box .ref-title {
+      font-weight: 700;
+      color: #1e40af;
+      font-size: 0.92rem;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .reference-answer-box .formula {
+      margin: 0;
+    }
+    .analysis-detail {
+      margin-top: 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 10px 14px;
+      background: #ffffff;
+    }
+    .analysis-detail summary {
+      cursor: pointer;
+      font-weight: 700;
+      color: #0056b3;
+    }
+    .analysis-body {
+      padding-top: 10px;
+      border-top: 1px solid #e2e8f0;
+      margin-top: 10px;
+    }
+    .analysis-body h4 {
+      color: #0f172a;
+      margin: 14px 0 6px 0;
+      font-size: 1.05rem;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 3px;
+    }
     @media print {
       header, aside, .header-actions, .taller-filter-bar, .search-box, .workshop-actions, .buttons, .feedback {
         display: none !important;
@@ -72,6 +176,10 @@
         border: 1px solid #ccc;
         margin-bottom: 16px;
         padding: 10px;
+      }
+      .problem-context-box, .circuit-data-box, .target-questions-box, .reference-answer-box, .analysis-detail {
+        break-inside: avoid;
+        page-break-inside: avoid;
       }
     }
   </style>
@@ -118,12 +226,13 @@
       </div>
       <h4>Taller BJT en AC</h4>
       <nav>
-        <a href="#teorico">T1 · Comprensión y Fundamentos</a>
-        <a href="#practico">T2 · Problemas y Solucionario Dual</a>
-        <a href="#metodologia">T3 · Guía de Fórmulas y Modelos</a>
+        <a href="#teorico">T1 · Fase 1: Calentamiento Teórico</a>
+        <a href="#practico">T2 · Fase 2: Ejercicios Guiados</a>
+        <a href="#retos" style="font-weight:bold;color:#dc2626;">T3 · Fase 3: Retos de Examen 🔥</a>
+        <a href="#metodologia">T4 · Formulario Maestro & Modelos</a>
       </nav>
       <div class="side-info">
-        <b>💡 Tip de Examen:</b> Resuelve cada ejercicio en tu cuaderno con los dos métodos (modelo \(r_e\) e híbrido-\(\pi\)) antes de consultar el desarrollo desplegable.
+        <b>💡 Metodología del Taller:</b> Primero repasa los conceptos en <b>T1</b>, analiza los esquemáticos y soluciones en <b>T2</b>, y enfréntate a los <b>Retos de T3</b> con tu cuaderno y calculadora sin mirar la solución.
       </div>
     </aside>
 
@@ -136,9 +245,11 @@
           Incluye preguntas de comprensión conceptual con pistas, problemas con contexto de ingeniería moderna (vehículos eléctricos, sensores biomédicos, robótica, RF y audio) y solucionario detallado paso a paso con los modelos <b>\(r_e\)</b> e <b>híbrido-\(\pi\)</b>.
         </p>
         <div class="workshop-actions">
-          <button id="btnPrintPdf" class="btn primary">🖨️ Descargar / Imprimir en PDF</button>
-          <a href="#practico" class="btn">Ir directamente a los problemas resueltos</a>
-          <a href="bjt-ac.html" class="btn">Volver a la teoría de BJT AC</a>
+          <button id="btnPrintPdf" class="btn primary">🖨️ Imprimir Vista Actual</button>
+          <a href="taller-bjt-ac-imprimible.html" target="_blank" class="btn" style="text-decoration:none;">📄 Guía Maestra PDF (Formato Libro A4)</a>
+          <a href="#retos" class="btn" style="border: 1.5px solid #dc2626; color: #dc2626; font-weight: bold; background: #fff5f5;">🔥 Zona de Retos Autónomos</a>
+          <a href="#practico" class="btn">Explorar Ejercicios Guiados</a>
+          <a href="bjt-ac.html" class="btn">Módulo Teórico BJT AC</a>
         </div>
       </section>
 
@@ -197,11 +308,32 @@
         <div id="practicalAnswersBjtAc" style="margin-top:16px"></div>
       </section>
 
-      <!-- SECCIÓN T3: GUÍA RÁPIDA DE FÓRMULAS Y EQUIVALENCIAS -->
+      <!-- SECCIÓN T3: ZONA DE RETOS AUTÓNOMOS DE EXAMEN -->
+      <section class="module" id="retos">
+        <div class="module-head">
+          <div class="module-title">
+            <span class="no" style="background:#dc2626;color:#fff;">T3</span>
+            <div>
+              <span class="eyebrow" style="color:#dc2626;font-weight:bold;">Zona de desafío autónomo</span>
+              <h2>Retos de Examen: Resuelve en tu cuaderno sin ver la respuesta</h2>
+            </div>
+          </div>
+          <button class="mark" data-mark="taller-bjt-ac-t3">Marcar estudiado</button>
+        </div>
+
+        <div class="box warn" style="border-left-color:#dc2626;">
+          <small style="color:#b91c1c;">Instrucción pedagógica del profesor</small>
+          En estos problemas <b>no hay respuesta inicial a la vista</b>. Observa el esquemático profesional con valores y componentes reales, desarrolla el análisis en tu cuaderno (continua, dinámica y ganancias), y utiliza los campos de validación para contrastar tus números. La solución detallada paso a paso está <b>bloqueada en un desplegable al final</b> para que la consultes solo tras haber trabajado el reto.
+        </div>
+
+        <div id="retosContainer" style="margin-top:20px"></div>
+      </section>
+
+      <!-- SECCIÓN T4: GUÍA RÁPIDA DE FÓRMULAS Y EQUIVALENCIAS -->
       <section class="module" id="metodologia">
         <div class="module-head">
           <div class="module-title">
-            <span class="no">T3</span>
+            <span class="no">T4</span>
             <div>
               <span class="eyebrow">Guía de referencia rápida</span>
               <h2>Formulario Maestro de Pequeña Señal en Banda Media</h2>
@@ -292,6 +424,7 @@
   <script src="js/core.js?v=14.5"></script>
   <script src="data/taller_bjt_ac_teorico.js?v=1.0"></script>
   <script src="data/respuestas_taller_bjt_ac.js?v=1.0"></script>
+  <script src="data/retos_bjt_ac.js?v=1.0"></script>
   <script src="js/taller-bjt-ac.js?v=1.0"></script>
 </body>
 </html>

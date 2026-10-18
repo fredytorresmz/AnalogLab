@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="540" viewBox="0 0 900 540" role="img" aria-label="Circuito Reto de Examen">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .title { font: bold 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #b91c1c; }
+      .subtitle { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #627d98; }
+      .wire { stroke: #243b53; stroke-width: 2.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.5; }
+      .cap { stroke: #b91c1c; stroke-width: 3.5; }
+      .node { fill: #102a43; }
+      .trans-circle { fill: #fff5f5; stroke: #feb2b2; stroke-width: 2; }
+      .trans-line { stroke: #b91c1c; stroke-width: 3; stroke-linecap: round; }
+      .trans-arrow { fill: #b91c1c; }
+      .lbl { font: bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #b91c1c; }
+      .val { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
+      .gnd { stroke: #243b53; stroke-width: 2.5; stroke-linecap: round; }
+      .ac-source { fill: #fff5f5; stroke: #b91c1c; stroke-width: 2.5; }
+    </style>
+  </defs>
+
+  <rect width="900" height="540" rx="14" class="bg"/>
+  <rect x="15" y="15" width="870" height="510" rx="10" fill="none" stroke="#fca5a5" stroke-width="1.8"/>
+
+  <text x="35" y="48" class="title">⚡ CIRCUITO RETO DE EXAMEN · Acondicionador de Sensor Automotriz</text>
+  <text x="35" y="72" class="subtitle">Desafío integral: Polarización Thévenin + Degeneración parcial + Carga RL + Resistencia de fuente Rs</text>
+
+  <!-- Rail VCC -->
+  <path class="wire" d="M380 95 H520 M520 95 H600"/>
+  <circle cx="600" cy="95" r="5" class="node"/>
+  <text x="612" y="100" class="lbl" style="color:#b91c1c;">+VCC = 16V</text>
+
+  <!-- Divisor R1 y R2 -->
+  <path class="wire" d="M380 95 V125"/>
+  <rect x="367" y="125" width="26" height="55" class="res"/>
+  <text x="305" y="155" class="lbl">R1</text>
+  <text x="305" y="172" class="val">68 kΩ</text>
+
+  <path class="wire" d="M380 180 V250 M380 250 V310"/>
+  <circle cx="380" cy="250" r="5" class="node"/>
+
+  <rect x="367" y="310" width="26" height="55" class="res"/>
+  <text x="305" y="340" class="lbl">R2</text>
+  <text x="305" y="357" class="val">15 kΩ</text>
+  <path class="wire" d="M380 365 V465"/>
+
+  <!-- RC -->
+  <path class="wire" d="M520 95 V125"/>
+  <rect x="507" y="125" width="26" height="55" class="res"/>
+  <text x="545" y="155" class="lbl">RC</text>
+  <text x="545" y="172" class="val">3.9 kΩ</text>
+  <path class="wire" d="M520 180 V205"/>
+  <circle cx="520" cy="205" r="5" class="node"/>
+
+  <!-- Transistor Q1 NPN -->
+  <circle cx="480" cy="250" r="45" class="trans-circle"/>
+  <path class="trans-line" d="M460 228 V272"/>
+  <path class="wire" d="M380 250 H460"/>
+  <path class="trans-line" d="M460 238 L520 205"/>
+  <path class="trans-line" d="M460 262 L520 295"/>
+  <polygon points="505,290 520,295 515,280" class="trans-arrow"/>
+
+  <text x="430" y="310" class="lbl">Q1 · 2N2222A</text>
+  <text x="430" y="327" class="val">β = 160, VA = 80V</text>
+
+  <!-- Rama de Emisor Dividida RE1 (sin bypass) y RE2 (con bypass) -->
+  <path class="wire" d="M520 295 V315"/>
+  <rect x="507" y="315" width="26" height="40" class="res" style="stroke:#b91c1c;stroke-width:2.5;"/>
+  <text x="455" y="338" class="lbl">RE1</text>
+  <text x="450" y="354" class="val" style="font-weight:bold;">120 Ω</text>
+
+  <path class="wire" d="M520 355 V380 M520 380 H620"/>
+  <circle cx="520" cy="380" r="5" class="node"/>
+
+  <rect x="507" y="380" width="26" height="55" class="res"/>
+  <text x="455" y="410" class="lbl">RE2</text>
+  <text x="450" y="427" class="val">1.2 kΩ</text>
+  <path class="wire" d="M520 435 V465"/>
+
+  <!-- Bypass CE en paralelo con RE2 -->
+  <path class="wire" d="M620 380 V405 M620 425 V465 H520"/>
+  <path class="cap" d="M602 405 H638 M602 425 H638"/>
+  <text x="648" y="415" class="lbl">CE</text>
+  <text x="648" y="432" class="val">100 µF</text>
+
+  <!-- Fuente de sensor con Rs -->
+  <circle cx="65" cy="250" r="20" class="ac-source"/>
+  <path d="M55 250 Q60 240 65 250 T75 250" fill="none" stroke="#b91c1c" stroke-width="2.5"/>
+  <text x="40" y="295" class="lbl">vs (Sensor)</text>
+  <text x="35" y="312" class="val">15 mVp</text>
+  <path class="wire" d="M65 270 V465"/>
+
+  <path class="wire" d="M85 250 H120"/>
+  <rect x="120" y="238" width="45" height="24" class="res"/>
+  <text x="128" y="230" class="lbl">Rs</text>
+  <text x="125" y="278" class="val">1.5 kΩ</text>
+
+  <path class="wire" d="M165 250 H210"/>
+  <path class="cap" d="M210 232 V268 M225 232 V268"/>
+  <text x="205" y="222" class="lbl">C1</text>
+  <text x="200" y="284" class="val">22 µF</text>
+  <path class="wire" d="M225 250 H380"/>
+
+  <!-- Salida con C2 y RL -->
+  <path class="wire" d="M520 205 H670"/>
+  <path class="cap" d="M670 187 V223 M685 187 V223"/>
+  <text x="665" y="177" class="lbl">C2</text>
+  <text x="665" y="238" class="val">22 µF</text>
+
+  <path class="wire" d="M685 205 H760"/>
+  <circle cx="760" cy="205" r="5" class="node"/>
+  <path class="wire" d="M760 205 H820"/>
+  <circle cx="820" cy="205" r="5" fill="#fff" stroke="#b91c1c" stroke-width="2.5"/>
+  <text x="832" y="210" class="lbl">vo (out)</text>
+
+  <path class="wire" d="M760 205 V275"/>
+  <rect x="747" y="275" width="26" height="55" class="res"/>
+  <text x="785" y="305" class="lbl">RL</text>
+  <text x="785" y="322" class="val">4.7 kΩ</text>
+  <path class="wire" d="M760 330 V465"/>
+
+  <!-- Tierra -->
+  <path class="wire" d="M65 465 H760"/>
+  <path class="wire" d="M520 465 V485"/>
+  <path class="gnd" d="M500 485 H540 M508 492 H532 M516 499 H524"/>
+</svg>

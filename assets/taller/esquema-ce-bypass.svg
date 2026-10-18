@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520" role="img" aria-label="Amplificador Emisor Común con Bypass">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .title { font: bold 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
+      .subtitle { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #627d98; }
+      .wire { stroke: #243b53; stroke-width: 2.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.5; }
+      .cap { stroke: #0b69a3; stroke-width: 3.5; }
+      .node { fill: #102a43; }
+      .trans-circle { fill: #f0f4f8; stroke: #9fb3c8; stroke-width: 1.8; }
+      .trans-line { stroke: #0b69a3; stroke-width: 3; stroke-linecap: round; }
+      .trans-arrow { fill: #0b69a3; }
+      .lbl { font: bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #0b69a3; }
+      .val { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
+      .gnd { stroke: #243b53; stroke-width: 2.5; stroke-linecap: round; }
+      .ac-source { fill: #f0f4f8; stroke: #243b53; stroke-width: 2.5; }
+    </style>
+  </defs>
+
+  <rect width="900" height="520" rx="14" class="bg"/>
+  <rect x="15" y="15" width="870" height="490" rx="10" fill="none" stroke="#d9e2ec" stroke-width="1.5"/>
+
+  <!-- Título y metadatos estilo simulación -->
+  <text x="35" y="48" class="title">Esquemático 1 · Emisor Común (CE) con Bypass Total</text>
+  <text x="35" y="72" class="subtitle">Configuración clásica de alta ganancia de tensión y desfase de 180°</text>
+
+  <!-- Rail VCC -->
+  <path class="wire" d="M380 95 H520 M520 95 H600"/>
+  <circle cx="600" cy="95" r="5" class="node"/>
+  <text x="612" y="100" class="lbl">+VCC = 15V</text>
+
+  <!-- Divisor R1 y R2 -->
+  <path class="wire" d="M380 95 V130"/>
+  <rect x="367" y="130" width="26" height="60" class="res"/>
+  <text x="310" y="165" class="lbl">R1</text>
+  <text x="310" y="182" class="val">47 kΩ</text>
+
+  <path class="wire" d="M380 190 V270 M380 270 V330"/>
+  <circle cx="380" cy="270" r="5" class="node"/>
+
+  <rect x="367" y="330" width="26" height="60" class="res"/>
+  <text x="310" y="365" class="lbl">R2</text>
+  <text x="310" y="382" class="val">10 kΩ</text>
+  <path class="wire" d="M380 390 V440"/>
+
+  <!-- Rama de Colector RC -->
+  <path class="wire" d="M520 95 V130"/>
+  <rect x="507" y="130" width="26" height="60" class="res"/>
+  <text x="545" y="165" class="lbl">RC</text>
+  <text x="545" y="182" class="val">3.3 kΩ</text>
+
+  <path class="wire" d="M520 190 V215"/>
+  <circle cx="520" cy="215" r="5" class="node"/>
+
+  <!-- Transistor Q1 NPN -->
+  <circle cx="480" cy="270" r="48" class="trans-circle"/>
+  <!-- Base vertical -->
+  <path class="trans-line" d="M460 245 V295"/>
+  <!-- Conexión base exterior -->
+  <path class="wire" d="M380 270 H460"/>
+  <!-- Colector diagonal -->
+  <path class="trans-line" d="M460 255 L520 215"/>
+  <!-- Emisor diagonal -->
+  <path class="trans-line" d="M460 285 L520 325"/>
+  <!-- Flecha emisor -->
+  <polygon points="505,320 520,325 515,310" class="trans-arrow"/>
+
+  <text x="440" y="240" class="val" style="font-size:11px;font-weight:bold;">B</text>
+  <text x="530" y="215" class="val" style="font-size:11px;font-weight:bold;">C</text>
+  <text x="530" y="335" class="val" style="font-size:11px;font-weight:bold;">E</text>
+  <text x="430" y="335" class="lbl">Q1 · 2N3904</text>
+  <text x="430" y="352" class="val">β = 120</text>
+
+  <!-- Rama de Emisor RE y CE -->
+  <path class="wire" d="M520 325 V355 M520 355 H610"/>
+  <circle cx="520" cy="355" r="5" class="node"/>
+
+  <rect x="507" y="365" width="26" height="60" class="res"/>
+  <path class="wire" d="M520 355 V365 M520 425 V440"/>
+  <text x="460" y="395" class="lbl">RE</text>
+  <text x="460" y="412" class="val">1.2 kΩ</text>
+
+  <!-- Capacitor Bypass CE -->
+  <path class="wire" d="M610 355 V385 M610 405 V440"/>
+  <path class="cap" d="M592 385 H628 M592 405 H628"/>
+  <text x="638" y="395" class="lbl">CE</text>
+  <text x="638" y="412" class="val">47 µF</text>
+
+  <!-- Entrada con Generador vs, Rs y C1 -->
+  <!-- Fuente vs -->
+  <circle cx="70" cy="270" r="22" class="ac-source"/>
+  <path d="M58 270 Q64 260 70 270 T82 270" fill="none" stroke="#243b53" stroke-width="2.5"/>
+  <text x="45" y="315" class="lbl">vs</text>
+  <text x="35" y="332" class="val">10 mVp</text>
+  <path class="wire" d="M70 292 V440"/>
+
+  <path class="wire" d="M70 248 V270 M92 270 H130"/>
+  <!-- Resistencia interna Rs -->
+  <rect x="130" y="257" width="50" height="26" class="res"/>
+  <text x="138" y="248" class="lbl">Rs</text>
+  <text x="135" y="300" class="val">600 Ω</text>
+
+  <path class="wire" d="M180 270 H225"/>
+  <!-- Capacitor de acoplo C1 -->
+  <path class="cap" d="M225 252 V288 M240 252 V288"/>
+  <text x="218" y="242" class="lbl">C1</text>
+  <text x="215" y="304" class="val">10 µF</text>
+  <path class="wire" d="M240 270 H380"/>
+
+  <!-- Salida con C2 y RL -->
+  <path class="wire" d="M520 215 H680"/>
+  <path class="cap" d="M680 197 V233 M695 197 V233"/>
+  <text x="675" y="187" class="lbl">C2</text>
+  <text x="675" y="248" class="val">10 µF</text>
+
+  <path class="wire" d="M695 215 H780"/>
+  <circle cx="780" cy="215" r="5" class="node"/>
+  <!-- Terminal Vo -->
+  <path class="wire" d="M780 215 H830"/>
+  <circle cx="830" cy="215" r="5" fill="#fff" stroke="#0b69a3" stroke-width="2.5"/>
+  <text x="842" y="220" class="lbl">vo (out)</text>
+
+  <!-- Carga RL -->
+  <path class="wire" d="M780 215 V280"/>
+  <rect x="767" y="280" width="26" height="60" class="res"/>
+  <text x="805" y="312" class="lbl">RL</text>
+  <text x="805" y="330" class="val">10 kΩ</text>
+  <path class="wire" d="M780 340 V440"/>
+
+  <!-- Línea común de Tierra -->
+  <path class="wire" d="M70 440 H780"/>
+  <!-- Símbolo de tierra en centro -->
+  <path class="wire" d="M480 440 V460"/>
+  <path class="gnd" d="M460 460 H500 M468 467 H492 M476 474 H484"/>
+</svg>
