@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Taller de Aprendizaje BJT en AC: banco de 49 problemas y preguntas teórico-prácticas con solucionario dual paso a paso (modelo re e híbrido-π), esquemáticos y contexto industrial.">
+  <title>AnalogLab · Taller BJT en AC</title>
+  <link rel="stylesheet" href="css/styles.css?v=14.5">
+  <style>
+    .taller-filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 14px 0;
+      align-items: center;
+    }
+    .filter-btn {
+      background: var(--bg-card, #fff);
+      border: 1px solid var(--border, #ccc);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      cursor: pointer;
+      color: var(--text, #333);
+      transition: all 0.2s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--accent, #0056b3);
+      color: #fff;
+      border-color: var(--accent, #0056b3);
+    }
+    .search-box {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--border, #ccc);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+      background: var(--bg-card, #fff);
+      color: var(--text, #333);
+    }
+    .workshop-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 14px 0;
+    }
+    @media print {
+      header, aside, .header-actions, .taller-filter-bar, .search-box, .workshop-actions, .buttons, .feedback {
+        display: none !important;
+      }
+      .layout {
+        display: block !important;
+      }
+      main {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      details {
+        display: block !important;
+      }
+      details[open] summary ~ * {
+        display: block !important;
+      }
+      .answer-detail, .analysis-detail {
+        display: block !important;
+      }
+      .practical-item {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        border: 1px solid #ccc;
+        margin-bottom: 16px;
+        padding: 10px;
+      }
+    }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']]
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script id="MathJax-script" defer src="vendor/mathjax/tex-svg.js?v=3.2.1"></script>
+</head>
+<body>
+  <header>
+    <button class="menu">☰</button>
+    <a class="brand" href="index.html"><strong>AnalogLab</strong><span>Electrónica Analógica y Laboratorio</span></a>
+    <nav class="topnav">
+      <a href="index.html">Inicio</a>
+      <a href="dc.html">Diodos DC</a>
+      <a href="ac.html">Diodos AC</a>
+      <a href="zener.html">Zener</a>
+      <a href="bjt-dc.html">BJT DC I</a>
+      <a href="bjt-dc2.html">BJT DC II</a>
+      <a href="bjt-ac.html">BJT AC</a>
+      <a href="practica-pwm555.html">Práctica PWM</a>
+      <a href="taller.html">Taller 1</a>
+      <a class="active" href="taller-bjt-ac.html">Taller BJT AC</a>
+      <a href="datasheet.html">Datasheets</a>
+      <a href="proyecto1.html">Trabajo opcional</a>
+    </nav>
+    <div class="header-actions">
+      <button id="class">Modo clase</button>
+      <button id="theme">◐</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside>
+      <div class="progress-card">
+        <div><span>Progreso de estudio</span><strong class="progress-value">0%</strong></div>
+        <div class="track"><span class="progress-fill"></span></div>
+      </div>
+      <h4>Taller BJT en AC</h4>
+      <nav>
+        <a href="#teorico">T1 · Comprensión y Fundamentos</a>
+        <a href="#practico">T2 · Problemas y Solucionario Dual</a>
+        <a href="#metodologia">T3 · Guía de Fórmulas y Modelos</a>
+      </nav>
+      <div class="side-info">
+        <b>💡 Tip de Examen:</b> Resuelve cada ejercicio en tu cuaderno con los dos métodos (modelo \(r_e\) e híbrido-\(\pi\)) antes de consultar el desarrollo desplegable.
+      </div>
+    </aside>
+
+    <main>
+      <section class="hero small">
+        <span class="eyebrow">Taller #2 · Práctica Intensiva de Consolidación</span>
+        <h1>Taller de Aprendizaje: Transistores BJT en Señal Pequeña (AC)</h1>
+        <p>
+          Banco integral de <b>49 ejercicios graduados</b> para preparar el examen parcial y el trabajo en laboratorio.
+          Incluye preguntas de comprensión conceptual con pistas, problemas con contexto de ingeniería moderna (vehículos eléctricos, sensores biomédicos, robótica, RF y audio) y solucionario detallado paso a paso con los modelos <b>\(r_e\)</b> e <b>híbrido-\(\pi\)</b>.
+        </p>
+        <div class="workshop-actions">
+          <button id="btnPrintPdf" class="btn primary">🖨️ Descargar / Imprimir en PDF</button>
+          <a href="#practico" class="btn">Ir directamente a los problemas resueltos</a>
+          <a href="bjt-ac.html" class="btn">Volver a la teoría de BJT AC</a>
+        </div>
+      </section>
+
+      <!-- SECCIÓN T1: REPASO TEÓRICO INTERACTIVO -->
+      <section class="module" id="teorico">
+        <div class="module-head">
+          <div class="module-title">
+            <span class="no">T1</span>
+            <div>
+              <span class="eyebrow">Parte teórica interactiva</span>
+              <h2>Preguntas de Comprensión, Linealización y Criterio Físico</h2>
+            </div>
+          </div>
+          <button class="mark" data-mark="taller-bjt-ac-t1">Marcar estudiado</button>
+        </div>
+
+        <div class="box remember">
+          <small>Metodología de estudio guiado</small>
+          Escribe primero tu propia respuesta en el cuadro de texto o selecciona la opción. Si tienes dudas, consulta <b>Pista 1</b> y <b>Pista 2</b>. Una vez registrado tu intento se desbloqueará la <b>Respuesta orientativa</b> desarrollada con criterio de la industria.
+        </div>
+
+        <div id="tallerBjtAcList" class="taller-list" style="margin-top:15px"></div>
+      </section>
+
+      <!-- SECCIÓN T2: PROBLEMAS NUMÉRICOS E INDUSTRIALES -->
+      <section class="module" id="practico">
+        <div class="module-head">
+          <div class="module-title">
+            <span class="no">T2</span>
+            <div>
+              <span class="eyebrow">Banco de problemas graduados</span>
+              <h2>Problemas Numéricos, Casos de Aplicación y Solucionario Dual</h2>
+            </div>
+          </div>
+          <button class="mark" data-mark="taller-bjt-ac-t2">Marcar estudiado</button>
+        </div>
+
+        <p class="lead">
+          Los 34 ejercicios prácticos abarcan desde el cálculo analítico de parámetros dinámicos hasta topologías multietapa (Cascode, Darlington, Sziklai), análisis de peor caso y diagnóstico de fallas en laboratorio. Las soluciones están desplegadas para contrastar tus ecuaciones y números.
+        </p>
+
+        <!-- Barra de búsqueda y filtros -->
+        <input type="search" id="searchExercises" class="search-box" placeholder="🔍 Buscar por palabra clave: Cascode, Darlington, Early, Swamping, Swing, Miller, THD, Zo...">
+
+        <div class="taller-filter-bar">
+          <button class="filter-btn active" data-group="all">Todos los ejercicios (34)</button>
+          <button class="filter-btn" data-group="Bloque 1">B1 · Fundamentos (6)</button>
+          <button class="filter-btn" data-group="Bloque 2">B2 · Emisor Común (7)</button>
+          <button class="filter-btn" data-group="Bloque 3">B3 · CC y CB (5)</button>
+          <button class="filter-btn" data-group="Bloque 4">B4 · Carga y Swing (6)</button>
+          <button class="filter-btn" data-group="Bloque 5">B5 · Multietapa (5)</button>
+          <button class="filter-btn" data-group="Bloque 6">B6 · Fallas y Specs (5)</button>
+          <button id="btnToggleAll" class="btn small" style="margin-left: auto;">Colapsar / Expandir todos</button>
+        </div>
+
+        <div id="practicalAnswersBjtAc" style="margin-top:16px"></div>
+      </section>
+
+      <!-- SECCIÓN T3: GUÍA RÁPIDA DE FÓRMULAS Y EQUIVALENCIAS -->
+      <section class="module" id="metodologia">
+        <div class="module-head">
+          <div class="module-title">
+            <span class="no">T3</span>
+            <div>
+              <span class="eyebrow">Guía de referencia rápida</span>
+              <h2>Formulario Maestro de Pequeña Señal en Banda Media</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel paper">
+          <h3>Tabla de Correspondencia Exacta entre Modelos</h3>
+          <div class="ac-table-wrap">
+            <table class="ac-table">
+              <thead>
+                <tr>
+                  <th>Magnitud Física</th>
+                  <th>Modelo \(r_e\) (Boylestad / Malvino)</th>
+                  <th>Modelo Híbrido-\(\pi\) (Sedra / Smith / Razavi)</th>
+                  <th>Ecuación de Transformación</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Resistencia de Entrada B-E</b></td>
+                  <td>\(r_e = \dfrac{V_T}{I_{EQ}} \approx \dfrac{26\,\mathrm{mV}}{I_E}\)</td>
+                  <td>\(r_\pi = \dfrac{\beta V_T}{I_{CQ}} = \dfrac{\beta}{g_m}\)</td>
+                  <td>\(r_\pi = (\beta+1)r_e \approx \beta r_e\)</td>
+                </tr>
+                <tr>
+                  <td><b>Fuerza de Control de Colector</b></td>
+                  <td>Fuente de corriente: \(i_c = \beta \cdot i_b\)</td>
+                  <td>Fuente de corriente: \(i_c = g_m \cdot v_{be}\)</td>
+                  <td>\(g_m = \dfrac{I_{CQ}}{V_T} \approx \dfrac{1}{r_e}\)</td>
+                </tr>
+                <tr>
+                  <td><b>Resistencia de Salida</b></td>
+                  <td>\(r_o = \dfrac{V_A + V_{CEQ}}{I_{CQ}} \approx \dfrac{V_A}{I_{CQ}}\)</td>
+                  <td>\(r_o = \dfrac{V_A + V_{CEQ}}{I_{CQ}} \approx \dfrac{V_A}{I_{CQ}}\)</td>
+                  <td>Idéntica definición (Efecto Early)</td>
+                </tr>
+                <tr>
+                  <td><b>Ganancia CE con Bypass</b></td>
+                  <td>\(A_v = -\dfrac{R_C \parallel R_L}{r_e}\)</td>
+                  <td>\(A_v = -g_m (R_C \parallel R_L)\)</td>
+                  <td>Coincidencia exacta al sustituir \(g_m = 1/r_e\)</td>
+                </tr>
+                <tr>
+                  <td><b>Ganancia CE sin Bypass</b></td>
+                  <td>\(A_v = -\dfrac{R_C \parallel R_L}{r_e + R_E}\)</td>
+                  <td>\(A_v = -\dfrac{g_m (R_C \parallel R_L)}{1 + g_m R_E}\)</td>
+                  <td>Coincidencia exacta al dividir numerador y denominador por \(g_m\)</td>
+                </tr>
+                <tr>
+                  <td><b>Ganancia Colector Común (Buffer)</b></td>
+                  <td>\(A_v = +\dfrac{R_E \parallel R_L}{r_e + (R_E \parallel R_L)}\)</td>
+                  <td>\(A_v = +\dfrac{g_m (R_E \parallel R_L)}{1 + g_m (R_E \parallel R_L)}\)</td>
+                  <td>Ligeramente menor que \(+1\) (sin desfase)</td>
+                </tr>
+                <tr>
+                  <td><b>Ganancia Base Común</b></td>
+                  <td>\(A_v = +\dfrac{R_C \parallel R_L}{r_e}\)</td>
+                  <td>\(A_v = +g_m (R_C \parallel R_L)\)</td>
+                  <td>Elevada, en fase (0°) y con baja \(Z_i \approx r_e\)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="box key" style="margin-top: 14px;">
+          <small>Regla de oro para resolver exámenes sin dudar</small>
+          <b>1)</b> Identifica terminal de entrada y salida para clasificar la etapa (CE, CC o CB).<br>
+          <b>2)</b> Resuelve el punto Q en continua para obtener \(I_{CQ}\) y calcula de inmediato \(r_e = 26\,\mathrm{mV}/I_E\) y \(g_m = I_C/26\,\mathrm{mV}\).<br>
+          <b>3)</b> Dibuja el circuito equivalente AC poniendo a tierra las fuentes DC independientes y cortocircuitando condensadores en banda media.<br>
+          <b>4)</b> Escribe las ecuaciones de nodos o divisores y comprueba que la ganancia tenga el signo físico correcto.
+        </div>
+      </section>
+
+      <div class="footer">
+        <div>
+          <b>AnalogLab</b>
+          <span>Recurso interactivo de apoyo académico para Electrónica Analógica y Laboratorio</span>
+        </div>
+        <span>Cátedra de Electrónica Analógica</span>
+      </div>
+    </main>
+  </div>
+
+  <script src="data/quizzes.js?v=14.5"></script>
+  <script src="js/core.js?v=14.5"></script>
+  <script src="data/taller_bjt_ac_teorico.js?v=1.0"></script>
+  <script src="data/respuestas_taller_bjt_ac.js?v=1.0"></script>
+  <script src="js/taller-bjt-ac.js?v=1.0"></script>
+</body>
+</html>
