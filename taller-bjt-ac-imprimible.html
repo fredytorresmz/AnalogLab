@@ -384,6 +384,15 @@
       \[(\beta + 1) r_e = (\beta + 1) \frac{V_T}{I_{CQ} \frac{\beta+1}{\beta}} = \frac{\beta V_T}{I_{CQ}} = \frac{\beta}{g_m} = r_\pi\]
       \[151 \times 17.33\,\Omega = 2616\,\Omega \approx 2.60\,\mathrm{k\Omega} = r_\pi \quad (\checkmark \text{Coincidencia exacta})\]
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>La rigidez del resorte mecánico:</b> La resistencia dinámica \(r_e\) mide qué tan duro o elástico es el transistor ante una pequeña perturbación de señal. Cuanto mayor es la corriente estática de reposo en continua (\(I_{EQ}\)), más 'comprimido' está el resorte y menor es la resistencia que opone a oscilar (\(r_e \propto 1/I_E\)). Por el contrario, la resistencia de salida \(r_o\) actúa como un freno viscoso parásito en paralelo, provocado por el estrechamiento de la base (Efecto Early).</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Parámetros oficiales:</b> Resistencia intrínseca de emisor: \(r_e = V_T / I_{EQ}\) (Boylestad/Malvino). Transconductancia: \(g_m = I_{CQ} / V_T = \alpha / r_e\) (Sedra/Smith). Resistencia de base: \(r_\pi = (\beta+1)r_e = \beta / g_m\). Resistencia de salida por Early: \(r_o = (V_A + V_{CEQ}) / I_{CQ} \approx V_A / I_{CQ}\).</p>
+      </div>
+      
     </div>
   </div>
 
@@ -441,6 +450,15 @@
       <h4>d) Conclusión e impacto en el diseño</h4>
       <p>En un amplificador CE con emisor totalmente bypassado (donde \(A_v \approx -R_C / r_e\)), la ganancia caerá casi un 15% solo por el calentamiento ambiental. Para evitarlo en automoción, es imperativo utilizar <b>degeneración parcial de emisor (swamping)</b>.</p>
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>La cometa frente al viento térmico:</b> Sin degeneración de emisor, la ganancia de un amplificador es inversamente proporcional a \(V_T = kT/q\). Al calentarse el circuito bajo el capó (de 25 °C a 75 °C), la tensión térmica se expande un 15%, inflando \(r_e\) y haciendo caer la ganancia. Para evitar que el amplificador sea una cometa a merced del clima, Malvino enseña que es imperativo usar <i>swamping</i> (resistencia no puenteada) para anclar la ganancia al ratio fijo de resistencias externas.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Sensibilidad térmica:</b> \(V_T(T) = k T / q\). A 25 °C: \(V_T \approx 26.0\,\mathrm{mV}\); a 75 °C: \(V_T \approx 30.0\,\mathrm{mV}\). En Emisor Común bypassado: \(A_v \approx -R_C / r_e \propto 1/V_T\), por lo que la ganancia cae directamente un \(13.5\%\) solo por temperatura.</p>
+      </div>
+      
     </div>
   </div>
 
@@ -494,6 +512,15 @@
       \[|A_{v0}| = \frac{100\,\mathrm{V}}{0.026\,\mathrm{V}} \approx \mathbf{3846.15}\]
       \[|A_{v0}|_{\mathrm{dB}} = 20 \log_{10}(3846.15) \approx \mathbf{71.70\,\mathrm{dB}}\]
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>El límite de velocidad cósmico del semiconductor:</b> Aunque reemplacemos la resistencia pasiva de colector por una fuente de corriente activa infinita, un transistor nunca puede tener ganancia infinita. Su propia modulación del ancho de base (Efecto Early) crea un camino interno de fuga \(r_o\) a través del cual se escapa la corriente de señal, fijando un techo natural insuperable de ganancia \(A_{vo,max} = V_A / V_T\).</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Ganancia intrínseca máxima (en circuito abierto, sin carga):</b> \(A_{vo,max} = -g_m r_o = -\frac{I_{CQ}}{V_T} \cdot \frac{V_A}{I_{CQ}} = -\frac{V_A}{V_T}\). Es una constante física universal independiente de \(I_{CQ}\).</p>
+      </div>
+      
     </div>
   </div>
 
@@ -551,6 +578,15 @@
       <p>Para \(R_{base}' = 10\,\mathrm{k\Omega}\) y \(\beta = 150\):</p>
       \[Z_{o,e}' = \frac{10000\,\Omega}{151} = \mathbf{66.23\,\Omega}\]
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>La palanca multiplicadora de fuerza:</b> El BJT actúa como un brazo de palanca mecánico. Cualquier resistencia colocada en el emisor (\(R_E\)) es atravesada por la corriente total \(i_e = (\beta+1)i_b\); por tanto, la fuente en la base la 'siente' multiplicada por \((\beta+1)\). A la inversa, una resistencia en la base vista desde el emisor se siente dividida por \((\beta+1)\), como si empujáramos la palanca desde el extremo pesado.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Reglas de reflexión de impedancias:</b> De emisor hacia la base: \(Z_b = (\beta+1)(r_e + R_E) = r_\pi + (\beta+1)R_E\). De la base hacia el emisor: \(Z_e = r_e + \frac{R_B}{\beta+1}\).</p>
+      </div>
+      
     </div>
   </div>
 
@@ -603,6 +639,15 @@
       \[v_{be} = v_i \cdot \frac{r_e}{r_e + R_{E1}}\]
       <p>Si \(R_{E1} = 10 r_e\), la tensión que llega a la unión se divide por 11, permitiendo entradas de hasta 55 mV pico con distorsión menor al 5%.</p>
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Caminar por el plano inclinado curvo:</b> La unión base-emisor es exponencial. Si tu señal alterna oscila apenas un paso diminuto (\(v_{be} \le 5\,\mathrm{mV}\)), el terreno parece una recta perfecta y no hay distorsión. Pero si aplicas una señal de 40 mV pico a pico, experimentas la curva completa y la señal de salida se distorsiona con armónicos cuadráticos.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Criterio estricto de pequeña señal:</b> \(V_p \le 5\,\mathrm{mV}\) para \(HD_2 \le 4.8\%\). Si la señal del sensor es mayor, la aproximación lineal colapsa salvo que se agregue degeneración de emisor \(R_{E1}\).</p>
+      </div>
+      
     </div>
   </div>
 
@@ -655,6 +700,15 @@
       <h4>c) Criterio de diseño</h4>
       <p>La transconductancia \(g_m\) y \(r_e\) dependen únicamente de \(I_C\), por lo que son completamente estables si la polarización DC está bien diseñada. En contraste, \(r_\pi\) cambia en un 125%, lo que alterará significativamente la impedancia de entrada \(Z_i\) entre diferentes unidades del mismo circuito.</p>
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>El expediente médico del transistor:</b> Los fabricantes de semiconductores nunca garantizan un valor exacto de \(\beta\), sino una dispersión enorme (ej. \(h_{fe}\) entre 200 y 450). Malvino enseña que un buen circuito analógico debe ser 'inmune al beta', entregando exactamente la misma ganancia tanto con el transistor de beta mínimo como con el de beta máximo.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Correspondencia con parámetros híbridos (h):</b> \(h_{fe} \equiv \beta_{ac}\), \(h_{ie} \equiv r_\pi = (\beta+1)r_e\), \(h_{oe} \equiv 1/r_o\), \(h_{re} \equiv \mu\) (realimentación inversa).</p>
+      </div>
+      
     </div>
   </div>
 <h3 class="group-title">Bloque 2 · Topologías Fundamentales: Emisor Común</h3>
@@ -865,6 +919,15 @@
       <h4>e) Interpretación del signo negativo</h4>
       <p>El signo '−' representa un <b>desfase de 180°</b>: cuando la tensión en la base alcanza su cresta positiva, el transistor conduce más y la tensión de colector cae hacia su mínimo.</p>
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>La autopista sin peaje en AC:</b> En DC, el condensador \(C_E\) es un puente levadizo abierto, obligando a la corriente a pasar por \(R_E\) para pagar el 'peaje' de estabilidad térmica. En AC de banda media, \(C_E\) se convierte en una autopista de ocho carriles sin peaje (corto a tierra), logrando máxima ganancia (\(A_v = -R_C / r_e\)), con la contrapartida de una impedancia de entrada moderada.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Parámetros de la etapa CE con bypass:</b> Impedancia de entrada total: \(Z_i = R_1 \parallel R_2 \parallel Z_b\), donde \(Z_b = (\beta+1)r_e\). Impedancia de salida: \(Z_o = R_C \parallel r_o \approx R_C\). Ganancia de tensión con carga: \(A_v = -\frac{R_C \parallel R_L}{r_e}\). Ganancia global: \(A_{vs} = \frac{Z_i}{R_s + Z_i} A_v\).</p>
+      </div>
+      
     </div>
   </div>
 
@@ -917,6 +980,15 @@
       <h4>c) Conclusión de ingeniería</h4>
       <p>La ganancia bajó drásticamente de −119 a −2.03, pero ahora <b>está garantizada matemáticamente por resistores pasivos al 1%</b> y no sufrirá distorsión ni alteración con el calor.</p>
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>La suspensión rígida del todoterreno:</b> Quitar el condensador de bypass \(C_E\) es colocar amortiguadores rígidos en el circuito. La ganancia cae drásticamente (de 150 a 10), pero la impedancia de entrada se dispara a decenas de kilo-ohms y la respuesta se vuelve sólida como una roca frente a cambios de temperatura.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Parámetros sin bypass:</b> \(Z_b = (\beta+1)(r_e + R_E) \approx (\beta+1)R_E\). \(A_v \approx -\frac{R_C \parallel R_L}{r_e + R_E} \approx -\frac{R_C \parallel R_L}{R_E}\). La ganancia depende casi exclusivamente del cociente de resistencias externas.</p>
+      </div>
+      
     </div>
   </div>
 
@@ -1087,6 +1159,15 @@
       <h4>c) Criterio didáctico</h4>
       <p>Logra una ganancia sólida de más de 10x, triplica la impedancia de entrada frente a un bypass total y reduce la distorsión armónica en más de un 80%.</p>
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>El diseño de compromiso maestro (Swamping):</b> Ni autopista sin control ni suspensión de hierro: dividir el emisor en \(R_{E1}\) (amortiguador de señal) y \(R_{E2}\) (puenteada para DC) es el estándar universal de la industria para obtener ganancia respetable, linealidad cristalina y estabilidad térmica garantizada.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Regla de diseño de Swamping:</b> Elegir \(R_{E1} \ge 10 r_e\) asegura que la ganancia \(A_v \approx -r_L / R_{E1}\) sea independiente de \(r_e\) y de las variaciones térmicas con un error menor al 10%.</p>
+      </div>
+      
     </div>
   </div>
 
@@ -1285,6 +1366,15 @@
       <p>Planteando LCK en el nodo colector: \(i_o + g_m v_{be} + \frac{v_o - v_i}{R_F} + \frac{v_o}{R_C} = 0\).</p>
       \[v_o \left(\frac{1}{R_C} + \frac{1}{R_F}\right) = v_i \left(\frac{1}{R_F} - g_m\right) \implies A_v = \frac{v_o}{v_i} = \frac{\frac{1}{R_F} - g_m}{\frac{1}{R_C} + \frac{1}{R_F}} \approx \frac{-0.09423}{\frac{1}{2660}} = \mathbf{-250.6} \quad (\checkmark)\]
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>El balancín con palanca amplificadora (Efecto Miller):</b> La resistencia \(R_F\) une la base con el colector. Cuando la base sube \(+1\,\mathrm{mV}\), el colector cae violentamente \(-250\,\mathrm{mV}\). \(R_F\) siente \(251\,\mathrm{mV}\) de diferencia de potencial y drena \(251\times\) más corriente de la base, haciendo que la entrada perciba una resistencia virtual \(R_F / (1 + |A_v|)\) extraordinariamente pequeña.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Teorema de Miller en AC:</b> Equivalente en entrada: \(R_{Mi} = \frac{R_F}{1 - A_v}\). Impedancia de entrada total: \(Z_i = R_{Mi} \parallel r_\pi\). Equivalente en salida: \(R_{Mo} = \frac{R_F}{1 - 1/A_v} \approx R_F\). \(Z_o = R_C \parallel R_F\).</p>
+      </div>
+      
     </div>
   </div>
 
@@ -1475,6 +1565,15 @@
       \[Z_o = R_C \parallel r_o = \mathbf{3.05\,\mathrm{k\Omega}}\]
       <p>Criterio de Boylestad / Malvino: Si \(r_o \ge 10 R_C\), el error de despreciar \(r_o\) es menor al 10% y suele aceptarse en pre-diseño analítico. Aquí \(10 R_C = 33\,\mathrm{k\Omega}\); como \(r_o = 40\,\mathrm{k\Omega} > 33\,\mathrm{k\Omega}\), la aproximación ideal era admisible con un 8% de margen.</p>
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>La regla del 10% de Boylestad:</b> Si la resistencia Early \(r_o\) es al menos diez veces mayor que la resistencia de colector (\(r_o \ge 10 R_C\)), el error de ignorarla en el examen o en el laboratorio es inferior al 10%, lo que permite agilizar el cálculo preliminar de diseño sin perder rigor físico.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Efecto Early en ganancia e impedancia:</b> Resistencia de carga efectiva: \(r_L' = R_C \parallel R_L \parallel r_o\). Impedancia de salida: \(Z_o = R_C \parallel r_o\). Ganancia: \(A_v = -r_L' / r_e\).</p>
+      </div>
+      
     </div>
   </div>
 
@@ -1672,6 +1771,15 @@
       \[A_v = -\frac{r_L}{r_e} = -g_m r_L = -\frac{1803\,\Omega}{11.10\,\Omega} \approx \mathbf{-162.4}\]
       \[Z_o = R_C = \mathbf{2.2\,\mathrm{k\Omega}}\]
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>El punto cero de equilibrio:</b> Con fuentes simétricas (\(\pm 12\,\mathrm{V}\)), el potencial de reposo de la base queda clavado en 0 V de continua mediante una simple resistencia \(R_B\) a masa. El emisor queda polarizado automáticamente a \(-0.7\,\mathrm{V}\), eliminando los condensadores de acoplamiento de entrada y simplificando el conexionado en instrumentación.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Polarización bipolar:</b> \(I_E = \frac{V_{EE} - V_{BE}}{R_E + R_B/(\beta+1)}\). \(Z_i = R_B \parallel [(\beta+1)r_e]\). \(Z_o = R_C\). \(A_v = -r_L / r_e\).</p>
+      </div>
+      
     </div>
   </div>
 
@@ -1864,6 +1972,15 @@
       <h4>d) Justificación física de \(A_i < \beta\)</h4>
       <p>La corriente de entrada \(i_i\) se divide en dos ramas: parte se pierde en las resistencias de polarización de base (\(R_1 \parallel R_2\)), por lo que solo una fracción llega a la base como \(i_b\). Además, la corriente de colector \(i_c = \beta i_b\) se divide entre \(R_C\) y la carga útil \(R_L\). Como consecuencia de ambos divisores, \(A_i\) es siempre significativamente menor que \(\beta\) intrínseco.</p>
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Voltaje vs. Músculo (Ganancia de Potencia):</b> Un amplificador de tensión puede multiplicar el voltaje por 100, pero si su corriente de salida es débil, no moverá una carga física. La ganancia de corriente \(A_i = i_o / i_i\) y la ganancia de potencia \(A_p = |A_v \cdot A_i|\) miden cuánta energía neta inyecta la fuente de alimentación DC en la señal.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Relación fundamental de redes:</b> \(A_i = -A_v \frac{Z_i}{R_L}\). Ganancia de potencia: \(A_p = |A_v \cdot A_i| = A_v^2 \frac{Z_i}{R_L}\). En decibeles: \(A_p(\mathrm{dB}) = 10 \log_{10}(A_p)\).</p>
+      </div>
+      
     </div>
   </div>
 <h3 class="group-title">Bloque 3 · Colector Común (Buffer) y Base Común</h3>
@@ -2027,6 +2144,15 @@
       \[\frac{v_i}{v_s} = \frac{Z_i}{R_s + Z_i} = \frac{23.76}{10 + 23.76} \approx 0.7038\]
       \[A_{vs} = \frac{v_o}{v_s} = 0.7038 \times (+0.957) = \mathbf{+0.6735}\]
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>La caja reductora del camión (Transformador de impedancias):</b> El Colector Común (Seguidor de Emisor) no aumenta el voltaje (\(A_v \approx +1\)), pero actúa como una caja de cambios con reductora: transforma una fuente débil de alta impedancia en una salida robusta de bajísima impedancia (\(Z_o \approx 20\,\Omega\)), entregando corriente masiva a la carga sin perder tensión.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Ecuaciones del Seguidor de Emisor (CC):</b> \(Z_b = (\beta+1)(r_e + R_E \parallel R_L)\). \(Z_i = R_B \parallel Z_b\). \(Z_o = R_E \parallel \left[r_e + \frac{R_s \parallel R_B}{\beta+1}\right]\). \(A_v = +\frac{R_E \parallel R_L}{r_e + (R_E \parallel R_L)}\) (fase 0°, sin inversión).</p>
+      </div>
+      
     </div>
   </div>
 
@@ -2188,6 +2314,15 @@
       \[v_{o,directo} = v_s \cdot \frac{R_L}{R_s + R_L} = 100\,\mathrm{mV} \cdot \frac{1.0\,\mathrm{k\Omega}}{10.0\,\mathrm{k\Omega} + 1.0\,\mathrm{k\Omega}} = \mathbf{9.09\,\mathrm{mV}}\]
       <p><b>Conclusión:</b> El buffer multiplica la señal útil por un factor de \(69.0 / 9.09 \approx 7.6\) (\(+17.6\,\mathrm{dB}\)), demostrando la función vital de la adaptación de impedancias en instrumentación.</p>
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>La aduana del sensor de alta impedancia:</b> Si un sensor tiene \(R_s = 10\,\mathrm{k\Omega}\) y lo conectas directo a \(1\,\mathrm{k\Omega}\), la señal cae al 9%. Interponer el seguidor de emisor es como colocar un negociador aduanero: su alta \(Z_i\) recibe el 72% del voltaje y su baja \(Z_o\) lo transfiere casi intacto a la carga.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Atenuación de entrada y ganancia global:</b> \(v_b / v_s = \frac{Z_i}{R_s + Z_i}\). Ganancia total del sistema: \(A_{vs} = \frac{v_o}{v_s} = \left(\frac{Z_i}{R_s + Z_i}\right) \cdot A_v\).</p>
+      </div>
+      
     </div>
   </div>
 
@@ -2355,6 +2490,15 @@
       <h4>d) Justificación física de la fase (0°)</h4>
       <p>Al aplicar una tensión positiva en el emisor, la diferencia de potencial \(v_{BE} = v_B - v_E\) disminuye. Esto reduce la corriente de colector \(i_C\), lo que disminuye la caída en \(R_C\) e incrementa el potencial de salida \(v_C\). Por tanto, entrada positiva produce salida positiva: <b>fase en 0°</b>.</p>
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>El blindaje electrostático en RF:</b> En la etapa Base Común, la base está rígidamente conectada a tierra en AC, interponiéndose como un escudo de metal entre el emisor (entrada) y el colector (salida). Esto extermina la capacitancia de Miller y permite alcanzar anchos de banda de cientos de mega-hertz.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Parámetros de Base Común (CB):</b> \(Z_i = R_E \parallel r_e \approx r_e\) (muy baja). \(Z_o = R_C\). Ganancia: \(A_v = +\frac{R_C \parallel R_L}{r_e}\) (alta y positiva, fase 0°).</p>
+      </div>
+      
     </div>
   </div>
 
@@ -2525,6 +2669,15 @@
       <h4>e) Justificación física en RF</h4>
       <p>En Emisor Común, la capacitancia parásita colector-base \(C_{bc}\) se multiplica por \((1 + |A_v|)\) por efecto Miller, colapsando el ancho de banda a frecuencias de megahertz. En Base Común, la base está rígidamente conectada a tierra en AC, actuando como un <b>blindaje electrostático</b> entre entrada y salida: \(C_{bc}\) queda aterrizada y no hay retroalimentación Miller. Esto permite un ancho de banda diez veces superior.</p>
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>La paradoja de la baja impedancia de entrada:</b> Como la Base Común tiene \(Z_i \approx 13\,\Omega\), la antena de \(50\,\Omega\) pierde el 80% de su tensión en el divisor de entrada. Sin embargo, la etapa tiene tanta ganancia propia (\(A_v = 138\)) que el sistema global sigue entregando una ganancia neta respetable de \(+28\) con estabilidad perfecta.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Divisor de entrada severo en CB:</b> \(\frac{v_e}{v_s} = \frac{Z_i}{R_s + Z_i} = \frac{13}{50+13} \approx 0.20\). \(A_{vs} = 0.20 \times 138 \approx +28.2\).</p>
+      </div>
+      
     </div>
   </div>
 
@@ -2714,6 +2867,15 @@
         </tbody>
       </table>
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Las tres herramientas del maestro artesano:</b> El Emisor Común es el martillo de fuerza (amplifica tensión y potencia con inversión de 180°). El Colector Común es el adaptador de llave inglesa (iguala impedancias y entrega corriente). La Base Común es el bisturí de precisión (máxima velocidad y ancho de banda en RF).</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Cuadro resumen de impedancias y ganancias:</b> CE: \(Z_i\) media, \(Z_o\) media, \(|A_v|\) alta, desfase 180°. CC: \(Z_i\) muy alta, \(Z_o\) muy baja, \(A_v \approx +1\), desfase 0°. CB: \(Z_i\) muy baja, \(Z_o\) media, \(A_v\) alta, desfase 0°.</p>
+      </div>
+      
     </div>
   </div>
 <h3 class="group-title">Bloque 4 · Carga (RL), Fuente (Rs) y Swing Máximo</h3>
@@ -2903,6 +3065,15 @@
       \[r_{L4} = 3.3\,\mathrm{k\Omega} \parallel 0.47\,\mathrm{k\Omega} = \frac{3.3 \times 0.47}{3.77} \approx 411.4\,\Omega \implies A_{v4} = -\frac{411.4\,\Omega}{16.5\,\Omega} = \mathbf{-24.93}\]
       <p><b>Lección de diseño:</b> Cuando \(R_L < R_C\), la ganancia colapsa porque la resistencia externa absorbe la corriente de señal. Para excitar cargas menores a 1 kΩ, es obligatorio usar un buffer de salida Colector Común o un par Darlington.</p>
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>El ciclista con pasajero pesado (Efecto de carga):</b> Calcular la ganancia con \(R_L = \infty\) es como medir la velocidad del ciclista pedaleando solo. Al subirle un pasajero pesado (carga \(R_L < R_C\)), la resistencia en paralelo disminuye y la ganancia se desploma a la mitad o a la cuarta parte.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Resistencia efectiva de colector en AC:</b> \(r_L = R_C \parallel R_L\). \(A_v = -r_L / r_e\). Si \(R_L = R_C\), la ganancia cae exactamente al \(50\%\) de su valor en circuito abierto.</p>
+      </div>
+      
     </div>
   </div>
 
@@ -3101,6 +3272,15 @@
       <h4>d) Justificación física de la pendiente</h4>
       <p>Como \(r_{ac} = R_C \parallel R_L = 1.65\,\mathrm{k\Omega} < R_{DC} = 4.3\,\mathrm{k\Omega}\), la magnitud de la pendiente en AC (\(1/r_{ac}\)) es \(4.3 / 1.65 = 2.61\) veces mayor que la de DC. Por ello, <b>el rango de excursión de tensión en alterna siempre queda acotado por la recta AC</b>, limitando el swing antes de lo que sugeriría la recta estática de continua.</p>
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>La pista de aterrizaje estática vs. dinámica:</b> La recta de DC fija dónde aterriza el punto Q en reposo (dictada por \(R_C + R_E\)). Pero cuando llega la música o la señal alterna, los condensadores se cierran y la pista se vuelve mucho más empinada (dictada por \(r_{ac} = R_C \parallel R_L\)), limitando el margen de vuelo del voltaje antes de chocar con el suelo.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Ecuaciones de rectas de carga:</b> Recta DC: pendiente \(-1/(R_C + R_E)\). Recta AC: pendiente \(-1/r_{ac}\) pasando por \((V_{CEQ}, I_{CQ})\). Tensión de corte AC: \(v_{ce(corte)} = V_{CEQ} + I_{CQ} r_{ac}\).</p>
+      </div>
+      
     </div>
   </div>
 
@@ -3155,6 +3335,15 @@
       <h4>d) Diagnóstico de recorte</h4>
       <p>Dado que \(\Delta v_{ce(corte)} = 3.6\,\mathrm{V} < \Delta v_{ce(sat)} = 4.8\,\mathrm{V}\), el amplificador alcanzará el <b>CORTE</b> antes que la saturación. Como en CE la ganancia invierte 180°, el corte se manifestará como un aplanamiento en la cresta positiva de la salida.</p>
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Conducir por el centro de la carretera (Swing Máximo):</b> Si tu punto Q está demasiado cerca de saturación (hacia la izquierda) o de corte (hacia la derecha), la señal chocará contra el guardarraíl ante la menor oscilación. El swing máximo simétrico se obtiene cuando las distancias a ambos bordes son exactamente idénticas.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Límites de excursión simétrica:</b> \(V_{o(pico,max)} = \min\{I_{CQ} r_{ac},\, V_{CEQ} - V_{CE(sat)}\}\). \(V_{o(p-p,max)} = 2 \times V_{o(pico,max)}\).</p>
+      </div>
+      
     </div>
   </div>
 
@@ -3352,6 +3541,15 @@
       \[V_{CEQ} = 12 - (3.5 \times 2.88) = 1.92\,\mathrm{V}\]
       <p>El margen hacia saturación es solo \(1.92 - 0.2 = 1.72\,\mathrm{V}\), mientras que hacia el corte es \(3.5 \times 1.1 = 3.85\,\mathrm{V}\). Por lo tanto, <b>recortará severamente por saturación</b> mucho antes de alcanzar su límite de corte.</p>
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>La fórmula matemática del centrado perfecto:</b> Para maximizar la excursión sin recortar, el punto de reposo en AC debe colocarse exactamente donde \(V_{CEQ} - V_{CE(sat)} = I_{CQ} r_{ac}\). Combinando con la recta DC, se despeja la corriente óptima única que aprovecha el 100% de la batería.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Punto Q óptimo de Malvino:</b> \(I_{CQ,opt} = \frac{V_{CC} - V_{CE(sat)}}{R_{DC} + r_{ac}}\). Cualquier corriente superior recortará por saturación; cualquier corriente inferior recortará por corte.</p>
+      </div>
+      
     </div>
   </div>
 
@@ -3541,6 +3739,15 @@
       <h4>d) Criterio de optimización</h4>
       <p>Para que la pérdida sea menor al 5%, se requiere que \(Z_i \ge 20 R_s = 12\,\mathrm{k\Omega}\). Esto se logra fácilmente agregando una resistencia de swamping \(R_{E1}\) no puenteada o interponiendo un seguidor de emisor como etapa adaptadora.</p>
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>El impuesto aduanero de la fuente real:</b> Un micrófono piezoeléctrico genera 10 mV en circuito abierto, pero tiene \(R_s = 600\,\Omega\). Si tu amplificador tiene \(Z_i = 900\,\Omega\), el divisor de entrada se queda con el 40% de la tensión antes de que toque el transistor.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Divisor de tensión de entrada:</b> \(v_i = v_s \cdot \frac{Z_i}{R_s + Z_i}\). Ganancia global: \(A_{vs} = \frac{v_o}{v_s} = \left(\frac{Z_i}{R_s + Z_i}\right) A_v\). Para perder menos del 5%, se diseña con \(Z_i \ge 20 R_s\).</p>
+      </div>
+      
     </div>
   </div>
 
@@ -3734,6 +3941,15 @@
       <h4>d) Criterio de pequeña señal</h4>
       <p>Una distorsión de casi el 10% para 10 mV demuestra que el modelo lineal estándar colapsa rápidamente. En la práctica, para que el amplificador se comporte linealmente con menos del 5% de armónicos, se exige \(v_{be(pico)} \le 5\,\mathrm{mV}\). Si la señal de entrada es superior, se debe insertar degeneración de emisor \(R_{E1}\) para extender la linealidad mediante realimentación local negativa.</p>
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>El espejo deformante de la feria:</b> La relación exponencial de Shockley genera armónicos que distorsionan el timbre de la señal. La matemática de Taylor demuestra que la distorsión de segundo armónico es directamente proporcional a la amplitud de entrada: si duplicas la señal, duplicas la distorsión.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Distorsión armónica de segundo orden:</b> \(HD_2 = \frac{V_p}{4 V_T} \times 100\%\). Para señales mayores a 5 mV pico, la única forma de recuperar linealidad sin atenuar es aplicar degeneración de emisor (swamping).</p>
+      </div>
+      
     </div>
   </div>
 <h3 class="group-title">Bloque 5 · Configuraciones Compuestas y Multietapa</h3>
@@ -3924,6 +4140,15 @@
       \[A_{v,total}(\mathrm{dB}) = 20 \log_{10}(7224.7) \approx \mathbf{77.18\,\mathrm{dB}}\]
       <p><b>Análisis de fase:</b> Cada etapa en Emisor Común introduce una inversión de fase de 180°. La combinación de ambas produce \(180^\circ + 180^\circ = 360^\circ = 0^\circ\), por lo que la señal de salida resultante está <b>en fase exacta</b> con la señal de entrada.</p>
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>El tren de dos locomotoras (Doble inversión de fase):</b> La primera etapa CE invierte 180°, y la segunda etapa CE vuelve a invertir 180°. Como \(180^\circ + 180^\circ = 360^\circ = 0^\circ\), la señal de salida final vuelve a estar en fase perfecta con la entrada, multiplicando las ganancias a miles de veces.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Efecto de carga interetapa:</b> La carga de la primera etapa es \(r_{L1} = R_{C1} \parallel Z_{i2}\). La ganancia total es el producto escalar: \(A_{v,total} = A_{v1} \times A_{v2}\).</p>
+      </div>
+      
     </div>
   </div>
 
@@ -4086,6 +4311,15 @@
       \[r_{L,directo} = 4700\,\Omega \parallel 100\,\Omega = 97.92\,\Omega \implies A_v = -\frac{97.92\,\Omega}{15\,\Omega} = \mathbf{-6.53}\]
       <p>El buffer incrementa la ganancia entregada a la carga de 6.5 a 204 (<b>un aumento de más del 3000%</b>).</p>
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>El motor y la caja de embrague (CE + CC):</b> La etapa CE es el motor que genera el alto voltaje (ganancia de 200), pero tiene una impedancia de salida de varios kilo-ohms. La etapa CC es el embrague que entrega la corriente sin que la carga pesada de 100 Ω ahogue al motor.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Cascada de alta fidelidad:</b> La etapa CC eleva la impedancia que ve la etapa CE a más de 12 kΩ, permitiendo que la etapa CE mantenga una ganancia de \(-226\) y transfiera \(-204\) a una carga de apenas 100 Ω.</p>
+      </div>
+      
     </div>
   </div>
 
@@ -4247,6 +4481,15 @@
       <h4>d) Impedancia de salida \(Z_o\)</h4>
       \[Z_o = R_E \parallel \left[ r_{e2} + \frac{r_{e1} + \frac{R_s}{\beta_1 + 1}}{\beta_2 + 1} \right] = 1000 \parallel \left[ 13 + \frac{1573 + \frac{10000}{121}}{121} \right] = 1000 \parallel [13 + 13.68] = 1000 \parallel 26.68 \approx \mathbf{26.0\,\Omega}\]
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>El super-transistor compuesto Darlington:</b> Dos transistores conectados en cascada directa donde el emisor del primero alimenta la base del segundo. Sus betas se multiplican (\(\beta_1 \beta_2 \approx 14400\)), creando un transistor con impedancia de entrada astronómica, ideal para sensores de carga estática.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Par Darlington:</b> \(\beta_{total} \approx \beta_1 \beta_2\). \(Z_{in,base} \approx \beta_1 \beta_2 R_E\). \(V_{BE(total)} \approx 2 \times 0.7 = 1.4\,\mathrm{V}\). \(Z_o \approx r_{e2} + \frac{r_{e1}}{\beta_2} + \frac{R_s}{\beta_1 \beta_2}\).</p>
+      </div>
+      
     </div>
   </div>
 
@@ -4408,6 +4651,15 @@
       <h4>d) Superioridad en Estabilidad Térmica</h4>
       <p>El transistor \(Q_2\) disipa alta potencia y se calienta intensamente. En el Darlington, si \(Q_2\) se calienta, su \(V_{BE2}\) disminuye (-2 mV/°C), aumentando la corriente y provocando <b>embalamiento térmico</b>. En el Sziklai, el transistor que fija la tensión base-emisor del circuito es \(Q_1\) (de pequeña señal, que permanece frío), aislando térmicamente el punto Q de la etapa de potencia.</p>
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>El gemelo mejorado de Sziklai:</b> Al combinar un NPN con un PNP de potencia, se obtiene la misma super-beta del Darlington, pero con la enorme ventaja de encender con solo 0.7 V de polarización (un solo \(V_{BE}\)) y manteniendo al transistor de control frío para evitar el temido embalamiento térmico.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Par Sziklai Complementario:</b> \(V_{in(umbral)} = V_{BE1} = 0.7\,\mathrm{V}\). \(\beta_{comp} \approx \beta_1 \beta_2\). Mayor estabilidad térmica porque el punto de polarización lo fija el transistor NPN de pequeña señal.</p>
+      </div>
+      
     </div>
   </div>
 
@@ -4593,6 +4845,15 @@
       \[A_{v2} = +\frac{R_C}{r_{e2}} = +\frac{2700\,\Omega}{17.33\,\Omega} = +155.8\]
       \[A_{v,total} = A_{v1} \times A_{v2} = (-1.0) \times (+155.8) = \mathbf{-155.8}\]
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>El estrangulador del Efecto Miller (Cascode):</b> Al forzar a la primera etapa CE a alimentar el emisor de la etapa CB (cuya impedancia es de apenas \(10\,\Omega\)), la ganancia de tensión de la primera etapa se reduce a solo \(-1\). Esto apaga por completo la multiplicación de la capacitancia parásita de Miller, permitiendo multiplicar por diez el ancho de banda en RF.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Topología Cascode (CE + CB):</b> \(A_{v1} \approx -r_{e2} / r_{e1} \approx -1\). \(A_{v2} = +R_C / r_{e2}\). Ganancia global: \(A_v = A_{v1} A_{v2} \approx -R_C / r_{e1}\). Capacitancia de entrada: \(C_{in} \approx C_{be1} + 2 C_{bc1}\) (anula el Efecto Miller).</p>
+      </div>
+      
     </div>
   </div>
 <h3 class="group-title">Bloque 6 · Casos de Ingeniería Real y Troubleshooting</h3>
@@ -4642,6 +4903,15 @@
       <h4>Diagnóstico de Circuito C</h4>
       <p>La base tiene 3.5 V pero el emisor está en 0 V, lo que arroja \(V_{BE} = 3.5\,\mathrm{V}\). En un diodo de silicio sano, \(V_{BE}\) nunca supera 0.7 V a 0.8 V. Esta lectura confirma que la <b>unión física PN base-emisor se fundió y quedó en circuito abierto</b> por una sobrecorriente previa.</p>
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>El estetoscopio del técnico:</b> Medir primero los voltajes en DC con el multímetro resuelve el 90% de las fallas. Si \(V_C = V_{CC}\), el transistor está en corte o la resistencia de emisor está abierta. Si \(V_C \approx V_E\), el transistor está saturado o en corto. Si los voltajes DC son normales pero no hay ganancia en AC, el culpable es el condensador de bypass \(C_E\).</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Matriz de diagnóstico de voltajes:</b> En un CE polarizado correctamente: \(V_B \approx 1.8\,\mathrm{V}\), \(V_E \approx 1.1\,\mathrm{V}\), \(V_C \approx 0.5\,V_{CC}\). Desviaciones bruscas hacia \(V_{CC}\) o tierra identifican componentes abiertos o cruzados antes de usar el osciloscopio.</p>
+      </div>
+      
     </div>
   </div>
 
@@ -4818,6 +5088,15 @@
       <p>Criterio de estabilidad térmica: \(R_2 \le 0.1 \beta R_E = 0.1 \times 150 \times 593 = 8.89\,\mathrm{k\Omega}\). Seleccionamos \(R_2 = \mathbf{8.2\,\mathrm{k\Omega}}\).</p>
       \[I_{divisor} \approx \frac{1.886\,\mathrm{V}}{8.2\,\mathrm{k\Omega}} = 0.23\,\mathrm{mA} \implies R_1 = \frac{12.0 - 1.886}{0.23\,\mathrm{mA} + I_B} \approx \frac{10.11\,\mathrm{V}}{0.243\,\mathrm{mA}} = 41.6\,\mathrm{k\Omega} \implies \text{E24: } \mathbf{43\,\mathrm{k\Omega} \text{ o } 47\,\mathrm{k\Omega}}\]
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>El traje a medida del ingeniero:</b> Diseñar no es adivinar resistencias en el protoboard; es despejar las ecuaciones hacia atrás: fijar la corriente de reposo para centrar el swing, calcular \(R_{E1}\) para la ganancia exacta solicitada y elegir valores comerciales normalizados de la serie E24 verificando que el error sea menor al 5%.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Metodología de diseño por especificaciones:</b> 1) Fijar \(V_{CEQ} \approx V_{CC}/2\). 2) Hallar \(R_C + R_E\). 3) Calcular \(R_{E1} = (R_C \parallel R_L)/|A_v| - r_e\). 4) Seleccionar divisor de base cumpliendo la regla de rigidez: \(R_2 \le 0.1 \beta R_E\).</p>
+      </div>
+      
     </div>
   </div>
 
@@ -4997,6 +5276,15 @@
       <h4>d) Conclusión de robustez industrial</h4>
       <p>Con swamping, la variación total se confina en el rango \([-11\%, +12\%]\). Si el circuito estuviera totalmente puenteado (\(R_{E1} = 0\)), la ganancia dependería enteramente de \(r_e\) y de \(\beta\), provocando dispersiones incontrolables de más del 50%, lo que haría reprobar la prueba de auditoría automotriz.</p>
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>La prueba de choque en el desierto automotriz:</b> Las tolerancias de los componentes pasivos (\(\pm 5\%\)) y la dispersión del beta de fábrica (de 100 a 300) conspiran para alterar el circuito. El análisis de peor caso evalúa la combinación más desfavorable de parámetros para garantizar que el producto cumpla normas de seguridad en cualquier condición.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Análisis Worst-Case:</b> Ganancia mínima: \(R_C\) al -5%, \(R_{E1}\) al +5%, \(I_C\) al -10%. Ganancia máxima: \(R_C\) al +5%, \(R_{E1}\) al -5%, \(I_C\) al +10%. Con swamping, la dispersión se contiene dentro de \(\pm 12\%\).</p>
+      </div>
+      
     </div>
   </div>
 
@@ -5191,6 +5479,15 @@
       <h4>d) Diagnóstico de laboratorio</h4>
       <p>Los capacímetros convencionales de bajo costo miden el tiempo de carga en DC o a muy bajas frecuencias, reportando que la capacitancia sigue siendo de 45 µF (aparentemente dentro de la tolerancia de ±20%). Sin embargo, a frecuencias de señal, la <b>alta resistencia serie parásita (ESR)</b> degenera el emisor como si fuera una resistencia de swamping parásita indeseada, colapsando la ganancia a la mitad. El medidor de ESR es el instrumento mandatorio para hallar esta falla.</p>
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>La arteria calcificada por la vejez (ESR):</b> El capacímetro digital ordinario reporta que el condensador tiene 47 µF, engañando al técnico. Pero con los años, el electrolito se seca y su resistencia serie interna (ESR) aumenta de \(0.2\,\Omega\) a \(16\,\Omega\). Para la señal de alta frecuencia, esa ESR actúa como una resistencia de swamping parásita que derrumba la ganancia a la mitad.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Efecto de la ESR en AC:</b> \(r_{e,eff} = r_e + ESR\). \(A_v = -\frac{R_C}{r_e + ESR}\). Para detectar condensadores secos sin desoldar, el instrumento mandatorio en el laboratorio de servicio técnico es el medidor de ESR en circuito.</p>
+      </div>
+      
     </div>
   </div>
 
@@ -5380,6 +5677,15 @@
         <li><b>2. Neutralización capacitiva:</b> Inyectar una señal en contra-fase a través de un trimmer capacitivo para cancelar la corriente de \(C_{bc}\).</li>
       </ul>
     
+      <div class="box remember" style="margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>El silbido del micrófono frente al altavoz:</b> Si la carga del colector es inductiva, la señal realimentada por la capacitancia parásita \(C_{bc}\) sufre un desfase mayor a 90°. En lugar de oponerse a la entrada, la realimenta positivamente, inyectando energía hacia la fuente (resistencia negativa \(R_{in} < 0\)). El circuito deja de ser un amplificador y se convierte en un oscilador parásito fuera de control.</p>
+      </div>
+      <div class="box key" style="margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;">
+        <small style="text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>
+        <p style="margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;"><b>Condición de resistencia negativa por Miller:</b> \(G_{in} = \mathrm{Re}\{Y_{in}\} = -\omega C_{bc} g_m X_L\). Si \(X_L > 0\) (inductiva), \(R_{in} < 0\), cumpliendo el criterio de oscilación de Barkhausen. Se erradica mediante arquitectura Cascode o neutralización capacitiva.</p>
+      </div>
+      
     </div>
   </div>
 
@@ -5917,6 +6223,167 @@
       <p>Reemplazar \(R_2\) por el valor correcto de \(10\,\mathrm{k\Omega}\). El punto de operación regresa a \(I_{CQ} \approx 1.5\,\mathrm{mA}\), \(V_C \approx 10\,\mathrm{V}\), y la señal alterna oscila sin recorte simétricamente.</p>
     
     </div>
+  </div>
+
+  <h2 class="section-title" style="page-break-before: always; color:#0056b3; border-bottom: 2px solid #0056b3;">Fase 4 · Formulario Maestro y Diccionario Unificado de Pequeña Señal</h2>
+  <div style="background: #eef6ff; border: 1.5px solid #b8daff; padding: 10px 14px; border-radius: 6px; margin-bottom: 16px;">
+    <b>Unificación de Criterio de Aula y Libros Guía (Boylestad · Malvino · Sedra · Neamen):</b> Esta tabla unifica la notación, ecuaciones y criterios de laboratorio para hablar exactamente el mismo idioma y evitar confusiones en el examen.
+  </div>
+
+  <table class="ac-table">
+    <thead>
+      <tr style="background:#0056b3; color:#fff;">
+        <th style="width:14%;">Símbolo</th>
+        <th style="width:20%;">Nombre & Libros Guía</th>
+        <th style="width:36%;">Definición Física & Ecuación</th>
+        <th style="width:30%;">Criterio de Laboratorio y Examen</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>\(Z_i\)</b> (o \(Z_{in}\))</td>
+        <td><b>Impedancia de entrada total</b><br><small>Boylestad ((Z_i)), Malvino ((z_{in})), Sedra ((R_{in}))</small></td>
+        <td>Resistencia alterna total vista por la fuente de señal desde los terminales de entrada:<br>\[Z_i = R_1 \parallel R_2 \parallel Z_b\]</td>
+        <td>Determina cuánto se atenúa la señal del sensor al entrar a la etapa (\(v_i / v_s\)). Debe medirse desconectando la fuente \(R_s\).</td>
+      </tr>
+      <tr>
+        <td><b>\(Z_b\)</b> (o \(Z_{in,base}\))</td>
+        <td><b>Impedancia de entrada en la base</b><br><small>Boylestad ((Z_b)), Malvino ((z_{in(base)}))</small></td>
+        <td>Resistencia dinámica que 'siente' la base mirando hacia el interior del transistor:<br>\[Z_b = (\beta+1)(r_e + R_E) = r_\pi + (\beta+1)R_E\]</td>
+        <td>Aplica el <i>Teorema de Reflexión</i>: cualquier resistencia en el emisor se multiplica por \((\beta+1)\) al verse desde la base.</td>
+      </tr>
+      <tr>
+        <td><b>\(I_i\)</b> (o \(i_{in}\))</td>
+        <td><b>Corriente de entrada total</b><br><small>Boylestad ((I_i)), Sedra ((i_{in}))</small></td>
+        <td>Corriente alterna total suministrada por la fuente al amplificador:<br>\[I_i = \frac{v_i}{Z_i}\]</td>
+        <td>No confundir con la corriente de base \(I_b\): \(I_i\) se divide entre la red de polarización (\(R_1 \parallel R_2\)) y la base.</td>
+      </tr>
+      <tr>
+        <td><b>\(Z_o\)</b> (o \(Z_{out}\))</td>
+        <td><b>Impedancia de salida</b><br><small>Boylestad ((Z_o)), Sedra ((R_{out}))</small></td>
+        <td>Resistencia equivalente que ve la carga externa \(R_L\) mirando hacia el amplificador con fuentes independientes apagadas (\(v_s = 0\)).</td>
+        <td>En CE: \(Z_o = R_C \parallel r_o \approx R_C\).<br>En CC: \(Z_o = R_E \parallel \left[r_e + \frac{R_s \parallel R_B}{\beta+1}\right]\) (muy baja).</td>
+      </tr>
+      <tr>
+        <td><b>\(r_o\)</b> (o \(1/h_{oe}\))</td>
+        <td><b>Resistencia de salida por Early</b><br><small>Sedra ((r_o)), Malvino ((r_o)), Boylestad ((r_o))</small></td>
+        <td>Pendiente debida a la modulación del ancho de base:<br>\[r_o = \frac{V_A + V_{CEQ}}{I_{CQ}} \approx \frac{V_A}{I_{CQ}}\]</td>
+        <td><b>Regla de oro de Boylestad:</b> si \(r_o \ge 10 R_C\), ignorar \(r_o\) introduce menos de un 10% de error en la ganancia.</td>
+      </tr>
+      <tr>
+        <td><b>\(A_{vo}\)</b> (o \(A_{vNL}\))</td>
+        <td><b>Ganancia en circuito abierto</b><br><small>Boylestad ((A_{vNL})), Sedra ((A_{vo}))</small></td>
+        <td>Ganancia de tensión cuando la carga no está conectada (\(R_L = \infty\)):<br>\[A_{vo} = \frac{v_o}{v_i} \Big|_{R_L = \infty} \approx -\frac{R_C}{r_e} \quad (\text{en CE bypass})\]</td>
+        <td>Es la capacidad intrínseca máxima de la etapa antes de acoplarle la carga de trabajo.</td>
+      </tr>
+      <tr>
+        <td><b>\(A_v\)</b> (o \(A_{vL}\))</td>
+        <td><b>Ganancia de tensión con carga</b><br><small>Todos los libros guía</small></td>
+        <td>Relación de voltaje entre salida y base con \(R_L\) conectada:<br>\[A_v = \frac{v_o}{v_i} \approx -\frac{R_C \parallel R_L}{r_e} \quad (\text{en CE bypass})\]</td>
+        <td>Siempre es menor en magnitud que \(A_{vo}\) debido al efecto de carga (<i>loading effect</i>) del paralelo \(R_C \parallel R_L\).</td>
+      </tr>
+      <tr>
+        <td><b>\(A_{vs}\)</b> (o \(A_{v,sig}\))</td>
+        <td><b>Ganancia global del sistema</b><br><small>Boylestad ((A_{vs})), Sedra ((G_v)), Malvino</small></td>
+        <td>Ganancia neta desde el generador \(v_s\) hasta la carga final:<br>\[A_{vs} = \frac{v_o}{v_s} = \left(\frac{Z_i}{R_s + Z_i}\right) \cdot A_v\]</td>
+        <td><b>¡El dato crítico de laboratorio!</b> Si el sensor tiene alta resistencia interna \(R_s\), \(A_{vs}\) puede ser muy inferior a \(A_v\).</td>
+      </tr>
+      <tr>
+        <td><b>\(A_i\)</b></td>
+        <td><b>Ganancia de corriente de la etapa</b><br><small>Boylestad ((A_i)), Malvino ((A_i))</small></td>
+        <td>Relación entre corriente de carga y corriente consumida a la entrada:<br>\[A_i = \frac{I_o}{I_i} = -A_v \cdot \frac{Z_i}{R_L}\]</td>
+        <td>Siempre es menor que \(\beta\) debido a las corrientes que se desvían en el divisor de base y en \(R_C\).</td>
+      </tr>
+      <tr>
+        <td><b>\(A_p\)</b></td>
+        <td><b>Ganancia de potencia de la etapa</b><br><small>Boylestad ((A_p)), Malvino ((A_p))</small></td>
+        <td>Potencia de señal en la carga dividida por potencia de entrada:<br>\[A_p = |A_v \cdot A_i| = A_v^2 \cdot \frac{Z_i}{R_L}\]</td>
+        <td>En decibeles: \(A_p(\mathrm{dB}) = 10 \log_{10}(A_p)\). Mide la verdadera amplificación energética.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 style="color:#0056b3; margin-top:20px;">Tabla Maestra de Fórmulas para las 4 Topologías Principales</h3>
+  <table class="ac-table">
+    <thead>
+      <tr style="background:#0056b3; color:#fff;">
+        <th>Configuración</th>
+        <th>Impedancia Entrada (\(Z_i\))</th>
+        <th>Impedancia Salida (\(Z_o\))</th>
+        <th>Ganancia Carga (\(A_v\))</th>
+        <th>Ganancia Global (\(A_{vs}\))</th>
+        <th>Desfase</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>CE con Bypass Total (\(C_E\))</b></td>
+        <td>\(R_B \parallel [(\beta+1)r_e]\)</td>
+        <td>\(R_C \parallel r_o \approx R_C\)</td>
+        <td>\(-\dfrac{R_C \parallel R_L}{r_e}\)</td>
+        <td>\(\left(\dfrac{Z_i}{R_s + Z_i}\right) A_v\)</td>
+        <td><b>180°</b></td>
+      </tr>
+      <tr>
+        <td><b>CE con Swamping (\(R_{E1}\))</b></td>
+        <td>\(R_B \parallel [(\beta+1)(r_e + R_{E1})]\)</td>
+        <td>\(R_C \parallel r_o \approx R_C\)</td>
+        <td>\(-\dfrac{R_C \parallel R_L}{r_e + R_{E1}} \approx -\dfrac{r_L}{R_{E1}}\)</td>
+        <td>\(\left(\dfrac{Z_i}{R_s + Z_i}\right) A_v\)</td>
+        <td><b>180°</b></td>
+      </tr>
+      <tr>
+        <td><b>Colector Común (Buffer)</b></td>
+        <td>\(R_B \parallel [(\beta+1)(r_e + R_E \parallel R_L)]\)</td>
+        <td>\(R_E \parallel \left[r_e + \dfrac{R_s \parallel R_B}{\beta+1}\right]\)</td>
+        <td>\(+\dfrac{R_E \parallel R_L}{r_e + (R_E \parallel R_L)} \approx +0.98\)</td>
+        <td>\(\left(\dfrac{Z_i}{R_s + Z_i}\right) A_v\)</td>
+        <td><b>0°</b></td>
+      </tr>
+      <tr>
+        <td><b>Base Común (CB)</b></td>
+        <td>\(R_E \parallel r_e \approx r_e\)</td>
+        <td>\(R_C \parallel r_o \approx R_C\)</td>
+        <td>\(+\dfrac{R_C \parallel R_L}{r_e}\)</td>
+        <td>\(\left(\dfrac{Z_i}{R_s + Z_i}\right) A_v\)</td>
+        <td><b>0°</b></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="section-title" style="page-break-before: always; color:#0284c7; border-bottom: 2px solid #0284c7;">Fase 5 · Las 6 Analogías Pedagógicas de Albert Malvino para el BJT en AC</h2>
+  <div style="background: #f0f9ff; border: 1.5px solid #bae6fd; padding: 10px 14px; border-radius: 6px; margin-bottom: 16px;">
+    <b>Pedagogía Intuitiva de Alto Nivel:</b> Albert Malvino demostró que las ecuaciones complejas de semiconductores se dominan cuando el estudiante las asocia con fenómenos de la vida real.
+  </div>
+
+  <div class="item-card">
+    <h3 style="color:#0284c7; margin-bottom:4px;">1. El Condensador de Bypass (\(C_E\)): La Autopista sin Peaje vs. el Peaje de DC</h3>
+    <p>En continua (DC), el condensador es un puente levadizo abierto: toda la corriente cruza por \(R_E\) para pagar el peaje de estabilidad térmica. En alterna (AC), el condensador se convierte en una autopista libre sin peaje (cortocircuito): la señal bordea \(R_E\) directo a tierra, disparando la ganancia al máximo.</p>
+  </div>
+
+  <div class="item-card">
+    <h3 style="color:#0284c7; margin-bottom:4px;">2. La Resistencia de Swamping (\(R_{E1}\)): El Amortiguador en el Coche Deportivo</h3>
+    <p>Un amplificador totalmente puenteado es como correr en un coche con neumáticos fijados directamente al chasis: la ganancia depende de \(r_e\), que cambia con la temperatura. Colocar \(R_{E1} \ge 10 r_e\) es instalar un amortiguador hidráulico: la ganancia se ancla a la relación fija \(R_C / R_{E1}\), volviéndose inmune al calor y a la dispersión de beta.</p>
+  </div>
+
+  <div class="item-card">
+    <h3 style="color:#0284c7; margin-bottom:4px;">3. El Colector Común (Buffer): La Caja Reductora del Camión Pesado</h3>
+    <p>Si acoplas un sensor delicado de alta impedancia directo a un altavoz o carga de 100 Ω, la señal se apaga por efecto de carga. El seguidor de emisor es la caja reductora: no corre más rápido (\(A_v \approx +1\)), pero entrega una corriente astronómica con impedancia de salida de unos pocos ohmios (\(Z_o \approx 20\,\Omega\)).</p>
+  </div>
+
+  <div class="item-card">
+    <h3 style="color:#0284c7; margin-bottom:4px;">4. El Efecto Early (\(r_o\)): El Canal de Agua cuyo Lecho se Estrecha</h3>
+    <p>Al elevar \(V_{CE}\), la zona de deplexión colector-base se ensancha y reduce el grosor de la base. Con un cauce más estrecho, menos electrones se pierden y más llegan al colector. Esa pendiente en la curva \(I_C\) vs \(V_{CE}\) actúa en el circuito equivalente como una resistencia parásita \(r_o\) en paralelo con la fuente de colector.</p>
+  </div>
+
+  <div class="item-card">
+    <h3 style="color:#0284c7; margin-bottom:4px;">5. El Teorema de Miller: El Subibaja con Palanca Multiplicadora</h3>
+    <p>Si la base sube \(+1\,\mathrm{mV}\), el colector cae \(-200\,\mathrm{mV}\) debido a la ganancia inversora. La resistencia \(R_F\) entre base y colector experimenta \(201\,\mathrm{mV}\) de diferencia de potencial, drenando \(201\times\) más corriente de la base. Por tanto, la entrada siente una resistencia virtual \(R_{Mi} = R_F / (1 + |A_v|)\) doscientas veces menor.</p>
+  </div>
+
+  <div class="item-card">
+    <h3 style="color:#0284c7; margin-bottom:4px;">6. La Ganancia Global \(A_{vs}\): El Peaje Aduanero de la Resistencia de Fuente</h3>
+    <p>Todo sensor real tiene resistencia interna \(R_s\). Antes de que la señal entre al amplificador, debe cruzar la aduana del divisor de entrada formado por \(R_s\) y \(Z_i\). La aduana cobra un peaje de tensión: a la base solo ingresa \(v_i = v_s \cdot [Z_i / (R_s + Z_i)]\). Por eso la ganancia neta del sistema \(A_{vs}\) siempre es menor que \(A_v\).</p>
   </div>
 
   <div style="margin-top: 30px; text-align: center; border-top: 1px solid #ddd; padding-top: 15px; color: #777; font-size: 8.5pt;">

@@ -149,6 +149,68 @@
       border-bottom: 1px solid #e2e8f0;
       padding-bottom: 3px;
     }
+    .analogias-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+      margin: 18px 0;
+    }
+    .analogia-card {
+      border: 1px solid var(--line, #cbd5e1);
+      border-radius: 12px;
+      padding: 16px;
+      background: var(--paper, #fff);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .analogia-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    }
+    .analogia-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid #f1f5f9;
+      padding-bottom: 8px;
+    }
+    .analogia-icon {
+      font-size: 2rem;
+      line-height: 1;
+    }
+    .analogia-title {
+      font-weight: 750;
+      color: var(--navy, #153a5b);
+      font-size: 1.05rem;
+      margin: 0;
+    }
+    .analogia-concept {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: var(--blue, #235f91);
+      display: block;
+    }
+    .analogia-desc {
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: var(--ink, #18212b);
+      margin: 0;
+    }
+    .analogia-takeaway {
+      background: #f0f7ff;
+      border-left: 3.5px solid #0056b3;
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: #0c4a6e;
+      margin-top: auto;
+      line-height: 1.4;
+    }
     @media print {
       header, aside, .header-actions, .taller-filter-bar, .search-box, .workshop-actions, .buttons, .feedback {
         display: none !important;
@@ -229,7 +291,8 @@
         <a href="#teorico">T1 · Fase 1: Calentamiento Teórico</a>
         <a href="#practico">T2 · Fase 2: Ejercicios Guiados</a>
         <a href="#retos" style="font-weight:bold;color:#dc2626;">T3 · Fase 3: Retos de Examen 🔥</a>
-        <a href="#metodologia">T4 · Formulario Maestro & Modelos</a>
+        <a href="#metodologia">T4 · Formulario & Diccionario Unificado</a>
+        <a href="#analogias" style="font-weight:bold;color:#0284c7;">T5 · Las 6 Analogías de Malvino 💡</a>
       </nav>
       <div class="side-info">
         <b>💡 Metodología del Taller:</b> Primero repasa los conceptos en <b>T1</b>, analiza los esquemáticos y soluciones en <b>T2</b>, y enfréntate a los <b>Retos de T3</b> con tu cuaderno y calculadora sin mirar la solución.
@@ -238,11 +301,11 @@
 
     <main>
       <section class="hero small">
-        <span class="eyebrow">Taller #2 · Práctica Intensiva de Consolidación</span>
+        <span class="eyebrow">Taller #2 · Basado en Boylestad & Nashelsky (Cap. 5) y Malvino & Bates</span>
         <h1>Taller de Aprendizaje: Transistores BJT en Señal Pequeña (AC)</h1>
         <p>
-          Banco integral de <b>49 ejercicios graduados</b> para preparar el examen parcial y el trabajo en laboratorio.
-          Incluye preguntas de comprensión conceptual con pistas, problemas con contexto de ingeniería moderna (vehículos eléctricos, sensores biomédicos, robótica, RF y audio) y solucionario detallado paso a paso con los modelos <b>\(r_e\)</b> e <b>híbrido-\(\pi\)</b>.
+          Banco integral de <b>49 ejercicios graduados</b> para preparar el examen parcial y el trabajo en laboratorio, estructurado según el <b>Capítulo 5 ("Análisis de ca de un BJT") de Boylestad & Nashelsky</b>.
+          Incluye preguntas conceptuales con pistas, problemas con contexto de ingeniería real, solucionario paso a paso con modelos <b>\(r_e\)</b> e <b>híbrido-\(\pi\)</b> y las <b>analogías pedagógicas maestras de Albert Malvino</b>.
         </p>
         <div class="workshop-actions">
           <button id="btnPrintPdf" class="btn primary">🖨️ Imprimir Vista Actual</button>
@@ -296,12 +359,12 @@
 
         <div class="taller-filter-bar">
           <button class="filter-btn active" data-group="all">Todos los ejercicios (34)</button>
-          <button class="filter-btn" data-group="Bloque 1">B1 · Fundamentos (6)</button>
-          <button class="filter-btn" data-group="Bloque 2">B2 · Emisor Común (7)</button>
-          <button class="filter-btn" data-group="Bloque 3">B3 · CC y CB (5)</button>
-          <button class="filter-btn" data-group="Bloque 4">B4 · Carga y Swing (6)</button>
-          <button class="filter-btn" data-group="Bloque 5">B5 · Multietapa (5)</button>
-          <button class="filter-btn" data-group="Bloque 6">B6 · Fallas y Specs (5)</button>
+          <button class="filter-btn" data-group="Bloque 1">B1 · Fundamentos (Sec. 5.1–5.4)</button>
+          <button class="filter-btn" data-group="Bloque 2">B2 · Emisor Común (Sec. 5.5–5.7)</button>
+          <button class="filter-btn" data-group="Bloque 3">B3 · CC y CB (Sec. 5.8–5.9)</button>
+          <button class="filter-btn" data-group="Bloque 4">B4 · Carga y Bipuertos (Sec. 5.12–5.15)</button>
+          <button class="filter-btn" data-group="Bloque 5">B5 · Cascada y Darlington (Sec. 5.16–5.18)</button>
+          <button class="filter-btn" data-group="Bloque 6">B6 · Fallas y Aplicaciones (Sec. 5.24–5.25)</button>
           <button id="btnToggleAll" class="btn small" style="margin-left: auto;">Colapsar / Expandir todos</button>
         </div>
 
@@ -329,20 +392,199 @@
         <div id="retosContainer" style="margin-top:20px"></div>
       </section>
 
-      <!-- SECCIÓN T4: GUÍA RÁPIDA DE FÓRMULAS Y EQUIVALENCIAS -->
+      <!-- SECCIÓN T4: GUÍA RÁPIDA, DICCIONARIO UNIFICADO Y FÓRMULAS MAESTRAS -->
       <section class="module" id="metodologia">
         <div class="module-head">
           <div class="module-title">
             <span class="no">T4</span>
             <div>
-              <span class="eyebrow">Guía de referencia rápida</span>
-              <h2>Formulario Maestro de Pequeña Señal en Banda Media</h2>
+              <span class="eyebrow">Unificación de Criterio de Aula y Libros Guía</span>
+              <h2>Formulario Maestro y Diccionario Unificado de Pequeña Señal</h2>
             </div>
+          </div>
+          <button class="mark" data-mark="taller-bjt-ac-t4">Marcar estudiado</button>
+        </div>
+
+        <p class="lead">
+          Para evitar confusiones habituales entre lo que se explica en clase y lo que presentan los textos clásicos (<b>Boylestad & Nashelsky</b>, <b>Malvino & Bates</b>, <b>Sedra & Smith</b>, <b>Neamen</b>), esta sección unifica la notación, define con precisión cada variable física y resume las ecuaciones maestras para el examen y el laboratorio.
+        </p>
+
+        <!-- DICCIONARIO UNIFICADO -->
+        <div class="panel paper" style="margin-bottom: 22px;">
+          <h3 style="margin-top:0; color:#153a5b;">📖 Diccionario Unificado de Parámetros de Pequeña Señal</h3>
+          <p style="font-size:0.92rem; color:#475569;">
+            Consulta esta tabla de equivalencias para comprobar qué significa cada símbolo según el autor que estés leyendo:
+          </p>
+          <div class="ac-table-wrap">
+            <table class="ac-table">
+              <thead>
+                <tr>
+                  <th style="min-width:110px;">Símbolo Oficial</th>
+                  <th style="min-width:160px;">Nombre & Libros Guía</th>
+                  <th style="min-width:260px;">Definición Física & Ecuación</th>
+                  <th style="min-width:240px;">Criterio de Laboratorio y Examen</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>\(Z_i\)</b> (o \(Z_{in}\))</td>
+                  <td><b>Impedancia de entrada total</b><br><small>Boylestad (\(Z_i\)), Malvino (\(z_{in}\)), Sedra (\(R_{in}\))</small></td>
+                  <td>Resistencia alterna total vista por la fuente de señal desde los terminales de entrada:<br>\[Z_i = R_1 \parallel R_2 \parallel Z_b\]</td>
+                  <td>Determina cuánto se atenúa la señal del sensor al entrar a la etapa (\(v_i / v_s\)). Debe medirse desconectando la fuente \(R_s\).</td>
+                </tr>
+                <tr>
+                  <td><b>\(Z_b\)</b> (o \(Z_{in,base}\))</td>
+                  <td><b>Impedancia de entrada en la base</b><br><small>Boylestad (\(Z_b\)), Malvino (\(z_{in(base)}\))</small></td>
+                  <td>Resistencia dinámica que 'siente' la base mirando hacia el interior del transistor:<br>\[Z_b = (\beta+1)(r_e + R_E) = r_\pi + (\beta+1)R_E\]</td>
+                  <td>Aplica el <i>Teorema de Reflexión</i>: cualquier resistencia en el emisor se multiplica por \((\beta+1)\) al verse desde la base.</td>
+                </tr>
+                <tr>
+                  <td><b>\(I_i\)</b> (o \(i_{in}\))</td>
+                  <td><b>Corriente de entrada total</b><br><small>Boylestad (\(I_i\)), Sedra (\(i_{in}\))</small></td>
+                  <td>Corriente alterna total suministrada por la fuente al amplificador:<br>\[I_i = \frac{v_i}{Z_i}\]</td>
+                  <td>No confundir con la corriente de base \(I_b\): \(I_i\) se divide entre la red de polarización (\(R_1 \parallel R_2\)) y la base.</td>
+                </tr>
+                <tr>
+                  <td><b>\(I_b\)</b> (o \(i_b\))</td>
+                  <td><b>Corriente de base de señal</b><br><small>Todos los libros guía</small></td>
+                  <td>Componente alterna que efectivamente entra al terminal de base:<br>\[I_b = I_i \cdot \frac{R_1 \parallel R_2}{(R_1 \parallel R_2) + Z_b}\]</td>
+                  <td>Es la variable de control en el modelo \(r_e\): la fuente de corriente de colector genera \(i_c = \beta I_b\).</td>
+                </tr>
+                <tr>
+                  <td><b>\(Z_o\)</b> (o \(Z_{out}\))</td>
+                  <td><b>Impedancia de salida</b><br><small>Boylestad (\(Z_o\)), Sedra (\(R_{out}\))</small></td>
+                  <td>Resistencia equivalente que ve la carga externa \(R_L\) mirando hacia el amplificador con fuentes independientes apagadas (\(v_s = 0\)).</td>
+                  <td>En CE: \(Z_o = R_C \parallel r_o \approx R_C\).<br>En CC: \(Z_o = R_E \parallel \left[r_e + \frac{R_s \parallel R_B}{\beta+1}\right]\) (muy baja).</td>
+                </tr>
+                <tr>
+                  <td><b>\(I_o\)</b> (o \(i_o\))</td>
+                  <td><b>Corriente de salida en la carga</b><br><small>Todos los libros guía</small></td>
+                  <td>Corriente alterna entregada a la resistencia de carga externa \(R_L\):<br>\[I_o = -\frac{v_o}{R_L} \quad (\text{según convención de redes})\]</td>
+                  <td>Permite calcular la ganancia de corriente de la etapa completa: \(A_i = I_o / I_i\).</td>
+                </tr>
+                <tr>
+                  <td><b>\(r_o\)</b> (o \(1/h_{oe}\))</td>
+                  <td><b>Resistencia dinámica de salida por Early</b><br><small>Sedra (\(r_o\)), Malvino (\(r_o\)), Boylestad (\(r_o\))</small></td>
+                  <td>Pendiente de la curva característica debida a la modulación del ancho de base:<br>\[r_o = \frac{V_A + V_{CEQ}}{I_{CQ}} \approx \frac{V_A}{I_{CQ}}\]</td>
+                  <td><b>Regla de oro de Boylestad:</b> si \(r_o \ge 10 R_C\), ignorar \(r_o\) introduce menos de un 10% de error en la ganancia.</td>
+                </tr>
+                <tr>
+                  <td><b>\(A_{vo}\)</b> (o \(A_{vNL}\))</td>
+                  <td><b>Ganancia en circuito abierto (sin carga)</b><br><small>Boylestad (\(A_{vNL}\)), Sedra (\(A_{vo}\))</small></td>
+                  <td>Ganancia de tensión cuando la carga externa no está conectada (\(R_L = \infty\)):<br>\[A_{vo} = \frac{v_o}{v_i} \Big|_{R_L = \infty} \approx -\frac{R_C}{r_e} \quad (\text{en CE bypass})\]</td>
+                  <td>Es la capacidad intrínseca máxima de la etapa antes de acoplarle la carga de trabajo.</td>
+                </tr>
+                <tr>
+                  <td><b>\(A_v\)</b> (o \(A_{vL}\))</td>
+                  <td><b>Ganancia de tensión con carga</b><br><small>Todos los libros guía</small></td>
+                  <td>Relación de voltaje entre la salida y los terminales de base con \(R_L\) conectada:<br>\[A_v = \frac{v_o}{v_i} \approx -\frac{R_C \parallel R_L}{r_e} \quad (\text{en CE bypass})\]</td>
+                  <td>Siempre es menor en magnitud que \(A_{vo}\) debido al efecto de carga (<i>loading effect</i>) del paralelo \(R_C \parallel R_L\).</td>
+                </tr>
+                <tr>
+                  <td><b>\(A_{vs}\)</b> (o \(A_{v,sig}\))</td>
+                  <td><b>Ganancia global del sistema</b><br><small>Boylestad (\(A_{vs}\)), Sedra (\(G_v\)), Malvino</small></td>
+                  <td>Ganancia neta desde la fuente de señal (generador \(v_s\)) hasta la carga final:<br>\[A_{vs} = \frac{v_o}{v_s} = \left(\frac{Z_i}{R_s + Z_i}\right) \cdot A_v\]</td>
+                  <td><b>¡El dato crítico de laboratorio!</b> Si el sensor tiene alta resistencia interna \(R_s\), \(A_{vs}\) puede ser mucho menor que \(A_v\).</td>
+                </tr>
+                <tr>
+                  <td><b>\(A_i\)</b></td>
+                  <td><b>Ganancia de corriente de la etapa</b><br><small>Boylestad (\(A_i\)), Malvino (\(A_i\))</small></td>
+                  <td>Relación entre corriente entregada a la carga y corriente consumida a la entrada:<br>\[A_i = \frac{I_o}{I_i} = -A_v \cdot \frac{Z_i}{R_L}\]</td>
+                  <td>Siempre es menor que \(\beta\) debido a las corrientes que se desvían en el divisor de base y en \(R_C\).</td>
+                </tr>
+                <tr>
+                  <td><b>\(A_p\)</b></td>
+                  <td><b>Ganancia de potencia de la etapa</b><br><small>Boylestad (\(A_p\)), Malvino (\(A_p\))</small></td>
+                  <td>Potencia alterna entregada a la carga dividida por potencia suministrada por la fuente:<br>\[A_p = |A_v \cdot A_i| = A_v^2 \cdot \frac{Z_i}{R_L}\]</td>
+                  <td>En decibeles de potencia: \(A_p(\mathrm{dB}) = 10 \log_{10}(A_p)\). Mide la verdadera amplificación energética.</td>
+                </tr>
+                <tr>
+                  <td><b>\(r_e\)</b></td>
+                  <td><b>Resistencia intrínseca dinámica de emisor</b><br><small>Boylestad, Malvino</small></td>
+                  <td>Resistencia incremental de la unión PN base-emisor polarizada con corriente \(I_{EQ}\):<br>\[r_e = \frac{V_T}{I_{EQ}} \approx \frac{26\,\mathrm{mV}}{I_{EQ}} \quad (25\,^\circ\mathrm{C})\]</td>
+                  <td>Inversamente proporcional a la corriente de reposo. Se reduce a la mitad al duplicar \(I_{EQ}\).</td>
+                </tr>
+                <tr>
+                  <td><b>\(g_m\)</b></td>
+                  <td><b>Transconductancia del transistor</b><br><small>Sedra/Smith, Razavi, Malvino</small></td>
+                  <td>Pendiente de la curva \(i_C\) vs \(v_{BE}\) en el punto Q:<br>\[g_m = \frac{I_{CQ}}{V_T} \approx \frac{1}{r_e} \quad (\text{en Siemens, mS})\]</td>
+                  <td>Representa la capacidad del transistor de transformar una tensión de entrada en una corriente de colector.</td>
+                </tr>
+                <tr>
+                  <td><b>\(r_\pi\)</b> (o \(h_{ie}\))</td>
+                  <td><b>Resistencia de base en Híbrido-\(\pi\)</b><br><small>Sedra/Smith, Razavi</small></td>
+                  <td>Resistencia equivalente vista entre base y emisor en el modelo Híbrido-\(\pi\):<br>\[r_\pi = \frac{\beta}{g_m} = (\beta+1)r_e \approx \beta r_e\]</td>
+                  <td>Une de forma matemática exacta el modelo \(r_e\) con el modelo Híbrido-\(\pi\).</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
+        <!-- TABLA MAESTRA DE LAS 4 CONFIGURACIONES -->
+        <div class="panel paper" style="margin-bottom: 22px;">
+          <h3 style="margin-top:0; color:#153a5b;">📊 Fórmulas Maestras de las 4 Configuraciones Fundamentales</h3>
+          <p style="font-size:0.92rem; color:#475569;">
+            Resumen comparativo unificado para resolver cualquier problema de examen considerando carga externa \(R_L\) y resistencia de generador \(R_s\):
+          </p>
+          <div class="ac-table-wrap">
+            <table class="ac-table">
+              <thead>
+                <tr>
+                  <th>Configuración</th>
+                  <th>Entrada / Salida / AC Tierra</th>
+                  <th>Impedancia de Entrada (\(Z_i\))</th>
+                  <th>Impedancia de Salida (\(Z_o\))</th>
+                  <th>Ganancia con Carga (\(A_v = v_o/v_i\))</th>
+                  <th>Ganancia Global (\(A_{vs} = v_o/v_s\))</th>
+                  <th>Desfase (\(\phi\))</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Emisor Común (CE) con Bypass Total (\(C_E\))</b></td>
+                  <td>Entrada: Base<br>Salida: Colector<br>Común: Emisor</td>
+                  <td>\(R_B \parallel [(\beta+1)r_e]\)<br><small>(Media: \(1 - 3\,\mathrm{k\Omega}\))</small></td>
+                  <td>\(R_C \parallel r_o \approx R_C\)<br><small>(Media: \(2 - 5\,\mathrm{k\Omega}\))</small></td>
+                  <td>\(-\dfrac{R_C \parallel R_L}{r_e}\)<br><small>(Alta: \(-100 \dots -300\))</small></td>
+                  <td>\(\left(\dfrac{Z_i}{R_s + Z_i}\right) A_v\)</td>
+                  <td><b>180°</b><br>(Inversora)</td>
+                </tr>
+                <tr>
+                  <td><b>Emisor Común con Swamping (\(R_{E1}\))</b></td>
+                  <td>Entrada: Base<br>Salida: Colector<br>Común: Emisor</td>
+                  <td>\(R_B \parallel [(\beta+1)(r_e + R_{E1})]\)<br><small>(Alta: \(5 - 20\,\mathrm{k\Omega}\))</small></td>
+                  <td>\(R_C \parallel r_o \approx R_C\)<br><small>(Media: \(2 - 5\,\mathrm{k\Omega}\))</small></td>
+                  <td>\(-\dfrac{R_C \parallel R_L}{r_e + R_{E1}} \approx -\dfrac{R_C \parallel R_L}{R_{E1}}\)<br><small>(Estable y lineal: \(-10 \dots -50\))</small></td>
+                  <td>\(\left(\dfrac{Z_i}{R_s + Z_i}\right) A_v\)</td>
+                  <td><b>180°</b><br>(Inversora)</td>
+                </tr>
+                <tr>
+                  <td><b>Colector Común (CC) / Seguidor de Emisor</b></td>
+                  <td>Entrada: Base<br>Salida: Emisor<br>Común: Colector</td>
+                  <td>\(R_B \parallel [(\beta+1)(r_e + R_E \parallel R_L)]\)<br><small>(Muy alta: \(20 - 100\,\mathrm{k\Omega}\))</small></td>
+                  <td>\(R_E \parallel \left[r_e + \dfrac{R_s \parallel R_B}{\beta+1}\right]\)<br><small>(Muy baja: \(10 - 50\,\Omega\))</small></td>
+                  <td>\(+\dfrac{R_E \parallel R_L}{r_e + (R_E \parallel R_L)} \approx +0.98\)<br><small>(Cercana a +1)</small></td>
+                  <td>\(\left(\dfrac{Z_i}{R_s + Z_i}\right) A_v \approx +0.8 \dots +0.95\)</td>
+                  <td><b>0°</b><br>(En fase)</td>
+                </tr>
+                <tr>
+                  <td><b>Base Común (CB) / Etapa de RF</b></td>
+                  <td>Entrada: Emisor<br>Salida: Colector<br>Común: Base</td>
+                  <td>\(R_E \parallel r_e \approx r_e\)<br><small>(Muy baja: \(10 - 30\,\Omega\))</small></td>
+                  <td>\(R_C \parallel r_o \approx R_C\)<br><small>(Media: \(2 - 5\,\mathrm{k\Omega}\))</small></td>
+                  <td>\(+\dfrac{R_C \parallel R_L}{r_e}\)<br><small>(Alta: \(+100 \dots +300\))</small></td>
+                  <td>\(\left(\dfrac{Z_i}{R_s + Z_i}\right) A_v\)<br><small>(Atenuada por divisor de entrada)</small></td>
+                  <td><b>0°</b><br>(En fase)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- CORRESPONDENCIA ENTRE MODELOS -->
         <div class="panel paper">
-          <h3>Tabla de Correspondencia Exacta entre Modelos</h3>
+          <h3 style="margin-top:0; color:#153a5b;">🔄 Tabla de Correspondencia Exacta entre Modelos</h3>
           <div class="ac-table-wrap">
             <table class="ac-table">
               <thead>
@@ -370,7 +612,7 @@
                   <td><b>Resistencia de Salida</b></td>
                   <td>\(r_o = \dfrac{V_A + V_{CEQ}}{I_{CQ}} \approx \dfrac{V_A}{I_{CQ}}\)</td>
                   <td>\(r_o = \dfrac{V_A + V_{CEQ}}{I_{CQ}} \approx \dfrac{V_A}{I_{CQ}}\)</td>
-                  <td>Idéntica definición (Efecto Early)</td>
+                  <td>Idéntica definición física (Efecto Early)</td>
                 </tr>
                 <tr>
                   <td><b>Ganancia CE con Bypass</b></td>
@@ -379,10 +621,10 @@
                   <td>Coincidencia exacta al sustituir \(g_m = 1/r_e\)</td>
                 </tr>
                 <tr>
-                  <td><b>Ganancia CE sin Bypass</b></td>
-                  <td>\(A_v = -\dfrac{R_C \parallel R_L}{r_e + R_E}\)</td>
-                  <td>\(A_v = -\dfrac{g_m (R_C \parallel R_L)}{1 + g_m R_E}\)</td>
-                  <td>Coincidencia exacta al dividir numerador y denominador por \(g_m\)</td>
+                  <td><b>Ganancia CE con Swamping</b></td>
+                  <td>\(A_v = -\dfrac{R_C \parallel R_L}{r_e + R_{E1}}\)</td>
+                  <td>\(A_v = -\dfrac{g_m (R_C \parallel R_L)}{1 + g_m R_{E1}}\)</td>
+                  <td>Coincidencia exacta al dividir numerador y denominador entre \(g_m\)</td>
                 </tr>
                 <tr>
                   <td><b>Ganancia Colector Común (Buffer)</b></td>
@@ -402,11 +644,134 @@
         </div>
 
         <div class="box key" style="margin-top: 14px;">
-          <small>Regla de oro para resolver exámenes sin dudar</small>
-          <b>1)</b> Identifica terminal de entrada y salida para clasificar la etapa (CE, CC o CB).<br>
-          <b>2)</b> Resuelve el punto Q en continua para obtener \(I_{CQ}\) y calcula de inmediato \(r_e = 26\,\mathrm{mV}/I_E\) y \(g_m = I_C/26\,\mathrm{mV}\).<br>
-          <b>3)</b> Dibuja el circuito equivalente AC poniendo a tierra las fuentes DC independientes y cortocircuitando condensadores en banda media.<br>
-          <b>4)</b> Escribe las ecuaciones de nodos o divisores y comprueba que la ganancia tenga el signo físico correcto.
+          <small>Regla de oro de 5 pasos para resolver exámenes sin dudar</small>
+          <b>1) Identifica terminales:</b> Observa dónde entra la señal y de dónde se extrae para clasificar de inmediato la etapa (CE, CC o CB).<br>
+          <b>2) Resuelve el DC completo:</b> Obtén \(I_{EQ}\) y comprueba que el transistor esté en región activa (\(V_{CEQ} > 0.3\,\mathrm{V}\)). Calcula al instante \(r_e = 26\,\mathrm{mV}/I_E\) y \(g_m = I_C/26\,\mathrm{mV}\).<br>
+          <b>3) Dibuja el equivalente AC:</b> Cortocircuita las fuentes DC constantes (ponlas a tierra de AC) y cortocircuita los condensadores de acoplamiento y bypass en banda media.<br>
+          <b>4) Calcula las tres impedancias clave:</b> Determina la impedancia de base \(Z_b\), la impedancia de entrada total de la etapa \(Z_i = R_B \parallel Z_b\) y la impedancia de salida \(Z_o\).<br>
+          <b>5) Aplica divisores y comprueba fase:</b> Calcula la ganancia de la etapa con carga \(A_v = v_o/v_i\), multiplica por el divisor de entrada \(v_i/v_s = Z_i/(R_s + Z_i)\) para hallar la ganancia global \(A_{vs}\), y verifica el signo físico esperado (\(-\) en CE, \(+\) en CC y CB).
+        </div>
+      </section>
+
+      <!-- SECCIÓN T5: LAS 6 ANALOGÍAS MAESTRAS DE ALBERT MALVINO -->
+      <section class="module" id="analogias">
+        <div class="module-head">
+          <div class="module-title">
+            <span class="no" style="background:#0284c7;color:#fff;">T5</span>
+            <div>
+              <span class="eyebrow" style="color:#0284c7;font-weight:bold;">Pedagogía Intuitiva de Alto Nivel</span>
+              <h2>Las 6 Analogías Maestras de Albert Malvino para el BJT en AC</h2>
+            </div>
+          </div>
+          <button class="mark" data-mark="taller-bjt-ac-t5">Marcar estudiado</button>
+        </div>
+
+        <p class="lead">
+          El profesor e ingeniero <b>Albert Paul Malvino</b> revolucionó la enseñanza de la electrónica en el mundo gracias a su capacidad de traducir ecuaciones matemáticas complejas en <b>analogías intuitivas de la vida cotidiana</b>. Con estas 6 analogías entenderás qué le ocurre físicamente a los electrones en cada caso de estudio:
+        </p>
+
+        <div class="analogias-grid">
+          <!-- ANALOGÍA 1 -->
+          <article class="analogia-card">
+            <div class="analogia-header">
+              <span class="analogia-icon">🛣️</span>
+              <div>
+                <span class="analogia-concept">Condensador de Bypass \(C_E\)</span>
+                <h3 class="analogia-title">La Autopista sin Peaje vs. el Peaje de DC</h3>
+              </div>
+            </div>
+            <p class="analogia-desc">
+              En continua (DC), el condensador es un puente levadizo levantado (circuito abierto): toda la corriente debe cruzar obligatoriamente por la resistencia \(R_E\), pagando el 'peaje' que mantiene el punto Q térmicamente estable. Pero para la señal alterna (AC de banda media), el condensador se convierte en una autopista de ocho carriles sin peaje (cortocircuito): la señal bordea \(R_E\) y va directo a tierra, disparando la ganancia al máximo.
+            </p>
+            <div class="analogia-takeaway">
+              <b>Lección de laboratorio:</b> Si el condensador \(C_E\) se abre o se desconecta, el punto Q en DC medido con el multímetro sigue perfecto, pero la ganancia en alterna observada en el osciloscopio se desploma de \(-150\) a \(-1.5\).
+            </div>
+          </article>
+
+          <!-- ANALOGÍA 2 -->
+          <article class="analogia-card">
+            <div class="analogia-header">
+              <span class="analogia-icon">🚗</span>
+              <div>
+                <span class="analogia-concept">Resistencia de Swamping \(R_{E1}\)</span>
+                <h3 class="analogia-title">El Amortiguador en el Coche Deportivo</h3>
+              </div>
+            </div>
+            <p class="analogia-desc">
+              Un amplificador con emisor totalmente puenteado es como correr en un coche de carreras con los neumáticos fijados al chasis sin suspensión: la ganancia depende enteramente de \(r_e\), que cambia con cada grado centígrado de temperatura o con cada lote de transistores. Colocar una resistencia de <i>swamping</i> \(R_{E1} \gg r_e\) es instalar un amortiguador hidráulico robusto: la ganancia se 'ancla' a la relación fija \(R_C / R_{E1}\), eliminando la distorsión y volviendo el circuito inmune al calor.
+            </p>
+            <div class="analogia-takeaway">
+              <b>Regla de oro de Malvino:</b> Si diseñas con \(R_{E1} \ge 10 r_e\), la ganancia de tensión queda determinada con menos del 10% de error por componentes pasivos de precisión, garantizando que el circuito funcione idéntico en verano o invierno.
+            </div>
+          </article>
+
+          <!-- ANALOGÍA 3 -->
+          <article class="analogia-card">
+            <div class="analogia-header">
+              <span class="analogia-icon">🚚</span>
+              <div>
+                <span class="analogia-concept">Colector Común (Buffer)</span>
+                <h3 class="analogia-title">La Caja Reductora del Camión Pesado</h3>
+              </div>
+            </div>
+            <p class="analogia-desc">
+              Si intentas acoplar un sensor delicado de alta impedancia directamente a un altavoz de 8 Ω o a un cable largo de 50 Ω, es como conectar el motor de una motocicleta ligera a las ruedas de un camión de 20 toneladas: el motor se apaga (la tensión colapsa por efecto de carga). El seguidor de emisor (Colector Común) es la <b>caja de cambios con reductora</b>: no corre más rápido (su ganancia de tensión es apenas \(A_v \approx +1\)), pero multiplica la fuerza de corriente por \(\beta\), entregando potencia masiva a la carga con una impedancia de salida de apenas unos pocos ohmios.
+            </p>
+            <div class="analogia-takeaway">
+              <b>Aplicación reina:</b> El buffer no busca elevar el voltaje, sino adaptar impedancias: toma la señal de un nodo de alta impedancia sin drenarle corriente y la transfiere a una carga exigente sin caídas de tensión.
+            </div>
+          </article>
+
+          <!-- ANALOGÍA 4 -->
+          <article class="analogia-card">
+            <div class="analogia-header">
+              <span class="analogia-icon">🌊</span>
+              <div>
+                <span class="analogia-concept">Efecto Early y Resistencia \(r_o\)</span>
+                <h3 class="analogia-title">El Canal de Agua cuyo Lecho se Estrecha</h3>
+              </div>
+            </div>
+            <p class="analogia-desc">
+              Al aumentar el voltaje entre colector y emisor (\(V_{CE}\)), la zona de deplexión de la unión colector-base se ensancha e invade la región de base, reduciendo su grosor físico efectivo. Con un cauce más estrecho, menos electrones se pierden recombinándose en la base y una fracción mayor logra cruzar hacia el colector. Esta ligera subida continua en la corriente \(I_C\) es la modulación del ancho de base (Efecto Early), que en el circuito equivalente actúa exactamente como una resistencia parásita \(r_o\) en paralelo con la fuente de corriente de colector.
+            </p>
+            <div class="analogia-takeaway">
+              <b>Criterio de Boylestad:</b> Compara siempre \(r_o\) con \(R_C\). Si \(r_o \ge 10 R_C\), la fuga de corriente por \(r_o\) es despreciable. Si \(r_o < 10 R_C\) (habitual en circuitos integrados con cargas activas), debes incluirla en paralelo: \(r_L' = R_C \parallel R_L \parallel r_o\).
+            </div>
+          </article>
+
+          <!-- ANALOGÍA 5 -->
+          <article class="analogia-card">
+            <div class="analogia-header">
+              <span class="analogia-icon">🎪</span>
+              <div>
+                <span class="analogia-concept">Teorema de Miller en AC</span>
+                <h3 class="analogia-title">El Subibaja con Palanca Multiplicadora</h3>
+              </div>
+            </div>
+            <p class="analogia-desc">
+              Imagina dos personas en los extremos de un balancín mecánico asimétrico. Si la persona en el extremo corto (base) sube apenas \(+1\,\mathrm{mV}\), la persona en el extremo largo (colector) cae violentamente hacia abajo \(-200\,\mathrm{mV}\) debido a la ganancia inversora de la etapa. Una resistencia \(R_F\) conectada entre la base y el colector experimenta una diferencia de potencial de \(201\,\mathrm{mV}\) (\(201\times\) mayor), drenando una corriente gigantesca de la base. Por tanto, la entrada 'siente' una resistencia virtual \(200\) veces más pequeña: \(R_{Mi} = R_F / (1 + |A_v|)\).
+            </p>
+            <div class="analogia-takeaway">
+              <b>Consecuencia de diseño:</b> El efecto Miller estabiliza el punto Q en continua mediante realimentación negativa, pero derrumba la impedancia de entrada en alterna y multiplica las capacitancias parásitas, limitando el ancho de banda en alta frecuencia.
+            </div>
+          </article>
+
+          <!-- ANALOGÍA 6 -->
+          <article class="analogia-card">
+            <div class="analogia-header">
+              <span class="analogia-icon">🛂</span>
+              <div>
+                <span class="analogia-concept">Ganancia Global \(A_{vs}\) vs \(A_v\)</span>
+                <h3 class="analogia-title">El Peaje Aduanero de la Resistencia de Fuente</h3>
+              </div>
+            </div>
+            <p class="analogia-desc">
+              Todo sensor, antena o micrófono real tiene una resistencia interna de salida \(R_s\). El sensor genera un voltaje en circuito abierto \(v_s\), pero antes de que esa señal ingrese al amplificador, debe cruzar la 'aduana' del divisor de entrada formado por \(R_s\) y la impedancia de entrada \(Z_i\). La aduana cobra un peaje de tensión: a la base solo ingresa \(v_i = v_s \cdot [Z_i / (R_s + Z_i)]\). La ganancia que amplifica el transistor es \(A_v = v_o / v_i\), pero la ganancia real que aprovecha el sistema completo es \(A_{vs} = v_o / v_s\).
+            </p>
+            <div class="analogia-takeaway">
+              <b>Trampa típica de parcial:</b> Nunca multipliques \(v_s\) directamente por \(A_v\). Siempre calcula primero la atenuación del divisor de entrada: \(A_{vs} = \frac{Z_i}{R_s + Z_i} \cdot A_v\). Solo si \(Z_i \ge 20 R_s\), la pérdida en la aduana será menor al 5%.
+            </div>
+          </article>
         </div>
       </section>
 
