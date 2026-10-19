@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520" role="img" aria-label="Amplificador Emisor Común sin Bypass">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .title { font: bold 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
+      .subtitle { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #627d98; }
+      .wire { stroke: #243b53; stroke-width: 2.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.5; }
+      .cap { stroke: #0b69a3; stroke-width: 3.5; }
+      .node { fill: #102a43; }
+      .trans-circle { fill: #f0f4f8; stroke: #9fb3c8; stroke-width: 1.8; }
+      .trans-line { stroke: #0b69a3; stroke-width: 3; stroke-linecap: round; }
+      .trans-arrow { fill: #0b69a3; }
+      .lbl { font: bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #0b69a3; }
+      .val { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
+      .gnd { stroke: #243b53; stroke-width: 2.5; stroke-linecap: round; }
+      .ac-source { fill: #f0f4f8; stroke: #243b53; stroke-width: 2.5; }
+      .note-box { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.5; rx: 6px; }
+      .note-text { font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #475569; }
+    </style>
+  </defs>
+
+  <rect width="900" height="520" rx="14" class="bg"/>
+  <rect x="15" y="15" width="870" height="490" rx="10" fill="none" stroke="#d9e2ec" stroke-width="1.5"/>
+
+  <!-- Título y metadatos estilo simulación -->
+  <text x="35" y="48" class="title">Esquemático · Emisor Común (CE) sin Condensador de Bypass</text>
+  <text x="35" y="72" class="subtitle">Degeneración de emisor pura: estabilización térmica y linealización a expensas de la ganancia</text>
+
+  <!-- Rail VCC -->
+  <path class="wire" d="M380 95 H520 M520 95 H600"/>
+  <circle cx="600" cy="95" r="5" class="node"/>
+  <text x="612" y="100" class="lbl">+VCC = 15V</text>
+
+  <!-- Divisor R1 y R2 -->
+  <path class="wire" d="M380 95 V130"/>
+  <rect x="367" y="130" width="26" height="60" class="res"/>
+  <text x="310" y="165" class="lbl">R1</text>
+  <text x="310" y="182" class="val">47 kΩ</text>
+
+  <path class="wire" d="M380 190 V270 M380 270 V330"/>
+  <circle cx="380" cy="270" r="5" class="node"/>
+
+  <rect x="367" y="330" width="26" height="60" class="res"/>
+  <text x="310" y="365" class="lbl">R2</text>
+  <text x="310" y="382" class="val">10 kΩ</text>
+  <path class="wire" d="M380 390 V440"/>
+
+  <!-- Rama de Colector RC -->
+  <path class="wire" d="M520 95 V130"/>
+  <rect x="507" y="130" width="26" height="60" class="res"/>
+  <text x="545" y="165" class="lbl">RC</text>
+  <text x="545" y="182" class="val">3.3 kΩ</text>
+
+  <path class="wire" d="M520 190 V215"/>
+  <circle cx="520" cy="215" r="5" class="node"/>
+
+  <!-- Transistor Q1 NPN -->
+  <circle cx="480" cy="270" r="48" class="trans-circle"/>
+  <path class="trans-line" d="M460 245 V295"/>
+  <path class="wire" d="M380 270 H460"/>
+  <path class="trans-line" d="M460 255 L520 215"/>
+  <path class="wire" d="M520 215 V200"/>
+  <path class="trans-line" d="M460 285 L520 325"/>
+  <polygon points="508,310 522,326 502,324" class="trans-arrow"/>
+  <text x="495" y="275" class="lbl">Q1</text>
+  <text x="495" y="292" class="val">2N3904</text>
+
+  <!-- Rama de Emisor RE SIN BYPASS (NO CE) -->
+  <path class="wire" d="M520 325 V345"/>
+  <rect x="507" y="345" width="26" height="65" class="res"/>
+  <text x="545" y="375" class="lbl">RE</text>
+  <text x="545" y="392" class="val">1.0 kΩ</text>
+  <text x="545" y="410" style="font-size:11px; fill:#dc2626; font-weight:bold;">(Sin Bypass)</text>
+  <path class="wire" d="M520 410 V440"/>
+
+  <!-- Tierras -->
+  <path class="gnd" d="M365 440 H395 M370 445 H390 M375 450 H385"/>
+  <path class="gnd" d="M505 440 H535 M510 445 H530 M515 450 H525"/>
+
+  <!-- Entrada con Generador y C1 -->
+  <circle cx="120" cy="270" r="24" class="ac-source"/>
+  <path class="wire" d="M108 270 Q114 260 120 270 T132 270" style="stroke-width:2; fill:none;"/>
+  <text x="80" y="315" class="lbl">vs</text>
+  <path class="wire" d="M120 294 V440"/>
+  <path class="gnd" d="M105 440 H135 M110 445 H130 M115 450 H125"/>
+
+  <!-- Rs -->
+  <path class="wire" d="M144 270 H180"/>
+  <rect x="180" y="257" width="55" height="26" class="res"/>
+  <text x="190" y="250" class="lbl">Rs</text>
+  <text x="185" y="300" class="val">600 Ω</text>
+
+  <!-- C1 -->
+  <path class="wire" d="M235 270 H280"/>
+  <line x1="280" y1="250" x2="280" y2="290" class="cap"/>
+  <line x1="290" y1="250" x2="290" y2="290" class="cap"/>
+  <text x="270" y="240" class="lbl">C1</text>
+  <text x="265" y="308" class="val">10 µF</text>
+  <path class="wire" d="M290 270 H380"/>
+
+  <!-- Salida con C2 y Carga RL -->
+  <path class="wire" d="M520 215 H680"/>
+  <line x1="680" y1="195" x2="680" y2="235" class="cap"/>
+  <line x1="690" y1="195" x2="690" y2="235" class="cap"/>
+  <text x="675" y="185" class="lbl">C2</text>
+  <text x="670" y="252" class="val">10 µF</text>
+
+  <path class="wire" d="M690 215 H780"/>
+  <circle cx="780" cy="215" r="5" class="node"/>
+  <path class="wire" d="M780 215 V270"/>
+  <rect x="767" y="270" width="26" height="65" class="res"/>
+  <text x="805" y="300" class="lbl">RL</text>
+  <text x="805" y="318" class="val">10 kΩ</text>
+  <path class="wire" d="M780 335 V440"/>
+  <path class="gnd" d="M765 440 H795 M770 445 H790 M775 450 H785"/>
+
+  <!-- Punto de salida Vo -->
+  <path class="wire" d="M780 215 H830"/>
+  <circle cx="830" cy="215" r="4" fill="#0b69a3"/>
+  <text x="838" y="220" class="lbl" style="font-size:16px;">vo</text>
+
+  <!-- Cuadro de fórmulas rápidas del circuito -->
+  <rect x="620" y="360" width="240" height="110" class="note-box"/>
+  <text x="635" y="385" style="font-weight:bold; font-size:13px; fill:#102a43;">Ecuaciones Clave (Sin Bypass):</text>
+  <text x="635" y="408" class="note-text">• Zb ≈ (β + 1) · (re + RE) ≈ β · RE</text>
+  <text x="635" y="428" class="note-text">• Av ≈ - (RC || RL) / (re + RE)</text>
+  <text x="635" y="448" class="note-text">• Av ≈ - (RC || RL) / RE (Inmune a β)</text>
+</svg>

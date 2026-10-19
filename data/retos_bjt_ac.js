@@ -26,9 +26,9 @@ window.RETOS_BJT_AC = [
       { "name": "Avs", "label": "Ganancia global del sistema Avs (sensor a salida)", "expected": -13.0, "tol": 1.5, "unit": "adimensional" }
     ],
     "hints": [
-      "<b>Pista 1 (Punto Q):</b> Convierte el divisor de base R1-R2 en su equivalente de Thévenin: \\(V_{TH} = V_{CC} \\frac{R_2}{R_1+R_2}\\) y \\(R_{TH} = R_1 \\parallel R_2\\). En continua, la resistencia total de emisor es \\(R_{E,total} = R_{E1} + R_{E2} = 1.32\\,\\mathrm{k\\Omega}\\).",
-      "<b>Pista 2 (Banda media AC):</b> En AC, \\(C_E\\) cortocircuita \\(R_{E2}\\), pero \\(R_{E1} = 120\\,\\Omega\\) permanece en la trayectoria de señal. Por tanto, la resistencia en el emisor en AC es \\(r_e + R_{E1}\\).",
-      "<b>Pista 3 (Divisor con sensor):</b> La ganancia global es \\(A_{vs} = \\frac{v_o}{v_s} = A_v \\cdot \\frac{Z_i}{R_s + Z_i}\\). No olvides que la impedancia de entrada \\(Z_i\\) es el paralelo de \\(R_{TH}\\) con \\(Z_b = (\\beta+1)(r_e + R_{E1})\\)."
+      "<b>Pista 1 (Punto Q):</b> Muchachos, simplifiquen la base con el equivalente de Thévenin: \\(V_{TH} = V_{CC} \\frac{R_2}{R_1+R_2}\\) y \\(R_{TH} = R_1 \\parallel R_2\\). Ojo: en continua, la resistencia total de emisor es la suma \\(R_{E,total} = R_{E1} + R_{E2} = 1.32\\,\\mathrm{k\\Omega}\\).",
+      "<b>Pista 2 (Banda media AC):</b> ¡Atención con el condensador! En AC, \\(C_E\\) puentea \\(R_{E2}\\), pero \\(R_{E1} = 120\\,\\Omega\\) permanece en la trayectoria de señal. Por tanto, la resistencia en el emisor en AC es \\(r_e + R_{E1}\\).",
+      "<b>Pista 3 (Divisor con sensor):</b> Recuerden cobrar el peaje a la entrada: la ganancia neta es \\(A_{vs} = A_v \\cdot \\frac{Z_i}{R_s + Z_i}\\). No olviden que \\(Z_i = R_{TH} \\parallel [(\\beta+1)(r_e + R_{E1})]\\)."
     ],
     "fullSolution": `
       <h4>1. Análisis en Corriente Continua (Punto Q)</h4>
@@ -98,9 +98,9 @@ window.RETOS_BJT_AC = [
       { "name": "Avs", "label": "Ganancia total del sistema Avs", "expected": 0.84, "tol": 0.05, "unit": "adimensional" }
     ],
     "hints": [
-      "<b>Pista 1:</b> El Colector Común no tiene resistencia en el colector en AC (colector a tierra AC). La salida se toma directamente del emisor.",
-      "<b>Pista 2:</b> La impedancia vista hacia atrás desde el emisor es \\(Z_{o,e} = r_e + \\frac{R_B \\parallel R_s}{\\beta+1}\\). Recuerda que la impedancia de salida final \\(Z_o\\) es el paralelo de \\(R_E\\) con \\(Z_{o,e}\\).",
-      "<b>Pista 3:</b> La ganancia es positiva y ligeramente menor que +1."
+      "<b>Pista 1:</b> Muchachos, en el Colector Común el colector va directo a tierra de AC. La salida se extrae del emisor, sin inversión de fase.",
+      "<b>Pista 2:</b> Recuerden la regla de reflexión inversa hacia el emisor: \\(Z_{o,e} = r_e + \\frac{R_B \\parallel R_s}{\\beta+1}\\). La impedancia de salida total \\(Z_o\\) es el paralelo de \\(R_E\\) con \\(Z_{o,e}\\).",
+      "<b>Pista 3:</b> La ganancia en el seguidor es siempre positiva y cercana a +1 (\\(A_v \\approx 0.96\\)). ¡Un buffer perfecto!"
     ],
     "fullSolution": `
       <h4>1. Análisis DC</h4>
@@ -134,7 +134,7 @@ window.RETOS_BJT_AC = [
     "id": "RETO-03",
     "title": "Diagnóstico y Corrección de Falla en Laboratorio",
     "badge": "Reto Nivel Examen · Troubleshooting",
-    "image": "assets/taller/esquema-ce-bypass.svg",
+    "image": "assets/taller/esquema-troubleshooting-lab.svg",
     "context": "Un grupo de estudiantes montó el circuito de Emisor Común de la figura para su entrega final. Al conectar el generador con vs = 10 mVp, el osciloscopio muestra una salida distorsionada: el semiciclo superior de colector se aplana violentamente a 15 V, mientras que el semiciclo inferior desciende limpiamente. El multímetro mide en DC: VB = 1.1 V, VE = 0.4 V, VC = 13.8 V.",
     "circuitData": {
       "VCC": "15 V",
@@ -146,9 +146,9 @@ window.RETOS_BJT_AC = [
       { "name": "diagnostico", "label": "Escribe el componente culpable o fallo (R1 desvalorizada / R2 desvalorizada / Transistor quemado)", "expected": 1, "isText": true, "guideWord": "R2" }
     ],
     "hints": [
-      "<b>Pista 1:</b> El voltaje de reposo de colector medido es \\(V_C = 13.8\\,\\mathrm{V}\\). Para una fuente de 15 V, eso significa que por \\(R_C = 3.3\\,\\mathrm{k\\Omega}\\) apenas circula \\((15 - 13.8)/3.3k \\approx 0.36\\,\\mathrm{mA}\\).",
-      "<b>Pista 2:</b> El transistor está operando peligrosamente cerca del CORTE (corriente de reposo demasiado baja).",
-      "<b>Pista 3:</b> ¿Qué resistencia del divisor hace que \\(V_B\\) caiga de los 2.6 V calculados a solo 1.1 V? O bien \\(R_1\\) subió de valor, o \\(R_2\\) se colocó de un valor mucho menor (por ejemplo, 2.2 kΩ en vez de 10 kΩ)."
+      "<b>Pista 1:</b> ¡Ojo clínico en el laboratorio! El multímetro marca \\(V_C = 13.8\\,\\mathrm{V}\\). Con una fuente de 15 V, por \\(R_C = 3.3\\,\\mathrm{k\\Omega}\\) apenas circulan \\((15 - 13.8)/3.3k \\approx 0.36\\,\\mathrm{mA}\\).",
+      "<b>Pista 2:</b> Miren el osciloscopio: el recorte superior ocurre en \\(V_{CC}\\), lo que significa que el transistor está operando peligrosamente cerca del CORTE (corriente de reposo anómalamente baja).",
+      "<b>Pista 3:</b> ¿Qué resistencia del divisor hace que \\(V_B\\) caiga de los 2.6 V calculados a solo 1.1 V? Revisen si \\(R_2\\) se montó con un código de colores equivocado."
     ],
     "fullSolution": `
       <h4>Diagnóstico Técnico de Laboratorio</h4>

@@ -301,18 +301,20 @@
 
     <main>
       <section class="hero small">
-        <span class="eyebrow">Taller #2 · Basado en Boylestad & Nashelsky (Cap. 5) y Malvino & Bates</span>
-        <h1>Taller de Aprendizaje: Transistores BJT en Señal Pequeña (AC)</h1>
+        <span class="eyebrow">Cátedra de Electrónica Analógica y Laboratorio · Profe Fredy Torres</span>
+        <h1>Taller Maestro de BJT en AC: De la Teoría al Laboratorio y la Industria</h1>
         <p>
-          Banco integral de <b>49 ejercicios graduados</b> para preparar el examen parcial y el trabajo en laboratorio, estructurado según el <b>Capítulo 5 ("Análisis de ca de un BJT") de Boylestad & Nashelsky</b>.
-          Incluye preguntas conceptuales con pistas, problemas con contexto de ingeniería real, solucionario paso a paso con modelos <b>\(r_e\)</b> e <b>híbrido-\(\pi\)</b> y las <b>analogías pedagógicas maestras de Albert Malvino</b>.
+          ¡Hola, muchachos! Bienvenidos a su taller de entrenamiento para el examen parcial. Como siempre les insisto en el tablero y en las mesas de laboratorio: el análisis de transistores en señal pequeña no es una colección de fórmulas para memorizar, sino <b>el arte de entender cómo se mueven los electrones y cómo dialogan la continua y la alterna</b>.
+        </p>
+        <p style="margin-top:8px; font-size:0.95rem; color:#475569;">
+          He organizado este taller en <b>49 ejercicios y retos graduados</b> siguiendo la ruta pedagógica del <b>Capítulo 5 de Boylestad & Nashelsky</b> y las geniales <b>analogías intuitivas de Albert Malvino</b>. Aquí encontrarán esquemáticos de simulación completos para cada problema, deducciones en paralelo por modelo \(r_e\) e híbrido-\(\pi\), trucos para no enredarse en mallas kilométricas y los errores más comunes que veo en las entregas prácticas para que ustedes no los cometan en el examen.
         </p>
         <div class="workshop-actions">
           <button id="btnPrintPdf" class="btn primary">🖨️ Imprimir Vista Actual</button>
-          <a href="taller-bjt-ac-imprimible.html" target="_blank" class="btn" style="text-decoration:none;">📄 Guía Maestra PDF (Formato Libro A4)</a>
-          <a href="#retos" class="btn" style="border: 1.5px solid #dc2626; color: #dc2626; font-weight: bold; background: #fff5f5;">🔥 Zona de Retos Autónomos</a>
-          <a href="#practico" class="btn">Explorar Ejercicios Guiados</a>
-          <a href="bjt-ac.html" class="btn">Módulo Teórico BJT AC</a>
+          <a href="taller-bjt-ac-imprimible.html" target="_blank" class="btn" style="text-decoration:none;">📄 Descargar Guía Maestra PDF (Formato Libro A4)</a>
+          <a href="#retos" class="btn" style="border: 1.5px solid #dc2626; color: #dc2626; font-weight: bold; background: #fff5f5;">🔥 Simulacro: Retos de Examen</a>
+          <a href="#practico" class="btn">34 Ejercicios Resueltos Paso a Paso</a>
+          <a href="bjt-ac.html" class="btn">Módulo Teórico de Clase</a>
         </div>
       </section>
 
@@ -322,16 +324,16 @@
           <div class="module-title">
             <span class="no">T1</span>
             <div>
-              <span class="eyebrow">Parte teórica interactiva</span>
+              <span class="eyebrow">Fase 1 · Calentamiento Conceptual</span>
               <h2>Preguntas de Comprensión, Linealización y Criterio Físico</h2>
             </div>
           </div>
           <button class="mark" data-mark="taller-bjt-ac-t1">Marcar estudiado</button>
         </div>
 
-        <div class="box remember">
-          <small>Metodología de estudio guiado</small>
-          Escribe primero tu propia respuesta en el cuadro de texto o selecciona la opción. Si tienes dudas, consulta <b>Pista 1</b> y <b>Pista 2</b>. Una vez registrado tu intento se desbloqueará la <b>Respuesta orientativa</b> desarrollada con criterio de la industria.
+        <div class="box remember" style="border-left-color: #0284c7; background: #f0f9ff;">
+          <small style="color:#0369a1; font-weight:bold;">💡 Consejo del Profe para arrancar</small>
+          Muchachos, ningún circuito analógico se resuelve tirando números a la calculadora sin pensar. Tómense 15 minutos para responder estas 15 preguntas con sus propias palabras. Si entienden con claridad <i>por qué la fuente de continua es masa para la alterna</i> o <i>por qué una señal de más de 5 mV distorsiona la onda senoidal</i>, resolverán cualquier circuito del examen en minutos. Si se sienten atascados, hagan clic en <b>Pista 1</b> y <b>Pista 2</b> como si me estuvieran preguntando en clase.
         </div>
 
         <div id="tallerBjtAcList" class="taller-list" style="margin-top:15px"></div>
@@ -343,15 +345,18 @@
           <div class="module-title">
             <span class="no">T2</span>
             <div>
-              <span class="eyebrow">Banco de problemas graduados</span>
-              <h2>Problemas Numéricos, Casos de Aplicación y Solucionario Dual</h2>
+              <span class="eyebrow">Fase 2 · Banco de Problemas Guiados con Esquemático</span>
+              <h2>34 Problemas Numéricos con Solucionario Dual (\(r_e\) e Híbrido-\(\pi\))</h2>
             </div>
           </div>
           <button class="mark" data-mark="taller-bjt-ac-t2">Marcar estudiado</button>
         </div>
 
         <p class="lead">
-          Los 34 ejercicios prácticos abarcan desde el cálculo analítico de parámetros dinámicos hasta topologías multietapa (Cascode, Darlington, Sziklai), análisis de peor caso y diagnóstico de fallas en laboratorio. Las soluciones están desplegadas para contrastar tus ecuaciones y números.
+          Aquí tienen el corazón del taller. Vamos a recorrer juntos desde el cálculo analítico de parámetros dinámicos (\(r_e, g_m, r_\pi, r_o\)), pasando por las tres topologías fundamentales (Emisor Común, Seguidor de Emisor y Base Común), hasta circuitos de nivel industrial: etapas Cascode para radiofrecuencia, pares Darlington y Sziklai para control de potencia y acondicionadores para sensores de vehículos eléctricos.
+        </p>
+        <p style="font-size:0.92rem; color:#475569; margin-top:-6px;">
+          <b>Mi recomendación de estudio:</b> En cada ejercicio, miren detenidamente el esquemático antes de abrir la solución. Identifiquen la entrada, la salida, calculen el punto Q en su cuaderno y luego abran el desplegable para contrastar sus números con mi desarrollo paso a paso.
         </p>
 
         <!-- Barra de búsqueda y filtros -->
@@ -377,16 +382,16 @@
           <div class="module-title">
             <span class="no" style="background:#dc2626;color:#fff;">T3</span>
             <div>
-              <span class="eyebrow" style="color:#dc2626;font-weight:bold;">Zona de desafío autónomo</span>
-              <h2>Retos de Examen: Resuelve en tu cuaderno sin ver la respuesta</h2>
+              <span class="eyebrow" style="color:#dc2626;font-weight:bold;">Fase 3 · Simulacro de Examen Parcial</span>
+              <h2>Zona de Retos Autónomos: ¡Resuelvan en su cuaderno sin ver la respuesta!</h2>
             </div>
           </div>
           <button class="mark" data-mark="taller-bjt-ac-t3">Marcar estudiado</button>
         </div>
 
-        <div class="box warn" style="border-left-color:#dc2626;">
-          <small style="color:#b91c1c;">Instrucción pedagógica del profesor</small>
-          En estos problemas <b>no hay respuesta inicial a la vista</b>. Observa el esquemático profesional con valores y componentes reales, desarrolla el análisis en tu cuaderno (continua, dinámica y ganancias), y utiliza los campos de validación para contrastar tus números. La solución detallada paso a paso está <b>bloqueada en un desplegable al final</b> para que la consultes solo tras haber trabajado el reto.
+        <div class="box warn" style="border-left-color:#dc2626; background:#fff8f8;">
+          <small style="color:#b91c1c; font-weight:bold;">⚠️ La regla de oro del simulacro</small>
+          Muchachos, llegó la prueba de fuego. En estos 3 retos <b>no hay respuestas a la vista</b>. Tomen su cuaderno de apuntes, su lápiz y su calculadora científica. Analicen el esquemático de simulación, calculen el punto Q, las impedancias dinámicas y las ganancias de tensión, y digiten sus resultados numéricos en las casillas interactivas para que el sistema los evalúe con tolerancia real de ingeniería. Solo cuando hayan hecho su mejor intento, desplieguen mi solución completa al final.
         </div>
 
         <div id="retosContainer" style="margin-top:20px"></div>

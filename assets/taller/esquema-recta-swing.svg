@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" role="img" aria-label="Recta de Carga en AC vs DC y Máxima Excursión Simétrica">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .card-border { fill: none; stroke: #d9e2ec; stroke-width: 1.5; }
+      .title { font: bold 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
+      .subtitle { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #627d98; }
+      .axis { stroke: #102a43; stroke-width: 2.2; stroke-linecap: round; }
+      .grid { stroke: #e2e8f0; stroke-width: 1; stroke-dasharray: 4,4; }
+      .dc-line { stroke: #0284c7; stroke-width: 2.5; stroke-dasharray: 6,4; }
+      .ac-line { stroke: #dc2626; stroke-width: 3.2; }
+      .node-q { fill: #dc2626; stroke: #ffffff; stroke-width: 2; }
+      .lbl { font: bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #0b69a3; }
+      .val { font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
+      .box-panel { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.5; rx: 8px; }
+      .arrow { fill: #102a43; }
+      .sine-wave { stroke: #16a34a; stroke-width: 2.5; fill: none; }
+      .clip-wave { stroke: #dc2626; stroke-width: 2.5; fill: none; }
+    </style>
+  </defs>
+
+  <rect width="920" height="520" rx="14" class="bg"/>
+  <rect x="15" y="15" width="890" height="490" rx="10" class="card-border"/>
+
+  <text x="35" y="48" class="title">Líneas de Carga Dinámicas (DC vs AC) &amp; Máxima Excursión Simétrica</text>
+  <text x="35" y="70" class="subtitle">Condiciones de recorte por saturación vs corte y optimización del Punto Q para máxima excursión (Swing)</text>
+
+  <!-- GRÁFICA DE LÍNEAS DE CARGA (IZQUIERDA) -->
+  <!-- Ejes cartesianos -->
+  <!-- Eje Y: iC -->
+  <line x1="80" y1="360" x2="80" y2="110" class="axis"/>
+  <polygon points="76,115 80,105 84,115" class="arrow"/>
+  <text x="50" y="115" font-weight="bold" fill="#102a43" font-size="14">iC (mA)</text>
+
+  <!-- Eje X: vCE -->
+  <line x1="80" y1="360" x2="450" y2="360" class="axis"/>
+  <polygon points="445,356 455,360 445,364" class="arrow"/>
+  <text x="410" y="385" font-weight="bold" fill="#102a43" font-size="14">vCE (V)</text>
+
+  <!-- Origen 0 -->
+  <text x="68" y="375" class="val">0</text>
+
+  <!-- Recta de Carga en DC (Pendiente -1 / (RC + RE)) -->
+  <line x1="80" y1="160" x2="410" y2="360" class="dc-line"/>
+  <text x="340" y="352" font-size="11" font-weight="bold" fill="#0284c7">VCC</text>
+  <text x="42" y="165" font-size="11" font-weight="bold" fill="#0284c7">VCC/RDC</text>
+  <text x="290" y="270" font-size="12" font-weight="bold" fill="#0284c7">Recta DC (Pendiente = -1/RDC)</text>
+
+  <!-- Recta de Carga en AC (Pendiente -1 / rac, más empinada porque rac = RC || RL < RC) -->
+  <line x1="120" y1="120" x2="340" y2="360" class="ac-line"/>
+  <text x="325" y="380" font-size="12" font-weight="bold" fill="#dc2626">vce(cutoff) = VCEQ + ICQ·rac</text>
+  <text x="85" y="130" font-size="11" font-weight="bold" fill="#dc2626">ic(sat) = ICQ + VCEQ/rac</text>
+  <text x="140" y="180" font-size="12" font-weight="bold" fill="#dc2626">Recta AC (Pendiente = -1/rac)</text>
+
+  <!-- Punto Q de reposo -->
+  <!-- Cruce aproximado: X=230, Y=260 -->
+  <line x1="80" y1="260" x2="230" y2="260" class="grid"/>
+  <line x1="230" y1="360" x2="230" y2="260" class="grid"/>
+  <circle cx="230" cy="260" r="7" class="node-q"/>
+  <text x="242" y="255" font-weight="bold" fill="#dc2626" font-size="14">Punto Q</text>
+  <text x="35" y="265" font-weight="bold" fill="#102a43" font-size="12">ICQ</text>
+  <text x="215" y="380" font-weight="bold" fill="#102a43" font-size="12">VCEQ</text>
+
+  <!-- Zonas de Excursión y Límites -->
+  <!-- Límite hacia saturación -->
+  <path d="M 230 310 H 110" stroke="#0284c7" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="115" y="300" font-size="11" fill="#0284c7" font-weight="bold">ΔV1 = VCEQ - Vsat</text>
+
+  <!-- Límite hacia corte -->
+  <path d="M 230 330 H 335" stroke="#d97706" stroke-width="1.8"/>
+  <text x="235" y="325" font-size="11" fill="#d97706" font-weight="bold">ΔV2 = ICQ · rac</text>
+
+  <!-- PANEL DERECHO: DIAGRAMAS DE FORMA DE ONDA Y RECORTE -->
+  <rect x="470" y="90" width="415" height="305" class="box-panel"/>
+  <text x="485" y="118" font-size="15" font-weight="bold" fill="#102a43">Comportamiento Dinámico del Swing de Salida</text>
+
+  <!-- CASO 1: SWING SIMÉTRICO ÓPTIMO -->
+  <rect x="485" y="132" width="385" height="75" rx="6" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <text x="495" y="152" font-size="12" font-weight="bold" fill="#166534">1. Punto Q Óptimo (VCEQ ≈ ICQ · rac):</text>
+  <text x="495" y="170" class="val" style="font-size:11.5px;">Ambos semiciclos tienen el mismo margen. Excursión pico a pico máxima:</text>
+  <text x="495" y="190" font-size="12" font-weight="bold" fill="#15803d">Vp-p,max = 2 · min(VCEQ - 0.2V, ICQ · rac) = 2 · ICQ · rac</text>
+
+  <!-- CASO 2: RECORTE POR CORTE DINÁMICO -->
+  <rect x="485" y="215" width="385" height="85" rx="6" fill="#fff1f2" stroke="#fecdd3"/>
+  <text x="495" y="235" font-size="12" font-weight="bold" fill="#be123c">2. Recorte por Corte Dinámico (Q muy abajo, ICQ bajo):</text>
+  <text x="495" y="253" class="val" style="font-size:11.5px;">Si la señal demanda más corriente que ICQ, la corriente se anula (iC = 0).</text>
+  <text x="495" y="271" font-size="11.5" font-weight="bold" fill="#9f1239">En el osciloscopio: el semiciclo superior de vC(t) se aplana a VCC.</text>
+  <text x="495" y="289" class="val" style="font-size:11px;">(Síntoma típico de laboratorio visto en RETO-03 por desvalorización de R2).</text>
+
+  <!-- CASO 3: RECORTE POR SATURACIÓN -->
+  <rect x="485" y="308" width="385" height="75" rx="6" fill="#fefce8" stroke="#fef08a"/>
+  <text x="495" y="328" font-size="12" font-weight="bold" fill="#854d0e">3. Recorte por Saturación (Q muy arriba, VCEQ bajo):</text>
+  <text x="495" y="346" class="val" style="font-size:11.5px;">La tensión de colector no puede caer por debajo de VCE,sat ≈ 0.2 V.</text>
+  <text x="495" y="364" font-size="11.5" font-weight="bold" fill="#a16207">En el osciloscopio: el semiciclo inferior de vC(t) se aplana cerca de 0 V.</text>
+
+  <!-- FOOTER: EL CONSEJO DEL PROFESOR FREDY -->
+  <rect x="35" y="415" width="850" height="75" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="50" y="438" font-weight="bold" fill="#1e40af" font-size="13">💡 LA REGLA DE ORO DE LABORATORIO PARA EL EXAMEN (Profesor Fredy &amp; Malvino):</text>
+  <text x="50" y="458" class="val" style="font-size:12px;">Para no distorsionar, el swing máximo está limitado por el más angosto de los dos caminos: hacia el corte (ICQ · rac) o hacia</text>
+  <text x="50" y="476" class="val" style="font-size:12px;">la saturación (VCEQ - 0.2V). Si calculas VCEQ = 6V pero ICQ·rac = 2.5V, ¡tu señal máxima antes del clip es de 2.5V pico, no de 6V!</text>
+</svg>

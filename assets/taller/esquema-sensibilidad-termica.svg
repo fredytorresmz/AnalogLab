@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" role="img" aria-label="Sensibilidad Térmica en BJT">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .card-border { fill: none; stroke: #d9e2ec; stroke-width: 1.5; }
+      .title { font: bold 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
+      .subtitle { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #627d98; }
+      .wire { stroke: #243b53; stroke-width: 2.6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.4; }
+      .cap { stroke: #0b69a3; stroke-width: 3.5; }
+      .node { fill: #102a43; }
+      .trans-circle { fill: #f0f4f8; stroke: #9fb3c8; stroke-width: 1.8; }
+      .trans-line { stroke: #0b69a3; stroke-width: 3; stroke-linecap: round; }
+      .trans-arrow { fill: #0b69a3; }
+      .lbl { font: bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #0b69a3; }
+      .val { font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
+      .gnd { stroke: #243b53; stroke-width: 2.4; stroke-linecap: round; }
+      .box-panel { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.5; rx: 8px; }
+      .badge-cold { fill: #e1f5fe; stroke: #0288d1; stroke-width: 1.5; rx: 6px; }
+      .badge-hot { fill: #fbe9e7; stroke: #d84315; stroke-width: 1.5; rx: 6px; }
+      .txt-cold { font: bold 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #0277bd; }
+      .txt-hot { font: bold 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #c62828; }
+    </style>
+  </defs>
+
+  <rect width="920" height="520" rx="14" class="bg"/>
+  <rect x="15" y="15" width="890" height="490" rx="10" class="card-border"/>
+
+  <text x="35" y="48" class="title">Sensibilidad Térmica en BJT · Deriva de Parámetros Dinámicos</text>
+  <text x="35" y="70" class="subtitle">Efecto del gradiente térmico de 25 °C a 75 °C bajo el capó de un vehículo eléctrico (Punto Q: ICQ = 1.0 mA)</text>
+
+  <!-- ESQUEMÁTICO DEL CIRCUITO DE PRUEBA TÉRMICA (IZQUIERDA) -->
+  <!-- Rail VCC -->
+  <path class="wire" d="M120 100 H220"/>
+  <circle cx="220" cy="100" r="4.5" class="node"/>
+  <text x="230" y="105" class="lbl">+VCC = 12V</text>
+
+  <!-- RC -->
+  <path class="wire" d="M170 100 V130"/>
+  <rect x="157" y="130" width="26" height="55" class="res"/>
+  <text x="195" y="155" class="lbl">RC</text>
+  <text x="195" y="170" class="val">4.7 kΩ</text>
+  <path class="wire" d="M170 185 V220"/>
+
+  <!-- Transistor Q1 NPN con indicador de cámara térmica -->
+  <rect x="100" y="210" width="145" height="120" rx="10" fill="#fff3e0" stroke="#ffb74d" stroke-dasharray="4,4" stroke-width="1.5"/>
+  <text x="110" y="228" font-size="11" font-weight="bold" fill="#e65100">CÁMARA TÉRMICA ΔT</text>
+
+  <circle cx="160" cy="270" r="38" class="trans-circle"/>
+  <path class="trans-line" d="M145 250 V290"/>
+  <path class="wire" d="M80 270 H145"/>
+  <path class="trans-line" d="M145 258 L185 228"/>
+  <path class="wire" d="M185 228 V220 H170"/>
+  <path class="trans-line" d="M145 282 L185 312"/>
+  <polygon points="175,302 187,314 171,314" class="trans-arrow"/>
+  <text x="198" y="270" class="lbl">2N3904</text>
+  <text x="198" y="286" class="val">ICQ = 1 mA</text>
+
+  <!-- Emisor a fuente de corriente de polarización constante -->
+  <path class="wire" d="M185 312 V340"/>
+  <circle cx="185" cy="365" r="20" fill="#ffffff" stroke="#102a43" stroke-width="2.2"/>
+  <line x1="185" y1="352" x2="185" y2="378" stroke="#102a43" stroke-width="2.2"/>
+  <polygon points="181,374 185,382 189,374" fill="#102a43"/>
+  <text x="215" y="370" class="lbl">IDC = 1 mA</text>
+  <path class="wire" d="M185 385 V410"/>
+  <!-- Tierra -->
+  <line x1="170" y1="410" x2="200" y2="410" class="gnd"/>
+  <line x1="175" y1="415" x2="195" y2="415" class="gnd"/>
+  <line x1="180" y1="420" x2="190" y2="420" class="gnd"/>
+
+  <!-- PANEL DE COMPARACIÓN TÉRMICA (DERECHA) -->
+  <rect x="330" y="90" width="555" height="305" class="box-panel"/>
+  <text x="350" y="118" font-size="16" font-weight="bold" fill="#102a43">Deriva Térmica Cuantitativa de Parámetros Dinámicos</text>
+
+  <!-- Tarjeta Fría 25°C -->
+  <rect x="350" y="135" width="250" height="155" class="badge-cold"/>
+  <text x="365" y="160" class="txt-cold">❄️ Estado Ambiente: T1 = 25 °C (298 K)</text>
+  <text x="365" y="188" class="val" style="font-size:13px;"><b>Tensión térmica:</b> VT = 25.69 mV ≈ <b>26.0 mV</b></text>
+  <text x="365" y="210" class="val" style="font-size:13px;"><b>Resistencia dinámica:</b> re = 26.0 mV / 1 mA = <b>26.0 Ω</b></text>
+  <text x="365" y="232" class="val" style="font-size:13px;"><b>Transconductancia:</b> gm = 1 mA / 26 mV = <b>38.5 mS</b></text>
+  <text x="365" y="265" class="val" style="font-size:12.5px; fill:#01579b;"><b>Ganancia sin bypass (RC=4.7k):</b> Av ≈ -180.7</text>
+
+  <!-- Tarjeta Caliente 75°C -->
+  <rect x="615" y="135" width="250" height="155" class="badge-hot"/>
+  <text x="630" y="160" class="txt-hot">🔥 Régimen Caliente: T2 = 75 °C (348 K)</text>
+  <text x="630" y="188" class="val" style="font-size:13px;"><b>Tensión térmica:</b> VT = 29.99 mV ≈ <b>30.0 mV</b></text>
+  <text x="630" y="210" class="val" style="font-size:13px;"><b>Resistencia dinámica:</b> re = 30.0 mV / 1 mA = <b>30.0 Ω</b></text>
+  <text x="630" y="232" class="val" style="font-size:13px;"><b>Transconductancia:</b> gm = 1 mA / 30 mV = <b>33.3 mS</b></text>
+  <text x="630" y="265" class="val" style="font-size:12.5px; fill:#b71c1c;"><b>Ganancia sin bypass (RC=4.7k):</b> Av ≈ -156.7</text>
+
+  <!-- Métricas de Variación -->
+  <rect x="350" y="305" width="515" height="75" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+  <text x="365" y="328" font-size="13" font-weight="bold" fill="#b71c1c">⚠️ Degradación del rendimiento sin swamping:</text>
+  <text x="365" y="348" class="val" style="font-size:12.5px;">• La resistencia re se expande un <b>+15.38%</b> y la transconductancia cae un <b>-13.34%</b>.</text>
+  <text x="365" y="368" class="val" style="font-size:12.5px;">• <b>Solución de Aula (Malvino):</b> Al añadir RE1 = 220 Ω, la ganancia varía menos del <b>1.4%</b>.</text>
+
+  <!-- FOOTER -->
+  <rect x="35" y="415" width="850" height="75" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+  <text x="50" y="438" font-weight="bold" fill="#166534" font-size="13">💡 LA REGLA DE ORO DE LABORATORIO (Profesor Fredy &amp; Malvino):</text>
+  <text x="50" y="458" class="val" style="font-size:12px; fill:#14532d;">Nunca diseñe un amplificador comercial de instrumentación dependiendo únicamente de re. La unión semiconductora es un termómetro natural.</text>
+  <text x="50" y="476" class="val" style="font-size:12px; fill:#14532d;">Inserte siempre una resistencia de degeneración externa RE1 ≥ 5·re para que la ganancia quede anclada a resistencias de película metálica estables.</text>
+</svg>

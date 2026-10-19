@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" role="img" aria-label="Teoremas de Reflexión de Impedancias">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .card-border { fill: none; stroke: #d9e2ec; stroke-width: 1.5; }
+      .title { font: bold 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
+      .subtitle { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #627d98; }
+      .wire { stroke: #243b53; stroke-width: 2.6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.4; }
+      .node { fill: #102a43; }
+      .trans-circle { fill: #f0f4f8; stroke: #9fb3c8; stroke-width: 1.8; }
+      .trans-line { stroke: #0b69a3; stroke-width: 3; stroke-linecap: round; }
+      .trans-arrow { fill: #0b69a3; }
+      .lbl { font: bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #0b69a3; }
+      .val { font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
+      .gnd { stroke: #243b53; stroke-width: 2.4; stroke-linecap: round; }
+      .box-panel { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.5; rx: 8px; }
+      .arrow { fill: #0b69a3; }
+      .badge-lever { fill: #eef2ff; stroke: #6366f1; stroke-width: 1.5; rx: 6px; }
+    </style>
+  </defs>
+
+  <rect width="920" height="520" rx="14" class="bg"/>
+  <rect x="15" y="15" width="890" height="490" rx="10" class="card-border"/>
+
+  <text x="35" y="48" class="title">Teoremas de Reflexión de Impedancia en el Transistor BJT</text>
+  <text x="35" y="70" class="subtitle">Multiplicación de Resistencia (Emisor → Base) y División de Resistencia (Base → Emisor)</text>
+
+  <!-- PANEL IZQUIERDO: REFLEXIÓN EMISOR A BASE -->
+  <rect x="35" y="90" width="415" height="305" class="box-panel"/>
+  <text x="50" y="118" font-size="15" font-weight="bold" fill="#0b69a3">1. Mirando desde la Base hacia el Emisor</text>
+  <text x="50" y="136" class="val">La corriente total de emisor multiplica la resistencia por (β + 1)</text>
+
+  <!-- Ojo mirando a la base -->
+  <path d="M 60 210 Q 75 195 90 210 Q 75 225 60 210 Z" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+  <circle cx="75" cy="210" r="5" fill="#0284c7"/>
+  <text x="55" y="240" font-weight="bold" fill="#0284c7" font-size="12">Zb = ?</text>
+
+  <!-- Circuito Base - Emisor con RE -->
+  <path class="wire" d="M105 210 H170"/>
+  <circle cx="105" cy="210" r="4.5" class="node"/>
+  <!-- Flecha ib -->
+  <polygon points="135,206 143,210 135,214" class="arrow"/>
+  <text x="130" y="200" class="lbl" style="font-size:12px;">ib</text>
+
+  <!-- Transistor Q -->
+  <circle cx="205" cy="210" r="34" class="trans-circle"/>
+  <path class="trans-line" d="M192 192 V228"/>
+  <path class="wire" d="M170 210 H192"/>
+  <path class="trans-line" d="M192 198 L228 174"/>
+  <path class="wire" d="M228 174 V160"/>
+  <text x="235" y="165" class="val">Colector (AC)</text>
+  <path class="trans-line" d="M192 222 L228 246"/>
+  <polygon points="219,238 230,248 216,248" class="trans-arrow"/>
+
+  <!-- Emisor con RE hacia tierra -->
+  <path class="wire" d="M228 246 V270"/>
+  <circle cx="228" cy="270" r="4.5" class="node"/>
+  <!-- Flecha ie = (β+1)ib -->
+  <polygon points="224,285 228,295 232,285" fill="#d9381e"/>
+  <text x="240" y="292" font-weight="bold" fill="#d9381e" font-size="12">ie = (β+1)ib</text>
+  <rect x="215" y="300" width="26" height="50" class="res"/>
+  <text x="250" y="325" class="lbl">RE</text>
+  <path class="wire" d="M228 350 V375"/>
+  <line x1="213" y1="375" x2="243" y2="375" class="gnd"/>
+
+  <!-- Tarjeta de fórmula Izquierda -->
+  <rect x="50" y="260" width="145" height="120" class="badge-lever"/>
+  <text x="60" y="282" font-size="12" font-weight="bold" fill="#4338ca">FÓRMULA MAESTRA:</text>
+  <text x="60" y="305" font-size="13" font-weight="bold" fill="#1e1b4b">Zb = (β+1)(re + RE)</text>
+  <text x="60" y="325" font-size="12" class="val">ó Zb = rπ + (β+1)RE</text>
+  <text x="60" y="350" font-size="11" fill="#4338ca"><b>Ejemplo práctico:</b></text>
+  <text x="60" y="368" font-size="11" class="val">RE = 330Ω, β = 150</text>
+  <text x="60" y="382" font-size="11" font-weight="bold" fill="#0b69a3">Zb ≈ 50 kΩ (¡x151!)</text>
+
+  <!-- PANEL DERECHO: REFLEXIÓN BASE A EMISOR -->
+  <rect x="470" y="90" width="415" height="305" class="box-panel"/>
+  <text x="485" y="118" font-size="15" font-weight="bold" fill="#0b69a3">2. Mirando desde el Emisor hacia la Base</text>
+  <text x="485" y="136" class="val">La resistencia conectada en base se divide entre (β + 1)</text>
+
+  <!-- Base conectada a resistencia RB a tierra AC -->
+  <path class="wire" d="M545 210 H605"/>
+  <circle cx="545" cy="210" r="4.5" class="node"/>
+  <rect x="532" y="230" width="26" height="50" class="res"/>
+  <path class="wire" d="M545 210 V230 M545 280 V305"/>
+  <line x1="530" y1="305" x2="560" y2="305" class="gnd"/>
+  <text x="565" y="260" class="lbl">R'base</text>
+  <text x="565" y="275" class="val">(RB || Rs)</text>
+
+  <!-- Transistor Q -->
+  <circle cx="640" cy="210" r="34" class="trans-circle"/>
+  <path class="trans-line" d="M627 192 V228"/>
+  <path class="wire" d="M605 210 H627"/>
+  <path class="trans-line" d="M627 198 L663 174"/>
+  <path class="wire" d="M663 174 V160"/>
+  <text x="670" y="165" class="val">Colector (AC)</text>
+  <path class="trans-line" d="M627 222 L663 246"/>
+  <polygon points="654,238 665,248 651,248" class="trans-arrow"/>
+
+  <!-- Emisor conectado a terminal de prueba Zo,e -->
+  <path class="wire" d="M663 246 V290 H730"/>
+  <circle cx="730" cy="290" r="4.5" class="node"/>
+
+  <!-- Ojo mirando al emisor -->
+  <path d="M 770 290 Q 755 275 740 290 Q 755 305 770 290 Z" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <circle cx="755" cy="290" r="5" fill="#d97706"/>
+  <text x="740" y="320" font-weight="bold" fill="#b45309" font-size="12">Zo,e = ?</text>
+
+  <!-- Tarjeta de fórmula Derecha -->
+  <rect x="710" y="145" width="165" height="120" class="badge-lever"/>
+  <text x="720" y="167" font-size="12" font-weight="bold" fill="#4338ca">FÓRMULA MAESTRA:</text>
+  <text x="720" y="190" font-size="13" font-weight="bold" fill="#1e1b4b">Zo,e = re + R'base/(β+1)</text>
+  <text x="720" y="210" font-size="12" class="val">ó Zo,e = (rπ + R'base)/(β+1)</text>
+  <text x="720" y="235" font-size="11" fill="#4338ca"><b>Ejemplo práctico:</b></text>
+  <text x="720" y="250" font-size="11" class="val">R'base = 10 kΩ, β = 150</text>
+  <text x="720" y="265" font-size="11" font-weight="bold" fill="#0b69a3">Zo,e = re + 66.2 Ω (¡÷151!)</text>
+
+  <!-- FOOTER: EL CONSEJO DEL PROFESOR FREDY -->
+  <rect x="35" y="415" width="850" height="75" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.5"/>
+  <text x="50" y="438" font-weight="bold" fill="#5b21b6" font-size="13">💡 LA ANALOGÍA DE LA PALANCA MECÁNICA (Profesor Fredy &amp; Malvino):</text>
+  <text x="50" y="458" class="val" style="font-size:12px;">El BJT es un multiplicador de corriente. Cuando la corriente entra por la base (fuerza pequeña), mover la resistencia en el emisor</text>
+  <text x="50" y="476" class="val" style="font-size:12px;">cuesta (β+1) veces más esfuerzo. Y al revés: una gran resistencia en la base, vista desde el emisor, se siente dividida entre (β+1).</text>
+</svg>

@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="520" viewBox="0 0 940 520" role="img" aria-label="Amplificador Cascada CE-CE de Dos Etapas">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .card-border { fill: none; stroke: #d9e2ec; stroke-width: 1.5; }
+      .title { font: bold 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
+      .subtitle { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #627d98; }
+      .wire { stroke: #243b53; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.2; }
+      .cap { stroke: #0b69a3; stroke-width: 3.2; }
+      .node { fill: #102a43; }
+      .trans-circle { fill: #f0f4f8; stroke: #9fb3c8; stroke-width: 1.6; }
+      .trans-line { stroke: #0b69a3; stroke-width: 2.6; stroke-linecap: round; }
+      .trans-arrow { fill: #0b69a3; }
+      .lbl { font: bold 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #0b69a3; }
+      .val { font: 11.5px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
+      .gnd { stroke: #243b53; stroke-width: 2.2; stroke-linecap: round; }
+      .stage-box { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.2; stroke-dasharray: 4,4; rx: 8px; }
+      .badge { fill: #e0f2fe; stroke: #0284c7; stroke-width: 1.5; rx: 4px; }
+    </style>
+  </defs>
+
+  <rect width="940" height="520" rx="14" class="bg"/>
+  <rect x="15" y="15" width="910" height="490" rx="10" class="card-border"/>
+
+  <text x="35" y="48" class="title">Amplificador Multietapa en Cascada CE–CE con Acoplamiento Capacitivo</text>
+  <text x="35" y="70" class="subtitle">Efecto de carga inter-etapa: la impedancia Zi2 carga al colector de la Etapa 1 reduciendo su ganancia</text>
+
+  <!-- Rail VCC -->
+  <path class="wire" d="M120 95 H800"/>
+  <circle cx="800" cy="95" r="4.5" class="node"/>
+  <text x="810" y="100" class="lbl">+VCC = 15V</text>
+
+  <!-- ETAPA 1 (RECUADRO) -->
+  <rect x="35" y="85" width="375" height="320" class="stage-box"/>
+  <text x="50" y="112" font-size="13" font-weight="bold" fill="#0369a1">ETAPA 1 (Emisor Común Q1)</text>
+
+  <!-- Entrada vi y C1 -->
+  <path class="wire" d="M35 220 H65"/>
+  <line x1="65" y1="208" x2="65" y2="232" class="cap"/>
+  <line x1="72" y1="208" x2="72" y2="232" class="cap"/>
+  <text x="60" y="200" class="lbl">C1</text>
+  <path class="wire" d="M72 220 H115"/>
+  <circle cx="115" cy="220" r="4.5" class="node"/>
+
+  <!-- Divisor R1 y R2 -->
+  <path class="wire" d="M115 95 V130"/>
+  <rect x="103" y="130" width="24" height="45" class="res"/>
+  <text x="75" y="155" class="lbl">R1</text>
+  <path class="wire" d="M115 175 V220 M115 220 V255"/>
+  <rect x="103" y="255" width="24" height="45" class="res"/>
+  <text x="75" y="280" class="lbl">R2</text>
+  <path class="wire" d="M115 300 V340"/>
+  <line x1="102" y1="340" x2="128" y2="340" class="gnd"/>
+
+  <!-- Transistor Q1 -->
+  <path class="wire" d="M115 220 H170"/>
+  <circle cx="190" cy="220" r="30" class="trans-circle"/>
+  <path class="trans-line" d="M175 204 V236"/>
+  <path class="trans-line" d="M175 210 L205 188"/>
+  <path class="wire" d="M205 188 V175"/>
+  <path class="trans-line" d="M175 230 L205 252"/>
+  <polygon points="196,245 207,254 193,254" class="trans-arrow"/>
+  <text x="180" y="215" class="lbl">Q1</text>
+
+  <!-- RC1 -->
+  <path class="wire" d="M205 95 V130"/>
+  <rect x="193" y="130" width="24" height="45" class="res"/>
+  <text x="225" y="155" class="lbl">RC1</text>
+  <circle cx="205" cy="180" r="4.5" class="node"/>
+
+  <!-- RE1 y CE1 -->
+  <path class="wire" d="M205 252 V275"/>
+  <circle cx="205" cy="275" r="4" class="node"/>
+  <path class="wire" d="M205 275 V295"/>
+  <rect x="193" y="295" width="24" height="45" class="res"/>
+  <text x="165" y="320" class="lbl">RE1</text>
+  <path class="wire" d="M205 340 V370"/>
+
+  <path class="wire" d="M205 275 H255 V305"/>
+  <line x1="247" y1="305" x2="263" y2="305" class="cap"/>
+  <line x1="247" y1="312" x2="263" y2="312" class="cap"/>
+  <text x="268" y="312" class="lbl">CE1</text>
+  <path class="wire" d="M255 312 V370 H205"/>
+  <circle cx="205" cy="370" r="4" class="node"/>
+  <path class="wire" d="M205 370 V390"/>
+  <line x1="192" y1="390" x2="218" y2="390" class="gnd"/>
+
+  <!-- ACOPLAMIENTO INTER-ETAPA (CAPACITOR Cc) -->
+  <path class="wire" d="M205 180 H440"/>
+  <line x1="440" y1="168" x2="440" y2="192" class="cap"/>
+  <line x1="447" y1="168" x2="447" y2="192" class="cap"/>
+  <text x="430" y="160" class="lbl" style="fill:#d9381e;">Cc (Acople)</text>
+  <path class="wire" d="M447 180 H500"/>
+  <circle cx="500" cy="180" r="4.5" class="node"/>
+
+  <!-- ETAPA 2 (RECUADRO) -->
+  <rect x="475" y="85" width="440" height="320" class="stage-box"/>
+  <text x="490" y="112" font-size="13" font-weight="bold" fill="#0369a1">ETAPA 2 (Emisor Común Q2) &amp; Carga RL</text>
+
+  <!-- Divisor R3 y R4 -->
+  <path class="wire" d="M500 95 V130"/>
+  <rect x="488" y="130" width="24" height="45" class="res"/>
+  <text x="460" y="155" class="lbl">R3</text>
+  <path class="wire" d="M500 175 V180 M500 180 V255"/>
+  <rect x="488" y="255" width="24" height="45" class="res"/>
+  <text x="460" y="280" class="lbl">R4</text>
+  <path class="wire" d="M500 300 V340"/>
+  <line x1="487" y1="340" x2="513" y2="340" class="gnd"/>
+
+  <!-- Transistor Q2 -->
+  <path class="wire" d="M500 180 H555"/>
+  <circle cx="575" cy="180" r="30" class="trans-circle"/>
+  <path class="trans-line" d="M560 164 V196"/>
+  <path class="trans-line" d="M560 170 L590 148"/>
+  <path class="wire" d="M590 148 V135"/>
+  <path class="trans-line" d="M560 190 L590 212"/>
+  <polygon points="581,205 592,214 578,214" class="trans-arrow"/>
+  <text x="565" y="175" class="lbl">Q2</text>
+
+  <!-- RC2 -->
+  <path class="wire" d="M590 95 V130"/>
+  <rect x="578" y="130" width="24" height="45" class="res"/>
+  <text x="610" y="155" class="lbl">RC2</text>
+  <circle cx="590" cy="145" r="4.5" class="node"/>
+
+  <!-- RE2 y CE2 -->
+  <path class="wire" d="M590 212 V245"/>
+  <circle cx="590" cy="245" r="4" class="node"/>
+  <path class="wire" d="M590 245 V275"/>
+  <rect x="578" y="275" width="24" height="45" class="res"/>
+  <text x="550" y="300" class="lbl">RE2</text>
+  <path class="wire" d="M590 320 V350"/>
+
+  <path class="wire" d="M590 245 H640 V285"/>
+  <line x1="632" y1="285" x2="648" y2="285" class="cap"/>
+  <line x1="632" y1="292" x2="648" y2="292" class="cap"/>
+  <text x="653" y="292" class="lbl">CE2</text>
+  <path class="wire" d="M640 292 V350 H590"/>
+  <circle cx="590" cy="350" r="4" class="node"/>
+  <path class="wire" d="M590 350 V375"/>
+  <line x1="577" y1="375" x2="603" y2="375" class="gnd"/>
+
+  <!-- Salida C3 hacia RL -->
+  <path class="wire" d="M590 145 H720"/>
+  <line x1="720" y1="133" x2="720" y2="157" class="cap"/>
+  <line x1="727" y1="133" x2="727" y2="157" class="cap"/>
+  <text x="715" y="125" class="lbl">C3</text>
+  <path class="wire" d="M727 145 H780"/>
+  <circle cx="780" cy="145" r="4.5" class="node"/>
+
+  <!-- RL -->
+  <path class="wire" d="M780 145 V185"/>
+  <rect x="768" y="185" width="24" height="50" class="res"/>
+  <text x="800" y="210" class="lbl">RL</text>
+  <path class="wire" d="M780 235 V280"/>
+  <line x1="767" y1="280" x2="793" y2="280" class="gnd"/>
+
+  <!-- Salida vo -->
+  <path class="wire" d="M780 145 H860"/>
+  <circle cx="860" cy="145" r="5" class="node"/>
+  <text x="870" y="150" class="lbl" style="fill:#d9381e;">vo (AC)</text>
+  <text x="870" y="168" class="val">Fase = 0°</text>
+
+  <!-- LEYENDA DEL EFECTO DE CARGA -->
+  <rect x="300" y="315" width="260" height="75" rx="6" fill="#fff7ed" stroke="#fed7aa"/>
+  <text x="310" y="335" font-size="11.5" font-weight="bold" fill="#c2410c">⚠️ EFECTO DE CARGA INTER-ETAPA:</text>
+  <text x="310" y="352" font-size="11" class="val">El colector de Q1 no ve solo a RC1,</text>
+  <text x="310" y="367" font-size="11" font-weight="bold" fill="#9a3412">ve: rL1 = RC1 || Zi2 = RC1 || (R3 || R4 || Zb2)</text>
+  <text x="310" y="382" font-size="10.5" class="val">Por tanto: Av1 = -rL1 / re1 (atenuada!).</text>
+
+  <!-- FOOTER -->
+  <rect x="35" y="415" width="875" height="75" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="50" y="438" font-weight="bold" fill="#1e40af" font-size="13">💡 LA REGLA DE ORO DE MULTIETAPAS (Profesor Fredy &amp; Boylestad Sec. 5.14):</text>
+  <text x="50" y="458" class="val" style="font-size:12px;">1. La ganancia total es el producto de las ganancias individuales CON CARGA: Av = Av1(con Zi2) · Av2(con RL).</text>
+  <text x="50" y="476" class="val" style="font-size:12px;">2. Cada etapa inversora desfasa 180°. Dos etapas en cascada entregan un desfase total de 360° = 0° (la salida está en fase con la entrada).</text>
+</svg>

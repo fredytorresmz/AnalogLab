@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" role="img" aria-label="Emisor Común con Carga Activa">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .card-border { fill: none; stroke: #d9e2ec; stroke-width: 1.5; }
+      .title { font: bold 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
+      .subtitle { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #627d98; }
+      .wire { stroke: #243b53; stroke-width: 2.6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.4; }
+      .node { fill: #102a43; }
+      .trans-circle { fill: #f0f4f8; stroke: #9fb3c8; stroke-width: 1.8; }
+      .trans-line { stroke: #0b69a3; stroke-width: 3; stroke-linecap: round; }
+      .trans-arrow { fill: #0b69a3; }
+      .lbl { font: bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #0b69a3; }
+      .val { font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
+      .gnd { stroke: #243b53; stroke-width: 2.4; stroke-linecap: round; }
+      .box-panel { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.5; rx: 8px; }
+      .src-circle { fill: #ffffff; stroke: #0b69a3; stroke-width: 2.4; }
+      .src-diamond { fill: #ffffff; stroke: #0b69a3; stroke-width: 2.4; }
+      .arrow { fill: #0b69a3; }
+    </style>
+  </defs>
+
+  <rect width="920" height="520" rx="14" class="bg"/>
+  <rect x="15" y="15" width="890" height="490" rx="10" class="card-border"/>
+
+  <text x="35" y="48" class="title">Emisor Común con Carga Activa (Circuito Integrado Analógico)</text>
+  <text x="35" y="70" class="subtitle">Límite Teórico Superior de Ganancia Intrínseca: Avo,max = -gm · ro = -VA / VT</text>
+
+  <!-- PANEL IZQUIERDO: ESQUEMA CON ESPEJO PNP / CARGA ACTIVA -->
+  <rect x="35" y="90" width="415" height="305" class="box-panel"/>
+  <text x="50" y="118" font-size="15" font-weight="bold" fill="#0b69a3">Esquemático de Silicio (IC)</text>
+
+  <!-- Rail VCC -->
+  <path class="wire" d="M100 135 H350"/>
+  <circle cx="230" cy="135" r="4.5" class="node"/>
+  <text x="360" y="140" class="lbl">+VCC = 5V</text>
+
+  <!-- Fuente de Corriente Activa PNP (Carga Activa) -->
+  <path class="wire" d="M230 135 V165"/>
+  <circle cx="230" cy="180" r="15" fill="#f0f4f8" stroke="#0b69a3" stroke-width="2.2"/>
+  <circle cx="230" cy="202" r="15" fill="#f0f4f8" stroke="#0b69a3" stroke-width="2.2"/>
+  <line x1="230" y1="172" x2="230" y2="210" stroke="#0b69a3" stroke-width="2.2"/>
+  <polygon points="226,206 230,214 234,206" fill="#0b69a3"/>
+  <text x="255" y="195" class="lbl">IREF (Activa)</text>
+  <text x="255" y="210" class="val">Rac → ∞</text>
+
+  <!-- Nodo de salida de alta impedancia vo -->
+  <path class="wire" d="M230 217 V240"/>
+  <circle cx="230" cy="240" r="5" class="node"/>
+  <path class="wire" d="M230 240 H380"/>
+  <circle cx="380" cy="240" r="4.5" class="node"/>
+  <text x="390" y="245" class="lbl" style="fill:#d9381e;">vo (AC)</text>
+  <text x="390" y="260" class="val">RL = ∞</text>
+
+  <!-- Transistor amplificador NPN Q1 -->
+  <path class="wire" d="M230 240 V255"/>
+  <circle cx="200" cy="295" r="38" class="trans-circle"/>
+  <path class="trans-line" d="M185 275 V315"/>
+  <path class="wire" d="M100 295 H185"/>
+  <circle cx="100" cy="295" r="4.5" class="node"/>
+  <text x="55" y="300" class="lbl">vi (AC)</text>
+  <path class="trans-line" d="M185 283 L230 255"/>
+  <path class="wire" d="M230 255 V240"/>
+  <path class="trans-line" d="M185 307 L230 335"/>
+  <polygon points="220,325 232,337 216,337" class="trans-arrow"/>
+  <text x="140" y="335" class="lbl">Q1</text>
+  <text x="135" y="350" class="val">VA = 100V</text>
+
+  <!-- Emisor a tierra -->
+  <path class="wire" d="M230 335 V370"/>
+  <line x1="215" y1="370" x2="245" y2="370" class="gnd"/>
+  <line x1="220" y1="375" x2="240" y2="375" class="gnd"/>
+  <line x1="225" y1="380" x2="235" y2="380" class="gnd"/>
+
+  <!-- PANEL DERECHO: MODELO EQUIVALENTE DE PEQUEÑA SEÑAL Y DEMOSTRACIÓN -->
+  <rect x="470" y="90" width="415" height="305" class="box-panel"/>
+  <text x="485" y="118" font-size="15" font-weight="bold" fill="#0b69a3">Circuito Equivalente en Pequeña Señal</text>
+
+  <!-- vbe en base -->
+  <circle cx="505" cy="190" r="4.5" class="node"/>
+  <text x="495" y="175" class="lbl">B</text>
+  <path class="wire" d="M505 190 H545 V220"/>
+  <rect x="532" y="220" width="26" height="55" class="res"/>
+  <text x="565" y="250" class="lbl">rπ</text>
+  <path class="wire" d="M545 275 V330 H835"/>
+  <line x1="680" y1="330" x2="710" y2="330" class="gnd"/>
+  <text x="685" y="350" class="val">E (Tierra)</text>
+
+  <!-- Fuente gm·vbe -->
+  <path class="wire" d="M690 330 V280"/>
+  <circle cx="690" cy="245" r="20" class="src-circle"/>
+  <line x1="690" y1="235" x2="690" y2="258" stroke="#0b69a3" stroke-width="2.2"/>
+  <polygon points="686,254 690,262 694,254" class="arrow"/>
+  <text x="640" y="248" class="lbl" style="font-size:12px;">gm·vbe</text>
+  <path class="wire" d="M690 225 V190 H835"/>
+
+  <!-- Resistencia Early ro -->
+  <path class="wire" d="M780 190 V220"/>
+  <rect x="767" y="220" width="26" height="55" class="res"/>
+  <text x="800" y="245" class="lbl">ro</text>
+  <text x="800" y="260" class="val">VA/ICQ</text>
+  <path class="wire" d="M780 275 V330"/>
+  <circle cx="780" cy="190" r="4.5" class="node"/>
+  <circle cx="780" cy="330" r="4.5" class="node"/>
+
+  <!-- Salida vo -->
+  <circle cx="845" cy="190" r="5" class="node"/>
+  <text x="855" y="195" class="lbl" style="fill:#d9381e;">vo</text>
+
+  <!-- Deducción matemática resumida en panel -->
+  <rect x="485" y="310" width="385" height="70" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="495" y="330" font-weight="bold" fill="#102a43" font-size="12">vo = -(gm·vbe) · ro = -(ICQ/VT · vbe) · (VA/ICQ)</text>
+  <text x="495" y="348" font-size="12" fill="#d9381e" font-weight="bold">Avo,max = vo / vbe = -VA / VT  (Independiente de ICQ!)</text>
+  <text x="495" y="366" font-size="11.5" class="val">Con VA = 100V, VT = 26mV: |Avo| = 100 / 0.026 = 3846 (71.7 dB)</text>
+
+  <!-- FOOTER -->
+  <rect x="35" y="415" width="850" height="75" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="50" y="438" font-weight="bold" fill="#0f172a" font-size="13">💡 LA ANALOGÍA DEL TECHO FÍSICO (Profesor Fredy &amp; Malvino):</text>
+  <text x="50" y="458" class="val" style="font-size:12px;">Por más infinita que hagamos la resistencia de colector con electrónica integrada, la propia modulación del ancho de base</text>
+  <text x="50" y="476" class="val" style="font-size:12px;">(Efecto Early) crea un camino interno de fuga ro. La ganancia máxima de un BJT está acotada estrictamente por la relación VA / VT.</text>
+</svg>

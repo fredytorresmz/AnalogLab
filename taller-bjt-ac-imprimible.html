@@ -195,7 +195,7 @@
     <h3>Explique el principio físico de la linealización de pequeña señal en un transistor BJT. ¿Por qué es indispensable haber resuelto previamente el punto de operación en DC (punto Q)?</h3>
     <div class="analysis-text">
       <b>Respuesta orientativa y criterio de ingeniería:</b><br>
-      La característica física de entrada del BJT es exponencial: \(i_C = I_S \exp(v_{BE}/V_T)\). Para amplitudes de señal muy pequeñas (\(v_{be} \le 5\,\mathrm{mV}\)), la curva exponencial puede aproximarse con alta precisión mediante la recta tangente a la curva en el punto de reposo \(Q(V_{BEQ}, I_{CQ})\). La pendiente de esa tangente es la transconductancia \(g_m = I_{CQ}/V_T\). Sin resolver el DC, se desconoce el valor de \(I_{CQ}\) y, por tanto, es imposible determinar los parámetros dinámicos (\(g_m, r_e, r_\pi\)).
+      La característica física de entrada del BJT es estrictamente exponencial: \(i_C = I_S \exp(v_{BE}/V_T)\). Para amplitudes de señal muy pequeñas (\(v_{be} \le 5\,\mathrm{mV}\)), la curva exponencial puede aproximarse con altísima precisión mediante la recta tangente evaluada en el punto de reposo \(Q(V_{BEQ}, I_{CQ})\). La pendiente de esa tangente es la transconductancia \(g_m = I_{CQ}/V_T\). Sin resolver primero el circuito en DC, desconocemos \(I_{CQ}\) y, por lo tanto, es físicamente imposible calcular los parámetros dinámicos de pequeña señal (\(g_m, r_e, r_\pi\)).
     </div>
   </div>
 
@@ -213,7 +213,7 @@
     <h3>Demuestre la relación matemática de equivalencia entre el modelo \(r_e\) de Boylestad/Malvino y el modelo híbrido-\(\pi\) de Sedra/Smith/Razavi. ¿Por qué ambos producen exactamente los mismos resultados numéricos?</h3>
     <div class="analysis-text">
       <b>Respuesta orientativa y criterio de ingeniería:</b><br>
-      En el modelo \(r_e\), la fuente de colector es controlada por corriente: \(i_c = \beta i_b\), y la resistencia vista desde la base es \(Z_b = (\beta+1)r_e\). En el modelo híbrido-\(\pi\), la fuente es controlada por tensión: \(i_c = g_m v_{be}\), con resistencia de base \(r_\pi\). Como \(g_m = 1/r_e\) (asumiendo \(\alpha \approx 1\)) y \(v_{be} = i_b r_\pi = i_b (\beta r_e)\), al sustituir se tiene: \(i_c = g_m v_{be} = (1/r_e)(i_b \beta r_e) = \beta i_b\). Ambos modelos representan la misma física linealizada; la elección es solo una preferencia de análisis nodal vs de malla.
+      En el modelo \(r_e\), la fuente de colector se modela como controlada por corriente: \(i_c = \beta i_b\), y la resistencia vista desde la base es \(Z_b = (\beta+1)r_e\). En el modelo híbrido-\(\pi\), la fuente es controlada por tensión: \(i_c = g_m v_{be}\), con resistencia de base \(r_\pi\). Como \(g_m = 1/r_e\) (asumiendo \(\alpha \approx 1\)) y \(v_{be} = i_b r_\pi = i_b (\beta r_e)\), al sustituir tenemos: \(i_c = g_m v_{be} = (1/r_e)(i_b \beta r_e) = \beta i_b\). Ambos modelos describen exactamente la misma física linealizada; usar uno u otro es simplemente preferencia entre análisis de mallas o análisis nodal.
     </div>
   </div>
 
@@ -222,7 +222,7 @@
     <h3>En el análisis de pequeña señal en banda media, ¿por qué una fuente de alimentación de continua independiente como \(+V_{CC} = 15\,\mathrm{V}\) se reemplaza por un cortocircuito a tierra (tierra AC)?</h3>
     <div class="analysis-text">
       <b>Respuesta orientativa y criterio de ingeniería:</b><br>
-      Una fuente DC ideal mantiene un potencial perfectamente constante en el tiempo: \(v_{fuente}(t) = V_{CC}\). La componente alterna (incremental) es por definición la derivada o variación temporal: \(v_{ac} = \Delta V_{CC} = 0\,\mathrm{V}\). Un nodo con diferencia de potencial alterna igual a cero respecto a la referencia de tierra se comporta dinámicamente como un cortocircuito a tierra para la señal AC (tierra incremental o masa virtual de AC).
+      Una fuente DC ideal mantiene un potencial rigurosamente constante en el tiempo: \(v_{fuente}(t) = V_{CC}\). La componente alterna (señal incremental) es por definición la derivada o variación temporal: \(v_{ac} = \Delta V_{CC} = 0\,\mathrm{V}\). Un nodo eléctrico cuya diferencia de potencial alterna respecto a tierra es 0 V se comporta dinámicamente como un cortocircuito a tierra para la señal AC (masa virtual o tierra de señal).
     </div>
   </div>
 
@@ -240,7 +240,7 @@
     <h3>En una etapa Emisor Común (CE), ¿por qué existe un desfase de 180° entre la señal de tensión de entrada en la base y la de salida en el colector?</h3>
     <div class="analysis-text">
       <b>Respuesta orientativa y criterio de ingeniería:</b><br>
-      Cuando la señal de entrada \(v_i\) sube en su semiciclo positivo, la tensión base-emisor crece, incrementando la corriente de colector \(i_c\). Al circular mayor corriente por \(R_C\), la caída de tensión \(i_c R_C\) aumenta. Por la ecuación del nodo de salida \(v_C = V_{CC} - i_C R_C\), un aumento en la caída de \(R_C\) provoca una disminución inmediata en el potencial del colector. Por lo tanto, cuando la entrada sube, la salida baja, produciendo una inversión de fase exacta de 180° (signo negativo en la ganancia \(A_v\)).
+      Cuando la señal de entrada en la base \(v_i\) experimenta su semiciclo positivo, la tensión base-emisor aumenta y el transistor conduce más corriente de colector \(i_c\). Al circular más corriente por \(R_C\), la caída de tensión en esa resistencia aumenta proporcionalmente. Por la ley de Kirchhoff en el nodo de salida, \(v_C = V_{CC} - i_C R_C\); por tanto, al aumentar la caída en \(R_C\), el potencial instantáneo de colector cae en picada. Cuando la entrada sube, la salida baja: una inversión física exacta de 180° (signo negativo en \(A_v\)).
     </div>
   </div>
 
@@ -249,7 +249,7 @@
     <h3>Explique el Teorema de Reflexión de Resistencia de emisor a base. ¿Por qué una resistencia pequeña de degeneración \(R_E = 220\,\Omega\) eleva tanto la impedancia de entrada vista desde la base?</h3>
     <div class="analysis-text">
       <b>Respuesta orientativa y criterio de ingeniería:</b><br>
-      La corriente que atraviesa la resistencia de emisor no es la diminuta corriente de base \(i_b\), sino la corriente de emisor completa \(i_e = (\beta+1)i_b\). Al aplicar la ley de Ohm para encontrar la resistencia equivalente que 'siente' la fuente conectada a la base: \(Z_b = v_b / i_b = (i_b r_\pi + (\beta+1)i_b R_E) / i_b = r_\pi + (\beta+1)R_E = (\beta+1)(r_e + R_E)\). Por ello, cualquier resistor colocado en el emisor se refleja en la base magnificado por un factor de \((\beta+1)\). Si \(\beta=100\), un resistor de \(220\,\Omega\) se percibe desde la base como \(101 \times 220\,\Omega \approx 22.2\,\mathrm{k\Omega}\).
+      La corriente que atraviesa el resistor de emisor no es la diminuta corriente de base \(i_b\), sino la corriente total del emisor: \(i_e = (\beta+1)i_b\). Al aplicar la ley de Ohm vista desde la base: \(Z_b = v_b / i_b = [i_b r_\pi + (\beta+1)i_b R_E] / i_b = r_\pi + (\beta+1)R_E = (\beta+1)(r_e + R_E)\). Cualquier resistor en el emisor se 'refleja' en la base multiplicado por \((\beta+1)\). Si \(\beta=100\), un modesto resistor de \(220\,\Omega\) es percibido desde la base como \(101 \times 220\,\Omega \approx 22.2\,\mathrm{k\Omega}\). ¡Una palanca de impedancias fenomenal!
     </div>
   </div>
 
@@ -267,9 +267,9 @@
     <h3>¿Cuál es la diferencia física y matemática entre la ganancia de voltaje sin carga (\(A_{vo}\)), la ganancia con carga (\(A_v\)) y la ganancia global del sistema (\(A_{vs} = v_o/v_s\))?</h3>
     <div class="analysis-text">
       <b>Respuesta orientativa y criterio de ingeniería:</b><br>
-      1) \(A_{vo} = v_o/v_i\) en circuito abierto (sin carga externa, \(R_L = \infty\)): representa la capacidad máxima de ganancia de la etapa aislada: \(A_{vo} \approx -R_C/r_e\).
-2) \(A_v = v_o/v_i\) con carga \(R_L\) conectada: la resistencia de colector efectiva disminuye a \(R_C \parallel R_L\), reduciendo la ganancia de la etapa: \(A_v \approx -(R_C \parallel R_L)/r_e\).
-3) \(A_{vs} = v_o/v_s\) (ganancia del sistema): toma en cuenta la resistencia interna del sensor/generador \(R_s\). Dado que \(R_s\) y la impedancia de entrada \(Z_i\) forman un divisor resistivo, la tensión real que llega a la base es \(v_i = v_s \cdot \frac{Z_i}{R_s + Z_i}\). Por tanto: \(A_{vs} = A_v \cdot \frac{Z_i}{R_s + Z_i}\). Despreciar \(R_s\) o \(R_L\) conduce a errores severos de sobrestimación en diseño real.
+      1) \(A_{vo} = v_o/v_i\) en circuito abierto (sin carga, \(R_L = \infty\)): representa el techo máximo intrínseco de ganancia de la etapa aislada: \(A_{vo} \approx -R_C/r_e\).
+2) \(A_v = v_o/v_i\) con carga \(R_L\) conectada: la resistencia dinámica en el colector se reduce al paralelo \(R_C \parallel R_L\), bajando la ganancia a \(A_v \approx -(R_C \parallel R_L)/r_e\).
+3) \(A_{vs} = v_o/v_s\) (ganancia neta del sistema): toma en cuenta la resistencia interna del sensor o generador \(R_s\). Dado que \(R_s\) y \(Z_i\) forman un divisor a la entrada, a la base solo llega \(v_i = v_s \cdot \frac{Z_i}{R_s + Z_i}\). Por tanto: \(A_{vs} = A_v \cdot \frac{Z_i}{R_s + Z_i}\). En el diseño real de ingeniería, olvidar este peaje conduce a errores de cálculo de más del 50%.
     </div>
   </div>
 
@@ -278,7 +278,7 @@
     <h3>Defina el concepto de Máxima Excursión Simétrica de Salida (Maximum Symmetrical Swing) y explique qué tipo de distorsión ocurre si la señal supera dicho límite.</h3>
     <div class="analysis-text">
       <b>Respuesta orientativa y criterio de ingeniería:</b><br>
-      La máxima excursión simétrica es la mayor amplitud pico a pico de voltaje o corriente que el amplificador puede entregar a la carga en AC sin que la señal sufra recorte (clipping) por saturación o por corte. El límite ascendente de corriente está acotado por la saturación (donde \(v_{CE} \approx V_{CE(sat)}\)) y el límite descendente por el corte (donde \(i_C = 0\)). Si el punto Q no está perfectamente centrado en la recta de carga AC, la señal se recortará de forma asimétrica primero por uno de los dos extremos al exceder el límite, generando armónicos de distorsión severos.
+      La máxima excursión simétrica es la mayor oscilación pico a pico de voltaje o corriente que el amplificador puede entregar a la carga en AC sin recortar la forma de onda (clipping) ni por saturación ni por corte. El límite superior de corriente lo fija la saturación (donde \(v_{CE} \approx V_{CE(sat)}\)) y el límite inferior el corte (donde \(i_C = 0\)). Si el punto Q no se diseña en el centro óptimo de la recta de carga de AC, la señal sufrirá un recorte asimétrico cuando se le exija gran amplitud, destruyendo la fidelidad acústica o de medición con armónicos indeseados.
     </div>
   </div>
 
@@ -296,13 +296,13 @@
     <h3>Describa la topología Cascode (CE seguido de CB). ¿Por qué es una de las configuraciones más valoradas en circuitos de RF y preamplificadores de banda ancha?</h3>
     <div class="analysis-text">
       <b>Respuesta orientativa y criterio de ingeniería:</b><br>
-      La configuración Cascode conecta una etapa en Emisor Común (CE) en cascada directa con una etapa en Base Común (CB). El emisor de la etapa CB presenta una impedancia de entrada diminuta: \(Z_{in2} \approx r_{e2}\). Por tanto, la carga de la primera etapa CE es apenas \(r_{e2}\), haciendo que la ganancia de tensión de la primera etapa sea casi unitaria: \(|A_{v1}| = r_{e2}/r_{e1} \approx 1\). Al ser \(A_{v1} \approx -1\), la amplificación de la capacitancia parásita base-colector por Efecto Miller (\(C_{in,Miller} = C_{\mu}(1+|A_v|)\)) queda prácticamente anulada. Toda la ganancia de tensión la aporta la segunda etapa CB sin sufrir el efecto Miller en su base, logrando anchos de banda muy superiores a una etapa CE simple.
+      La configuración Cascode conecta una etapa en Emisor Común (CE) en cascada directa con una etapa en Base Común (CB). El emisor de la segunda etapa CB presenta una impedancia de entrada sumamente baja: \(Z_{i2} \approx r_{e2}\). Por consiguiente, la carga de la primera etapa CE es apenas \(r_{e2}\), reduciendo la ganancia de tensión de la primera etapa a prácticamente la unidad: \(|A_{v1}| = r_{e2}/r_{e1} \approx 1\). Al no haber ganancia en la primera etapa, el Efecto Miller que multiplica la capacitancia parásita base-colector (\(C_{in,Miller} = C_{\mu}(1+|A_v|)\)) queda casi completamente neutralizado. Toda la ganancia de tensión la produce la segunda etapa CB, logrando anchos de banda descomunales ideales para radiofrecuencia e instrumentación rápida.
     </div>
   </div>
 
   <div class="item-card">
     <span class="badge">F · Troubleshooting en Laboratorio · Pregunta 13</span>
-    <h3>Un técnico monta un amplificador CE y mide con el osciloscopio que la ganancia de tensión cayó de su valor de diseño de −120 a apenas −1.5. Sin embargo, al medir los voltajes con el multímetro en DC, comprueba que VBE = 0.7 V y VCEQ = 6.2 V, idénticos a los teóricos. ¿Cuál es la falla más probable?</h3>
+    <h3>Un estudiante monta en el laboratorio un amplificador CE y mide con el osciloscopio que la ganancia de tensión cayó de su valor de diseño de −120 a apenas −1.5. Sin embargo, al medir los voltajes con el multímetro en DC, comprueba que VBE = 0.7 V y VCEQ = 6.2 V, idénticos a los teóricos. ¿Cuál es la falla más probable?</h3>
     <div class="analysis-text">
       <b>Respuesta orientativa y criterio de ingeniería:</b><br>
       undefined
@@ -314,9 +314,9 @@
     <h3>¿Cómo se distingue en la pantalla de un osciloscopio si un amplificador en emisor común está recortando la señal por saturación dinámica o por corte?</h3>
     <div class="analysis-text">
       <b>Respuesta orientativa y criterio de ingeniería:</b><br>
-      Debido a la inversión de fase de 180° en Emisor Común:
-1) Cuando la señal de entrada alcanza su cresta positiva, el transistor conduce máxima corriente y se aproxima a la saturación: el colector cae a su tensión mínima (\(V_{CE(sat)} \approx 0.2\,\mathrm{V}\)). Por lo tanto, el recorte por saturación aparece en el semiciclo NEGATIVO (valle inferior) de la forma de onda de salida en el osciloscopio.
-2) Cuando la señal de entrada cae a su mínimo negativo, el transistor deja de conducir y entra en corte: la corriente cesa y el colector sube hacia \(V_{CC}\). Por lo tanto, el recorte por corte aparece en el semiciclo POSITIVO (cresta superior) de la forma de onda de salida.
+      Debido a la inversión de fase de 180° propia del Emisor Común:
+1) Cuando la señal de entrada alcanza su cresta máxima positiva, el transistor se polariza con máxima corriente y se acerca a la saturación: el colector cae a su tensión más baja (\(V_{CE(sat)} \approx 0.2\,\mathrm{V}\)). En consecuencia, el recorte por SATURACIÓN aparece en el semiciclo NEGATIVO (valle inferior) de la forma de onda en la pantalla del osciloscopio.
+2) Cuando la señal de entrada cae a su mínimo negativo, el transistor se apaga y entra en corte: la corriente cesa y el potencial de colector sube hacia \(+V_{CC}\). En consecuencia, el recorte por CORTE aparece en el semiciclo POSITIVO (cresta superior) de la forma de onda.
     </div>
   </div>
 
@@ -325,7 +325,7 @@
     <h3>Al diseñar con transistores reales como el 2N3904 o 2N2222A, el fabricante especifica un rango de \(\beta\) muy amplio (por ejemplo, entre 100 y 300). ¿Qué decisiones de diseño en AC debe tomar el ingeniero para garantizar que la ganancia del circuito sea robusta y no cambie con cada transistor?</h3>
     <div class="analysis-text">
       <b>Respuesta orientativa y criterio de ingeniería:</b><br>
-      Para insensibilizar la ganancia ante la dispersión de \(\beta\) y ante la variación térmica de \(r_e = 26\,\mathrm{mV}/I_E\), el ingeniero utiliza degeneración de emisor con resistencia partida (swamping): se divide la resistencia de emisor en dos partes en serie \(R_E = R_{E1} + R_{E2}\), y se coloca el condensador de bypass \(C_E\) únicamente en paralelo con \(R_{E2}\). De este modo, en AC la ganancia resulta: \(A_v \approx -R_C / (r_e + R_{E1})\). Si se selecciona \(R_{E1} \gg r_e\) (por ejemplo, \(R_{E1} = 100\,\Omega\) frente a \(r_e = 13\,\Omega\)), la ganancia pasa a depender casi exclusivamente de la relación de componentes pasivos externos \(A_v \approx -R_C / R_{E1}\), la cual es extraordinariamente estable, lineal y predecible independientemente del transistor instalado.
+      Para insensibilizar la ganancia ante la dispersión de \(\beta\) y ante la variación térmica de \(r_e = 26\,\mathrm{mV}/I_E\), el ingeniero recurre a la técnica de emisor dividido (swamping o degeneración parcial): se divide la resistencia de emisor en dos partes en serie \(R_E = R_{E1} + R_{E2}\), y se coloca el condensador de bypass \(C_E\) exclusivamente en paralelo con \(R_{E2}\). Así, en AC la ganancia de la etapa queda regida por: \(A_v \approx -R_C / (r_e + R_{E1})\). Si elegimos \(R_{E1} \ge 10 r_e\), la ganancia pasa a depender casi al 100% del cociente de resistencias externas \(A_v \approx -R_C / R_{E1}\). Esto hace que el amplificador mantenga exactamente la misma ganancia aunque cambies de transistor o la temperatura suba 40°C en el chasis del equipo.
     </div>
   </div>
 
@@ -342,7 +342,144 @@
       </div>
     
 
-    
+    <div class="schematic-container"><svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" role="img" aria-label="Modelos Dinámicos re e Híbrido-pi">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .card-border { fill: none; stroke: #d9e2ec; stroke-width: 1.5; }
+      .box-panel { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.5; rx: 8px; }
+      .title { font: bold 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
+      .subtitle { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #627d98; }
+      .panel-title { font: bold 15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #0b69a3; }
+      .wire { stroke: #243b53; stroke-width: 2.6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.4; }
+      .node { fill: #102a43; }
+      .lbl { font: bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #0b69a3; }
+      .val { font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
+      .term-lbl { font: bold 15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #d9381e; }
+      .src-diamond { fill: #ffffff; stroke: #0b69a3; stroke-width: 2.4; }
+      .src-circle { fill: #ffffff; stroke: #0b69a3; stroke-width: 2.4; }
+      .arrow { fill: #0b69a3; }
+      .footer-box { fill: #eef6fc; stroke: #7bb5dc; stroke-width: 1.5; rx: 6px; }
+      .footer-txt { font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
+    </style>
+  </defs>
+
+  <rect width="920" height="520" rx="14" class="bg"/>
+  <rect x="15" y="15" width="890" height="490" rx="10" class="card-border"/>
+
+  <!-- Título principal -->
+  <text x="35" y="48" class="title">Modelos Dinámicos de Pequeña Señal en AC para Transistor BJT</text>
+  <text x="35" y="70" class="subtitle">Equivalencia formal entre el Modelo re (Boylestad/Malvino) y el Modelo Híbrido-π (Sedra/Smith)</text>
+
+  <!-- PANEL IZQUIERDO: MODELO re -->
+  <rect x="35" y="90" width="415" height="305" class="box-panel"/>
+  <text x="50" y="118" class="panel-title">1. Modelo re (Controlado por Corriente ib)</text>
+  <text x="50" y="136" class="val">Referencia: Boylestad &amp; Malvino · Entrada en Base, emisor común</text>
+
+  <!-- Terminal Base B -->
+  <circle cx="70" cy="200" r="4.5" class="node"/>
+  <text x="55" y="195" class="term-lbl">B</text>
+  <path class="wire" d="M70 200 H120"/>
+  <!-- Corriente ib -->
+  <polygon points="105,195 115,200 105,205" class="arrow"/>
+  <text x="95" y="188" class="lbl" style="font-size:12px;">ib</text>
+
+  <!-- Resistencia Zb = (β+1)re hacia emisor -->
+  <path class="wire" d="M120 200 V230"/>
+  <rect x="107" y="230" width="26" height="55" class="res"/>
+  <text x="140" y="252" class="lbl">β·re</text>
+  <text x="140" y="268" class="val">(ó re en E)</text>
+  <path class="wire" d="M120 285 V340"/>
+  <circle cx="120" cy="340" r="4.5" class="node"/>
+
+  <!-- Terminal Emisor E -->
+  <path class="wire" d="M120 340 H400"/>
+  <circle cx="260" cy="340" r="4.5" class="node"/>
+  <text x="255" y="365" class="term-lbl">E (Tierra AC)</text>
+
+  <!-- Fuente de Corriente dependiente β·ib -->
+  <path class="wire" d="M300 340 V290"/>
+  <rect x="286" y="225" width="28" height="60" transform="rotate(45 300 255)" class="src-diamond"/>
+  <!-- Flecha hacia abajo -->
+  <line x1="300" y1="240" x2="300" y2="270" stroke="#0b69a3" stroke-width="2.2" stroke-linecap="round"/>
+  <polygon points="296,265 300,274 304,265" class="arrow"/>
+  <text x="325" y="255" class="lbl">β·ib</text>
+  <path class="wire" d="M300 220 V175 H400"/>
+
+  <!-- Resistencia Early ro -->
+  <path class="wire" d="M375 175 V230"/>
+  <rect x="362" y="230" width="26" height="55" class="res"/>
+  <text x="395" y="255" class="lbl">ro</text>
+  <text x="395" y="270" class="val">VA/ICQ</text>
+  <path class="wire" d="M375 285 V340"/>
+  <circle cx="375" cy="175" r="4.5" class="node"/>
+  <circle cx="375" cy="340" r="4.5" class="node"/>
+
+  <!-- Terminal Colector C -->
+  <circle cx="410" cy="175" r="4.5" class="node"/>
+  <text x="418" y="178" class="term-lbl">C</text>
+  <circle cx="410" cy="340" r="4.5" class="node"/>
+  <text x="418" y="343" class="term-lbl">E</text>
+
+  <!-- PANEL DERECHO: MODELO HIBRIDO-PI -->
+  <rect x="470" y="90" width="415" height="305" class="box-panel"/>
+  <text x="485" y="118" class="panel-title">2. Modelo Híbrido-π (Controlado por Tensión vbe)</text>
+  <text x="485" y="136" class="val">Referencia: Sedra &amp; Smith · Entrada en Base, emisor común</text>
+
+  <!-- Terminal Base B -->
+  <circle cx="505" cy="200" r="4.5" class="node"/>
+  <text x="490" y="195" class="term-lbl">B</text>
+  <path class="wire" d="M505 200 H555"/>
+
+  <!-- Resistencia rπ -->
+  <path class="wire" d="M555 200 V230"/>
+  <rect x="542" y="230" width="26" height="55" class="res"/>
+  <text x="575" y="252" class="lbl">rπ</text>
+  <text x="575" y="268" class="val">β / gm</text>
+  <path class="wire" d="M555 285 V340"/>
+  <circle cx="555" cy="340" r="4.5" class="node"/>
+
+  <!-- Tensión vbe indicada -->
+  <text x="525" y="245" fill="#d9381e" font-weight="bold" font-size="13">+</text>
+  <text x="520" y="262" class="lbl" style="font-size:12px;">vbe</text>
+  <text x="526" y="280" fill="#d9381e" font-weight="bold" font-size="13">-</text>
+
+  <!-- Terminal Emisor E -->
+  <path class="wire" d="M555 340 H835"/>
+  <circle cx="695" cy="340" r="4.5" class="node"/>
+  <text x="690" y="365" class="term-lbl">E (Tierra AC)</text>
+
+  <!-- Fuente de Corriente dependiente gm·vbe -->
+  <path class="wire" d="M735 340 V290"/>
+  <circle cx="735" cy="255" r="22" class="src-circle"/>
+  <line x1="735" y1="242" x2="735" y2="268" stroke="#0b69a3" stroke-width="2.2" stroke-linecap="round"/>
+  <polygon points="731,263 735,272 739,263" class="arrow"/>
+  <text x="765" y="255" class="lbl">gm·vbe</text>
+  <path class="wire" d="M735 233 V175 H835"/>
+
+  <!-- Resistencia Early ro -->
+  <path class="wire" d="M810 175 V230"/>
+  <rect x="797" y="230" width="26" height="55" class="res"/>
+  <text x="830" y="255" class="lbl">ro</text>
+  <text x="830" y="270" class="val">VA/ICQ</text>
+  <path class="wire" d="M810 285 V340"/>
+  <circle cx="810" cy="175" r="4.5" class="node"/>
+  <circle cx="810" cy="340" r="4.5" class="node"/>
+
+  <!-- Terminal Colector C -->
+  <circle cx="845" cy="175" r="4.5" class="node"/>
+  <text x="855" y="178" class="term-lbl">C</text>
+  <circle cx="845" cy="340" r="4.5" class="node"/>
+  <text x="855" y="343" class="term-lbl">E</text>
+
+  <!-- CAJA INFERIOR DE RELACIONES MATEMÁTICAS UNIFICADAS -->
+  <rect x="35" y="410" width="850" height="80" class="footer-box"/>
+  <text x="50" y="433" font-weight="bold" fill="#0b69a3" font-size="13">⚡ IDENTIDADES DE CONVERSIÓN RIGUROSA ENTRE AMBOS MODELOS:</text>
+  <text x="50" y="455" class="footer-txt">1. Resistencia intrínseca: re = VT / IEQ ≈ 26 mV / ICQ   |   2. Transconductancia: gm = ICQ / VT = α / re ≈ 1 / re</text>
+  <text x="50" y="475" class="footer-txt">3. Resistencia de entrada en base: rπ = (β + 1)·re = β / gm   |   4. Equivalencia de corriente: ic = β·ib = gm·vbe (Demostrado)</text>
+</svg>
+</div>
 
     
       <div style="background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px 10px; margin: 6px 0; font-size: 8.5pt;">
@@ -407,7 +544,109 @@
       </div>
     
 
-    
+    <div class="schematic-container"><svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" role="img" aria-label="Sensibilidad Térmica en BJT">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .card-border { fill: none; stroke: #d9e2ec; stroke-width: 1.5; }
+      .title { font: bold 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
+      .subtitle { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #627d98; }
+      .wire { stroke: #243b53; stroke-width: 2.6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.4; }
+      .cap { stroke: #0b69a3; stroke-width: 3.5; }
+      .node { fill: #102a43; }
+      .trans-circle { fill: #f0f4f8; stroke: #9fb3c8; stroke-width: 1.8; }
+      .trans-line { stroke: #0b69a3; stroke-width: 3; stroke-linecap: round; }
+      .trans-arrow { fill: #0b69a3; }
+      .lbl { font: bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #0b69a3; }
+      .val { font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
+      .gnd { stroke: #243b53; stroke-width: 2.4; stroke-linecap: round; }
+      .box-panel { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.5; rx: 8px; }
+      .badge-cold { fill: #e1f5fe; stroke: #0288d1; stroke-width: 1.5; rx: 6px; }
+      .badge-hot { fill: #fbe9e7; stroke: #d84315; stroke-width: 1.5; rx: 6px; }
+      .txt-cold { font: bold 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #0277bd; }
+      .txt-hot { font: bold 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #c62828; }
+    </style>
+  </defs>
+
+  <rect width="920" height="520" rx="14" class="bg"/>
+  <rect x="15" y="15" width="890" height="490" rx="10" class="card-border"/>
+
+  <text x="35" y="48" class="title">Sensibilidad Térmica en BJT · Deriva de Parámetros Dinámicos</text>
+  <text x="35" y="70" class="subtitle">Efecto del gradiente térmico de 25 °C a 75 °C bajo el capó de un vehículo eléctrico (Punto Q: ICQ = 1.0 mA)</text>
+
+  <!-- ESQUEMÁTICO DEL CIRCUITO DE PRUEBA TÉRMICA (IZQUIERDA) -->
+  <!-- Rail VCC -->
+  <path class="wire" d="M120 100 H220"/>
+  <circle cx="220" cy="100" r="4.5" class="node"/>
+  <text x="230" y="105" class="lbl">+VCC = 12V</text>
+
+  <!-- RC -->
+  <path class="wire" d="M170 100 V130"/>
+  <rect x="157" y="130" width="26" height="55" class="res"/>
+  <text x="195" y="155" class="lbl">RC</text>
+  <text x="195" y="170" class="val">4.7 kΩ</text>
+  <path class="wire" d="M170 185 V220"/>
+
+  <!-- Transistor Q1 NPN con indicador de cámara térmica -->
+  <rect x="100" y="210" width="145" height="120" rx="10" fill="#fff3e0" stroke="#ffb74d" stroke-dasharray="4,4" stroke-width="1.5"/>
+  <text x="110" y="228" font-size="11" font-weight="bold" fill="#e65100">CÁMARA TÉRMICA ΔT</text>
+
+  <circle cx="160" cy="270" r="38" class="trans-circle"/>
+  <path class="trans-line" d="M145 250 V290"/>
+  <path class="wire" d="M80 270 H145"/>
+  <path class="trans-line" d="M145 258 L185 228"/>
+  <path class="wire" d="M185 228 V220 H170"/>
+  <path class="trans-line" d="M145 282 L185 312"/>
+  <polygon points="175,302 187,314 171,314" class="trans-arrow"/>
+  <text x="198" y="270" class="lbl">2N3904</text>
+  <text x="198" y="286" class="val">ICQ = 1 mA</text>
+
+  <!-- Emisor a fuente de corriente de polarización constante -->
+  <path class="wire" d="M185 312 V340"/>
+  <circle cx="185" cy="365" r="20" fill="#ffffff" stroke="#102a43" stroke-width="2.2"/>
+  <line x1="185" y1="352" x2="185" y2="378" stroke="#102a43" stroke-width="2.2"/>
+  <polygon points="181,374 185,382 189,374" fill="#102a43"/>
+  <text x="215" y="370" class="lbl">IDC = 1 mA</text>
+  <path class="wire" d="M185 385 V410"/>
+  <!-- Tierra -->
+  <line x1="170" y1="410" x2="200" y2="410" class="gnd"/>
+  <line x1="175" y1="415" x2="195" y2="415" class="gnd"/>
+  <line x1="180" y1="420" x2="190" y2="420" class="gnd"/>
+
+  <!-- PANEL DE COMPARACIÓN TÉRMICA (DERECHA) -->
+  <rect x="330" y="90" width="555" height="305" class="box-panel"/>
+  <text x="350" y="118" font-size="16" font-weight="bold" fill="#102a43">Deriva Térmica Cuantitativa de Parámetros Dinámicos</text>
+
+  <!-- Tarjeta Fría 25°C -->
+  <rect x="350" y="135" width="250" height="155" class="badge-cold"/>
+  <text x="365" y="160" class="txt-cold">❄️ Estado Ambiente: T1 = 25 °C (298 K)</text>
+  <text x="365" y="188" class="val" style="font-size:13px;"><b>Tensión térmica:</b> VT = 25.69 mV ≈ <b>26.0 mV</b></text>
+  <text x="365" y="210" class="val" style="font-size:13px;"><b>Resistencia dinámica:</b> re = 26.0 mV / 1 mA = <b>26.0 Ω</b></text>
+  <text x="365" y="232" class="val" style="font-size:13px;"><b>Transconductancia:</b> gm = 1 mA / 26 mV = <b>38.5 mS</b></text>
+  <text x="365" y="265" class="val" style="font-size:12.5px; fill:#01579b;"><b>Ganancia sin bypass (RC=4.7k):</b> Av ≈ -180.7</text>
+
+  <!-- Tarjeta Caliente 75°C -->
+  <rect x="615" y="135" width="250" height="155" class="badge-hot"/>
+  <text x="630" y="160" class="txt-hot">🔥 Régimen Caliente: T2 = 75 °C (348 K)</text>
+  <text x="630" y="188" class="val" style="font-size:13px;"><b>Tensión térmica:</b> VT = 29.99 mV ≈ <b>30.0 mV</b></text>
+  <text x="630" y="210" class="val" style="font-size:13px;"><b>Resistencia dinámica:</b> re = 30.0 mV / 1 mA = <b>30.0 Ω</b></text>
+  <text x="630" y="232" class="val" style="font-size:13px;"><b>Transconductancia:</b> gm = 1 mA / 30 mV = <b>33.3 mS</b></text>
+  <text x="630" y="265" class="val" style="font-size:12.5px; fill:#b71c1c;"><b>Ganancia sin bypass (RC=4.7k):</b> Av ≈ -156.7</text>
+
+  <!-- Métricas de Variación -->
+  <rect x="350" y="305" width="515" height="75" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+  <text x="365" y="328" font-size="13" font-weight="bold" fill="#b71c1c">⚠️ Degradación del rendimiento sin swamping:</text>
+  <text x="365" y="348" class="val" style="font-size:12.5px;">• La resistencia re se expande un <b>+15.38%</b> y la transconductancia cae un <b>-13.34%</b>.</text>
+  <text x="365" y="368" class="val" style="font-size:12.5px;">• <b>Solución de Aula (Malvino):</b> Al añadir RE1 = 220 Ω, la ganancia varía menos del <b>1.4%</b>.</text>
+
+  <!-- FOOTER -->
+  <rect x="35" y="415" width="850" height="75" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+  <text x="50" y="438" font-weight="bold" fill="#166534" font-size="13">💡 LA REGLA DE ORO DE LABORATORIO (Profesor Fredy &amp; Malvino):</text>
+  <text x="50" y="458" class="val" style="font-size:12px; fill:#14532d;">Nunca diseñe un amplificador comercial de instrumentación dependiendo únicamente de re. La unión semiconductora es un termómetro natural.</text>
+  <text x="50" y="476" class="val" style="font-size:12px; fill:#14532d;">Inserte siempre una resistencia de degeneración externa RE1 ≥ 5·re para que la ganancia quede anclada a resistencias de película metálica estables.</text>
+</svg>
+</div>
 
     
       <div style="background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px 10px; margin: 6px 0; font-size: 8.5pt;">
@@ -473,7 +712,129 @@
       </div>
     
 
-    
+    <div class="schematic-container"><svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" role="img" aria-label="Emisor Común con Carga Activa">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .card-border { fill: none; stroke: #d9e2ec; stroke-width: 1.5; }
+      .title { font: bold 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
+      .subtitle { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #627d98; }
+      .wire { stroke: #243b53; stroke-width: 2.6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.4; }
+      .node { fill: #102a43; }
+      .trans-circle { fill: #f0f4f8; stroke: #9fb3c8; stroke-width: 1.8; }
+      .trans-line { stroke: #0b69a3; stroke-width: 3; stroke-linecap: round; }
+      .trans-arrow { fill: #0b69a3; }
+      .lbl { font: bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #0b69a3; }
+      .val { font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
+      .gnd { stroke: #243b53; stroke-width: 2.4; stroke-linecap: round; }
+      .box-panel { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.5; rx: 8px; }
+      .src-circle { fill: #ffffff; stroke: #0b69a3; stroke-width: 2.4; }
+      .src-diamond { fill: #ffffff; stroke: #0b69a3; stroke-width: 2.4; }
+      .arrow { fill: #0b69a3; }
+    </style>
+  </defs>
+
+  <rect width="920" height="520" rx="14" class="bg"/>
+  <rect x="15" y="15" width="890" height="490" rx="10" class="card-border"/>
+
+  <text x="35" y="48" class="title">Emisor Común con Carga Activa (Circuito Integrado Analógico)</text>
+  <text x="35" y="70" class="subtitle">Límite Teórico Superior de Ganancia Intrínseca: Avo,max = -gm · ro = -VA / VT</text>
+
+  <!-- PANEL IZQUIERDO: ESQUEMA CON ESPEJO PNP / CARGA ACTIVA -->
+  <rect x="35" y="90" width="415" height="305" class="box-panel"/>
+  <text x="50" y="118" font-size="15" font-weight="bold" fill="#0b69a3">Esquemático de Silicio (IC)</text>
+
+  <!-- Rail VCC -->
+  <path class="wire" d="M100 135 H350"/>
+  <circle cx="230" cy="135" r="4.5" class="node"/>
+  <text x="360" y="140" class="lbl">+VCC = 5V</text>
+
+  <!-- Fuente de Corriente Activa PNP (Carga Activa) -->
+  <path class="wire" d="M230 135 V165"/>
+  <circle cx="230" cy="180" r="15" fill="#f0f4f8" stroke="#0b69a3" stroke-width="2.2"/>
+  <circle cx="230" cy="202" r="15" fill="#f0f4f8" stroke="#0b69a3" stroke-width="2.2"/>
+  <line x1="230" y1="172" x2="230" y2="210" stroke="#0b69a3" stroke-width="2.2"/>
+  <polygon points="226,206 230,214 234,206" fill="#0b69a3"/>
+  <text x="255" y="195" class="lbl">IREF (Activa)</text>
+  <text x="255" y="210" class="val">Rac → ∞</text>
+
+  <!-- Nodo de salida de alta impedancia vo -->
+  <path class="wire" d="M230 217 V240"/>
+  <circle cx="230" cy="240" r="5" class="node"/>
+  <path class="wire" d="M230 240 H380"/>
+  <circle cx="380" cy="240" r="4.5" class="node"/>
+  <text x="390" y="245" class="lbl" style="fill:#d9381e;">vo (AC)</text>
+  <text x="390" y="260" class="val">RL = ∞</text>
+
+  <!-- Transistor amplificador NPN Q1 -->
+  <path class="wire" d="M230 240 V255"/>
+  <circle cx="200" cy="295" r="38" class="trans-circle"/>
+  <path class="trans-line" d="M185 275 V315"/>
+  <path class="wire" d="M100 295 H185"/>
+  <circle cx="100" cy="295" r="4.5" class="node"/>
+  <text x="55" y="300" class="lbl">vi (AC)</text>
+  <path class="trans-line" d="M185 283 L230 255"/>
+  <path class="wire" d="M230 255 V240"/>
+  <path class="trans-line" d="M185 307 L230 335"/>
+  <polygon points="220,325 232,337 216,337" class="trans-arrow"/>
+  <text x="140" y="335" class="lbl">Q1</text>
+  <text x="135" y="350" class="val">VA = 100V</text>
+
+  <!-- Emisor a tierra -->
+  <path class="wire" d="M230 335 V370"/>
+  <line x1="215" y1="370" x2="245" y2="370" class="gnd"/>
+  <line x1="220" y1="375" x2="240" y2="375" class="gnd"/>
+  <line x1="225" y1="380" x2="235" y2="380" class="gnd"/>
+
+  <!-- PANEL DERECHO: MODELO EQUIVALENTE DE PEQUEÑA SEÑAL Y DEMOSTRACIÓN -->
+  <rect x="470" y="90" width="415" height="305" class="box-panel"/>
+  <text x="485" y="118" font-size="15" font-weight="bold" fill="#0b69a3">Circuito Equivalente en Pequeña Señal</text>
+
+  <!-- vbe en base -->
+  <circle cx="505" cy="190" r="4.5" class="node"/>
+  <text x="495" y="175" class="lbl">B</text>
+  <path class="wire" d="M505 190 H545 V220"/>
+  <rect x="532" y="220" width="26" height="55" class="res"/>
+  <text x="565" y="250" class="lbl">rπ</text>
+  <path class="wire" d="M545 275 V330 H835"/>
+  <line x1="680" y1="330" x2="710" y2="330" class="gnd"/>
+  <text x="685" y="350" class="val">E (Tierra)</text>
+
+  <!-- Fuente gm·vbe -->
+  <path class="wire" d="M690 330 V280"/>
+  <circle cx="690" cy="245" r="20" class="src-circle"/>
+  <line x1="690" y1="235" x2="690" y2="258" stroke="#0b69a3" stroke-width="2.2"/>
+  <polygon points="686,254 690,262 694,254" class="arrow"/>
+  <text x="640" y="248" class="lbl" style="font-size:12px;">gm·vbe</text>
+  <path class="wire" d="M690 225 V190 H835"/>
+
+  <!-- Resistencia Early ro -->
+  <path class="wire" d="M780 190 V220"/>
+  <rect x="767" y="220" width="26" height="55" class="res"/>
+  <text x="800" y="245" class="lbl">ro</text>
+  <text x="800" y="260" class="val">VA/ICQ</text>
+  <path class="wire" d="M780 275 V330"/>
+  <circle cx="780" cy="190" r="4.5" class="node"/>
+  <circle cx="780" cy="330" r="4.5" class="node"/>
+
+  <!-- Salida vo -->
+  <circle cx="845" cy="190" r="5" class="node"/>
+  <text x="855" y="195" class="lbl" style="fill:#d9381e;">vo</text>
+
+  <!-- Deducción matemática resumida en panel -->
+  <rect x="485" y="310" width="385" height="70" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="495" y="330" font-weight="bold" fill="#102a43" font-size="12">vo = -(gm·vbe) · ro = -(ICQ/VT · vbe) · (VA/ICQ)</text>
+  <text x="495" y="348" font-size="12" fill="#d9381e" font-weight="bold">Avo,max = vo / vbe = -VA / VT  (Independiente de ICQ!)</text>
+  <text x="495" y="366" font-size="11.5" class="val">Con VA = 100V, VT = 26mV: |Avo| = 100 / 0.026 = 3846 (71.7 dB)</text>
+
+  <!-- FOOTER -->
+  <rect x="35" y="415" width="850" height="75" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="50" y="438" font-weight="bold" fill="#0f172a" font-size="13">💡 LA ANALOGÍA DEL TECHO FÍSICO (Profesor Fredy &amp; Malvino):</text>
+  <text x="50" y="458" class="val" style="font-size:12px;">Por más infinita que hagamos la resistencia de colector con electrónica integrada, la propia modulación del ancho de base</text>
+  <text x="50" y="476" class="val" style="font-size:12px;">(Efecto Early) crea un camino interno de fuga ro. La ganancia máxima de un BJT está acotada estrictamente por la relación VA / VT.</text>
+</svg>
+</div>
 
     
       <div style="background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px 10px; margin: 6px 0; font-size: 8.5pt;">
@@ -535,7 +896,130 @@
       </div>
     
 
-    
+    <div class="schematic-container"><svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" role="img" aria-label="Teoremas de Reflexión de Impedancias">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .card-border { fill: none; stroke: #d9e2ec; stroke-width: 1.5; }
+      .title { font: bold 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
+      .subtitle { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #627d98; }
+      .wire { stroke: #243b53; stroke-width: 2.6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.4; }
+      .node { fill: #102a43; }
+      .trans-circle { fill: #f0f4f8; stroke: #9fb3c8; stroke-width: 1.8; }
+      .trans-line { stroke: #0b69a3; stroke-width: 3; stroke-linecap: round; }
+      .trans-arrow { fill: #0b69a3; }
+      .lbl { font: bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #0b69a3; }
+      .val { font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
+      .gnd { stroke: #243b53; stroke-width: 2.4; stroke-linecap: round; }
+      .box-panel { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.5; rx: 8px; }
+      .arrow { fill: #0b69a3; }
+      .badge-lever { fill: #eef2ff; stroke: #6366f1; stroke-width: 1.5; rx: 6px; }
+    </style>
+  </defs>
+
+  <rect width="920" height="520" rx="14" class="bg"/>
+  <rect x="15" y="15" width="890" height="490" rx="10" class="card-border"/>
+
+  <text x="35" y="48" class="title">Teoremas de Reflexión de Impedancia en el Transistor BJT</text>
+  <text x="35" y="70" class="subtitle">Multiplicación de Resistencia (Emisor → Base) y División de Resistencia (Base → Emisor)</text>
+
+  <!-- PANEL IZQUIERDO: REFLEXIÓN EMISOR A BASE -->
+  <rect x="35" y="90" width="415" height="305" class="box-panel"/>
+  <text x="50" y="118" font-size="15" font-weight="bold" fill="#0b69a3">1. Mirando desde la Base hacia el Emisor</text>
+  <text x="50" y="136" class="val">La corriente total de emisor multiplica la resistencia por (β + 1)</text>
+
+  <!-- Ojo mirando a la base -->
+  <path d="M 60 210 Q 75 195 90 210 Q 75 225 60 210 Z" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+  <circle cx="75" cy="210" r="5" fill="#0284c7"/>
+  <text x="55" y="240" font-weight="bold" fill="#0284c7" font-size="12">Zb = ?</text>
+
+  <!-- Circuito Base - Emisor con RE -->
+  <path class="wire" d="M105 210 H170"/>
+  <circle cx="105" cy="210" r="4.5" class="node"/>
+  <!-- Flecha ib -->
+  <polygon points="135,206 143,210 135,214" class="arrow"/>
+  <text x="130" y="200" class="lbl" style="font-size:12px;">ib</text>
+
+  <!-- Transistor Q -->
+  <circle cx="205" cy="210" r="34" class="trans-circle"/>
+  <path class="trans-line" d="M192 192 V228"/>
+  <path class="wire" d="M170 210 H192"/>
+  <path class="trans-line" d="M192 198 L228 174"/>
+  <path class="wire" d="M228 174 V160"/>
+  <text x="235" y="165" class="val">Colector (AC)</text>
+  <path class="trans-line" d="M192 222 L228 246"/>
+  <polygon points="219,238 230,248 216,248" class="trans-arrow"/>
+
+  <!-- Emisor con RE hacia tierra -->
+  <path class="wire" d="M228 246 V270"/>
+  <circle cx="228" cy="270" r="4.5" class="node"/>
+  <!-- Flecha ie = (β+1)ib -->
+  <polygon points="224,285 228,295 232,285" fill="#d9381e"/>
+  <text x="240" y="292" font-weight="bold" fill="#d9381e" font-size="12">ie = (β+1)ib</text>
+  <rect x="215" y="300" width="26" height="50" class="res"/>
+  <text x="250" y="325" class="lbl">RE</text>
+  <path class="wire" d="M228 350 V375"/>
+  <line x1="213" y1="375" x2="243" y2="375" class="gnd"/>
+
+  <!-- Tarjeta de fórmula Izquierda -->
+  <rect x="50" y="260" width="145" height="120" class="badge-lever"/>
+  <text x="60" y="282" font-size="12" font-weight="bold" fill="#4338ca">FÓRMULA MAESTRA:</text>
+  <text x="60" y="305" font-size="13" font-weight="bold" fill="#1e1b4b">Zb = (β+1)(re + RE)</text>
+  <text x="60" y="325" font-size="12" class="val">ó Zb = rπ + (β+1)RE</text>
+  <text x="60" y="350" font-size="11" fill="#4338ca"><b>Ejemplo práctico:</b></text>
+  <text x="60" y="368" font-size="11" class="val">RE = 330Ω, β = 150</text>
+  <text x="60" y="382" font-size="11" font-weight="bold" fill="#0b69a3">Zb ≈ 50 kΩ (¡x151!)</text>
+
+  <!-- PANEL DERECHO: REFLEXIÓN BASE A EMISOR -->
+  <rect x="470" y="90" width="415" height="305" class="box-panel"/>
+  <text x="485" y="118" font-size="15" font-weight="bold" fill="#0b69a3">2. Mirando desde el Emisor hacia la Base</text>
+  <text x="485" y="136" class="val">La resistencia conectada en base se divide entre (β + 1)</text>
+
+  <!-- Base conectada a resistencia RB a tierra AC -->
+  <path class="wire" d="M545 210 H605"/>
+  <circle cx="545" cy="210" r="4.5" class="node"/>
+  <rect x="532" y="230" width="26" height="50" class="res"/>
+  <path class="wire" d="M545 210 V230 M545 280 V305"/>
+  <line x1="530" y1="305" x2="560" y2="305" class="gnd"/>
+  <text x="565" y="260" class="lbl">R'base</text>
+  <text x="565" y="275" class="val">(RB || Rs)</text>
+
+  <!-- Transistor Q -->
+  <circle cx="640" cy="210" r="34" class="trans-circle"/>
+  <path class="trans-line" d="M627 192 V228"/>
+  <path class="wire" d="M605 210 H627"/>
+  <path class="trans-line" d="M627 198 L663 174"/>
+  <path class="wire" d="M663 174 V160"/>
+  <text x="670" y="165" class="val">Colector (AC)</text>
+  <path class="trans-line" d="M627 222 L663 246"/>
+  <polygon points="654,238 665,248 651,248" class="trans-arrow"/>
+
+  <!-- Emisor conectado a terminal de prueba Zo,e -->
+  <path class="wire" d="M663 246 V290 H730"/>
+  <circle cx="730" cy="290" r="4.5" class="node"/>
+
+  <!-- Ojo mirando al emisor -->
+  <path d="M 770 290 Q 755 275 740 290 Q 755 305 770 290 Z" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <circle cx="755" cy="290" r="5" fill="#d97706"/>
+  <text x="740" y="320" font-weight="bold" fill="#b45309" font-size="12">Zo,e = ?</text>
+
+  <!-- Tarjeta de fórmula Derecha -->
+  <rect x="710" y="145" width="165" height="120" class="badge-lever"/>
+  <text x="720" y="167" font-size="12" font-weight="bold" fill="#4338ca">FÓRMULA MAESTRA:</text>
+  <text x="720" y="190" font-size="13" font-weight="bold" fill="#1e1b4b">Zo,e = re + R'base/(β+1)</text>
+  <text x="720" y="210" font-size="12" class="val">ó Zo,e = (rπ + R'base)/(β+1)</text>
+  <text x="720" y="235" font-size="11" fill="#4338ca"><b>Ejemplo práctico:</b></text>
+  <text x="720" y="250" font-size="11" class="val">R'base = 10 kΩ, β = 150</text>
+  <text x="720" y="265" font-size="11" font-weight="bold" fill="#0b69a3">Zo,e = re + 66.2 Ω (¡÷151!)</text>
+
+  <!-- FOOTER: EL CONSEJO DEL PROFESOR FREDY -->
+  <rect x="35" y="415" width="850" height="75" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.5"/>
+  <text x="50" y="438" font-weight="bold" fill="#5b21b6" font-size="13">💡 LA ANALOGÍA DE LA PALANCA MECÁNICA (Profesor Fredy &amp; Malvino):</text>
+  <text x="50" y="458" class="val" style="font-size:12px;">El BJT es un multiplicador de corriente. Cuando la corriente entra por la base (fuerza pequeña), mover la resistencia en el emisor</text>
+  <text x="50" y="476" class="val" style="font-size:12px;">cuesta (β+1) veces más esfuerzo. Y al revés: una gran resistencia en la base, vista desde el emisor, se siente dividida entre (β+1).</text>
+</svg>
+</div>
 
     
       <div style="background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px 10px; margin: 6px 0; font-size: 8.5pt;">
@@ -601,7 +1085,147 @@
       </div>
     
 
-    
+    <div class="schematic-container"><svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" role="img" aria-label="Acondicionamiento de Sensor Piezoeléctrico y Límite de Pequeña Señal">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .card-border { fill: none; stroke: #d9e2ec; stroke-width: 1.5; }
+      .title { font: bold 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
+      .subtitle { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #627d98; }
+      .wire { stroke: #243b53; stroke-width: 2.6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.4; }
+      .cap { stroke: #0b69a3; stroke-width: 3.5; }
+      .node { fill: #102a43; }
+      .trans-circle { fill: #f0f4f8; stroke: #9fb3c8; stroke-width: 1.8; }
+      .trans-line { stroke: #0b69a3; stroke-width: 3; stroke-linecap: round; }
+      .trans-arrow { fill: #0b69a3; }
+      .lbl { font: bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #0b69a3; }
+      .val { font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
+      .gnd { stroke: #243b53; stroke-width: 2.4; stroke-linecap: round; }
+      .box-panel { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.5; rx: 8px; }
+      .ac-source { fill: #f0f4f8; stroke: #243b53; stroke-width: 2.4; }
+      .sine-wave { stroke: #0b69a3; stroke-width: 2.2; fill: none; }
+      .sine-dist { stroke: #d9381e; stroke-width: 2.2; fill: none; }
+    </style>
+  </defs>
+
+  <rect width="920" height="520" rx="14" class="bg"/>
+  <rect x="15" y="15" width="890" height="490" rx="10" class="card-border"/>
+
+  <text x="35" y="48" class="title">Acondicionamiento de Sensor Piezoeléctrico &amp; Criterio de Pequeña Señal</text>
+  <text x="35" y="70" class="subtitle">Control de distorsión armónica (HD2 ≤ 5%) mediante degeneración de emisor (Swamping)</text>
+
+  <!-- ESQUEMA CIRCUITAL (IZQUIERDA) -->
+  <!-- Sensor Piezoeléctrico Modelo -->
+  <rect x="35" y="130" width="160" height="230" rx="8" fill="#f0f9ff" stroke="#bae6fd" stroke-dasharray="4,4" stroke-width="1.5"/>
+  <text x="45" y="150" font-size="11" font-weight="bold" fill="#0284c7">SENSOR PIEZOELÉCTRICO</text>
+
+  <!-- Fuente vs -->
+  <circle cx="80" cy="235" r="22" class="ac-source"/>
+  <path d="M 68 235 Q 74 225 80 235 Q 86 245 92 235" class="sine-wave"/>
+  <text x="50" y="275" class="lbl" style="font-size:12px;">vs (40 mVp)</text>
+  <path class="wire" d="M80 257 V330"/>
+  <line x1="65" y1="330" x2="95" y2="330" class="gnd"/>
+
+  <!-- Resistencia Rs del sensor -->
+  <path class="wire" d="M80 213 V185 H110"/>
+  <rect x="110" y="172" width="45" height="26" class="res"/>
+  <text x="120" y="163" class="lbl">Rs</text>
+  <text x="115" y="213" class="val">1.2 kΩ</text>
+  <path class="wire" d="M155 185 H195"/>
+
+  <!-- Condensador C1 -->
+  <path class="wire" d="M195 185 H220"/>
+  <line x1="220" y1="172" x2="220" y2="198" class="cap"/>
+  <line x1="228" y1="172" x2="228" y2="198" class="cap"/>
+  <text x="215" y="163" class="lbl">C1</text>
+  <path class="wire" d="M228 185 H270"/>
+
+  <!-- Divisor R1 y R2 -->
+  <circle cx="270" cy="185" r="4.5" class="node"/>
+  <path class="wire" d="M270 185 V125 M270 185 V245"/>
+  <rect x="257" y="125" width="26" height="40" class="res"/>
+  <text x="225" y="145" class="lbl">R1</text>
+  <path class="wire" d="M270 125 V95 H360"/>
+  <circle cx="360" cy="95" r="4.5" class="node"/>
+  <text x="370" y="100" class="lbl">+VCC</text>
+
+  <rect x="257" y="245" width="26" height="40" class="res"/>
+  <text x="225" y="265" class="lbl">R2</text>
+  <path class="wire" d="M270 285 V330"/>
+  <line x1="255" y1="330" x2="285" y2="330" class="gnd"/>
+
+  <!-- Transistor Q1 NPN -->
+  <path class="wire" d="M270 185 H320"/>
+  <circle cx="340" cy="185" r="32" class="trans-circle"/>
+  <path class="trans-line" d="M325 168 V202"/>
+  <path class="trans-line" d="M325 174 L355 152"/>
+  <path class="wire" d="M355 152 V95"/>
+  <path class="trans-line" d="M325 196 L355 218"/>
+  <polygon points="346,211 357,220 343,220" class="trans-arrow"/>
+  <text x="355" y="185" class="lbl">Q1</text>
+
+  <!-- RC en Colector -->
+  <rect x="342" y="105" width="26" height="38" class="res"/>
+  <text x="375" y="125" class="lbl">RC</text>
+
+  <!-- Emisor con Swamping RE1 y Bypass en RE2 -->
+  <path class="wire" d="M355 218 V240"/>
+  <circle cx="355" cy="240" r="4" class="node"/>
+  <!-- RE1 no puenteada -->
+  <rect x="342" y="245" width="26" height="38" class="res" style="stroke:#d9381e; stroke-width:2.6;"/>
+  <text x="280" y="265" font-weight="bold" fill="#d9381e" font-size="12">RE1 (Swamp)</text>
+  <text x="375" y="265" class="val">180 Ω</text>
+  <path class="wire" d="M355 283 V305"/>
+  <circle cx="355" cy="305" r="4.5" class="node"/>
+
+  <!-- RE2 y CE en paralelo -->
+  <path class="wire" d="M355 305 H410 V325"/>
+  <rect x="342" y="325" width="26" height="38" class="res"/>
+  <text x="310" y="345" class="lbl">RE2</text>
+  <path class="wire" d="M355 305 V325 M355 363 V385"/>
+
+  <!-- CE bypass -->
+  <line x1="400" y1="335" x2="420" y2="335" class="cap"/>
+  <line x1="400" y1="343" x2="420" y2="343" class="cap"/>
+  <text x="428" y="342" class="lbl">CE</text>
+  <path class="wire" d="M410 343 V385 H355"/>
+  <circle cx="355" cy="385" r="4.5" class="node"/>
+  <path class="wire" d="M355 385 V405"/>
+  <line x1="340" y1="405" x2="370" y2="405" class="gnd"/>
+
+  <!-- PANEL DERECHO: COMPARACIÓN DE FORMAS DE ONDA Y DISTORSIÓN -->
+  <rect x="470" y="90" width="415" height="305" class="box-panel"/>
+  <text x="485" y="118" font-size="15" font-weight="bold" fill="#102a43">Criterio Matemático de Linealidad vs Deformación</text>
+
+  <!-- CASO 1: SIN SWAMPING (DISTORSIÓN SEVERA) -->
+  <rect x="485" y="135" width="385" height="110" rx="6" fill="#fff1f2" stroke="#fecdd3" stroke-width="1.2"/>
+  <text x="495" y="155" font-size="12.5" font-weight="bold" fill="#be123c">❌ Caso A: Sin degeneración (RE1 = 0, vbe = 40 mVp)</text>
+  <text x="495" y="173" class="val" style="font-size:12px;">Distorsión armónica de segundo orden: <b>HD2 = Vp / (4·VT)</b></text>
+  <text x="495" y="191" class="val" style="font-size:12px;">HD2 = 40 mV / (4 × 26 mV) = 40 / 104 = <b>38.46% (¡Inaceptable!)</b></text>
+  <text x="495" y="210" class="val" style="font-size:11.5px; fill:#9f1239;">Forma de onda: recorte asimétrico del semiciclo inferior por exponencial.</text>
+  <!-- Mini onda deformada -->
+  <path d="M 750 230 Q 765 200 780 230 Q 795 242 810 230" class="sine-dist"/>
+  <text x="815" y="233" font-size="10" fill="#be123c" font-weight="bold">Deformada</text>
+
+  <!-- CASO 2: CON SWAMPING (ONDA LINEAL PURA) -->
+  <rect x="485" y="255" width="385" height="125" rx="6" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.2"/>
+  <text x="495" y="275" font-size="12.5" font-weight="bold" fill="#15803d">✅ Caso B: Con Swamping (RE1 = 180 Ω, re = 18 Ω)</text>
+  <text x="495" y="295" class="val" style="font-size:12px;">Divisor en la unión: <b>vbe_interna = vi · re / (re + RE1)</b></text>
+  <text x="495" y="313" class="val" style="font-size:12px;">vbe = 40 mV × 18 / (18 + 180) = 40 mV × 0.091 = <b>3.64 mV pico</b></text>
+  <text x="495" y="331" class="val" style="font-size:12px;">Como vbe = 3.64 mV &lt; 5.2 mV: <b>HD2 = 3.64 / 104 = 3.5% &lt; 5%</b></text>
+  <text x="495" y="350" font-size="11.5" font-weight="bold" fill="#15803d">¡Señal de salida perfectamente senoidal e inteligible!</text>
+  <!-- Mini onda senoidal limpia -->
+  <path d="M 750 365 Q 765 345 780 365 Q 795 385 810 365" class="sine-wave"/>
+  <text x="815" y="368" font-size="10" fill="#15803d" font-weight="bold">Limpia</text>
+
+  <!-- FOOTER -->
+  <rect x="35" y="415" width="850" height="75" rx="6" fill="#f0f9ff" stroke="#7dd3fc" stroke-width="1.5"/>
+  <text x="50" y="438" font-weight="bold" fill="#0369a1" font-size="13">💡 LA ANALOGÍA DEL PLANO INCLINADO CURVO (Profesor Fredy &amp; Malvino):</text>
+  <text x="50" y="458" class="val" style="font-size:12px;">La curva exponencial de un diodo o BJT parece recta solo si caminas pasitos diminutos (≤ 5 mV). Si das zancadas de 40 mV,</text>
+  <text x="50" y="476" class="val" style="font-size:12px;">te estrellas con la curva y la onda se distorsiona. El resistor de swamping RE1 absorbe el 90% de la zancada y salva la señal.</text>
+</svg>
+</div>
 
     
       <div style="background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px 10px; margin: 6px 0; font-size: 8.5pt;">
@@ -662,7 +1286,144 @@
       </div>
     
 
-    
+    <div class="schematic-container"><svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" role="img" aria-label="Modelos Dinámicos re e Híbrido-pi">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .card-border { fill: none; stroke: #d9e2ec; stroke-width: 1.5; }
+      .box-panel { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.5; rx: 8px; }
+      .title { font: bold 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
+      .subtitle { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #627d98; }
+      .panel-title { font: bold 15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #0b69a3; }
+      .wire { stroke: #243b53; stroke-width: 2.6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.4; }
+      .node { fill: #102a43; }
+      .lbl { font: bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #0b69a3; }
+      .val { font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
+      .term-lbl { font: bold 15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #d9381e; }
+      .src-diamond { fill: #ffffff; stroke: #0b69a3; stroke-width: 2.4; }
+      .src-circle { fill: #ffffff; stroke: #0b69a3; stroke-width: 2.4; }
+      .arrow { fill: #0b69a3; }
+      .footer-box { fill: #eef6fc; stroke: #7bb5dc; stroke-width: 1.5; rx: 6px; }
+      .footer-txt { font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
+    </style>
+  </defs>
+
+  <rect width="920" height="520" rx="14" class="bg"/>
+  <rect x="15" y="15" width="890" height="490" rx="10" class="card-border"/>
+
+  <!-- Título principal -->
+  <text x="35" y="48" class="title">Modelos Dinámicos de Pequeña Señal en AC para Transistor BJT</text>
+  <text x="35" y="70" class="subtitle">Equivalencia formal entre el Modelo re (Boylestad/Malvino) y el Modelo Híbrido-π (Sedra/Smith)</text>
+
+  <!-- PANEL IZQUIERDO: MODELO re -->
+  <rect x="35" y="90" width="415" height="305" class="box-panel"/>
+  <text x="50" y="118" class="panel-title">1. Modelo re (Controlado por Corriente ib)</text>
+  <text x="50" y="136" class="val">Referencia: Boylestad &amp; Malvino · Entrada en Base, emisor común</text>
+
+  <!-- Terminal Base B -->
+  <circle cx="70" cy="200" r="4.5" class="node"/>
+  <text x="55" y="195" class="term-lbl">B</text>
+  <path class="wire" d="M70 200 H120"/>
+  <!-- Corriente ib -->
+  <polygon points="105,195 115,200 105,205" class="arrow"/>
+  <text x="95" y="188" class="lbl" style="font-size:12px;">ib</text>
+
+  <!-- Resistencia Zb = (β+1)re hacia emisor -->
+  <path class="wire" d="M120 200 V230"/>
+  <rect x="107" y="230" width="26" height="55" class="res"/>
+  <text x="140" y="252" class="lbl">β·re</text>
+  <text x="140" y="268" class="val">(ó re en E)</text>
+  <path class="wire" d="M120 285 V340"/>
+  <circle cx="120" cy="340" r="4.5" class="node"/>
+
+  <!-- Terminal Emisor E -->
+  <path class="wire" d="M120 340 H400"/>
+  <circle cx="260" cy="340" r="4.5" class="node"/>
+  <text x="255" y="365" class="term-lbl">E (Tierra AC)</text>
+
+  <!-- Fuente de Corriente dependiente β·ib -->
+  <path class="wire" d="M300 340 V290"/>
+  <rect x="286" y="225" width="28" height="60" transform="rotate(45 300 255)" class="src-diamond"/>
+  <!-- Flecha hacia abajo -->
+  <line x1="300" y1="240" x2="300" y2="270" stroke="#0b69a3" stroke-width="2.2" stroke-linecap="round"/>
+  <polygon points="296,265 300,274 304,265" class="arrow"/>
+  <text x="325" y="255" class="lbl">β·ib</text>
+  <path class="wire" d="M300 220 V175 H400"/>
+
+  <!-- Resistencia Early ro -->
+  <path class="wire" d="M375 175 V230"/>
+  <rect x="362" y="230" width="26" height="55" class="res"/>
+  <text x="395" y="255" class="lbl">ro</text>
+  <text x="395" y="270" class="val">VA/ICQ</text>
+  <path class="wire" d="M375 285 V340"/>
+  <circle cx="375" cy="175" r="4.5" class="node"/>
+  <circle cx="375" cy="340" r="4.5" class="node"/>
+
+  <!-- Terminal Colector C -->
+  <circle cx="410" cy="175" r="4.5" class="node"/>
+  <text x="418" y="178" class="term-lbl">C</text>
+  <circle cx="410" cy="340" r="4.5" class="node"/>
+  <text x="418" y="343" class="term-lbl">E</text>
+
+  <!-- PANEL DERECHO: MODELO HIBRIDO-PI -->
+  <rect x="470" y="90" width="415" height="305" class="box-panel"/>
+  <text x="485" y="118" class="panel-title">2. Modelo Híbrido-π (Controlado por Tensión vbe)</text>
+  <text x="485" y="136" class="val">Referencia: Sedra &amp; Smith · Entrada en Base, emisor común</text>
+
+  <!-- Terminal Base B -->
+  <circle cx="505" cy="200" r="4.5" class="node"/>
+  <text x="490" y="195" class="term-lbl">B</text>
+  <path class="wire" d="M505 200 H555"/>
+
+  <!-- Resistencia rπ -->
+  <path class="wire" d="M555 200 V230"/>
+  <rect x="542" y="230" width="26" height="55" class="res"/>
+  <text x="575" y="252" class="lbl">rπ</text>
+  <text x="575" y="268" class="val">β / gm</text>
+  <path class="wire" d="M555 285 V340"/>
+  <circle cx="555" cy="340" r="4.5" class="node"/>
+
+  <!-- Tensión vbe indicada -->
+  <text x="525" y="245" fill="#d9381e" font-weight="bold" font-size="13">+</text>
+  <text x="520" y="262" class="lbl" style="font-size:12px;">vbe</text>
+  <text x="526" y="280" fill="#d9381e" font-weight="bold" font-size="13">-</text>
+
+  <!-- Terminal Emisor E -->
+  <path class="wire" d="M555 340 H835"/>
+  <circle cx="695" cy="340" r="4.5" class="node"/>
+  <text x="690" y="365" class="term-lbl">E (Tierra AC)</text>
+
+  <!-- Fuente de Corriente dependiente gm·vbe -->
+  <path class="wire" d="M735 340 V290"/>
+  <circle cx="735" cy="255" r="22" class="src-circle"/>
+  <line x1="735" y1="242" x2="735" y2="268" stroke="#0b69a3" stroke-width="2.2" stroke-linecap="round"/>
+  <polygon points="731,263 735,272 739,263" class="arrow"/>
+  <text x="765" y="255" class="lbl">gm·vbe</text>
+  <path class="wire" d="M735 233 V175 H835"/>
+
+  <!-- Resistencia Early ro -->
+  <path class="wire" d="M810 175 V230"/>
+  <rect x="797" y="230" width="26" height="55" class="res"/>
+  <text x="830" y="255" class="lbl">ro</text>
+  <text x="830" y="270" class="val">VA/ICQ</text>
+  <path class="wire" d="M810 285 V340"/>
+  <circle cx="810" cy="175" r="4.5" class="node"/>
+  <circle cx="810" cy="340" r="4.5" class="node"/>
+
+  <!-- Terminal Colector C -->
+  <circle cx="845" cy="175" r="4.5" class="node"/>
+  <text x="855" y="178" class="term-lbl">C</text>
+  <circle cx="845" cy="340" r="4.5" class="node"/>
+  <text x="855" y="343" class="term-lbl">E</text>
+
+  <!-- CAJA INFERIOR DE RELACIONES MATEMÁTICAS UNIFICADAS -->
+  <rect x="35" y="410" width="850" height="80" class="footer-box"/>
+  <text x="50" y="433" font-weight="bold" fill="#0b69a3" font-size="13">⚡ IDENTIDADES DE CONVERSIÓN RIGUROSA ENTRE AMBOS MODELOS:</text>
+  <text x="50" y="455" class="footer-txt">1. Resistencia intrínseca: re = VT / IEQ ≈ 26 mV / ICQ   |   2. Transconductancia: gm = ICQ / VT = α / re ≈ 1 / re</text>
+  <text x="50" y="475" class="footer-txt">3. Resistencia de entrada en base: rπ = (β + 1)·re = β / gm   |   4. Equivalencia de corriente: ic = β·ib = gm·vbe (Demostrado)</text>
+</svg>
+</div>
 
     
       <div style="background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px 10px; margin: 6px 0; font-size: 8.5pt;">
@@ -942,7 +1703,136 @@
       </div>
     
 
-    
+    <div class="schematic-container"><svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520" role="img" aria-label="Amplificador Emisor Común sin Bypass">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .title { font: bold 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
+      .subtitle { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #627d98; }
+      .wire { stroke: #243b53; stroke-width: 2.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.5; }
+      .cap { stroke: #0b69a3; stroke-width: 3.5; }
+      .node { fill: #102a43; }
+      .trans-circle { fill: #f0f4f8; stroke: #9fb3c8; stroke-width: 1.8; }
+      .trans-line { stroke: #0b69a3; stroke-width: 3; stroke-linecap: round; }
+      .trans-arrow { fill: #0b69a3; }
+      .lbl { font: bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #0b69a3; }
+      .val { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
+      .gnd { stroke: #243b53; stroke-width: 2.5; stroke-linecap: round; }
+      .ac-source { fill: #f0f4f8; stroke: #243b53; stroke-width: 2.5; }
+      .note-box { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.5; rx: 6px; }
+      .note-text { font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #475569; }
+    </style>
+  </defs>
+
+  <rect width="900" height="520" rx="14" class="bg"/>
+  <rect x="15" y="15" width="870" height="490" rx="10" fill="none" stroke="#d9e2ec" stroke-width="1.5"/>
+
+  <!-- Título y metadatos estilo simulación -->
+  <text x="35" y="48" class="title">Esquemático · Emisor Común (CE) sin Condensador de Bypass</text>
+  <text x="35" y="72" class="subtitle">Degeneración de emisor pura: estabilización térmica y linealización a expensas de la ganancia</text>
+
+  <!-- Rail VCC -->
+  <path class="wire" d="M380 95 H520 M520 95 H600"/>
+  <circle cx="600" cy="95" r="5" class="node"/>
+  <text x="612" y="100" class="lbl">+VCC = 15V</text>
+
+  <!-- Divisor R1 y R2 -->
+  <path class="wire" d="M380 95 V130"/>
+  <rect x="367" y="130" width="26" height="60" class="res"/>
+  <text x="310" y="165" class="lbl">R1</text>
+  <text x="310" y="182" class="val">47 kΩ</text>
+
+  <path class="wire" d="M380 190 V270 M380 270 V330"/>
+  <circle cx="380" cy="270" r="5" class="node"/>
+
+  <rect x="367" y="330" width="26" height="60" class="res"/>
+  <text x="310" y="365" class="lbl">R2</text>
+  <text x="310" y="382" class="val">10 kΩ</text>
+  <path class="wire" d="M380 390 V440"/>
+
+  <!-- Rama de Colector RC -->
+  <path class="wire" d="M520 95 V130"/>
+  <rect x="507" y="130" width="26" height="60" class="res"/>
+  <text x="545" y="165" class="lbl">RC</text>
+  <text x="545" y="182" class="val">3.3 kΩ</text>
+
+  <path class="wire" d="M520 190 V215"/>
+  <circle cx="520" cy="215" r="5" class="node"/>
+
+  <!-- Transistor Q1 NPN -->
+  <circle cx="480" cy="270" r="48" class="trans-circle"/>
+  <path class="trans-line" d="M460 245 V295"/>
+  <path class="wire" d="M380 270 H460"/>
+  <path class="trans-line" d="M460 255 L520 215"/>
+  <path class="wire" d="M520 215 V200"/>
+  <path class="trans-line" d="M460 285 L520 325"/>
+  <polygon points="508,310 522,326 502,324" class="trans-arrow"/>
+  <text x="495" y="275" class="lbl">Q1</text>
+  <text x="495" y="292" class="val">2N3904</text>
+
+  <!-- Rama de Emisor RE SIN BYPASS (NO CE) -->
+  <path class="wire" d="M520 325 V345"/>
+  <rect x="507" y="345" width="26" height="65" class="res"/>
+  <text x="545" y="375" class="lbl">RE</text>
+  <text x="545" y="392" class="val">1.0 kΩ</text>
+  <text x="545" y="410" style="font-size:11px; fill:#dc2626; font-weight:bold;">(Sin Bypass)</text>
+  <path class="wire" d="M520 410 V440"/>
+
+  <!-- Tierras -->
+  <path class="gnd" d="M365 440 H395 M370 445 H390 M375 450 H385"/>
+  <path class="gnd" d="M505 440 H535 M510 445 H530 M515 450 H525"/>
+
+  <!-- Entrada con Generador y C1 -->
+  <circle cx="120" cy="270" r="24" class="ac-source"/>
+  <path class="wire" d="M108 270 Q114 260 120 270 T132 270" style="stroke-width:2; fill:none;"/>
+  <text x="80" y="315" class="lbl">vs</text>
+  <path class="wire" d="M120 294 V440"/>
+  <path class="gnd" d="M105 440 H135 M110 445 H130 M115 450 H125"/>
+
+  <!-- Rs -->
+  <path class="wire" d="M144 270 H180"/>
+  <rect x="180" y="257" width="55" height="26" class="res"/>
+  <text x="190" y="250" class="lbl">Rs</text>
+  <text x="185" y="300" class="val">600 Ω</text>
+
+  <!-- C1 -->
+  <path class="wire" d="M235 270 H280"/>
+  <line x1="280" y1="250" x2="280" y2="290" class="cap"/>
+  <line x1="290" y1="250" x2="290" y2="290" class="cap"/>
+  <text x="270" y="240" class="lbl">C1</text>
+  <text x="265" y="308" class="val">10 µF</text>
+  <path class="wire" d="M290 270 H380"/>
+
+  <!-- Salida con C2 y Carga RL -->
+  <path class="wire" d="M520 215 H680"/>
+  <line x1="680" y1="195" x2="680" y2="235" class="cap"/>
+  <line x1="690" y1="195" x2="690" y2="235" class="cap"/>
+  <text x="675" y="185" class="lbl">C2</text>
+  <text x="670" y="252" class="val">10 µF</text>
+
+  <path class="wire" d="M690 215 H780"/>
+  <circle cx="780" cy="215" r="5" class="node"/>
+  <path class="wire" d="M780 215 V270"/>
+  <rect x="767" y="270" width="26" height="65" class="res"/>
+  <text x="805" y="300" class="lbl">RL</text>
+  <text x="805" y="318" class="val">10 kΩ</text>
+  <path class="wire" d="M780 335 V440"/>
+  <path class="gnd" d="M765 440 H795 M770 445 H790 M775 450 H785"/>
+
+  <!-- Punto de salida Vo -->
+  <path class="wire" d="M780 215 H830"/>
+  <circle cx="830" cy="215" r="4" fill="#0b69a3"/>
+  <text x="838" y="220" class="lbl" style="font-size:16px;">vo</text>
+
+  <!-- Cuadro de fórmulas rápidas del circuito -->
+  <rect x="620" y="360" width="240" height="110" class="note-box"/>
+  <text x="635" y="385" style="font-weight:bold; font-size:13px; fill:#102a43;">Ecuaciones Clave (Sin Bypass):</text>
+  <text x="635" y="408" class="note-text">• Zb ≈ (β + 1) · (re + RE) ≈ β · RE</text>
+  <text x="635" y="428" class="note-text">• Av ≈ - (RC || RL) / (re + RE)</text>
+  <text x="635" y="448" class="note-text">• Av ≈ - (RC || RL) / RE (Inmune a β)</text>
+</svg>
+</div>
 
     
       <div style="background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px 10px; margin: 6px 0; font-size: 8.5pt;">
@@ -3088,141 +3978,106 @@
       </div>
     
 
-    <div class="schematic-container"><svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520" role="img" aria-label="Amplificador Emisor Común con Bypass">
+    <div class="schematic-container"><svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" role="img" aria-label="Recta de Carga en AC vs DC y Máxima Excursión Simétrica">
   <defs>
     <style>
       .bg { fill: #ffffff; }
+      .card-border { fill: none; stroke: #d9e2ec; stroke-width: 1.5; }
       .title { font: bold 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
       .subtitle { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #627d98; }
-      .wire { stroke: #243b53; stroke-width: 2.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.5; }
-      .cap { stroke: #0b69a3; stroke-width: 3.5; }
-      .node { fill: #102a43; }
-      .trans-circle { fill: #f0f4f8; stroke: #9fb3c8; stroke-width: 1.8; }
-      .trans-line { stroke: #0b69a3; stroke-width: 3; stroke-linecap: round; }
-      .trans-arrow { fill: #0b69a3; }
+      .axis { stroke: #102a43; stroke-width: 2.2; stroke-linecap: round; }
+      .grid { stroke: #e2e8f0; stroke-width: 1; stroke-dasharray: 4,4; }
+      .dc-line { stroke: #0284c7; stroke-width: 2.5; stroke-dasharray: 6,4; }
+      .ac-line { stroke: #dc2626; stroke-width: 3.2; }
+      .node-q { fill: #dc2626; stroke: #ffffff; stroke-width: 2; }
       .lbl { font: bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #0b69a3; }
-      .val { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
-      .gnd { stroke: #243b53; stroke-width: 2.5; stroke-linecap: round; }
-      .ac-source { fill: #f0f4f8; stroke: #243b53; stroke-width: 2.5; }
+      .val { font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
+      .box-panel { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.5; rx: 8px; }
+      .arrow { fill: #102a43; }
+      .sine-wave { stroke: #16a34a; stroke-width: 2.5; fill: none; }
+      .clip-wave { stroke: #dc2626; stroke-width: 2.5; fill: none; }
     </style>
   </defs>
 
-  <rect width="900" height="520" rx="14" class="bg"/>
-  <rect x="15" y="15" width="870" height="490" rx="10" fill="none" stroke="#d9e2ec" stroke-width="1.5"/>
+  <rect width="920" height="520" rx="14" class="bg"/>
+  <rect x="15" y="15" width="890" height="490" rx="10" class="card-border"/>
 
-  <!-- Título y metadatos estilo simulación -->
-  <text x="35" y="48" class="title">Esquemático 1 · Emisor Común (CE) con Bypass Total</text>
-  <text x="35" y="72" class="subtitle">Configuración clásica de alta ganancia de tensión y desfase de 180°</text>
+  <text x="35" y="48" class="title">Líneas de Carga Dinámicas (DC vs AC) &amp; Máxima Excursión Simétrica</text>
+  <text x="35" y="70" class="subtitle">Condiciones de recorte por saturación vs corte y optimización del Punto Q para máxima excursión (Swing)</text>
 
-  <!-- Rail VCC -->
-  <path class="wire" d="M380 95 H520 M520 95 H600"/>
-  <circle cx="600" cy="95" r="5" class="node"/>
-  <text x="612" y="100" class="lbl">+VCC = 15V</text>
+  <!-- GRÁFICA DE LÍNEAS DE CARGA (IZQUIERDA) -->
+  <!-- Ejes cartesianos -->
+  <!-- Eje Y: iC -->
+  <line x1="80" y1="360" x2="80" y2="110" class="axis"/>
+  <polygon points="76,115 80,105 84,115" class="arrow"/>
+  <text x="50" y="115" font-weight="bold" fill="#102a43" font-size="14">iC (mA)</text>
 
-  <!-- Divisor R1 y R2 -->
-  <path class="wire" d="M380 95 V130"/>
-  <rect x="367" y="130" width="26" height="60" class="res"/>
-  <text x="310" y="165" class="lbl">R1</text>
-  <text x="310" y="182" class="val">47 kΩ</text>
+  <!-- Eje X: vCE -->
+  <line x1="80" y1="360" x2="450" y2="360" class="axis"/>
+  <polygon points="445,356 455,360 445,364" class="arrow"/>
+  <text x="410" y="385" font-weight="bold" fill="#102a43" font-size="14">vCE (V)</text>
 
-  <path class="wire" d="M380 190 V270 M380 270 V330"/>
-  <circle cx="380" cy="270" r="5" class="node"/>
+  <!-- Origen 0 -->
+  <text x="68" y="375" class="val">0</text>
 
-  <rect x="367" y="330" width="26" height="60" class="res"/>
-  <text x="310" y="365" class="lbl">R2</text>
-  <text x="310" y="382" class="val">10 kΩ</text>
-  <path class="wire" d="M380 390 V440"/>
+  <!-- Recta de Carga en DC (Pendiente -1 / (RC + RE)) -->
+  <line x1="80" y1="160" x2="410" y2="360" class="dc-line"/>
+  <text x="340" y="352" font-size="11" font-weight="bold" fill="#0284c7">VCC</text>
+  <text x="42" y="165" font-size="11" font-weight="bold" fill="#0284c7">VCC/RDC</text>
+  <text x="290" y="270" font-size="12" font-weight="bold" fill="#0284c7">Recta DC (Pendiente = -1/RDC)</text>
 
-  <!-- Rama de Colector RC -->
-  <path class="wire" d="M520 95 V130"/>
-  <rect x="507" y="130" width="26" height="60" class="res"/>
-  <text x="545" y="165" class="lbl">RC</text>
-  <text x="545" y="182" class="val">3.3 kΩ</text>
+  <!-- Recta de Carga en AC (Pendiente -1 / rac, más empinada porque rac = RC || RL < RC) -->
+  <line x1="120" y1="120" x2="340" y2="360" class="ac-line"/>
+  <text x="325" y="380" font-size="12" font-weight="bold" fill="#dc2626">vce(cutoff) = VCEQ + ICQ·rac</text>
+  <text x="85" y="130" font-size="11" font-weight="bold" fill="#dc2626">ic(sat) = ICQ + VCEQ/rac</text>
+  <text x="140" y="180" font-size="12" font-weight="bold" fill="#dc2626">Recta AC (Pendiente = -1/rac)</text>
 
-  <path class="wire" d="M520 190 V215"/>
-  <circle cx="520" cy="215" r="5" class="node"/>
+  <!-- Punto Q de reposo -->
+  <!-- Cruce aproximado: X=230, Y=260 -->
+  <line x1="80" y1="260" x2="230" y2="260" class="grid"/>
+  <line x1="230" y1="360" x2="230" y2="260" class="grid"/>
+  <circle cx="230" cy="260" r="7" class="node-q"/>
+  <text x="242" y="255" font-weight="bold" fill="#dc2626" font-size="14">Punto Q</text>
+  <text x="35" y="265" font-weight="bold" fill="#102a43" font-size="12">ICQ</text>
+  <text x="215" y="380" font-weight="bold" fill="#102a43" font-size="12">VCEQ</text>
 
-  <!-- Transistor Q1 NPN -->
-  <circle cx="480" cy="270" r="48" class="trans-circle"/>
-  <!-- Base vertical -->
-  <path class="trans-line" d="M460 245 V295"/>
-  <!-- Conexión base exterior -->
-  <path class="wire" d="M380 270 H460"/>
-  <!-- Colector diagonal -->
-  <path class="trans-line" d="M460 255 L520 215"/>
-  <!-- Emisor diagonal -->
-  <path class="trans-line" d="M460 285 L520 325"/>
-  <!-- Flecha emisor -->
-  <polygon points="505,320 520,325 515,310" class="trans-arrow"/>
+  <!-- Zonas de Excursión y Límites -->
+  <!-- Límite hacia saturación -->
+  <path d="M 230 310 H 110" stroke="#0284c7" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="115" y="300" font-size="11" fill="#0284c7" font-weight="bold">ΔV1 = VCEQ - Vsat</text>
 
-  <text x="440" y="240" class="val" style="font-size:11px;font-weight:bold;">B</text>
-  <text x="530" y="215" class="val" style="font-size:11px;font-weight:bold;">C</text>
-  <text x="530" y="335" class="val" style="font-size:11px;font-weight:bold;">E</text>
-  <text x="430" y="335" class="lbl">Q1 · 2N3904</text>
-  <text x="430" y="352" class="val">β = 120</text>
+  <!-- Límite hacia corte -->
+  <path d="M 230 330 H 335" stroke="#d97706" stroke-width="1.8"/>
+  <text x="235" y="325" font-size="11" fill="#d97706" font-weight="bold">ΔV2 = ICQ · rac</text>
 
-  <!-- Rama de Emisor RE y CE -->
-  <path class="wire" d="M520 325 V355 M520 355 H610"/>
-  <circle cx="520" cy="355" r="5" class="node"/>
+  <!-- PANEL DERECHO: DIAGRAMAS DE FORMA DE ONDA Y RECORTE -->
+  <rect x="470" y="90" width="415" height="305" class="box-panel"/>
+  <text x="485" y="118" font-size="15" font-weight="bold" fill="#102a43">Comportamiento Dinámico del Swing de Salida</text>
 
-  <rect x="507" y="365" width="26" height="60" class="res"/>
-  <path class="wire" d="M520 355 V365 M520 425 V440"/>
-  <text x="460" y="395" class="lbl">RE</text>
-  <text x="460" y="412" class="val">1.2 kΩ</text>
+  <!-- CASO 1: SWING SIMÉTRICO ÓPTIMO -->
+  <rect x="485" y="132" width="385" height="75" rx="6" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <text x="495" y="152" font-size="12" font-weight="bold" fill="#166534">1. Punto Q Óptimo (VCEQ ≈ ICQ · rac):</text>
+  <text x="495" y="170" class="val" style="font-size:11.5px;">Ambos semiciclos tienen el mismo margen. Excursión pico a pico máxima:</text>
+  <text x="495" y="190" font-size="12" font-weight="bold" fill="#15803d">Vp-p,max = 2 · min(VCEQ - 0.2V, ICQ · rac) = 2 · ICQ · rac</text>
 
-  <!-- Capacitor Bypass CE -->
-  <path class="wire" d="M610 355 V385 M610 405 V440"/>
-  <path class="cap" d="M592 385 H628 M592 405 H628"/>
-  <text x="638" y="395" class="lbl">CE</text>
-  <text x="638" y="412" class="val">47 µF</text>
+  <!-- CASO 2: RECORTE POR CORTE DINÁMICO -->
+  <rect x="485" y="215" width="385" height="85" rx="6" fill="#fff1f2" stroke="#fecdd3"/>
+  <text x="495" y="235" font-size="12" font-weight="bold" fill="#be123c">2. Recorte por Corte Dinámico (Q muy abajo, ICQ bajo):</text>
+  <text x="495" y="253" class="val" style="font-size:11.5px;">Si la señal demanda más corriente que ICQ, la corriente se anula (iC = 0).</text>
+  <text x="495" y="271" font-size="11.5" font-weight="bold" fill="#9f1239">En el osciloscopio: el semiciclo superior de vC(t) se aplana a VCC.</text>
+  <text x="495" y="289" class="val" style="font-size:11px;">(Síntoma típico de laboratorio visto en RETO-03 por desvalorización de R2).</text>
 
-  <!-- Entrada con Generador vs, Rs y C1 -->
-  <!-- Fuente vs -->
-  <circle cx="70" cy="270" r="22" class="ac-source"/>
-  <path d="M58 270 Q64 260 70 270 T82 270" fill="none" stroke="#243b53" stroke-width="2.5"/>
-  <text x="45" y="315" class="lbl">vs</text>
-  <text x="35" y="332" class="val">10 mVp</text>
-  <path class="wire" d="M70 292 V440"/>
+  <!-- CASO 3: RECORTE POR SATURACIÓN -->
+  <rect x="485" y="308" width="385" height="75" rx="6" fill="#fefce8" stroke="#fef08a"/>
+  <text x="495" y="328" font-size="12" font-weight="bold" fill="#854d0e">3. Recorte por Saturación (Q muy arriba, VCEQ bajo):</text>
+  <text x="495" y="346" class="val" style="font-size:11.5px;">La tensión de colector no puede caer por debajo de VCE,sat ≈ 0.2 V.</text>
+  <text x="495" y="364" font-size="11.5" font-weight="bold" fill="#a16207">En el osciloscopio: el semiciclo inferior de vC(t) se aplana cerca de 0 V.</text>
 
-  <path class="wire" d="M70 248 V270 M92 270 H130"/>
-  <!-- Resistencia interna Rs -->
-  <rect x="130" y="257" width="50" height="26" class="res"/>
-  <text x="138" y="248" class="lbl">Rs</text>
-  <text x="135" y="300" class="val">600 Ω</text>
-
-  <path class="wire" d="M180 270 H225"/>
-  <!-- Capacitor de acoplo C1 -->
-  <path class="cap" d="M225 252 V288 M240 252 V288"/>
-  <text x="218" y="242" class="lbl">C1</text>
-  <text x="215" y="304" class="val">10 µF</text>
-  <path class="wire" d="M240 270 H380"/>
-
-  <!-- Salida con C2 y RL -->
-  <path class="wire" d="M520 215 H680"/>
-  <path class="cap" d="M680 197 V233 M695 197 V233"/>
-  <text x="675" y="187" class="lbl">C2</text>
-  <text x="675" y="248" class="val">10 µF</text>
-
-  <path class="wire" d="M695 215 H780"/>
-  <circle cx="780" cy="215" r="5" class="node"/>
-  <!-- Terminal Vo -->
-  <path class="wire" d="M780 215 H830"/>
-  <circle cx="830" cy="215" r="5" fill="#fff" stroke="#0b69a3" stroke-width="2.5"/>
-  <text x="842" y="220" class="lbl">vo (out)</text>
-
-  <!-- Carga RL -->
-  <path class="wire" d="M780 215 V280"/>
-  <rect x="767" y="280" width="26" height="60" class="res"/>
-  <text x="805" y="312" class="lbl">RL</text>
-  <text x="805" y="330" class="val">10 kΩ</text>
-  <path class="wire" d="M780 340 V440"/>
-
-  <!-- Línea común de Tierra -->
-  <path class="wire" d="M70 440 H780"/>
-  <!-- Símbolo de tierra en centro -->
-  <path class="wire" d="M480 440 V460"/>
-  <path class="gnd" d="M460 460 H500 M468 467 H492 M476 474 H484"/>
+  <!-- FOOTER: EL CONSEJO DEL PROFESOR FREDY -->
+  <rect x="35" y="415" width="850" height="75" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="50" y="438" font-weight="bold" fill="#1e40af" font-size="13">💡 LA REGLA DE ORO DE LABORATORIO PARA EL EXAMEN (Profesor Fredy &amp; Malvino):</text>
+  <text x="50" y="458" class="val" style="font-size:12px;">Para no distorsionar, el swing máximo está limitado por el más angosto de los dos caminos: hacia el corte (ICQ · rac) o hacia</text>
+  <text x="50" y="476" class="val" style="font-size:12px;">la saturación (VCEQ - 0.2V). Si calculas VCEQ = 6V pero ICQ·rac = 2.5V, ¡tu señal máxima antes del clip es de 2.5V pico, no de 6V!</text>
 </svg>
 </div>
 
@@ -3295,7 +4150,108 @@
       </div>
     
 
-    
+    <div class="schematic-container"><svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" role="img" aria-label="Recta de Carga en AC vs DC y Máxima Excursión Simétrica">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .card-border { fill: none; stroke: #d9e2ec; stroke-width: 1.5; }
+      .title { font: bold 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
+      .subtitle { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #627d98; }
+      .axis { stroke: #102a43; stroke-width: 2.2; stroke-linecap: round; }
+      .grid { stroke: #e2e8f0; stroke-width: 1; stroke-dasharray: 4,4; }
+      .dc-line { stroke: #0284c7; stroke-width: 2.5; stroke-dasharray: 6,4; }
+      .ac-line { stroke: #dc2626; stroke-width: 3.2; }
+      .node-q { fill: #dc2626; stroke: #ffffff; stroke-width: 2; }
+      .lbl { font: bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #0b69a3; }
+      .val { font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
+      .box-panel { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.5; rx: 8px; }
+      .arrow { fill: #102a43; }
+      .sine-wave { stroke: #16a34a; stroke-width: 2.5; fill: none; }
+      .clip-wave { stroke: #dc2626; stroke-width: 2.5; fill: none; }
+    </style>
+  </defs>
+
+  <rect width="920" height="520" rx="14" class="bg"/>
+  <rect x="15" y="15" width="890" height="490" rx="10" class="card-border"/>
+
+  <text x="35" y="48" class="title">Líneas de Carga Dinámicas (DC vs AC) &amp; Máxima Excursión Simétrica</text>
+  <text x="35" y="70" class="subtitle">Condiciones de recorte por saturación vs corte y optimización del Punto Q para máxima excursión (Swing)</text>
+
+  <!-- GRÁFICA DE LÍNEAS DE CARGA (IZQUIERDA) -->
+  <!-- Ejes cartesianos -->
+  <!-- Eje Y: iC -->
+  <line x1="80" y1="360" x2="80" y2="110" class="axis"/>
+  <polygon points="76,115 80,105 84,115" class="arrow"/>
+  <text x="50" y="115" font-weight="bold" fill="#102a43" font-size="14">iC (mA)</text>
+
+  <!-- Eje X: vCE -->
+  <line x1="80" y1="360" x2="450" y2="360" class="axis"/>
+  <polygon points="445,356 455,360 445,364" class="arrow"/>
+  <text x="410" y="385" font-weight="bold" fill="#102a43" font-size="14">vCE (V)</text>
+
+  <!-- Origen 0 -->
+  <text x="68" y="375" class="val">0</text>
+
+  <!-- Recta de Carga en DC (Pendiente -1 / (RC + RE)) -->
+  <line x1="80" y1="160" x2="410" y2="360" class="dc-line"/>
+  <text x="340" y="352" font-size="11" font-weight="bold" fill="#0284c7">VCC</text>
+  <text x="42" y="165" font-size="11" font-weight="bold" fill="#0284c7">VCC/RDC</text>
+  <text x="290" y="270" font-size="12" font-weight="bold" fill="#0284c7">Recta DC (Pendiente = -1/RDC)</text>
+
+  <!-- Recta de Carga en AC (Pendiente -1 / rac, más empinada porque rac = RC || RL < RC) -->
+  <line x1="120" y1="120" x2="340" y2="360" class="ac-line"/>
+  <text x="325" y="380" font-size="12" font-weight="bold" fill="#dc2626">vce(cutoff) = VCEQ + ICQ·rac</text>
+  <text x="85" y="130" font-size="11" font-weight="bold" fill="#dc2626">ic(sat) = ICQ + VCEQ/rac</text>
+  <text x="140" y="180" font-size="12" font-weight="bold" fill="#dc2626">Recta AC (Pendiente = -1/rac)</text>
+
+  <!-- Punto Q de reposo -->
+  <!-- Cruce aproximado: X=230, Y=260 -->
+  <line x1="80" y1="260" x2="230" y2="260" class="grid"/>
+  <line x1="230" y1="360" x2="230" y2="260" class="grid"/>
+  <circle cx="230" cy="260" r="7" class="node-q"/>
+  <text x="242" y="255" font-weight="bold" fill="#dc2626" font-size="14">Punto Q</text>
+  <text x="35" y="265" font-weight="bold" fill="#102a43" font-size="12">ICQ</text>
+  <text x="215" y="380" font-weight="bold" fill="#102a43" font-size="12">VCEQ</text>
+
+  <!-- Zonas de Excursión y Límites -->
+  <!-- Límite hacia saturación -->
+  <path d="M 230 310 H 110" stroke="#0284c7" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="115" y="300" font-size="11" fill="#0284c7" font-weight="bold">ΔV1 = VCEQ - Vsat</text>
+
+  <!-- Límite hacia corte -->
+  <path d="M 230 330 H 335" stroke="#d97706" stroke-width="1.8"/>
+  <text x="235" y="325" font-size="11" fill="#d97706" font-weight="bold">ΔV2 = ICQ · rac</text>
+
+  <!-- PANEL DERECHO: DIAGRAMAS DE FORMA DE ONDA Y RECORTE -->
+  <rect x="470" y="90" width="415" height="305" class="box-panel"/>
+  <text x="485" y="118" font-size="15" font-weight="bold" fill="#102a43">Comportamiento Dinámico del Swing de Salida</text>
+
+  <!-- CASO 1: SWING SIMÉTRICO ÓPTIMO -->
+  <rect x="485" y="132" width="385" height="75" rx="6" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <text x="495" y="152" font-size="12" font-weight="bold" fill="#166534">1. Punto Q Óptimo (VCEQ ≈ ICQ · rac):</text>
+  <text x="495" y="170" class="val" style="font-size:11.5px;">Ambos semiciclos tienen el mismo margen. Excursión pico a pico máxima:</text>
+  <text x="495" y="190" font-size="12" font-weight="bold" fill="#15803d">Vp-p,max = 2 · min(VCEQ - 0.2V, ICQ · rac) = 2 · ICQ · rac</text>
+
+  <!-- CASO 2: RECORTE POR CORTE DINÁMICO -->
+  <rect x="485" y="215" width="385" height="85" rx="6" fill="#fff1f2" stroke="#fecdd3"/>
+  <text x="495" y="235" font-size="12" font-weight="bold" fill="#be123c">2. Recorte por Corte Dinámico (Q muy abajo, ICQ bajo):</text>
+  <text x="495" y="253" class="val" style="font-size:11.5px;">Si la señal demanda más corriente que ICQ, la corriente se anula (iC = 0).</text>
+  <text x="495" y="271" font-size="11.5" font-weight="bold" fill="#9f1239">En el osciloscopio: el semiciclo superior de vC(t) se aplana a VCC.</text>
+  <text x="495" y="289" class="val" style="font-size:11px;">(Síntoma típico de laboratorio visto en RETO-03 por desvalorización de R2).</text>
+
+  <!-- CASO 3: RECORTE POR SATURACIÓN -->
+  <rect x="485" y="308" width="385" height="75" rx="6" fill="#fefce8" stroke="#fef08a"/>
+  <text x="495" y="328" font-size="12" font-weight="bold" fill="#854d0e">3. Recorte por Saturación (Q muy arriba, VCEQ bajo):</text>
+  <text x="495" y="346" class="val" style="font-size:11.5px;">La tensión de colector no puede caer por debajo de VCE,sat ≈ 0.2 V.</text>
+  <text x="495" y="364" font-size="11.5" font-weight="bold" fill="#a16207">En el osciloscopio: el semiciclo inferior de vC(t) se aplana cerca de 0 V.</text>
+
+  <!-- FOOTER: EL CONSEJO DEL PROFESOR FREDY -->
+  <rect x="35" y="415" width="850" height="75" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="50" y="438" font-weight="bold" fill="#1e40af" font-size="13">💡 LA REGLA DE ORO DE LABORATORIO PARA EL EXAMEN (Profesor Fredy &amp; Malvino):</text>
+  <text x="50" y="458" class="val" style="font-size:12px;">Para no distorsionar, el swing máximo está limitado por el más angosto de los dos caminos: hacia el corte (ICQ · rac) o hacia</text>
+  <text x="50" y="476" class="val" style="font-size:12px;">la saturación (VCEQ - 0.2V). Si calculas VCEQ = 6V pero ICQ·rac = 2.5V, ¡tu señal máxima antes del clip es de 2.5V pico, no de 6V!</text>
+</svg>
+</div>
 
     
       <div style="background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px 10px; margin: 6px 0; font-size: 8.5pt;">
@@ -3358,141 +4314,106 @@
       </div>
     
 
-    <div class="schematic-container"><svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520" role="img" aria-label="Amplificador Emisor Común con Bypass">
+    <div class="schematic-container"><svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" role="img" aria-label="Recta de Carga en AC vs DC y Máxima Excursión Simétrica">
   <defs>
     <style>
       .bg { fill: #ffffff; }
+      .card-border { fill: none; stroke: #d9e2ec; stroke-width: 1.5; }
       .title { font: bold 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
       .subtitle { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #627d98; }
-      .wire { stroke: #243b53; stroke-width: 2.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.5; }
-      .cap { stroke: #0b69a3; stroke-width: 3.5; }
-      .node { fill: #102a43; }
-      .trans-circle { fill: #f0f4f8; stroke: #9fb3c8; stroke-width: 1.8; }
-      .trans-line { stroke: #0b69a3; stroke-width: 3; stroke-linecap: round; }
-      .trans-arrow { fill: #0b69a3; }
+      .axis { stroke: #102a43; stroke-width: 2.2; stroke-linecap: round; }
+      .grid { stroke: #e2e8f0; stroke-width: 1; stroke-dasharray: 4,4; }
+      .dc-line { stroke: #0284c7; stroke-width: 2.5; stroke-dasharray: 6,4; }
+      .ac-line { stroke: #dc2626; stroke-width: 3.2; }
+      .node-q { fill: #dc2626; stroke: #ffffff; stroke-width: 2; }
       .lbl { font: bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #0b69a3; }
-      .val { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
-      .gnd { stroke: #243b53; stroke-width: 2.5; stroke-linecap: round; }
-      .ac-source { fill: #f0f4f8; stroke: #243b53; stroke-width: 2.5; }
+      .val { font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
+      .box-panel { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.5; rx: 8px; }
+      .arrow { fill: #102a43; }
+      .sine-wave { stroke: #16a34a; stroke-width: 2.5; fill: none; }
+      .clip-wave { stroke: #dc2626; stroke-width: 2.5; fill: none; }
     </style>
   </defs>
 
-  <rect width="900" height="520" rx="14" class="bg"/>
-  <rect x="15" y="15" width="870" height="490" rx="10" fill="none" stroke="#d9e2ec" stroke-width="1.5"/>
+  <rect width="920" height="520" rx="14" class="bg"/>
+  <rect x="15" y="15" width="890" height="490" rx="10" class="card-border"/>
 
-  <!-- Título y metadatos estilo simulación -->
-  <text x="35" y="48" class="title">Esquemático 1 · Emisor Común (CE) con Bypass Total</text>
-  <text x="35" y="72" class="subtitle">Configuración clásica de alta ganancia de tensión y desfase de 180°</text>
+  <text x="35" y="48" class="title">Líneas de Carga Dinámicas (DC vs AC) &amp; Máxima Excursión Simétrica</text>
+  <text x="35" y="70" class="subtitle">Condiciones de recorte por saturación vs corte y optimización del Punto Q para máxima excursión (Swing)</text>
 
-  <!-- Rail VCC -->
-  <path class="wire" d="M380 95 H520 M520 95 H600"/>
-  <circle cx="600" cy="95" r="5" class="node"/>
-  <text x="612" y="100" class="lbl">+VCC = 15V</text>
+  <!-- GRÁFICA DE LÍNEAS DE CARGA (IZQUIERDA) -->
+  <!-- Ejes cartesianos -->
+  <!-- Eje Y: iC -->
+  <line x1="80" y1="360" x2="80" y2="110" class="axis"/>
+  <polygon points="76,115 80,105 84,115" class="arrow"/>
+  <text x="50" y="115" font-weight="bold" fill="#102a43" font-size="14">iC (mA)</text>
 
-  <!-- Divisor R1 y R2 -->
-  <path class="wire" d="M380 95 V130"/>
-  <rect x="367" y="130" width="26" height="60" class="res"/>
-  <text x="310" y="165" class="lbl">R1</text>
-  <text x="310" y="182" class="val">47 kΩ</text>
+  <!-- Eje X: vCE -->
+  <line x1="80" y1="360" x2="450" y2="360" class="axis"/>
+  <polygon points="445,356 455,360 445,364" class="arrow"/>
+  <text x="410" y="385" font-weight="bold" fill="#102a43" font-size="14">vCE (V)</text>
 
-  <path class="wire" d="M380 190 V270 M380 270 V330"/>
-  <circle cx="380" cy="270" r="5" class="node"/>
+  <!-- Origen 0 -->
+  <text x="68" y="375" class="val">0</text>
 
-  <rect x="367" y="330" width="26" height="60" class="res"/>
-  <text x="310" y="365" class="lbl">R2</text>
-  <text x="310" y="382" class="val">10 kΩ</text>
-  <path class="wire" d="M380 390 V440"/>
+  <!-- Recta de Carga en DC (Pendiente -1 / (RC + RE)) -->
+  <line x1="80" y1="160" x2="410" y2="360" class="dc-line"/>
+  <text x="340" y="352" font-size="11" font-weight="bold" fill="#0284c7">VCC</text>
+  <text x="42" y="165" font-size="11" font-weight="bold" fill="#0284c7">VCC/RDC</text>
+  <text x="290" y="270" font-size="12" font-weight="bold" fill="#0284c7">Recta DC (Pendiente = -1/RDC)</text>
 
-  <!-- Rama de Colector RC -->
-  <path class="wire" d="M520 95 V130"/>
-  <rect x="507" y="130" width="26" height="60" class="res"/>
-  <text x="545" y="165" class="lbl">RC</text>
-  <text x="545" y="182" class="val">3.3 kΩ</text>
+  <!-- Recta de Carga en AC (Pendiente -1 / rac, más empinada porque rac = RC || RL < RC) -->
+  <line x1="120" y1="120" x2="340" y2="360" class="ac-line"/>
+  <text x="325" y="380" font-size="12" font-weight="bold" fill="#dc2626">vce(cutoff) = VCEQ + ICQ·rac</text>
+  <text x="85" y="130" font-size="11" font-weight="bold" fill="#dc2626">ic(sat) = ICQ + VCEQ/rac</text>
+  <text x="140" y="180" font-size="12" font-weight="bold" fill="#dc2626">Recta AC (Pendiente = -1/rac)</text>
 
-  <path class="wire" d="M520 190 V215"/>
-  <circle cx="520" cy="215" r="5" class="node"/>
+  <!-- Punto Q de reposo -->
+  <!-- Cruce aproximado: X=230, Y=260 -->
+  <line x1="80" y1="260" x2="230" y2="260" class="grid"/>
+  <line x1="230" y1="360" x2="230" y2="260" class="grid"/>
+  <circle cx="230" cy="260" r="7" class="node-q"/>
+  <text x="242" y="255" font-weight="bold" fill="#dc2626" font-size="14">Punto Q</text>
+  <text x="35" y="265" font-weight="bold" fill="#102a43" font-size="12">ICQ</text>
+  <text x="215" y="380" font-weight="bold" fill="#102a43" font-size="12">VCEQ</text>
 
-  <!-- Transistor Q1 NPN -->
-  <circle cx="480" cy="270" r="48" class="trans-circle"/>
-  <!-- Base vertical -->
-  <path class="trans-line" d="M460 245 V295"/>
-  <!-- Conexión base exterior -->
-  <path class="wire" d="M380 270 H460"/>
-  <!-- Colector diagonal -->
-  <path class="trans-line" d="M460 255 L520 215"/>
-  <!-- Emisor diagonal -->
-  <path class="trans-line" d="M460 285 L520 325"/>
-  <!-- Flecha emisor -->
-  <polygon points="505,320 520,325 515,310" class="trans-arrow"/>
+  <!-- Zonas de Excursión y Límites -->
+  <!-- Límite hacia saturación -->
+  <path d="M 230 310 H 110" stroke="#0284c7" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="115" y="300" font-size="11" fill="#0284c7" font-weight="bold">ΔV1 = VCEQ - Vsat</text>
 
-  <text x="440" y="240" class="val" style="font-size:11px;font-weight:bold;">B</text>
-  <text x="530" y="215" class="val" style="font-size:11px;font-weight:bold;">C</text>
-  <text x="530" y="335" class="val" style="font-size:11px;font-weight:bold;">E</text>
-  <text x="430" y="335" class="lbl">Q1 · 2N3904</text>
-  <text x="430" y="352" class="val">β = 120</text>
+  <!-- Límite hacia corte -->
+  <path d="M 230 330 H 335" stroke="#d97706" stroke-width="1.8"/>
+  <text x="235" y="325" font-size="11" fill="#d97706" font-weight="bold">ΔV2 = ICQ · rac</text>
 
-  <!-- Rama de Emisor RE y CE -->
-  <path class="wire" d="M520 325 V355 M520 355 H610"/>
-  <circle cx="520" cy="355" r="5" class="node"/>
+  <!-- PANEL DERECHO: DIAGRAMAS DE FORMA DE ONDA Y RECORTE -->
+  <rect x="470" y="90" width="415" height="305" class="box-panel"/>
+  <text x="485" y="118" font-size="15" font-weight="bold" fill="#102a43">Comportamiento Dinámico del Swing de Salida</text>
 
-  <rect x="507" y="365" width="26" height="60" class="res"/>
-  <path class="wire" d="M520 355 V365 M520 425 V440"/>
-  <text x="460" y="395" class="lbl">RE</text>
-  <text x="460" y="412" class="val">1.2 kΩ</text>
+  <!-- CASO 1: SWING SIMÉTRICO ÓPTIMO -->
+  <rect x="485" y="132" width="385" height="75" rx="6" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <text x="495" y="152" font-size="12" font-weight="bold" fill="#166534">1. Punto Q Óptimo (VCEQ ≈ ICQ · rac):</text>
+  <text x="495" y="170" class="val" style="font-size:11.5px;">Ambos semiciclos tienen el mismo margen. Excursión pico a pico máxima:</text>
+  <text x="495" y="190" font-size="12" font-weight="bold" fill="#15803d">Vp-p,max = 2 · min(VCEQ - 0.2V, ICQ · rac) = 2 · ICQ · rac</text>
 
-  <!-- Capacitor Bypass CE -->
-  <path class="wire" d="M610 355 V385 M610 405 V440"/>
-  <path class="cap" d="M592 385 H628 M592 405 H628"/>
-  <text x="638" y="395" class="lbl">CE</text>
-  <text x="638" y="412" class="val">47 µF</text>
+  <!-- CASO 2: RECORTE POR CORTE DINÁMICO -->
+  <rect x="485" y="215" width="385" height="85" rx="6" fill="#fff1f2" stroke="#fecdd3"/>
+  <text x="495" y="235" font-size="12" font-weight="bold" fill="#be123c">2. Recorte por Corte Dinámico (Q muy abajo, ICQ bajo):</text>
+  <text x="495" y="253" class="val" style="font-size:11.5px;">Si la señal demanda más corriente que ICQ, la corriente se anula (iC = 0).</text>
+  <text x="495" y="271" font-size="11.5" font-weight="bold" fill="#9f1239">En el osciloscopio: el semiciclo superior de vC(t) se aplana a VCC.</text>
+  <text x="495" y="289" class="val" style="font-size:11px;">(Síntoma típico de laboratorio visto en RETO-03 por desvalorización de R2).</text>
 
-  <!-- Entrada con Generador vs, Rs y C1 -->
-  <!-- Fuente vs -->
-  <circle cx="70" cy="270" r="22" class="ac-source"/>
-  <path d="M58 270 Q64 260 70 270 T82 270" fill="none" stroke="#243b53" stroke-width="2.5"/>
-  <text x="45" y="315" class="lbl">vs</text>
-  <text x="35" y="332" class="val">10 mVp</text>
-  <path class="wire" d="M70 292 V440"/>
+  <!-- CASO 3: RECORTE POR SATURACIÓN -->
+  <rect x="485" y="308" width="385" height="75" rx="6" fill="#fefce8" stroke="#fef08a"/>
+  <text x="495" y="328" font-size="12" font-weight="bold" fill="#854d0e">3. Recorte por Saturación (Q muy arriba, VCEQ bajo):</text>
+  <text x="495" y="346" class="val" style="font-size:11.5px;">La tensión de colector no puede caer por debajo de VCE,sat ≈ 0.2 V.</text>
+  <text x="495" y="364" font-size="11.5" font-weight="bold" fill="#a16207">En el osciloscopio: el semiciclo inferior de vC(t) se aplana cerca de 0 V.</text>
 
-  <path class="wire" d="M70 248 V270 M92 270 H130"/>
-  <!-- Resistencia interna Rs -->
-  <rect x="130" y="257" width="50" height="26" class="res"/>
-  <text x="138" y="248" class="lbl">Rs</text>
-  <text x="135" y="300" class="val">600 Ω</text>
-
-  <path class="wire" d="M180 270 H225"/>
-  <!-- Capacitor de acoplo C1 -->
-  <path class="cap" d="M225 252 V288 M240 252 V288"/>
-  <text x="218" y="242" class="lbl">C1</text>
-  <text x="215" y="304" class="val">10 µF</text>
-  <path class="wire" d="M240 270 H380"/>
-
-  <!-- Salida con C2 y RL -->
-  <path class="wire" d="M520 215 H680"/>
-  <path class="cap" d="M680 197 V233 M695 197 V233"/>
-  <text x="675" y="187" class="lbl">C2</text>
-  <text x="675" y="248" class="val">10 µF</text>
-
-  <path class="wire" d="M695 215 H780"/>
-  <circle cx="780" cy="215" r="5" class="node"/>
-  <!-- Terminal Vo -->
-  <path class="wire" d="M780 215 H830"/>
-  <circle cx="830" cy="215" r="5" fill="#fff" stroke="#0b69a3" stroke-width="2.5"/>
-  <text x="842" y="220" class="lbl">vo (out)</text>
-
-  <!-- Carga RL -->
-  <path class="wire" d="M780 215 V280"/>
-  <rect x="767" y="280" width="26" height="60" class="res"/>
-  <text x="805" y="312" class="lbl">RL</text>
-  <text x="805" y="330" class="val">10 kΩ</text>
-  <path class="wire" d="M780 340 V440"/>
-
-  <!-- Línea común de Tierra -->
-  <path class="wire" d="M70 440 H780"/>
-  <!-- Símbolo de tierra en centro -->
-  <path class="wire" d="M480 440 V460"/>
-  <path class="gnd" d="M460 460 H500 M468 467 H492 M476 474 H484"/>
+  <!-- FOOTER: EL CONSEJO DEL PROFESOR FREDY -->
+  <rect x="35" y="415" width="850" height="75" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="50" y="438" font-weight="bold" fill="#1e40af" font-size="13">💡 LA REGLA DE ORO DE LABORATORIO PARA EL EXAMEN (Profesor Fredy &amp; Malvino):</text>
+  <text x="50" y="458" class="val" style="font-size:12px;">Para no distorsionar, el swing máximo está limitado por el más angosto de los dos caminos: hacia el corte (ICQ · rac) o hacia</text>
+  <text x="50" y="476" class="val" style="font-size:12px;">la saturación (VCEQ - 0.2V). Si calculas VCEQ = 6V pero ICQ·rac = 2.5V, ¡tu señal máxima antes del clip es de 2.5V pico, no de 6V!</text>
 </svg>
 </div>
 
@@ -3762,141 +4683,145 @@
       </div>
     
 
-    <div class="schematic-container"><svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520" role="img" aria-label="Amplificador Emisor Común con Bypass">
+    <div class="schematic-container"><svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" role="img" aria-label="Acondicionamiento de Sensor Piezoeléctrico y Límite de Pequeña Señal">
   <defs>
     <style>
       .bg { fill: #ffffff; }
+      .card-border { fill: none; stroke: #d9e2ec; stroke-width: 1.5; }
       .title { font: bold 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
       .subtitle { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #627d98; }
-      .wire { stroke: #243b53; stroke-width: 2.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.5; }
+      .wire { stroke: #243b53; stroke-width: 2.6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.4; }
       .cap { stroke: #0b69a3; stroke-width: 3.5; }
       .node { fill: #102a43; }
       .trans-circle { fill: #f0f4f8; stroke: #9fb3c8; stroke-width: 1.8; }
       .trans-line { stroke: #0b69a3; stroke-width: 3; stroke-linecap: round; }
       .trans-arrow { fill: #0b69a3; }
       .lbl { font: bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #0b69a3; }
-      .val { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
-      .gnd { stroke: #243b53; stroke-width: 2.5; stroke-linecap: round; }
-      .ac-source { fill: #f0f4f8; stroke: #243b53; stroke-width: 2.5; }
+      .val { font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
+      .gnd { stroke: #243b53; stroke-width: 2.4; stroke-linecap: round; }
+      .box-panel { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.5; rx: 8px; }
+      .ac-source { fill: #f0f4f8; stroke: #243b53; stroke-width: 2.4; }
+      .sine-wave { stroke: #0b69a3; stroke-width: 2.2; fill: none; }
+      .sine-dist { stroke: #d9381e; stroke-width: 2.2; fill: none; }
     </style>
   </defs>
 
-  <rect width="900" height="520" rx="14" class="bg"/>
-  <rect x="15" y="15" width="870" height="490" rx="10" fill="none" stroke="#d9e2ec" stroke-width="1.5"/>
+  <rect width="920" height="520" rx="14" class="bg"/>
+  <rect x="15" y="15" width="890" height="490" rx="10" class="card-border"/>
 
-  <!-- Título y metadatos estilo simulación -->
-  <text x="35" y="48" class="title">Esquemático 1 · Emisor Común (CE) con Bypass Total</text>
-  <text x="35" y="72" class="subtitle">Configuración clásica de alta ganancia de tensión y desfase de 180°</text>
+  <text x="35" y="48" class="title">Acondicionamiento de Sensor Piezoeléctrico &amp; Criterio de Pequeña Señal</text>
+  <text x="35" y="70" class="subtitle">Control de distorsión armónica (HD2 ≤ 5%) mediante degeneración de emisor (Swamping)</text>
 
-  <!-- Rail VCC -->
-  <path class="wire" d="M380 95 H520 M520 95 H600"/>
-  <circle cx="600" cy="95" r="5" class="node"/>
-  <text x="612" y="100" class="lbl">+VCC = 15V</text>
+  <!-- ESQUEMA CIRCUITAL (IZQUIERDA) -->
+  <!-- Sensor Piezoeléctrico Modelo -->
+  <rect x="35" y="130" width="160" height="230" rx="8" fill="#f0f9ff" stroke="#bae6fd" stroke-dasharray="4,4" stroke-width="1.5"/>
+  <text x="45" y="150" font-size="11" font-weight="bold" fill="#0284c7">SENSOR PIEZOELÉCTRICO</text>
+
+  <!-- Fuente vs -->
+  <circle cx="80" cy="235" r="22" class="ac-source"/>
+  <path d="M 68 235 Q 74 225 80 235 Q 86 245 92 235" class="sine-wave"/>
+  <text x="50" y="275" class="lbl" style="font-size:12px;">vs (40 mVp)</text>
+  <path class="wire" d="M80 257 V330"/>
+  <line x1="65" y1="330" x2="95" y2="330" class="gnd"/>
+
+  <!-- Resistencia Rs del sensor -->
+  <path class="wire" d="M80 213 V185 H110"/>
+  <rect x="110" y="172" width="45" height="26" class="res"/>
+  <text x="120" y="163" class="lbl">Rs</text>
+  <text x="115" y="213" class="val">1.2 kΩ</text>
+  <path class="wire" d="M155 185 H195"/>
+
+  <!-- Condensador C1 -->
+  <path class="wire" d="M195 185 H220"/>
+  <line x1="220" y1="172" x2="220" y2="198" class="cap"/>
+  <line x1="228" y1="172" x2="228" y2="198" class="cap"/>
+  <text x="215" y="163" class="lbl">C1</text>
+  <path class="wire" d="M228 185 H270"/>
 
   <!-- Divisor R1 y R2 -->
-  <path class="wire" d="M380 95 V130"/>
-  <rect x="367" y="130" width="26" height="60" class="res"/>
-  <text x="310" y="165" class="lbl">R1</text>
-  <text x="310" y="182" class="val">47 kΩ</text>
+  <circle cx="270" cy="185" r="4.5" class="node"/>
+  <path class="wire" d="M270 185 V125 M270 185 V245"/>
+  <rect x="257" y="125" width="26" height="40" class="res"/>
+  <text x="225" y="145" class="lbl">R1</text>
+  <path class="wire" d="M270 125 V95 H360"/>
+  <circle cx="360" cy="95" r="4.5" class="node"/>
+  <text x="370" y="100" class="lbl">+VCC</text>
 
-  <path class="wire" d="M380 190 V270 M380 270 V330"/>
-  <circle cx="380" cy="270" r="5" class="node"/>
-
-  <rect x="367" y="330" width="26" height="60" class="res"/>
-  <text x="310" y="365" class="lbl">R2</text>
-  <text x="310" y="382" class="val">10 kΩ</text>
-  <path class="wire" d="M380 390 V440"/>
-
-  <!-- Rama de Colector RC -->
-  <path class="wire" d="M520 95 V130"/>
-  <rect x="507" y="130" width="26" height="60" class="res"/>
-  <text x="545" y="165" class="lbl">RC</text>
-  <text x="545" y="182" class="val">3.3 kΩ</text>
-
-  <path class="wire" d="M520 190 V215"/>
-  <circle cx="520" cy="215" r="5" class="node"/>
+  <rect x="257" y="245" width="26" height="40" class="res"/>
+  <text x="225" y="265" class="lbl">R2</text>
+  <path class="wire" d="M270 285 V330"/>
+  <line x1="255" y1="330" x2="285" y2="330" class="gnd"/>
 
   <!-- Transistor Q1 NPN -->
-  <circle cx="480" cy="270" r="48" class="trans-circle"/>
-  <!-- Base vertical -->
-  <path class="trans-line" d="M460 245 V295"/>
-  <!-- Conexión base exterior -->
-  <path class="wire" d="M380 270 H460"/>
-  <!-- Colector diagonal -->
-  <path class="trans-line" d="M460 255 L520 215"/>
-  <!-- Emisor diagonal -->
-  <path class="trans-line" d="M460 285 L520 325"/>
-  <!-- Flecha emisor -->
-  <polygon points="505,320 520,325 515,310" class="trans-arrow"/>
+  <path class="wire" d="M270 185 H320"/>
+  <circle cx="340" cy="185" r="32" class="trans-circle"/>
+  <path class="trans-line" d="M325 168 V202"/>
+  <path class="trans-line" d="M325 174 L355 152"/>
+  <path class="wire" d="M355 152 V95"/>
+  <path class="trans-line" d="M325 196 L355 218"/>
+  <polygon points="346,211 357,220 343,220" class="trans-arrow"/>
+  <text x="355" y="185" class="lbl">Q1</text>
 
-  <text x="440" y="240" class="val" style="font-size:11px;font-weight:bold;">B</text>
-  <text x="530" y="215" class="val" style="font-size:11px;font-weight:bold;">C</text>
-  <text x="530" y="335" class="val" style="font-size:11px;font-weight:bold;">E</text>
-  <text x="430" y="335" class="lbl">Q1 · 2N3904</text>
-  <text x="430" y="352" class="val">β = 120</text>
+  <!-- RC en Colector -->
+  <rect x="342" y="105" width="26" height="38" class="res"/>
+  <text x="375" y="125" class="lbl">RC</text>
 
-  <!-- Rama de Emisor RE y CE -->
-  <path class="wire" d="M520 325 V355 M520 355 H610"/>
-  <circle cx="520" cy="355" r="5" class="node"/>
+  <!-- Emisor con Swamping RE1 y Bypass en RE2 -->
+  <path class="wire" d="M355 218 V240"/>
+  <circle cx="355" cy="240" r="4" class="node"/>
+  <!-- RE1 no puenteada -->
+  <rect x="342" y="245" width="26" height="38" class="res" style="stroke:#d9381e; stroke-width:2.6;"/>
+  <text x="280" y="265" font-weight="bold" fill="#d9381e" font-size="12">RE1 (Swamp)</text>
+  <text x="375" y="265" class="val">180 Ω</text>
+  <path class="wire" d="M355 283 V305"/>
+  <circle cx="355" cy="305" r="4.5" class="node"/>
 
-  <rect x="507" y="365" width="26" height="60" class="res"/>
-  <path class="wire" d="M520 355 V365 M520 425 V440"/>
-  <text x="460" y="395" class="lbl">RE</text>
-  <text x="460" y="412" class="val">1.2 kΩ</text>
+  <!-- RE2 y CE en paralelo -->
+  <path class="wire" d="M355 305 H410 V325"/>
+  <rect x="342" y="325" width="26" height="38" class="res"/>
+  <text x="310" y="345" class="lbl">RE2</text>
+  <path class="wire" d="M355 305 V325 M355 363 V385"/>
 
-  <!-- Capacitor Bypass CE -->
-  <path class="wire" d="M610 355 V385 M610 405 V440"/>
-  <path class="cap" d="M592 385 H628 M592 405 H628"/>
-  <text x="638" y="395" class="lbl">CE</text>
-  <text x="638" y="412" class="val">47 µF</text>
+  <!-- CE bypass -->
+  <line x1="400" y1="335" x2="420" y2="335" class="cap"/>
+  <line x1="400" y1="343" x2="420" y2="343" class="cap"/>
+  <text x="428" y="342" class="lbl">CE</text>
+  <path class="wire" d="M410 343 V385 H355"/>
+  <circle cx="355" cy="385" r="4.5" class="node"/>
+  <path class="wire" d="M355 385 V405"/>
+  <line x1="340" y1="405" x2="370" y2="405" class="gnd"/>
 
-  <!-- Entrada con Generador vs, Rs y C1 -->
-  <!-- Fuente vs -->
-  <circle cx="70" cy="270" r="22" class="ac-source"/>
-  <path d="M58 270 Q64 260 70 270 T82 270" fill="none" stroke="#243b53" stroke-width="2.5"/>
-  <text x="45" y="315" class="lbl">vs</text>
-  <text x="35" y="332" class="val">10 mVp</text>
-  <path class="wire" d="M70 292 V440"/>
+  <!-- PANEL DERECHO: COMPARACIÓN DE FORMAS DE ONDA Y DISTORSIÓN -->
+  <rect x="470" y="90" width="415" height="305" class="box-panel"/>
+  <text x="485" y="118" font-size="15" font-weight="bold" fill="#102a43">Criterio Matemático de Linealidad vs Deformación</text>
 
-  <path class="wire" d="M70 248 V270 M92 270 H130"/>
-  <!-- Resistencia interna Rs -->
-  <rect x="130" y="257" width="50" height="26" class="res"/>
-  <text x="138" y="248" class="lbl">Rs</text>
-  <text x="135" y="300" class="val">600 Ω</text>
+  <!-- CASO 1: SIN SWAMPING (DISTORSIÓN SEVERA) -->
+  <rect x="485" y="135" width="385" height="110" rx="6" fill="#fff1f2" stroke="#fecdd3" stroke-width="1.2"/>
+  <text x="495" y="155" font-size="12.5" font-weight="bold" fill="#be123c">❌ Caso A: Sin degeneración (RE1 = 0, vbe = 40 mVp)</text>
+  <text x="495" y="173" class="val" style="font-size:12px;">Distorsión armónica de segundo orden: <b>HD2 = Vp / (4·VT)</b></text>
+  <text x="495" y="191" class="val" style="font-size:12px;">HD2 = 40 mV / (4 × 26 mV) = 40 / 104 = <b>38.46% (¡Inaceptable!)</b></text>
+  <text x="495" y="210" class="val" style="font-size:11.5px; fill:#9f1239;">Forma de onda: recorte asimétrico del semiciclo inferior por exponencial.</text>
+  <!-- Mini onda deformada -->
+  <path d="M 750 230 Q 765 200 780 230 Q 795 242 810 230" class="sine-dist"/>
+  <text x="815" y="233" font-size="10" fill="#be123c" font-weight="bold">Deformada</text>
 
-  <path class="wire" d="M180 270 H225"/>
-  <!-- Capacitor de acoplo C1 -->
-  <path class="cap" d="M225 252 V288 M240 252 V288"/>
-  <text x="218" y="242" class="lbl">C1</text>
-  <text x="215" y="304" class="val">10 µF</text>
-  <path class="wire" d="M240 270 H380"/>
+  <!-- CASO 2: CON SWAMPING (ONDA LINEAL PURA) -->
+  <rect x="485" y="255" width="385" height="125" rx="6" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.2"/>
+  <text x="495" y="275" font-size="12.5" font-weight="bold" fill="#15803d">✅ Caso B: Con Swamping (RE1 = 180 Ω, re = 18 Ω)</text>
+  <text x="495" y="295" class="val" style="font-size:12px;">Divisor en la unión: <b>vbe_interna = vi · re / (re + RE1)</b></text>
+  <text x="495" y="313" class="val" style="font-size:12px;">vbe = 40 mV × 18 / (18 + 180) = 40 mV × 0.091 = <b>3.64 mV pico</b></text>
+  <text x="495" y="331" class="val" style="font-size:12px;">Como vbe = 3.64 mV &lt; 5.2 mV: <b>HD2 = 3.64 / 104 = 3.5% &lt; 5%</b></text>
+  <text x="495" y="350" font-size="11.5" font-weight="bold" fill="#15803d">¡Señal de salida perfectamente senoidal e inteligible!</text>
+  <!-- Mini onda senoidal limpia -->
+  <path d="M 750 365 Q 765 345 780 365 Q 795 385 810 365" class="sine-wave"/>
+  <text x="815" y="368" font-size="10" fill="#15803d" font-weight="bold">Limpia</text>
 
-  <!-- Salida con C2 y RL -->
-  <path class="wire" d="M520 215 H680"/>
-  <path class="cap" d="M680 197 V233 M695 197 V233"/>
-  <text x="675" y="187" class="lbl">C2</text>
-  <text x="675" y="248" class="val">10 µF</text>
-
-  <path class="wire" d="M695 215 H780"/>
-  <circle cx="780" cy="215" r="5" class="node"/>
-  <!-- Terminal Vo -->
-  <path class="wire" d="M780 215 H830"/>
-  <circle cx="830" cy="215" r="5" fill="#fff" stroke="#0b69a3" stroke-width="2.5"/>
-  <text x="842" y="220" class="lbl">vo (out)</text>
-
-  <!-- Carga RL -->
-  <path class="wire" d="M780 215 V280"/>
-  <rect x="767" y="280" width="26" height="60" class="res"/>
-  <text x="805" y="312" class="lbl">RL</text>
-  <text x="805" y="330" class="val">10 kΩ</text>
-  <path class="wire" d="M780 340 V440"/>
-
-  <!-- Línea común de Tierra -->
-  <path class="wire" d="M70 440 H780"/>
-  <!-- Símbolo de tierra en centro -->
-  <path class="wire" d="M480 440 V460"/>
-  <path class="gnd" d="M460 460 H500 M468 467 H492 M476 474 H484"/>
+  <!-- FOOTER -->
+  <rect x="35" y="415" width="850" height="75" rx="6" fill="#f0f9ff" stroke="#7dd3fc" stroke-width="1.5"/>
+  <text x="50" y="438" font-weight="bold" fill="#0369a1" font-size="13">💡 LA ANALOGÍA DEL PLANO INCLINADO CURVO (Profesor Fredy &amp; Malvino):</text>
+  <text x="50" y="458" class="val" style="font-size:12px;">La curva exponencial de un diodo o BJT parece recta solo si caminas pasitos diminutos (≤ 5 mV). Si das zancadas de 40 mV,</text>
+  <text x="50" y="476" class="val" style="font-size:12px;">te estrellas con la curva y la onda se distorsiona. El resistor de swamping RE1 absorbe el 90% de la zancada y salva la señal.</text>
 </svg>
 </div>
 
@@ -3964,141 +4889,182 @@
       </div>
     
 
-    <div class="schematic-container"><svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520" role="img" aria-label="Amplificador Emisor Común con Bypass">
+    <div class="schematic-container"><svg xmlns="http://www.w3.org/2000/svg" width="940" height="520" viewBox="0 0 940 520" role="img" aria-label="Amplificador Cascada CE-CE de Dos Etapas">
   <defs>
     <style>
       .bg { fill: #ffffff; }
+      .card-border { fill: none; stroke: #d9e2ec; stroke-width: 1.5; }
       .title { font: bold 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
       .subtitle { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #627d98; }
-      .wire { stroke: #243b53; stroke-width: 2.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.5; }
-      .cap { stroke: #0b69a3; stroke-width: 3.5; }
+      .wire { stroke: #243b53; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.2; }
+      .cap { stroke: #0b69a3; stroke-width: 3.2; }
       .node { fill: #102a43; }
-      .trans-circle { fill: #f0f4f8; stroke: #9fb3c8; stroke-width: 1.8; }
-      .trans-line { stroke: #0b69a3; stroke-width: 3; stroke-linecap: round; }
+      .trans-circle { fill: #f0f4f8; stroke: #9fb3c8; stroke-width: 1.6; }
+      .trans-line { stroke: #0b69a3; stroke-width: 2.6; stroke-linecap: round; }
       .trans-arrow { fill: #0b69a3; }
-      .lbl { font: bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #0b69a3; }
-      .val { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
-      .gnd { stroke: #243b53; stroke-width: 2.5; stroke-linecap: round; }
-      .ac-source { fill: #f0f4f8; stroke: #243b53; stroke-width: 2.5; }
+      .lbl { font: bold 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #0b69a3; }
+      .val { font: 11.5px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
+      .gnd { stroke: #243b53; stroke-width: 2.2; stroke-linecap: round; }
+      .stage-box { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.2; stroke-dasharray: 4,4; rx: 8px; }
+      .badge { fill: #e0f2fe; stroke: #0284c7; stroke-width: 1.5; rx: 4px; }
     </style>
   </defs>
 
-  <rect width="900" height="520" rx="14" class="bg"/>
-  <rect x="15" y="15" width="870" height="490" rx="10" fill="none" stroke="#d9e2ec" stroke-width="1.5"/>
+  <rect width="940" height="520" rx="14" class="bg"/>
+  <rect x="15" y="15" width="910" height="490" rx="10" class="card-border"/>
 
-  <!-- Título y metadatos estilo simulación -->
-  <text x="35" y="48" class="title">Esquemático 1 · Emisor Común (CE) con Bypass Total</text>
-  <text x="35" y="72" class="subtitle">Configuración clásica de alta ganancia de tensión y desfase de 180°</text>
+  <text x="35" y="48" class="title">Amplificador Multietapa en Cascada CE–CE con Acoplamiento Capacitivo</text>
+  <text x="35" y="70" class="subtitle">Efecto de carga inter-etapa: la impedancia Zi2 carga al colector de la Etapa 1 reduciendo su ganancia</text>
 
   <!-- Rail VCC -->
-  <path class="wire" d="M380 95 H520 M520 95 H600"/>
-  <circle cx="600" cy="95" r="5" class="node"/>
-  <text x="612" y="100" class="lbl">+VCC = 15V</text>
+  <path class="wire" d="M120 95 H800"/>
+  <circle cx="800" cy="95" r="4.5" class="node"/>
+  <text x="810" y="100" class="lbl">+VCC = 15V</text>
+
+  <!-- ETAPA 1 (RECUADRO) -->
+  <rect x="35" y="85" width="375" height="320" class="stage-box"/>
+  <text x="50" y="112" font-size="13" font-weight="bold" fill="#0369a1">ETAPA 1 (Emisor Común Q1)</text>
+
+  <!-- Entrada vi y C1 -->
+  <path class="wire" d="M35 220 H65"/>
+  <line x1="65" y1="208" x2="65" y2="232" class="cap"/>
+  <line x1="72" y1="208" x2="72" y2="232" class="cap"/>
+  <text x="60" y="200" class="lbl">C1</text>
+  <path class="wire" d="M72 220 H115"/>
+  <circle cx="115" cy="220" r="4.5" class="node"/>
 
   <!-- Divisor R1 y R2 -->
-  <path class="wire" d="M380 95 V130"/>
-  <rect x="367" y="130" width="26" height="60" class="res"/>
-  <text x="310" y="165" class="lbl">R1</text>
-  <text x="310" y="182" class="val">47 kΩ</text>
+  <path class="wire" d="M115 95 V130"/>
+  <rect x="103" y="130" width="24" height="45" class="res"/>
+  <text x="75" y="155" class="lbl">R1</text>
+  <path class="wire" d="M115 175 V220 M115 220 V255"/>
+  <rect x="103" y="255" width="24" height="45" class="res"/>
+  <text x="75" y="280" class="lbl">R2</text>
+  <path class="wire" d="M115 300 V340"/>
+  <line x1="102" y1="340" x2="128" y2="340" class="gnd"/>
 
-  <path class="wire" d="M380 190 V270 M380 270 V330"/>
-  <circle cx="380" cy="270" r="5" class="node"/>
+  <!-- Transistor Q1 -->
+  <path class="wire" d="M115 220 H170"/>
+  <circle cx="190" cy="220" r="30" class="trans-circle"/>
+  <path class="trans-line" d="M175 204 V236"/>
+  <path class="trans-line" d="M175 210 L205 188"/>
+  <path class="wire" d="M205 188 V175"/>
+  <path class="trans-line" d="M175 230 L205 252"/>
+  <polygon points="196,245 207,254 193,254" class="trans-arrow"/>
+  <text x="180" y="215" class="lbl">Q1</text>
 
-  <rect x="367" y="330" width="26" height="60" class="res"/>
-  <text x="310" y="365" class="lbl">R2</text>
-  <text x="310" y="382" class="val">10 kΩ</text>
-  <path class="wire" d="M380 390 V440"/>
+  <!-- RC1 -->
+  <path class="wire" d="M205 95 V130"/>
+  <rect x="193" y="130" width="24" height="45" class="res"/>
+  <text x="225" y="155" class="lbl">RC1</text>
+  <circle cx="205" cy="180" r="4.5" class="node"/>
 
-  <!-- Rama de Colector RC -->
-  <path class="wire" d="M520 95 V130"/>
-  <rect x="507" y="130" width="26" height="60" class="res"/>
-  <text x="545" y="165" class="lbl">RC</text>
-  <text x="545" y="182" class="val">3.3 kΩ</text>
+  <!-- RE1 y CE1 -->
+  <path class="wire" d="M205 252 V275"/>
+  <circle cx="205" cy="275" r="4" class="node"/>
+  <path class="wire" d="M205 275 V295"/>
+  <rect x="193" y="295" width="24" height="45" class="res"/>
+  <text x="165" y="320" class="lbl">RE1</text>
+  <path class="wire" d="M205 340 V370"/>
 
-  <path class="wire" d="M520 190 V215"/>
-  <circle cx="520" cy="215" r="5" class="node"/>
+  <path class="wire" d="M205 275 H255 V305"/>
+  <line x1="247" y1="305" x2="263" y2="305" class="cap"/>
+  <line x1="247" y1="312" x2="263" y2="312" class="cap"/>
+  <text x="268" y="312" class="lbl">CE1</text>
+  <path class="wire" d="M255 312 V370 H205"/>
+  <circle cx="205" cy="370" r="4" class="node"/>
+  <path class="wire" d="M205 370 V390"/>
+  <line x1="192" y1="390" x2="218" y2="390" class="gnd"/>
 
-  <!-- Transistor Q1 NPN -->
-  <circle cx="480" cy="270" r="48" class="trans-circle"/>
-  <!-- Base vertical -->
-  <path class="trans-line" d="M460 245 V295"/>
-  <!-- Conexión base exterior -->
-  <path class="wire" d="M380 270 H460"/>
-  <!-- Colector diagonal -->
-  <path class="trans-line" d="M460 255 L520 215"/>
-  <!-- Emisor diagonal -->
-  <path class="trans-line" d="M460 285 L520 325"/>
-  <!-- Flecha emisor -->
-  <polygon points="505,320 520,325 515,310" class="trans-arrow"/>
+  <!-- ACOPLAMIENTO INTER-ETAPA (CAPACITOR Cc) -->
+  <path class="wire" d="M205 180 H440"/>
+  <line x1="440" y1="168" x2="440" y2="192" class="cap"/>
+  <line x1="447" y1="168" x2="447" y2="192" class="cap"/>
+  <text x="430" y="160" class="lbl" style="fill:#d9381e;">Cc (Acople)</text>
+  <path class="wire" d="M447 180 H500"/>
+  <circle cx="500" cy="180" r="4.5" class="node"/>
 
-  <text x="440" y="240" class="val" style="font-size:11px;font-weight:bold;">B</text>
-  <text x="530" y="215" class="val" style="font-size:11px;font-weight:bold;">C</text>
-  <text x="530" y="335" class="val" style="font-size:11px;font-weight:bold;">E</text>
-  <text x="430" y="335" class="lbl">Q1 · 2N3904</text>
-  <text x="430" y="352" class="val">β = 120</text>
+  <!-- ETAPA 2 (RECUADRO) -->
+  <rect x="475" y="85" width="440" height="320" class="stage-box"/>
+  <text x="490" y="112" font-size="13" font-weight="bold" fill="#0369a1">ETAPA 2 (Emisor Común Q2) &amp; Carga RL</text>
 
-  <!-- Rama de Emisor RE y CE -->
-  <path class="wire" d="M520 325 V355 M520 355 H610"/>
-  <circle cx="520" cy="355" r="5" class="node"/>
+  <!-- Divisor R3 y R4 -->
+  <path class="wire" d="M500 95 V130"/>
+  <rect x="488" y="130" width="24" height="45" class="res"/>
+  <text x="460" y="155" class="lbl">R3</text>
+  <path class="wire" d="M500 175 V180 M500 180 V255"/>
+  <rect x="488" y="255" width="24" height="45" class="res"/>
+  <text x="460" y="280" class="lbl">R4</text>
+  <path class="wire" d="M500 300 V340"/>
+  <line x1="487" y1="340" x2="513" y2="340" class="gnd"/>
 
-  <rect x="507" y="365" width="26" height="60" class="res"/>
-  <path class="wire" d="M520 355 V365 M520 425 V440"/>
-  <text x="460" y="395" class="lbl">RE</text>
-  <text x="460" y="412" class="val">1.2 kΩ</text>
+  <!-- Transistor Q2 -->
+  <path class="wire" d="M500 180 H555"/>
+  <circle cx="575" cy="180" r="30" class="trans-circle"/>
+  <path class="trans-line" d="M560 164 V196"/>
+  <path class="trans-line" d="M560 170 L590 148"/>
+  <path class="wire" d="M590 148 V135"/>
+  <path class="trans-line" d="M560 190 L590 212"/>
+  <polygon points="581,205 592,214 578,214" class="trans-arrow"/>
+  <text x="565" y="175" class="lbl">Q2</text>
 
-  <!-- Capacitor Bypass CE -->
-  <path class="wire" d="M610 355 V385 M610 405 V440"/>
-  <path class="cap" d="M592 385 H628 M592 405 H628"/>
-  <text x="638" y="395" class="lbl">CE</text>
-  <text x="638" y="412" class="val">47 µF</text>
+  <!-- RC2 -->
+  <path class="wire" d="M590 95 V130"/>
+  <rect x="578" y="130" width="24" height="45" class="res"/>
+  <text x="610" y="155" class="lbl">RC2</text>
+  <circle cx="590" cy="145" r="4.5" class="node"/>
 
-  <!-- Entrada con Generador vs, Rs y C1 -->
-  <!-- Fuente vs -->
-  <circle cx="70" cy="270" r="22" class="ac-source"/>
-  <path d="M58 270 Q64 260 70 270 T82 270" fill="none" stroke="#243b53" stroke-width="2.5"/>
-  <text x="45" y="315" class="lbl">vs</text>
-  <text x="35" y="332" class="val">10 mVp</text>
-  <path class="wire" d="M70 292 V440"/>
+  <!-- RE2 y CE2 -->
+  <path class="wire" d="M590 212 V245"/>
+  <circle cx="590" cy="245" r="4" class="node"/>
+  <path class="wire" d="M590 245 V275"/>
+  <rect x="578" y="275" width="24" height="45" class="res"/>
+  <text x="550" y="300" class="lbl">RE2</text>
+  <path class="wire" d="M590 320 V350"/>
 
-  <path class="wire" d="M70 248 V270 M92 270 H130"/>
-  <!-- Resistencia interna Rs -->
-  <rect x="130" y="257" width="50" height="26" class="res"/>
-  <text x="138" y="248" class="lbl">Rs</text>
-  <text x="135" y="300" class="val">600 Ω</text>
+  <path class="wire" d="M590 245 H640 V285"/>
+  <line x1="632" y1="285" x2="648" y2="285" class="cap"/>
+  <line x1="632" y1="292" x2="648" y2="292" class="cap"/>
+  <text x="653" y="292" class="lbl">CE2</text>
+  <path class="wire" d="M640 292 V350 H590"/>
+  <circle cx="590" cy="350" r="4" class="node"/>
+  <path class="wire" d="M590 350 V375"/>
+  <line x1="577" y1="375" x2="603" y2="375" class="gnd"/>
 
-  <path class="wire" d="M180 270 H225"/>
-  <!-- Capacitor de acoplo C1 -->
-  <path class="cap" d="M225 252 V288 M240 252 V288"/>
-  <text x="218" y="242" class="lbl">C1</text>
-  <text x="215" y="304" class="val">10 µF</text>
-  <path class="wire" d="M240 270 H380"/>
+  <!-- Salida C3 hacia RL -->
+  <path class="wire" d="M590 145 H720"/>
+  <line x1="720" y1="133" x2="720" y2="157" class="cap"/>
+  <line x1="727" y1="133" x2="727" y2="157" class="cap"/>
+  <text x="715" y="125" class="lbl">C3</text>
+  <path class="wire" d="M727 145 H780"/>
+  <circle cx="780" cy="145" r="4.5" class="node"/>
 
-  <!-- Salida con C2 y RL -->
-  <path class="wire" d="M520 215 H680"/>
-  <path class="cap" d="M680 197 V233 M695 197 V233"/>
-  <text x="675" y="187" class="lbl">C2</text>
-  <text x="675" y="248" class="val">10 µF</text>
+  <!-- RL -->
+  <path class="wire" d="M780 145 V185"/>
+  <rect x="768" y="185" width="24" height="50" class="res"/>
+  <text x="800" y="210" class="lbl">RL</text>
+  <path class="wire" d="M780 235 V280"/>
+  <line x1="767" y1="280" x2="793" y2="280" class="gnd"/>
 
-  <path class="wire" d="M695 215 H780"/>
-  <circle cx="780" cy="215" r="5" class="node"/>
-  <!-- Terminal Vo -->
-  <path class="wire" d="M780 215 H830"/>
-  <circle cx="830" cy="215" r="5" fill="#fff" stroke="#0b69a3" stroke-width="2.5"/>
-  <text x="842" y="220" class="lbl">vo (out)</text>
+  <!-- Salida vo -->
+  <path class="wire" d="M780 145 H860"/>
+  <circle cx="860" cy="145" r="5" class="node"/>
+  <text x="870" y="150" class="lbl" style="fill:#d9381e;">vo (AC)</text>
+  <text x="870" y="168" class="val">Fase = 0°</text>
 
-  <!-- Carga RL -->
-  <path class="wire" d="M780 215 V280"/>
-  <rect x="767" y="280" width="26" height="60" class="res"/>
-  <text x="805" y="312" class="lbl">RL</text>
-  <text x="805" y="330" class="val">10 kΩ</text>
-  <path class="wire" d="M780 340 V440"/>
+  <!-- LEYENDA DEL EFECTO DE CARGA -->
+  <rect x="300" y="315" width="260" height="75" rx="6" fill="#fff7ed" stroke="#fed7aa"/>
+  <text x="310" y="335" font-size="11.5" font-weight="bold" fill="#c2410c">⚠️ EFECTO DE CARGA INTER-ETAPA:</text>
+  <text x="310" y="352" font-size="11" class="val">El colector de Q1 no ve solo a RC1,</text>
+  <text x="310" y="367" font-size="11" font-weight="bold" fill="#9a3412">ve: rL1 = RC1 || Zi2 = RC1 || (R3 || R4 || Zb2)</text>
+  <text x="310" y="382" font-size="10.5" class="val">Por tanto: Av1 = -rL1 / re1 (atenuada!).</text>
 
-  <!-- Línea común de Tierra -->
-  <path class="wire" d="M70 440 H780"/>
-  <!-- Símbolo de tierra en centro -->
-  <path class="wire" d="M480 440 V460"/>
-  <path class="gnd" d="M460 460 H500 M468 467 H492 M476 474 H484"/>
+  <!-- FOOTER -->
+  <rect x="35" y="415" width="875" height="75" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="50" y="438" font-weight="bold" fill="#1e40af" font-size="13">💡 LA REGLA DE ORO DE MULTIETAPAS (Profesor Fredy &amp; Boylestad Sec. 5.14):</text>
+  <text x="50" y="458" class="val" style="font-size:12px;">1. La ganancia total es el producto de las ganancias individuales CON CARGA: Av = Av1(con Zi2) · Av2(con RL).</text>
+  <text x="50" y="476" class="val" style="font-size:12px;">2. Cada etapa inversora desfasa 180°. Dos etapas en cascada entregan un desfase total de 360° = 0° (la salida está en fase con la entrada).</text>
 </svg>
 </div>
 
@@ -4163,110 +5129,182 @@
       </div>
     
 
-    <div class="schematic-container"><svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520" role="img" aria-label="Seguidor de Emisor Colector Común">
+    <div class="schematic-container"><svg xmlns="http://www.w3.org/2000/svg" width="940" height="520" viewBox="0 0 940 520" role="img" aria-label="Amplificador Cascada CE-CE de Dos Etapas">
   <defs>
     <style>
       .bg { fill: #ffffff; }
+      .card-border { fill: none; stroke: #d9e2ec; stroke-width: 1.5; }
       .title { font: bold 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
       .subtitle { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #627d98; }
-      .wire { stroke: #243b53; stroke-width: 2.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.5; }
-      .cap { stroke: #0b69a3; stroke-width: 3.5; }
+      .wire { stroke: #243b53; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.2; }
+      .cap { stroke: #0b69a3; stroke-width: 3.2; }
       .node { fill: #102a43; }
-      .trans-circle { fill: #f0f4f8; stroke: #9fb3c8; stroke-width: 1.8; }
-      .trans-line { stroke: #0b69a3; stroke-width: 3; stroke-linecap: round; }
+      .trans-circle { fill: #f0f4f8; stroke: #9fb3c8; stroke-width: 1.6; }
+      .trans-line { stroke: #0b69a3; stroke-width: 2.6; stroke-linecap: round; }
       .trans-arrow { fill: #0b69a3; }
-      .lbl { font: bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #0b69a3; }
-      .val { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
-      .gnd { stroke: #243b53; stroke-width: 2.5; stroke-linecap: round; }
+      .lbl { font: bold 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #0b69a3; }
+      .val { font: 11.5px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
+      .gnd { stroke: #243b53; stroke-width: 2.2; stroke-linecap: round; }
+      .stage-box { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.2; stroke-dasharray: 4,4; rx: 8px; }
+      .badge { fill: #e0f2fe; stroke: #0284c7; stroke-width: 1.5; rx: 4px; }
     </style>
   </defs>
 
-  <rect width="900" height="520" rx="14" class="bg"/>
-  <rect x="15" y="15" width="870" height="490" rx="10" fill="none" stroke="#d9e2ec" stroke-width="1.5"/>
+  <rect width="940" height="520" rx="14" class="bg"/>
+  <rect x="15" y="15" width="910" height="490" rx="10" class="card-border"/>
 
-  <text x="35" y="48" class="title">Esquemático 3 · Colector Común (CC) / Seguidor de Emisor</text>
-  <text x="35" y="72" class="subtitle">Buffer de alta impedancia de entrada, muy baja impedancia de salida y ganancia de tensión Av ≈ +1</text>
+  <text x="35" y="48" class="title">Amplificador Multietapa en Cascada CE–CE con Acoplamiento Capacitivo</text>
+  <text x="35" y="70" class="subtitle">Efecto de carga inter-etapa: la impedancia Zi2 carga al colector de la Etapa 1 reduciendo su ganancia</text>
 
   <!-- Rail VCC -->
-  <path class="wire" d="M380 95 H520 M520 95 H600"/>
-  <circle cx="600" cy="95" r="5" class="node"/>
-  <text x="612" y="100" class="lbl">+VCC = 12V</text>
+  <path class="wire" d="M120 95 H800"/>
+  <circle cx="800" cy="95" r="4.5" class="node"/>
+  <text x="810" y="100" class="lbl">+VCC = 15V</text>
+
+  <!-- ETAPA 1 (RECUADRO) -->
+  <rect x="35" y="85" width="375" height="320" class="stage-box"/>
+  <text x="50" y="112" font-size="13" font-weight="bold" fill="#0369a1">ETAPA 1 (Emisor Común Q1)</text>
+
+  <!-- Entrada vi y C1 -->
+  <path class="wire" d="M35 220 H65"/>
+  <line x1="65" y1="208" x2="65" y2="232" class="cap"/>
+  <line x1="72" y1="208" x2="72" y2="232" class="cap"/>
+  <text x="60" y="200" class="lbl">C1</text>
+  <path class="wire" d="M72 220 H115"/>
+  <circle cx="115" cy="220" r="4.5" class="node"/>
 
   <!-- Divisor R1 y R2 -->
-  <path class="wire" d="M380 95 V130"/>
-  <rect x="367" y="130" width="26" height="60" class="res"/>
-  <text x="310" y="165" class="lbl">R1</text>
-  <text x="310" y="182" class="val">100 kΩ</text>
+  <path class="wire" d="M115 95 V130"/>
+  <rect x="103" y="130" width="24" height="45" class="res"/>
+  <text x="75" y="155" class="lbl">R1</text>
+  <path class="wire" d="M115 175 V220 M115 220 V255"/>
+  <rect x="103" y="255" width="24" height="45" class="res"/>
+  <text x="75" y="280" class="lbl">R2</text>
+  <path class="wire" d="M115 300 V340"/>
+  <line x1="102" y1="340" x2="128" y2="340" class="gnd"/>
 
-  <path class="wire" d="M380 190 V270 M380 270 V330"/>
-  <circle cx="380" cy="270" r="5" class="node"/>
+  <!-- Transistor Q1 -->
+  <path class="wire" d="M115 220 H170"/>
+  <circle cx="190" cy="220" r="30" class="trans-circle"/>
+  <path class="trans-line" d="M175 204 V236"/>
+  <path class="trans-line" d="M175 210 L205 188"/>
+  <path class="wire" d="M205 188 V175"/>
+  <path class="trans-line" d="M175 230 L205 252"/>
+  <polygon points="196,245 207,254 193,254" class="trans-arrow"/>
+  <text x="180" y="215" class="lbl">Q1</text>
 
-  <rect x="367" y="330" width="26" height="60" class="res"/>
-  <text x="310" y="365" class="lbl">R2</text>
-  <text x="310" y="382" class="val">100 kΩ</text>
-  <path class="wire" d="M380 390 V440"/>
+  <!-- RC1 -->
+  <path class="wire" d="M205 95 V130"/>
+  <rect x="193" y="130" width="24" height="45" class="res"/>
+  <text x="225" y="155" class="lbl">RC1</text>
+  <circle cx="205" cy="180" r="4.5" class="node"/>
 
-  <!-- Colector conectado directo a VCC (con bypass AC a tierra) -->
-  <path class="wire" d="M520 95 V220"/>
-  <circle cx="520" cy="150" r="5" class="node"/>
-  <!-- Capacitor de desacoplo de fuente a tierra -->
-  <path class="wire" d="M520 150 H590 V170 M590 190 V210 H590"/>
-  <path class="cap" d="M575 170 H605 M575 190 H605"/>
-  <path class="gnd" d="M580 210 H600 M584 215 H596 M588 220 H592"/>
-  <text x="615" y="185" class="lbl">Cdec</text>
-  <text x="615" y="200" class="val">100 nF</text>
+  <!-- RE1 y CE1 -->
+  <path class="wire" d="M205 252 V275"/>
+  <circle cx="205" cy="275" r="4" class="node"/>
+  <path class="wire" d="M205 275 V295"/>
+  <rect x="193" y="295" width="24" height="45" class="res"/>
+  <text x="165" y="320" class="lbl">RE1</text>
+  <path class="wire" d="M205 340 V370"/>
 
-  <!-- Transistor Q1 NPN -->
-  <circle cx="480" cy="270" r="48" class="trans-circle"/>
-  <path class="trans-line" d="M460 245 V295"/>
-  <path class="wire" d="M380 270 H460"/>
-  <path class="trans-line" d="M460 255 L520 220"/>
-  <path class="trans-line" d="M460 285 L520 325"/>
-  <polygon points="505,320 520,325 515,310" class="trans-arrow"/>
+  <path class="wire" d="M205 275 H255 V305"/>
+  <line x1="247" y1="305" x2="263" y2="305" class="cap"/>
+  <line x1="247" y1="312" x2="263" y2="312" class="cap"/>
+  <text x="268" y="312" class="lbl">CE1</text>
+  <path class="wire" d="M255 312 V370 H205"/>
+  <circle cx="205" cy="370" r="4" class="node"/>
+  <path class="wire" d="M205 370 V390"/>
+  <line x1="192" y1="390" x2="218" y2="390" class="gnd"/>
 
-  <text x="430" y="335" class="lbl">Q1 · 2N3904</text>
-  <text x="430" y="352" class="val">β = 150</text>
+  <!-- ACOPLAMIENTO INTER-ETAPA (CAPACITOR Cc) -->
+  <path class="wire" d="M205 180 H440"/>
+  <line x1="440" y1="168" x2="440" y2="192" class="cap"/>
+  <line x1="447" y1="168" x2="447" y2="192" class="cap"/>
+  <text x="430" y="160" class="lbl" style="fill:#d9381e;">Cc (Acople)</text>
+  <path class="wire" d="M447 180 H500"/>
+  <circle cx="500" cy="180" r="4.5" class="node"/>
 
-  <!-- Resistencia de Emisor RE (No hay RC!) -->
-  <path class="wire" d="M520 325 V350"/>
-  <circle cx="520" cy="350" r="5" class="node"/>
-  <rect x="507" y="350" width="26" height="60" class="res"/>
-  <text x="460" y="385" class="lbl">RE</text>
-  <text x="450" y="402" class="val">2.2 kΩ</text>
-  <path class="wire" d="M520 410 V440"/>
+  <!-- ETAPA 2 (RECUADRO) -->
+  <rect x="475" y="85" width="440" height="320" class="stage-box"/>
+  <text x="490" y="112" font-size="13" font-weight="bold" fill="#0369a1">ETAPA 2 (Emisor Común Q2) &amp; Carga RL</text>
 
-  <!-- Entrada -->
-  <path class="cap" d="M225 252 V288 M240 252 V288"/>
-  <text x="218" y="242" class="lbl">C1</text>
-  <text x="215" y="304" class="val">10 µF</text>
-  <path class="wire" d="M150 270 H225 M240 270 H380"/>
-  <circle cx="140" cy="270" r="5" fill="#fff" stroke="#0b69a3" stroke-width="2.5"/>
-  <text x="95" y="275" class="lbl">vi (in)</text>
+  <!-- Divisor R3 y R4 -->
+  <path class="wire" d="M500 95 V130"/>
+  <rect x="488" y="130" width="24" height="45" class="res"/>
+  <text x="460" y="155" class="lbl">R3</text>
+  <path class="wire" d="M500 175 V180 M500 180 V255"/>
+  <rect x="488" y="255" width="24" height="45" class="res"/>
+  <text x="460" y="280" class="lbl">R4</text>
+  <path class="wire" d="M500 300 V340"/>
+  <line x1="487" y1="340" x2="513" y2="340" class="gnd"/>
 
-  <!-- Salida tomada DIRECTAMENTE DEL EMISOR hacia C2 y RL -->
-  <path class="wire" d="M520 350 H670"/>
-  <path class="cap" d="M670 332 V368 M685 332 V368"/>
-  <text x="665" y="322" class="lbl">C2</text>
-  <text x="665" y="384" class="val">47 µF</text>
+  <!-- Transistor Q2 -->
+  <path class="wire" d="M500 180 H555"/>
+  <circle cx="575" cy="180" r="30" class="trans-circle"/>
+  <path class="trans-line" d="M560 164 V196"/>
+  <path class="trans-line" d="M560 170 L590 148"/>
+  <path class="wire" d="M590 148 V135"/>
+  <path class="trans-line" d="M560 190 L590 212"/>
+  <polygon points="581,205 592,214 578,214" class="trans-arrow"/>
+  <text x="565" y="175" class="lbl">Q2</text>
 
-  <path class="wire" d="M685 350 H770"/>
-  <circle cx="770" cy="350" r="5" class="node"/>
-  <path class="wire" d="M770 350 H830"/>
-  <circle cx="830" cy="350" r="5" fill="#fff" stroke="#0b69a3" stroke-width="2.5"/>
-  <text x="842" y="355" class="lbl">vo (out)</text>
+  <!-- RC2 -->
+  <path class="wire" d="M590 95 V130"/>
+  <rect x="578" y="130" width="24" height="45" class="res"/>
+  <text x="610" y="155" class="lbl">RC2</text>
+  <circle cx="590" cy="145" r="4.5" class="node"/>
 
-  <!-- Carga RL baja -->
-  <path class="wire" d="M770 350 V375"/>
-  <rect x="757" y="375" width="26" height="45" class="res"/>
-  <text x="795" y="400" class="lbl">RL</text>
-  <text x="795" y="417" class="val">330 Ω</text>
-  <path class="wire" d="M770 420 V440"/>
+  <!-- RE2 y CE2 -->
+  <path class="wire" d="M590 212 V245"/>
+  <circle cx="590" cy="245" r="4" class="node"/>
+  <path class="wire" d="M590 245 V275"/>
+  <rect x="578" y="275" width="24" height="45" class="res"/>
+  <text x="550" y="300" class="lbl">RE2</text>
+  <path class="wire" d="M590 320 V350"/>
 
-  <!-- Tierra -->
-  <path class="wire" d="M380 440 H770"/>
-  <path class="wire" d="M520 440 V460"/>
-  <path class="gnd" d="M500 460 H540 M508 467 H532 M516 474 H524"/>
+  <path class="wire" d="M590 245 H640 V285"/>
+  <line x1="632" y1="285" x2="648" y2="285" class="cap"/>
+  <line x1="632" y1="292" x2="648" y2="292" class="cap"/>
+  <text x="653" y="292" class="lbl">CE2</text>
+  <path class="wire" d="M640 292 V350 H590"/>
+  <circle cx="590" cy="350" r="4" class="node"/>
+  <path class="wire" d="M590 350 V375"/>
+  <line x1="577" y1="375" x2="603" y2="375" class="gnd"/>
+
+  <!-- Salida C3 hacia RL -->
+  <path class="wire" d="M590 145 H720"/>
+  <line x1="720" y1="133" x2="720" y2="157" class="cap"/>
+  <line x1="727" y1="133" x2="727" y2="157" class="cap"/>
+  <text x="715" y="125" class="lbl">C3</text>
+  <path class="wire" d="M727 145 H780"/>
+  <circle cx="780" cy="145" r="4.5" class="node"/>
+
+  <!-- RL -->
+  <path class="wire" d="M780 145 V185"/>
+  <rect x="768" y="185" width="24" height="50" class="res"/>
+  <text x="800" y="210" class="lbl">RL</text>
+  <path class="wire" d="M780 235 V280"/>
+  <line x1="767" y1="280" x2="793" y2="280" class="gnd"/>
+
+  <!-- Salida vo -->
+  <path class="wire" d="M780 145 H860"/>
+  <circle cx="860" cy="145" r="5" class="node"/>
+  <text x="870" y="150" class="lbl" style="fill:#d9381e;">vo (AC)</text>
+  <text x="870" y="168" class="val">Fase = 0°</text>
+
+  <!-- LEYENDA DEL EFECTO DE CARGA -->
+  <rect x="300" y="315" width="260" height="75" rx="6" fill="#fff7ed" stroke="#fed7aa"/>
+  <text x="310" y="335" font-size="11.5" font-weight="bold" fill="#c2410c">⚠️ EFECTO DE CARGA INTER-ETAPA:</text>
+  <text x="310" y="352" font-size="11" class="val">El colector de Q1 no ve solo a RC1,</text>
+  <text x="310" y="367" font-size="11" font-weight="bold" fill="#9a3412">ve: rL1 = RC1 || Zi2 = RC1 || (R3 || R4 || Zb2)</text>
+  <text x="310" y="382" font-size="10.5" class="val">Por tanto: Av1 = -rL1 / re1 (atenuada!).</text>
+
+  <!-- FOOTER -->
+  <rect x="35" y="415" width="875" height="75" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="50" y="438" font-weight="bold" fill="#1e40af" font-size="13">💡 LA REGLA DE ORO DE MULTIETAPAS (Profesor Fredy &amp; Boylestad Sec. 5.14):</text>
+  <text x="50" y="458" class="val" style="font-size:12px;">1. La ganancia total es el producto de las ganancias individuales CON CARGA: Av = Av1(con Zi2) · Av2(con RL).</text>
+  <text x="50" y="476" class="val" style="font-size:12px;">2. Cada etapa inversora desfasa 180°. Dos etapas en cascada entregan un desfase total de 360° = 0° (la salida está en fase con la entrada).</text>
 </svg>
 </div>
 
@@ -4334,110 +5372,144 @@
       </div>
     
 
-    <div class="schematic-container"><svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520" role="img" aria-label="Seguidor de Emisor Colector Común">
+    <div class="schematic-container"><svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" role="img" aria-label="Par Darlington y Par Sziklai">
   <defs>
     <style>
       .bg { fill: #ffffff; }
+      .card-border { fill: none; stroke: #d9e2ec; stroke-width: 1.5; }
       .title { font: bold 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
       .subtitle { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #627d98; }
-      .wire { stroke: #243b53; stroke-width: 2.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.5; }
-      .cap { stroke: #0b69a3; stroke-width: 3.5; }
+      .wire { stroke: #243b53; stroke-width: 2.6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.4; }
       .node { fill: #102a43; }
       .trans-circle { fill: #f0f4f8; stroke: #9fb3c8; stroke-width: 1.8; }
       .trans-line { stroke: #0b69a3; stroke-width: 3; stroke-linecap: round; }
       .trans-arrow { fill: #0b69a3; }
       .lbl { font: bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #0b69a3; }
-      .val { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
-      .gnd { stroke: #243b53; stroke-width: 2.5; stroke-linecap: round; }
+      .val { font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
+      .term-lbl { font: bold 15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #d9381e; }
+      .box-panel { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.5; rx: 8px; }
+      .badge-npn { fill: #e0f2fe; stroke: #0284c7; stroke-width: 1.5; rx: 6px; }
+      .badge-pnp { fill: #fdf2f8; stroke: #db2777; stroke-width: 1.5; rx: 6px; }
     </style>
   </defs>
 
-  <rect width="900" height="520" rx="14" class="bg"/>
-  <rect x="15" y="15" width="870" height="490" rx="10" fill="none" stroke="#d9e2ec" stroke-width="1.5"/>
+  <rect width="920" height="520" rx="14" class="bg"/>
+  <rect x="15" y="15" width="890" height="490" rx="10" class="card-border"/>
 
-  <text x="35" y="48" class="title">Esquemático 3 · Colector Común (CC) / Seguidor de Emisor</text>
-  <text x="35" y="72" class="subtitle">Buffer de alta impedancia de entrada, muy baja impedancia de salida y ganancia de tensión Av ≈ +1</text>
+  <text x="35" y="48" class="title">Configuraciones de Super-Beta: Par Darlington vs Par Sziklai</text>
+  <text x="35" y="70" class="subtitle">Multiplicación compuesta de ganancia de corriente (β_total ≈ β1 · β2) e impedancias astronómicas</text>
 
-  <!-- Rail VCC -->
-  <path class="wire" d="M380 95 H520 M520 95 H600"/>
-  <circle cx="600" cy="95" r="5" class="node"/>
-  <text x="612" y="100" class="lbl">+VCC = 12V</text>
+  <!-- PANEL IZQUIERDO: PAR DARLINGTON (NPN + NPN) -->
+  <rect x="35" y="90" width="415" height="305" class="box-panel"/>
+  <text x="50" y="118" font-size="15" font-weight="bold" fill="#0369a1">1. Par Darlington Clásico (NPN + NPN)</text>
+  <text x="50" y="136" class="val">Referencia: Boylestad Sec. 5.17 · Colectores unidos</text>
 
-  <!-- Divisor R1 y R2 -->
-  <path class="wire" d="M380 95 V130"/>
-  <rect x="367" y="130" width="26" height="60" class="res"/>
-  <text x="310" y="165" class="lbl">R1</text>
-  <text x="310" y="182" class="val">100 kΩ</text>
+  <!-- Colector Común C -->
+  <path class="wire" d="M190 150 V185 M300 150 V240 M190 150 H300 M245 150 V125"/>
+  <circle cx="245" cy="125" r="4.5" class="node"/>
+  <text x="255" y="130" class="term-lbl">C (Colector Común)</text>
 
-  <path class="wire" d="M380 190 V270 M380 270 V330"/>
-  <circle cx="380" cy="270" r="5" class="node"/>
-
-  <rect x="367" y="330" width="26" height="60" class="res"/>
-  <text x="310" y="365" class="lbl">R2</text>
-  <text x="310" y="382" class="val">100 kΩ</text>
-  <path class="wire" d="M380 390 V440"/>
-
-  <!-- Colector conectado directo a VCC (con bypass AC a tierra) -->
-  <path class="wire" d="M520 95 V220"/>
-  <circle cx="520" cy="150" r="5" class="node"/>
-  <!-- Capacitor de desacoplo de fuente a tierra -->
-  <path class="wire" d="M520 150 H590 V170 M590 190 V210 H590"/>
-  <path class="cap" d="M575 170 H605 M575 190 H605"/>
-  <path class="gnd" d="M580 210 H600 M584 215 H596 M588 220 H592"/>
-  <text x="615" y="185" class="lbl">Cdec</text>
-  <text x="615" y="200" class="val">100 nF</text>
+  <!-- Base B -->
+  <circle cx="70" cy="205" r="4.5" class="node"/>
+  <text x="50" y="210" class="term-lbl">B</text>
+  <path class="wire" d="M70 205 H145"/>
 
   <!-- Transistor Q1 NPN -->
-  <circle cx="480" cy="270" r="48" class="trans-circle"/>
-  <path class="trans-line" d="M460 245 V295"/>
-  <path class="wire" d="M380 270 H460"/>
-  <path class="trans-line" d="M460 255 L520 220"/>
-  <path class="trans-line" d="M460 285 L520 325"/>
-  <polygon points="505,320 520,325 515,310" class="trans-arrow"/>
+  <circle cx="170" cy="205" r="30" class="trans-circle"/>
+  <path class="trans-line" d="M155 190 V220"/>
+  <path class="wire" d="M145 205 H155"/>
+  <path class="trans-line" d="M155 195 L190 175"/>
+  <path class="wire" d="M190 175 V150"/>
+  <path class="trans-line" d="M155 215 L190 235"/>
+  <polygon points="181,228 192,236 178,236" class="trans-arrow"/>
+  <text x="175" y="195" class="lbl">Q1</text>
 
-  <text x="430" y="335" class="lbl">Q1 · 2N3904</text>
-  <text x="430" y="352" class="val">β = 150</text>
+  <!-- Emisor de Q1 conecta a Base de Q2 -->
+  <path class="wire" d="M190 235 V260 H255"/>
+  <circle cx="190" cy="260" r="4" class="node"/>
 
-  <!-- Resistencia de Emisor RE (No hay RC!) -->
-  <path class="wire" d="M520 325 V350"/>
-  <circle cx="520" cy="350" r="5" class="node"/>
-  <rect x="507" y="350" width="26" height="60" class="res"/>
-  <text x="460" y="385" class="lbl">RE</text>
-  <text x="450" y="402" class="val">2.2 kΩ</text>
-  <path class="wire" d="M520 410 V440"/>
+  <!-- Transistor Q2 NPN de Potencia -->
+  <circle cx="280" cy="260" r="32" class="trans-circle"/>
+  <path class="trans-line" d="M265 244 V276"/>
+  <path class="wire" d="M255 260 H265"/>
+  <path class="trans-line" d="M265 250 L300 228"/>
+  <path class="wire" d="M300 228 V150"/>
+  <path class="trans-line" d="M265 270 L300 292"/>
+  <polygon points="291,285 302,294 288,294" class="trans-arrow"/>
+  <text x="285" y="250" class="lbl">Q2</text>
 
-  <!-- Entrada -->
-  <path class="cap" d="M225 252 V288 M240 252 V288"/>
-  <text x="218" y="242" class="lbl">C1</text>
-  <text x="215" y="304" class="val">10 µF</text>
-  <path class="wire" d="M150 270 H225 M240 270 H380"/>
-  <circle cx="140" cy="270" r="5" fill="#fff" stroke="#0b69a3" stroke-width="2.5"/>
-  <text x="95" y="275" class="lbl">vi (in)</text>
+  <!-- Emisor E final -->
+  <path class="wire" d="M300 292 V340"/>
+  <circle cx="300" cy="340" r="4.5" class="node"/>
+  <text x="310" y="345" class="term-lbl">E</text>
 
-  <!-- Salida tomada DIRECTAMENTE DEL EMISOR hacia C2 y RL -->
-  <path class="wire" d="M520 350 H670"/>
-  <path class="cap" d="M670 332 V368 M685 332 V368"/>
-  <text x="665" y="322" class="lbl">C2</text>
-  <text x="665" y="384" class="val">47 µF</text>
+  <!-- Tarjeta Darlington Info -->
+  <rect x="50" y="280" width="130" height="100" class="badge-npn"/>
+  <text x="60" y="300" font-size="11" font-weight="bold" fill="#0369a1">PROPIEDADES:</text>
+  <text x="60" y="318" font-size="11" class="val">βD ≈ β1 · β2</text>
+  <text x="60" y="336" font-size="11" font-weight="bold" fill="#b91c1c">VBE,D ≈ 1.4 V (2 caídas)</text>
+  <text x="60" y="354" font-size="11" class="val">Zb ≈ β1·β2·RE</text>
+  <text x="60" y="370" font-size="11" class="val">Zo ≈ re2 + re1/β2</text>
 
-  <path class="wire" d="M685 350 H770"/>
-  <circle cx="770" cy="350" r="5" class="node"/>
-  <path class="wire" d="M770 350 H830"/>
-  <circle cx="830" cy="350" r="5" fill="#fff" stroke="#0b69a3" stroke-width="2.5"/>
-  <text x="842" y="355" class="lbl">vo (out)</text>
+  <!-- PANEL DERECHO: PAR SZIKLAI (NPN + PNP) -->
+  <rect x="470" y="90" width="415" height="305" class="box-panel"/>
+  <text x="485" y="118" font-size="15" font-weight="bold" fill="#9d174d">2. Par Sziklai (Complementario NPN + PNP)</text>
+  <text x="485" y="136" class="val">Mayor estabilidad térmica · Solo 1 caída de diodo VBE</text>
 
-  <!-- Carga RL baja -->
-  <path class="wire" d="M770 350 V375"/>
-  <rect x="757" y="375" width="26" height="45" class="res"/>
-  <text x="795" y="400" class="lbl">RL</text>
-  <text x="795" y="417" class="val">330 Ω</text>
-  <path class="wire" d="M770 420 V440"/>
+  <!-- Colector 'equivalente' C -->
+  <path class="wire" d="M720 125 V150 H610 M610 150 V175"/>
+  <circle cx="720" cy="125" r="4.5" class="node"/>
+  <text x="730" y="130" class="term-lbl">C</text>
 
-  <!-- Tierra -->
-  <path class="wire" d="M380 440 H770"/>
-  <path class="wire" d="M520 440 V460"/>
-  <path class="gnd" d="M500 460 H540 M508 467 H532 M516 474 H524"/>
+  <!-- Base B -->
+  <circle cx="505" cy="205" r="4.5" class="node"/>
+  <text x="490" y="210" class="term-lbl">B</text>
+  <path class="wire" d="M505 205 H565"/>
+
+  <!-- Transistor Q1 NPN -->
+  <circle cx="590" cy="205" r="30" class="trans-circle"/>
+  <path class="trans-line" d="M575 190 V220"/>
+  <path class="wire" d="M565 205 H575"/>
+  <!-- Colector de Q1 hacia Base de Q2 -->
+  <path class="trans-line" d="M575 195 L610 175"/>
+  <path class="wire" d="M610 175 V185 H675"/>
+  <circle cx="610" cy="185" r="4" class="node"/>
+  <!-- Emisor de Q1 hacia Colector de Q2 y salida E -->
+  <path class="trans-line" d="M575 215 L610 235"/>
+  <polygon points="601,228 612,236 598,236" class="trans-arrow"/>
+  <text x="595" y="195" class="lbl">Q1 (NPN)</text>
+
+  <!-- Transistor Q2 PNP -->
+  <circle cx="700" cy="220" r="32" class="trans-circle"/>
+  <path class="trans-line" d="M685 204 V236"/>
+  <path class="wire" d="M675 220 H685"/>
+  <!-- Emisor de Q2 va hacia C superior -->
+  <path class="trans-line" d="M685 210 L720 188"/>
+  <polygon points="705,198 694,204 703,212" fill="#db2777"/> <!-- Flecha apuntando a la base (PNP) -->
+  <path class="wire" d="M720 188 V150"/>
+  <!-- Colector de Q2 conecta con emisor de Q1 -->
+  <path class="trans-line" d="M685 230 L720 252"/>
+  <text x="705" y="210" class="lbl" style="fill:#db2777;">Q2 (PNP)</text>
+
+  <path class="wire" d="M610 235 V280 H720 M720 252 V280 M720 280 V340"/>
+  <circle cx="720" cy="280" r="4.5" class="node"/>
+  <circle cx="720" cy="340" r="4.5" class="node"/>
+  <text x="730" y="345" class="term-lbl">E</text>
+
+  <!-- Tarjeta Sziklai Info -->
+  <rect x="485" y="280" width="140" height="100" class="badge-pnp"/>
+  <text x="495" y="300" font-size="11" font-weight="bold" fill="#9d174d">PROPIEDADES:</text>
+  <text x="495" y="318" font-size="11" class="val">βS ≈ β1 · β2</text>
+  <text x="495" y="336" font-size="11" font-weight="bold" fill="#15803d">VBE,S ≈ 0.7 V (¡Solo 1 caída!)</text>
+  <text x="495" y="354" font-size="11" class="val">Menor distorsión térmica</text>
+  <text x="495" y="370" font-size="11" class="val">Usado en etapas AB cuasi-comp.</text>
+
+  <!-- FOOTER -->
+  <rect x="35" y="415" width="850" height="75" rx="6" fill="#fdf4ff" stroke="#f0abfc" stroke-width="1.5"/>
+  <text x="50" y="438" font-weight="bold" fill="#86198f" font-size="13">💡 LA CLAVE PEDAGÓGICA (Profesor Fredy &amp; Boylestad Sec. 5.17):</text>
+  <text x="50" y="458" class="val" style="font-size:12px;">En Darlington pierdes 1.4V solo para polarizar la base (VBE1 + VBE2), lo cual recorta el swing en fuentes bajas de 5V o 3.3V.</text>
+  <text x="50" y="476" class="val" style="font-size:12px;">El par Sziklai te entrega la misma ganancia multiplicada (β1·β2) conservando una única caída VBE ≈ 0.7V. ¡Ténganlo presente para el examen!</text>
 </svg>
 </div>
 
@@ -4504,110 +5576,144 @@
       </div>
     
 
-    <div class="schematic-container"><svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520" role="img" aria-label="Seguidor de Emisor Colector Común">
+    <div class="schematic-container"><svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" role="img" aria-label="Par Darlington y Par Sziklai">
   <defs>
     <style>
       .bg { fill: #ffffff; }
+      .card-border { fill: none; stroke: #d9e2ec; stroke-width: 1.5; }
       .title { font: bold 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
       .subtitle { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #627d98; }
-      .wire { stroke: #243b53; stroke-width: 2.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.5; }
-      .cap { stroke: #0b69a3; stroke-width: 3.5; }
+      .wire { stroke: #243b53; stroke-width: 2.6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.4; }
       .node { fill: #102a43; }
       .trans-circle { fill: #f0f4f8; stroke: #9fb3c8; stroke-width: 1.8; }
       .trans-line { stroke: #0b69a3; stroke-width: 3; stroke-linecap: round; }
       .trans-arrow { fill: #0b69a3; }
       .lbl { font: bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #0b69a3; }
-      .val { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
-      .gnd { stroke: #243b53; stroke-width: 2.5; stroke-linecap: round; }
+      .val { font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
+      .term-lbl { font: bold 15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #d9381e; }
+      .box-panel { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.5; rx: 8px; }
+      .badge-npn { fill: #e0f2fe; stroke: #0284c7; stroke-width: 1.5; rx: 6px; }
+      .badge-pnp { fill: #fdf2f8; stroke: #db2777; stroke-width: 1.5; rx: 6px; }
     </style>
   </defs>
 
-  <rect width="900" height="520" rx="14" class="bg"/>
-  <rect x="15" y="15" width="870" height="490" rx="10" fill="none" stroke="#d9e2ec" stroke-width="1.5"/>
+  <rect width="920" height="520" rx="14" class="bg"/>
+  <rect x="15" y="15" width="890" height="490" rx="10" class="card-border"/>
 
-  <text x="35" y="48" class="title">Esquemático 3 · Colector Común (CC) / Seguidor de Emisor</text>
-  <text x="35" y="72" class="subtitle">Buffer de alta impedancia de entrada, muy baja impedancia de salida y ganancia de tensión Av ≈ +1</text>
+  <text x="35" y="48" class="title">Configuraciones de Super-Beta: Par Darlington vs Par Sziklai</text>
+  <text x="35" y="70" class="subtitle">Multiplicación compuesta de ganancia de corriente (β_total ≈ β1 · β2) e impedancias astronómicas</text>
 
-  <!-- Rail VCC -->
-  <path class="wire" d="M380 95 H520 M520 95 H600"/>
-  <circle cx="600" cy="95" r="5" class="node"/>
-  <text x="612" y="100" class="lbl">+VCC = 12V</text>
+  <!-- PANEL IZQUIERDO: PAR DARLINGTON (NPN + NPN) -->
+  <rect x="35" y="90" width="415" height="305" class="box-panel"/>
+  <text x="50" y="118" font-size="15" font-weight="bold" fill="#0369a1">1. Par Darlington Clásico (NPN + NPN)</text>
+  <text x="50" y="136" class="val">Referencia: Boylestad Sec. 5.17 · Colectores unidos</text>
 
-  <!-- Divisor R1 y R2 -->
-  <path class="wire" d="M380 95 V130"/>
-  <rect x="367" y="130" width="26" height="60" class="res"/>
-  <text x="310" y="165" class="lbl">R1</text>
-  <text x="310" y="182" class="val">100 kΩ</text>
+  <!-- Colector Común C -->
+  <path class="wire" d="M190 150 V185 M300 150 V240 M190 150 H300 M245 150 V125"/>
+  <circle cx="245" cy="125" r="4.5" class="node"/>
+  <text x="255" y="130" class="term-lbl">C (Colector Común)</text>
 
-  <path class="wire" d="M380 190 V270 M380 270 V330"/>
-  <circle cx="380" cy="270" r="5" class="node"/>
-
-  <rect x="367" y="330" width="26" height="60" class="res"/>
-  <text x="310" y="365" class="lbl">R2</text>
-  <text x="310" y="382" class="val">100 kΩ</text>
-  <path class="wire" d="M380 390 V440"/>
-
-  <!-- Colector conectado directo a VCC (con bypass AC a tierra) -->
-  <path class="wire" d="M520 95 V220"/>
-  <circle cx="520" cy="150" r="5" class="node"/>
-  <!-- Capacitor de desacoplo de fuente a tierra -->
-  <path class="wire" d="M520 150 H590 V170 M590 190 V210 H590"/>
-  <path class="cap" d="M575 170 H605 M575 190 H605"/>
-  <path class="gnd" d="M580 210 H600 M584 215 H596 M588 220 H592"/>
-  <text x="615" y="185" class="lbl">Cdec</text>
-  <text x="615" y="200" class="val">100 nF</text>
+  <!-- Base B -->
+  <circle cx="70" cy="205" r="4.5" class="node"/>
+  <text x="50" y="210" class="term-lbl">B</text>
+  <path class="wire" d="M70 205 H145"/>
 
   <!-- Transistor Q1 NPN -->
-  <circle cx="480" cy="270" r="48" class="trans-circle"/>
-  <path class="trans-line" d="M460 245 V295"/>
-  <path class="wire" d="M380 270 H460"/>
-  <path class="trans-line" d="M460 255 L520 220"/>
-  <path class="trans-line" d="M460 285 L520 325"/>
-  <polygon points="505,320 520,325 515,310" class="trans-arrow"/>
+  <circle cx="170" cy="205" r="30" class="trans-circle"/>
+  <path class="trans-line" d="M155 190 V220"/>
+  <path class="wire" d="M145 205 H155"/>
+  <path class="trans-line" d="M155 195 L190 175"/>
+  <path class="wire" d="M190 175 V150"/>
+  <path class="trans-line" d="M155 215 L190 235"/>
+  <polygon points="181,228 192,236 178,236" class="trans-arrow"/>
+  <text x="175" y="195" class="lbl">Q1</text>
 
-  <text x="430" y="335" class="lbl">Q1 · 2N3904</text>
-  <text x="430" y="352" class="val">β = 150</text>
+  <!-- Emisor de Q1 conecta a Base de Q2 -->
+  <path class="wire" d="M190 235 V260 H255"/>
+  <circle cx="190" cy="260" r="4" class="node"/>
 
-  <!-- Resistencia de Emisor RE (No hay RC!) -->
-  <path class="wire" d="M520 325 V350"/>
-  <circle cx="520" cy="350" r="5" class="node"/>
-  <rect x="507" y="350" width="26" height="60" class="res"/>
-  <text x="460" y="385" class="lbl">RE</text>
-  <text x="450" y="402" class="val">2.2 kΩ</text>
-  <path class="wire" d="M520 410 V440"/>
+  <!-- Transistor Q2 NPN de Potencia -->
+  <circle cx="280" cy="260" r="32" class="trans-circle"/>
+  <path class="trans-line" d="M265 244 V276"/>
+  <path class="wire" d="M255 260 H265"/>
+  <path class="trans-line" d="M265 250 L300 228"/>
+  <path class="wire" d="M300 228 V150"/>
+  <path class="trans-line" d="M265 270 L300 292"/>
+  <polygon points="291,285 302,294 288,294" class="trans-arrow"/>
+  <text x="285" y="250" class="lbl">Q2</text>
 
-  <!-- Entrada -->
-  <path class="cap" d="M225 252 V288 M240 252 V288"/>
-  <text x="218" y="242" class="lbl">C1</text>
-  <text x="215" y="304" class="val">10 µF</text>
-  <path class="wire" d="M150 270 H225 M240 270 H380"/>
-  <circle cx="140" cy="270" r="5" fill="#fff" stroke="#0b69a3" stroke-width="2.5"/>
-  <text x="95" y="275" class="lbl">vi (in)</text>
+  <!-- Emisor E final -->
+  <path class="wire" d="M300 292 V340"/>
+  <circle cx="300" cy="340" r="4.5" class="node"/>
+  <text x="310" y="345" class="term-lbl">E</text>
 
-  <!-- Salida tomada DIRECTAMENTE DEL EMISOR hacia C2 y RL -->
-  <path class="wire" d="M520 350 H670"/>
-  <path class="cap" d="M670 332 V368 M685 332 V368"/>
-  <text x="665" y="322" class="lbl">C2</text>
-  <text x="665" y="384" class="val">47 µF</text>
+  <!-- Tarjeta Darlington Info -->
+  <rect x="50" y="280" width="130" height="100" class="badge-npn"/>
+  <text x="60" y="300" font-size="11" font-weight="bold" fill="#0369a1">PROPIEDADES:</text>
+  <text x="60" y="318" font-size="11" class="val">βD ≈ β1 · β2</text>
+  <text x="60" y="336" font-size="11" font-weight="bold" fill="#b91c1c">VBE,D ≈ 1.4 V (2 caídas)</text>
+  <text x="60" y="354" font-size="11" class="val">Zb ≈ β1·β2·RE</text>
+  <text x="60" y="370" font-size="11" class="val">Zo ≈ re2 + re1/β2</text>
 
-  <path class="wire" d="M685 350 H770"/>
-  <circle cx="770" cy="350" r="5" class="node"/>
-  <path class="wire" d="M770 350 H830"/>
-  <circle cx="830" cy="350" r="5" fill="#fff" stroke="#0b69a3" stroke-width="2.5"/>
-  <text x="842" y="355" class="lbl">vo (out)</text>
+  <!-- PANEL DERECHO: PAR SZIKLAI (NPN + PNP) -->
+  <rect x="470" y="90" width="415" height="305" class="box-panel"/>
+  <text x="485" y="118" font-size="15" font-weight="bold" fill="#9d174d">2. Par Sziklai (Complementario NPN + PNP)</text>
+  <text x="485" y="136" class="val">Mayor estabilidad térmica · Solo 1 caída de diodo VBE</text>
 
-  <!-- Carga RL baja -->
-  <path class="wire" d="M770 350 V375"/>
-  <rect x="757" y="375" width="26" height="45" class="res"/>
-  <text x="795" y="400" class="lbl">RL</text>
-  <text x="795" y="417" class="val">330 Ω</text>
-  <path class="wire" d="M770 420 V440"/>
+  <!-- Colector 'equivalente' C -->
+  <path class="wire" d="M720 125 V150 H610 M610 150 V175"/>
+  <circle cx="720" cy="125" r="4.5" class="node"/>
+  <text x="730" y="130" class="term-lbl">C</text>
 
-  <!-- Tierra -->
-  <path class="wire" d="M380 440 H770"/>
-  <path class="wire" d="M520 440 V460"/>
-  <path class="gnd" d="M500 460 H540 M508 467 H532 M516 474 H524"/>
+  <!-- Base B -->
+  <circle cx="505" cy="205" r="4.5" class="node"/>
+  <text x="490" y="210" class="term-lbl">B</text>
+  <path class="wire" d="M505 205 H565"/>
+
+  <!-- Transistor Q1 NPN -->
+  <circle cx="590" cy="205" r="30" class="trans-circle"/>
+  <path class="trans-line" d="M575 190 V220"/>
+  <path class="wire" d="M565 205 H575"/>
+  <!-- Colector de Q1 hacia Base de Q2 -->
+  <path class="trans-line" d="M575 195 L610 175"/>
+  <path class="wire" d="M610 175 V185 H675"/>
+  <circle cx="610" cy="185" r="4" class="node"/>
+  <!-- Emisor de Q1 hacia Colector de Q2 y salida E -->
+  <path class="trans-line" d="M575 215 L610 235"/>
+  <polygon points="601,228 612,236 598,236" class="trans-arrow"/>
+  <text x="595" y="195" class="lbl">Q1 (NPN)</text>
+
+  <!-- Transistor Q2 PNP -->
+  <circle cx="700" cy="220" r="32" class="trans-circle"/>
+  <path class="trans-line" d="M685 204 V236"/>
+  <path class="wire" d="M675 220 H685"/>
+  <!-- Emisor de Q2 va hacia C superior -->
+  <path class="trans-line" d="M685 210 L720 188"/>
+  <polygon points="705,198 694,204 703,212" fill="#db2777"/> <!-- Flecha apuntando a la base (PNP) -->
+  <path class="wire" d="M720 188 V150"/>
+  <!-- Colector de Q2 conecta con emisor de Q1 -->
+  <path class="trans-line" d="M685 230 L720 252"/>
+  <text x="705" y="210" class="lbl" style="fill:#db2777;">Q2 (PNP)</text>
+
+  <path class="wire" d="M610 235 V280 H720 M720 252 V280 M720 280 V340"/>
+  <circle cx="720" cy="280" r="4.5" class="node"/>
+  <circle cx="720" cy="340" r="4.5" class="node"/>
+  <text x="730" y="345" class="term-lbl">E</text>
+
+  <!-- Tarjeta Sziklai Info -->
+  <rect x="485" y="280" width="140" height="100" class="badge-pnp"/>
+  <text x="495" y="300" font-size="11" font-weight="bold" fill="#9d174d">PROPIEDADES:</text>
+  <text x="495" y="318" font-size="11" class="val">βS ≈ β1 · β2</text>
+  <text x="495" y="336" font-size="11" font-weight="bold" fill="#15803d">VBE,S ≈ 0.7 V (¡Solo 1 caída!)</text>
+  <text x="495" y="354" font-size="11" class="val">Menor distorsión térmica</text>
+  <text x="495" y="370" font-size="11" class="val">Usado en etapas AB cuasi-comp.</text>
+
+  <!-- FOOTER -->
+  <rect x="35" y="415" width="850" height="75" rx="6" fill="#fdf4ff" stroke="#f0abfc" stroke-width="1.5"/>
+  <text x="50" y="438" font-weight="bold" fill="#86198f" font-size="13">💡 LA CLAVE PEDAGÓGICA (Profesor Fredy &amp; Boylestad Sec. 5.17):</text>
+  <text x="50" y="458" class="val" style="font-size:12px;">En Darlington pierdes 1.4V solo para polarizar la base (VBE1 + VBE2), lo cual recorta el swing en fuentes bajas de 5V o 3.3V.</text>
+  <text x="50" y="476" class="val" style="font-size:12px;">El par Sziklai te entrega la misma ganancia multiplicada (β1·β2) conservando una única caída VBE ≈ 0.7V. ¡Ténganlo presente para el examen!</text>
 </svg>
 </div>
 
@@ -4868,7 +5974,192 @@
       </div>
     
 
-    
+    <div class="schematic-container"><svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" role="img" aria-label="Diagnóstico y Troubleshooting de Laboratorio">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .card-border { fill: none; stroke: #d9e2ec; stroke-width: 1.5; }
+      .title { font: bold 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
+      .subtitle { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #627d98; }
+      .wire { stroke: #243b53; stroke-width: 2.6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.4; }
+      .cap { stroke: #0b69a3; stroke-width: 3.5; }
+      .node { fill: #102a43; }
+      .trans-circle { fill: #f0f4f8; stroke: #9fb3c8; stroke-width: 1.8; }
+      .trans-line { stroke: #0b69a3; stroke-width: 3; stroke-linecap: round; }
+      .trans-arrow { fill: #0b69a3; }
+      .lbl { font: bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #0b69a3; }
+      .val { font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
+      .gnd { stroke: #243b53; stroke-width: 2.4; stroke-linecap: round; }
+      .tp-badge { fill: #ffedd5; stroke: #ea580c; stroke-width: 1.8; rx: 4px; }
+      .tp-text { font: bold 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #c2410c; }
+      .box-panel { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.5; rx: 8px; }
+      .table-hdr { font: bold 11.5px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #1e293b; }
+      .table-row { font: 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334155; }
+      .probe-line { stroke: #ea580c; stroke-width: 2; stroke-dasharray: 4,3; fill: none; }
+    </style>
+  </defs>
+
+  <rect width="920" height="520" rx="14" class="bg"/>
+  <rect x="15" y="15" width="890" height="490" rx="10" class="card-border"/>
+
+  <text x="35" y="48" class="title">Protocolo de Diagnóstico y Búsqueda de Fallas en Laboratorio</text>
+  <text x="35" y="70" class="subtitle">Identificación de anomalías mediante Puntos de Prueba (TP), multímetro digital y osciloscopio</text>
+
+  <!-- CIRCUITO CON PUNTOS DE PRUEBA (IZQUIERDA) -->
+  <!-- TP1: VCC -->
+  <path class="wire" d="M120 100 H230 M230 100 H300"/>
+  <circle cx="300" cy="100" r="4.5" class="node"/>
+  <text x="310" y="105" class="lbl">+VCC = 15V</text>
+  <rect x="235" y="75" width="38" height="20" class="tp-badge"/>
+  <text x="242" y="90" class="tp-text">TP1</text>
+
+  <!-- Rama Divisor Base -->
+  <path class="wire" d="M120 100 V130"/>
+  <rect x="107" y="130" width="26" height="50" class="res"/>
+  <text x="75" y="158" class="lbl">R1</text>
+  <path class="wire" d="M120 180 V230"/>
+  <circle cx="120" cy="230" r="4.5" class="node"/>
+
+  <!-- TP2: BASE -->
+  <rect x="55" y="218" width="38" height="20" class="tp-badge"/>
+  <text x="62" y="233" class="tp-text">TP2</text>
+  <line x1="93" y1="228" x2="120" y2="228" class="probe-line"/>
+
+  <path class="wire" d="M120 230 V270"/>
+  <rect x="107" y="270" width="26" height="50" class="res"/>
+  <text x="75" y="300" class="lbl">R2</text>
+  <path class="wire" d="M120 320 V365"/>
+  <line x1="105" y1="365" x2="135" y2="365" class="gnd"/>
+
+  <!-- Entrada AC con C1 -->
+  <path class="wire" d="M30 230 H70"/>
+  <line x1="70" y1="218" x2="70" y2="242" class="cap"/>
+  <line x1="77" y1="218" x2="77" y2="242" class="cap"/>
+  <path class="wire" d="M77 230 H120"/>
+
+  <!-- Transistor Q1 NPN -->
+  <path class="wire" d="M120 230 H165"/>
+  <circle cx="185" cy="230" r="32" class="trans-circle"/>
+  <path class="trans-line" d="M170 212 V248"/>
+  <path class="trans-line" d="M170 218 L200 196"/>
+  <path class="wire" d="M200 196 V180"/>
+  <path class="trans-line" d="M170 242 L200 264"/>
+  <polygon points="191,257 202,266 188,266" class="trans-arrow"/>
+  <text x="195" y="232" class="lbl">Q1</text>
+
+  <!-- RC en Colector y TP3 -->
+  <path class="wire" d="M200 100 V130"/>
+  <rect x="187" y="130" width="26" height="50" class="res"/>
+  <text x="220" y="158" class="lbl">RC</text>
+  <circle cx="200" cy="188" r="4.5" class="node"/>
+  <!-- TP3: COLECTOR -->
+  <rect x="235" y="178" width="38" height="20" class="tp-badge"/>
+  <text x="242" y="193" class="tp-text">TP3</text>
+  <line x1="200" y1="188" x2="235" y2="188" class="probe-line"/>
+
+  <!-- Salida hacia C2 -->
+  <path class="wire" d="M200 188 H285"/>
+  <line x1="285" y1="176" x2="285" y2="200" class="cap"/>
+  <line x1="292" y1="176" x2="292" y2="200" class="cap"/>
+  <path class="wire" d="M292 188 H320"/>
+  <circle cx="320" cy="188" r="4.5" class="node"/>
+  <!-- TP5: SALIDA OSCILOSCOPIO -->
+  <rect x="330" y="178" width="38" height="20" class="tp-badge"/>
+  <text x="337" y="193" class="tp-text">TP5</text>
+  <text x="375" y="193" font-size="11" font-weight="bold" fill="#0284c7">Osciloscopio</text>
+
+  <!-- Emisor con RE, CE y TP4 -->
+  <path class="wire" d="M200 264 V285"/>
+  <circle cx="200" cy="285" r="4.5" class="node"/>
+  <!-- TP4: EMISOR -->
+  <rect x="235" y="275" width="38" height="20" class="tp-badge"/>
+  <text x="242" y="290" class="tp-text">TP4</text>
+  <line x1="200" y1="285" x2="235" y2="285" class="probe-line"/>
+
+  <!-- RE y CE -->
+  <path class="wire" d="M200 285 V310"/>
+  <rect x="187" y="310" width="26" height="50" class="res"/>
+  <text x="155" y="338" class="lbl">RE</text>
+  <path class="wire" d="M200 360 V385"/>
+
+  <!-- CE en paralelo -->
+  <path class="wire" d="M200 285 H260 V325"/>
+  <line x1="250" y1="325" x2="270" y2="325" class="cap"/>
+  <line x1="250" y1="333" x2="270" y2="333" class="cap"/>
+  <path class="wire" d="M260 333 V385 H200"/>
+  <circle cx="200" cy="385" r="4.5" class="node"/>
+  <path class="wire" d="M200 385 V405"/>
+  <line x1="185" y1="405" x2="215" y2="405" class="gnd"/>
+
+  <!-- PANEL DERECHO: MATRIZ DE DIAGNÓSTICO EN LABORATORIO -->
+  <rect x="420" y="90" width="465" height="305" class="box-panel"/>
+  <text x="435" y="116" font-size="14.5" font-weight="bold" fill="#102a43">Matriz Maestra de Diagnóstico de Fallas (Boylestad Cap. 5.21)</text>
+
+  <!-- Cabecera de tabla -->
+  <rect x="435" y="128" width="435" height="24" rx="4" fill="#e2e8f0"/>
+  <text x="442" y="144" class="table-hdr">Falla Inyectada</text>
+  <text x="545" y="144" class="table-hdr">TP2 (Base)</text>
+  <text x="615" y="144" class="table-hdr">TP3 (Colector)</text>
+  <text x="705" y="144" class="table-hdr">TP4 (Emisor)</text>
+  <text x="785" y="144" class="table-hdr">Firma en TP5</text>
+
+  <!-- Fila 1: R1 Abierta -->
+  <rect x="435" y="156" width="435" height="34" fill="#ffffff" stroke="#f1f5f9"/>
+  <text x="442" y="172" class="table-row" font-weight="bold" fill="#dc2626">R1 Abierta</text>
+  <text x="442" y="184" font-size="10" class="val">Sin bias superior</text>
+  <text x="545" y="176" class="table-row">0 V</text>
+  <text x="615" y="176" class="table-row">15 V (VCC)</text>
+  <text x="705" y="176" class="table-row">0 V</text>
+  <text x="785" y="176" class="table-row" fill="#dc2626">Silencio (0V)</text>
+
+  <!-- Fila 2: R2 Abierta -->
+  <rect x="435" y="193" width="435" height="34" fill="#f8fafc" stroke="#f1f5f9"/>
+  <text x="442" y="209" class="table-row" font-weight="bold" fill="#dc2626">R2 Abierta</text>
+  <text x="442" y="221" font-size="10" class="val">Base flota a VCC</text>
+  <text x="545" y="213" class="table-row">Muy alto</text>
+  <text x="615" y="213" class="table-row">Bajo (Vsat)</text>
+  <text x="705" y="213" class="table-row">Muy alto</text>
+  <text x="785" y="213" class="table-row" fill="#dc2626">Distorsión brutal</text>
+
+  <!-- Fila 3: RE Abierta -->
+  <rect x="435" y="230" width="435" height="34" fill="#ffffff" stroke="#f1f5f9"/>
+  <text x="442" y="246" class="table-row" font-weight="bold" fill="#dc2626">RE Abierta</text>
+  <text x="442" y="258" font-size="10" class="val">Pata emisor suelta</text>
+  <text x="545" y="250" class="table-row">Nominal</text>
+  <text x="615" y="250" class="table-row">15 V (VCC)</text>
+  <text x="705" y="250" class="table-row">VB - 0.7V</text>
+  <text x="785" y="250" class="table-row" fill="#dc2626">Sin amplificación</text>
+
+  <!-- Fila 4: CE Abierto -->
+  <rect x="435" y="267" width="435" height="34" fill="#f8fafc" stroke="#f1f5f9"/>
+  <text x="442" y="283" class="table-row" font-weight="bold" fill="#d97706">CE Abierto</text>
+  <text x="442" y="295" font-size="10" class="val">Capacitor seco/desol</text>
+  <text x="545" y="287" class="table-row">Nominal</text>
+  <text x="615" y="287" class="table-row">Nominal</text>
+  <text x="705" y="287" class="table-row">Nominal</text>
+  <text x="785" y="287" class="table-row" fill="#d97706">Ganancia cae 95%</text>
+
+  <!-- Fila 5: R2 Código de Color Erróneo (RETO-03) -->
+  <rect x="435" y="304" width="435" height="42" fill="#fff7ed" stroke="#fed7aa"/>
+  <text x="442" y="320" class="table-row" font-weight="bold" fill="#c2410c">R2 desvalorizada</text>
+  <text x="442" y="334" font-size="10" class="val">Pusieron 3.3k en vez de 10k</text>
+  <text x="545" y="325" class="table-row">1.1 V (Bajo)</text>
+  <text x="615" y="325" class="table-row">13.8 V</text>
+  <text x="705" y="325" class="table-row">0.4 V</text>
+  <text x="785" y="325" class="table-row" font-weight="bold" fill="#c2410c">Corte en cresta</text>
+
+  <!-- Leyenda de puntas -->
+  <rect x="435" y="352" width="435" height="35" rx="4" fill="#f1f5f9"/>
+  <text x="445" y="372" font-size="11" class="val"><b>Punta Osciloscopio:</b> Use siempre escala 10X para no sobrecargar el colector con los 15 pF del cable.</text>
+
+  <!-- FOOTER -->
+  <rect x="35" y="415" width="850" height="75" rx="6" fill="#fff7ed" stroke="#ffedd5" stroke-width="1.5"/>
+  <text x="50" y="438" font-weight="bold" fill="#9a3412" font-size="13">🛠️ EL MÉTODO SISTEMÁTICO DE LABORATORIO (Profesor Fredy):</text>
+  <text x="50" y="458" class="val" style="font-size:12px;">1° Antes de tocar el generador de funciones o el osciloscopio, mida siempre el DC con el multímetro (TP1 a TP4).</text>
+  <text x="50" y="476" class="val" style="font-size:12px;">Si el punto Q no está sano (ej. VCE &lt; 0.5V o VCE ≈ VCC), la señal AC jamás saldrá limpia. ¡El 90% de las fallas son de continua!</text>
+</svg>
+</div>
 
     
       <div style="background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px 10px; margin: 6px 0; font-size: 8.5pt;">
@@ -6052,141 +7343,190 @@
     </div>
     <h3 style="color:#b91c1c; font-size:12pt; margin:4px 0 8px 0;">Diagnóstico y Corrección de Falla en Laboratorio</h3>
     <p style="font-size:9.5pt;">Un grupo de estudiantes montó el circuito de Emisor Común de la figura para su entrega final. Al conectar el generador con vs = 10 mVp, el osciloscopio muestra una salida distorsionada: el semiciclo superior de colector se aplana violentamente a 15 V, mientras que el semiciclo inferior desciende limpiamente. El multímetro mide en DC: VB = 1.1 V, VE = 0.4 V, VC = 13.8 V.</p>
-    <div class="schematic-container"><svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520" role="img" aria-label="Amplificador Emisor Común con Bypass">
+    <div class="schematic-container"><svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" role="img" aria-label="Diagnóstico y Troubleshooting de Laboratorio">
   <defs>
     <style>
       .bg { fill: #ffffff; }
+      .card-border { fill: none; stroke: #d9e2ec; stroke-width: 1.5; }
       .title { font: bold 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
       .subtitle { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #627d98; }
-      .wire { stroke: #243b53; stroke-width: 2.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.5; }
+      .wire { stroke: #243b53; stroke-width: 2.6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.4; }
       .cap { stroke: #0b69a3; stroke-width: 3.5; }
       .node { fill: #102a43; }
       .trans-circle { fill: #f0f4f8; stroke: #9fb3c8; stroke-width: 1.8; }
       .trans-line { stroke: #0b69a3; stroke-width: 3; stroke-linecap: round; }
       .trans-arrow { fill: #0b69a3; }
       .lbl { font: bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #0b69a3; }
-      .val { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
-      .gnd { stroke: #243b53; stroke-width: 2.5; stroke-linecap: round; }
-      .ac-source { fill: #f0f4f8; stroke: #243b53; stroke-width: 2.5; }
+      .val { font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
+      .gnd { stroke: #243b53; stroke-width: 2.4; stroke-linecap: round; }
+      .tp-badge { fill: #ffedd5; stroke: #ea580c; stroke-width: 1.8; rx: 4px; }
+      .tp-text { font: bold 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #c2410c; }
+      .box-panel { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.5; rx: 8px; }
+      .table-hdr { font: bold 11.5px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #1e293b; }
+      .table-row { font: 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334155; }
+      .probe-line { stroke: #ea580c; stroke-width: 2; stroke-dasharray: 4,3; fill: none; }
     </style>
   </defs>
 
-  <rect width="900" height="520" rx="14" class="bg"/>
-  <rect x="15" y="15" width="870" height="490" rx="10" fill="none" stroke="#d9e2ec" stroke-width="1.5"/>
+  <rect width="920" height="520" rx="14" class="bg"/>
+  <rect x="15" y="15" width="890" height="490" rx="10" class="card-border"/>
 
-  <!-- Título y metadatos estilo simulación -->
-  <text x="35" y="48" class="title">Esquemático 1 · Emisor Común (CE) con Bypass Total</text>
-  <text x="35" y="72" class="subtitle">Configuración clásica de alta ganancia de tensión y desfase de 180°</text>
+  <text x="35" y="48" class="title">Protocolo de Diagnóstico y Búsqueda de Fallas en Laboratorio</text>
+  <text x="35" y="70" class="subtitle">Identificación de anomalías mediante Puntos de Prueba (TP), multímetro digital y osciloscopio</text>
 
-  <!-- Rail VCC -->
-  <path class="wire" d="M380 95 H520 M520 95 H600"/>
-  <circle cx="600" cy="95" r="5" class="node"/>
-  <text x="612" y="100" class="lbl">+VCC = 15V</text>
+  <!-- CIRCUITO CON PUNTOS DE PRUEBA (IZQUIERDA) -->
+  <!-- TP1: VCC -->
+  <path class="wire" d="M120 100 H230 M230 100 H300"/>
+  <circle cx="300" cy="100" r="4.5" class="node"/>
+  <text x="310" y="105" class="lbl">+VCC = 15V</text>
+  <rect x="235" y="75" width="38" height="20" class="tp-badge"/>
+  <text x="242" y="90" class="tp-text">TP1</text>
 
-  <!-- Divisor R1 y R2 -->
-  <path class="wire" d="M380 95 V130"/>
-  <rect x="367" y="130" width="26" height="60" class="res"/>
-  <text x="310" y="165" class="lbl">R1</text>
-  <text x="310" y="182" class="val">47 kΩ</text>
+  <!-- Rama Divisor Base -->
+  <path class="wire" d="M120 100 V130"/>
+  <rect x="107" y="130" width="26" height="50" class="res"/>
+  <text x="75" y="158" class="lbl">R1</text>
+  <path class="wire" d="M120 180 V230"/>
+  <circle cx="120" cy="230" r="4.5" class="node"/>
 
-  <path class="wire" d="M380 190 V270 M380 270 V330"/>
-  <circle cx="380" cy="270" r="5" class="node"/>
+  <!-- TP2: BASE -->
+  <rect x="55" y="218" width="38" height="20" class="tp-badge"/>
+  <text x="62" y="233" class="tp-text">TP2</text>
+  <line x1="93" y1="228" x2="120" y2="228" class="probe-line"/>
 
-  <rect x="367" y="330" width="26" height="60" class="res"/>
-  <text x="310" y="365" class="lbl">R2</text>
-  <text x="310" y="382" class="val">10 kΩ</text>
-  <path class="wire" d="M380 390 V440"/>
+  <path class="wire" d="M120 230 V270"/>
+  <rect x="107" y="270" width="26" height="50" class="res"/>
+  <text x="75" y="300" class="lbl">R2</text>
+  <path class="wire" d="M120 320 V365"/>
+  <line x1="105" y1="365" x2="135" y2="365" class="gnd"/>
 
-  <!-- Rama de Colector RC -->
-  <path class="wire" d="M520 95 V130"/>
-  <rect x="507" y="130" width="26" height="60" class="res"/>
-  <text x="545" y="165" class="lbl">RC</text>
-  <text x="545" y="182" class="val">3.3 kΩ</text>
-
-  <path class="wire" d="M520 190 V215"/>
-  <circle cx="520" cy="215" r="5" class="node"/>
+  <!-- Entrada AC con C1 -->
+  <path class="wire" d="M30 230 H70"/>
+  <line x1="70" y1="218" x2="70" y2="242" class="cap"/>
+  <line x1="77" y1="218" x2="77" y2="242" class="cap"/>
+  <path class="wire" d="M77 230 H120"/>
 
   <!-- Transistor Q1 NPN -->
-  <circle cx="480" cy="270" r="48" class="trans-circle"/>
-  <!-- Base vertical -->
-  <path class="trans-line" d="M460 245 V295"/>
-  <!-- Conexión base exterior -->
-  <path class="wire" d="M380 270 H460"/>
-  <!-- Colector diagonal -->
-  <path class="trans-line" d="M460 255 L520 215"/>
-  <!-- Emisor diagonal -->
-  <path class="trans-line" d="M460 285 L520 325"/>
-  <!-- Flecha emisor -->
-  <polygon points="505,320 520,325 515,310" class="trans-arrow"/>
+  <path class="wire" d="M120 230 H165"/>
+  <circle cx="185" cy="230" r="32" class="trans-circle"/>
+  <path class="trans-line" d="M170 212 V248"/>
+  <path class="trans-line" d="M170 218 L200 196"/>
+  <path class="wire" d="M200 196 V180"/>
+  <path class="trans-line" d="M170 242 L200 264"/>
+  <polygon points="191,257 202,266 188,266" class="trans-arrow"/>
+  <text x="195" y="232" class="lbl">Q1</text>
 
-  <text x="440" y="240" class="val" style="font-size:11px;font-weight:bold;">B</text>
-  <text x="530" y="215" class="val" style="font-size:11px;font-weight:bold;">C</text>
-  <text x="530" y="335" class="val" style="font-size:11px;font-weight:bold;">E</text>
-  <text x="430" y="335" class="lbl">Q1 · 2N3904</text>
-  <text x="430" y="352" class="val">β = 120</text>
+  <!-- RC en Colector y TP3 -->
+  <path class="wire" d="M200 100 V130"/>
+  <rect x="187" y="130" width="26" height="50" class="res"/>
+  <text x="220" y="158" class="lbl">RC</text>
+  <circle cx="200" cy="188" r="4.5" class="node"/>
+  <!-- TP3: COLECTOR -->
+  <rect x="235" y="178" width="38" height="20" class="tp-badge"/>
+  <text x="242" y="193" class="tp-text">TP3</text>
+  <line x1="200" y1="188" x2="235" y2="188" class="probe-line"/>
 
-  <!-- Rama de Emisor RE y CE -->
-  <path class="wire" d="M520 325 V355 M520 355 H610"/>
-  <circle cx="520" cy="355" r="5" class="node"/>
+  <!-- Salida hacia C2 -->
+  <path class="wire" d="M200 188 H285"/>
+  <line x1="285" y1="176" x2="285" y2="200" class="cap"/>
+  <line x1="292" y1="176" x2="292" y2="200" class="cap"/>
+  <path class="wire" d="M292 188 H320"/>
+  <circle cx="320" cy="188" r="4.5" class="node"/>
+  <!-- TP5: SALIDA OSCILOSCOPIO -->
+  <rect x="330" y="178" width="38" height="20" class="tp-badge"/>
+  <text x="337" y="193" class="tp-text">TP5</text>
+  <text x="375" y="193" font-size="11" font-weight="bold" fill="#0284c7">Osciloscopio</text>
 
-  <rect x="507" y="365" width="26" height="60" class="res"/>
-  <path class="wire" d="M520 355 V365 M520 425 V440"/>
-  <text x="460" y="395" class="lbl">RE</text>
-  <text x="460" y="412" class="val">1.2 kΩ</text>
+  <!-- Emisor con RE, CE y TP4 -->
+  <path class="wire" d="M200 264 V285"/>
+  <circle cx="200" cy="285" r="4.5" class="node"/>
+  <!-- TP4: EMISOR -->
+  <rect x="235" y="275" width="38" height="20" class="tp-badge"/>
+  <text x="242" y="290" class="tp-text">TP4</text>
+  <line x1="200" y1="285" x2="235" y2="285" class="probe-line"/>
 
-  <!-- Capacitor Bypass CE -->
-  <path class="wire" d="M610 355 V385 M610 405 V440"/>
-  <path class="cap" d="M592 385 H628 M592 405 H628"/>
-  <text x="638" y="395" class="lbl">CE</text>
-  <text x="638" y="412" class="val">47 µF</text>
+  <!-- RE y CE -->
+  <path class="wire" d="M200 285 V310"/>
+  <rect x="187" y="310" width="26" height="50" class="res"/>
+  <text x="155" y="338" class="lbl">RE</text>
+  <path class="wire" d="M200 360 V385"/>
 
-  <!-- Entrada con Generador vs, Rs y C1 -->
-  <!-- Fuente vs -->
-  <circle cx="70" cy="270" r="22" class="ac-source"/>
-  <path d="M58 270 Q64 260 70 270 T82 270" fill="none" stroke="#243b53" stroke-width="2.5"/>
-  <text x="45" y="315" class="lbl">vs</text>
-  <text x="35" y="332" class="val">10 mVp</text>
-  <path class="wire" d="M70 292 V440"/>
+  <!-- CE en paralelo -->
+  <path class="wire" d="M200 285 H260 V325"/>
+  <line x1="250" y1="325" x2="270" y2="325" class="cap"/>
+  <line x1="250" y1="333" x2="270" y2="333" class="cap"/>
+  <path class="wire" d="M260 333 V385 H200"/>
+  <circle cx="200" cy="385" r="4.5" class="node"/>
+  <path class="wire" d="M200 385 V405"/>
+  <line x1="185" y1="405" x2="215" y2="405" class="gnd"/>
 
-  <path class="wire" d="M70 248 V270 M92 270 H130"/>
-  <!-- Resistencia interna Rs -->
-  <rect x="130" y="257" width="50" height="26" class="res"/>
-  <text x="138" y="248" class="lbl">Rs</text>
-  <text x="135" y="300" class="val">600 Ω</text>
+  <!-- PANEL DERECHO: MATRIZ DE DIAGNÓSTICO EN LABORATORIO -->
+  <rect x="420" y="90" width="465" height="305" class="box-panel"/>
+  <text x="435" y="116" font-size="14.5" font-weight="bold" fill="#102a43">Matriz Maestra de Diagnóstico de Fallas (Boylestad Cap. 5.21)</text>
 
-  <path class="wire" d="M180 270 H225"/>
-  <!-- Capacitor de acoplo C1 -->
-  <path class="cap" d="M225 252 V288 M240 252 V288"/>
-  <text x="218" y="242" class="lbl">C1</text>
-  <text x="215" y="304" class="val">10 µF</text>
-  <path class="wire" d="M240 270 H380"/>
+  <!-- Cabecera de tabla -->
+  <rect x="435" y="128" width="435" height="24" rx="4" fill="#e2e8f0"/>
+  <text x="442" y="144" class="table-hdr">Falla Inyectada</text>
+  <text x="545" y="144" class="table-hdr">TP2 (Base)</text>
+  <text x="615" y="144" class="table-hdr">TP3 (Colector)</text>
+  <text x="705" y="144" class="table-hdr">TP4 (Emisor)</text>
+  <text x="785" y="144" class="table-hdr">Firma en TP5</text>
 
-  <!-- Salida con C2 y RL -->
-  <path class="wire" d="M520 215 H680"/>
-  <path class="cap" d="M680 197 V233 M695 197 V233"/>
-  <text x="675" y="187" class="lbl">C2</text>
-  <text x="675" y="248" class="val">10 µF</text>
+  <!-- Fila 1: R1 Abierta -->
+  <rect x="435" y="156" width="435" height="34" fill="#ffffff" stroke="#f1f5f9"/>
+  <text x="442" y="172" class="table-row" font-weight="bold" fill="#dc2626">R1 Abierta</text>
+  <text x="442" y="184" font-size="10" class="val">Sin bias superior</text>
+  <text x="545" y="176" class="table-row">0 V</text>
+  <text x="615" y="176" class="table-row">15 V (VCC)</text>
+  <text x="705" y="176" class="table-row">0 V</text>
+  <text x="785" y="176" class="table-row" fill="#dc2626">Silencio (0V)</text>
 
-  <path class="wire" d="M695 215 H780"/>
-  <circle cx="780" cy="215" r="5" class="node"/>
-  <!-- Terminal Vo -->
-  <path class="wire" d="M780 215 H830"/>
-  <circle cx="830" cy="215" r="5" fill="#fff" stroke="#0b69a3" stroke-width="2.5"/>
-  <text x="842" y="220" class="lbl">vo (out)</text>
+  <!-- Fila 2: R2 Abierta -->
+  <rect x="435" y="193" width="435" height="34" fill="#f8fafc" stroke="#f1f5f9"/>
+  <text x="442" y="209" class="table-row" font-weight="bold" fill="#dc2626">R2 Abierta</text>
+  <text x="442" y="221" font-size="10" class="val">Base flota a VCC</text>
+  <text x="545" y="213" class="table-row">Muy alto</text>
+  <text x="615" y="213" class="table-row">Bajo (Vsat)</text>
+  <text x="705" y="213" class="table-row">Muy alto</text>
+  <text x="785" y="213" class="table-row" fill="#dc2626">Distorsión brutal</text>
 
-  <!-- Carga RL -->
-  <path class="wire" d="M780 215 V280"/>
-  <rect x="767" y="280" width="26" height="60" class="res"/>
-  <text x="805" y="312" class="lbl">RL</text>
-  <text x="805" y="330" class="val">10 kΩ</text>
-  <path class="wire" d="M780 340 V440"/>
+  <!-- Fila 3: RE Abierta -->
+  <rect x="435" y="230" width="435" height="34" fill="#ffffff" stroke="#f1f5f9"/>
+  <text x="442" y="246" class="table-row" font-weight="bold" fill="#dc2626">RE Abierta</text>
+  <text x="442" y="258" font-size="10" class="val">Pata emisor suelta</text>
+  <text x="545" y="250" class="table-row">Nominal</text>
+  <text x="615" y="250" class="table-row">15 V (VCC)</text>
+  <text x="705" y="250" class="table-row">VB - 0.7V</text>
+  <text x="785" y="250" class="table-row" fill="#dc2626">Sin amplificación</text>
 
-  <!-- Línea común de Tierra -->
-  <path class="wire" d="M70 440 H780"/>
-  <!-- Símbolo de tierra en centro -->
-  <path class="wire" d="M480 440 V460"/>
-  <path class="gnd" d="M460 460 H500 M468 467 H492 M476 474 H484"/>
+  <!-- Fila 4: CE Abierto -->
+  <rect x="435" y="267" width="435" height="34" fill="#f8fafc" stroke="#f1f5f9"/>
+  <text x="442" y="283" class="table-row" font-weight="bold" fill="#d97706">CE Abierto</text>
+  <text x="442" y="295" font-size="10" class="val">Capacitor seco/desol</text>
+  <text x="545" y="287" class="table-row">Nominal</text>
+  <text x="615" y="287" class="table-row">Nominal</text>
+  <text x="705" y="287" class="table-row">Nominal</text>
+  <text x="785" y="287" class="table-row" fill="#d97706">Ganancia cae 95%</text>
+
+  <!-- Fila 5: R2 Código de Color Erróneo (RETO-03) -->
+  <rect x="435" y="304" width="435" height="42" fill="#fff7ed" stroke="#fed7aa"/>
+  <text x="442" y="320" class="table-row" font-weight="bold" fill="#c2410c">R2 desvalorizada</text>
+  <text x="442" y="334" font-size="10" class="val">Pusieron 3.3k en vez de 10k</text>
+  <text x="545" y="325" class="table-row">1.1 V (Bajo)</text>
+  <text x="615" y="325" class="table-row">13.8 V</text>
+  <text x="705" y="325" class="table-row">0.4 V</text>
+  <text x="785" y="325" class="table-row" font-weight="bold" fill="#c2410c">Corte en cresta</text>
+
+  <!-- Leyenda de puntas -->
+  <rect x="435" y="352" width="435" height="35" rx="4" fill="#f1f5f9"/>
+  <text x="445" y="372" font-size="11" class="val"><b>Punta Osciloscopio:</b> Use siempre escala 10X para no sobrecargar el colector con los 15 pF del cable.</text>
+
+  <!-- FOOTER -->
+  <rect x="35" y="415" width="850" height="75" rx="6" fill="#fff7ed" stroke="#ffedd5" stroke-width="1.5"/>
+  <text x="50" y="438" font-weight="bold" fill="#9a3412" font-size="13">🛠️ EL MÉTODO SISTEMÁTICO DE LABORATORIO (Profesor Fredy):</text>
+  <text x="50" y="458" class="val" style="font-size:12px;">1° Antes de tocar el generador de funciones o el osciloscopio, mida siempre el DC con el multímetro (TP1 a TP4).</text>
+  <text x="50" y="476" class="val" style="font-size:12px;">Si el punto Q no está sano (ej. VCE &lt; 0.5V o VCE ≈ VCC), la señal AC jamás saldrá limpia. ¡El 90% de las fallas son de continua!</text>
 </svg>
 </div>
     

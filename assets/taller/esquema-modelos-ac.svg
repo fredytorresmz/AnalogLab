@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" role="img" aria-label="Modelos Dinámicos re e Híbrido-pi">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .card-border { fill: none; stroke: #d9e2ec; stroke-width: 1.5; }
+      .box-panel { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.5; rx: 8px; }
+      .title { font: bold 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
+      .subtitle { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #627d98; }
+      .panel-title { font: bold 15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #0b69a3; }
+      .wire { stroke: #243b53; stroke-width: 2.6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.4; }
+      .node { fill: #102a43; }
+      .lbl { font: bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #0b69a3; }
+      .val { font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
+      .term-lbl { font: bold 15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #d9381e; }
+      .src-diamond { fill: #ffffff; stroke: #0b69a3; stroke-width: 2.4; }
+      .src-circle { fill: #ffffff; stroke: #0b69a3; stroke-width: 2.4; }
+      .arrow { fill: #0b69a3; }
+      .footer-box { fill: #eef6fc; stroke: #7bb5dc; stroke-width: 1.5; rx: 6px; }
+      .footer-txt { font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
+    </style>
+  </defs>
+
+  <rect width="920" height="520" rx="14" class="bg"/>
+  <rect x="15" y="15" width="890" height="490" rx="10" class="card-border"/>
+
+  <!-- Título principal -->
+  <text x="35" y="48" class="title">Modelos Dinámicos de Pequeña Señal en AC para Transistor BJT</text>
+  <text x="35" y="70" class="subtitle">Equivalencia formal entre el Modelo re (Boylestad/Malvino) y el Modelo Híbrido-π (Sedra/Smith)</text>
+
+  <!-- PANEL IZQUIERDO: MODELO re -->
+  <rect x="35" y="90" width="415" height="305" class="box-panel"/>
+  <text x="50" y="118" class="panel-title">1. Modelo re (Controlado por Corriente ib)</text>
+  <text x="50" y="136" class="val">Referencia: Boylestad &amp; Malvino · Entrada en Base, emisor común</text>
+
+  <!-- Terminal Base B -->
+  <circle cx="70" cy="200" r="4.5" class="node"/>
+  <text x="55" y="195" class="term-lbl">B</text>
+  <path class="wire" d="M70 200 H120"/>
+  <!-- Corriente ib -->
+  <polygon points="105,195 115,200 105,205" class="arrow"/>
+  <text x="95" y="188" class="lbl" style="font-size:12px;">ib</text>
+
+  <!-- Resistencia Zb = (β+1)re hacia emisor -->
+  <path class="wire" d="M120 200 V230"/>
+  <rect x="107" y="230" width="26" height="55" class="res"/>
+  <text x="140" y="252" class="lbl">β·re</text>
+  <text x="140" y="268" class="val">(ó re en E)</text>
+  <path class="wire" d="M120 285 V340"/>
+  <circle cx="120" cy="340" r="4.5" class="node"/>
+
+  <!-- Terminal Emisor E -->
+  <path class="wire" d="M120 340 H400"/>
+  <circle cx="260" cy="340" r="4.5" class="node"/>
+  <text x="255" y="365" class="term-lbl">E (Tierra AC)</text>
+
+  <!-- Fuente de Corriente dependiente β·ib -->
+  <path class="wire" d="M300 340 V290"/>
+  <rect x="286" y="225" width="28" height="60" transform="rotate(45 300 255)" class="src-diamond"/>
+  <!-- Flecha hacia abajo -->
+  <line x1="300" y1="240" x2="300" y2="270" stroke="#0b69a3" stroke-width="2.2" stroke-linecap="round"/>
+  <polygon points="296,265 300,274 304,265" class="arrow"/>
+  <text x="325" y="255" class="lbl">β·ib</text>
+  <path class="wire" d="M300 220 V175 H400"/>
+
+  <!-- Resistencia Early ro -->
+  <path class="wire" d="M375 175 V230"/>
+  <rect x="362" y="230" width="26" height="55" class="res"/>
+  <text x="395" y="255" class="lbl">ro</text>
+  <text x="395" y="270" class="val">VA/ICQ</text>
+  <path class="wire" d="M375 285 V340"/>
+  <circle cx="375" cy="175" r="4.5" class="node"/>
+  <circle cx="375" cy="340" r="4.5" class="node"/>
+
+  <!-- Terminal Colector C -->
+  <circle cx="410" cy="175" r="4.5" class="node"/>
+  <text x="418" y="178" class="term-lbl">C</text>
+  <circle cx="410" cy="340" r="4.5" class="node"/>
+  <text x="418" y="343" class="term-lbl">E</text>
+
+  <!-- PANEL DERECHO: MODELO HIBRIDO-PI -->
+  <rect x="470" y="90" width="415" height="305" class="box-panel"/>
+  <text x="485" y="118" class="panel-title">2. Modelo Híbrido-π (Controlado por Tensión vbe)</text>
+  <text x="485" y="136" class="val">Referencia: Sedra &amp; Smith · Entrada en Base, emisor común</text>
+
+  <!-- Terminal Base B -->
+  <circle cx="505" cy="200" r="4.5" class="node"/>
+  <text x="490" y="195" class="term-lbl">B</text>
+  <path class="wire" d="M505 200 H555"/>
+
+  <!-- Resistencia rπ -->
+  <path class="wire" d="M555 200 V230"/>
+  <rect x="542" y="230" width="26" height="55" class="res"/>
+  <text x="575" y="252" class="lbl">rπ</text>
+  <text x="575" y="268" class="val">β / gm</text>
+  <path class="wire" d="M555 285 V340"/>
+  <circle cx="555" cy="340" r="4.5" class="node"/>
+
+  <!-- Tensión vbe indicada -->
+  <text x="525" y="245" fill="#d9381e" font-weight="bold" font-size="13">+</text>
+  <text x="520" y="262" class="lbl" style="font-size:12px;">vbe</text>
+  <text x="526" y="280" fill="#d9381e" font-weight="bold" font-size="13">-</text>
+
+  <!-- Terminal Emisor E -->
+  <path class="wire" d="M555 340 H835"/>
+  <circle cx="695" cy="340" r="4.5" class="node"/>
+  <text x="690" y="365" class="term-lbl">E (Tierra AC)</text>
+
+  <!-- Fuente de Corriente dependiente gm·vbe -->
+  <path class="wire" d="M735 340 V290"/>
+  <circle cx="735" cy="255" r="22" class="src-circle"/>
+  <line x1="735" y1="242" x2="735" y2="268" stroke="#0b69a3" stroke-width="2.2" stroke-linecap="round"/>
+  <polygon points="731,263 735,272 739,263" class="arrow"/>
+  <text x="765" y="255" class="lbl">gm·vbe</text>
+  <path class="wire" d="M735 233 V175 H835"/>
+
+  <!-- Resistencia Early ro -->
+  <path class="wire" d="M810 175 V230"/>
+  <rect x="797" y="230" width="26" height="55" class="res"/>
+  <text x="830" y="255" class="lbl">ro</text>
+  <text x="830" y="270" class="val">VA/ICQ</text>
+  <path class="wire" d="M810 285 V340"/>
+  <circle cx="810" cy="175" r="4.5" class="node"/>
+  <circle cx="810" cy="340" r="4.5" class="node"/>
+
+  <!-- Terminal Colector C -->
+  <circle cx="845" cy="175" r="4.5" class="node"/>
+  <text x="855" y="178" class="term-lbl">C</text>
+  <circle cx="845" cy="340" r="4.5" class="node"/>
+  <text x="855" y="343" class="term-lbl">E</text>
+
+  <!-- CAJA INFERIOR DE RELACIONES MATEMÁTICAS UNIFICADAS -->
+  <rect x="35" y="410" width="850" height="80" class="footer-box"/>
+  <text x="50" y="433" font-weight="bold" fill="#0b69a3" font-size="13">⚡ IDENTIDADES DE CONVERSIÓN RIGUROSA ENTRE AMBOS MODELOS:</text>
+  <text x="50" y="455" class="footer-txt">1. Resistencia intrínseca: re = VT / IEQ ≈ 26 mV / ICQ   |   2. Transconductancia: gm = ICQ / VT = α / re ≈ 1 / re</text>
+  <text x="50" y="475" class="footer-txt">3. Resistencia de entrada en base: rπ = (β + 1)·re = β / gm   |   4. Equivalencia de corriente: ic = β·ib = gm·vbe (Demostrado)</text>
+</svg>

@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" role="img" aria-label="Par Darlington y Par Sziklai">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .card-border { fill: none; stroke: #d9e2ec; stroke-width: 1.5; }
+      .title { font: bold 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #102a43; }
+      .subtitle { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #627d98; }
+      .wire { stroke: #243b53; stroke-width: 2.6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .res { fill: #ffffff; stroke: #102a43; stroke-width: 2.4; }
+      .node { fill: #102a43; }
+      .trans-circle { fill: #f0f4f8; stroke: #9fb3c8; stroke-width: 1.8; }
+      .trans-line { stroke: #0b69a3; stroke-width: 3; stroke-linecap: round; }
+      .trans-arrow { fill: #0b69a3; }
+      .lbl { font: bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; fill: #0b69a3; }
+      .val { font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #334e68; }
+      .term-lbl { font: bold 15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #d9381e; }
+      .box-panel { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.5; rx: 8px; }
+      .badge-npn { fill: #e0f2fe; stroke: #0284c7; stroke-width: 1.5; rx: 6px; }
+      .badge-pnp { fill: #fdf2f8; stroke: #db2777; stroke-width: 1.5; rx: 6px; }
+    </style>
+  </defs>
+
+  <rect width="920" height="520" rx="14" class="bg"/>
+  <rect x="15" y="15" width="890" height="490" rx="10" class="card-border"/>
+
+  <text x="35" y="48" class="title">Configuraciones de Super-Beta: Par Darlington vs Par Sziklai</text>
+  <text x="35" y="70" class="subtitle">Multiplicación compuesta de ganancia de corriente (β_total ≈ β1 · β2) e impedancias astronómicas</text>
+
+  <!-- PANEL IZQUIERDO: PAR DARLINGTON (NPN + NPN) -->
+  <rect x="35" y="90" width="415" height="305" class="box-panel"/>
+  <text x="50" y="118" font-size="15" font-weight="bold" fill="#0369a1">1. Par Darlington Clásico (NPN + NPN)</text>
+  <text x="50" y="136" class="val">Referencia: Boylestad Sec. 5.17 · Colectores unidos</text>
+
+  <!-- Colector Común C -->
+  <path class="wire" d="M190 150 V185 M300 150 V240 M190 150 H300 M245 150 V125"/>
+  <circle cx="245" cy="125" r="4.5" class="node"/>
+  <text x="255" y="130" class="term-lbl">C (Colector Común)</text>
+
+  <!-- Base B -->
+  <circle cx="70" cy="205" r="4.5" class="node"/>
+  <text x="50" y="210" class="term-lbl">B</text>
+  <path class="wire" d="M70 205 H145"/>
+
+  <!-- Transistor Q1 NPN -->
+  <circle cx="170" cy="205" r="30" class="trans-circle"/>
+  <path class="trans-line" d="M155 190 V220"/>
+  <path class="wire" d="M145 205 H155"/>
+  <path class="trans-line" d="M155 195 L190 175"/>
+  <path class="wire" d="M190 175 V150"/>
+  <path class="trans-line" d="M155 215 L190 235"/>
+  <polygon points="181,228 192,236 178,236" class="trans-arrow"/>
+  <text x="175" y="195" class="lbl">Q1</text>
+
+  <!-- Emisor de Q1 conecta a Base de Q2 -->
+  <path class="wire" d="M190 235 V260 H255"/>
+  <circle cx="190" cy="260" r="4" class="node"/>
+
+  <!-- Transistor Q2 NPN de Potencia -->
+  <circle cx="280" cy="260" r="32" class="trans-circle"/>
+  <path class="trans-line" d="M265 244 V276"/>
+  <path class="wire" d="M255 260 H265"/>
+  <path class="trans-line" d="M265 250 L300 228"/>
+  <path class="wire" d="M300 228 V150"/>
+  <path class="trans-line" d="M265 270 L300 292"/>
+  <polygon points="291,285 302,294 288,294" class="trans-arrow"/>
+  <text x="285" y="250" class="lbl">Q2</text>
+
+  <!-- Emisor E final -->
+  <path class="wire" d="M300 292 V340"/>
+  <circle cx="300" cy="340" r="4.5" class="node"/>
+  <text x="310" y="345" class="term-lbl">E</text>
+
+  <!-- Tarjeta Darlington Info -->
+  <rect x="50" y="280" width="130" height="100" class="badge-npn"/>
+  <text x="60" y="300" font-size="11" font-weight="bold" fill="#0369a1">PROPIEDADES:</text>
+  <text x="60" y="318" font-size="11" class="val">βD ≈ β1 · β2</text>
+  <text x="60" y="336" font-size="11" font-weight="bold" fill="#b91c1c">VBE,D ≈ 1.4 V (2 caídas)</text>
+  <text x="60" y="354" font-size="11" class="val">Zb ≈ β1·β2·RE</text>
+  <text x="60" y="370" font-size="11" class="val">Zo ≈ re2 + re1/β2</text>
+
+  <!-- PANEL DERECHO: PAR SZIKLAI (NPN + PNP) -->
+  <rect x="470" y="90" width="415" height="305" class="box-panel"/>
+  <text x="485" y="118" font-size="15" font-weight="bold" fill="#9d174d">2. Par Sziklai (Complementario NPN + PNP)</text>
+  <text x="485" y="136" class="val">Mayor estabilidad térmica · Solo 1 caída de diodo VBE</text>
+
+  <!-- Colector 'equivalente' C -->
+  <path class="wire" d="M720 125 V150 H610 M610 150 V175"/>
+  <circle cx="720" cy="125" r="4.5" class="node"/>
+  <text x="730" y="130" class="term-lbl">C</text>
+
+  <!-- Base B -->
+  <circle cx="505" cy="205" r="4.5" class="node"/>
+  <text x="490" y="210" class="term-lbl">B</text>
+  <path class="wire" d="M505 205 H565"/>
+
+  <!-- Transistor Q1 NPN -->
+  <circle cx="590" cy="205" r="30" class="trans-circle"/>
+  <path class="trans-line" d="M575 190 V220"/>
+  <path class="wire" d="M565 205 H575"/>
+  <!-- Colector de Q1 hacia Base de Q2 -->
+  <path class="trans-line" d="M575 195 L610 175"/>
+  <path class="wire" d="M610 175 V185 H675"/>
+  <circle cx="610" cy="185" r="4" class="node"/>
+  <!-- Emisor de Q1 hacia Colector de Q2 y salida E -->
+  <path class="trans-line" d="M575 215 L610 235"/>
+  <polygon points="601,228 612,236 598,236" class="trans-arrow"/>
+  <text x="595" y="195" class="lbl">Q1 (NPN)</text>
+
+  <!-- Transistor Q2 PNP -->
+  <circle cx="700" cy="220" r="32" class="trans-circle"/>
+  <path class="trans-line" d="M685 204 V236"/>
+  <path class="wire" d="M675 220 H685"/>
+  <!-- Emisor de Q2 va hacia C superior -->
+  <path class="trans-line" d="M685 210 L720 188"/>
+  <polygon points="705,198 694,204 703,212" fill="#db2777"/> <!-- Flecha apuntando a la base (PNP) -->
+  <path class="wire" d="M720 188 V150"/>
+  <!-- Colector de Q2 conecta con emisor de Q1 -->
+  <path class="trans-line" d="M685 230 L720 252"/>
+  <text x="705" y="210" class="lbl" style="fill:#db2777;">Q2 (PNP)</text>
+
+  <path class="wire" d="M610 235 V280 H720 M720 252 V280 M720 280 V340"/>
+  <circle cx="720" cy="280" r="4.5" class="node"/>
+  <circle cx="720" cy="340" r="4.5" class="node"/>
+  <text x="730" y="345" class="term-lbl">E</text>
+
+  <!-- Tarjeta Sziklai Info -->
+  <rect x="485" y="280" width="140" height="100" class="badge-pnp"/>
+  <text x="495" y="300" font-size="11" font-weight="bold" fill="#9d174d">PROPIEDADES:</text>
+  <text x="495" y="318" font-size="11" class="val">βS ≈ β1 · β2</text>
+  <text x="495" y="336" font-size="11" font-weight="bold" fill="#15803d">VBE,S ≈ 0.7 V (¡Solo 1 caída!)</text>
+  <text x="495" y="354" font-size="11" class="val">Menor distorsión térmica</text>
+  <text x="495" y="370" font-size="11" class="val">Usado en etapas AB cuasi-comp.</text>
+
+  <!-- FOOTER -->
+  <rect x="35" y="415" width="850" height="75" rx="6" fill="#fdf4ff" stroke="#f0abfc" stroke-width="1.5"/>
+  <text x="50" y="438" font-weight="bold" fill="#86198f" font-size="13">💡 LA CLAVE PEDAGÓGICA (Profesor Fredy &amp; Boylestad Sec. 5.17):</text>
+  <text x="50" y="458" class="val" style="font-size:12px;">En Darlington pierdes 1.4V solo para polarizar la base (VBE1 + VBE2), lo cual recorta el swing en fuentes bajas de 5V o 3.3V.</text>
+  <text x="50" y="476" class="val" style="font-size:12px;">El par Sziklai te entrega la misma ganancia multiplicada (β1·β2) conservando una única caída VBE ≈ 0.7V. ¡Ténganlo presente para el examen!</text>
+</svg>
