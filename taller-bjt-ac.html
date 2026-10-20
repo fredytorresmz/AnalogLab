@@ -302,19 +302,19 @@
 
     <main>
       <section class="hero small">
-        <span class="eyebrow">Cátedra de Electrónica Analógica y Laboratorio · Profe Fredy Torres</span>
-        <h1>Taller Maestro de BJT en AC: De la Teoría al Laboratorio y la Industria</h1>
+        <span class="eyebrow">Cátedra de Electrónica Analógica y Laboratorio · Nivel Universitario</span>
+        <h1>Taller de Análisis y Diseño de Circuitos BJT en Pequeña Señal (AC)</h1>
         <p>
-          ¡Hola, muchachos! Bienvenidos a su taller de entrenamiento para el examen parcial. Como siempre les insisto en el tablero y en las mesas de laboratorio: el análisis de transistores en señal pequeña no es una colección de fórmulas para memorizar, sino <b>el arte de entender cómo se mueven los electrones y cómo dialogan la continua y la alterna</b>.
+          Este taller constituye el instrumento formal de estudio, deducción analítica y preparación para las evaluaciones prácticas y teóricas de la cátedra. Fundamentado en la estructura temática de <b>Boylestad & Nashelsky (Capítulo 5)</b> y complementado con los criterios de diseño intuitivo de <b>Albert Malvino</b>, el taller abarca desde el modelado incremental de parámetros dinámicos hasta topologías compuestas y aplicaciones de ingeniería real.
         </p>
         <p style="margin-top:8px; font-size:0.95rem; color:#475569;">
-          He organizado este taller en <b>49 ejercicios y retos graduados</b> siguiendo la ruta pedagógica del <b>Capítulo 5 de Boylestad & Nashelsky</b> y las geniales <b>analogías intuitivas de Albert Malvino</b>. Aquí encontrarán esquemáticos de simulación completos para cada problema, deducciones en paralelo por modelo \(r_e\) e híbrido-\(\pi\), trucos para no enredarse en mallas kilométricas y los errores más comunes que veo en las entregas prácticas para que ustedes no los cometan en el examen.
+          Estructurado en <b>evaluación conceptual, 34 problemas prácticos con esquemáticos normalizados y 3 retos de examen</b>, cada ejercicio integra desarrollos analíticos paralelos mediante el modelo \(r_e\) y el modelo híbrido-\(\pi\), verificaciones de punto de reposo en continua y notas de criterio ingenieril para el trabajo en laboratorio.
         </p>
         <div class="workshop-actions">
           <button id="btnPrintPdf" class="btn primary">🖨️ Imprimir Vista Actual</button>
-          <a href="taller-bjt-ac-imprimible.html" target="_blank" class="btn" style="text-decoration:none;">📄 Descargar Guía Maestra PDF (Formato Libro A4)</a>
+          <a href="taller-bjt-ac-imprimible.html" target="_blank" class="btn" style="text-decoration:none;">📄 Descargar Guía Oficial PDF (Formato Libro A4)</a>
           <a href="#retos" class="btn" style="border: 1.5px solid #dc2626; color: #dc2626; font-weight: bold; background: #fff5f5;">🔥 Simulacro: Retos de Examen</a>
-          <a href="#practico" class="btn">34 Ejercicios Resueltos Paso a Paso</a>
+          <a href="#practico" class="btn">34 Problemas Desarrollados Paso a Paso</a>
           <a href="bjt-ac.html" class="btn">Módulo Teórico de Clase</a>
         </div>
       </section>
@@ -325,8 +325,8 @@
           <div class="module-title">
             <span class="no" style="background:#0284c7;color:#fff;">🧭</span>
             <div>
-              <span class="eyebrow" style="color:#0284c7;font-weight:bold;">Guía de Supervivencia y Traducción Inmediata</span>
-              <h2>Brújula del Estudiante: Del Tablero de Clase a Boylestad y Malvino</h2>
+              <span class="eyebrow" style="color:#0284c7;font-weight:bold;">Marco Terminológico y Criterio de Diseño</span>
+              <h2>Unificación Conceptual: De las Notas de Clase a Boylestad y Malvino</h2>
             </div>
           </div>
           <button class="mark" data-mark="taller-bjt-ac-brujula">Marcar leído</button>
@@ -334,10 +334,10 @@
 
         <div class="box remember" style="border-left-color: #0284c7; background: #eff6ff; margin: 12px 0 18px 0;">
           <h4 style="margin: 0 0 6px 0; color: #1e40af; font-size: 1.05rem;">
-            👨‍🏫 Mensaje del Profe Fredy sobre el vocabulario de este taller
+            📘 Nota docente sobre la terminología técnica del taller
           </h4>
           <p style="margin: 0; font-size: 0.95rem; line-height: 1.55; color: #1e293b;">
-            <b>¡Muchachos, mucha atención!</b> Si al leer los ejercicios se encuentran con palabras en inglés como <i>bypass</i> o <i>swamping</i>, o nombres como <i>Teorema de Miller</i>, <i>Cascode</i> o <i>Efecto Early</i>, <b>¡no se asusten ni sientan que les cambiaron el tema!</b> Todo nuestro taller sigue estrictamente el <b>Capítulo 5 de Boylestad & Nashelsky (10ª y 11ª edición)</b> y las explicaciones que hemos hecho en el tablero, complementadas con la intuición de <b>Albert Malvino</b>. A veces los libros en inglés, las hojas de datos de fabricantes y los simuladores usan términos técnicos para atajos que en clase vimos con nombres en español. Aquí tienen su mapa para que conecten de inmediato lo que rayamos en clase con la literatura internacional:
+            En el estudio formal de la electrónica analógica a nivel universitario, es habitual encontrar diferentes denominaciones para una misma topología según la literatura consultada (traducciones de Boylestad, textos de Malvino o Sedra, y hojas de datos en inglés). Esta sección unifica el vocabulario para asegurar rigor y precisión en el desarrollo de los problemas y en los reportes de laboratorio:
           </p>
         </div>
 
@@ -534,16 +534,16 @@
           <div class="module-title">
             <span class="no">T1</span>
             <div>
-              <span class="eyebrow">Fase 1 · Calentamiento Conceptual</span>
-              <h2>Preguntas de Comprensión, Linealización y Criterio Físico</h2>
+              <span class="eyebrow">Fase 1 · Evaluación y Fundamentación Conceptual</span>
+              <h2>Cuestionario de Linealización, Principios Físicos y Modelos Incrementales</h2>
             </div>
           </div>
           <button class="mark" data-mark="taller-bjt-ac-t1">Marcar estudiado</button>
         </div>
 
         <div class="box remember" style="border-left-color: #0284c7; background: #f0f9ff;">
-          <small style="color:#0369a1; font-weight:bold;">💡 Consejo del Profe para arrancar</small>
-          Muchachos, ningún circuito analógico se resuelve tirando números a la calculadora sin pensar. Tómense 15 minutos para responder estas 15 preguntas con sus propias palabras. Si entienden con claridad <i>por qué la fuente de continua es masa para la alterna</i> o <i>por qué una señal de más de 5 mV distorsiona la onda senoidal</i>, resolverán cualquier circuito del examen en minutos. Si se sienten atascados, hagan clic en <b>Pista 1</b> y <b>Pista 2</b> como si me estuvieran preguntando en clase.
+          <small style="color:#0369a1; font-weight:bold;">💡 Criterio de fundamentación previa</small>
+          El cálculo cuantitativo de amplificadores analógicos exige dominar con solidez los principios físicos del modelo incremental: la naturaleza exponencial de la unión, las condiciones de linealidad en pequeña señal y el concepto de masa virtual en continua. Responda cada cuestión justificando su razonamiento técnico; puede emplear los botones de asistencia conceptual (<b>Pista 1</b> y <b>Pista 2</b>) para orientar su deducción.
         </div>
 
         <div id="tallerBjtAcList" class="taller-list" style="margin-top:15px"></div>
@@ -555,18 +555,18 @@
           <div class="module-title">
             <span class="no">T2</span>
             <div>
-              <span class="eyebrow">Fase 2 · Banco de Problemas Guiados con Esquemático</span>
-              <h2>34 Problemas Numéricos con Solucionario Dual (\(r_e\) e Híbrido-\(\pi\))</h2>
+              <span class="eyebrow">Fase 2 · Banco de Problemas Guiados y Aplicaciones de Ingeniería</span>
+              <h2>34 Problemas Numéricos Desarrollados por Modelos \(r_e\) e Híbrido-\(\pi\)</h2>
             </div>
           </div>
           <button class="mark" data-mark="taller-bjt-ac-t2">Marcar estudiado</button>
         </div>
 
         <p class="lead">
-          Aquí tienen el corazón del taller. Vamos a recorrer juntos desde el cálculo analítico de parámetros dinámicos (\(r_e, g_m, r_\pi, r_o\)), pasando por las tres topologías fundamentales (Emisor Común, Seguidor de Emisor y Base Común), hasta circuitos de nivel industrial: etapas Cascode para radiofrecuencia, pares Darlington y Sziklai para control de potencia y acondicionadores para sensores de vehículos eléctricos.
+          Esta sección constituye el núcleo práctico del taller. Comprende 34 problemas clasificados sistemáticamente en seis bloques temáticos según la secuencia analítica de Boylestad (Capítulo 5). El recorrido abarca desde el modelado incremental de parámetros (\(r_e, g_m, r_\pi, r_o\)), pasando por las tres configuraciones canónicas (Emisor Común, Colector Común y Base Común), hasta arquitecturas compuestas e industriales (Cascode, Darlington, Sziklai y acondicionamiento de señales en automoción).
         </p>
         <p style="font-size:0.92rem; color:#475569; margin-top:-6px;">
-          <b>Mi recomendación de estudio:</b> En cada ejercicio, miren detenidamente el esquemático antes de abrir la solución. Identifiquen la entrada, la salida, calculen el punto Q en su cuaderno y luego abran el desplegable para contrastar sus números con mi desarrollo paso a paso.
+          <b>Criterio metodológico de trabajo:</b> Se recomienda examinar minuciosamente el esquemático y los parámetros de cada circuito, formular la solución analítica en el cuaderno de trabajo y contrastar posteriormente los resultados con el desarrollo detallado disponible en cada elemento desplegable.
         </p>
 
         <!-- Barra de búsqueda y filtros -->
@@ -592,16 +592,16 @@
           <div class="module-title">
             <span class="no" style="background:#dc2626;color:#fff;">T3</span>
             <div>
-              <span class="eyebrow" style="color:#dc2626;font-weight:bold;">Fase 3 · Simulacro de Examen Parcial</span>
-              <h2>Zona de Retos Autónomos: ¡Resuelvan en su cuaderno sin ver la respuesta!</h2>
+              <span class="eyebrow" style="color:#dc2626;font-weight:bold;">Fase 3 · Evaluación y Retos de Examen Parcial</span>
+              <h2>Retos Autónomos de Nivel Evaluación: Resolución y Validación Numérica</h2>
             </div>
           </div>
           <button class="mark" data-mark="taller-bjt-ac-t3">Marcar estudiado</button>
         </div>
 
         <div class="box warn" style="border-left-color:#dc2626; background:#fff8f8;">
-          <small style="color:#b91c1c; font-weight:bold;">⚠️ La regla de oro del simulacro</small>
-          Muchachos, llegó la prueba de fuego. En estos 3 retos <b>no hay respuestas a la vista</b>. Tomen su cuaderno de apuntes, su lápiz y su calculadora científica. Analicen el esquemático de simulación, calculen el punto Q, las impedancias dinámicas y las ganancias de tensión, y digiten sus resultados numéricos en las casillas interactivas para que el sistema los evalúe con tolerancia real de ingeniería. Solo cuando hayan hecho su mejor intento, desplieguen mi solución completa al final.
+          <small style="color:#b91c1c; font-weight:bold;">⚠️ Criterio de autoevaluación formal</small>
+          Esta sección reproduce condiciones estrictas de evaluación parcial. Cada reto presenta un caso de ingeniería real con sus especificaciones completas. Se solicita resolver los cálculos en el cuaderno de trabajo y registrar los valores en los campos de validación interactiva, los cuales aplican tolerancias de diseño de ingeniería. El desarrollo analítico completo debe consultarse exclusivamente tras haber completado el intento autónomo.
         </div>
 
         <div id="retosContainer" style="margin-top:20px"></div>

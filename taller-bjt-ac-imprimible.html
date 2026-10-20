@@ -189,10 +189,10 @@
     <b>4. Fase 3 (ZONA DE RETOS):</b> Enfréntate a los problemas tipo examen con tu cuaderno y calculadora sin mirar la solución. Contrasta tus números finales en el solucionario al pie de cada reto.
   </div>
 
-  <h2 class="section-title" style="color: #0284c7; border-bottom: 2px solid #0284c7;">🧭 Brújula del Estudiante: Del Tablero de Clase a Boylestad y Malvino</h2>
+  <h2 class="section-title" style="color: #0284c7; border-bottom: 2px solid #0284c7;">🧭 Marco Terminológico y Criterio de Diseño: Unificación Aula–Literatura Técnica</h2>
   <div style="background: #f0f9ff; border: 1.5px solid #bae6fd; padding: 12px 14px; border-radius: 6px; margin-bottom: 16px;">
-    <b>👨‍🏫 Mensaje del Profe Fredy sobre el vocabulario de este taller:</b><br>
-    Muchachos: todo nuestro taller sigue estrictamente el <b>Capítulo 5 de Boylestad & Nashelsky (10ª y 11ª edición)</b> y las explicaciones que hemos hecho en el tablero, complementadas con la pedagogía intuitiva de <b>Albert Malvino</b>. Si al leer los ejercicios encuentran términos en inglés como <i>bypass</i> o <i>swamping</i>, o nombres como <i>Teorema de Miller</i> o <i>Cascode</i>, ¡no se asusten! Aquí tienen su mapa para traducir inmediatamente el vocabulario del aula al de los libros y hojas de datos:
+    <b>📘 Nota docente sobre la terminología técnica del taller:</b><br>
+    En el estudio formal de la electrónica analógica a nivel universitario, es habitual encontrar diferentes denominaciones para una misma topología según la literatura consultada (traducciones de Boylestad, textos de Malvino o Sedra, y hojas de datos en inglés). Esta sección unifica el vocabulario para asegurar rigor y precisión en el desarrollo de los problemas y en los reportes de laboratorio:
   </div>
 
   <div class="item-card" style="border-left: 4px solid #0284c7;">
@@ -385,7 +385,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> En el diseño de la etapa de entrada para un sensor de vibración en una turbina eólica, se utiliza un transistor bipolar NPN 2N3904. Muchachos, antes de conectar filtros o cargas, debemos modelar el transistor en pequeña señal a partir de su punto de operación en continua (punto Q).
+        <b>Contexto de Ingeniería & Aplicación:</b> En el diseño de la etapa de entrada para un sensor de vibración en una turbina eólica, se utiliza un transistor bipolar NPN 2N3904. Se requiere modelar el transistor en pequeña señal a partir de su punto de operación en continua (punto Q) antes de acoplar la etapa a los filtros posteriores.
       </div>
     
 
@@ -587,7 +587,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> Un módulo bajo el capó de un vehículo eléctrico opera en un rango térmico severo (de 25 °C a 75 °C). En clase vimos que el potencial térmico VT = kT/q sube con la temperatura. Aquí evaluaremos cómo esa subida altera los parámetros dinámicos del BJT y por qué es indispensable usar una resistencia en el emisor para amortiguar el calor.
+        <b>Contexto de Ingeniería & Aplicación:</b> Un módulo de instrumentación bajo el capó de un vehículo eléctrico opera en un rango térmico severo (de 25 °C a 75 °C). Dado que la tensión térmica VT = kT/q se incrementa con la temperatura, se requiere evaluar analíticamente la variación resultante sobre los parámetros dinámicos del BJT y determinar la necesidad de degeneración de emisor.
       </div>
     
 
@@ -755,7 +755,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> En circuitos integrados (chips analógicos), en lugar de una resistencia de colector pasiva RC, se utiliza una fuente de corriente activa (lo que en microelectrónica se conoce como "carga activa"). Si la resistencia de colector tiende a infinito, ¿cuál es el techo físico máximo de ganancia que puede dar un solo transistor antes de chocar con su propia resistencia interna Early ro?
+        <b>Contexto de Ingeniería & Aplicación:</b> En circuitos integrados analógicos, la resistencia pasiva de colector suele reemplazarse por una fuente de corriente activa (carga activa). Se requiere determinar el límite teórico superior de ganancia de tensión en circuito abierto impuesta por la resistencia dinámica Early ro.
       </div>
     
 
@@ -939,7 +939,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> Para no tener que resolver sistemas de mallas kilométricos en el examen, en clase aprendimos las dos reglas de oro de la reflexión de impedancias (la palanca del BJT). Vamos a demostrarlas paso a paso mediante leyes fundamentales de Kirchhoff.
+        <b>Contexto de Ingeniería & Aplicación:</b> El análisis sistemático de amplificadores con transistores bipolares se fundamenta en los teoremas de reflexión de impedancias a través de la unión base-emisor. Se requiere deducir y aplicar formalmente estas relaciones mediante las leyes fundamentales de Kirchhoff.
       </div>
     
 
@@ -1128,7 +1128,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> Muchachos, recuerden la condición fundamental que vimos en clase: para que el transistor opere de forma puramente lineal y sin distorsión audible, la oscilación alterna base-emisor debe ser diminuta (vbe ≤ 5 mV pico). Si el sensor entrega más voltaje, debemos insertar una resistencia de emisor para absorber el exceso.
+        <b>Contexto de Ingeniería & Aplicación:</b> En el acondicionamiento de señales provenientes de transductores piezoeléctricos de impacto, la condición fundamental para garantizar operación lineal y distorsión armónica despreciable es operar dentro del régimen de pequeña señal (amplitud vbe ≤ 5 mV pico).
       </div>
     
 
@@ -1329,7 +1329,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> En un examen de diseño o en el laboratorio les entregan la hoja de datos (datasheet) del transistor BC547B. Notarán que el fabricante nunca especifica un único valor de beta, sino un rango amplio (hfe entre 200 y 450). Vamos a calcular los parámetros dinámicos para los casos extremos.
+        <b>Contexto de Ingeniería & Aplicación:</b> A partir de la hoja de datos (datasheet) del fabricante para el transistor BC547B, se requiere determinar los parámetros dinámicos considerando la dispersión de fabricación de la ganancia de corriente (hfe entre 200 y 450) para un punto de prueba específico.
       </div>
     
 
@@ -1527,7 +1527,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> Preamplificador de audio para un micrófono dinámico en una consola de sonido. En este circuito conectamos un condensador en paralelo con RE (llamado condensador de desacoplo de emisor o "bypass" en inglés, porque para la señal alterna desvía la corriente a tierra puenteando a RE). El estudiante resolverá el circuito completo desde DC hasta la ganancia con carga acoplada.
+        <b>Contexto de Ingeniería & Aplicación:</b> Etapa preamplificadora de audio para un micrófono dinámico en una consola de sonido. El circuito cuenta con condensador de desacoplo de emisor (bypass en paralelo con RE). Se requiere resolver el análisis completo del circuito, desde el punto de operación en continua hasta la ganancia de tensión en alterna con carga acoplada.
       </div>
     
 
@@ -1746,7 +1746,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> En una aplicación de instrumentación necesitamos que la ganancia no cambie si la temperatura sube o si cambiamos de transistor. Para lograrlo, retiramos por completo el condensador CE (lo que en los textos en inglés llaman "sin bypass" o "degeneración de emisor pura", dejando RE activa para la señal de alterna).
+        <b>Contexto de Ingeniería & Aplicación:</b> En una aplicación de instrumentación se requiere que la ganancia de voltaje sea altamente estable frente a variaciones de temperatura y dispersión de transistores. Para ello, se prescinde del condensador de desacoplo de emisor (degeneración de emisor pura con RE activa en corriente alterna).
       </div>
     
 
@@ -1936,7 +1936,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> Para tener buena ganancia y al mismo tiempo no sufrir por calor ni distorsión, Boylestad propone dividir la resistencia de emisor en dos en serie: RE1 (que queda activa en alterna) y RE2 (que lleva el condensador CE en paralelo). Albert Malvino llamó a esto la técnica de "swamping" (inundación), porque si RE1 es al menos 10 veces re, "inunda" e invisibiliza a re.
+        <b>Contexto de Ingeniería & Aplicación:</b> Para lograr un compromiso óptimo entre ganancia de tensión y estabilidad térmica, se implementa una etapa de emisor común con resistencia de emisor dividida en dos componentes en serie: RE1 (activa en alterna) y RE2 (puenteada por el condensador de desacoplo CE).
       </div>
     
 
@@ -2115,7 +2115,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> En este amplificador, la resistencia de polarización RF no va a VCC sino que se conecta directamente entre el colector y la base (Boylestad Sec. 5.10). Esto crea una realimentación negativa que estabiliza el punto Q. Para analizarla en AC sin resolver mallas simultáneas complejas, utilizamos una regla matemática muy conveniente llamada Teorema de Miller: desacoplamos RF dividiéndola en una resistencia que cuelga en la entrada (RMi) y otra en la salida (RMo).
+        <b>Contexto de Ingeniería & Aplicación:</b> En etapas preamplificadoras de audio y sensores industriales, se utiliza la polarización por retroalimentación de colector (resistencia RF conectada entre colector y base). Se requiere analizar su comportamiento en corriente alterna mediante la descomposición equivalente proporcionada por el Teorema de Miller.
       </div>
     
 
@@ -2322,7 +2322,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> En clase vimos que si ro ≥ 10 RC (la regla del 10% de Boylestad), podemos ignorar ro en el análisis preliminar de diseño. Pero si ro es menor (o si la carga es muy grande), debemos colocarla en paralelo con RC. Vamos a calcular el error exacto que se comete al despreciarla.
+        <b>Contexto de Ingeniería & Aplicación:</b> En el análisis de etapas amplificadoras en emisor común, la resistencia dinámica de salida ro debida a la modulación del ancho de base (Efecto Early) influye en la ganancia efectiva y en la impedancia de salida. Se requiere evaluar cuantitativamente el error cometido al aplicar la aproximación estándar de Boylestad (ro ≥ 10 RC).
       </div>
     
 
@@ -2521,7 +2521,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> En sistemas de instrumentación industrial y audio profesional es estándar utilizar fuentes partidas (+VCC y -VEE). Esto permite fijar la base en potencial de 0 V de continua mediante una simple resistencia a masa, reduciendo condensadores de acoplamiento voluminosos.
+        <b>Contexto de Ingeniería & Aplicación:</b> En sistemas de instrumentación industrial y audio profesional es estándar utilizar fuentes de alimentación simétricas (+VCC y -VEE). Esto permite fijar la base en potencial de 0 V de continua mediante una resistencia a masa, simplificando el acoplamiento directo de la señal.
       </div>
     
 
@@ -2727,7 +2727,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> En el diseño de excitadores para relés, motores o altavoces, no basta con conocer la ganancia de voltaje; es fundamental cuantificar la ganancia de corriente (Ai = io / ii) y la ganancia de potencia neta (Ap) para verificar que la fuente de señal débil pueda suministrar la energía requerida.
+        <b>Contexto de Ingeniería & Aplicación:</b> En el diseño de excitadores para relés, actuadores o altavoces, se requiere determinar formalmente la ganancia de corriente (Ai = io / ii) y la ganancia de potencia neta (Ap) de una etapa en Emisor Común a partir de su ganancia de voltaje y las impedancias del circuito.
       </div>
     
 
@@ -2928,7 +2928,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> Se requiere conectar un sensor de alta impedancia (Rs = 10 kΩ) a una carga de audio de baja resistencia (RL = 330 Ω) sin que la señal caiga a cero. El Colector Común (Seguidor de Emisor) es el circuito ideal: no amplifica voltaje (Av ≈ +1, sin desfase), pero entrega corriente masiva con una impedancia de salida de unos pocos ohmios.
+        <b>Contexto de Ingeniería & Aplicación:</b> Se requiere diseñar una etapa adaptadora para interconectar una fuente de señal de alta impedancia (Rs = 10 kΩ) con una carga de baja resistencia (RL = 330 Ω) minimizando la atenuación. Para ello se implementa un seguidor de emisor (Colector Común).
       </div>
     
 
@@ -3100,7 +3100,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> Un acelerómetro utilizado en pruebas de choque tiene una resistencia interna de salida elevada (Rs = 10 kΩ). Si se conectara directo a un filtro de 1 kΩ, la señal se perdería en un 90%. Vamos a cuantificar cómo el buffer de Colector Común actúa como un adaptador de impedancias que rescata la señal.
+        <b>Contexto de Ingeniería & Aplicación:</b> Se requiere evaluar el desempeño de un seguidor de emisor (Colector Común) como etapa adaptadora de impedancias para minimizar la atenuación producida por la resistencia interna de un sensor acelerométrico acoplado a una carga resistiva.
       </div>
     
 
@@ -3270,7 +3270,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> Etapa receptora sintonizada para una antena de comunicaciones de 50 Ω. En la configuración Base Común, la señal entra por el emisor y sale por el colector, mientras que la base se conecta a tierra en AC mediante un condensador. No invierte la fase (0°) y su bajísima impedancia de entrada empata de forma natural con cables coaxiales de 50 Ω.
+        <b>Contexto de Ingeniería & Aplicación:</b> Etapa receptora sintonizada para una antena de comunicaciones de 50 Ω. En la configuración Base Común, la señal ingresa por el emisor y se extrae por el colector, mientras que la base se desacopla a tierra en corriente alterna. Se requiere evaluar sus parámetros dinámicos de entrada y ganancia.
       </div>
     
 
@@ -3446,7 +3446,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> En el receptor de un enlace inalámbrico a 433 MHz, una antena con resistencia característica estándar Rs = 50 Ω se conecta a un preamplificador en Base Común. Aunque el divisor de entrada pierde tensión debido a la baja Zi, la altísima ganancia propia de la etapa compensa con creces y entrega un excelente ancho de banda sin efecto Miller.
+        <b>Contexto de Ingeniería & Aplicación:</b> En el extremo receptor de un enlace de radiofrecuencia a 433 MHz, una antena con resistencia característica estándar Rs = 50 Ω se conecta a un preamplificador en Base Común. Se requiere determinar la ganancia neta del sistema considerando la atenuación del divisor de entrada.
       </div>
     
 
@@ -3625,7 +3625,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> El resumen definitivo que todo estudiante de ingeniería debe dominar para el examen y el laboratorio: comparativa rigurosa de Zi, Zo, Av, Avs y desfase para las tres configuraciones con un mismo transistor bajo idénticas condiciones de polarización.
+        <b>Contexto de Ingeniería & Aplicación:</b> En evaluación de diseño analógico se requiere contrastar de forma analítica y cuantitativa las tres configuraciones fundamentales del BJT (Emisor Común, Colector Común y Base Común) bajo idénticas condiciones de polarización estática y componentes normalizados.
       </div>
     
 
@@ -3823,7 +3823,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> Un error habitual en el laboratorio ocurre cuando un estudiante diseña un amplificador con ganancia calculada de 200 en vacío, pero al conectarle auriculares de 32 Ω o un cable a otro equipo, comprueba que la ganancia cae drásticamente. Analizaremos cuantitativamente este efecto de carga.
+        <b>Contexto de Ingeniería & Aplicación:</b> En el análisis de etapas amplificadoras, la conexión de una carga finita RL altera la resistencia dinámica efectiva de colector (rL = RC || RL). Se requiere evaluar numéricamente el efecto de carga sobre la ganancia de voltaje ante cuatro valores representativos de impedancia.
       </div>
     
 
@@ -4021,7 +4021,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> Comprender la diferencia entre la recta de carga en continua (que fija la polarización estática de reposo dictada por RC + RE) y la recta de carga en alterna (por la cual se mueve dinámicamente la señal dictada por rL = RC || RL) es la competencia más evaluada en exámenes de diseño analógico.
+        <b>Contexto de Ingeniería & Aplicación:</b> El análisis dinámico de amplificadores BJT requiere diferenciar formalmente la recta de carga estática en continua (determinada por RC + RE) de la recta de carga dinámica en alterna (determinada por rL = RC || RL). Se requiere trazar ambas rectas y deducir sus puntos característicos de corte y saturación.
       </div>
     
 
@@ -4193,7 +4193,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> En los libros en inglés le llaman "maximum symmetrical swing". Es simplemente el mayor voltaje pico a pico que puede entregar el circuito sin que la onda senoidal se recorte (sin clipping) por chocar contra la saturación (VCE(sat) ≈ 0.2 V) o contra el corte (iC = 0).
+        <b>Contexto de Ingeniería & Aplicación:</b> En etapas de salida de audio, la máxima amplitud de señal no distorsionada queda acotada por los límites físicos de corte y saturación dinámica sobre la recta de carga de alterna. Se requiere determinar la máxima excursión simétrica pico a pico (Maximum Symmetrical Swing) y el tipo de recorte que se producirá ante una sobreexcitación.
       </div>
     
 
@@ -4357,7 +4357,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> Para aprovechar al 100% el voltaje de la fuente de alimentación sin recortar la señal senoidal, debemos ubicar el punto Q exactamente en el centro de la recta de carga de AC. Deduciremos la fórmula de diseño que garantiza este centrado perfecto.
+        <b>Contexto de Ingeniería & Aplicación:</b> Para maximizar la excursión simétrica de voltaje sin distorsión (Maximum Symmetrical Swing) con una fuente de alimentación dada, se requiere determinar la posición óptima del punto de reposo Q sobre la recta de carga en corriente alterna a partir de las resistencias del circuito.
       </div>
     
 
@@ -4528,7 +4528,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> Todo sensor o generador real tiene una resistencia interna de salida Rs. Antes de que la señal ingrese al amplificador, debe pagar el "peaje" del divisor de entrada formado por Rs y Zi. Calcularemos cuánto voltaje se pierde en la aduana de entrada y cómo evitarlo.
+        <b>Contexto de Ingeniería & Aplicación:</b> En el acoplamiento de sensores reales con resistencia interna de salida Rs no despreciable, el divisor de tensión resistivo formado con la impedancia de entrada Zi reduce la tensión efectiva aplicada a la base. Se requiere cuantificar dicha atenuación y determinar la ganancia global del sistema Avs.
       </div>
     
 
@@ -4726,7 +4726,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> En sistemas biomédicos y audio de alta fidelidad, la distorsión puede falsear mediciones. Debido a la relación exponencial inherente ic = Is · exp(vbe/VT), un BJT sin resistencia de emisor genera armónicos si la señal excede 5 mV. Vamos a demostrarlo analíticamente con Serie de Taylor.
+        <b>Contexto de Ingeniería & Aplicación:</b> En aplicaciones de instrumentación biomédica y audio de alta fidelidad, la característica no lineal exponencial de la unión base-emisor introduce distorsión armónica. Se requiere modelar analíticamente este efecto mediante la Serie de Taylor y determinar el límite estricto de linealidad para pequeña señal.
       </div>
     
 
@@ -4932,7 +4932,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> Para amplificar señales débiles de microvoltios se conectan dos etapas en serie acopladas capacitivamente. La clave de análisis aquí es recordar que la impedancia de entrada de la segunda etapa (Zin2) actúa como carga en paralelo para el colector de la primera etapa, y que dos inversiones de 180° devuelven la señal en fase (360° = 0°).
+        <b>Contexto de Ingeniería & Aplicación:</b> En aplicaciones que requieren amplificar señales de muy baja amplitud (microvoltios), se utiliza una cascada de dos etapas en Emisor Común acopladas capacitivamente. Se requiere calcular la ganancia total del sistema considerando el efecto de carga inter-etapa y verificar la relación de fase resultante.
       </div>
     
 
@@ -5172,7 +5172,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> La combinación reina del audio y la instrumentación: la primera etapa (CE) aporta toda la ganancia de voltaje, y la segunda etapa (CC) actúa como un músculo de corriente para excitar parlantes o cables de baja impedancia (100 Ω) sin ahogar al amplificador.
+        <b>Contexto de Ingeniería & Aplicación:</b> En el diseño de sistemas de audio e instrumentación se implementa una arquitectura en cascada compuesta por una etapa en Emisor Común (alta ganancia de voltaje) seguida de un Colector Común (buffer adaptador de baja impedancia) para excitar una carga pesada de 100 Ω.
       </div>
     
 
@@ -5415,7 +5415,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> En actuadores y sensores de alta impedancia se utiliza la conexión Darlington (dos transistores integrados donde el emisor del primero excita la base del segundo). Sus ganancias de corriente se multiplican (βtotal ≈ β1 · β2), creando un "súper transistor" con impedancias de entrada de cientos de kilo-ohms.
+        <b>Contexto de Ingeniería & Aplicación:</b> En actuadores y sensores de alta impedancia se utiliza la conexión compuesta Darlington (dos transistores integrados donde el emisor del primero polariza directamente la base del segundo) para multiplicar la ganancia efectiva de corriente y lograr impedancias de entrada de orden elevado.
       </div>
     
 
@@ -5619,7 +5619,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> Alternativa al par Darlington inventada por George Sziklai: combina un transistor NPN de señal con un PNP de potencia. Ofrece la misma súper ganancia de corriente, pero con la gran ventaja de encender con solo 0.7 V de polarización (un solo VBE frente a los 1.4 V del Darlington) y mantener una excelente estabilidad térmica.
+        <b>Contexto de Ingeniería & Aplicación:</b> En etapas de potencia clase AB para audio y servomecanismos se evalúa el par complementario Sziklai (NPN + PNP) como alternativa al par Darlington, con el propósito de reducir la tensión umbral de conducción en continua y mejorar la estabilidad térmica.
       </div>
     
 
@@ -5823,7 +5823,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> Una de las joyas de la electrónica de alta frecuencia: conectamos un Emisor Común abajo y un Base Común arriba. Como la carga del primer transistor es la diminuta resistencia re del segundo, la ganancia del primer transistor es casi unitaria (Av1 ≈ -1). Esto anula por completo la multiplicación de la capacitancia parásita (Efecto Miller), multiplicando el ancho de banda por diez.
+        <b>Contexto de Ingeniería & Aplicación:</b> En amplificadores de radiofrecuencia de banda ancha, la configuración Cascode (etapa Emisor Común acoplada directamente a una etapa Base Común) se utiliza para neutralizar la multiplicación de la capacitancia parásita base-colector producida por el Efecto Miller.
       </div>
     
 
@@ -6017,7 +6017,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> Guía práctica de taller: cómo usar el multímetro en continua y el osciloscopio para diagnosticar componentes abiertos, transistores dañados o condensadores de desacoplo desconectados mediante la medición sistemática de voltajes en los nodos clave.
+        <b>Contexto de Ingeniería & Aplicación:</b> En el diagnóstico y localización de fallas en laboratorio (troubleshooting), la medición sistemática de tensiones en corriente continua y la inspección de formas de onda en el osciloscopio permiten identificar de manera inequívoca componentes abiertos, cortocircuitos o fallas de acoplamiento.
       </div>
     
 
@@ -6260,7 +6260,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> Problema tipo proyecto real: a partir de los requerimientos de ganancia (|Av| = 40), impedancia (Zi ≥ 5 kΩ) y fuente de 12 V, el estudiante calcula hacia atrás los resistores comerciales normalizados de la serie E24 para cumplir con las especificaciones del cliente.
+        <b>Contexto de Ingeniería & Aplicación:</b> En el sistema de gestión de baterías de un vehículo eléctrico, se requiere diseñar un amplificador discreto para acondicionar la señal de un resistor shunt de 10 mΩ, calculando los componentes pasivos normalizados de la serie E24 para cumplir con especificaciones formales de ganancia e impedancia.
       </div>
     
 
@@ -6445,7 +6445,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> En la industria automotriz y médica (norma AEC-Q100), los circuitos deben operar dentro de norma considerando las tolerancias extremas de los resistores (±5%) y la dispersión del beta de los transistores (hFE entre 100 y 300). Evaluaremos la ganancia mínima y máxima garantizada.
+        <b>Contexto de Ingeniería & Aplicación:</b> En aplicaciones de alta confiabilidad automotriz y médica (norma AEC-Q100), se requiere realizar un análisis de peor caso (Worst-Case Analysis) considerando tolerancias del ±5% en resistores y la dispersión de fabricación del parámetro beta entre 100 y 300.
       </div>
     
 
@@ -6633,7 +6633,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> ¿Por qué un módulo con 6 años de uso en una fábrica pierde la mitad de su ganancia aunque el capacímetro digital ordinario reporte que los microfaradios están bien? Aprenderemos cómo el secado del electrolito eleva la resistencia interna parásita (ESR) del condensador de desacoplo de emisor, degradando la ganancia en alterna.
+        <b>Contexto de Ingeniería & Aplicación:</b> En sistemas analógicos con varios años de operación continua, el secado del electrolito en condensadores de desacoplo incrementa su resistencia serie equivalente (ESR). Se requiere cuantificar el impacto de este fenómeno parásito sobre la ganancia de tensión en corriente alterna.
       </div>
     
 
@@ -6836,7 +6836,7 @@
 
     
       <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 6px 10px; margin: 8px 0; font-size: 8.5pt;">
-        <b>Contexto de Ingeniería & Aplicación:</b> Un ejercicio de criterio de alto nivel explicado con sencillez pedagógica: ¿por qué un amplificador con cargas inductivas (bobinas o pistas largas) puede ponerse a silbar u oscilar solo sin señal de entrada, y cómo la configuración Cascode o la neutralización resuelven el problema de raíz?
+        <b>Contexto de Ingeniería & Aplicación:</b> En amplificadores de radiofrecuencia con cargas de colector que exhiben comportamiento inductivo a alta frecuencia, la capacitancia parásita colector-base puede introducir realimentación positiva. Se requiere analizar la condición bajo la cual la impedancia de entrada se vuelve negativa y evaluar las soluciones de diseño estándar.
       </div>
     
 
