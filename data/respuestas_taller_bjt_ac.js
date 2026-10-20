@@ -2,14 +2,14 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 1 · Fundamentos y Parámetros Dinámicos",
     "n": "P1-01",
-    "title": "Cálculo riguroso de parámetros dinámicos para transistor 2N3904",
-    "context": "En el diseño de la etapa de entrada para un sensor de vibración en una turbina eólica, se utiliza un transistor bipolar NPN 2N3904. El diseñador requiere modelar el transistor en pequeña señal antes de acoplar la etapa a los filtros posteriores.",
+    "title": "Cálculo de parámetros dinámicos para transistor 2N3904 (Boylestad Sec. 5.2–5.4)",
+    "context": "En el diseño de la etapa de entrada para un sensor de vibración en una turbina eólica, se utiliza un transistor bipolar NPN 2N3904. Muchachos, antes de conectar filtros o cargas, debemos modelar el transistor en pequeña señal a partir de su punto de operación en continua (punto Q).",
     "datos": "Transistor: 2N3904 (NPN) | Punto Q: ICQ = 1.5 mA, VCEQ = 6.4 V | Ganancia en alterna: βac = hfe = 150 | Tensión Early: VA = 74 V | Temperatura ambiente: 25 °C (VT = 26 mV).",
     "preguntas": [
-      "Calcule la corriente de emisor en reposo (IEQ) y la resistencia intrínseca de emisor re (Modelo Boylestad/Malvino).",
+      "Calcule la corriente de emisor en reposo (IEQ) y la resistencia intrínseca de emisor re (fórmula de Boylestad: re = 26 mV / IEQ).",
       "Calcule la transconductancia gm y la resistencia de base rπ (Modelo Híbrido-π de Sedra/Smith).",
-      "Determine la resistencia dinámica de salida ro debida al efecto Early.",
-      "Demuestre formalmente que rπ = (β + 1)re y que ambos modelos son matemáticamente idénticos."
+      "Determine la resistencia dinámica de salida ro debida al efecto Early (Boylestad Sec. 5.5).",
+      "Demuestre formalmente que rπ = (β + 1)re y que ambos modelos matemáticos producen exactamente los mismos números."
     ],
     "answer": "\\(r_e \\approx 17.33\\,\\Omega\\), \\(g_m \\approx 57.69\\,\\mathrm{mS}\\), \\(r_\\pi \\approx 2.60\\,\\mathrm{k\\Omega}\\) y \\(r_o \\approx 53.6\\,\\mathrm{k\\Omega}\\).",
     "analysis": "\n      <h4>a) Corriente de emisor en reposo y resistencia intrínseca \\(r_e\\)</h4>\n      \\[I_{EQ} = I_{CQ} \\cdot \\frac{\\beta + 1}{\\beta} = 1.5\\,\\mathrm{mA} \\cdot \\frac{151}{150} \\approx \\mathbf{1.510\\,\\mathrm{mA}}\\]\n      \\[r_e = \\frac{V_T}{I_{EQ}} = \\frac{26\\,\\mathrm{mV}}{1.510\\,\\mathrm{mA}} \\approx \\mathbf{17.33\\,\\Omega}\\]\n      \n      <h4>b) Parámetros del Modelo Híbrido-\\(\\pi\\) (\\(g_m, r_\\pi\\))</h4>\n      \\[g_m = \\frac{I_{CQ}}{V_T} = \\frac{1.5\\,\\mathrm{mA}}{26\\,\\mathrm{mV}} = 0.05769\\,\\mathrm{A/V} = \\mathbf{57.69\\,\\mathrm{mS}}\\]\n      \\[r_\\pi = \\frac{\\beta}{g_m} = \\frac{150}{0.05769\\,\\mathrm{S}} \\approx \\mathbf{2600\\,\\Omega = 2.60\\,\\mathrm{k\\Omega}}\\]\n\n      <h4>c) Resistencia dinámica de salida \\(r_o\\) por Efecto Early</h4>\n      \\[r_o = \\frac{V_A + V_{CEQ}}{I_{CQ}} = \\frac{74\\,\\mathrm{V} + 6.4\\,\\mathrm{V}}{1.5\\,\\mathrm{mA}} = \\frac{80.4\\,\\mathrm{V}}{1.5\\,\\mathrm{mA}} = \\mathbf{53.6\\,\\mathrm{k\\Omega}}\\]\n\n      <h4>d) Demostración de equivalencia matemática</h4>\n      <p>Sustituyendo \\(r_e = V_T / I_{EQ}\\) y \\(I_{EQ} = I_{CQ} (\\beta+1)/\\beta\\):</p>\n      \\[(\\beta + 1) r_e = (\\beta + 1) \\frac{V_T}{I_{CQ} \\frac{\\beta+1}{\\beta}} = \\frac{\\beta V_T}{I_{CQ}} = \\frac{\\beta}{g_m} = r_\\pi\\]\n      \\[151 \\times 17.33\\,\\Omega = 2616\\,\\Omega \\approx 2.60\\,\\mathrm{k\\Omega} = r_\\pi \\quad (\\checkmark \\text{Coincidencia exacta})\\]\n    \n      <div class=\"box remember\" style=\"margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;\">\n        <small style=\"text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;\">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>\n        <p style=\"margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;\"><b>La rigidez del resorte mecánico:</b> La resistencia dinámica \\(r_e\\) mide qué tan duro o elástico es el transistor ante una pequeña perturbación de señal. Cuanto mayor es la corriente estática de reposo en continua (\\(I_{EQ}\\)), más 'comprimido' está el resorte y menor es la resistencia que opone a oscilar (\\(r_e \\propto 1/I_E\\)). Por el contrario, la resistencia de salida \\(r_o\\) actúa como un freno viscoso parásito en paralelo, provocado por el estrechamiento de la base (Efecto Early).</p>\n      </div>\n      <div class=\"box key\" style=\"margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;\">\n        <small style=\"text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;\">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>\n        <p style=\"margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;\"><b>Parámetros oficiales:</b> Resistencia intrínseca de emisor: \\(r_e = V_T / I_{EQ}\\) (Boylestad/Malvino). Transconductancia: \\(g_m = I_{CQ} / V_T = \\alpha / r_e\\) (Sedra/Smith). Resistencia de base: \\(r_\\pi = (\\beta+1)r_e = \\beta / g_m\\). Resistencia de salida por Early: \\(r_o = (V_A + V_{CEQ}) / I_{CQ} \\approx V_A / I_{CQ}\\).</p>\n      </div>\n      ",
@@ -18,14 +18,14 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 1 · Fundamentos y Parámetros Dinámicos",
     "n": "P1-02",
-    "title": "Sensibilidad térmica de la transconductancia y resistencia de emisor",
-    "context": "Un módulo de monitoreo bajo el capó de un vehículo eléctrico opera en un rango térmico severo: arranca a temperatura ambiente (25 °C) y alcanza 75 °C en régimen de potencia. El ingeniero debe evaluar cuánto se degradan los parámetros de pequeña señal del BJT.",
+    "title": "Sensibilidad térmica de la resistencia de emisor (re) y transconductancia (gm)",
+    "context": "Un módulo bajo el capó de un vehículo eléctrico opera en un rango térmico severo (de 25 °C a 75 °C). En clase vimos que el potencial térmico VT = kT/q sube con la temperatura. Aquí evaluaremos cómo esa subida altera los parámetros dinámicos del BJT y por qué es indispensable usar una resistencia en el emisor para amortiguar el calor.",
     "datos": "Corriente de reposo fijada por circuito en DC: ICQ = 1.0 mA | Temperatura 1: T1 = 25 °C (298.15 K) | Temperatura 2: T2 = 75 °C (348.15 K) | Constante de Boltzmann: k = 1.38×10^-23 J/K | Carga del electrón: q = 1.602×10^-19 C.",
     "preguntas": [
-      "Calcule la tensión térmica exacta VT a 25 °C y a 75 °C.",
-      "Determine los valores de re y gm a ambas temperaturas.",
+      "Calcule la tensión térmica exacta VT a 25 °C y a 75 °C (con VT = k·T / q).",
+      "Determine los valores de re y gm a ambas temperaturas manteniendo ICQ = 1.0 mA.",
       "Calcule el porcentaje de variación de re y gm al calentarse el circuito.",
-      "¿Qué consecuencia tiene esta variación sobre la ganancia de un amplificador sin degeneración de emisor?"
+      "¿Qué consecuencia tiene esta variación sobre la ganancia de un amplificador si no colocamos resistencia de emisor para estabilizarlo (degeneración de emisor)?"
     ],
     "answer": "A 25°C: \\(r_e = 26.0\\,\\Omega\\), \\(g_m = 38.5\\,\\mathrm{mS}\\). A 75°C: \\(r_e = 30.0\\,\\Omega\\), \\(g_m = 33.3\\,\\mathrm{mS}\\) (Variación de \\(+15.4\\%\\) en \\(r_e\\) y \\(-13.5\\%\\) en \\(g_m\\)).",
     "analysis": "\n      <h4>a) Cálculo de la tensión térmica \\(V_T\\)</h4>\n      \\[V_{T1}(25^\\circ\\mathrm{C}) = \\frac{k T_1}{q} = \\frac{(1.38 \\times 10^{-23})(298.15)}{1.602 \\times 10^{-19}} \\approx \\mathbf{25.69\\,\\mathrm{mV} \\approx 26.0\\,\\mathrm{mV}}\\]\n      \\[V_{T2}(75^\\circ\\mathrm{C}) = \\frac{k T_2}{q} = \\frac{(1.38 \\times 10^{-23})(348.15)}{1.602 \\times 10^{-19}} \\approx \\mathbf{29.99\\,\\mathrm{mV} \\approx 30.0\\,\\mathrm{mV}}\\]\n\n      <h4>b) Parámetros dinámicos a ambas temperaturas</h4>\n      <p>A 25 °C (\\(V_T = 26.0\\,\\mathrm{mV}\\)):</p>\n      \\[r_{e1} = \\frac{26.0\\,\\mathrm{mV}}{1.0\\,\\mathrm{mA}} = \\mathbf{26.0\\,\\Omega}, \\qquad g_{m1} = \\frac{1.0\\,\\mathrm{mA}}{26.0\\,\\mathrm{mV}} = \\mathbf{38.46\\,\\mathrm{mS}}\\]\n      <p>A 75 °C (\\(V_T = 30.0\\,\\mathrm{mV}\\)):</p>\n      \\[r_{e2} = \\frac{30.0\\,\\mathrm{mV}}{1.0\\,\\mathrm{mA}} = \\mathbf{30.0\\,\\Omega}, \\qquad g_{m2} = \\frac{1.0\\,\\mathrm{mA}}{30.0\\,\\mathrm{mV}} = \\mathbf{33.33\\,\\mathrm{mS}}\\]\n\n      <h4>c) Porcentaje de variación térmica</h4>\n      \\[\\Delta r_e(\\%) = \\frac{30.0 - 26.0}{26.0} \\times 100\\% = \\mathbf{+15.38\\%}\\]\n      \\[\\Delta g_m(\\%) = \\frac{33.33 - 38.46}{38.46} \\times 100\\% = \\mathbf{-13.34\\%}\\]\n\n      <h4>d) Conclusión e impacto en el diseño</h4>\n      <p>En un amplificador CE con emisor totalmente bypassado (donde \\(A_v \\approx -R_C / r_e\\)), la ganancia caerá casi un 15% solo por el calentamiento ambiental. Para evitarlo en automoción, es imperativo utilizar <b>degeneración parcial de emisor (swamping)</b>.</p>\n    \n      <div class=\"box remember\" style=\"margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;\">\n        <small style=\"text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;\">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>\n        <p style=\"margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;\"><b>La cometa frente al viento térmico:</b> Sin degeneración de emisor, la ganancia de un amplificador es inversamente proporcional a \\(V_T = kT/q\\). Al calentarse el circuito bajo el capó (de 25 °C a 75 °C), la tensión térmica se expande un 15%, inflando \\(r_e\\) y haciendo caer la ganancia. Para evitar que el amplificador sea una cometa a merced del clima, Malvino enseña que es imperativo usar <i>swamping</i> (resistencia no puenteada) para anclar la ganancia al ratio fijo de resistencias externas.</p>\n      </div>\n      <div class=\"box key\" style=\"margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;\">\n        <small style=\"text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;\">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>\n        <p style=\"margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;\"><b>Sensibilidad térmica:</b> \\(V_T(T) = k T / q\\). A 25 °C: \\(V_T \\approx 26.0\\,\\mathrm{mV}\\); a 75 °C: \\(V_T \\approx 30.0\\,\\mathrm{mV}\\). En Emisor Común bypassado: \\(A_v \\approx -R_C / r_e \\propto 1/V_T\\), por lo que la ganancia cae directamente un \\(13.5\\%\\) solo por temperatura.</p>\n      </div>\n      ",
@@ -34,11 +34,11 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 1 · Fundamentos y Parámetros Dinámicos",
     "n": "P1-03",
-    "title": "Ganancia intrínseca máxima limitada por efecto Early",
-    "context": "En el diseño de circuitos integrados analógicos (como preamplificadores para transductores biomédicos), se reemplaza la resistencia pasiva de colector por una fuente de corriente activa ideal (carga activa con espejo de corriente). El estudiante debe calcular el límite físico teórico insuperable del transistor.",
+    "title": "Ganancia intrínseca máxima limitada por efecto Early (Boylestad Sec. 5.5)",
+    "context": "En circuitos integrados (chips analógicos), en lugar de una resistencia de colector pasiva RC, se utiliza una fuente de corriente activa (lo que en microelectrónica se conoce como \"carga activa\"). Si la resistencia de colector tiende a infinito, ¿cuál es el techo físico máximo de ganancia que puede dar un solo transistor antes de chocar con su propia resistencia interna Early ro?",
     "datos": "Carga externa en AC: RL = ∞ | Resistencia pasiva de colector: RC → ∞ (fuente de corriente ideal) | Tensión Early: VA = 100 V | Temperatura: 25 °C (VT = 26 mV).",
     "preguntas": [
-      "Obtenga la expresión analítica de la ganancia intrínseca de tensión Av0 = vo / vbe cuando el colector ve una carga infinita.",
+      "Obtenga la expresión analítica de la ganancia intrínseca de tensión Av0 = vo / vbe cuando el colector ve una carga infinita (fuente de corriente ideal).",
       "Demuestre analíticamente si Av0 depende o no de la corriente de polarización ICQ.",
       "Calcule el valor numérico de la ganancia en magnitud y en decibeles (dB) para un transistor con VA = 100 V."
     ],
@@ -49,14 +49,14 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 1 · Fundamentos y Parámetros Dinámicos",
     "n": "P1-04",
-    "title": "Teoremas de reflexión de resistencia (Base a Emisor y viceversa)",
-    "context": "El análisis rápido de amplificadores con transistores bipolares requiere dominar los dos teoremas de reflexión de Kirchhoff para no tener que plantear mallas kilométricas en cada problema.",
+    "title": "Teoremas de reflexión de resistencia: Base a Emisor y viceversa (Boylestad Sec. 5.5 y 5.8)",
+    "context": "Para no tener que resolver sistemas de mallas kilométricos en el examen, en clase aprendimos las dos reglas de oro de la reflexión de impedancias (la palanca del BJT). Vamos a demostrarlas paso a paso mediante leyes fundamentales de Kirchhoff.",
     "datos": "Transistor con ganancia de corriente β | Parámetros dinámicos: rπ, re | Resistencia de emisor no puenteada: RE | Resistencia en la base vista hacia atrás: R'base = RB || Rs.",
     "preguntas": [
-      "Demuestre mediante la ley de Ohm y KCL que la resistencia vista desde la base mirando hacia el emisor es Zb = rπ + (β+1)RE = (β+1)(re + RE).",
-      "Demuestre analíticamente mediante una fuente de prueba vx que la resistencia vista desde el emisor mirando hacia la base es Zo,e = re + (R'base / (β+1)).",
-      "Si RE = 330 Ω y β = 150, ¿cuántos ohmios 'siente' la fuente conectada en la base?",
-      "Si R'base = 10 kΩ y β = 150, ¿cuántos ohmios 'siente' una carga conectada en el emisor?"
+      "Demuestre mediante la ley de Ohm que cualquier resistencia colocada en el emisor se refleja en la base multiplicada por (β+1): Zb = (β+1)(re + RE).",
+      "Demuestre analíticamente mediante una fuente de prueba virtual que una resistencia en la base se refleja en el emisor dividida por (β+1): Zo,e = re + [R'base / (β+1)].",
+      "Si RE = 330 Ω y β = 150, ¿cuántos ohmios \"siente\" la fuente conectada en la base?",
+      "Si R'base = 10 kΩ y β = 150, ¿cuántos ohmios \"siente\" una carga conectada en el emisor?"
     ],
     "answer": "Hacia la base: \\(Z_b = (\\beta+1)(r_e + R_E) = 151(r_e + 330) \\approx 50\\,\\mathrm{k\\Omega}\\). Hacia el emisor: \\(Z_{o,e} = r_e + 10k/151 \\approx r_e + 66.2\\,\\Omega\\).",
     "analysis": "\n      <h4>a) Reflexión de Emisor hacia la Base (Multiplicación por \\(\\beta+1\\))</h4>\n      <p>La tensión total en la base es la suma de la caída en la unión interna más la caída en la resistencia de emisor:</p>\n      \\[v_b = v_{be} + i_e R_E = i_b r_\\pi + [(\\beta+1)i_b] R_E = i_b [r_\\pi + (\\beta+1)R_E]\\]\n      \\[Z_b = \\frac{v_b}{i_b} = r_\\pi + (\\beta+1)R_E = (\\beta+1)r_e + (\\beta+1)R_E = \\mathbf{(\\beta+1)(r_e + R_E)}\\]\n\n      <h4>b) Reflexión inversa de Base hacia el Emisor (División por \\(\\beta+1\\))</h4>\n      <p>Conectando una fuente virtual \\(v_x\\) en el emisor y anulando la fuente independiente de entrada:</p>\n      \\[i_b = -\\frac{v_x}{r_\\pi + R_{base}'}\\]\n      \\[i_x = -i_e = -(\\beta+1)i_b = (\\beta+1) \\frac{v_x}{r_\\pi + R_{base}'}\\]\n      \\[Z_{o,e} = \\frac{v_x}{i_x} = \\frac{r_\\pi + R_{base}'}{\\beta+1} = \\frac{r_\\pi}{\\beta+1} + \\frac{R_{base}'}{\\beta+1} = \\mathbf{r_e + \\frac{R_{base}'}{\\beta+1}}\\]\n\n      <h4>c) Casos numéricos</h4>\n      <p>Para \\(R_E = 330\\,\\Omega\\) y \\(\\beta = 150\\):</p>\n      \\[Z_b \\approx 151 \\times 330\\,\\Omega = \\mathbf{49.83\\,\\mathrm{k\\Omega}}\\]\n      <p>Para \\(R_{base}' = 10\\,\\mathrm{k\\Omega}\\) y \\(\\beta = 150\\):</p>\n      \\[Z_{o,e}' = \\frac{10000\\,\\Omega}{151} = \\mathbf{66.23\\,\\Omega}\\]\n    \n      <div class=\"box remember\" style=\"margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;\">\n        <small style=\"text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;\">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>\n        <p style=\"margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;\"><b>La palanca multiplicadora de fuerza:</b> El BJT actúa como un brazo de palanca mecánico. Cualquier resistencia colocada en el emisor (\\(R_E\\)) es atravesada por la corriente total \\(i_e = (\\beta+1)i_b\\); por tanto, la fuente en la base la 'siente' multiplicada por \\((\\beta+1)\\). A la inversa, una resistencia en la base vista desde el emisor se siente dividida por \\((\\beta+1)\\), como si empujáramos la palanca desde el extremo pesado.</p>\n      </div>\n      <div class=\"box key\" style=\"margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;\">\n        <small style=\"text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;\">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>\n        <p style=\"margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;\"><b>Reglas de reflexión de impedancias:</b> De emisor hacia la base: \\(Z_b = (\\beta+1)(r_e + R_E) = r_\\pi + (\\beta+1)R_E\\). De la base hacia el emisor: \\(Z_e = r_e + \\frac{R_B}{\\beta+1}\\).</p>\n      </div>\n      ",
@@ -65,13 +65,13 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 1 · Fundamentos y Parámetros Dinámicos",
     "n": "P1-05",
-    "title": "Criterio de pequeña señal y distorsión armónica en sensor piezoeléctrico",
-    "context": "Un sensor piezoeléctrico de impacto genera señales senoidales que se conectan directamente a la base de un BJT. El estudiante debe determinar el límite de tensión alterna para evitar distorsión audible.",
+    "title": "Criterio de pequeña señal (vbe ≤ 5 mV) y distorsión armónica en sensor piezoeléctrico",
+    "context": "Muchachos, recuerden la condición fundamental que vimos en clase: para que el transistor opere de forma puramente lineal y sin distorsión audible, la oscilación alterna base-emisor debe ser diminuta (vbe ≤ 5 mV pico). Si el sensor entrega más voltaje, debemos insertar una resistencia de emisor para absorber el exceso.",
     "datos": "Tensión térmica: VT = 26 mV | Modelo de distorsión de segundo armónico: HD2 = Vp / (4 VT) | Distorsión máxima tolerable: THD ≤ 5% = 0.05.",
     "preguntas": [
-      "Calcule la amplitud máxima pico de la tensión base-emisor Vp,max para que la distorsión HD2 sea inferior al 5%.",
-      "Si el sensor entrega un pico de 40 mV sin degeneración de emisor, ¿cuál será el porcentaje de distorsión armónica generado?",
-      "¿Cómo soluciona un diseñador senior este problema sin atenuar la señal con divisores pasivos ruidosos?"
+      "Calcule la amplitud máxima pico de la tensión base-emisor Vp,max para que la distorsión de segundo armónico HD2 sea inferior al 5% (HD2 = Vp / (4 VT)).",
+      "Si el sensor entrega un pico de 40 mV sin resistencia en el emisor, ¿cuál será el porcentaje de distorsión armónica generado?",
+      "¿Cómo soluciona un diseñador profesional este problema para recibir señales grandes sin recortar la onda?"
     ],
     "answer": "\\(V_{p,max} \\le 5.2\\,\\mathrm{mV}\\) pico. Con 40 mV, la distorsión se dispara al \\(38.5\\%\\) (recorte severo). Se soluciona añadiendo resistencia de degeneración \\(R_{E1}\\).",
     "analysis": "\n      <h4>a) Amplitud máxima permitida para \\(HD_2 \\le 5\\%\\)</h4>\n      \\[HD_2 = \\frac{V_p}{4 V_T} \\le 0.05 \\implies V_p \\le 0.05 \\times 4 \\times 26\\,\\mathrm{mV} = \\mathbf{5.2\\,\\mathrm{mV pico}}\\]\n\n      <h4>b) Distorsión con señal de 40 mV pico</h4>\n      \\[HD_2 = \\frac{40\\,\\mathrm{mV}}{4 \\times 26\\,\\mathrm{mV}} = \\frac{40}{104} \\approx 0.3846 = \\mathbf{38.46\\%}\\]\n      <p>La señal sufrirá una deformación masiva y ya no podrá considerarse una senoide lineal.</p>\n\n      <h4>c) Solución de ingeniería</h4>\n      <p>Se introduce una resistencia de emisor no puenteada \\(R_{E1}\\). Por divisor de tensión de pequeña señal, la tensión real en la unión PN interna se reduce a:</p>\n      \\[v_{be} = v_i \\cdot \\frac{r_e}{r_e + R_{E1}}\\]\n      <p>Si \\(R_{E1} = 10 r_e\\), la tensión que llega a la unión se divide por 11, permitiendo entradas de hasta 55 mV pico con distorsión menor al 5%.</p>\n    \n      <div class=\"box remember\" style=\"margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;\">\n        <small style=\"text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;\">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>\n        <p style=\"margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;\"><b>Caminar por el plano inclinado curvo:</b> La unión base-emisor es exponencial. Si tu señal alterna oscila apenas un paso diminuto (\\(v_{be} \\le 5\\,\\mathrm{mV}\\)), el terreno parece una recta perfecta y no hay distorsión. Pero si aplicas una señal de 40 mV pico a pico, experimentas la curva completa y la señal de salida se distorsiona con armónicos cuadráticos.</p>\n      </div>\n      <div class=\"box key\" style=\"margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;\">\n        <small style=\"text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;\">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>\n        <p style=\"margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;\"><b>Criterio estricto de pequeña señal:</b> \\(V_p \\le 5\\,\\mathrm{mV}\\) para \\(HD_2 \\le 4.8\\%\\). Si la señal del sensor es mayor, la aproximación lineal colapsa salvo que se agregue degeneración de emisor \\(R_{E1}\\).</p>\n      </div>\n      ",
@@ -80,13 +80,13 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 1 · Fundamentos y Parámetros Dinámicos",
     "n": "P1-06",
-    "title": "Extracción de parámetros de datasheet real para transistor BC547B",
-    "context": "En un examen de diseño se entrega la hoja de datos oficial de Fairchild/ON Semi del transistor BC547B. El estudiante debe extraer los parámetros para diseñar en el peor caso.",
+    "title": "Extracción de parámetros de datasheet real para transistor BC547B (Boylestad Sec. 5.19)",
+    "context": "En un examen de diseño o en el laboratorio les entregan la hoja de datos (datasheet) del transistor BC547B. Notarán que el fabricante nunca especifica un único valor de beta, sino un rango amplio (hfe entre 200 y 450). Vamos a calcular los parámetros dinámicos para los casos extremos.",
     "datos": "Transistor: BC547B | Punto de prueba: IC = 2.0 mA, VCE = 5.0 V | Rango de hfe según datasheet: hfe,min = 200, hfe,max = 450 | VT = 26 mV.",
     "preguntas": [
-      "Calcule re y gm a la corriente de prueba de 2.0 mA.",
-      "Calcule el rango de dispersión de rπ entre el transistor con menor ganancia y el de mayor ganancia del lote.",
-      "Concluya qué parámetro es confiable para fijar la ganancia y cuál requerirá especial atención al calcular la impedancia de entrada."
+      "Calcule re y gm a la corriente de prueba de 2.0 mA especificada en la hoja de datos.",
+      "Calcule el rango de dispersión de rπ entre el transistor con menor ganancia (β = 200) y el de mayor ganancia (β = 450).",
+      "Concluya qué parámetro es confiable para fijar la ganancia y cuál requerirá especial atención al calcular la impedancia de entrada Zi."
     ],
     "answer": "\\(r_e \\approx 13.0\\,\\Omega\\), \\(g_m = 76.9\\,\\mathrm{mS}\\). Rango de \\(r_\\pi\\): de \\(2.60\\,\\mathrm{k\\Omega}\\) a \\(5.85\\,\\mathrm{k\\Omega}\\) (variación de \\(+125\\%\\)).",
     "analysis": "\n      <h4>a) Cálculo de \\(r_e\\) y \\(g_m\\)</h4>\n      \\[r_e \\approx \\frac{26\\,\\mathrm{mV}}{2.0\\,\\mathrm{mA}} = \\mathbf{13.0\\,\\Omega}, \\qquad g_m = \\frac{2.0\\,\\mathrm{mA}}{26\\,\\mathrm{mV}} = \\mathbf{76.92\\,\\mathrm{mS}}\\]\n\n      <h4>b) Rango de variación de \\(r_\\pi\\)</h4>\n      <p>Para \\(h_{fe,min} = 200\\):</p>\n      \\[r_{\\pi,min} = \\beta_{min} \\cdot r_e = 200 \\times 13.0\\,\\Omega = \\mathbf{2.60\\,\\mathrm{k\\Omega}}\\]\n      <p>Para \\(h_{fe,max} = 450\\):</p>\n      \\[r_{\\pi,max} = \\beta_{max} \\cdot r_e = 450 \\times 13.0\\,\\Omega = \\mathbf{5.85\\,\\mathrm{k\\Omega}}\\]\n\n      <h4>c) Criterio de diseño</h4>\n      <p>La transconductancia \\(g_m\\) y \\(r_e\\) dependen únicamente de \\(I_C\\), por lo que son completamente estables si la polarización DC está bien diseñada. En contraste, \\(r_\\pi\\) cambia en un 125%, lo que alterará significativamente la impedancia de entrada \\(Z_i\\) entre diferentes unidades del mismo circuito.</p>\n    \n      <div class=\"box remember\" style=\"margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;\">\n        <small style=\"text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;\">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>\n        <p style=\"margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;\"><b>El expediente médico del transistor:</b> Los fabricantes de semiconductores nunca garantizan un valor exacto de \\(\\beta\\), sino una dispersión enorme (ej. \\(h_{fe}\\) entre 200 y 450). Malvino enseña que un buen circuito analógico debe ser 'inmune al beta', entregando exactamente la misma ganancia tanto con el transistor de beta mínimo como con el de beta máximo.</p>\n      </div>\n      <div class=\"box key\" style=\"margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;\">\n        <small style=\"text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;\">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>\n        <p style=\"margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;\"><b>Correspondencia con parámetros híbridos (h):</b> \\(h_{fe} \\equiv \\beta_{ac}\\), \\(h_{ie} \\equiv r_\\pi = (\\beta+1)r_e\\), \\(h_{oe} \\equiv 1/r_o\\), \\(h_{re} \\equiv \\mu\\) (realimentación inversa).</p>\n      </div>\n      ",
@@ -95,16 +95,16 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 2 · Topologías Fundamentales: Emisor Común",
     "n": "P2-07",
-    "title": "Emisor común clásico con bypass total (Análisis DC + AC completo)",
+    "title": "Emisor Común con condensador de desacoplo de emisor (Bypass total — Boylestad Sec. 5.5)",
     "image": "assets/taller/esquema-ce-bypass.svg",
-    "context": "Etapa preamplificadora de audio para un micrófono dinámico en una consola de sonido. El estudiante debe resolver el circuito completo desde la polarización en continua hasta la ganancia en alterna con carga acoplada.",
+    "context": "Preamplificador de audio para un micrófono dinámico en una consola de sonido. En este circuito conectamos un condensador en paralelo con RE (llamado condensador de desacoplo de emisor o \"bypass\" en inglés, porque para la señal alterna desvía la corriente a tierra puenteando a RE). El estudiante resolverá el circuito completo desde DC hasta la ganancia con carga acoplada.",
     "datos": "VCC = 15 V | R1 = 47 kΩ, R2 = 10 kΩ | RC = 3.3 kΩ, RE = 1.2 kΩ | C1 = C2 = 10 µF, CE = 47 µF | Carga: RL = 10 kΩ | Generador: vs = 10 mVp con Rs = 600 Ω | Transistor: 2N3904 (β = 120, VBE = 0.7 V, VA = ∞).",
     "preguntas": [
-      "Determine el punto de operación en DC (IBQ, ICQ, VCEQ) mediante el equivalente de Thévenin y compruebe que opera en Región Activa.",
+      "Determine el punto de operación en DC (IBQ, ICQ, VCEQ) mediante el equivalente de Thévenin y compruebe que opera en Región Activa (Boylestad Sec. 5.5).",
       "Calcule los parámetros de pequeña señal: re (Boylestad) y gm, rπ (Sedra/Smith).",
-      "Determine la impedancia de entrada de la etapa Zi y la impedancia de salida Zo.",
-      "Calcule la ganancia de voltaje sin carga (Avo), con carga RL (Av) y la ganancia global del sistema (Avs = vo / vs).",
-      "Explique el significado físico del signo negativo obtenido en la ganancia."
+      "Determine la impedancia de entrada de la etapa Zi = R1 || R2 || (β+1)re y la impedancia de salida Zo = RC.",
+      "Calcule la ganancia de voltaje sin carga (Avo), con carga RL (Av = -rL / re) y la ganancia global del sistema (Avs = vo / vs).",
+      "Explique el significado físico del signo negativo obtenido en la ganancia (inversión de fase de 180°)."
     ],
     "answer": "DC: \\(I_{CQ} \\approx 1.25\\,\\mathrm{mA}\\), \\(V_{CEQ} \\approx 6.0\\,\\mathrm{V}\\). AC: \\(r_e \\approx 20.8\\,\\Omega\\), \\(Z_i \\approx 2.06\\,\\mathrm{k\\Omega}\\), \\(Z_o = 3.3\\,\\mathrm{k\\Omega}\\), \\(A_v = -158.6\\), \\(A_{vs} = -122.8\\).",
     "analysis": "\n      <h4>a) Análisis en Corriente Continua (Punto Q)</h4>\n      \\[V_{TH} = V_{CC} \\cdot \\frac{R_2}{R_1 + R_2} = 15\\,\\mathrm{V} \\cdot \\frac{10\\,\\mathrm{k\\Omega}}{47\\,\\mathrm{k\\Omega} + 10\\,\\mathrm{k\\Omega}} = 15 \\cdot \\frac{10}{57} \\approx \\mathbf{2.632\\,\\mathrm{V}}\\]\n      \\[R_{TH} = R_1 \\parallel R_2 = \\frac{47\\,\\mathrm{k\\Omega} \\times 10\\,\\mathrm{k\\Omega}}{57\\,\\mathrm{k\\Omega}} \\approx \\mathbf{8.246\\,\\mathrm{k\\Omega}}\\]\n      <p>Malla de entrada Base-Emisor (con \\(I_E = (\\beta+1)I_B\\)):</p>\n      \\[I_{BQ} = \\frac{V_{TH} - V_{BE}}{R_{TH} + (\\beta+1)R_E} = \\frac{2.632 - 0.7}{8.246k + (121 \\times 1.2k)} = \\frac{1.932\\,\\mathrm{V}}{153.45\\,\\mathrm{k\\Omega}} \\approx \\mathbf{12.59\\,\\mu\\mathrm{A}}\\]\n      \\[I_{CQ} = \\beta I_{BQ} = 120 \\times 12.59\\,\\mu\\mathrm{A} \\approx \\mathbf{1.511\\,\\mathrm{mA} \\approx 1.25\\,\\mathrm{mA} - 1.51\\,\\mathrm{mA}}\\]\n      \\[I_{EQ} = (\\beta+1)I_{BQ} = 121 \\times 12.59\\,\\mu\\mathrm{A} \\approx \\mathbf{1.523\\,\\mathrm{mA}}\\]\n      \\[V_E = I_{EQ} R_E = 1.523\\,\\mathrm{mA} \\times 1.2\\,\\mathrm{k\\Omega} \\approx 1.828\\,\\mathrm{V}\\]\n      \\[V_C = V_{CC} - I_{CQ} R_C = 15\\,\\mathrm{V} - (1.511\\,\\mathrm{mA} \\times 3.3\\,\\mathrm{k\\Omega}) = 15 - 4.986 = 10.014\\,\\mathrm{V}\\]\n      \\[V_{CEQ} = V_C - V_E = 10.014 - 1.828 = \\mathbf{8.186\\,\\mathrm{V}} > 0.2\\,\\mathrm{V} \\quad (\\checkmark \\text{Zona Activa Lineal})\\]\n\n      <h4>b) Parámetros de Pequeña Señal</h4>\n      \\[r_e = \\frac{26\\,\\mathrm{mV}}{I_{EQ}} = \\frac{26\\,\\mathrm{mV}}{1.523\\,\\mathrm{mA}} \\approx \\mathbf{17.07\\,\\Omega \\quad (\\text{o } 20.8\\,\\Omega \\text{ si } I_C \\approx 1.25\\,\\mathrm{mA})}\\]\n      \\[g_m = \\frac{I_{CQ}}{26\\,\\mathrm{mV}} = \\frac{1.511\\,\\mathrm{mA}}{26\\,\\mathrm{mV}} \\approx \\mathbf{58.12\\,\\mathrm{mS}}\\]\n      \\[r_\\pi = \\beta r_e = 120 \\times 17.07\\,\\Omega \\approx \\mathbf{2.048\\,\\mathrm{k\\Omega}}\\]\n\n      <h4>c) Impedancias en Banda Media (AC)</h4>\n      <p>El condensador \\(C_E\\) cortocircuita \\(R_E\\) a tierra:</p>\n      \\[Z_b = r_\\pi \\approx 2.05\\,\\mathrm{k\\Omega}\\]\n      \\[Z_i = R_{TH} \\parallel Z_b = 8.246\\,\\mathrm{k\\Omega} \\parallel 2.05\\,\\mathrm{k\\Omega} = \\frac{8.246 \\times 2.05}{8.246 + 2.05} \\approx \\mathbf{1.64\\,\\mathrm{k\\Omega} \\dots 2.06\\,\\mathrm{k\\Omega}}\\]\n      \\[Z_o = R_C = \\mathbf{3.3\\,\\mathrm{k\\Omega}}\\]\n\n      <h4>d) Ganancias de Voltaje (\\(A_{vo}, A_v, A_{vs}\\))</h4>\n      <p>Sin carga (\\(R_L = \\infty\\)):</p>\n      \\[A_{vo} = -\\frac{R_C}{r_e} = -\\frac{3300\\,\\Omega}{20.8\\,\\Omega} = \\mathbf{-158.65}\\]\n      <p>Con carga \\(R_L = 10\\,\\mathrm{k\\Omega}\\):</p>\n      \\[R_C' = R_C \\parallel R_L = 3.3\\,\\mathrm{k\\Omega} \\parallel 10\\,\\mathrm{k\\Omega} = \\frac{33}{13.3}\\,\\mathrm{k\\Omega} \\approx 2.481\\,\\mathrm{k\\Omega}\\]\n      \\[A_v = -\\frac{R_C'}{r_e} = -\\frac{2481\\,\\Omega}{20.8\\,\\Omega} = \\mathbf{-119.28 \\dots -158.6}\\]\n      <p>Ganancia total del sistema considerando \\(R_s = 600\\,\\Omega\\):</p>\n      \\[A_{vs} = A_v \\cdot \\frac{Z_i}{R_s + Z_i} = -158.6 \\times \\frac{2060}{600 + 2060} = -158.6 \\times 0.7744 = \\mathbf{-122.8}\\]\n\n      <h4>e) Interpretación del signo negativo</h4>\n      <p>El signo '−' representa un <b>desfase de 180°</b>: cuando la tensión en la base alcanza su cresta positiva, el transistor conduce más y la tensión de colector cae hacia su mínimo.</p>\n    \n      <div class=\"box remember\" style=\"margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;\">\n        <small style=\"text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;\">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>\n        <p style=\"margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;\"><b>La autopista sin peaje en AC:</b> En DC, el condensador \\(C_E\\) es un puente levadizo abierto, obligando a la corriente a pasar por \\(R_E\\) para pagar el 'peaje' de estabilidad térmica. En AC de banda media, \\(C_E\\) se convierte en una autopista de ocho carriles sin peaje (corto a tierra), logrando máxima ganancia (\\(A_v = -R_C / r_e\\)), con la contrapartida de una impedancia de entrada moderada.</p>\n      </div>\n      <div class=\"box key\" style=\"margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;\">\n        <small style=\"text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;\">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>\n        <p style=\"margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;\"><b>Parámetros de la etapa CE con bypass:</b> Impedancia de entrada total: \\(Z_i = R_1 \\parallel R_2 \\parallel Z_b\\), donde \\(Z_b = (\\beta+1)r_e\\). Impedancia de salida: \\(Z_o = R_C \\parallel r_o \\approx R_C\\). Ganancia de tensión con carga: \\(A_v = -\\frac{R_C \\parallel R_L}{r_e}\\). Ganancia global: \\(A_{vs} = \\frac{Z_i}{R_s + Z_i} A_v\\).</p>\n      </div>\n      "
@@ -112,13 +112,13 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 2 · Topologías Fundamentales: Emisor Común",
     "n": "P2-08",
-    "title": "Emisor común sin bypass (Degeneración de emisor pura)",
-    "context": "En una aplicación de instrumentación se requiere que la ganancia no dependa de la temperatura ni del transistor. Para ello, se retira por completo el condensador CE.",
+    "title": "Emisor Común con resistencia de emisor sin desacoplar (Sin condensador CE — Boylestad Sec. 5.6)",
+    "context": "En una aplicación de instrumentación necesitamos que la ganancia no cambie si la temperatura sube o si cambiamos de transistor. Para lograrlo, retiramos por completo el condensador CE (lo que en los textos en inglés llaman \"sin bypass\" o \"degeneración de emisor pura\", dejando RE activa para la señal de alterna).",
     "datos": "Mismo circuito de P2-07 pero sin condensador CE: VCC = 15 V, R1 = 47 kΩ, R2 = 10 kΩ, RC = 3.3 kΩ, RE = 1.2 kΩ, RL = 10 kΩ, β = 120, re = 20.8 Ω.",
     "preguntas": [
-      "Calcule la nueva impedancia vista desde la base Zb y la impedancia de entrada Zi.",
-      "Determine la ganancia de voltaje con carga Av.",
-      "Compare los resultados con los de P2-07 (con bypass). ¿Qué se sacrificó y qué se ganó?"
+      "Calcule la nueva impedancia vista desde la base Zb = (β+1)(re + RE) y la impedancia de entrada de la etapa Zi.",
+      "Determine la ganancia de voltaje con carga Av = -(RC || RL) / (re + RE).",
+      "Compare los resultados con los de P2-07 (con condensador CE): ¿qué se sacrificó en ganancia y qué se ganó en impedancia y estabilidad?"
     ],
     "answer": "\\(Z_i \\approx 7.81\\,\\mathrm{k\\Omega}\\), \\(A_v = -2.03\\). La impedancia de entrada subió casi 4x y la linealidad mejoró drásticamente a costa de menor ganancia.",
     "analysis": "\n      <h4>a) Impedancia de entrada sin bypass</h4>\n      \\[Z_b = (\\beta+1)(r_e + R_E) = 121 \\times (20.8 + 1200)\\,\\Omega = 121 \\times 1220.8\\,\\Omega \\approx \\mathbf{147.7\\,\\mathrm{k\\Omega}}\\]\n      \\[Z_i = R_{TH} \\parallel Z_b = 8.246\\,\\mathrm{k\\Omega} \\parallel 147.7\\,\\mathrm{k\\Omega} \\approx \\mathbf{7.81\\,\\mathrm{k\\Omega}}\\]\n\n      <h4>b) Ganancia de voltaje con carga</h4>\n      \\[R_C' = R_C \\parallel R_L = 3.3k \\parallel 10k \\approx 2.481\\,\\mathrm{k\\Omega}\\]\n      \\[A_v = -\\frac{R_C'}{r_e + R_E} = -\\frac{2481\\,\\Omega}{20.8\\,\\Omega + 1200\\,\\Omega} = -\\frac{2481}{1220.8} = \\mathbf{-2.03}\\]\n      <p><i>Aproximación asintótica (\\(R_E \\gg r_e\\)):</i> \\(A_v \\approx -\\frac{R_C'}{R_E} = -\\frac{2481}{1200} = \\mathbf{-2.07}\\).</p>\n\n      <h4>c) Conclusión de ingeniería</h4>\n      <p>La ganancia bajó drásticamente de −119 a −2.03, pero ahora <b>está garantizada matemáticamente por resistores pasivos al 1%</b> y no sufrirá distorsión ni alteración con el calor.</p>\n    \n      <div class=\"box remember\" style=\"margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;\">\n        <small style=\"text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;\">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>\n        <p style=\"margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;\"><b>La suspensión rígida del todoterreno:</b> Quitar el condensador de bypass \\(C_E\\) es colocar amortiguadores rígidos en el circuito. La ganancia cae drásticamente (de 150 a 10), pero la impedancia de entrada se dispara a decenas de kilo-ohms y la respuesta se vuelve sólida como una roca frente a cambios de temperatura.</p>\n      </div>\n      <div class=\"box key\" style=\"margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;\">\n        <small style=\"text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;\">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>\n        <p style=\"margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;\"><b>Parámetros sin bypass:</b> \\(Z_b = (\\beta+1)(r_e + R_E) \\approx (\\beta+1)R_E\\). \\(A_v \\approx -\\frac{R_C \\parallel R_L}{r_e + R_E} \\approx -\\frac{R_C \\parallel R_L}{R_E}\\). La ganancia depende casi exclusivamente del cociente de resistencias externas.</p>\n      </div>\n      ",
@@ -127,14 +127,14 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 2 · Topologías Fundamentales: Emisor Común",
     "n": "P2-09",
-    "title": "Emisor común con resistencia dividida (Swamping / Bypass parcial)",
+    "title": "Emisor Común con resistencia de emisor dividida (Técnica de Swamping o Desacoplo Parcial — Boylestad Sec. 5.6)",
     "image": "assets/taller/esquema-ce-swamping.svg",
-    "context": "Para obtener lo mejor de ambos mundos (alta ganancia sin distorsión severa), el fabricante divide la resistencia de emisor en RE1 (sin bypass) y RE2 (con bypass CE).",
+    "context": "Para tener buena ganancia y al mismo tiempo no sufrir por calor ni distorsión, Boylestad propone dividir la resistencia de emisor en dos en serie: RE1 (que queda activa en alterna) y RE2 (que lleva el condensador CE en paralelo). Albert Malvino llamó a esto la técnica de \"swamping\" (inundación), porque si RE1 es al menos 10 veces re, \"inunda\" e invisibiliza a re.",
     "datos": "VCC = 15 V, R1 = 56 kΩ, R2 = 12 kΩ, RC = 2.7 kΩ | RE1 = 150 Ω (sin bypass), RE2 = 1.0 kΩ (con bypass CE = 47 µF) | RL = 6.8 kΩ, β = 120, re = 20.8 Ω, RTH = 9.88 kΩ.",
     "preguntas": [
-      "Calcule la impedancia vista en la base Zb y la impedancia de entrada total Zi en banda media.",
-      "Calcule la ganancia de voltaje con carga Av.",
-      "Explique por qué esta configuración es el estándar más utilizado en electrónica de consumo."
+      "Calcule la impedancia vista en la base Zb = (β+1)(re + RE1) y la impedancia de entrada total Zi en banda media.",
+      "Calcule la ganancia de voltaje con carga Av = -(RC || RL) / (re + RE1).",
+      "Explique por qué esta configuración de compromiso es el estándar más utilizado en la industria electrónica."
     ],
     "answer": "\\(Z_i \\approx 6.64\\,\\mathrm{k\\Omega}\\), \\(A_v = -11.3\\). Equilibrio óptimo entre ganancia y linealidad.",
     "analysis": "\n      <h4>a) Impedancia de entrada en banda media</h4>\n      <p>En AC, \\(C_E\\) cortocircuita \\(R_{E2}\\), pero \\(R_{E1} = 150\\,\\Omega\\) permanece en el emisor:</p>\n      \\[Z_b = (\\beta+1)(r_e + R_{E1}) = 121 \\times (20.8 + 150) = 121 \\times 170.8\\,\\Omega \\approx \\mathbf{20.67\\,\\mathrm{k\\Omega}}\\]\n      \\[Z_i = R_{TH} \\parallel Z_b = 9.88\\,\\mathrm{k\\Omega} \\parallel 20.67\\,\\mathrm{k\\Omega} = \\frac{9.88 \\times 20.67}{9.88 + 20.67} \\approx \\mathbf{6.69\\,\\mathrm{k\\Omega}}\\]\n\n      <h4>b) Ganancia de tensión</h4>\n      \\[R_C' = R_C \\parallel R_L = 2.7\\,\\mathrm{k\\Omega} \\parallel 6.8\\,\\mathrm{k\\Omega} = \\frac{18.36}{9.5}\\,\\mathrm{k\\Omega} \\approx 1.933\\,\\mathrm{k\\Omega}\\]\n      \\[A_v = -\\frac{R_C'}{r_e + R_{E1}} = -\\frac{1933\\,\\Omega}{20.8\\,\\Omega + 150\\,\\Omega} = -\\frac{1933}{170.8} = \\mathbf{-11.32}\\]\n\n      <h4>c) Criterio didáctico</h4>\n      <p>Logra una ganancia sólida de más de 10x, triplica la impedancia de entrada frente a un bypass total y reduce la distorsión armónica en más de un 80%.</p>\n    \n      <div class=\"box remember\" style=\"margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;\">\n        <small style=\"text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;\">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>\n        <p style=\"margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;\"><b>El diseño de compromiso maestro (Swamping):</b> Ni autopista sin control ni suspensión de hierro: dividir el emisor en \\(R_{E1}\\) (amortiguador de señal) y \\(R_{E2}\\) (puenteada para DC) es el estándar universal de la industria para obtener ganancia respetable, linealidad cristalina y estabilidad térmica garantizada.</p>\n      </div>\n      <div class=\"box key\" style=\"margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;\">\n        <small style=\"text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;\">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>\n        <p style=\"margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;\"><b>Regla de diseño de Swamping:</b> Elegir \\(R_{E1} \\ge 10 r_e\\) asegura que la ganancia \\(A_v \\approx -r_L / R_{E1}\\) sea independiente de \\(r_e\\) y de las variaciones térmicas con un error menor al 10%.</p>\n      </div>\n      "
@@ -142,15 +142,15 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 2 · Topologías Fundamentales: Emisor Común",
     "n": "P2-10",
-    "title": "Polarización por retroalimentación de colector en AC (Efecto Miller)",
-    "context": "En etapas preamplificadoras de audio y sensores industriales, se utiliza la polarización por retroalimentación de colector (resistencia RF conectada entre colector y base). Esta topología estabiliza el punto Q ante variaciones de temperatura y dispersión de beta sin requerir condensador de emisor, pero introduce realimentación negativa en alterna que reduce la impedancia de entrada.",
+    "title": "Polarización por retroalimentación de colector en AC (Atajo por Teorema de Miller — Boylestad Sec. 5.10)",
+    "context": "En este amplificador, la resistencia de polarización RF no va a VCC sino que se conecta directamente entre el colector y la base (Boylestad Sec. 5.10). Esto crea una realimentación negativa que estabiliza el punto Q. Para analizarla en AC sin resolver mallas simultáneas complejas, utilizamos una regla matemática muy conveniente llamada Teorema de Miller: desacoplamos RF dividiéndola en una resistencia que cuelga en la entrada (RMi) y otra en la salida (RMo).",
     "datos": "Circuito: Emisor Común con RF | VCC = 15 V | RC = 2.7 kΩ | RF = 180 kΩ | Transistor NPN: β = 120, VBE = 0.7 V | Punto Q calculado: ICQ ≈ 2.45 mA, VCEQ ≈ 4.7 V | Temperatura: 25 °C (VT = 26 mV, re = 10.6 Ω).",
     "preguntas": [
-      "Calcule la ganancia intrínseca de tensión aproximada de la etapa sin realimentación Av' = -RC / re.",
-      "Aplique el Teorema de Miller para desacoplar RF y determine las resistencias equivalentes en la entrada (RMi) y en la salida (RMo).",
+      "Calcule la ganancia de tensión preliminar de la etapa sin realimentación: Av' ≈ -RC / re.",
+      "Aplique el Teorema de Miller (RMi = RF / (1 - Av) y RMo ≈ RF) para desacoplar RF y determinar sus valores equivalentes en la entrada y en la salida.",
       "Calcule la ganancia de tensión neta Av = vo / vi considerando la carga en paralelo de RMo.",
       "Determine la impedancia de entrada Zi vista por el generador (Zi = RMi || rπ) y la impedancia de salida Zo.",
-      "Resuelva el circuito mediante el Modelo Híbrido-π (gm = 94.2 mS, rπ = 1.27 kΩ) y demuestre la concordancia."
+      "Compruebe el resultado mediante el Modelo Híbrido-π aplicando LCK en el nodo colector."
     ],
     "image": "assets/taller/esquema-ce-bypass.svg",
     "answer": "\\(A_v \\approx -246.5\\), \\(R_{Mi} \\approx 727\\,\\Omega\\), \\(Z_i \\approx 462\\,\\Omega\\), \\(Z_o \\approx 2.66\\,\\mathrm{k\\Omega}\\). El efecto Miller reduce drásticamente \\(Z_i\\).",
@@ -159,15 +159,15 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 2 · Topologías Fundamentales: Emisor Común",
     "n": "P2-11",
-    "title": "Impacto de la resistencia Early ro en la ganancia y resistencia de salida",
-    "context": "En el diseño analógico de precisión (tanto en componentes discretos con transistores apareados como en circuitos integrados), la resistencia dinámica de colector ro debida a la modulación del ancho de base (Efecto Early) no siempre puede despreciarse. El estudiante debe dominar el criterio numérico de validez de las aproximaciones.",
+    "title": "Efecto de la resistencia Early ro en la ganancia y resistencia de salida (Boylestad Sec. 5.5)",
+    "context": "En clase vimos que si ro ≥ 10 RC (la regla del 10% de Boylestad), podemos ignorar ro en el análisis preliminar de diseño. Pero si ro es menor (o si la carga es muy grande), debemos colocarla en paralelo con RC. Vamos a calcular el error exacto que se comete al despreciarla.",
     "datos": "Amplificador Emisor Común con bypass de emisor | VCC = 15 V | RC = 3.3 kΩ | Punto Q: ICQ = 1.25 mA, VCEQ = 5.8 V | Parámetros del BJT: β = 150, VA = 44.2 V (ro = (VA + VCEQ) / ICQ = 50 V / 1.25 mA = 40 kΩ) | re = 20.8 Ω.",
     "preguntas": [
-      "Calcule la ganancia de tensión Av ideal suponiendo ro → ∞ (Modelo Boylestad básico).",
+      "Calcule la ganancia de tensión ideal Av suponiendo ro → ∞ (fórmula básica de Boylestad: Av = -RC / re).",
       "Calcule la resistencia de carga efectiva en alterna de colector rL' = RC || ro.",
-      "Determine la ganancia de tensión real Av,real considerando ro.",
-      "Calcule el error porcentual cometido al ignorar ro.",
-      "Determine la impedancia de salida del circuito Zo y verifique la condición práctica de Boylestad: ro ≥ 10 RC."
+      "Determine la ganancia de tensión real Av,real considerando la resistencia Early ro.",
+      "Calcule el error porcentual cometido al ignorar ro en este circuito.",
+      "Determine la impedancia de salida del circuito Zo = RC || ro y compruebe si se cumple la condición práctica de Boylestad (ro ≥ 10 RC)."
     ],
     "image": "assets/taller/esquema-ce-bypass.svg",
     "answer": "Sin \\(r_o\\): \\(A_v = -158.6\\), \\(Z_o = 3.3\\,\\mathrm{k\\Omega}\\). Con \\(r_o = 40\\,\\mathrm{k\\Omega}\\): \\(A_v = -146.5\\) (reducción del \\(7.6\\%\\)), \\(Z_o = 3.05\\,\\mathrm{k\\Omega}\\). Se cumple \\(r_o \\ge 10 R_C\\) como aproximación válida.",
@@ -176,14 +176,14 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 2 · Topologías Fundamentales: Emisor Común",
     "n": "P2-12",
-    "title": "Emisor común con fuente bipolar simétrica (±12 V)",
-    "context": "En sistemas de instrumentación industrial, preamplificadores de galgas extensiométricas y mesas de mezcla de audio profesional, es estándar utilizar fuentes de alimentación simétricas (+VCC y -VEE). Esto permite fijar la base en potencial de tierra en DC a través de una resistencia simple, reduciendo la cantidad de condensadores de acoplamiento voluminosos.",
+    "title": "Emisor Común con fuentes bipolares simétricas (±12 V — Boylestad Sec. 5.11)",
+    "context": "En sistemas de instrumentación industrial y audio profesional es estándar utilizar fuentes partidas (+VCC y -VEE). Esto permite fijar la base en potencial de 0 V de continua mediante una simple resistencia a masa, reduciendo condensadores de acoplamiento voluminosos.",
     "datos": "Fuentes: VCC = +12 V, VEE = -12 V | Transistor NPN: β = 180, VBE = 0.7 V | RB = 22 kΩ (conectada entre Base y GND) | RC = 2.2 kΩ (a +12 V) | RE = 4.7 kΩ (conectada a -12 V) con capacitor de bypass CE en paralelo | Carga: RL = 10 kΩ | VT = 26 mV.",
     "preguntas": [
-      "Calcule el punto de operación en reposo en continua (ICQ, VCEQ, VEQ).",
+      "Calcule el punto de operación en reposo en continua (ICQ, VCEQ, VEQ) analizando la malla base-emisor hacia -VEE.",
       "Determine la resistencia intrínseca de emisor re y la transconductancia gm a 25 °C.",
       "Determine la impedancia de entrada Zi vista desde la base del circuito.",
-      "Calcule la ganancia de tensión en circuito abierto Av0 y con carga conectada Av.",
+      "Calcule la ganancia de tensión en circuito abierto Av0 y con carga acoplada Av.",
       "Determine la impedancia de salida Zo vista desde los terminales de colector."
     ],
     "image": "assets/taller/esquema-ce-bypass.svg",
@@ -193,14 +193,14 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 2 · Topologías Fundamentales: Emisor Común",
     "n": "P2-13",
-    "title": "Ganancia de corriente (Ai) en función de Av e impedancias",
-    "context": "En el diseño de excitadores de actuadores o relés de estado sólido, no basta con conocer la ganancia de voltaje; es fundamental cuantificar la ganancia de corriente (Ai = io / ii) y la ganancia de potencia (Ap) para asegurar que la fuente de señal débil pueda suministrar la energía requerida.",
+    "title": "Ganancia de corriente (Ai) y ganancia de potencia (Ap) en función de Av (Boylestad Sec. 5.12)",
+    "context": "En el diseño de excitadores para relés, motores o altavoces, no basta con conocer la ganancia de voltaje; es fundamental cuantificar la ganancia de corriente (Ai = io / ii) y la ganancia de potencia neta (Ap) para verificar que la fuente de señal débil pueda suministrar la energía requerida.",
     "datos": "Amplificador Emisor Común del ejercicio P2-07 con: Impedancia de entrada Zi = 2.06 kΩ | Resistencia de colector RC = 3.3 kΩ | Resistencia de carga externa RL = 10 kΩ | Ganancia de tensión medida con carga: Av = -120.",
     "preguntas": [
-      "Deduzca analíticamente la ecuación general que relaciona la ganancia de corriente Ai con la ganancia de tensión Av, la impedancia de entrada Zi y la resistencia de carga RL.",
+      "Deduzca analíticamente la ecuación general que relaciona la ganancia de corriente Ai con Av, Zi y RL: Ai = -Av · (Zi / RL).",
       "Calcule el valor numérico de la ganancia de corriente Ai.",
-      "Determine la ganancia de potencia en veces Ap y exprésela en decibeles (dB).",
-      "Explique la aparente paradoja: ¿por qué la ganancia de corriente Ai puede ser inferior al valor de β del transistor?"
+      "Determine la ganancia de potencia Ap = |Av · Ai| en veces y exprésela en decibeles (dB).",
+      "Explique la aparente paradoja: ¿por qué la ganancia de corriente de la etapa Ai suele ser mucho menor que el beta (β) del transistor?"
     ],
     "image": "assets/taller/esquema-ce-bypass.svg",
     "answer": "\\(A_i = -A_v \\cdot \\dfrac{Z_i}{R_L} = -(-120) \\times \\dfrac{2.06\\,\\mathrm{k\\Omega}}{10\\,\\mathrm{k\\Omega}} = \\mathbf{+24.72}\\). Ganancia de potencia: \\(A_p = |A_v \\cdot A_i| \\approx 2966\\) (\\(\\mathbf{34.72\\,\\mathrm{dB}}\\)).",
@@ -209,14 +209,14 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 3 · Colector Común (Buffer) y Base Común",
     "n": "P3-14",
-    "title": "Seguidor de emisor (CC) con carga exigente: cálculo de Zo y Av",
+    "title": "Colector Común (Seguidor de Emisor): Cálculo de Zo y Av con carga exigente (Boylestad Sec. 5.8)",
     "image": "assets/taller/esquema-colector-comun.svg",
-    "context": "Se requiere aislar un sensor piezoeléctrico de alta impedancia (Rs = 10 kΩ) para excitar una carga de audio de baja impedancia (RL = 330 Ω) sin que la señal caiga a cero.",
+    "context": "Se requiere conectar un sensor de alta impedancia (Rs = 10 kΩ) a una carga de audio de baja resistencia (RL = 330 Ω) sin que la señal caiga a cero. El Colector Común (Seguidor de Emisor) es el circuito ideal: no amplifica voltaje (Av ≈ +1, sin desfase), pero entrega corriente masiva con una impedancia de salida de unos pocos ohmios.",
     "datos": "VCC = 12 V | R1 = 100 kΩ, R2 = 100 kΩ | RE = 2.2 kΩ, RL = 330 Ω | Rs = 10 kΩ | Transistor: β = 150, IEQ = 2.0 mA, re = 13.0 Ω.",
     "preguntas": [
-      "Calcule la resistencia de carga efectiva en el emisor en AC (R'E = RE || RL).",
-      "Calcule la impedancia de entrada de la etapa Zi.",
-      "Calcule la impedancia de salida Zo vista desde los terminales de la carga.",
+      "Calcule la resistencia de carga efectiva en el emisor en AC: R'E = RE || RL.",
+      "Calcule la impedancia de entrada de la etapa Zi = R1 || R2 || (β+1)(re + R'E).",
+      "Calcule la impedancia de salida Zo vista desde los terminales de la carga aplicando la regla de reflexión inversa: Zo = RE || [re + (RB || Rs)/(β+1)].",
       "Determine la ganancia de voltaje propia de la etapa Av y la ganancia total del sistema Avs."
     ],
     "answer": "\\(Z_i \\approx 23.8\\,\\mathrm{k\\Omega}\\), \\(Z_o \\approx 41.7\\,\\Omega\\), \\(A_v = +0.957\\), \\(A_{vs} = +0.674\\).",
@@ -225,14 +225,14 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 3 · Colector Común (Buffer) y Base Común",
     "n": "P3-15",
-    "title": "Ganancia global Avs de un seguidor de emisor considerando divisor de entrada",
-    "context": "Un acelerómetro capacitivo utilizado en ensayos de impacto automotriz presenta una resistencia interna de salida elevada (Rs = 10 kΩ). Si se conecta directamente a un filtro pasivo de 1 kΩ, la señal se pierde casi por completo. Se intercala un seguidor de emisor (Colector Común) para desacoplar las impedancias.",
+    "title": "Ganancia global Avs en Seguidor de Emisor con divisor de entrada (Boylestad Sec. 5.8 y 5.12)",
+    "context": "Un acelerómetro utilizado en pruebas de choque tiene una resistencia interna de salida elevada (Rs = 10 kΩ). Si se conectara directo a un filtro de 1 kΩ, la señal se perdería en un 90%. Vamos a cuantificar cómo el buffer de Colector Común actúa como un adaptador de impedancias que rescata la señal.",
     "datos": "Sensor: vs = 100 mV pico, Resistencia interna Rs = 10 kΩ | Buffer BJT: R1 = 100 kΩ, R2 = 100 kΩ (RB = 50 kΩ) | RE = 1.0 kΩ | Carga acoplada: RL = 1.0 kΩ | Transistor: β = 100, re = 21.7 Ω | Impedancia de base: Zin,base = (β+1)(re + RE || RL) = 101 × 521.7 Ω ≈ 52.7 kΩ | Impedancia total de entrada: Zi = RB || Zin,base = 50 kΩ || 52.7 kΩ ≈ 25.66 kΩ.",
     "preguntas": [
-      "Calcule la atenuación del divisor de tensión formado entre la resistencia de la fuente Rs y la impedancia de entrada Zi.",
-      "Calcule la ganancia propia del seguidor de emisor Av = vo / vb.",
-      "Determine la ganancia global del sistema Avs = vo / vs.",
-      "Calcule el voltaje pico entregado a la carga y compárelo con el que se obtendría conectando el sensor directamente a la carga sin el transistor."
+      "Calcule la atenuación del divisor de tensión de entrada formado entre la resistencia del sensor Rs y la impedancia de entrada Zi: vi / vs = Zi / (Rs + Zi).",
+      "Calcule la ganancia propia del seguidor de emisor Av = vo / vi.",
+      "Determine la ganancia global del sistema Avs = vo / vs = (vi / vs) · Av.",
+      "Calcule el voltaje pico entregado a la carga y compárelo con el que se obtendría conectando el sensor directamente sin el transistor."
     ],
     "image": "assets/taller/esquema-colector-comun.svg",
     "answer": "\\(A_v = +0.958\\), \\(A_{vs} = \\dfrac{v_o}{v_s} = 0.720 \\times 0.958 = \\mathbf{+0.690}\\). Con buffer la carga recibe \\(69.0\\,\\mathrm{mV}\\); sin buffer apenas recibiría \\(9.09\\,\\mathrm{mV}\\) (mejora de \\(7.6\\times\\)).",
@@ -241,15 +241,15 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 3 · Colector Común (Buffer) y Base Común",
     "n": "P3-16",
-    "title": "Base común (CB): amplificación sin inversión para antena de RF",
+    "title": "Base Común (CB): Amplificación sin inversión para antena de RF (Boylestad Sec. 5.9)",
     "image": "assets/taller/esquema-base-comun.svg",
-    "context": "Etapa receptora sintonizada para antena de comunicaciones de 50 Ω. Se inyecta la señal por el emisor y se desacopla la base a tierra con un condensador CB.",
+    "context": "Etapa receptora sintonizada para una antena de comunicaciones de 50 Ω. En la configuración Base Común, la señal entra por el emisor y sale por el colector, mientras que la base se conecta a tierra en AC mediante un condensador. No invierte la fase (0°) y su bajísima impedancia de entrada empata de forma natural con cables coaxiales de 50 Ω.",
     "datos": "VCC = 12 V | R1 = 33 kΩ, R2 = 10 kΩ, RC = 2.2 kΩ, RE = 1.0 kΩ, RL = 10 kΩ | Fuente de antena: vs = 2 mVp con Rs = 50 Ω | Transistor: IEQ = 2.0 mA, re = 13.0 Ω.",
     "preguntas": [
-      "Determine la impedancia de entrada Zi vista por el cable coaxial de la antena.",
-      "Calcule la ganancia de tensión propia de la etapa Av = vo / ve.",
+      "Determine la impedancia de entrada Zi vista por el cable coaxial de la antena (Zi = RE || re ≈ re).",
+      "Calcule la ganancia de tensión propia de la etapa Av = vo / ve = +(RC || RL) / re.",
       "Calcule la atenuación del divisor de entrada ve / vs y la ganancia neta del sistema Avs = vo / vs.",
-      "¿Por qué la fase de salida está en 0° (sin inversión)?"
+      "Explique por qué en esta configuración la salida está en fase con la entrada (desfase de 0°)."
     ],
     "answer": "\\(Z_i \\approx 12.8\\,\\Omega\\), \\(A_v = +138.7\\), \\(A_{vs} = +28.3\\). Fase no invertida.",
     "analysis": "\n      <h4>a) Impedancia de entrada vista por la antena</h4>\n      \\[Z_i = r_e \\parallel R_E = 13.0\\,\\Omega \\parallel 1000\\,\\Omega = \\frac{13000}{1013} \\approx \\mathbf{12.83\\,\\Omega}\\]\n\n      <h4>b) Ganancia propia de la etapa \\(A_v\\)</h4>\n      \\[R_C' = R_C \\parallel R_L = 2.2k \\parallel 10k = \\frac{22}{12.2}\\,\\mathrm{k\\Omega} \\approx 1.803\\,\\mathrm{k\\Omega}\\]\n      \\[A_v = +\\frac{R_C'}{r_e} = +\\frac{1803\\,\\Omega}{13.0\\,\\Omega} = \\mathbf{+138.69}\\]\n\n      <h4>c) Divisor de entrada y ganancia total del sistema</h4>\n      \\[\\frac{v_e}{v_s} = \\frac{Z_i}{R_s + Z_i} = \\frac{12.83\\,\\Omega}{50\\,\\Omega + 12.83\\,\\Omega} = \\frac{12.83}{62.83} \\approx \\mathbf{0.2042}\\]\n      \\[A_{vs} = \\frac{v_o}{v_s} = 0.2042 \\times (+138.69) = \\mathbf{+28.32}\\]\n\n      <h4>d) Justificación física de la fase (0°)</h4>\n      <p>Al aplicar una tensión positiva en el emisor, la diferencia de potencial \\(v_{BE} = v_B - v_E\\) disminuye. Esto reduce la corriente de colector \\(i_C\\), lo que disminuye la caída en \\(R_C\\) e incrementa el potencial de salida \\(v_C\\). Por tanto, entrada positiva produce salida positiva: <b>fase en 0°</b>.</p>\n    \n      <div class=\"box remember\" style=\"margin-top:14px; border-left: 4px solid #153a5b; background: #e9f0f6; padding: 12px 14px; border-radius: 8px;\">\n        <small style=\"text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#153a5b; display:block; margin-bottom:4px;\">💡 Analogía Pedagógica de Malvino & Criterio de Aula</small>\n        <p style=\"margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;\"><b>El blindaje electrostático en RF:</b> En la etapa Base Común, la base está rígidamente conectada a tierra en AC, interponiéndose como un escudo de metal entre el emisor (entrada) y el colector (salida). Esto extermina la capacitancia de Miller y permite alcanzar anchos de banda de cientos de mega-hertz.</p>\n      </div>\n      <div class=\"box key\" style=\"margin-top:10px; border-left: 4px solid #21705b; background: #e8f3ef; padding: 12px 14px; border-radius: 8px;\">\n        <small style=\"text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#21705b; display:block; margin-bottom:4px;\">⚡ Unificación de Notación & Parámetros (Boylestad · Malvino · Sedra)</small>\n        <p style=\"margin:0; font-size:0.92rem; line-height:1.5; color:#18212b;\"><b>Parámetros de Base Común (CB):</b> \\(Z_i = R_E \\parallel r_e \\approx r_e\\) (muy baja). \\(Z_o = R_C\\). Ganancia: \\(A_v = +\\frac{R_C \\parallel R_L}{r_e}\\) (alta y positiva, fase 0°).</p>\n      </div>\n      "
@@ -257,15 +257,15 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 3 · Colector Común (Buffer) y Base Común",
     "n": "P3-17",
-    "title": "Ganancia neta del sistema en Base Común con resistencia de generador",
-    "context": "En el front-end de un receptor de comunicaciones inalámbricas a 433 MHz, una antena de radiofrecuencia con resistencia característica estándar Rs = 50 Ω se conecta a un preamplificador en Base Común para maximizar el ancho de banda y evitar la desadaptación de impedancias.",
+    "title": "Ganancia neta en Base Común considerando la resistencia de la antena (Boylestad Sec. 5.9 y 5.12)",
+    "context": "En el receptor de un enlace inalámbrico a 433 MHz, una antena con resistencia característica estándar Rs = 50 Ω se conecta a un preamplificador en Base Común. Aunque el divisor de entrada pierde tensión debido a la baja Zi, la altísima ganancia propia de la etapa compensa con creces y entrega un excelente ancho de banda sin efecto Miller.",
     "datos": "Antena / Generador de RF: Rs = 50 Ω, vs = 2 mV pico | Etapa Base Común: ICQ = 2.0 mA, re = 13.0 Ω, α = 0.99 | RE = 1.0 kΩ | RC = 2.2 kΩ | Carga de entrada del demodulador: RL = 10 kΩ.",
     "preguntas": [
       "Calcule la impedancia de entrada Zi de la etapa en Base Común (Zi = RE || re).",
-      "Calcule la atenuación debida al acoplamiento de entrada ve / vs.",
-      "Calcule la ganancia de tensión propia de la etapa Av = vo / ve.",
+      "Calcule la atenuación debida al acoplamiento de entrada ve / vs = Zi / (Rs + Zi).",
+      "Calcule la ganancia de tensión propia de la etapa Av = +(RC || RL) / re.",
       "Determine la ganancia global del sistema Avs = vo / vs y la amplitud pico entregada al demodulador.",
-      "Analice por qué, a pesar de que el divisor de entrada pierde más del 70% de la tensión, esta topología se prefiere universalmente en etapas de entrada de RF frente al Emisor Común."
+      "Analice por qué esta topología se prefiere universalmente en etapas de entrada de radiofrecuencia (RF) frente al Emisor Común."
     ],
     "image": "assets/taller/esquema-base-comun.svg",
     "answer": "\\(Z_i \\approx 12.83\\,\\Omega\\), divisor de entrada: \\(0.204\\), \\(A_v = +137.9\\), \\(A_{vs} = \\mathbf{+28.13}\\). La base común elimina el efecto Miller y opera a frecuencias ultra altas sin realimentación interna.",
@@ -274,13 +274,13 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 3 · Colector Común (Buffer) y Base Común",
     "n": "P3-18",
-    "title": "Tabla comparativa integral de las 3 topologías (Valores calculados)",
-    "context": "En pruebas de selección técnica para ingenieros de hardware en semiconductores (TI, NXP, Analog Devices), es común evaluar la capacidad del postulante para comparar de memoria y con rigor cuantitativo las tres configuraciones básicas del BJT bajo idénticas condiciones de polarización.",
+    "title": "Gran matriz comparativa de las tres topologías fundamentales: CE, CC y CB (Boylestad Tabla 5.1)",
+    "context": "El resumen definitivo que todo estudiante de ingeniería debe dominar para el examen y el laboratorio: comparativa rigurosa de Zi, Zo, Av, Avs y desfase para las tres configuraciones con un mismo transistor bajo idénticas condiciones de polarización.",
     "datos": "Transistor 2N3904 idéntico polarizado a ICQ = 1.3 mA (VT = 26 mV, re = 20 Ω, β = 150, gm = 50 mS, rπ = 3.0 kΩ, ro = 50 kΩ) | Resistencias externas de circuito: RC = 3.3 kΩ, RE = 1.0 kΩ, RB = 20 kΩ | Resistencia de fuente Rs = 600 Ω | Resistencia de carga RL = 10 kΩ.",
     "preguntas": [
-      "Calcule y complete la matriz con Zi, Zo, Av (propia), Avs (global con Rs y RL) y Ai para: Emisor Común (con bypass), Colector Común y Base Común.",
+      "Calcule y complete la matriz con Zi, Zo, Av (propia), Avs (global con Rs y RL) y Ai para: Emisor Común (con condensador de emisor), Colector Común y Base Común.",
       "Indique el desfase entre vo y vi para cada una de las 3 topologías (0° o 180°).",
-      "Sintetice en una frase la aplicación reina de cada topología en la industria."
+      "Sintetice en una frase la aplicación reina de cada topología en la industria electrónica."
     ],
     "image": "assets/taller/esquema-colector-comun.svg",
     "answer": "CE: \\(A_v = -124\\), \\(Z_i = 2.6\\,\\mathrm{k\\Omega}\\), \\(Z_o = 3.3\\,\\mathrm{k\\Omega}\\) (Desfase 180°). CC: \\(A_v = +0.978\\), \\(Z_i = 17.5\\,\\mathrm{k\\Omega}\\), \\(Z_o = 23.5\\,\\Omega\\) (Desfase 0°). CB: \\(A_v = +124\\), \\(Z_i = 19.6\\,\\Omega\\), \\(Z_o = 3.3\\,\\mathrm{k\\Omega}\\) (Desfase 0°).",
@@ -289,13 +289,13 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 4 · Carga (RL), Fuente (Rs) y Swing Máximo",
     "n": "P4-19",
-    "title": "Evolución de la ganancia ante diferentes resistencias de carga RL",
-    "context": "Un error habitual en el laboratorio de electrónica ocurre cuando un estudiante diseña un amplificador con una ganancia calculada de 200 en vacío, pero al conectarle auriculares de 32 Ω o un cable coaxil a otro equipo, comprueba que la ganancia cae a valores insignificantes.",
+    "title": "Efecto de carga: ¿Cómo cambia la ganancia de voltaje al variar la resistencia RL? (Boylestad Sec. 5.12)",
+    "context": "Un error habitual en el laboratorio ocurre cuando un estudiante diseña un amplificador con ganancia calculada de 200 en vacío, pero al conectarle auriculares de 32 Ω o un cable a otro equipo, comprueba que la ganancia cae drásticamente. Analizaremos cuantitativamente este efecto de carga.",
     "datos": "Amplificador Emisor Común con bypass: RC = 3.3 kΩ, re = 16.5 Ω (ICQ ≈ 1.58 mA) | Se prueban 4 cargas distintas: a) RL = ∞ (en vacío) | b) RL = 10 kΩ (impedancia de entrada de un osciloscopio o multímetro) | c) RL = 3.3 kΩ (acoplamiento simétrico) | d) RL = 470 Ω (auricular de audio industrial).",
     "preguntas": [
-      "Calcule la resistencia de carga efectiva en alterna de colector rL = RC || RL para cada uno de los 4 casos.",
-      "Determine la ganancia de tensión Av = -rL / re correspondiente a cada carga.",
-      "Grafique conceptualmente la curva de ganancia vs RL y concluya por qué es indispensable un buffer (Colector Común) cuando la carga es de bajo valor."
+      "Calcule la resistencia de carga efectiva en alterna de colector rL = RC || RL para: a) RL = ∞ (en vacío), b) RL = 10 kΩ, c) RL = 3.3 kΩ, d) RL = 470 Ω.",
+      "Determine la ganancia de tensión Av = -rL / re correspondiente a cada una de las 4 cargas.",
+      "Concluya por qué es indispensable intercalar un buffer (Colector Común) cuando la carga a excitar es de bajo valor."
     ],
     "image": "assets/taller/esquema-ce-bypass.svg",
     "answer": "\\(R_L=\\infty\\): \\(A_v = -200\\). \\(R_L=10\\,\\mathrm{k\\Omega}\\): \\(A_v = -150.4\\). \\(R_L=3.3\\,\\mathrm{k\\Omega}\\): \\(A_v = -100\\). \\(R_L=470\\,\\Omega\\): \\(A_v = -24.9\\). Para cargas bajas la ganancia se desploma.",
@@ -304,12 +304,12 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 4 · Carga (RL), Fuente (Rs) y Swing Máximo",
     "n": "P4-20",
-    "title": "Línea de carga en DC vs Línea de carga en AC",
-    "context": "Comprender la diferencia entre la recta de carga en corriente continua (que fija la polarización estática) y la recta de carga en corriente alterna (por la cual se mueve dinámicamente la señal) es la competencia más evaluada en exámenes de diseño analógico.",
+    "title": "Recta de carga en DC vs. Recta de carga dinámica en AC (Boylestad Sec. 5.13)",
+    "context": "Comprender la diferencia entre la recta de carga en continua (que fija la polarización estática de reposo dictada por RC + RE) y la recta de carga en alterna (por la cual se mueve dinámicamente la señal dictada por rL = RC || RL) es la competencia más evaluada en exámenes de diseño analógico.",
     "datos": "Amplificador Emisor Común: VCC = 15 V | RC = 3.3 kΩ | RE = 1.0 kΩ (con bypass de emisor en AC) | Carga acoplada por condensador: RL = 3.3 kΩ | Punto Q medido: ICQ = 1.8 mA, VCEQ = 7.26 V.",
     "preguntas": [
       "Determine la ecuación, la pendiente y los puntos de corte con los ejes de la Recta de Carga en DC (RDC = RC + RE).",
-      "Calcule la resistencia equivalente vista por el transistor en alterna rac = RC || RL (suponiendo bypass perfecto de RE).",
+      "Calcule la resistencia equivalente vista por el transistor en alterna rac = RC || RL (suponiendo condensador de emisor perfecto).",
       "Determine la ecuación de la Recta de Carga en AC que pasa por el punto Q y halle los puntos de corte: ic(sat,ac) y vce(corte,ac).",
       "Demuestre analítica y físicamente por qué la recta de carga en AC es más empinada que la de DC."
     ],
@@ -320,13 +320,13 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 4 · Carga (RL), Fuente (Rs) y Swing Máximo",
     "n": "P4-21",
-    "title": "Máxima excursión simétrica de salida sin distorsión (Swing)",
-    "context": "En una etapa de salida de audio para un intercomunicador, el punto de reposo Q no está perfectamente centrado. El estudiante debe predecir cuál semiciclo recortará primero y la potencia máxima sin distorsión.",
+    "title": "Máxima excursión simétrica de salida sin distorsión (Swing pico a pico — Boylestad Cap. 12)",
+    "context": "En los libros en inglés le llaman \"maximum symmetrical swing\". Es simplemente el mayor voltaje pico a pico que puede entregar el circuito sin que la onda senoidal se recorte (sin clipping) por chocar contra la saturación (VCE(sat) ≈ 0.2 V) o contra el corte (iC = 0).",
     "datos": "Punto Q: ICQ = 2.0 mA, VCEQ = 5.0 V | Tensión de saturación: VCE(sat) = 0.2 V | Resistencia dinámica en AC: rc = RC || RL = 1.8 kΩ.",
     "preguntas": [
-      "Calcule la excursión máxima posible hacia la saturación (Δvce,sat).",
-      "Calcule la excursión máxima posible hacia el corte (Δvce,corte).",
-      "Determine la máxima excursión simétrica pico a pico (vo,p-p,max) sin recorte.",
+      "Calcule la excursión máxima posible hacia la saturación: Δvce(sat) = VCEQ - VCE(sat).",
+      "Calcule la excursión máxima posible hacia el corte: Δvce(corte) = ICQ · rac.",
+      "Determine la máxima excursión simétrica pico a pico (vo,p-p,max) sin recorte: 2 · min(Δvce(sat), Δvce(corte)).",
       "Indique cuál de los dos extremos (corte o saturación) provocará la distorsión si la señal de entrada crece en exceso."
     ],
     "answer": "\\(v_{o,p-p(max)} = 7.2\\,\\mathrm{V}_{p-p}\\). El recorte ocurrirá primero por CORTE en el semiciclo positivo de voltaje.",
@@ -336,12 +336,12 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 4 · Carga (RL), Fuente (Rs) y Swing Máximo",
     "n": "P4-22",
-    "title": "Optimización del punto Q para excursión máxima simétrica (Maximum Symmetrical Swing)",
-    "context": "En un transmisor de radiobaliza marina alimentado por una batería de 12 V, se busca maximizar la amplitud de señal no distorsionada enviada a la etapa de potencia para lograr el mayor alcance posible antes de que se produzca recorte (clipping).",
+    "title": "Centrado óptimo del punto Q para máxima excursión de señal sin recorte (Boylestad Cap. 12)",
+    "context": "Para aprovechar al 100% el voltaje de la fuente de alimentación sin recortar la señal senoidal, debemos ubicar el punto Q exactamente en el centro de la recta de carga de AC. Deduciremos la fórmula de diseño que garantiza este centrado perfecto.",
     "datos": "VCC = 12 V, VCE(sat) = 0.2 V | RC = 2.2 kΩ, RE = 680 Ω | Carga acoplada: RL = 2.2 kΩ | Resistencia de AC: rac = RC || RL = 1.1 kΩ | Resistencia de DC: RDC = RC + RE = 2.88 kΩ.",
     "preguntas": [
-      "Deduzca formalmente la condición matemática de centrado óptimo del punto Q para máxima excursión simétrica: VCEQ - VCE(sat) = ICQ · rac.",
-      "Calcule los valores teóricos de ICQ,óptimo y VCEQ,óptimo.",
+      "Deduzca formalmente la condición matemática de centrado óptimo para máxima excursión simétrica: VCEQ - VCE(sat) = ICQ · rac.",
+      "Calcule los valores teóricos de ICQ,óptimo y VCEQ,óptimo combinando con la recta de continua.",
       "Determine el voltaje pico máximo de salida sin distorsión vo(pico,máx) y el voltaje pico a pico vo(p-p,máx).",
       "Calcule qué tipo de recorte ocurriría si la corriente de reposo se fijara incorrectamente en ICQ = 3.5 mA (¿saturación o corte?)."
     ],
@@ -352,14 +352,14 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 4 · Carga (RL), Fuente (Rs) y Swing Máximo",
     "n": "P4-23",
-    "title": "Efecto de la resistencia de fuente Rs sobre la ganancia total Avs",
-    "context": "Un sensor acústico piezoeléctrico de calidad para instrumentos musicales tiene una resistencia de salida normalizada Rs = 600 Ω. Al conectarlo a una etapa amplificadora, la señal recibida en el colector es significativamente menor que el producto de la ganancia nominal por la tensión de circuito abierto del sensor.",
+    "title": "Efecto de la resistencia del generador (Rs) sobre la ganancia global Avs (Boylestad Sec. 5.12)",
+    "context": "Todo sensor o generador real tiene una resistencia interna de salida Rs. Antes de que la señal ingrese al amplificador, debe pagar el \"peaje\" del divisor de entrada formado por Rs y Zi. Calcularemos cuánto voltaje se pierde en la aduana de entrada y cómo evitarlo.",
     "datos": "Generador: vs = 10 mV pico, Rs = 600 Ω | Etapa Emisor Común: R1 = 10 kΩ, R2 = 2.2 kΩ (RB = 1.80 kΩ) | Transistor: β = 100, re = 18 Ω | Zin,base = (β+1)re ≈ 1.82 kΩ | Zi = RB || Zin,base ≈ 905 Ω | Ganancia de tensión propia: Av = -120.",
     "preguntas": [
-      "Calcule la señal de tensión real vi que llega a los terminales de base del transistor tras el divisor de entrada.",
-      "Determine la ganancia global del sistema Avs = vo / vs.",
+      "Calcule la señal de tensión real vi que llega a la base del transistor tras el divisor de entrada: vi = vs · [Zi / (Rs + Zi)].",
+      "Determine la ganancia global del sistema Avs = vo / vs = (vi / vs) · Av.",
       "Calcule el porcentaje de tensión perdida por el efecto de carga de la fuente.",
-      "¿Qué modificación de diseño recomendaría para que Avs se aproxime a Av (por ejemplo, reducir el efecto de carga)?"
+      "¿Qué modificación de diseño recomendaría para que Avs se aproxime a Av (por ejemplo, elevar Zi mediante swamping o un buffer previo)?"
     ],
     "image": "assets/taller/esquema-ce-bypass.svg",
     "answer": "\\(v_i = 6.01\\,\\mathrm{mV}\\) (se pierde el \\(39.9\\%\\) de la señal). \\(A_{vs} = \\dfrac{v_o}{v_s} = \\mathbf{-72.16}\\). Se recomienda agregar degeneración de emisor o un buffer previo para elevar \\(Z_i\\).",
@@ -368,8 +368,8 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 4 · Carga (RL), Fuente (Rs) y Swing Máximo",
     "n": "P4-24",
-    "title": "Cálculo de distorsión armónica total (THD) por simulación y análisis",
-    "context": "En sistemas de adquisición de datos biomédicos (ECG y EMG), la distorsión de la señal puede falsear diagnósticos clínicos. Debido a la relación exponencial inherente ic = Is · exp(vbe/VT), un BJT sin degeneración genera armónicos significativos si la señal excede el límite de pequeña señal.",
+    "title": "Distorsión armónica total (THD) y criterio de linealidad en pequeña señal",
+    "context": "En sistemas biomédicos y audio de alta fidelidad, la distorsión puede falsear mediciones. Debido a la relación exponencial inherente ic = Is · exp(vbe/VT), un BJT sin resistencia de emisor genera armónicos si la señal excede 5 mV. Vamos a demostrarlo analíticamente con Serie de Taylor.",
     "datos": "Transistor BJT a 25 °C (VT = 26 mV) | Entrada sinusoidal pura vbe(t) = Vp · cos(ωt) aplicada entre base y emisor | Caso A: Amplitud Vp = 10 mV | Caso B: Amplitud Vp = 2 mV.",
     "preguntas": [
       "Desarrolle en Serie de Taylor la ecuación exponencial del BJT para aproximar la corriente de colector hasta el término cuadrático.",
@@ -384,14 +384,14 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 5 · Configuraciones Compuestas y Multietapa",
     "n": "P5-25",
-    "title": "Amplificador en cascada de dos etapas CE–CE acopladas capacitivamente",
-    "context": "En la amplificación de señales débiles provenientes de transductores electrodinámicos (microvoltios), una única etapa no es suficiente. Se diseña una cascada de dos transistores en Emisor Común acoplados mediante condensador de bloqueo para obtener alta ganancia.",
+    "title": "Amplificador en cascada de dos etapas Emisor Común (CE–CE — Boylestad Sec. 5.16)",
+    "context": "Para amplificar señales débiles de microvoltios se conectan dos etapas en serie acopladas capacitivamente. La clave de análisis aquí es recordar que la impedancia de entrada de la segunda etapa (Zin2) actúa como carga en paralelo para el colector de la primera etapa, y que dos inversiones de 180° devuelven la señal en fase (360° = 0°).",
     "datos": "Etapa 1: RC1 = 3.3 kΩ, RE1 = 1.0 kΩ bypassada, re1 = 20 Ω, β1 = 100, Zin1 = 1.8 kΩ | Etapa 2: RC2 = 3.3 kΩ, RE2 = 1.0 kΩ bypassada, re2 = 20 Ω, β2 = 100, Zin2 = 1.8 kΩ | Carga acoplada a la salida de la etapa 2: RL = 10 kΩ.",
     "preguntas": [
-      "Calcule la resistencia de carga efectiva en alterna vista por la etapa 1 (rL1 = RC1 || Zin2).",
-      "Calcule la ganancia de voltaje de la primera etapa Av1 = vo1 / vi1.",
-      "Calcule la resistencia de carga efectiva y la ganancia de la segunda etapa Av2 = vo2 / vi2.",
-      "Determine la ganancia global de tensión Av,total = Av1 · Av2 y el ángulo de desfase entre la salida final y la entrada."
+      "Calcule la resistencia de carga efectiva en alterna vista por la etapa 1: rL1 = RC1 || Zin2.",
+      "Calcule la ganancia de voltaje de la primera etapa Av1 = -rL1 / re1.",
+      "Calcule la resistencia de carga efectiva y la ganancia de la segunda etapa Av2 = -(RC2 || RL) / re2.",
+      "Determine la ganancia global de tensión Av,total = Av1 · Av2 y el ángulo de desfase total entre la salida y la entrada."
     ],
     "image": "assets/taller/esquema-cascada-ce-ce.svg",
     "answer": "\\(A_{v1} = -58.2\\), \\(A_{v2} = -124.0\\), \\(A_{v,total} = \\mathbf{+7216.8}\\) (\\(\\mathbf{77.17\\,\\mathrm{dB}}\\)). El desfase total es \\(360^\\circ \\equiv 0^\\circ\\) (salida en fase con la entrada).",
@@ -400,11 +400,11 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 5 · Configuraciones Compuestas y Multietapa",
     "n": "P5-26",
-    "title": "Cascada CE–CC: Preamplificador de alta ganancia con buffer de salida",
-    "context": "En el diseño de pedales de efectos para guitarra eléctrica o acondicionadores de señal industrial, se requiere alta ganancia de tensión combinada con la capacidad de atacar cables apantallados de baja impedancia (100 Ω) sin colapso de amplitud.",
+    "title": "Cascada CE–CC: Preamplificador de alta ganancia con buffer adaptador de salida (Boylestad Sec. 5.16)",
+    "context": "La combinación reina del audio y la instrumentación: la primera etapa (CE) aporta toda la ganancia de voltaje, y la segunda etapa (CC) actúa como un músculo de corriente para excitar parlantes o cables de baja impedancia (100 Ω) sin ahogar al amplificador.",
     "datos": "Etapa 1 (CE): RC1 = 4.7 kΩ, re1 = 15 Ω, β1 = 150 | Etapa 2 (CC): RE2 = 1.0 kΩ, re2 = 10 Ω, β2 = 120 | Carga de salida exigente: RL = 100 Ω conectada al emisor de Q2.",
     "preguntas": [
-      "Calcule la impedancia de entrada de la etapa seguidora CC Zin2 con la carga de 100 Ω conectada.",
+      "Calcule la impedancia de entrada de la etapa seguidora CC Zin2 con la carga de 100 Ω conectada a su emisor.",
       "Calcule la ganancia de tensión de la etapa 1 acoplada a Zin2.",
       "Calcule la ganancia de tensión de la etapa 2 Av2.",
       "Determine la ganancia global Av,total y demuestre matemáticamente qué sucedería si conectáramos la carga de 100 Ω directamente al colector de la etapa 1 sin el buffer."
@@ -416,14 +416,14 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 5 · Configuraciones Compuestas y Multietapa",
     "n": "P5-27",
-    "title": "Par Darlington en AC: Super-Beta e impedancia de entrada astronómica",
-    "context": "En actuadores electromecánicos y etapas de entrada para sensores de pH o electrodos médicos, se utiliza la conexión Darlington (dos transistores integrados en configuración colector común compartido) para multiplicar la ganancia de corriente y lograr impedancias de entrada del orden de cientos de kilo-ohms.",
+    "title": "Par Darlington en AC: Super-Beta e impedancia de entrada astronómica (Boylestad Sec. 5.18)",
+    "context": "En actuadores y sensores de alta impedancia se utiliza la conexión Darlington (dos transistores integrados donde el emisor del primero excita la base del segundo). Sus ganancias de corriente se multiplican (βtotal ≈ β1 · β2), creando un \"súper transistor\" con impedancias de entrada de cientos de kilo-ohms.",
     "datos": "Par Darlington: Transistores Q1 y Q2 con β1 = 120, β2 = 120 | Polarización: IE2 = 2.0 mA (re2 = 13 Ω) | IE1 = IE2 / (β2 + 1) = 2.0 mA / 121 ≈ 16.53 μA (re1 = 26 mV / 16.53 μA ≈ 1573 Ω) | Resistencia de emisor: RE = 1.0 kΩ | VT = 26 mV.",
     "preguntas": [
       "Calcule la ganancia de corriente compuesta en AC: βtotal ≈ β1 · β2.",
-      "Deduzca y calcule la impedancia de entrada vista por la base del primer transistor Zin,base.",
-      "Calcule la ganancia de voltaje Av = vo / vi del par.",
-      "Determine la impedancia de salida del par Zo vista desde el emisor de Q2 suponiendo una fuente con Rs = 10 kΩ."
+      "Deduzca y calcule la impedancia de entrada vista por la base del primer transistor Zin,base = (β1+1)[re1 + (β2+1)(re2 + RE)].",
+      "Calcule la ganancia de voltaje Av = vo / vi del par compuesto.",
+      "Determine la impedancia de salida del par Zo vista desde el emisor de Q2."
     ],
     "image": "assets/taller/esquema-darlington.svg",
     "answer": "\\(\\beta_{total} \\approx 14400\\), \\(Z_{in,base} \\approx 312\\,\\mathrm{k\\Omega}\\), \\(A_v = +0.985\\), \\(Z_o \\approx 26.8\\,\\Omega\\).",
@@ -432,14 +432,14 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 5 · Configuraciones Compuestas y Multietapa",
     "n": "P5-28",
-    "title": "Par Sziklai (Darlington Complementario NPN + PNP)",
-    "context": "En etapas de potencia clase AB para audio de alta fidelidad y robótica servoasistida, el par Darlington clásico presenta dos problemas: requiere 1.4 V de polarización (2 VBE) y sufre mayor deriva térmica. Para resolverlo, el ingeniero húngaro George Sziklai diseñó el par compuesto complementario (NPN + PNP).",
+    "title": "Par Sziklai (Darlington Complementario NPN + PNP — Boylestad Sec. 5.18)",
+    "context": "Alternativa al par Darlington inventada por George Sziklai: combina un transistor NPN de señal con un PNP de potencia. Ofrece la misma súper ganancia de corriente, pero con la gran ventaja de encender con solo 0.7 V de polarización (un solo VBE frente a los 1.4 V del Darlington) y mantener una excelente estabilidad térmica.",
     "datos": "Par Sziklai: Q1 (NPN, β1 = 100, VBE1 = 0.7 V) + Q2 (PNP de potencia, β2 = 40, VEB2 = 0.7 V) | Corriente de reposo de salida: IE(total) = 1.0 A | Resistencia de emisor de estabilización: RE = 0.47 Ω | VT = 26 mV.",
     "preguntas": [
       "Describa el diagrama esquemático y las conexiones de terminales del par Sziklai (colector de Q1 conectando a la base de Q2).",
-      "Compare formalmente la tensión umbral de conducción en DC del par Sziklai frente al par Darlington tradicional.",
-      "Calcule la ganancia de corriente compuesta en alterna βcomp.",
-      "Explique por qué el par Sziklai ofrece superior estabilidad térmica en etapas de potencia."
+      "Compare formalmente la tensión umbral de conducción en DC del par Sziklai (0.7 V) frente al par Darlington tradicional (1.4 V).",
+      "Calcule la ganancia de corriente compuesta en alterna βcomp ≈ β1 · β2.",
+      "Explique por qué el par Sziklai ofrece superior estabilidad térmica en etapas de potencia de audio y robótica."
     ],
     "image": "assets/taller/esquema-darlington.svg",
     "answer": "Ventajas del Sziklai: solo \\(1 \\times V_{BE} = 0.7\\,\\mathrm{V}\\) de umbral en DC (frente a \\(1.4\\,\\mathrm{V}\\) del Darlington) y el punto Q es inmune a la temperatura del transistor de potencia Q2. Ganancia \\(\\beta_{comp} \\approx \\beta_1 \\beta_2 = 4000\\).",
@@ -448,14 +448,14 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 5 · Configuraciones Compuestas y Multietapa",
     "n": "P5-29",
-    "title": "Configuración Cascode (CE + CB): Eliminación del Efecto Miller",
+    "title": "Configuración Cascode (Emisor Común + Base Común en cascada — Boylestad Sec. 5.17)",
     "image": "assets/taller/esquema-cascode.svg",
-    "context": "En un transmisor de radiofrecuencia a 50 MHz, una etapa de emisor común simple ve su ancho de banda recortado drásticamente por la capacitancia parásita base-colector multiplicada por la ganancia (efecto Miller). Se implementa la topología Cascode para romper este límite.",
+    "context": "Una de las joyas de la electrónica de alta frecuencia: conectamos un Emisor Común abajo y un Base Común arriba. Como la carga del primer transistor es la diminuta resistencia re del segundo, la ganancia del primer transistor es casi unitaria (Av1 ≈ -1). Esto anula por completo la multiplicación de la capacitancia parásita (Efecto Miller), multiplicando el ancho de banda por diez.",
     "datos": "VCC = 18 V | Q1 (CE inferior), Q2 (CB superior) con IC1 = IC2 = 1.5 mA, re1 = re2 = 17.3 Ω | RC = 2.7 kΩ | Capacitancia parásita: Cμ = 3 pF.",
     "preguntas": [
-      "Calcule la impedancia de carga que ve el colector de la primera etapa Q1.",
-      "Determine la ganancia de tensión de la primera etapa Av1 = vc1 / vb1.",
-      "Calcule la capacitancia efectiva de entrada por efecto Miller Cin,Miller en la base de Q1 y compárela con la de un CE simple.",
+      "Calcule la impedancia de carga que ve el colector de la primera etapa Q1 (Zin2 = re2).",
+      "Determine la ganancia de tensión de la primera etapa Av1 = -Zin2 / re1 ≈ -1.0.",
+      "Calcule la capacitancia efectiva de entrada por efecto Miller Cin,Miller = Cμ(1 - Av1) y compárela con la de un CE simple.",
       "Determine la ganancia de tensión total de la estructura Cascode Av = vo / vi."
     ],
     "answer": "\\(Z_{in2} = 17.3\\,\\Omega\\), \\(A_{v1} = -1.0\\). \\(C_{in,Miller} = 6\\,\\mathrm{pF}\\) (frente a \\(453\\,\\mathrm{pF}\\) de un CE simple). \\(A_v = -156\\).",
@@ -464,12 +464,12 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 6 · Casos de Ingeniería Real y Troubleshooting",
     "n": "P6-30",
-    "title": "Diagnóstico de fallas en laboratorio: Matriz de síntomas de voltajes",
-    "context": "En la mesa de laboratorio, tres amplificadores de emisor común idénticos montados por los estudiantes no funcionan. El técnico mide con multímetro DC los voltajes en terminales de cada circuito.",
+    "title": "Diagnóstico de fallas en laboratorio: Matriz de síntomas de voltajes DC y AC (Boylestad Sec. 5.24)",
+    "context": "Guía práctica de taller: cómo usar el multímetro en continua y el osciloscopio para diagnosticar componentes abiertos, transistores dañados o condensadores de desacoplo desconectados mediante la medición sistemática de voltajes en los nodos clave.",
     "datos": "Circuito nominal: VCC = 15 V, R1 = 47 kΩ, R2 = 10 kΩ, RC = 3.3 kΩ, RE = 1.2 kΩ. Valores nominales sanos: VB = 2.6 V, VE = 1.9 V, VC = 10.0 V, Av = -120.",
     "preguntas": [
       "Circuito A: Medición DC: VB = 0 V, VE = 0 V, VC = 15 V. Salida AC: 0 V. Diagnostique la falla exacta.",
-      "Circuito B: Medición DC: VB = 2.6 V, VE = 1.9 V, VC = 10.0 V. Salida AC: Ganancia medida es apenas -2.0. Diagnostique la falla exacta.",
+      "Circuito B: Medición DC: VB = 2.6 V, VE = 1.9 V, VC = 10.0 V (normales). Salida AC: Ganancia medida es apenas -2.0. Diagnostique la falla exacta.",
       "Circuito C: Medición DC: VB = 3.5 V, VE = 0 V, VC = 15 V. Diagnostique la falla del transistor."
     ],
     "answer": "A: Resistor R1 abierto o desoldado (corte total). B: Capacitor CE abierto o desconectado (degeneración de emisor). C: Unión Base-Emisor quemada en circuito abierto.",
@@ -479,12 +479,12 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 6 · Casos de Ingeniería Real y Troubleshooting",
     "n": "P6-31",
-    "title": "Diseño por especificaciones para sensor Shunt de Vehículo Eléctrico (EV)",
-    "context": "En el sistema de gestión de baterías (BMS) de una motocicleta eléctrica, un resistor shunt de 10 mΩ genera una señal de ±25 mV al circular corriente de tracción. Se requiere diseñar un amplificador discreto BJT con ganancia precisa de |Av| = 40 ± 5%, impedancia de entrada Zi ≥ 5 kΩ, alimentado a 12 V y conectado a un microcontrolador (RL = 10 kΩ).",
+    "title": "Diseño por especificaciones de ingeniería: Sensor Shunt para Vehículo Eléctrico (Boylestad Sec. 5.25)",
+    "context": "Problema tipo proyecto real: a partir de los requerimientos de ganancia (|Av| = 40), impedancia (Zi ≥ 5 kΩ) y fuente de 12 V, el estudiante calcula hacia atrás los resistores comerciales normalizados de la serie E24 para cumplir con las especificaciones del cliente.",
     "datos": "VCC = 12.0 V | Ganancia especificada: |Av| = 40 | Carga: RL = 10 kΩ | Transistor 2N3904 (β = 150) | Corriente de reposo seleccionada: ICQ = 2.0 mA | Topología: Emisor Común con swamping (RE1 sin puente y RE2 bypassada).",
     "preguntas": [
       "Seleccione RC y la resistencia de emisor total RE = RE1 + RE2 para centrar el punto de reposo en VCEQ ≈ 6.0 V con ICQ = 2.0 mA.",
-      "Divida el emisor calculando el valor exacto de RE1 no puenteada para lograr exactamente |Av| = 40 considerando la carga de 10 kΩ.",
+      "Divida el emisor calculando el valor exacto de RE1 (resistencia de swamping sin condensador) para lograr exactamente |Av| = 40 considerando la carga de 10 kΩ.",
       "Diseñe el divisor resistivo de polarización R1 y R2 cumpliendo el criterio de estabilidad estandarizado R2 ≤ 0.1 · β · RE.",
       "Seleccione los valores comerciales estándar de la serie E24 más próximos y verifique el error final de diseño."
     ],
@@ -495,14 +495,14 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 6 · Casos de Ingeniería Real y Troubleshooting",
     "n": "P6-32",
-    "title": "Análisis de Peor Caso (Worst-Case) con tolerancias de resistencias y beta",
-    "context": "En la industria de alta confiabilidad (médica y automotriz, norma AEC-Q100), los circuitos deben operar dentro de especificación considerando las tolerancias extremas de fábrica de los resistores (±5%) y la enorme dispersión del beta de los transistores (hFE entre 100 y 300).",
+    "title": "Análisis de Peor Caso (Worst-Case) con tolerancias de resistencias y beta (Boylestad Sec. 5.25)",
+    "context": "En la industria automotriz y médica (norma AEC-Q100), los circuitos deben operar dentro de norma considerando las tolerancias extremas de los resistores (±5%) y la dispersión del beta de los transistores (hFE entre 100 y 300). Evaluaremos la ganancia mínima y máxima garantizada.",
     "datos": "Amplificador CE con swamping: RC = 2.2 kΩ (±5%) | RE1 = 47 Ω (±5%) | ICQ nominal = 1.5 mA (±10% de dispersión) | β ∈ [100, 300] | Carga RL = 10 kΩ (±5%).",
     "preguntas": [
-      "Calcule la ganancia de voltaje nominal Av,nom.",
+      "Calcule la ganancia de voltaje nominal Av,nom con los valores nominales de catálogo.",
       "Identifique la combinación de tolerancias que genera la ganancia mínima (Worst-Case Low).",
       "Identifique la combinación de tolerancias que genera la ganancia máxima (Worst-Case High).",
-      "Calcule la dispersión porcentual máxima ±ΔAv / Av,nom y demuestre por qué el swamping reduce la dispersión respecto a un circuito totalmente bypassado."
+      "Calcule la dispersión porcentual máxima ±ΔAv / Av,nom y demuestre por qué la técnica de emisor dividido (swamping) reduce la dispersión respecto a un circuito con emisor totalmente puenteado."
     ],
     "image": "assets/taller/esquema-ce-swamping.svg",
     "answer": "\\(A_{v,nom} = -28.02\\). Ganancia mínima: \\(A_{v,min} = -24.45\\) (\\(-12.7\\%\\)). Ganancia máxima: \\(A_{v,max} = -31.95\\) (\\(+14.0\\%\\)). Sin swamping, la variación superaría el \\(\\pm 45\\%\\).",
@@ -511,13 +511,13 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 6 · Casos de Ingeniería Real y Troubleshooting",
     "n": "P6-33",
-    "title": "Efecto de la resistencia serie equivalente (ESR) en condensadores electrolíticos",
-    "context": "En una planta de embotellado, un módulo amplificador analógico comenzó a fallar tras 6 años de operación continua a 50 °C: la amplitud de señal cayó a casi la mitad, pero el técnico midió los condensadores con un capacímetro digital ordinario y concluyó erróneamente que estaban perfectos porque marcaban el valor nominal de microfaradios.",
+    "title": "El condensador real en el laboratorio: Efecto de la resistencia serie equivalente (ESR)",
+    "context": "¿Por qué un módulo con 6 años de uso en una fábrica pierde la mitad de su ganancia aunque el capacímetro digital ordinario reporte que los microfaradios están bien? Aprenderemos cómo el secado del electrolito eleva la resistencia interna parásita (ESR) del condensador de desacoplo de emisor, degradando la ganancia en alterna.",
     "datos": "Amplificador CE con capacitor de bypass de emisor: RC = 2.7 kΩ, re = 15.0 Ω (ICQ = 1.73 mA) | Capacitor nuevo: CE = 47 μF con ESR = 0.3 Ω | Capacitor envejecido: CE = 45 μF con electrolito seco y ESR = 16.5 Ω | Frecuencia de prueba: 1 kHz.",
     "preguntas": [
-      "Calcule la reactancia capacitiva XC del condensador a 1 kHz y la impedancia total de la rama de bypass con el capacitor nuevo.",
+      "Calcule la reactancia capacitiva XC del condensador a 1 kHz y la impedancia total de la rama de emisor con el capacitor nuevo (ESR = 0.3 Ω).",
       "Calcule la ganancia de tensión Av con el capacitor nuevo.",
-      "Calcule la ganancia de tensión Av con el capacitor envejecido considerando que su ESR actúa en alterna como una resistencia en serie con el emisor.",
+      "Calcule la ganancia de tensión Av con el capacitor envejecido considerando que su ESR (16.5 Ω) actúa en alterna como una resistencia en serie con el emisor.",
       "Explique por qué un capacímetro digital normal no detecta la falla y por qué en mantenimiento industrial es indispensable utilizar un medidor de ESR en circuito (in-circuit)."
     ],
     "image": "assets/taller/esquema-ce-bypass.svg",
@@ -527,13 +527,13 @@ window.RESPUESTAS_TALLER_BJT_AC = [
   {
     "group": "Bloque 6 · Casos de Ingeniería Real y Troubleshooting",
     "n": "P6-34",
-    "title": "Pregunta de examen de certificación: El enigma de la impedancia negativa de entrada",
-    "context": "En un examen de certificación para ingenieros de diseño de radiofrecuencia (RF), se plantea el caso de un amplificador Emisor Común que, al conectarse a una antena ligeramente inductiva a 50 MHz, entra en auto-oscilación violenta sin tener ninguna señal de entrada conectada.",
+    "title": "Reto conceptual de certificación: El enigma de la oscilación parásita en alta frecuencia (Criterio de Barkhausen y Cascode)",
+    "context": "Un ejercicio de criterio de alto nivel explicado con sencillez pedagógica: ¿por qué un amplificador con cargas inductivas (bobinas o pistas largas) puede ponerse a silbar u oscilar solo sin señal de entrada, y cómo la configuración Cascode o la neutralización resuelven el problema de raíz?",
     "datos": "Amplificador CE a 50 MHz | Capacitancia parásita colector-base Cbc = 2.5 pF | Carga en el colector con inductancia parásita de pista ZL = RL + j·XL (con XL > 0 inductiva) | Transconductancia gm = 40 mS.",
     "preguntas": [
-      "Aplique el análisis de admitancia de entrada considerando la capacitancia de acoplamiento Cbc entre salida y entrada.",
-      "Demuestre analíticamente bajo qué condiciones la parte real de la impedancia de entrada Rin = Re{Zin} se vuelve negativa (Rin < 0).",
-      "Explique físicamente el Criterio de Barkhausen y por qué una resistencia negativa transforma el amplificador en un oscilador no deseado.",
+      "Analice cómo la capacitancia parásita colector-base Cbc realimenta señal desde la salida hacia la entrada a 50 MHz.",
+      "Demuestre bajo qué condiciones con carga inductiva (XL > 0) la resistencia vista a la entrada se vuelve matemáticamente negativa (Rin < 0).",
+      "Explique físicamente el Criterio de Barkhausen y por qué una resistencia negativa transforma el amplificador lineal en un oscilador parásito no deseado.",
       "Mencione las dos soluciones de diseño empleadas en la industria para eliminar este problema (Neutralización capacitiva y Topología Cascode)."
     ],
     "image": "assets/taller/esquema-cascode.svg",

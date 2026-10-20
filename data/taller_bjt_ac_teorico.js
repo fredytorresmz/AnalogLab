@@ -49,7 +49,7 @@ window.TALLER_BJT_AC_TEORICO = [
     "n": 5,
     "section": "B · Transformación DC a AC",
     "type": "mcq",
-    "prompt": "¿Qué función cumple el condensador de desacoplo de emisor (bypass) \\(C_E\\) conectado en paralelo con \\(R_E\\)?",
+    "prompt": "¿Qué función cumple el condensador de desacoplo de emisor \\(C_E\\) (llamado frecuentemente condensador de bypass en los manuales de laboratorio y datasheets) conectado en paralelo con \\(R_E\\)?",
     "options": [
       "Filtra el rizado de la fuente de alimentación DC.",
       "Evita que el transistor se caliente en corriente continua.",
@@ -77,7 +77,7 @@ window.TALLER_BJT_AC_TEORICO = [
     "n": 7,
     "section": "C · Topologías Fundamentales",
     "type": "open",
-    "prompt": "Explique el Teorema de Reflexión de Resistencia de emisor a base. ¿Por qué una resistencia pequeña de degeneración \\(R_E = 220\\,\\Omega\\) eleva tanto la impedancia de entrada vista desde la base?",
+    "prompt": "Explique el Teorema de Reflexión de Resistencia de emisor a base (Boylestad Sec. 5.5). ¿Por qué una resistencia en el emisor sin desacoplar de apenas \\(R_E = 220\\,\\Omega\\) eleva tanto la impedancia de entrada vista desde la base?",
     "h1": "Muchachos, comparen la corriente que entra por la base (i_b) con la corriente que realmente atraviesa R_E: \\(i_e = (\\beta+1)i_b\\).",
     "h2": "La tensión en base es \\(v_b = v_{be} + i_e R_E\\). Apliquen la ley de Ohm dividiendo todo entre \\(i_b\\).",
     "guide": "La corriente que atraviesa el resistor de emisor no es la diminuta corriente de base \\(i_b\\), sino la corriente total del emisor: \\(i_e = (\\beta+1)i_b\\). Al aplicar la ley de Ohm vista desde la base: \\(Z_b = v_b / i_b = [i_b r_\\pi + (\\beta+1)i_b R_E] / i_b = r_\\pi + (\\beta+1)R_E = (\\beta+1)(r_e + R_E)\\). Cualquier resistor en el emisor se 'refleja' en la base multiplicado por \\((\\beta+1)\\). Si \\(\\beta=100\\), un modesto resistor de \\(220\\,\\Omega\\) es percibido desde la base como \\(101 \\times 220\\,\\Omega \\approx 22.2\\,\\mathrm{k\\Omega}\\). ¡Una palanca de impedancias fenomenal!"
@@ -142,7 +142,7 @@ window.TALLER_BJT_AC_TEORICO = [
     "n": 12,
     "section": "E · Multietapa y Configuraciones Avanzadas",
     "type": "open",
-    "prompt": "Describa la topología Cascode (CE seguido de CB). ¿Por qué es una de las configuraciones más valoradas en circuitos de RF y preamplificadores de banda ancha?",
+    "prompt": "Describa la arquitectura Cascode (conexión directa de una etapa en Emisor Común seguida de una en Base Común — Boylestad Sec. 5.17). ¿Por qué es una de las configuraciones maestras para eliminar el Efecto Miller en alta frecuencia?",
     "h1": "Muchachos, analicen qué impedancia 've' el colector de la etapa CE al conectarse directamente al emisor de la etapa CB.",
     "h2": "Recuerden la trampa del Efecto Miller: la capacitancia parásita base-colector Cbc multiplicada por la ganancia de la etapa.",
     "guide": "La configuración Cascode conecta una etapa en Emisor Común (CE) en cascada directa con una etapa en Base Común (CB). El emisor de la segunda etapa CB presenta una impedancia de entrada sumamente baja: \\(Z_{i2} \\approx r_{e2}\\). Por consiguiente, la carga de la primera etapa CE es apenas \\(r_{e2}\\), reduciendo la ganancia de tensión de la primera etapa a prácticamente la unidad: \\(|A_{v1}| = r_{e2}/r_{e1} \\approx 1\\). Al no haber ganancia en la primera etapa, el Efecto Miller que multiplica la capacitancia parásita base-colector (\\(C_{in,Miller} = C_{\\mu}(1+|A_v|)\\)) queda casi completamente neutralizado. Toda la ganancia de tensión la produce la segunda etapa CB, logrando anchos de banda descomunales ideales para radiofrecuencia e instrumentación rápida."
@@ -179,7 +179,7 @@ window.TALLER_BJT_AC_TEORICO = [
     "n": 15,
     "section": "F · Troubleshooting en Laboratorio",
     "type": "open",
-    "prompt": "Al diseñar con transistores reales como el 2N3904 o 2N2222A, el fabricante especifica un rango de \\(\\beta\\) muy amplio (por ejemplo, entre 100 y 300). ¿Qué decisiones de diseño en AC debe tomar el ingeniero para garantizar que la ganancia del circuito sea robusta y no cambie con cada transistor?",
+    "prompt": "Al diseñar con transistores reales como el 2N3904 o 2N2222A, el fabricante especifica un rango de \\(\\beta\\) muy amplio (entre 100 y 300). ¿Cómo se aplica la técnica de emisor dividido o swamping (Boylestad Sec. 5.6) para asegurar que la ganancia sea inmune a la dispersión de transistores y al calor?",
     "h1": "Muchachos, comparen la sensibilidad de la ganancia cuando el emisor está totalmente puenteado frente a cuando usamos degeneración parcial (resistencia partida o swamping).",
     "h2": "Analicen qué pasa con la ecuación \\(A_v = -R_C / (r_e + R_{E1})\\) cuando elegimos \\(R_{E1} \\gg r_e\\).",
     "guide": "Para insensibilizar la ganancia ante la dispersión de \\(\\beta\\) y ante la variación térmica de \\(r_e = 26\\,\\mathrm{mV}/I_E\\), el ingeniero recurre a la técnica de emisor dividido (swamping o degeneración parcial): se divide la resistencia de emisor en dos partes en serie \\(R_E = R_{E1} + R_{E2}\\), y se coloca el condensador de bypass \\(C_E\\) exclusivamente en paralelo con \\(R_{E2}\\). Así, en AC la ganancia de la etapa queda regida por: \\(A_v \\approx -R_C / (r_e + R_{E1})\\). Si elegimos \\(R_{E1} \\ge 10 r_e\\), la ganancia pasa a depender casi al 100% del cociente de resistencias externas \\(A_v \\approx -R_C / R_{E1}\\). Esto hace que el amplificador mantenga exactamente la misma ganancia aunque cambies de transistor o la temperatura suba 40°C en el chasis del equipo."

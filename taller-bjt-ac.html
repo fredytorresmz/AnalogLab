@@ -288,6 +288,7 @@
       </div>
       <h4>Taller BJT en AC</h4>
       <nav>
+        <a href="#brujula" style="font-weight:bold;color:#0284c7;">🧭 Brújula: Del Tablero al Libro</a>
         <a href="#teorico">T1 · Fase 1: Calentamiento Teórico</a>
         <a href="#practico">T2 · Fase 2: Ejercicios Guiados</a>
         <a href="#retos" style="font-weight:bold;color:#dc2626;">T3 · Fase 3: Retos de Examen 🔥</a>
@@ -315,6 +316,215 @@
           <a href="#retos" class="btn" style="border: 1.5px solid #dc2626; color: #dc2626; font-weight: bold; background: #fff5f5;">🔥 Simulacro: Retos de Examen</a>
           <a href="#practico" class="btn">34 Ejercicios Resueltos Paso a Paso</a>
           <a href="bjt-ac.html" class="btn">Módulo Teórico de Clase</a>
+        </div>
+      </section>
+
+      <!-- SECCIÓN BRÚJULA DEL TALLER: DE LO VISTO EN CLASE A BOYLESTAD Y MALVINO -->
+      <section class="module" id="brujula" style="border: 2px solid #0284c7; background: #f8fafc;">
+        <div class="module-head">
+          <div class="module-title">
+            <span class="no" style="background:#0284c7;color:#fff;">🧭</span>
+            <div>
+              <span class="eyebrow" style="color:#0284c7;font-weight:bold;">Guía de Supervivencia y Traducción Inmediata</span>
+              <h2>Brújula del Estudiante: Del Tablero de Clase a Boylestad y Malvino</h2>
+            </div>
+          </div>
+          <button class="mark" data-mark="taller-bjt-ac-brujula">Marcar leído</button>
+        </div>
+
+        <div class="box remember" style="border-left-color: #0284c7; background: #eff6ff; margin: 12px 0 18px 0;">
+          <h4 style="margin: 0 0 6px 0; color: #1e40af; font-size: 1.05rem;">
+            👨‍🏫 Mensaje del Profe Fredy sobre el vocabulario de este taller
+          </h4>
+          <p style="margin: 0; font-size: 0.95rem; line-height: 1.55; color: #1e293b;">
+            <b>¡Muchachos, mucha atención!</b> Si al leer los ejercicios se encuentran con palabras en inglés como <i>bypass</i> o <i>swamping</i>, o nombres como <i>Teorema de Miller</i>, <i>Cascode</i> o <i>Efecto Early</i>, <b>¡no se asusten ni sientan que les cambiaron el tema!</b> Todo nuestro taller sigue estrictamente el <b>Capítulo 5 de Boylestad & Nashelsky (10ª y 11ª edición)</b> y las explicaciones que hemos hecho en el tablero, complementadas con la intuición de <b>Albert Malvino</b>. A veces los libros en inglés, las hojas de datos de fabricantes y los simuladores usan términos técnicos para atajos que en clase vimos con nombres en español. Aquí tienen su mapa para que conecten de inmediato lo que rayamos en clase con la literatura internacional:
+          </p>
+        </div>
+
+        <div class="analogias-grid" style="margin-top: 14px;">
+          <!-- TÉRMINO 1: BYPASS -->
+          <article class="analogia-card">
+            <div class="analogia-header">
+              <span class="analogia-icon">🛣️</span>
+              <div>
+                <span class="analogia-concept">Boylestad Sec. 5.5 · Condensador de Emisor</span>
+                <h3 class="analogia-title">Condensador de Bypass (\(C_E\)) = Desacoplo de Emisor</h3>
+              </div>
+            </div>
+            <p class="analogia-desc">
+              <b>¿Qué es?</b> Es el condensador conectado en paralelo con la resistencia de emisor \(R_E\). En inglés <i>bypass</i> significa 'desvío' o 'hacer un puente'.<br>
+              <b>¿Cómo actúa?</b> En continua (DC), el condensador es un circuito abierto y obliga a la corriente a pasar por \(R_E\) para fijar el punto Q con estabilidad térmica. En alterna (AC de banda media), es un cortocircuito que 'hace bypass' (desvía) la señal hacia tierra, anulando la resistencia de emisor y logrando máxima ganancia (\(A_v \approx -R_C / r_e\)).
+            </p>
+            <div class="analogia-takeaway">
+              <b>Traducción de aula:</b> Decir "etapa con bypass total" es exactamente lo mismo que decir "etapa con condensador \(C_E\) a tierra en AC".
+            </div>
+          </article>
+
+          <!-- TÉRMINO 2: SWAMPING -->
+          <article class="analogia-card">
+            <div class="analogia-header">
+              <span class="analogia-icon">🚗</span>
+              <div>
+                <span class="analogia-concept">Boylestad Sec. 5.6 · Emisor Dividido</span>
+                <h3 class="analogia-title">Swamping = Resistencia de Emisor Partida (\(R_{E1} + R_{E2}\))</h3>
+              </div>
+            </div>
+            <p class="analogia-desc">
+              <b>¿Qué es?</b> En vez de una sola \(R_E\), dividimos el emisor en dos resistencias en serie: \(R_{E1}\) (sin condensador) y \(R_{E2}\) (con \(C_E\) en paralelo).<br>
+              <b>¿Por qué le dicen swamping?</b> Es un término acuñado por Albert Malvino (del inglés <i>to swamp</i>, inundar o sofocar). Si elegimos \(R_{E1} \ge 10 r_e\), esa resistencia externa 'inunda' e invisibiliza a la pequeña resistencia interna \(r_e\), logrando que la ganancia \(A_v \approx -R_C / R_{E1}\) dependa solo de componentes fijos del 1% y no sufra por temperatura ni por dispersión de \(\beta\).
+            </p>
+            <div class="analogia-takeaway">
+              <b>Traducción de aula:</b> "Emisor con swamping" = "Emisor común con derivación parcial" (Boylestad página 270).
+            </div>
+          </article>
+
+          <!-- TÉRMINO 3: TEOREMA DE MILLER -->
+          <article class="analogia-card">
+            <div class="analogia-header">
+              <span class="analogia-icon">✂️</span>
+              <div>
+                <span class="analogia-concept">Boylestad Sec. 5.10 · Retroalimentación de Colector</span>
+                <h3 class="analogia-title">Teorema de Miller = Desacoplar la Resistencia \(R_F\)</h3>
+              </div>
+            </div>
+            <p class="analogia-desc">
+              <b>¿Qué es?</b> Cuando una resistencia \(R_F\) une el colector con la base, resolver las mallas simultáneas en alterna toma mucho tiempo.<br>
+              <b>El atajo de Miller:</b> El teorema demuestra que una resistencia \(R_F\) cruzada equivale matemáticamente a dos resistencias desacopladas a tierra:
+              <br>• En la entrada: \(R_{Mi} = \dfrac{R_F}{1 - A_v} = \dfrac{R_F}{1 + |A_v|}\)
+              <br>• En la salida: \(R_{Mo} = \dfrac{R_F}{1 - 1/A_v} \approx R_F\)
+            </p>
+            <div class="analogia-takeaway">
+              <b>Traducción de aula:</b> Con este atajo no tienes que hacer mallas difíciles: partes \(R_F\) en dos y calculas \(Z_i = R_{Mi} \parallel r_\pi\) y \(A_v = -(R_C \parallel R_F)/r_e\) como un circuito normal.
+            </div>
+          </article>
+
+          <!-- TÉRMINO 4: DEGENERACIÓN DE EMISOR -->
+          <article class="analogia-card">
+            <div class="analogia-header">
+              <span class="analogia-icon">🛡️</span>
+              <div>
+                <span class="analogia-concept">Boylestad Sec. 5.6 · Emisor sin Condensador</span>
+                <h3 class="analogia-title">Degeneración de Emisor = \(R_E\) sin Condensador \(C_E\)</h3>
+              </div>
+            </div>
+            <p class="analogia-desc">
+              <b>¿Qué es?</b> Es simplemente una etapa en Emisor Común donde no conectamos ningún condensador en el emisor (\(R_E\) permanece activa en alterna).<br>
+              <b>¿Por qué le dicen degeneración?</b> Es el término formal de teoría de control que usan autores como Sedra o Razavi para la <i>realimentación negativa de corriente</i>. Degenera (reduce) la ganancia de tensión (\(A_v \approx -R_C / R_E\)), pero a cambio dispara la impedancia de entrada (\(Z_b = (\beta+1)(r_e + R_E)\)) y elimina casi por completo la distorsión de la señal.
+            </p>
+            <div class="analogia-takeaway">
+              <b>Traducción de aula:</b> "Etapa con degeneración pura" = "Emisor común sin condensador de bypass".
+            </div>
+          </article>
+
+          <!-- TÉRMINO 5: EFECTO EARLY Y RO -->
+          <article class="analogia-card">
+            <div class="analogia-header">
+              <span class="analogia-icon">🌊</span>
+              <div>
+                <span class="analogia-concept">Boylestad Sec. 5.5 · Resistencia Dinámica ro</span>
+                <h3 class="analogia-title">Efecto Early (\(r_o\)) = Modulación del Ancho de Base</h3>
+              </div>
+            </div>
+            <p class="analogia-desc">
+              <b>¿Qué es?</b> En el transistor real, las curvas de colector tienen una leve inclinación hacia un voltaje negativo llamado Voltaje Early (\(-V_A\)). Esa pendiente se modela en AC como una resistencia interna de salida \(r_o \approx V_A / I_{CQ}\) conectada en paralelo entre colector y emisor.<br>
+              <b>Regla del 10% de Boylestad:</b> Si \(r_o \ge 10 R_C\), se ignora (\(r_o \to \infty\)) con menos de un 10% de error. Si \(r_o < 10 R_C\), se coloca en paralelo: \(R_C' = R_C \parallel r_o\).
+            </p>
+            <div class="analogia-takeaway">
+              <b>Traducción de aula:</b> Es la resistencia de salida del transistor que mide qué tan horizontal es su fuente de corriente de colector.
+            </div>
+          </article>
+
+          <!-- TÉRMINO 6: SWING Y RECTA AC -->
+          <article class="analogia-card">
+            <div class="analogia-header">
+              <span class="analogia-icon">📈</span>
+              <div>
+                <span class="analogia-concept">Boylestad Cap. 12 · Máxima Excursión</span>
+                <h3 class="analogia-title">Swing Máximo = Oscilación Simétrica sin Recorte</h3>
+              </div>
+            </div>
+            <p class="analogia-desc">
+              <b>¿Qué es?</b> En inglés <i>swing</i> es el balanceo de un columpio. Representa el mayor voltaje pico a pico que puede oscilar la salida sin deformarse.<br>
+              <b>Los dos topes de choque:</b> Si la señal crece mucho hacia arriba o hacia abajo, choca contra el techo (saturación: \(V_{CE(sat)} \approx 0.2\,\text{V}\)) o contra el piso (corte: \(i_C = 0\)). El swing máximo se logra cuando el punto Q está centrado en la recta de alterna, de modo que la distancia a saturación sea igual a la distancia al corte (\(I_{CQ} \cdot r_{ac}\)).
+            </p>
+            <div class="analogia-takeaway">
+              <b>Traducción de aula:</b> "Calcular el swing máximo" = "Hallar la máxima oscilación pico a pico (\(v_{o,p-p}\)) antes de que la senoidal se recorte".
+            </div>
+          </article>
+
+          <!-- TÉRMINO 7: CASCODE -->
+          <article class="analogia-card">
+            <div class="analogia-header">
+              <span class="analogia-icon">🗼</span>
+              <div>
+                <span class="analogia-concept">Boylestad Sec. 5.17 · CE seguido de CB</span>
+                <h3 class="analogia-title">Configuración Cascode = El Amplificador de Dos Pisos</h3>
+              </div>
+            </div>
+            <p class="analogia-desc">
+              <b>¿Qué es?</b> Conectamos dos transistores: un Emisor Común abajo (que aporta corriente) acoplado directamente al emisor de un Base Común arriba (que aporta voltaje).<br>
+              <b>¿Por qué es una genialidad?</b> Como la impedancia de entrada del Base Común es diminuta (\(r_{e2} \approx 15\,\Omega\)), la ganancia del primer transistor es casi unitaria (\(A_{v1} \approx -1\)). Al no haber ganancia en la primera etapa, el Efecto Miller que multiplica las capacitancias parásitas queda apagado, multiplicando el ancho de banda por diez en alta frecuencia.
+            </p>
+            <div class="analogia-takeaway">
+              <b>Traducción de aula:</b> Es una conexión en cascada CE + CB para lograr alta ganancia a frecuencias de radio sin que el circuito se frene.
+            </div>
+          </article>
+
+          <!-- TÉRMINO 8: DARLINGTON Y SZIKLAI -->
+          <article class="analogia-card">
+            <div class="analogia-header">
+              <span class="analogia-icon">👥</span>
+              <div>
+                <span class="analogia-concept">Boylestad Sec. 5.18 · Transistores Compuestos</span>
+                <h3 class="analogia-title">Pares Darlington y Sziklai = El Súper-Beta</h3>
+              </div>
+            </div>
+            <p class="analogia-desc">
+              <b>¿Qué son?</b> Dos transistores unidos para actuar como uno solo con ganancia de corriente gigantesca (\(\beta_{total} \approx \beta_1 \cdot \beta_2 \approx 10000\)).<br>
+              <b>La diferencia:</b><br>
+              • <b>Darlington:</b> Usa dos transistores del mismo tipo (NPN + NPN). Caída de encendido: \(V_{BE} \approx 1.4\,\text{V}\).<br>
+              • <b>Sziklai (par complementario):</b> Usa un NPN con un PNP. Enciende con solo \(V_{BE} \approx 0.7\,\text{V}\) y ofrece mejor estabilidad térmica en etapas de potencia.
+            </p>
+            <div class="analogia-takeaway">
+              <b>Traducción de aula:</b> Se usan cuando necesitamos una impedancia de entrada gigantesca (\(Z_i > 100\,\mathrm{k\Omega}\)) para no ahogar sensores débiles.
+            </div>
+          </article>
+
+          <!-- TÉRMINO 9: CARGA ACTIVA -->
+          <article class="analogia-card">
+            <div class="analogia-header">
+              <span class="analogia-icon">🔋</span>
+              <div>
+                <span class="analogia-concept">Boylestad Sec. 5.5 & Microelectrónica</span>
+                <h3 class="analogia-title">Carga Activa = Espejo de Corriente en vez de \(R_C\)</h3>
+              </div>
+            </div>
+            <p class="analogia-desc">
+              <b>¿Qué es?</b> En los circuitos integrados, fabricar resistencias de muchos mega-ohmios ocupa demasiado espacio en el chip de silicio. Por eso, en vez de una resistencia pasiva \(R_C\), se coloca otro transistor conectado como fuente de corriente constante.<br>
+              <b>Efecto en ganancia:</b> Como la resistencia dinámica de una fuente de corriente tiende a infinito, la resistencia en el colector es altísima, permitiendo que una sola etapa alcance ganancias de miles de veces (\(A_{vo} = -V_A / V_T\)).
+            </p>
+            <div class="analogia-takeaway">
+              <b>Traducción de aula:</b> "Amplificador con carga activa" = "Emisor común donde \(R_C \to \infty\) reemplazada por una fuente de corriente".
+            </div>
+          </article>
+
+          <!-- TÉRMINO 10: RESISTENCIA NEGATIVA Y BARKHAUSEN -->
+          <article class="analogia-card">
+            <div class="analogia-header">
+              <span class="analogia-icon">⚠️</span>
+              <div>
+                <span class="analogia-concept">Boylestad Cap. 14 · Oscilación Inestable</span>
+                <h3 class="analogia-title">Resistencia Negativa = Oscilador Parásito</h3>
+              </div>
+            </div>
+            <p class="analogia-desc">
+              <b>¿Qué significa físicamente?</b> Una resistencia real siempre consume energía (signo positivo). Pero cuando una carga tiene bobinas (es inductiva) a muy alta frecuencia, la señal que se devuelve por la capacitancia interna colector-base se desfasa tanto que inyecta energía hacia la entrada.<br>
+              <b>Consecuencia:</b> Matemáticamente la impedancia de entrada toma parte real negativa (\(R_{in} < 0\)). Según el Criterio de Barkhausen, el amplificador se convierte en un oscilador parásito y comienza a silbar o zumbar solo sin tener señal conectada.
+            </p>
+            <div class="analogia-takeaway">
+              <b>Traducción de aula:</b> Es el típico problema de laboratorio donde el circuito "se vuelve loco" porque la carga realimenta la señal en fase positiva.
+            </div>
+          </article>
         </div>
       </section>
 
