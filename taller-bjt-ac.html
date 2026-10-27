@@ -232,6 +232,18 @@
       .answer-detail, .analysis-detail {
         display: block !important;
       }
+      .guide {
+        display: block !important;
+        background: #f0fdf4 !important;
+        border-left: 4px solid #16a34a !important;
+        padding: 8px 12px !important;
+        margin-top: 10px !important;
+        font-size: 9.5pt !important;
+        border-radius: 4px;
+      }
+      .response, textarea {
+        display: none !important;
+      }
       .practical-item {
         break-inside: avoid;
         page-break-inside: avoid;
@@ -268,6 +280,7 @@
       <a href="bjt-dc.html">BJT DC I</a>
       <a href="bjt-dc2.html">BJT DC II</a>
       <a href="bjt-ac.html">BJT AC</a>
+      <a href="fet.html">FET & MOSFET</a>
       <a href="practica-pwm555.html">Práctica PWM</a>
       <a href="taller.html">Taller 1</a>
       <a class="active" href="taller-bjt-ac.html">Taller BJT AC</a>
@@ -302,20 +315,20 @@
 
     <main>
       <section class="hero small">
-        <span class="eyebrow">Cátedra de Electrónica Analógica y Laboratorio · Nivel Universitario</span>
-        <h1>Taller de Análisis y Diseño de Circuitos BJT en Pequeña Señal (AC)</h1>
+        <span class="eyebrow">Cátedra de Electrónica Analógica y Laboratorio · Apoyo Académico</span>
+        <h1>Taller Práctico de BJT en Pequeña Señal (AC)</h1>
         <p>
-          Este taller constituye el instrumento formal de estudio, deducción analítica y preparación para las evaluaciones prácticas y teóricas de la cátedra. Fundamentado en la estructura temática de <b>Boylestad & Nashelsky (Capítulo 5)</b> y complementado con los criterios de diseño intuitivo de <b>Albert Malvino</b>, el taller abarca desde el modelado incremental de parámetros dinámicos hasta topologías compuestas y aplicaciones de ingeniería real.
+          Guía integral y accesible para el estudio autónomo y la resolución paso a paso de circuitos con transistores BJT en corriente alterna. Basada en la metodología de <b>Boylestad & Nashelsky (Capítulo 5)</b> y las analogías prácticas de <b>Albert Malvino</b>, diseñada con explicaciones claras, amigables y aterrizadas a la realidad del laboratorio.
         </p>
         <p style="margin-top:8px; font-size:0.95rem; color:#475569;">
-          Estructurado en <b>evaluación conceptual, 34 problemas prácticos con esquemáticos normalizados y 3 retos de examen</b>, cada ejercicio integra desarrollos analíticos paralelos mediante el modelo \(r_e\) y el modelo híbrido-\(\pi\), verificaciones de punto de reposo en continua y notas de criterio ingenieril para el trabajo en laboratorio.
+          Estructurado en <b>15 preguntas conceptuales, 34 problemas prácticos con esquemáticos vectorizados y retos de autoevaluación</b>. Puedes comprobar tus respuestas en línea, desplegar los solucionarios completos (comparando el modelo \(r_e\) y el modelo híbrido-\(\pi\)) o descargar la versión para imprimir.
         </p>
         <div class="workshop-actions">
-          <button id="btnPrintPdf" class="btn primary">🖨️ Imprimir Vista Actual</button>
-          <a href="taller-bjt-ac-imprimible.html" target="_blank" class="btn" style="text-decoration:none;">📄 Descargar Guía Oficial PDF (Formato Libro A4)</a>
-          <a href="#retos" class="btn" style="border: 1.5px solid #dc2626; color: #dc2626; font-weight: bold; background: #fff5f5;">🔥 Simulacro: Retos de Examen</a>
-          <a href="#practico" class="btn">34 Problemas Desarrollados Paso a Paso</a>
-          <a href="bjt-ac.html" class="btn">Módulo Teórico de Clase</a>
+          <button id="btnToggleAllSolutions" class="btn" style="background:#0284c7;color:#fff;font-weight:bold;border-color:#0284c7;cursor:pointer;">👁️ Mostrar Todos los Solucionarios (Modo Estudio)</button>
+          <a href="taller-bjt-ac-imprimible.html" target="_blank" class="btn" style="text-decoration:none;font-weight:bold;background:#10b981;color:#fff;border-color:#10b981;">📄 Taller Completo Imprimible (Guía PDF Libro A4)</a>
+          <button id="btnPrintPdf" class="btn">🖨️ Imprimir Página</button>
+          <a href="examen_parcial/Examen_Interactivo_Moodle_BJT.html" target="_blank" class="btn" style="background:#7c3aed;color:#fff;border-color:#7c3aed;text-decoration:none;font-weight:bold;">🎯 Examen Parcial Modo Moodle</a>
+          <a href="#retos" class="btn">🔥 Zona de Retos</a>
         </div>
       </section>
 
@@ -529,21 +542,22 @@
       </section>
 
       <!-- SECCIÓN T1: REPASO TEÓRICO INTERACTIVO -->
+      <!-- SECCIÓN T1: REPASO TEÓRICO Y CONCEPTUAL -->
       <section class="module" id="teorico">
         <div class="module-head">
           <div class="module-title">
             <span class="no">T1</span>
             <div>
-              <span class="eyebrow">Fase 1 · Evaluación y Fundamentación Conceptual</span>
-              <h2>Cuestionario de Linealización, Principios Físicos y Modelos Incrementales</h2>
+              <span class="eyebrow">Fase 1 · Repaso Teórico y Conceptual</span>
+              <h2>15 Preguntas Clave para Comprender el Transistor BJT en Alterna</h2>
             </div>
           </div>
           <button class="mark" data-mark="taller-bjt-ac-t1">Marcar estudiado</button>
         </div>
 
         <div class="box remember" style="border-left-color: #0284c7; background: #f0f9ff;">
-          <small style="color:#0369a1; font-weight:bold;">💡 Criterio de fundamentación previa</small>
-          El cálculo cuantitativo de amplificadores analógicos exige dominar con solidez los principios físicos del modelo incremental: la naturaleza exponencial de la unión, las condiciones de linealidad en pequeña señal y el concepto de masa virtual en continua. Responda cada cuestión justificando su razonamiento técnico; puede emplear los botones de asistencia conceptual (<b>Pista 1</b> y <b>Pista 2</b>) para orientar su deducción.
+          <small style="color:#0369a1; font-weight:bold;">💡 Cómo estudiar esta fase teórica</small>
+          Antes de comenzar a calcular circuitos con números, es indispensable tener claro qué ocurre físicamente con la señal dentro del transistor. Aquí tienes 15 preguntas explicadas de forma amigable, directa y sin lenguaje intimidante. Intenta responderlas primero con tus palabras o seleccionando la opción adecuada; puedes utilizar las pistas (<b>Pista 1</b> y <b>Pista 2</b>) o pulsar en <b>Ver solución / Criterio</b> para aprender paso a paso a tu propio ritmo.
         </div>
 
         <div id="tallerBjtAcList" class="taller-list" style="margin-top:15px"></div>
@@ -555,18 +569,18 @@
           <div class="module-title">
             <span class="no">T2</span>
             <div>
-              <span class="eyebrow">Fase 2 · Banco de Problemas Guiados y Aplicaciones de Ingeniería</span>
-              <h2>34 Problemas Numéricos Desarrollados por Modelos \(r_e\) e Híbrido-\(\pi\)</h2>
+              <span class="eyebrow">Fase 2 · Banco de Problemas Prácticos Resueltos</span>
+              <h2>34 Circuitos con Solucionario Paso a Paso (Modelos \(r_e\) e Híbrido-\(\pi\))</h2>
             </div>
           </div>
           <button class="mark" data-mark="taller-bjt-ac-t2">Marcar estudiado</button>
         </div>
 
         <p class="lead">
-          Esta sección constituye el núcleo práctico del taller. Comprende 34 problemas clasificados sistemáticamente en seis bloques temáticos según la secuencia analítica de Boylestad (Capítulo 5). El recorrido abarca desde el modelado incremental de parámetros (\(r_e, g_m, r_\pi, r_o\)), pasando por las tres configuraciones canónicas (Emisor Común, Colector Común y Base Común), hasta arquitecturas compuestas e industriales (Cascode, Darlington, Sziklai y acondicionamiento de señales en automoción).
+          En esta sección aplicamos la teoría a circuitos reales basados en los textos de referencia de Boylestad (Capítulo 5) y Malvino. Los 34 problemas están organizados por bloques temáticos: desde los parámetros dinámicos del transistor (\(r_e, g_m, r_\pi, r_o\)) y las tres configuraciones clásicas (Emisor Común, Colector Común y Base Común), hasta circuitos en cascada y aplicaciones prácticas de laboratorio.
         </p>
         <p style="font-size:0.92rem; color:#475569; margin-top:-6px;">
-          <b>Criterio metodológico de trabajo:</b> Se recomienda examinar minuciosamente el esquemático y los parámetros de cada circuito, formular la solución analítica en el cuaderno de trabajo y contrastar posteriormente los resultados con el desarrollo detallado disponible en cada elemento desplegable.
+          <b>Recomendación para estudiar:</b> Observa el circuito esquemático y los datos, intenta resolverlo en tu cuaderno y luego despliega la solución detallada para comparar tu procedimiento y consolidar el aprendizaje.
         </p>
 
         <!-- Barra de búsqueda y filtros -->
@@ -592,14 +606,17 @@
           <div class="module-title">
             <span class="no" style="background:#dc2626;color:#fff;">T3</span>
             <div>
-              <span class="eyebrow" style="color:#dc2626;font-weight:bold;">Fase 3 · Evaluación y Retos de Examen Parcial</span>
-              <h2>Retos Autónomos de Nivel Evaluación: Resolución y Validación Numérica</h2>
+              <span class="eyebrow" style="color:#dc2626;font-weight:bold;">Fase 3 · Retos de Autoevaluación y Estudio</span>
+              <h2>Retos Interactivos para Preparar el Examen Parcial</h2>
             </div>
           </div>
           <button class="mark" data-mark="taller-bjt-ac-t3">Marcar estudiado</button>
         </div>
 
         <div class="box warn" style="border-left-color:#dc2626; background:#fff8f8;">
+          <small style="color:#b91c1c; font-weight:bold;">🎯 Ponte a prueba antes del examen</small>
+          Estos retos te permiten comprobar si ya dominas el análisis en alterna. Resuelve los circuitos con lápiz y papel, e ingresa tus valores calculados en las casillas: la plataforma te indicará al instante si tu respuesta es correcta (con una tolerancia amigable del ±5%) y te mostrará el solucionario completo para que aprendas de cualquier detalle.
+        </div>
           <small style="color:#b91c1c; font-weight:bold;">⚠️ Criterio de autoevaluación formal</small>
           Esta sección reproduce condiciones estrictas de evaluación parcial. Cada reto presenta un caso de ingeniería real con sus especificaciones completas. Se solicita resolver los cálculos en el cuaderno de trabajo y registrar los valores en los campos de validación interactiva, los cuales aplican tolerancias de diseño de ingeniería. El desarrollo analítico completo debe consultarse exclusivamente tras haber completado el intento autónomo.
         </div>
@@ -1000,11 +1017,11 @@
     </main>
   </div>
 
-  <script src="data/quizzes.js?v=14.5"></script>
-  <script src="js/core.js?v=14.5"></script>
-  <script src="data/taller_bjt_ac_teorico.js?v=1.0"></script>
-  <script src="data/respuestas_taller_bjt_ac.js?v=1.0"></script>
-  <script src="data/retos_bjt_ac.js?v=1.0"></script>
-  <script src="js/taller-bjt-ac.js?v=1.0"></script>
+  <script src="data/quizzes.js?v=15.0"></script>
+  <script src="js/core.js?v=15.0"></script>
+  <script src="data/taller_bjt_ac_teorico.js?v=15.0"></script>
+  <script src="data/respuestas_taller_bjt_ac.js?v=15.0"></script>
+  <script src="data/retos_bjt_ac.js?v=15.0"></script>
+  <script src="js/taller-bjt-ac.js?v=15.0"></script>
 </body>
 </html>

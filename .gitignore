@@ -1,0 +1,11 @@
+
+.DS_Store
+*.DS_Store
+assets/.DS_Store
+
+# Examen parcial confidencial
+examen_parcial/
+
+Examen_Parcial_BJT_DC_AC_Solucionario_Docente.*
+examen_parcial/Examen_Parcial_BJT_DC_AC_Solucionario_Docente.*
+examen_parcial/Banco_Examen_Parcial_BJT_DC_AC.html

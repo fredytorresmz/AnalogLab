@@ -3,185 +3,200 @@ window.TALLER_BJT_AC_TEORICO = [
     "n": 1,
     "section": "A · Fundamentos y Linealización",
     "type": "open",
-    "prompt": "Explique el principio físico de la linealización de pequeña señal en un transistor BJT. ¿Por qué es indispensable haber resuelto previamente el punto de operación en DC (punto Q)?",
-    "h1": "Muchachos, piensen en la relación física exponencial de Shockley entre iC y vBE.",
-    "h2": "Recuerden la analogía que vimos en el tablero: la pendiente (transconductancia gm) se evalúa estrictamente en el punto de reposo fijado por la continua.",
-    "guide": "La característica física de entrada del BJT es estrictamente exponencial: \\(i_C = I_S \\exp(v_{BE}/V_T)\\). Para amplitudes de señal muy pequeñas (\\(v_{be} \\le 5\\,\\mathrm{mV}\\)), la curva exponencial puede aproximarse con altísima precisión mediante la recta tangente evaluada en el punto de reposo \\(Q(V_{BEQ}, I_{CQ})\\). La pendiente de esa tangente es la transconductancia \\(g_m = I_{CQ}/V_T\\). Sin resolver primero el circuito en DC, desconocemos \\(I_{CQ}\\) y, por lo tanto, es físicamente imposible calcular los parámetros dinámicos de pequeña señal (\\(g_m, r_e, r_\\pi\\))."
+    "prompt": "¿Por qué antes de analizar o calcular un amplificador con transistor BJT en corriente alterna (AC) es obligatorio calcular primero su punto de trabajo en continua (punto Q en DC)?",
+    "h1": "Muchachos, recuerden que la resistencia interna del transistor (re) depende directamente de la corriente continua de emisor (IE).",
+    "h2": "Fórmula clave de Boylestad: re = 26 mV / IE. ¡Sin continua es imposible conocer los parámetros de alterna!",
+    "guide": "Para analizar el transistor en alterna necesitamos calcular su resistencia dinámica interna: \\(r_e = \\frac{26\\,\\mathrm{mV}}{I_E}\\). Como \\(I_E\\) es la corriente continua fijada por la polarización en DC, es imposible conocer \\(r_e\\), la impedancia de entrada (\\(Z_i\\)) o la ganancia de voltaje (\\(A_v\\)) sin haber resuelto primero el punto Q. En resumen: la corriente continua le da la 'energía y el punto de reposo' al transistor para que la señal alterna pueda oscilar limpiamente sin cortarse ni deformarse."
   },
   {
     "n": 2,
     "section": "A · Fundamentos y Linealización",
     "type": "mcq",
-    "prompt": "¿Cuál es la condición fundamental de pequeña señal sobre la amplitud de la tensión alterna base-emisor \\(v_{be}\\) para que la distorsión de segundo armónico (\\(HD_2\\)) sea despreciable (menor al 5%)?",
+    "prompt": "¿Qué significa en la práctica que una señal sea de 'pequeña señal' en la unión base-emisor de un transistor BJT?",
     "options": [
-      "\\(|v_{be}| \\ll V_{CC}\\), típicamente menor a 5 V.",
-      "\\(|v_{be}| \\ll 2V_T\\), típicamente menor o igual a 5 mV pico.",
-      "Cualquier amplitud, siempre que el transistor no entre en corte.",
-      "\\(|v_{be}|\\) debe ser exactamente igual a 0.7 V."
+      "Que el voltaje de la fuente de alimentación VCC debe ser menor a 5 V.",
+      "Que la señal alterna en la unión base-emisor debe ser muy pequeña (típicamente menor a 5 mV o 10 mV pico) para que el transistor amplifique de forma lineal sin distorsionar.",
+      "Que el transistor debe trabajar apagado en la región de corte.",
+      "Que la ganancia del circuito debe ser siempre menor a 1."
     ],
     "answer": 1,
+    "h1": "Piensen en qué tan pequeña debe ser la señal de un micrófono o sensor que entra al transistor para no deformar la onda.",
+    "h2": "A temperatura ambiente el voltaje térmico es VT ≈ 26 mV; amplitudes de pocos milivoltios se mantienen en el tramo casi recto de la curva exponencial.",
     "feedback": [
-      "Ojo: comparar con VCC no asegura linealidad en la unión base-emisor.",
-      "¡Excelente! De la serie de Taylor, la distorsión de segundo armónico es \\(HD_2 = V_p / (4V_T)\\). Con \\(V_p \\le 5\\,\\mathrm{mV}\\) a temperatura ambiente (\\(V_T \\approx 26\\,\\mathrm{mV}\\)), \\(HD_2 < 4.8\\%\\), garantizando que el transistor opere de forma puramente lineal.",
-      "Cuidado: aun sin entrar en corte ni saturación, la curvatura exponencial distorsiona la señal si la amplitud supera los 5 mV.",
-      "Ojo con el concepto: 0.7 V es la polarización estática DC, no la pequeña señal alterna."
-    ]
+      "Cuidado: VCC es el voltaje grande de continua de la fuente, no la señal alterna.",
+      "¡Excelente respuesta! La unión base-emisor es exponencial. Si la señal es diminuta (vbe ≤ 5 mV pico), el transistor opera sobre un tramo casi perfectamente recto (lineal), garantizando que la salida sea una copia fiel y limpia de la entrada.",
+      "Ojo: si el transistor entra en corte, se apaga y no amplifica la señal.",
+      "No: los amplificadores de pequeña señal en emisor común suelen tener ganancias muy altas (Av > 100)."
+    ],
+    "guide": "<b>Respuesta correcta (B):</b> La unión base-emisor se comporta como un diodo exponencial: \\(i_C = I_S e^{v_{BE}/V_T}\\). Para que el transistor funcione como un amplificador lineal (donde la señal de salida es idéntica en forma a la de entrada pero más grande), las variaciones de voltaje \\(v_{be}\\) no deben superar unos pocos milivoltios (típicamente \\(|v_{be}| \\le 5\\,\\mathrm{mV}\\) pico). Si la señal es mayor, la curvatura exponencial deforma la onda senoidal y genera distorsión armónica."
   },
   {
     "n": 3,
     "section": "A · Fundamentos y Linealización",
     "type": "open",
-    "prompt": "Demuestre la relación matemática de equivalencia entre el modelo \\(r_e\\) de Boylestad/Malvino y el modelo híbrido-\\(\\pi\\) de Sedra/Smith/Razavi. ¿Por qué ambos producen exactamente los mismos resultados numéricos?",
-    "h1": "Muchachos, expresen la corriente de colector generada por cada modelo: \\(i_c = \\beta i_b\\) frente a \\(i_c = g_m v_{be}\\).",
-    "h2": "Sustituyan \\(v_{be} = i_b r_\\pi\\) recordando que \\(g_m = I_C/V_T\\) y \\(r_e = V_T/I_E\\).",
-    "guide": "En el modelo \\(r_e\\), la fuente de colector se modela como controlada por corriente: \\(i_c = \\beta i_b\\), y la resistencia vista desde la base es \\(Z_b = (\\beta+1)r_e\\). En el modelo híbrido-\\(\\pi\\), la fuente es controlada por tensión: \\(i_c = g_m v_{be}\\), con resistencia de base \\(r_\\pi\\). Como \\(g_m = 1/r_e\\) (asumiendo \\(\\alpha \\approx 1\\)) y \\(v_{be} = i_b r_\\pi = i_b (\\beta r_e)\\), al sustituir tenemos: \\(i_c = g_m v_{be} = (1/r_e)(i_b \\beta r_e) = \\beta i_b\\). Ambos modelos describen exactamente la misma física linealizada; usar uno u otro es simplemente preferencia entre análisis de mallas o análisis nodal."
+    "prompt": "En los libros encontramos dos formas de representar el transistor en pequeña señal: el modelo re (Boylestad y Malvino) y el modelo híbrido-π (Sedra y Smith). ¿En qué se diferencian y por qué ambos dan exactamente el mismo resultado al resolver un circuito?",
+    "h1": "Boylestad modela el colector como una fuente controlada por corriente (ic = β·ib) y usa re. Sedra lo modela con una fuente controlada por voltaje (ic = gm·vbe).",
+    "h2": "Recuerden que la transconductancia gm es simplemente el inverso de re: gm ≈ 1 / re.",
+    "guide": "La diferencia es puramente de notación y preferencia de análisis:<br>1) En el modelo \\(r_e\\) de Boylestad y Malvino, el colector se modela como una fuente de corriente controlada por corriente: \\(i_c = \\beta i_b\\), y la resistencia vista desde la base es \\(Z_b = \\beta r_e\\).<br>2) En el modelo híbrido-\\(\\pi\\) de Sedra/Smith, esa misma corriente se expresa en función del voltaje de entrada: \\(i_c = g_m v_{be}\\), donde \\(g_m = I_C / V_T \\approx 1 / r_e\\), y la resistencia de entrada se llama \\(r_\\pi = \\beta r_e\\).<br>Como \\(g_m v_{be} = (1/r_e)(i_b \\beta r_e) = \\beta i_b\\), ambas representaciones son matemáticamente idénticas. Puedes usar cualquiera de las dos; ambas arrojan exactamente los mismos voltajes, ganancias e impedancias."
   },
   {
     "n": 4,
     "section": "B · Transformación DC a AC",
     "type": "open",
-    "prompt": "En el análisis de pequeña señal en banda media, ¿por qué una fuente de alimentación de continua independiente como \\(+V_{CC} = 15\\,\\mathrm{V}\\) se reemplaza por un cortocircuito a tierra (tierra AC)?",
-    "h1": "Piensen en la definición matemática de variación incremental: \\(v_{cc}(t) = \\Delta V_{CC}\\).",
-    "h2": "Un nodo con potencial constante en el tiempo no experimenta ninguna variación alterna respecto a tierra.",
-    "guide": "Una fuente DC ideal mantiene un potencial rigurosamente constante en el tiempo: \\(v_{fuente}(t) = V_{CC}\\). La componente alterna (señal incremental) es por definición la derivada o variación temporal: \\(v_{ac} = \\Delta V_{CC} = 0\\,\\mathrm{V}\\). Un nodo eléctrico cuya diferencia de potencial alterna respecto a tierra es 0 V se comporta dinámicamente como un cortocircuito a tierra para la señal AC (masa virtual o tierra de señal)."
+    "prompt": "Al dibujar el circuito equivalente para corriente alterna (AC), ¿por qué las fuentes de voltaje continuo como +VCC se conectan directamente a tierra?",
+    "h1": "Una fuente de continua ideal entrega un voltaje constante que no cambia en el tiempo (su variación en alterna es cero voltios: ΔV = 0).",
+    "h2": "Si entre un nodo y tierra el voltaje de señal alterna es cero, para la señal alterna ese nodo equivale a estar a tierra.",
+    "guide": "Una fuente DC ideal mantiene un potencial completamente constante en el tiempo: \\(v(t) = V_{CC}\\). Para la señal de alterna (que está formada por las variaciones, subidas y bajadas en el tiempo), el voltaje de la fuente no oscila en absoluto: \\(\\Delta V_{CC} = 0\\,\\mathrm{V}\\). Por eso, desde el punto de vista dinámico de la señal alterna, el terminal positivo de la fuente equivale a un cortocircuito a tierra (se le conoce como 'tierra de señal' o 'tierra AC'). Esto simplifica el circuito, ya que todas las resistencias conectadas a \\(+V_{CC}\\) pasan a conectarse a tierra en el modelo de alterna."
   },
   {
     "n": 5,
     "section": "B · Transformación DC a AC",
     "type": "mcq",
-    "prompt": "¿Qué función cumple el condensador de desacoplo de emisor \\(C_E\\) (llamado frecuentemente condensador de bypass en los manuales de laboratorio y datasheets) conectado en paralelo con \\(R_E\\)?",
+    "prompt": "¿Cuál es el propósito principal de colocar un condensador en paralelo con la resistencia de emisor (CE, conocido como condensador de desacoplo o bypass)?",
     "options": [
-      "Filtra el rizado de la fuente de alimentación DC.",
-      "Evita que el transistor se caliente en corriente continua.",
-      "Proporciona una autopista de muy baja impedancia a tierra para la señal AC, disparando la ganancia en banda media sin desestabilizar el punto Q en DC.",
-      "Convierte la etapa de emisor común en un seguidor de emisor."
+      "Permitir que la resistencia de emisor RE estabilice el circuito en continua (DC), y puentearla a tierra en alterna (AC) para lograr una ganancia de voltaje mucho más alta.",
+      "Evitar que la corriente continua pase hacia el colector del transistor.",
+      "Disminuir la ganancia de voltaje para que el transistor no se caliente.",
+      "Convertir la fuente de alimentación continua en una señal senoidal."
     ],
-    "answer": 2,
+    "answer": 0,
+    "h1": "Piensen en el condensador como un circuito abierto en DC y como un camino de bajísima resistencia (un puente a tierra) en AC.",
+    "h2": "Sin CE, la ganancia es baja: Av ≈ -RC / RE. Con CE, la ganancia se dispara a Av ≈ -RC / re.",
     "feedback": [
-      "No: el condensador de filtro de rizado va en la fuente de poder, no en el emisor de la etapa amplificadora.",
-      "No: la estabilidad térmica en continua la fija la resistencia RE, no el condensador.",
-      "¡Totalmente correcto! Como vimos con la analogía de Malvino, en DC el condensador actúa como circuito abierto para que RE fije el punto Q con estabilidad térmica. En AC de banda media, CE se vuelve un cortocircuito hacia tierra dinámica, haciendo que la ganancia sea \\(A_v \\approx -R_C/r_e\\) en lugar de verse reducida por RE.",
-      "Cuidado: el seguidor de emisor toma la salida en el emisor; si pusieras CE a tierra allí, anularías la señal de salida."
-    ]
+      "¡Correcto! En DC el condensador está abierto y RE trabaja estabilizando el punto Q frente al calor. En AC, el condensador se vuelve un cortocircuito que 'puentea' RE a tierra, eliminando su freno y disparando la ganancia de voltaje.",
+      "Incorrecto: los condensadores de emisor no tienen esa función; el aislamiento de continua lo hacen los condensadores de acople en serie.",
+      "Al revés: el condensador de emisor busca AUMENTAR la ganancia de voltaje, no disminuirla.",
+      "Incorrecto: un condensador pasivo no puede generar una señal senoidal por sí solo."
+    ],
+    "guide": "<b>Respuesta correcta (A):</b> En continua (DC), el condensador está abierto y toda la corriente pasa por \\(R_E\\), asegurando que el punto de operación Q se mantenga firme y no se mueva con la temperatura. Pero en alterna (AC), el condensador ofrece un camino de bajísima impedancia a tierra (hace un 'bypass' o puente), dejando a \\(R_E\\) fuera del camino de la señal. Esto hace que la ganancia de voltaje suba de un valor modesto \\(A_v \\approx -R_C / R_E\\) a una ganancia muy grande \\(A_v \\approx -R_C / r_e\\)."
   },
   {
     "n": 6,
     "section": "C · Topologías Fundamentales",
     "type": "open",
-    "prompt": "En una etapa Emisor Común (CE), ¿por qué existe un desfase de 180° entre la señal de tensión de entrada en la base y la de salida en el colector?",
-    "h1": "Sigan la cadena física que dedujimos en el tablero: sube v_in -> aumenta i_c -> crece la caída en R_C -> cae el potencial de colector v_c.",
-    "h2": "Recuerden la ley de tensiones en el lazo de colector: \\(v_C(t) = V_{CC} - i_C(t) R_C\\).",
-    "guide": "Cuando la señal de entrada en la base \\(v_i\\) experimenta su semiciclo positivo, la tensión base-emisor aumenta y el transistor conduce más corriente de colector \\(i_c\\). Al circular más corriente por \\(R_C\\), la caída de tensión en esa resistencia aumenta proporcionalmente. Por la ley de Kirchhoff en el nodo de salida, \\(v_C = V_{CC} - i_C R_C\\); por tanto, al aumentar la caída en \\(R_C\\), el potencial instantáneo de colector cae en picada. Cuando la entrada sube, la salida baja: una inversión física exacta de 180° (signo negativo en \\(A_v\\))."
+    "prompt": "En un amplificador en configuración Emisor Común (CE), ¿por qué la señal de salida en el colector sale invertida (desfasada 180°) respecto a la señal de entrada en la base?",
+    "h1": "Analicen qué le pasa a la corriente de colector cuando el voltaje en la base sube en su semiciclo positivo.",
+    "h2": "Acuérdense de la ley de Kirchhoff en el colector: vC = VCC - iC·RC. Si iC sube, ¿qué le pasa a vC?",
+    "guide": "Es una consecuencia directa de la ley de Kirchhoff en el colector:<br>1) Cuando la señal de entrada en la base sube (semiciclo positivo), la unión base-emisor se polariza más y el transistor conduce más corriente de colector (\\(i_C\\) aumenta).<br>2) Al circular más corriente por la resistencia de colector \\(R_C\\), la caída de voltaje en esa resistencia se hace mayor.<br>3) Como el voltaje en el terminal de colector es \\(v_C = V_{CC} - i_C R_C\\), al restar una caída más grande, el voltaje en el colector cae hacia abajo.<br>Por lo tanto: cuando la entrada sube, la salida baja. Esto produce una inversión de 180° que en las fórmulas se representa con el signo negativo de la ganancia: \\(A_v = -\\frac{R_C}{r_e}\\)."
   },
   {
     "n": 7,
     "section": "C · Topologías Fundamentales",
     "type": "open",
-    "prompt": "Explique el Teorema de Reflexión de Resistencia de emisor a base (Boylestad Sec. 5.5). ¿Por qué una resistencia en el emisor sin desacoplar de apenas \\(R_E = 220\\,\\Omega\\) eleva tanto la impedancia de entrada vista desde la base?",
-    "h1": "Muchachos, comparen la corriente que entra por la base (i_b) con la corriente que realmente atraviesa R_E: \\(i_e = (\\beta+1)i_b\\).",
-    "h2": "La tensión en base es \\(v_b = v_{be} + i_e R_E\\). Apliquen la ley de Ohm dividiendo todo entre \\(i_b\\).",
-    "guide": "La corriente que atraviesa el resistor de emisor no es la diminuta corriente de base \\(i_b\\), sino la corriente total del emisor: \\(i_e = (\\beta+1)i_b\\). Al aplicar la ley de Ohm vista desde la base: \\(Z_b = v_b / i_b = [i_b r_\\pi + (\\beta+1)i_b R_E] / i_b = r_\\pi + (\\beta+1)R_E = (\\beta+1)(r_e + R_E)\\). Cualquier resistor en el emisor se 'refleja' en la base multiplicado por \\((\\beta+1)\\). Si \\(\\beta=100\\), un modesto resistor de \\(220\\,\\Omega\\) es percibido desde la base como \\(101 \\times 220\\,\\Omega \\approx 22.2\\,\\mathrm{k\\Omega}\\). ¡Una palanca de impedancias fenomenal!"
+    "prompt": "Si un amplificador en Emisor Común no tiene condensador de desacoplo en el emisor, la resistencia RE queda visible en alterna. ¿Por qué al mirarla desde la base esa resistencia parece multiplicarse por (β+1) (efecto de reflexión al emisor)?",
+    "h1": "Muchachos, comparen la pequeñísima corriente que entra por la base (ib) con la corriente mucho mayor que atraviesa el emisor: ie = (β+1)ib.",
+    "h2": "La impedancia vista desde la base es Zb = vb / ib. Al sustituir vb ≈ ie·RE, el factor (β+1) queda multiplicando a RE.",
+    "guide": "Por la base del transistor solo entra una corriente muy pequeña (\\(i_b\\)), pero por el resistor de emisor \\(R_E\\) circula la corriente completa del emisor: \\(i_e = (\\beta + 1) i_b\\).<br>Por ley de Ohm, el voltaje alterno generado en el emisor es \\(v_e = i_e R_E = (\\beta+1)i_b R_E\\). Al calcular la impedancia vista desde el terminal de base (\\(Z_b = v_b / i_b\\)), la corriente \\(i_b\\) se simplifica y queda:<br>\\[Z_b \\approx (\\beta + 1)(r_e + R_E)\\]<br>Esto significa que la base 've' una resistencia enorme. Por ejemplo, con \\(\\beta = 100\\), una modesta resistencia de emisor de \\(220\\,\\Omega\\) es percibida desde la entrada como si fuera de más de \\(22\\,\\mathrm{k\\Omega}\\) (\\(101 \\times 220\\,\\Omega \\approx 22.2\\,\\mathrm{k\\Omega}\\)). ¡Eleva notablemente la impedancia de entrada del amplificador!"
   },
   {
     "n": 8,
     "section": "C · Topologías Fundamentales",
     "type": "mcq",
-    "prompt": "¿Cuáles son las dos características primordiales que justifican el uso de la configuración Colector Común (Seguidor de Emisor) en etapas de salida y buffers?",
+    "prompt": "¿Para qué se utiliza principalmente la configuración Colector Común (también llamada Seguidor de Emisor) en audio e instrumentación?",
     "options": [
-      "Alta ganancia de tensión (\\(A_v > 100\\)) e inversión de fase de 180°.",
-      "Ganancia de tensión cercana a la unidad (\\(A_v \\approx +1\\)), muy alta impedancia de entrada y muy baja impedancia de salida.",
-      "Impedancia de entrada casi nula y alta ganancia de corriente solamente.",
-      "Excelente comportamiento en frecuencias de microondas eliminando el efecto Miller."
+      "Para lograr una altísima ganancia de voltaje (Av > 200) e invertir la señal 180°.",
+      "Como adaptador de impedancias (buffer): tiene una alta impedancia de entrada y una muy baja impedancia de salida, entregando corriente a la carga sin perder nivel de voltaje (Av ≈ +1).",
+      "Para apagar el transistor y dejarlo permanentemente en corte.",
+      "Para amplificar únicamente señales de corriente continua sin admitir frecuencias de audio."
     ],
     "answer": 1,
+    "h1": "Recuerden que en esta configuración la salida se toma en el emisor, por lo que el voltaje de salida 'sigue' casi idéntico al de la base.",
+    "h2": "Es el circuito ideal para conectar un sensor delicado a un parlante o carga de baja resistencia sin ahogar la señal.",
     "feedback": [
-      "No: el seguidor de emisor no invierte la fase ni amplifica tensión.",
-      "¡Exacto! El seguidor de emisor funciona como un transformador electrónico de impedancias: toma la señal de un nodo de alta impedancia sin drenarle corriente (alta Zi) y la entrega a una carga exigente con baja resistencia (baja Zo), manteniendo Av ≈ 1 en fase.",
-      "Cuidado: la impedancia de entrada del CC es muy alta, nunca nula.",
-      "Incorrecto: la configuración que anula el efecto Miller en alta frecuencia es la Base Común (CB) o Cascode, no el CC."
-    ]
+      "No: el seguidor de emisor no amplifica voltaje ni invierte la fase.",
+      "¡Exacto! El seguidor de emisor actúa como un buffer: no amplifica voltaje (Av ≈ +1), pero tiene alta impedancia de entrada (no carga la etapa previa) y baja impedancia de salida (entrega toda la corriente necesaria a la carga sin que el voltaje se caiga).",
+      "Incorrecto: el transistor opera normalmente en la región activa lineal.",
+      "Falso: se usa ampliamente para audiofrecuencias y señales rápidas de instrumentación."
+    ],
+    "guide": "<b>Respuesta correcta (B):</b> El Colector Común o Seguidor de Emisor se caracteriza por no amplificar voltaje (su ganancia es ligeramente menor a 1, típicamente \\(A_v \\approx +0.98\\) y en fase), pero posee una gran ganancia de corriente. Su gran utilidad es servir de adaptador o 'buffer': presenta una alta impedancia de entrada (no le roba señal a la etapa anterior) y una bajísima impedancia de salida (unos pocos ohmios), permitiendo alimentar cargas difíciles (como un parlante de 8 Ω o un cable largo) sin que el voltaje se caiga."
   },
   {
     "n": 9,
     "section": "D · Efectos de Carga y Dinámica",
     "type": "open",
-    "prompt": "¿Cuál es la diferencia física y matemática entre la ganancia de voltaje sin carga (\\(A_{vo}\\)), la ganancia con carga (\\(A_v\\)) y la ganancia global del sistema (\\(A_{vs} = v_o/v_s\\))?",
-    "h1": "Muchachos, fíjense en los dos divisores de tensión: el de entrada (Rs con Zi) y el de salida (RC con RL).",
-    "h2": "Escriban la cadena de transferencia completa: \\(A_{vs} = \\frac{v_i}{v_s} \\cdot \\frac{v_o}{v_i}\\).",
-    "guide": "1) \\(A_{vo} = v_o/v_i\\) en circuito abierto (sin carga, \\(R_L = \\infty\\)): representa el techo máximo intrínseco de ganancia de la etapa aislada: \\(A_{vo} \\approx -R_C/r_e\\).\n2) \\(A_v = v_o/v_i\\) con carga \\(R_L\\) conectada: la resistencia dinámica en el colector se reduce al paralelo \\(R_C \\parallel R_L\\), bajando la ganancia a \\(A_v \\approx -(R_C \\parallel R_L)/r_e\\).\n3) \\(A_{vs} = v_o/v_s\\) (ganancia neta del sistema): toma en cuenta la resistencia interna del sensor o generador \\(R_s\\). Dado que \\(R_s\\) y \\(Z_i\\) forman un divisor a la entrada, a la base solo llega \\(v_i = v_s \\cdot \\frac{Z_i}{R_s + Z_i}\\). Por tanto: \\(A_{vs} = A_v \\cdot \\frac{Z_i}{R_s + Z_i}\\). En el diseño real de ingeniería, olvidar este peaje conduce a errores de cálculo de más del 50%."
+    "prompt": "¿Cuál es la diferencia práctica entre la ganancia de un amplificador sin carga (Avo), la ganancia cuando le conectamos una carga (Av) y la ganancia total del sistema (Avs) que incluye la resistencia de la fuente?",
+    "h1": "Piensen en un amplificador de audio: una cosa es medir el voltaje con los terminales al aire y otra cuando conectamos los parlantes.",
+    "h2": "La resistencia interna del generador o sensor (Rs) forma un divisor de voltaje con la entrada del amplificador (Zi).",
+    "guide": "En el diseño real de circuitos se distinguen tres ganancias:<br>1) **Ganancia sin carga (\\(A_{vo} = v_o/v_i\\)):** Se mide en circuito abierto (sin nada conectado a la salida, \\(R_L = \\infty\\)). Es el valor máximo teórico de la etapa sola: \\(A_{vo} \\approx -R_C/r_e\\).<br>2) **Ganancia con carga (\\(A_v = v_o/v_i\\)):** Al conectar la carga \\(R_L\\), esta queda en paralelo con \\(R_C\\) en alterna (\\(r_L = R_C \\parallel R_L\\)), haciendo que la ganancia disminuya: \\(A_v \\approx -r_L/r_e\\).<br>3) **Ganancia total del sistema (\\(A_{vs} = v_o/v_s\\)):** Tiene en cuenta que el generador o sensor tiene una resistencia interna \\(R_s\\). Al conectarse a la entrada del amplificador (\\(Z_i\\)), se forma un divisor de voltaje a la entrada (\\(v_i = v_s \\frac{Z_i}{R_s + Z_i}\\)), por lo que solo una fracción de la señal llega al transistor. La ganancia neta es:<br>\\[A_{vs} = A_v \\cdot \\left(\\frac{Z_i}{R_s + Z_i}\\right)\\]"
   },
   {
     "n": 10,
     "section": "D · Efectos de Carga y Dinámica",
     "type": "open",
-    "prompt": "Defina el concepto de Máxima Excursión Simétrica de Salida (Maximum Symmetrical Swing) y explique qué tipo de distorsión ocurre si la señal supera dicho límite.",
-    "h1": "Recuerden los dos topes sobre la recta de carga de AC: la corriente de corte (iC = 0) y el voltaje de saturación (VCE(sat) ≈ 0.2 V).",
-    "h2": "Si la señal alterna oscila alrededor de VCEQ, ¿hacia qué extremo recortará primero si el punto Q no está centrado?",
-    "guide": "La máxima excursión simétrica es la mayor oscilación pico a pico de voltaje o corriente que el amplificador puede entregar a la carga en AC sin recortar la forma de onda (clipping) ni por saturación ni por corte. El límite superior de corriente lo fija la saturación (donde \\(v_{CE} \\approx V_{CE(sat)}\\)) y el límite inferior el corte (donde \\(i_C = 0\\)). Si el punto Q no se diseña en el centro óptimo de la recta de carga de AC, la señal sufrirá un recorte asimétrico cuando se le exija gran amplitud, destruyendo la fidelidad acústica o de medición con armónicos indeseados."
+    "prompt": "¿Qué significa la 'máxima excursión simétrica' de salida en un amplificador y qué pasa con la forma de onda si le exigimos más señal de la que puede entregar?",
+    "h1": "Visualicen la onda senoidal en el osciloscopio oscilando alrededor del punto de reposo VCEQ.",
+    "h2": "El voltaje no puede subir más allá de la fuente VCC ni bajar más allá del voltaje de saturación (aprox. 0.2 V).",
+    "guide": "La **máxima excursión simétrica** es el mayor voltaje pico a pico que el amplificador puede entregar a la salida de forma limpia, sin deformar ni 'cortar' la onda senoidal.<br>El transistor tiene dos límites físicos insuperables:<br>- Hacia abajo: el voltaje colector-emisor no puede ser menor a su voltaje de saturación (\\(V_{CE(sat)} \\approx 0.2\\,\\mathrm{V}\\)).<br>- Hacia arriba: la corriente no puede ser negativa (en corte, \\(i_C = 0\\)), por lo que el colector no puede subir más allá del voltaje de alimentación \\(+V_{CC}\\).<br>Para lograr que la onda oscile lo más grande posible de forma simétrica, el punto de reposo \\(V_{CEQ}\\) debe diseñarse en el centro de la recta de carga. Si la señal de entrada supera ese rango, las crestas o los valles de la onda se 'aplanan' (recorte o clipping), generando un sonido distorsionado en audio o errores de medición en instrumentación."
   },
   {
     "n": 11,
     "section": "E · Multietapa y Configuraciones Avanzadas",
     "type": "mcq",
-    "prompt": "En una conexión de dos etapas en cascada CE–CC (Emisor Común seguido de Colector Común), ¿cuál es el beneficio fundamental frente a usar una sola etapa CE para alimentar un altavoz de baja impedancia?",
+    "prompt": "Si queremos amplificar la señal débil de un micrófono y conectarla a un parlante de baja impedancia, ¿por qué es una gran solución usar dos etapas en cascada: Emisor Común (CE) seguido de Colector Común (CC)?",
     "options": [
-      "El seguidor CC duplica la ganancia de tensión total.",
-      "El seguidor CC actúa como etapa aisladora de impedancia (buffer), evitando que la baja resistencia de carga destruya la ganancia de la primera etapa CE.",
-      "Elimina por completo la necesidad de polarización en corriente continua.",
-      "Invierte dos veces la señal para que vuelva a estar en fase."
+      "La primera etapa (CE) aporta la ganancia de voltaje necesaria y la segunda (CC) actúa como buffer de corriente, evitando que la baja resistencia del parlante ahogue la ganancia.",
+      "La segunda etapa duplica la ganancia de voltaje para que suene el doble de fuerte.",
+      "El Colector Común elimina por completo la necesidad de polarizar los transistores en continua.",
+      "Para invertir la señal dos veces y que vuelva a ser positiva."
     ],
-    "answer": 1,
+    "answer": 0,
+    "h1": "Recuerden las fortalezas de cada etapa: el Emisor Común es el rey del voltaje, y el Colector Común es el rey de la corriente.",
+    "h2": "Si conectan el parlante de pocos ohmios directo al Emisor Común, su baja resistencia queda en paralelo con RC y destruye la ganancia.",
     "feedback": [
-      "No: recuerden que el seguidor CC tiene ganancia de tensión Av ≈ 1; no aporta ganancia de voltaje.",
-      "¡Excelente respuesta de ingeniería! Si conectamos una carga baja (como 32 Ω u 8 Ω) directo al colector del CE, el paralelo RC || RL colapsaría a unos pocos ohmios y la ganancia se iría al suelo. El seguidor CC le muestra alta impedancia al CE y excita la carga con una impedancia de salida bajísima.",
-      "Falso: toda etapa a transistores requiere siempre polarización en continua.",
-      "Cuidado: el seguidor CC no desfasa la señal (0°), por lo que la señal total sigue invertida 180° por la primera etapa CE."
-    ]
+      "¡Excelente! El Emisor Común amplifica la débil tensión del micrófono a varios voltios. Luego, el Colector Común recibe ese voltaje y lo entrega con suficiente corriente al parlante gracias a su baja impedancia de salida, sin perder voltaje.",
+      "Incorrecto: el Colector Común no amplifica voltaje (Av ≈ +1), solo aporta corriente.",
+      "Falso: todos los transistores bipolares requieren polarización en DC para operar en zona activa.",
+      "Cuidado: el Colector Común no invierte la fase (Av tiene signo positivo)."
+    ],
+    "guide": "<b>Respuesta correcta (A):</b> Es una de las combinaciones más útiles en electrónica analógica:<br>1) La primera etapa en **Emisor Común (CE)** toma la diminuta señal del micrófono (unos pocos milivoltios) y la amplifica a varios voltios gracias a su alta ganancia de voltaje.<br>2) Sin embargo, si conectáramos un parlante de 8 Ω directamente al colector de esa etapa, la resistencia efectiva sería \\(R_C \\parallel 8\\,\\Omega \\approx 8\\,\\Omega\\), haciendo que la ganancia se desplome casi a cero.<br>3) Por eso se coloca la segunda etapa en **Colector Común (CC)**: recibe el voltaje amplificado, no lo reduce (\\(A_v \\approx +1\\)) y, al tener una impedancia de salida de unos pocos ohmios, es capaz de entregar toda la corriente que el parlante necesita para sonar fuerte y claro."
   },
   {
     "n": 12,
     "section": "E · Multietapa y Configuraciones Avanzadas",
     "type": "open",
-    "prompt": "Describa la arquitectura Cascode (conexión directa de una etapa en Emisor Común seguida de una en Base Común — Boylestad Sec. 5.17). ¿Por qué es una de las configuraciones maestras para eliminar el Efecto Miller en alta frecuencia?",
-    "h1": "Muchachos, analicen qué impedancia 've' el colector de la etapa CE al conectarse directamente al emisor de la etapa CB.",
-    "h2": "Recuerden la trampa del Efecto Miller: la capacitancia parásita base-colector Cbc multiplicada por la ganancia de la etapa.",
-    "guide": "La configuración Cascode conecta una etapa en Emisor Común (CE) en cascada directa con una etapa en Base Común (CB). El emisor de la segunda etapa CB presenta una impedancia de entrada sumamente baja: \\(Z_{i2} \\approx r_{e2}\\). Por consiguiente, la carga de la primera etapa CE es apenas \\(r_{e2}\\), reduciendo la ganancia de tensión de la primera etapa a prácticamente la unidad: \\(|A_{v1}| = r_{e2}/r_{e1} \\approx 1\\). Al no haber ganancia en la primera etapa, el Efecto Miller que multiplica la capacitancia parásita base-colector (\\(C_{in,Miller} = C_{\\mu}(1+|A_v|)\\)) queda casi completamente neutralizado. Toda la ganancia de tensión la produce la segunda etapa CB, logrando anchos de banda descomunales ideales para radiofrecuencia e instrumentación rápida."
+    "prompt": "¿Qué es la configuración en cascada Cascode (un Emisor Común conectado directamente a una Base Común) y cuál es su gran ventaja para trabajar con señales de alta frecuencia?",
+    "h1": "El primer transistor (CE) tiene como carga el emisor del segundo transistor (CB), cuya resistencia de entrada es pequeñísima (re).",
+    "h2": "Al tener la primera etapa una ganancia de voltaje cercana a 1, las capacitancias internas del transistor no se multiplican y la respuesta en frecuencia no se frena.",
+    "guide": "La configuración Cascode conecta dos transistores en cascada directa: el primero en **Emisor Común (abajo)** y el segundo en **Base Común (arriba)**.<br>Su gran ventaja radica en cómo resuelve el problema de la velocidad en alta frecuencia:<br>- En un Emisor Común tradicional, las pequeñas capacitancias parásitas internas del transistor se multiplican por la ganancia de voltaje (fenómeno conocido en los libros como Efecto Miller), frenando la respuesta del circuito cuando la frecuencia sube.<br>- En el Cascode, la carga que 've' el primer transistor es simplemente el emisor del segundo, cuya resistencia es pequeñísima (apenas \\(r_e\\)). Por lo tanto, la ganancia de voltaje de la primera etapa es casi unitaria (\\(|A_{v1}| \\approx r_e/r_e = 1\\)).<br>- Al no haber ganancia de voltaje en el primer transistor, las capacitancias parásitas no se multiplican y el circuito no se frena. Toda la ganancia de voltaje la produce limpiamente el segundo transistor (Base Común), logrando un ancho de banda mucho mayor, ideal para radiofrecuencia y telecomunicaciones."
   },
   {
     "n": 13,
     "section": "F · Troubleshooting en Laboratorio",
     "type": "mcq",
-    "prompt": "Un estudiante monta en el laboratorio un amplificador CE y mide con el osciloscopio que la ganancia de tensión cayó de su valor de diseño de −120 a apenas −1.5. Sin embargo, al medir los voltajes con el multímetro en DC, comprueba que VBE = 0.7 V y VCEQ = 6.2 V, idénticos a los teóricos. ¿Cuál es la falla más probable?",
+    "prompt": "Un estudiante monta en el protoboard un amplificador en Emisor Común. Al medir con el multímetro en continua (DC), todas las tensiones están perfectas (VBE = 0.7 V, VCEQ = 6.2 V). Sin embargo, al conectar la señal alterna, el osciloscopio muestra que la ganancia de voltaje cayó de −120 a apenas −1.5. ¿Cuál es la falla más probable?",
     "options": [
       "El transistor se quemó y está en cortocircuito.",
-      "La resistencia de colector RC se abrió.",
-      "El condensador de desacoplo de emisor CE está desconectado o abierto.",
-      "La fuente de alimentación VCC está entregando corriente inversa."
+      "La resistencia de colector RC se abrió o se desconectó.",
+      "El condensador de desacoplo de emisor (CE) está desconectado, abierto o con falso contacto en el protoboard.",
+      "La fuente de alimentación VCC se quedó sin voltaje."
     ],
     "answer": 2,
+    "h1": "Si los voltajes de continua están perfectos, las resistencias y el transistor están bien polarizados en DC.",
+    "h2": "La ganancia cayó de -RC/re a -RC/RE. ¿Qué componente es el encargado de puentear RE en alterna?",
     "feedback": [
-      "No: si el transistor estuviera dañado, las medidas de tensión en DC estarían totalmente alteradas.",
-      "No: si RC se abriera, el voltaje DC de colector sería 0 V o flotante.",
-      "¡Ojo clínico en el laboratorio! Si CE se desconecta o se abre, la polarización DC no cambia en nada (porque en continua los condensadores son circuito abierto). Pero en AC, RE queda activa en la señal y la ganancia se desploma a \\(A_v \\approx -R_C/(r_e + R_E)\\). Con RE = 1 kΩ y RC = 1.5 kΩ, la ganancia cae a ~1.5. ¡Un clásico de laboratorio!",
-      "Descartado: la polarización DC ya fue comprobada y está en sus valores normales."
-    ]
+      "No: si el transistor estuviera quemado, los voltajes en continua VBE y VCEQ no darían 0.7 V y 6.2 V.",
+      "Incorrecto: si RC estuviera abierta, el voltaje de colector sería 0 V o flotante, no 6.2 V.",
+      "¡Exacto! El condensador de emisor no interviene en DC, por lo que el multímetro mide tensiones normales. Pero en AC, al estar abierto o desconectado, RE deja de estar puenteada y la ganancia se desploma de -RC/re a -RC/RE.",
+      "Falso: si la fuente no tuviera voltaje, todas las mediciones de continua darían cero."
+    ],
+    "guide": "<b>Respuesta correcta (C):</b> ¡Es una de las fallas más comunes en las prácticas de laboratorio!<br>Como las mediciones en continua (DC) son exactamente las esperadas (\\(V_{BE} = 0.7\\,\\mathrm{V}\\) y \\(V_{CEQ} = 6.2\\,\\mathrm{V}\\)), confirmamos que la fuente, el transistor y las resistencias \\(R_1, R_2, R_C, R_E\\) están en perfecto estado.<br>El único componente que no afecta la continua pero sí define la ganancia en alterna es el **condensador de desacoplo de emisor (\\(C_E\\))**. Si este condensador tiene una patica suelta, un falso contacto en el protoboard o está dañado por dentro, \\(R_E\\) queda sin puentear en alterna, haciendo que la ganancia caiga drásticamente de \\(A_v \\approx -R_C/r_e\\) (por ejemplo \\(-120\\)) a \\(A_v \\approx -R_C/R_E\\) (por ejemplo \\(-1.5\\))."
   },
   {
     "n": 14,
     "section": "F · Troubleshooting en Laboratorio",
     "type": "open",
-    "prompt": "¿Cómo se distingue en la pantalla de un osciloscopio si un amplificador en emisor común está recortando la señal por saturación dinámica o por corte?",
-    "h1": "Muchachos, recuerden que el amplificador en Emisor Común invierte la fase (180°).",
-    "h2": "¿Qué le ocurre al voltaje de colector cuando la entrada alcanza su cresta positiva máxima?",
-    "guide": "Debido a la inversión de fase de 180° propia del Emisor Común:\n1) Cuando la señal de entrada alcanza su cresta máxima positiva, el transistor se polariza con máxima corriente y se acerca a la saturación: el colector cae a su tensión más baja (\\(V_{CE(sat)} \\approx 0.2\\,\\mathrm{V}\\)). En consecuencia, el recorte por SATURACIÓN aparece en el semiciclo NEGATIVO (valle inferior) de la forma de onda en la pantalla del osciloscopio.\n2) Cuando la señal de entrada cae a su mínimo negativo, el transistor se apaga y entra en corte: la corriente cesa y el potencial de colector sube hacia \\(+V_{CC}\\). En consecuencia, el recorte por CORTE aparece en el semiciclo POSITIVO (cresta superior) de la forma de onda."
+    "prompt": "Cuando observas la señal de salida de un amplificador en Emisor Común en el osciloscopio, ¿cómo sabes si la onda se está recortando (aplanando) por saturación o por corte?",
+    "h1": "Recuerda que el Emisor Común invierte la fase (180°): lo que en la entrada es positivo, en la salida es negativo.",
+    "h2": "Saturación significa máxima corriente y el voltaje de colector cae casi a cero (VCE ≈ 0.2 V). Corte significa corriente cero y el colector sube hacia +VCC.",
+    "guide": "Debido a la inversión de fase de 180° propia del Emisor Común:<br>1) **Recorte por saturación:** Ocurre cuando el transistor conduce su máxima corriente y el voltaje entre colector y emisor cae a su valor mínimo (\\(V_{CE(sat)} \\approx 0.2\\,\\mathrm{V}\\)). Por la inversión de fase, este aplanamiento se ve en el **semiciclo inferior (el valle de abajo)** de la onda senoidal en la pantalla del osciloscopio.<br>2) **Recorte por corte:** Ocurre cuando el transistor se apaga por completo (corriente de colector cero) y el voltaje de colector sube hasta el nivel de la fuente \\(+V_{CC}\\). Este aplanamiento se ve en el **semiciclo superior (la cresta de arriba)** de la onda en el osciloscopio."
   },
   {
     "n": 15,
     "section": "F · Troubleshooting en Laboratorio",
     "type": "open",
-    "prompt": "Al diseñar con transistores reales como el 2N3904 o 2N2222A, el fabricante especifica un rango de \\(\\beta\\) muy amplio (entre 100 y 300). ¿Cómo se aplica la técnica de emisor dividido o swamping (Boylestad Sec. 5.6) para asegurar que la ganancia sea inmune a la dispersión de transistores y al calor?",
-    "h1": "Muchachos, comparen la sensibilidad de la ganancia cuando el emisor está totalmente puenteado frente a cuando usamos degeneración parcial (resistencia partida o swamping).",
-    "h2": "Analicen qué pasa con la ecuación \\(A_v = -R_C / (r_e + R_{E1})\\) cuando elegimos \\(R_{E1} \\gg r_e\\).",
-    "guide": "Para insensibilizar la ganancia ante la dispersión de \\(\\beta\\) y ante la variación térmica de \\(r_e = 26\\,\\mathrm{mV}/I_E\\), el ingeniero recurre a la técnica de emisor dividido (swamping o degeneración parcial): se divide la resistencia de emisor en dos partes en serie \\(R_E = R_{E1} + R_{E2}\\), y se coloca el condensador de bypass \\(C_E\\) exclusivamente en paralelo con \\(R_{E2}\\). Así, en AC la ganancia de la etapa queda regida por: \\(A_v \\approx -R_C / (r_e + R_{E1})\\). Si elegimos \\(R_{E1} \\ge 10 r_e\\), la ganancia pasa a depender casi al 100% del cociente de resistencias externas \\(A_v \\approx -R_C / R_{E1}\\). Esto hace que el amplificador mantenga exactamente la misma ganancia aunque cambies de transistor o la temperatura suba 40°C en el chasis del equipo."
+    "prompt": "Al comprar transistores comerciales (como el 2N3904), el fabricante indica que el factor β puede variar ampliamente (por ejemplo, entre 100 y 300), y además la resistencia interna re cambia con la temperatura. ¿Cómo ayuda la técnica de 'emisor dividido' (resistencia partida RE1 + RE2) a que la ganancia del amplificador sea estable y predecible?",
+    "h1": "Si dejamos una pequeña parte de la resistencia de emisor (RE1) sin condensador de desacoplo, la ganancia pasa a depender de resistencias externas y no del transistor.",
+    "h2": "Compara la fórmula Av ≈ -RC / re frente a Av ≈ -RC / RE1 cuando elegimos RE1 mucho mayor que re.",
+    "guide": "La técnica de **emisor dividido** (conocida en los textos como *swamping* o degeneración parcial) consiste en dividir la resistencia de emisor en dos resistencias en serie: \\(R_E = R_{E1} + R_{E2}\\), y colocar el condensador de desacoplo \\(C_E\\) exclusivamente en paralelo con \\(R_{E2}\\).<br>De esta forma:<br>- La ganancia de voltaje en alterna queda regida por: \\(A_v \\approx -\\frac{R_C}{r_e + R_{E1}}\\).<br>- Si elegimos \\(R_{E1}\\) para que sea notablemente mayor que \\(r_e\\) (por ejemplo, \\(R_{E1} \\ge 10 r_e\\)), la resistencia interna del transistor \\(r_e\\) queda prácticamente despreciada, y la ganancia pasa a ser simplemente el cociente de dos resistencias fijas:<br>\\[A_v \\approx -\\frac{R_C}{R_{E1}}\\]<br>Como \\(R_C\\) y \\(R_{E1}\\) son componentes comerciales fijos con tolerancias conocidas (1% o 5%), el circuito mantendrá exactamente la misma ganancia aunque cambies de transistor por otro con distinto \\(\\beta\\) o la temperatura del chasis suba varios grados en el laboratorio."
   }
 ];

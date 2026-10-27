@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITM - Transistores de Efecto de Campo (MOSFET)</title>
+    <!-- KaTeX for crisp LaTeX formulas -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    <style>
+        :root {
+            --bg-navy: #0B1B3D;
+            --bg-card: #12264D;
+            --border-cyan: #00C0F3;
+            --gold-accent: #FFB800;
+            --text-white: #FFFFFF;
+            --text-muted: #94A3B8;
+            --emerald: #34D399;
+            --coral: #F87171;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--bg-navy);
+            color: var(--text-white);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        header {
+            background: linear-gradient(135deg, #102A6B 0%, #0B1B3D 100%);
+            border: 2px solid var(--gold-accent);
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+        .header-title h1 { font-size: 1.8rem; color: var(--gold-accent); margin-bottom: 6px; }
+        .header-title h2 { font-size: 1.2rem; color: var(--border-cyan); font-weight: 500; }
+        .header-badge {
+            background: rgba(0, 192, 243, 0.15);
+            border: 1px solid var(--border-cyan);
+            padding: 12px 18px;
+            border-radius: 8px;
+            text-align: right;
+        }
+        .badge-itm { font-weight: bold; font-size: 1rem; color: var(--text-white); }
+        .badge-sub { font-size: 0.85rem; color: var(--gold-accent); }
+        
+        .section-card {
+            background-color: var(--bg-card);
+            border: 1px solid rgba(0, 192, 243, 0.4);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 28px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 2px solid rgba(0, 192, 243, 0.3);
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+        }
+        .section-num {
+            background: var(--gold-accent);
+            color: var(--bg-navy);
+            font-weight: 900;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 1.1rem;
+        }
+        .section-title { font-size: 1.4rem; color: var(--text-white); font-weight: 700; }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        @media(max-width: 900px) {
+            .grid-2 { grid-template-columns: 1fr; }
+        }
+        
+        .sub-card {
+            background: rgba(14, 30, 64, 0.8);
+            border-radius: 8px;
+            padding: 18px;
+            border-left: 4px solid var(--border-cyan);
+        }
+        .sub-card.emerald { border-left-color: var(--emerald); }
+        .sub-card.coral { border-left-color: var(--coral); }
+        .sub-card.gold { border-left-color: var(--gold-accent); }
+        
+        .sub-card h3 {
+            font-size: 1.15rem;
+            color: var(--gold-accent);
+            margin-bottom: 12px;
+        }
+        
+        .formula-box {
+            background: #081226;
+            border: 1px dashed var(--border-cyan);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 14px 0;
+            text-align: center;
+            font-size: 1.15rem;
+        }
+        
+        img.diagram {
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 192, 243, 0.4);
+            margin-top: 10px;
+        }
+        
+        .speaker-notes {
+            background: rgba(255, 184, 0, 0.08);
+            border-left: 4px solid var(--gold-accent);
+            padding: 14px 18px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 16px;
+            font-style: italic;
+            font-size: 0.95rem;
+            color: #FDE68A;
+        }
+        
+        table.custom-tbl {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 14px;
+        }
+        table.custom-tbl th {
+            background: #102A6B;
+            color: var(--gold-accent);
+            text-align: left;
+            padding: 12px;
+            font-size: 0.95rem;
+            border: 1px solid rgba(0, 192, 243, 0.3);
+        }
+        table.custom-tbl td {
+            padding: 10px 12px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(0, 192, 243, 0.2);
+            color: var(--text-muted);
+        }
+        table.custom-tbl tr:nth-child(even) { background: rgba(14, 30, 64, 0.6); }
+        table.custom-tbl tr:nth-child(odd) { background: rgba(18, 38, 77, 0.8); }
+        table.custom-tbl td strong { color: var(--text-white); }
+        
+        .copy-btn {
+            background: rgba(0, 192, 243, 0.2);
+            border: 1px solid var(--border-cyan);
+            color: var(--border-cyan);
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-top: 8px;
+            transition: all 0.2s;
+        }
+        .copy-btn:hover {
+            background: var(--border-cyan);
+            color: var(--bg-navy);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div style="margin-bottom:16px;display:flex;gap:12px;flex-wrap:wrap;">
+        <a href="../fet.html" style="background:#00C0F3;color:#0B1B3D;font-weight:bold;padding:8px 16px;border-radius:6px;text-decoration:none;">← Volver a AnalogLab (Capítulo FET & MOSFET)</a>
+        <a href="Transistores_MOSFET_Clase_ITM.pptx" download style="background:#FFB800;color:#0B1B3D;font-weight:bold;padding:8px 16px;border-radius:6px;text-decoration:none;">📥 Descargar Diapositivas Oficiales ITM (.pptx)</a>
+    </div>
+
+    <header>
+        <div class="header-title">
+            <h1>TRANSISTORES DE EFECTO DE CAMPO (MOSFET)</h1>
+            <h2>Guía Maestra de Clase y Referencia Matemática — Electrónica Analógica</h2>
+        </div>
+        <div class="header-badge">
+            <div class="badge-itm">INSTITUCIÓN UNIVERSITARIA ITM</div>
+            <div class="badge-sub">Docente: Fredy Andrés Torres Muñoz</div>
+        </div>
+    </header>
+
+    <!-- SECTION 1 -->
+    <div class="section-card">
+        <div class="section-header">
+            <span class="section-num">01</span>
+            <span class="section-title">El Gran Cambio de Paradigma: BJT vs FET</span>
+        </div>
+        <div class="grid-2">
+            <div class="sub-card coral">
+                <h3>Transistor BJT (Control por Corriente)</h3>
+                <p>• Requiere flujo ininterrumpido de corriente de base $I_B$ para sostener la conducción.</p>
+                <div class="formula-box">$$I_C = \beta I_B = I_S e^{\frac{V_{BE}}{V_T}}$$</div>
+                <p>• <strong>Impedancia de entrada:</strong> $Z_{in} \sim 1\text{ k}\Omega - 50\text{ k}\Omega$ (efecto de carga evidente).</p>
+                <p>• <strong>Analogía de Malvino:</strong> Válvula con muelle que exige fuerza continua aplicada para mantenerse abierta.</p>
+            </div>
+            <div class="sub-card emerald">
+                <h3>Transistor MOSFET (Control por Voltaje)</h3>
+                <p>• Control electrostático puro por campo eléctrico transversal a través de la compuerta.</p>
+                <div class="formula-box">$$I_G \approx 0\text{ A} \quad \implies \quad I_D = k (V_{GS} - V_{GS(th)})^2$$</div>
+                <p>• <strong>Impedancia de entrada:</strong> $Z_{in} \sim 10^{12}\,\Omega - 10^{14}\,\Omega$ (aislamiento galvánico por $SiO_2$).</p>
+                <p>• <strong>Analogía de Malvino:</strong> Válvula hidráulica con émbolo electrostático: abre el paso sin consumir líquido por la llave.</p>
+            </div>
+        </div>
+        <div class="speaker-notes">
+            <strong>Guión del Profesor:</strong> "Muchachos, noten que $I_G = 0\text{ A}$ no es una aproximación perezosa; es un hecho físico debido a la capa de vidrio ($SiO_2$). Esto es lo que permite que una salida de $3.3\text{ V}$ de un ESP32 gobierne motores de $20\text{ A}$ sin quemar el microcontrolador."
+        </div>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="section-card">
+        <div class="section-header">
+            <span class="section-num">02</span>
+            <span class="section-title">Estructura Física, Capa de Inversión y Alerta ESD</span>
+        </div>
+        <img src="diagrama_estructura_fisica.png" alt="Estructura Física E-MOSFET" class="diagram">
+        <div class="grid-2" style="margin-top: 18px;">
+            <div class="sub-card gold">
+                <h3>Formación de la Capa de Inversión</h3>
+                <p>1. Al aplicar $V_{GS} > 0\text{ V}$, el electrodo de compuerta repele los huecos mayoritarios del sustrato P.</p>
+                <p>2. Al superar el <strong>Voltaje Umbral ($V_{GS(th)}$)</strong>, el campo eléctrico atrae electrones libres a la superficie.</p>
+                <p>3. Se forma un canal N conductor continuo que une los pozos N+ de Fuente y Drenador.</p>
+            </div>
+            <div class="sub-card coral">
+                <h3>Alerta de Taller: Fragilidad ESD (Malvino)</h3>
+                <p>• El espesor del dieléctrico de $SiO_2$ es menor a $100\text{ nm}$.</p>
+                <p>• Una descarga electrostática humana ($> 2000\text{ V}$) produce un gradiente:</p>
+                <div class="formula-box">$$E = \frac{V_{ESD}}{t_{ox}} > 10^7\text{ V/cm} \quad \implies \text{Perforación Dieléctrica}$$</div>
+                <p>• <strong>Regla en laboratorio:</strong> Uso obligatorio de manilla antiestática y disipación a tierra antes de tocar los terminales.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 3 -->
+    <div class="section-card">
+        <div class="section-header">
+            <span class="section-num">03</span>
+            <span class="section-title">Curvas Duales y Regiones de Operación</span>
+        </div>
+        <img src="diagrama_curvas_mosfet.png" alt="Curvas Características Duales MOSFET" class="diagram">
+        <div class="grid-2" style="margin-top: 18px;">
+            <div class="sub-card">
+                <h3>Condiciones Matemáticas de Operación</h3>
+                <p><strong>1. Región de Corte:</strong></p>
+                <p>$$V_{GS} < V_{GS(th)} \implies I_D = 0\text{ A}$$</p>
+                <p><strong>2. Región Óhmica / Triodo:</strong></p>
+                <p>$$V_{GS} \ge V_{GS(th)} \quad \text{y} \quad V_{DS} < V_{GS} - V_{GS(th)}$$</p>
+                <p>Actúa como resistencia lineal $R_{DS(on)}$ controlada por voltaje.</p>
+                <p><strong>3. Región de Saturación / Activa:</strong></p>
+                <p>$$V_{GS} \ge V_{GS(th)} \quad \text{y} \quad V_{DS} \ge V_{GS} - V_{GS(th)}$$</p>
+                <p>Estrangulamiento del canal: la corriente se satura en un valor constante.</p>
+            </div>
+            <div class="sub-card emerald">
+                <h3>Ecuaciones Fundamentales (Boylestad)</h3>
+                <div class="formula-box">
+                    $$I_D = k \left(V_{GS} - V_{GS(th)}\right)^2$$
+                </div>
+                <p>Cálculo de la constante de conducción $k$ desde la hoja de datos:</p>
+                <div class="formula-box">
+                    $$k = \frac{I_{D(on)}}{\left(V_{GS(on)} - V_{GS(th)}\right)^2}$$
+                </div>
+                <p>Frontera de estrangulamiento (*pinch-off*):</p>
+                <div class="formula-box">
+                    $$V_{DS(sat)} = V_{GS} - V_{GS(th)}$$
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 4 -->
+    <div class="section-card">
+        <div class="section-header">
+            <span class="section-num">04</span>
+            <span class="section-title">Simbología Normalizada IEEE / IEC</span>
+        </div>
+        <img src="diagrama_simbologia_fet.png" alt="Simbología FET" class="diagram">
+    </div>
+
+    <!-- SECTION 5 -->
+    <div class="section-card">
+        <div class="section-header">
+            <span class="section-num">05</span>
+            <span class="section-title">Ejercicio Resuelto Paso a Paso: Polarización por Divisor</span>
+        </div>
+        <img src="diagrama_divisor_tension.png" alt="Circuito Divisor de Tensión" class="diagram">
+        <div class="sub-card gold" style="margin-top: 18px;">
+            <h3>Resolución Matemática Completa (Parcial Tipo ITM)</h3>
+            <p><strong>Paso 1: Parámetro $k$</strong></p>
+            $$k = \frac{5\text{ mA}}{(5.0\text{ V} - 2.5\text{ V})^2} = \frac{5}{6.25} = 0.80\text{ mA/V}^2$$
+            
+            <p><strong>Paso 2: Voltaje de Compuerta $V_G$</strong></p>
+            $$V_G = V_{DD} \left(\frac{R_2}{R_1 + R_2}\right) = 24\text{ V} \left(\frac{10\text{ M}\Omega}{22\text{ M}\Omega + 10\text{ M}\Omega}\right) = 7.50\text{ V}$$
+            
+            <p><strong>Paso 3: Malla de Entrada Compuerta-Fuente</strong></p>
+            $$V_{GS} = V_G - I_D R_S = 7.50 - 0.82 I_D \quad (\text{con } I_D \text{ en mA})$$
+            
+            <p><strong>Paso 4: Ecuación Cuadrática</strong></p>
+            $$I_D = 0.80 \left[(7.50 - 0.82 I_D) - 2.50\right]^2 = 0.80 (5.0 - 0.82 I_D)^2$$
+            $$0.538 I_D^2 - 7.56 I_D + 20.0 = 0$$
+            
+            <p><strong>Paso 5: Solución y Criterio Físico de Descarte</strong></p>
+            $$I_{D1} = 7.15\text{ mA} \implies V_{GS1} = 7.50 - 7.15(0.82) = 1.64\text{ V} < V_{GS(th)} \quad \text{[SE DES CARTA]}$$
+            $$I_{DQ} = 3.22\text{ mA} \implies V_{GSQ} = 7.50 - 3.22(0.82) = 4.86\text{ V} > 2.5\text{ V} \quad \text{[VÁLIDA]}$$
+            
+            <p><strong>Paso 6: Cálculo de $V_{DSQ}$ y Comprobación de Saturación</strong></p>
+            $$V_{DSQ} = 24\text{ V} - 3.22\text{ mA}(1.8\text{ k}\Omega + 0.82\text{ k}\Omega) = 24 - 8.44 = 15.56\text{ V}$$
+            $$V_{DS(sat)} = V_{GSQ} - V_{GS(th)} = 4.86\text{ V} - 2.5\text{ V} = 2.36\text{ V}$$
+            $$\text{Como } 15.56\text{ V} \ge 2.36\text{ V} \implies \mathbf{¡Operación\ en\ Saturación\ Confirmada!}$$
+        </div>
+    </div>
+
+    <!-- SECTION 6 -->
+    <div class="section-card">
+        <div class="section-header">
+            <span class="section-num">06</span>
+            <span class="section-title">Caso Industrial: Driver de Potencia con Microcontrolador</span>
+        </div>
+        <img src="diagrama_driver_potencia.png" alt="Driver de Potencia Industrial" class="diagram">
+        <div class="grid-2" style="margin-top: 18px;">
+            <div class="sub-card emerald">
+                <h3>Los 4 Componentes Indispensables</h3>
+                <p><strong>1. MOSFET Logic-Level (IRLZ44N):</strong> Conduce plenamente con los $3.3\text{ V}$ del microcontrolador.</p>
+                <p><strong>2. Diodo Flyback (1N5822 Schottky):</strong> Evita la destrucción del transistor por el pulso destructivo $-L \frac{di}{dt}$.</p>
+                <p><strong>3. Resistencia $R_G = 100\,\Omega$:</strong> Amortigua el pulso de carga de $C_{iss}$ protegiendo el pin GPIO.</p>
+                <p><strong>4. Resistencia $R_{PD} = 100\text{ k}\Omega$:</strong> Evita que la compuerta flote en alta impedancia durante el arranque.</p>
+            </div>
+            <div class="sub-card gold">
+                <h3>Eficiencia Térmica: BJT vs MOSFET a 10 Amperios</h3>
+                <table class="custom-tbl">
+                    <tr><th>Parámetro</th><th>BJT (TIP35C)</th><th>MOSFET (IPP015N04N)</th></tr>
+                    <tr><td>Caída / Resistencia</td><td>$V_{CE(sat)} = 1.2\text{ V}$</td><td>$R_{DS(on)} = 1.5\text{ m}\Omega$</td></tr>
+                    <tr><td>Potencia Disipada</td><td>$P = 10\text{ A} \cdot 1.2\text{ V} = \mathbf{12\text{ W}}$</td><td>$P = (10\text{ A})^2 \cdot 0.0015\,\Omega = \mathbf{0.15\text{ W}}$</td></tr>
+                    <tr><td>Refrigeración</td><td>Disipador grande + ventilador</td><td>Área de cobre en la PCB</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

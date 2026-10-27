@@ -31,7 +31,7 @@
           <button class="btn small h1">Pista 1</button>
           <button class="btn small h2">Pista 2</button>
           <button class="btn small primary attempt">Registrar / comprobar</button>
-          <button class="btn small guideBtn" disabled>Respuesta orientativa</button>
+          <button class="btn small guideBtn">Ver solución / Criterio</button>
         </div>
         <p class="feedback"></p>
         <div class="hint hint1"></div>
@@ -44,16 +44,23 @@
       const g = $('.guide', el);
       const gb = $('.guideBtn', el);
 
+      // Pre-cargar la solución orientativa para que nunca aparezca "undefined"
+      let guideHtml = item.guide || '';
+      if (!guideHtml && item.type === 'mcq' && item.options) {
+        guideHtml = `<b>Respuesta correcta (${String.fromCharCode(65 + item.answer)}):</b> ${item.options[item.answer]}<br><br>${(item.feedback && item.feedback[item.answer]) ? item.feedback[item.answer] : ''}`;
+      }
+      g.innerHTML = guideHtml ? `<div class="guide-box" style="margin-top:8px; padding:10px 14px; background:#f0fdf4; border-left:4px solid #16a34a; border-radius:4px;"><b style="color:#166534; display:block; margin-bottom:4px;">💡 Solución y Criterio Pedagógico:</b>${guideHtml}</div>` : '';
+
       $('.h1', el).addEventListener('click', () => {
         let e = $('.hint1', el);
-        e.innerHTML = item.h1 || 'Revisa el concepto físico en bjt-ac.html.';
+        e.innerHTML = item.h1 || 'Revisa los conceptos básicos de BJT en AC.';
         window.AL.typeset(e);
         e.classList.toggle('show');
       });
 
       $('.h2', el).addEventListener('click', () => {
         let e = $('.hint2', el);
-        e.innerHTML = item.h2 || 'Comprueba las ecuaciones de los libros de texto.';
+        e.innerHTML = item.h2 || 'Consulta las ecuaciones de Boylestad y Malvino.';
         window.AL.typeset(e);
         e.classList.toggle('show');
       });
@@ -61,9 +68,12 @@
       if (item.type === 'mcq') {
         $$('.options button', el).forEach(b => b.addEventListener('click', () => {
           el.dataset.choice = b.dataset.i;
-          fb.innerHTML = item.feedback[+b.dataset.i];
+          $$('.options button', el).forEach(btn => btn.classList.remove('selected'));
+          b.classList.add('selected');
+          fb.innerHTML = (item.feedback && item.feedback[+b.dataset.i]) ? item.feedback[+b.dataset.i] : '';
           window.AL.typeset(fb);
           fb.className = 'feedback ' + (+b.dataset.i === item.answer ? 'ok' : 'bad');
+          attempted = true;
         }));
       }
 
@@ -76,7 +86,7 @@
           okAttempt = Number.isFinite(x);
           if (okAttempt) {
             let ok = Math.abs(x - item.answer) <= (item.tol || 0.05);
-            window.AL.fb(fb, (ok ? 'Resultado correcto. ' : 'Revisa el cálculo. ') + item.guide, ok);
+            window.AL.fb(fb, (ok ? 'Resultado correcto. ' : 'Revisa el cálculo. ') + (item.guide || ''), ok);
           }
         } else {
           okAttempt = el.dataset.choice !== undefined;
@@ -87,15 +97,13 @@
           return;
         }
         attempted = true;
-        gb.disabled = false;
         $('.attempt', el).textContent = '✓ Intento registrado';
       });
 
       gb.addEventListener('click', () => {
-        if (!attempted) return;
-        g.innerHTML = item.guide;
-        window.AL.typeset(g);
         g.classList.toggle('show');
+        gb.textContent = g.classList.contains('show') ? 'Ocultar solución' : 'Ver solución / Criterio';
+        window.AL.typeset(g);
       });
 
       wrapTheory.appendChild(el);
@@ -329,13 +337,40 @@
   }
 
   // =========================================================================
-  // BOTÓN IMPRIMIR / PDF
+  // BOTONES MAESTROS: MOSTRAR SOLUCIONARIOS E IMPRIMIR / PDF
   // =========================================================================
+  const btnToggleAllSolutions = $('#btnToggleAllSolutions');
+  let allSolutionsOpen = false;
+  if (btnToggleAllSolutions) {
+    btnToggleAllSolutions.addEventListener('click', () => {
+      allSolutionsOpen = !allSolutionsOpen;
+      $$('details', document).forEach(d => d.open = allSolutionsOpen);
+      $$('.guide', document).forEach(g => {
+        if (allSolutionsOpen) {
+          g.classList.add('show');
+        } else {
+          g.classList.remove('show');
+        }
+      });
+      $$('.guideBtn', document).forEach(b => {
+        b.textContent = allSolutionsOpen ? 'Ocultar solución' : 'Ver solución / Criterio';
+      });
+      btnToggleAllSolutions.textContent = allSolutionsOpen 
+        ? '🙈 Ocultar Todos los Solucionarios (Modo Práctica)' 
+        : '👁️ Mostrar Todos los Solucionarios (Modo Estudio)';
+      if (allSolutionsOpen && window.AL?.typeset) {
+        window.AL.typeset(document.body);
+      }
+    });
+  }
+
   const btnPrintPdf = $('#btnPrintPdf');
   if (btnPrintPdf) {
     btnPrintPdf.addEventListener('click', () => {
       $$('details', document).forEach(d => d.open = true);
-      window.print();
+      $$('.guide', document).forEach(g => g.classList.add('show'));
+      if (window.AL?.typeset) window.AL.typeset(document.body);
+      setTimeout(() => window.print(), 250);
     });
   }
 
