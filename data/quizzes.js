@@ -2902,101 +2902,536 @@ window.ANALOG_QUIZZES={
 window.ANALOG_QUIZZES=window.ANALOG_QUIZZES||{};window.ANALOG_QUIZZES["bjt-ac"]=[{"q":"¿Para qué se calcula primero el punto Q?","options":[{"text":"Para obtener las corrientes DC que determinan los parámetros incrementales","feedback":"El punto de operación determina IEQ, ICQ y la validez del modelo incremental."},{"text":"Para conocer la frecuencia exacta de corte","feedback":"Revisa: El punto de operación determina IEQ, ICQ y la validez del modelo incremental."},{"text":"Para eliminar el transistor","feedback":"Revisa: El punto de operación determina IEQ, ICQ y la validez del modelo incremental."}],"answer":0},{"q":"Al obtener el equivalente AC de una fuente ideal independiente de tensión DC constante:","options":[{"text":"Se sustituye por un circuito abierto","feedback":"Revisa: Su variación AC es cero, por eso se representa como tierra de AC."},{"text":"Se duplica su voltaje","feedback":"Revisa: Su variación AC es cero, por eso se representa como tierra de AC."},{"text":"Se sustituye por un cortocircuito","feedback":"Su variación AC es cero, por eso se representa como tierra de AC."}],"answer":2},{"q":"En el análisis AC de banda media, un capacitor de acoplamiento suficientemente grande:","options":[{"text":"Se trata como una batería","feedback":"Revisa: La aproximación requiere |XC| mucho menor que las resistencias relevantes."},{"text":"Puede aproximarse por un cortocircuito","feedback":"La aproximación requiere |XC| mucho menor que las resistencias relevantes."},{"text":"Se abre siempre","feedback":"Revisa: La aproximación requiere |XC| mucho menor que las resistencias relevantes."}],"answer":1},{"q":"Si no hay bypass en RE, esa resistencia:","options":[{"text":"Permanece en el equivalente AC","feedback":"RE no puenteada produce degeneración de emisor."},{"text":"Desaparece siempre","feedback":"Revisa: RE no puenteada produce degeneración de emisor."},{"text":"Se vuelve una fuente de corriente","feedback":"Revisa: RE no puenteada produce degeneración de emisor."}],"answer":0},{"q":"Si IEQ=2 mA y VT≈26 mV, ¿cuánto vale re?","options":[{"text":"13 kΩ","feedback":"Revisa: 26mV/2mA=13Ω."},{"text":"52 Ω","feedback":"Revisa: 26mV/2mA=13Ω."},{"text":"13 Ω","feedback":"26mV/2mA=13Ω."}],"answer":2},{"q":"Si IEQ aumenta y la temperatura se mantiene, re:","options":[{"text":"No cambia","feedback":"Revisa: La resistencia re es inversamente proporcional a IEQ."},{"text":"Disminuye","feedback":"La resistencia re es inversamente proporcional a IEQ."},{"text":"Aumenta","feedback":"Revisa: La resistencia re es inversamente proporcional a IEQ."}],"answer":1},{"q":"El signo negativo de la ganancia CE indica:","options":[{"text":"Inversión de fase","feedback":"En emisor común la salida de banda media invierte la fase respecto a la entrada."},{"text":"Ganancia de corriente negativa","feedback":"Revisa: En emisor común la salida de banda media invierte la fase respecto a la entrada."},{"text":"Voltaje DC negativo en toda la etapa","feedback":"Revisa: En emisor común la salida de banda media invierte la fase respecto a la entrada."}],"answer":0},{"q":"En CE con emisor bypassado y carga RL, la resistencia efectiva de colector es:","options":[{"text":"RC + RL siempre","feedback":"Revisa: La carga conectada por C2 aparece en paralelo en AC."},{"text":"Solamente RC sin importar RL","feedback":"Revisa: La carga conectada por C2 aparece en paralelo en AC."},{"text":"RC en paralelo con RL","feedback":"La carga conectada por C2 aparece en paralelo en AC."}],"answer":2},{"q":"Con RC=RL=2 kΩ, ¿cuál es RC||RL?","options":[{"text":"2 kΩ","feedback":"Revisa: Dos resistencias iguales en paralelo equivalen a la mitad."},{"text":"1 kΩ","feedback":"Dos resistencias iguales en paralelo equivalen a la mitad."},{"text":"4 kΩ","feedback":"Revisa: Dos resistencias iguales en paralelo equivalen a la mitad."}],"answer":1},{"q":"¿Qué cambio suele provocar aumentar RE sin bypass?","options":[{"text":"Menor magnitud de ganancia y mayor estabilidad","feedback":"La resistencia de emisor sin bypass introduce realimentación negativa local."},{"text":"Ganancia infinita","feedback":"Revisa: La resistencia de emisor sin bypass introduce realimentación negativa local."},{"text":"La desaparición de la polarización DC","feedback":"Revisa: La resistencia de emisor sin bypass introduce realimentación negativa local."}],"answer":0},{"q":"¿Qué parámetro es característico del híbrido-π?","options":[{"text":"Frecuencia PWM del 555","feedback":"Revisa: La fuente controlada del modelo π suele expresarse como gm vπ."},{"text":"Resistencia térmica del disipador","feedback":"Revisa: La fuente controlada del modelo π suele expresarse como gm vπ."},{"text":"Transconductancia gm","feedback":"La fuente controlada del modelo π suele expresarse como gm vπ."}],"answer":2},{"q":"La relación gm≈ICQ/VT utiliza:","options":[{"text":"La corriente alterna de la carga","feedback":"Revisa: gm se evalúa en el punto de operación."},{"text":"La corriente DC de colector","feedback":"gm se evalúa en el punto de operación."},{"text":"La corriente de arranque del motor","feedback":"Revisa: gm se evalúa en el punto de operación."}],"answer":1},{"q":"¿Qué representa rπ?","options":[{"text":"Resistencia incremental de entrada base-emisor","feedback":"El híbrido-π utiliza rπ entre base y emisor."},{"text":"Resistencia externa RC","feedback":"Revisa: El híbrido-π utiliza rπ entre base y emisor."},{"text":"Resistencia del motor","feedback":"Revisa: El híbrido-π utiliza rπ entre base y emisor."}],"answer":0},{"q":"Si βac=100 y gm=0.05 S, rπ vale:","options":[{"text":"5 Ω","feedback":"Revisa: rπ=β/gm=100/0.05=2000Ω."},{"text":"0.5 Ω","feedback":"Revisa: rπ=β/gm=100/0.05=2000Ω."},{"text":"2 kΩ","feedback":"rπ=β/gm=100/0.05=2000Ω."}],"answer":2},{"q":"¿Cuál etapa tiene Av cercana a +1 y alta impedancia de entrada?","options":[{"text":"Rectificador de media onda","feedback":"Revisa: El seguidor de emisor adapta impedancias y presenta Av ligeramente menor que 1."},{"text":"Colector común (seguidor de emisor)","feedback":"El seguidor de emisor adapta impedancias y presenta Av ligeramente menor que 1."},{"text":"Emisor común inversor","feedback":"Revisa: El seguidor de emisor adapta impedancias y presenta Av ligeramente menor que 1."}],"answer":1},{"q":"¿Cuál tiene típicamente impedancia de entrada baja?","options":[{"text":"Base común","feedback":"La entrada de CB se observa desde el emisor, próxima a re."},{"text":"Colector común","feedback":"Revisa: La entrada de CB se observa desde el emisor, próxima a re."},{"text":"Un capacitor desconectado","feedback":"Revisa: La entrada de CB se observa desde el emisor, próxima a re."}],"answer":0},{"q":"¿Qué condición limita el modelo de pequeña señal?","options":[{"text":"Que la fuente esté desconectada","feedback":"Revisa: El modelo es lineal local alrededor del punto Q."},{"text":"Que RC sea cero","feedback":"Revisa: El modelo es lineal local alrededor del punto Q."},{"text":"Que la amplitud no fuerce corte o saturación","feedback":"El modelo es lineal local alrededor del punto Q."}],"answer":2},{"q":"¿Por qué puede variar la ganancia real frente al valor calculado?","options":[{"text":"Porque re no tiene unidades","feedback":"Revisa: Los modelos aproximados omiten aspectos reales como ro y límites de frecuencia."},{"text":"Carga, β, ro, tolerancias y frecuencia","feedback":"Los modelos aproximados omiten aspectos reales como ro y límites de frecuencia."},{"text":"Porque el signo menos es una prohibición","feedback":"Revisa: Los modelos aproximados omiten aspectos reales como ro y límites de frecuencia."}],"answer":1},{"q":"El circuito equivalente AC de banda media sirve para:","options":[{"text":"Calcular la respuesta incremental alrededor de Q","feedback":"Se analiza la variación alrededor del punto establecido por DC."},{"text":"Volver a obtener el voltaje de la batería DC","feedback":"Revisa: Se analiza la variación alrededor del punto establecido por DC."},{"text":"Reemplazar la medición de seguridad","feedback":"Revisa: Se analiza la variación alrededor del punto establecido por DC."}],"answer":0},{"q":"¿Qué debe hacerse con una fuente independiente de corriente DC al obtener el equivalente AC?","options":[{"text":"Cortocircuitarla","feedback":"Revisa: Una corriente DC constante tiene variación AC cero; su equivalente incremental es una fuente de corriente nula, es decir un circuito abierto."},{"text":"Transformarla en un diodo","feedback":"Revisa: Una corriente DC constante tiene variación AC cero; su equivalente incremental es una fuente de corriente nula, es decir un circuito abierto."},{"text":"Abrirla","feedback":"Una corriente DC constante tiene variación AC cero; su equivalente incremental es una fuente de corriente nula, es decir un circuito abierto."}],"answer":2},{"q":"Un sensor tiene Rs=10 kΩ y la etapa tiene Zin=10 kΩ. ¿Qué fracción de vs llega a la entrada de la etapa?","options":[{"text":"1.0","feedback":"Revisa: El divisor de entrada es Zin/(Rs+Zin) = 10/(10+10) = 0.5."},{"text":"0.5","feedback":"El divisor de entrada es Zin/(Rs+Zin) = 10/(10+10) = 0.5."},{"text":"2.0","feedback":"Revisa: El divisor de entrada es Zin/(Rs+Zin) = 10/(10+10) = 0.5."}],"answer":1},{"q":"¿Cuál comparación es correcta para una etapa de emisor común con carga?","options":[{"text":"Av=vout/vbase no es necesariamente vout/vs","feedback":"La resistencia de fuente Rs provoca atenuación previa a la base."},{"text":"Av=vout/vs siempre","feedback":"Revisa: La resistencia de fuente Rs provoca atenuación previa a la base."},{"text":"Rs no influye nunca","feedback":"Revisa: La resistencia de fuente Rs provoca atenuación previa a la base."}],"answer":0},{"q":"Para que un capacitor se aproxime a corto en banda media, su |Xc| debe ser:","options":[{"text":"Igual a cualquier resistencia","feedback":"Revisa: El criterio depende de frecuencia y de las impedancias del circuito."},{"text":"Siempre infinita","feedback":"Revisa: El criterio depende de frecuencia y de las impedancias del circuito."},{"text":"Pequeña frente a las resistencias relevantes","feedback":"El criterio depende de frecuencia y de las impedancias del circuito."}],"answer":2},{"q":"Si C=1 µF y f=100 Hz, ¿qué orden de magnitud tiene |Xc|?","options":[{"text":"16 Ω","feedback":"Revisa: 1/(2πfC) ≈1592 Ω."},{"text":"1.6 kΩ","feedback":"1/(2πfC) ≈1592 Ω."},{"text":"160 kΩ","feedback":"Revisa: 1/(2πfC) ≈1592 Ω."}],"answer":1},{"q":"Al elevar la frecuencia diez veces, la reactancia capacitiva |Xc|:","options":[{"text":"Se divide por diez","feedback":"|Xc|=1/(2πfC) es inversamente proporcional a f."},{"text":"Se multiplica por diez","feedback":"Revisa: |Xc|=1/(2πfC) es inversamente proporcional a f."},{"text":"Permanece constante","feedback":"Revisa: |Xc|=1/(2πfC) es inversamente proporcional a f."}],"answer":0},{"q":"En DC permanente, el capacitor de bypass del emisor se modela como:","options":[{"text":"Fuente ideal","feedback":"Revisa: El capacitor ideal no conduce corriente continua estable."},{"text":"Resistencia negativa","feedback":"Revisa: El capacitor ideal no conduce corriente continua estable."},{"text":"Circuito abierto","feedback":"El capacitor ideal no conduce corriente continua estable."}],"answer":2},{"q":"En un CE, si el capacitor de bypass deja de ser eficaz al bajar f, en general:","options":[{"text":"Se invierte la fase a cero siempre","feedback":"Revisa: RE deja de estar puenteada al aumentar |XCE|."},{"text":"Aumenta la degeneración y disminuye |Av|","feedback":"RE deja de estar puenteada al aumentar |XCE|."},{"text":"Se elimina RC","feedback":"Revisa: RE deja de estar puenteada al aumentar |XCE|."}],"answer":1},{"q":"¿Por qué una señal alterna de 200 mV puede ser demasiado grande si |Av|≈100?","options":[{"text":"Pediría 20 V de salida y podría forzar recorte","feedback":"La amplitud útil está limitada por VCC, el punto Q y la excursión permitida."},{"text":"Un BJT siempre puede entregar 20 V","feedback":"Revisa: La amplitud útil está limitada por VCC, el punto Q y la excursión permitida."},{"text":"Porque re es cero","feedback":"Revisa: La amplitud útil está limitada por VCC, el punto Q y la excursión permitida."}],"answer":0},{"q":"Una etapa CE con RC=4.7 kΩ cargada por la entrada de otra de 10 kΩ ve aproximadamente:","options":[{"text":"14.7 kΩ","feedback":"Revisa: 4.7 kΩ || 10 kΩ ≈ 3.2 kΩ."},{"text":"4.7 kΩ sin cambios","feedback":"Revisa: 4.7 kΩ || 10 kΩ ≈ 3.2 kΩ."},{"text":"3.2 kΩ","feedback":"4.7 kΩ || 10 kΩ ≈ 3.2 kΩ."}],"answer":2},{"q":"Dos etapas en cascada tienen ganancias cargadas Av1=-10 y Av2=+0.9. La ganancia total es:","options":[{"text":"+9","feedback":"Revisa: El producto de las ganancias cargadas es (-10)(+0.9)=-9."},{"text":"-9","feedback":"El producto de las ganancias cargadas es (-10)(+0.9)=-9."},{"text":"-10.9","feedback":"Revisa: El producto de las ganancias cargadas es (-10)(+0.9)=-9."}],"answer":1},{"q":"Si dos etapas CE invierten cada una la señal, la cascada ideal:","options":[{"text":"No invierte globalmente","feedback":"Dos inversiones de 180° equivalen a 360°."},{"text":"Invierte 90°","feedback":"Revisa: Dos inversiones de 180° equivalen a 360°."},{"text":"Anula siempre la salida","feedback":"Revisa: Dos inversiones de 180° equivalen a 360°."}],"answer":0},{"q":"En un CC con ganancia desde la base ≈+0.98, significa:","options":[{"text":"Amplificación de 98 veces","feedback":"Revisa: El seguidor da ganancia de tensión cercana a uno y ayuda a adaptar impedancias."},{"text":"Inversión de fase","feedback":"Revisa: El seguidor da ganancia de tensión cercana a uno y ayuda a adaptar impedancias."},{"text":"Salida casi igual en tensión y en fase","feedback":"El seguidor da ganancia de tensión cercana a uno y ayuda a adaptar impedancias."}],"answer":2},{"q":"¿Cuál configuración toma su entrada de señal por el emisor?","options":[{"text":"Colector común","feedback":"Revisa: En CB, la base es común y la señal se aplica al emisor."},{"text":"Base común","feedback":"En CB, la base es común y la señal se aplica al emisor."},{"text":"Emisor común","feedback":"Revisa: En CB, la base es común y la señal se aplica al emisor."}],"answer":1},{"q":"En CB, una fuente con Rs elevada respecto a re:","options":[{"text":"Pierde gran parte de vs antes de llegar al emisor","feedback":"La entrada baja forma un divisor con Rs."},{"text":"Mejora indefinidamente Av total","feedback":"Revisa: La entrada baja forma un divisor con Rs."},{"text":"Elimina la carga","feedback":"Revisa: La entrada baja forma un divisor con Rs."}],"answer":0},{"q":"En un par de valores IC=2mA e IE≈2.02mA, ¿cuál se utiliza en gm=IC/VT?","options":[{"text":"IE solamente","feedback":"Revisa: gm se obtiene con la corriente DC de colector ICQ."},{"text":"IB","feedback":"Revisa: gm se obtiene con la corriente DC de colector ICQ."},{"text":"IC","feedback":"gm se obtiene con la corriente DC de colector ICQ."}],"answer":2},{"q":"Con IC=2 mA y VT=26 mV, gm aproximada es:","options":[{"text":"13 S","feedback":"Revisa: gm=0.002/0.026≈0.0769 siemens."},{"text":"0.077 S","feedback":"gm=0.002/0.026≈0.0769 siemens."},{"text":"77 Ω","feedback":"Revisa: gm=0.002/0.026≈0.0769 siemens."}],"answer":1},{"q":"Para beta=100 y gm≈0.05 S, rπ es:","options":[{"text":"2 kΩ","feedback":"rπ=beta/gm=100/0.05=2000 Ω."},{"text":"2 Ω","feedback":"Revisa: rπ=beta/gm=100/0.05=2000 Ω."},{"text":"200 kΩ","feedback":"Revisa: rπ=beta/gm=100/0.05=2000 Ω."}],"answer":0},{"q":"¿Por qué re ≠ rπ exactamente?","options":[{"text":"Una es una batería","feedback":"Revisa: re≈VT/IE y rπ=beta/gm; aproximadamente rπ≈(beta+1)re."},{"text":"Ambas representan RE externa","feedback":"Revisa: re≈VT/IE y rπ=beta/gm; aproximadamente rπ≈(beta+1)re."},{"text":"Son resistencias incrementales definidas desde terminales/variables diferentes","feedback":"re≈VT/IE y rπ=beta/gm; aproximadamente rπ≈(beta+1)re."}],"answer":2},{"q":"¿Qué cambio mejora la estabilidad de ganancia de un CE aunque reduzca |Av|?","options":[{"text":"Eliminar todas las resistencias","feedback":"Revisa: La realimentación negativa por RE sin bypass disminuye sensibilidad."},{"text":"Conservar RE sin bypass","feedback":"La realimentación negativa por RE sin bypass disminuye sensibilidad."},{"text":"Elevar arbitrariamente Vs","feedback":"Revisa: La realimentación negativa por RE sin bypass disminuye sensibilidad."}],"answer":1},{"q":"Una hoja de datos informa betaDC a cierta corriente. En pequeña señal, betaac:","options":[{"text":"Puede diferir y depende del punto de operación","feedback":"hfe incremental puede diferir de hFE DC y cambia con corriente y temperatura."},{"text":"Es siempre 1000","feedback":"Revisa: hfe incremental puede diferir de hFE DC y cambia con corriente y temperatura."},{"text":"No se necesita jamás","feedback":"Revisa: hfe incremental puede diferir de hFE DC y cambia con corriente y temperatura."}],"answer":0},{"q":"¿Qué debe comprobarse antes de utilizar el modelo lineal de AC?","options":[{"text":"Que el transistor esté en saturación","feedback":"Revisa: El modelo es una linealización local alrededor del punto de polarización."},{"text":"Que VCE sea siempre cero","feedback":"Revisa: El modelo es una linealización local alrededor del punto de polarización."},{"text":"Que el punto Q permanezca en región activa y la señal sea pequeña","feedback":"El modelo es una linealización local alrededor del punto de polarización."}],"answer":2},{"q":"Un sensor entrega vs=10 mV y un divisor fuente-entrada atenúa a 0.6. ¿Cuál es vi?","options":[{"text":"16 mV","feedback":"Revisa: vi/vs=0.6; 10 mV × 0.6=6 mV."},{"text":"6 mV","feedback":"vi/vs=0.6; 10 mV × 0.6=6 mV."},{"text":"60 mV","feedback":"Revisa: vi/vs=0.6; 10 mV × 0.6=6 mV."}],"answer":1},{"q":"Si Av de etapa=-20 y vi=6 mV pico, ¿cuánto vale vo?","options":[{"text":"-120 mV pico","feedback":"vo=Av×vi=-20×6 mV=-120 mV pico."},{"text":"+120 V","feedback":"Revisa: vo=Av×vi=-20×6 mV=-120 mV pico."},{"text":"-20 mV pico","feedback":"Revisa: vo=Av×vi=-20×6 mV=-120 mV pico."}],"answer":0},{"q":"Si IE aumenta de 1mA a 2mA con la misma temperatura, re:","options":[{"text":"Se duplica a 52Ω","feedback":"Revisa: re≈26 mV/IEQ, de modo que se reduce a la mitad."},{"text":"Permanece igual","feedback":"Revisa: re≈26 mV/IEQ, de modo que se reduce a la mitad."},{"text":"Pasa aproximadamente de 26Ω a 13Ω","feedback":"re≈26 mV/IEQ, de modo que se reduce a la mitad."}],"answer":2},{"q":"Si un estudiante confunde VBE≈0.7V con VT≈26mV:","options":[{"text":"Se obtiene el mismo re","feedback":"Revisa: VT es tensión térmica; VBE es la caída de polarización aproximada."},{"text":"Mezcla polarización DC con pendiente incremental de la unión","feedback":"VT es tensión térmica; VBE es la caída de polarización aproximada."},{"text":"No afecta nada","feedback":"Revisa: VT es tensión térmica; VBE es la caída de polarización aproximada."}],"answer":1},{"q":"En la estimación del valor de entrada Rin de un CE polarizado por divisor, interviene:","options":[{"text":"R1||R2||Zin,base","feedback":"En AC R1 y R2 conectan a tierra y cargan la entrada junto con el transistor."},{"text":"Solo RC","feedback":"Revisa: En AC R1 y R2 conectan a tierra y cargan la entrada junto con el transistor."},{"text":"Solo RL","feedback":"Revisa: En AC R1 y R2 conectan a tierra y cargan la entrada junto con el transistor."}],"answer":0},{"q":"Un resultado numérico de Av=-120 para una señal de entrada grande exige:","options":[{"text":"Declarar que es una ganancia medida","feedback":"Revisa: El cálculo incremental no garantiza linealidad a cualquier amplitud."},{"text":"Ignorar VCC","feedback":"Revisa: El cálculo incremental no garantiza linealidad a cualquier amplitud."},{"text":"Comprobar excursión de salida disponible para evitar recorte","feedback":"El cálculo incremental no garantiza linealidad a cualquier amplitud."}],"answer":2},{"q":"En CC, para RE=RL=1kΩ, la resistencia de emisor efectiva es:","options":[{"text":"2000Ω","feedback":"Revisa: Las resistencias RE y RL aparecen en paralelo a la salida de banda media."},{"text":"500Ω","feedback":"Las resistencias RE y RL aparecen en paralelo a la salida de banda media."},{"text":"1000Ω","feedback":"Revisa: Las resistencias RE y RL aparecen en paralelo a la salida de banda media."}],"answer":1}];
 
 // ==========================================
-// BANCOS DE PREGUNTAS: FET & MOSFET
-// ==========================================
+// BANCOS FET REVISADOS · 2026
 window.ANALOG_QUIZZES = window.ANALOG_QUIZZES || {};
-
 window.ANALOG_QUIZZES["fet_fundamentos"] = [
   {
-    "q": "¿Cuál es la diferencia fundamental en el principio de control entre un BJT y un MOSFET?",
+    "q": "¿Qué magnitud controla principalmente la conducción de un FET?",
     "options": [
-      { "text": "El BJT se controla por corriente de base ($I_B$), mientras el MOSFET se controla por campo eléctrico/tensión de compuerta ($V_{GS}$) sin corriente estática.", "feedback": "¡Exacto! El aislamiento de $SiO_2$ hace que $I_G \approx 0\text{ A}$, permitiendo un control puramente electrostático." },
-      { "text": "El BJT funciona solo con huecos y el MOSFET solo con electrones.", "feedback": "Incorrecto. Ambos dispositivos existen con ambos tipos de portadores (NPN/PNP en BJT y Canal N/Canal P en MOSFET)." },
-      { "text": "El MOSFET requiere mayor corriente de entrada que el BJT.", "feedback": "Falso: el MOSFET tiene $I_G \approx 0$, por lo que su consumo estático de entrada es virtualmente nulo." },
-      { "text": "El BJT tiene impedancia de entrada infinita y el MOSFET de pocos ohmios.", "feedback": "Al revés: el MOSFET tiene impedancia de entrada de teraohmios ($10^{12}\\Omega$), mientras el BJT tiene $Z_{in}$ de cientos o miles de ohmios." }
+      {
+        "text": "La tensión entre puerta y fuente VGS.",
+        "feedback": "VGS modifica el campo y la conducción del canal; la carga y VDS también importan."
+      },
+      {
+        "text": "La corriente del disipador.",
+        "feedback": "Revisa la definición y la condición de validez: VGS modifica el campo y la conducción del canal; la carga y VDS también importan."
+      },
+      {
+        "text": "El valor de beta del BJT.",
+        "feedback": "Revisa la definición y la condición de validez: VGS modifica el campo y la conducción del canal; la carga y VDS también importan."
+      },
+      {
+        "text": "Únicamente la tensión de red.",
+        "feedback": "Revisa la definición y la condición de validez: VGS modifica el campo y la conducción del canal; la carga y VDS también importan."
+      }
     ],
     "answer": 0
   },
   {
-    "q": "¿Por qué el JFET está quedando descontinuado en la electrónica moderna y no se utiliza en microprocesadores?",
+    "q": "¿Qué distingue a la puerta de un JFET de la de un MOSFET?",
     "options": [
-      { "text": "Porque es de empobrecimiento (Normally ON), su unión PN puede polarizarse en directa ante ruidos, y no permite fabricar lógica complementaria con consumo estático cero como el CMOS.", "feedback": "¡Correcto! Boylestad y Malvino destacan que el JFET consume corriente en reposo, carece de dieléctrico aislante y no es viable para integración VLSI/ULSI." },
-      { "text": "Porque el JFET no puede conducir corriente continua.", "feedback": "Incorrecto: el JFET conduce perfectamente en DC ($I_{DSS}$)." },
-      { "text": "Porque el silicio de los JFET es radiactivo.", "feedback": "Totalmente falso; se fabrican con silicio semiconductor estándar." },
-      { "text": "Porque su ganancia de voltaje es siempre cero.", "feedback": "Incorrecto: los JFETs amplifican mediante su transconductancia $g_m$." }
+      {
+        "text": "El JFET tiene puerta por unión PN; el MOSFET, aislada por dieléctrico.",
+        "feedback": "En JFET se polariza una unión PN; en MOSFET se modifica un canal mediante la puerta aislada."
+      },
+      {
+        "text": "Ambos tienen puerta metálica conectada a un LED.",
+        "feedback": "Revisa la definición y la condición de validez: En JFET se polariza una unión PN; en MOSFET se modifica un canal mediante la puerta aislada."
+      },
+      {
+        "text": "El JFET no puede amplificar señales.",
+        "feedback": "Revisa la definición y la condición de validez: En JFET se polariza una unión PN; en MOSFET se modifica un canal mediante la puerta aislada."
+      },
+      {
+        "text": "El MOSFET siempre tiene puerta abierta a la carga.",
+        "feedback": "Revisa la definición y la condición de validez: En JFET se polariza una unión PN; en MOSFET se modifica un canal mediante la puerta aislada."
+      }
     ],
     "answer": 0
   },
   {
-    "q": "En un E-MOSFET de Canal N, ¿qué fenómeno físico ocurre cuando $V_{GS} > V_{GS(th)}$?",
+    "q": "En un JFET canal N, al hacer VGS más negativo dentro de su intervalo válido, ¿qué sucede normalmente con ID?",
     "options": [
-      { "text": "Se rompe el dieléctrico de óxido de silicio permanentemente.", "feedback": "No, eso ocurre ante una descarga destructiva ESD, no en operación normal." },
-      { "text": "Inversión de canal: el campo eléctrico repele los huecos del sustrato P y atrae una lámina densa de electrones formando un canal N conductor.", "feedback": "¡Brillante! Este fenómeno se denomina capa de inversión o canal inducido." },
-      { "text": "Los electrones se recombinan y el transistor se apaga por completo.", "feedback": "Al contrario, al superar el umbral el transistor comienza a conducir." },
-      { "text": "La corriente de compuerta $I_G$ se vuelve igual a la corriente de drenador $I_D$.", "feedback": "Falso: $I_G$ permanece en cero amperios gracias a la capa de $SiO_2$." }
+      {
+        "text": "Disminuye.",
+        "feedback": "La región de agotamiento estrecha el canal y reduce la corriente."
+      },
+      {
+        "text": "Se invierte obligatoriamente.",
+        "feedback": "Revisa la definición y la condición de validez: La región de agotamiento estrecha el canal y reduce la corriente."
+      },
+      {
+        "text": "Aumenta sin límite.",
+        "feedback": "Revisa la definición y la condición de validez: La región de agotamiento estrecha el canal y reduce la corriente."
+      },
+      {
+        "text": "No cambia.",
+        "feedback": "Revisa la definición y la condición de validez: La región de agotamiento estrecha el canal y reduce la corriente."
+      }
     ],
-    "answer": 1
+    "answer": 0
   },
   {
-    "q": "Al resolver la ecuación cuadrática de polarización por divisor de tensión en un E-MOSFET, ¿cuál es el criterio físico riguroso para descartar una de las dos raíces matemáticas?",
+    "q": "¿Qué afirmación es correcta sobre el JFET?",
     "options": [
-      { "text": "Se descarta siempre la raíz de mayor valor sin comprobar voltajes.", "feedback": "No se puede descartar por simple magnitud; debe verificarse la condición física de compuerta." },
-      { "text": "Se descarta la raíz que produzca $V_{GS} = V_G - I_D R_S < V_{GS(th)}$, porque un E-MOSFET no puede conducir si la compuerta está por debajo del umbral.", "feedback": "¡Excelente! Malvino y Boylestad enfatizan que una raíz matemática que implique que el transistor conduzca estando apagado es físicamente imposible." },
-      { "text": "Se escoge la raíz negativa.", "feedback": "Las corrientes de drenador en este circuito son positivas; una corriente negativa no tiene sentido en el canal N." },
-      { "text": "Se promedian ambas raíces.", "feedback": "No, una sola es el punto de equilibrio físico estable." }
+      {
+        "text": "Continúa utilizándose en aplicaciones analógicas y de bajo ruido.",
+        "feedback": "No es correcto presentar al JFET como obsoleto; se elige según su función."
+      },
+      {
+        "text": "Todos los JFET están prohibidos por seguridad.",
+        "feedback": "Revisa la definición y la condición de validez: No es correcto presentar al JFET como obsoleto; se elige según su función."
+      },
+      {
+        "text": "No existe un JFET de canal P.",
+        "feedback": "Revisa la definición y la condición de validez: No es correcto presentar al JFET como obsoleto; se elige según su función."
+      },
+      {
+        "text": "Es un MOSFET con puerta aislada.",
+        "feedback": "Revisa la definición y la condición de validez: No es correcto presentar al JFET como obsoleto; se elige según su función."
+      }
     ],
-    "answer": 1
+    "answer": 0
   },
   {
-    "q": "¿Qué condición matemática garantiza que un E-MOSFET opere en la región de saturación (activa)?",
+    "q": "En un MOSFET canal N de enriquecimiento ideal, con VGS=0, ¿cuál es el estado habitual?",
     "options": [
-      { "text": "$V_{DS} \ge V_{GS} - V_{GS(th)}$", "feedback": "¡Correcto! En esta condición el canal se estrangula cerca del drenador (*pinch-off*) y la corriente queda gobernada por $I_D = k(V_{GS}-V_{GS(th)})^2$." },
-      { "text": "$V_{DS} < V_{GS} - V_{GS(th)}$", "feedback": "Esa es la condición de la región óhmica o de triodo." },
-      { "text": "$V_{GS} = 0\text{ V}$", "feedback": "Con $V_{GS} = 0$, el E-MOSFET está en corte ($I_D = 0$)." },
-      { "text": "$I_D = 0\text{ A}$", "feedback": "Si la corriente es cero, el dispositivo está apagado en corte." }
+      {
+        "text": "Corte.",
+        "feedback": "El canal inducido requiere una tensión de puerta apropiada."
+      },
+      {
+        "text": "Conducción plena.",
+        "feedback": "Revisa la definición y la condición de validez: El canal inducido requiere una tensión de puerta apropiada."
+      },
+      {
+        "text": "Avalancha obligatoria.",
+        "feedback": "Revisa la definición y la condición de validez: El canal inducido requiere una tensión de puerta apropiada."
+      },
+      {
+        "text": "Saturación BJT.",
+        "feedback": "Revisa la definición y la condición de validez: El canal inducido requiere una tensión de puerta apropiada."
+      }
+    ],
+    "answer": 0
+  },
+  {
+    "q": "En un MOSFET de canal N de agotamiento, con VGS=0, ¿qué ocurre habitualmente?",
+    "options": [
+      {
+        "text": "Existe canal y puede conducir.",
+        "feedback": "La denominación agotamiento indica que un canal preexiste a VGS=0."
+      },
+      {
+        "text": "Está necesariamente en corte.",
+        "feedback": "Revisa la definición y la condición de validez: La denominación agotamiento indica que un canal preexiste a VGS=0."
+      },
+      {
+        "text": "Su puerta debe recibir corriente DC de 1 A.",
+        "feedback": "Revisa la definición y la condición de validez: La denominación agotamiento indica que un canal preexiste a VGS=0."
+      },
+      {
+        "text": "Solo funciona como diodo.",
+        "feedback": "Revisa la definición y la condición de validez: La denominación agotamiento indica que un canal preexiste a VGS=0."
+      }
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Si VG=5 V y VS=2 V, ¿cuánto vale VGS?",
+    "options": [
+      {
+        "text": "3 V.",
+        "feedback": "VGS es la diferencia VG−VS, no la tensión de puerta respecto al suelo."
+      },
+      {
+        "text": "7 V.",
+        "feedback": "Revisa la definición y la condición de validez: VGS es la diferencia VG−VS, no la tensión de puerta respecto al suelo."
+      },
+      {
+        "text": "5 V.",
+        "feedback": "Revisa la definición y la condición de validez: VGS es la diferencia VG−VS, no la tensión de puerta respecto al suelo."
+      },
+      {
+        "text": "2 V.",
+        "feedback": "Revisa la definición y la condición de validez: VGS es la diferencia VG−VS, no la tensión de puerta respecto al suelo."
+      }
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Para un JFET canal N con IDSS=8 mA, VGS(off)=−4 V y VGS=−2 V, Shockley predice:",
+    "options": [
+      {
+        "text": "2 mA.",
+        "feedback": "8(1−(−2/−4))²=8·0.25=2 mA."
+      },
+      {
+        "text": "8 mA.",
+        "feedback": "Revisa la definición y la condición de validez: 8(1−(−2/−4))²=8·0.25=2 mA."
+      },
+      {
+        "text": "4 mA.",
+        "feedback": "Revisa la definición y la condición de validez: 8(1−(−2/−4))²=8·0.25=2 mA."
+      },
+      {
+        "text": "0 mA.",
+        "feedback": "Revisa la definición y la condición de validez: 8(1−(−2/−4))²=8·0.25=2 mA."
+      }
+    ],
+    "answer": 0
+  },
+  {
+    "q": "¿Qué se comprueba tras usar la ecuación ID=k(VGS−VT)² en un E-MOSFET?",
+    "options": [
+      {
+        "text": "Que VDS sea al menos VGS−VT y VGS>VT.",
+        "feedback": "La ecuación cuadrática mostrada presupone región de saturación del modelo analógico."
+      },
+      {
+        "text": "Solo que VG sea positivo.",
+        "feedback": "Revisa la definición y la condición de validez: La ecuación cuadrática mostrada presupone región de saturación del modelo analógico."
+      },
+      {
+        "text": "Que VDS sea exactamente cero.",
+        "feedback": "Revisa la definición y la condición de validez: La ecuación cuadrática mostrada presupone región de saturación del modelo analógico."
+      },
+      {
+        "text": "Que ID sea mayor que 100 A.",
+        "feedback": "Revisa la definición y la condición de validez: La ecuación cuadrática mostrada presupone región de saturación del modelo analógico."
+      }
+    ],
+    "answer": 0
+  },
+  {
+    "q": "En el análisis de pequeña señal FET, ¿qué significa gm?",
+    "options": [
+      {
+        "text": "Variación de corriente de drenador por variación de VGS alrededor de Q.",
+        "feedback": "gm es la derivada local dID/dVGS, con unidades A/V o siemens."
+      },
+      {
+        "text": "Ganancia beta de base.",
+        "feedback": "Revisa la definición y la condición de validez: gm es la derivada local dID/dVGS, con unidades A/V o siemens."
+      },
+      {
+        "text": "Resistencia exacta del disipador.",
+        "feedback": "Revisa la definición y la condición de validez: gm es la derivada local dID/dVGS, con unidades A/V o siemens."
+      },
+      {
+        "text": "Corriente máxima garantizada de puerta.",
+        "feedback": "Revisa la definición y la condición de validez: gm es la derivada local dID/dVGS, con unidades A/V o siemens."
+      }
+    ],
+    "answer": 0
+  },
+  {
+    "q": "¿Cuál de las siguientes afirmaciones sobre CMOS es válida?",
+    "options": [
+      {
+        "text": "En el modelo ideal reduce la corriente estática, pero en circuitos reales hay fugas y pérdidas dinámicas.",
+        "feedback": "En circuitos reales el consumo dinámico y las fugas son relevantes."
+      },
+      {
+        "text": "En CMOS nunca hay pérdidas.",
+        "feedback": "Revisa la definición y la condición de validez: En circuitos reales el consumo dinámico y las fugas son relevantes."
+      },
+      {
+        "text": "En CMOS no existen capacitancias.",
+        "feedback": "Revisa la definición y la condición de validez: En circuitos reales el consumo dinámico y las fugas son relevantes."
+      },
+      {
+        "text": "Un CMOS es un JFET de canal N.",
+        "feedback": "Revisa la definición y la condición de validez: En circuitos reales el consumo dinámico y las fugas son relevantes."
+      }
+    ],
+    "answer": 0
+  },
+  {
+    "q": "¿Qué ventaja tiene un esquema de estudio con gráfico ID–VGS y punto Q?",
+    "options": [
+      {
+        "text": "Permite relacionar la polarización con el modelo y comprobar la coherencia física.",
+        "feedback": "La gráfica es herramienta de análisis; siempre se comprueba su dominio de validez."
+      },
+      {
+        "text": "Sustituye todas las hojas de datos reales.",
+        "feedback": "Revisa la definición y la condición de validez: La gráfica es herramienta de análisis; siempre se comprueba su dominio de validez."
+      },
+      {
+        "text": "Garantiza el mismo transistor para cualquier motor.",
+        "feedback": "Revisa la definición y la condición de validez: La gráfica es herramienta de análisis; siempre se comprueba su dominio de validez."
+      },
+      {
+        "text": "Evita verificar la región.",
+        "feedback": "Revisa la definición y la condición de validez: La gráfica es herramienta de análisis; siempre se comprueba su dominio de validez."
+      }
     ],
     "answer": 0
   }
 ];
-
 window.ANALOG_QUIZZES["fet_aplicaciones"] = [
   {
-    "q": "Un ingeniero novato conecta la compuerta de un MOSFET de potencia estándar (como el IRFZ44N) directo a un pin de 3.3V de un microcontrolador ESP32 para mover un motor de 10A. ¿Qué ocurrirá y por qué?",
+    "q": "Un ESP32 de 3,3 V va a controlar un IRLZ44N. ¿Qué decisión inicial es correcta?",
     "options": [
-      { "text": "El MOSFET funcionará frío y perfecto porque 3.3V supera el $V_{GS(th)}$ mínimo de 2V.", "feedback": "¡Cuidado! El $V_{GS(th)}$ solo indica cuándo empiezan a circular $250\\mu\\text{A}$. Para conducir 10A con baja resistencia, el IRFZ44N exige 10V en compuerta." },
-      { "text": "El MOSFET operará en zona parcialmente resistiva con una alta resistencia de canal ($R_{DS} \sim 2-5\\,\\Omega$), disipando decenas de vatios y quemándose rápidamente por sobrecalentamiento.", "feedback": "¡Exacto! Para controlar directamente con 3.3V o 5V se debe utilizar un MOSFET Logic-Level (como el IRLZ44N)." },
-      { "text": "El microcontrolador explotará porque el MOSFET absorberá 5 amperios por la compuerta.", "feedback": "No; la compuerta tiene aislamiento de $SiO_2$ ($I_G \approx 0$), el peligro es térmico para el transistor." },
-      { "text": "El motor girará a velocidad doble.", "feedback": "No, el motor apenas recibirá potencia y el transistor arderá en calor." }
-    ],
-    "answer": 1
-  },
-  {
-    "q": "¿Por qué es obligatorio colocar un diodo de rueda libre (Flyback) en paralelo inverso con cargas inductivas (motores, relés, solenoides) conmutadas por MOSFET?",
-    "options": [
-      { "text": "Para aumentar la velocidad del motor.", "feedback": "No tiene efecto sobre la velocidad máxima de régimen." },
-      { "text": "Para absorber el pico destructivo de sobretensión inductiva ($v = -L \\frac{di}{dt}$) al abrir el transistor, evitando la perforación del drenador por avalancha.", "feedback": "¡Impecable! Al cortar la corriente bruscamente, el inductor invierte su polaridad y genera cientos de voltios que destruirían el transistor sin el diodo." },
-      { "text": "Para reducir la resistencia de la compuerta.", "feedback": "El diodo está en el drenador/carga, no en la compuerta." },
-      { "text": "Para invertir el giro del motor.", "feedback": "Para invertir giro se requiere un puente H, no un solo diodo flyback." }
-    ],
-    "answer": 1
-  },
-  {
-    "q": "¿Cuál es la función fundamental de la resistencia de pull-down ($R_{PD} \approx 10\text{ k}\Omega - 100\text{ k}\Omega$) conectada entre compuerta y fuente en el circuito de control?",
-    "options": [
-      { "text": "Garantizar que la compuerta se mantenga firmemente a 0V durante el encendido o reseteo del microcontrolador, evitando que flote en alta impedancia y encienda la carga por error.", "feedback": "¡Brillante regla de diseño! Durante el arranque de un microcontrolador sus pines están en alta impedancia (Hi-Z); sin $R_{PD}$, el ruido ambiental cargaría la compuerta." },
-      { "text": "Aumentar la ganancia de voltaje del circuito a más de 1000.", "feedback": "No tiene ese propósito en circuitos de conmutación." },
-      { "text": "Limitar la corriente que entra al motor.", "feedback": "La corriente del motor fluye por drenador-fuente, no por la compuerta." },
-      { "text": "Reemplazar al diodo flyback.", "feedback": "No protege contra sobretensiones inductivas en la carga." }
+      {
+        "text": "No aprobarlo automáticamente: verificar RDS(on) a 3,3 V, carga y temperatura.",
+        "feedback": "La hoja consultada especifica RDS(on) a 4 V y 5 V, no una garantía general a 3,3 V."
+      },
+      {
+        "text": "Garantizar que opera frío porque dice logic-level.",
+        "feedback": "Revisa la definición y la condición de validez: La hoja consultada especifica RDS(on) a 4 V y 5 V, no una garantía general a 3,3 V."
+      },
+      {
+        "text": "Usar VGS(th) como resistencia de conducción.",
+        "feedback": "Revisa la definición y la condición de validez: La hoja consultada especifica RDS(on) a 4 V y 5 V, no una garantía general a 3,3 V."
+      },
+      {
+        "text": "Eliminar las protecciones del motor.",
+        "feedback": "Revisa la definición y la condición de validez: La hoja consultada especifica RDS(on) a 4 V y 5 V, no una garantía general a 3,3 V."
+      }
     ],
     "answer": 0
   },
   {
-    "q": "En el análisis de pequeña señal en AC, la transconductancia $g_m$ de un E-MOSFET representa:",
+    "q": "La hoja de datos define VGS(th) para una pequeña corriente ID de ensayo. ¿Qué NO garantiza ese dato?",
     "options": [
-      { "text": "La relación de cambio de la corriente de drenador frente a cambios en la tensión compuerta-fuente: $g_m = \\left.\\frac{\\partial i_D}{\\partial v_{gs}}\\right|_Q = 2k(V_{GSQ} - V_{GS(th)}) = 2\\sqrt{k I_{DQ}}$.", "feedback": "¡Perfecto! Indica la sensibilidad con la que la tensión alterna de entrada modula la corriente de salida." },
-      { "text": "La resistencia estática del canal en corriente continua.", "feedback": "Eso corresponde a $R_{DS(on)}$, no a la transconductancia incremental." },
-      { "text": "La capacitancia de compuerta a masa.", "feedback": "Eso es $C_{iss}$ o $C_{gs}$." },
-      { "text": "La corriente de fuga del dióxido de silicio.", "feedback": "La corriente de fuga es un defecto parásito indeseable, no $g_m$." }
+      {
+        "text": "Una baja RDS(on) a la tensión GPIO disponible.",
+        "feedback": "El umbral indica inicio de conducción, no capacidad nominal de potencia."
+      },
+      {
+        "text": "La existencia de un umbral de conducción.",
+        "feedback": "Revisa la definición y la condición de validez: El umbral indica inicio de conducción, no capacidad nominal de potencia."
+      },
+      {
+        "text": "Que pueda especificarse una condición de prueba.",
+        "feedback": "Revisa la definición y la condición de validez: El umbral indica inicio de conducción, no capacidad nominal de potencia."
+      },
+      {
+        "text": "Que el transistor tiene puerta.",
+        "feedback": "Revisa la definición y la condición de validez: El umbral indica inicio de conducción, no capacidad nominal de potencia."
+      }
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Para una conmutación MOSFET de lado bajo, ¿qué debe existir entre microcontrolador y etapa?",
+    "options": [
+      {
+        "text": "Referencia común de tierra y una interfaz de puerta adecuada.",
+        "feedback": "Sin referencia común las tensiones GPIO y VGS no están definidas como se supone."
+      },
+      {
+        "text": "Conexión directa entre motor y pin sin transistor.",
+        "feedback": "Revisa la definición y la condición de validez: Sin referencia común las tensiones GPIO y VGS no están definidas como se supone."
+      },
+      {
+        "text": "Una unión PN en la puerta del MOSFET.",
+        "feedback": "Revisa la definición y la condición de validez: Sin referencia común las tensiones GPIO y VGS no están definidas como se supone."
+      },
+      {
+        "text": "Una fuente flotante sin retorno definida.",
+        "feedback": "Revisa la definición y la condición de validez: Sin referencia común las tensiones GPIO y VGS no están definidas como se supone."
+      }
+    ],
+    "answer": 0
+  },
+  {
+    "q": "¿Cuál es la aproximación de pérdidas de conducción de un MOSFET bien encendido?",
+    "options": [
+      {
+        "text": "I²·RDS(on).",
+        "feedback": "Se usa P≈I²RDS(on) en las condiciones de especificación de resistencia."
+      },
+      {
+        "text": "I·beta.",
+        "feedback": "Revisa la definición y la condición de validez: Se usa P≈I²RDS(on) en las condiciones de especificación de resistencia."
+      },
+      {
+        "text": "VGS(th)·frecuencia únicamente.",
+        "feedback": "Revisa la definición y la condición de validez: Se usa P≈I²RDS(on) en las condiciones de especificación de resistencia."
+      },
+      {
+        "text": "IDSS/VGS.",
+        "feedback": "Revisa la definición y la condición de validez: Se usa P≈I²RDS(on) en las condiciones de especificación de resistencia."
+      }
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Un motor de 2 A y MOSFET hipotético de 0,025 Ω, ¿qué pérdidas estimas solo por conducción?",
+    "options": [
+      {
+        "text": "0,10 W.",
+        "feedback": "(2 A)²×0.025 Ω = 0.1 W; no incluye conmutación ni temperatura."
+      },
+      {
+        "text": "2 W.",
+        "feedback": "Revisa la definición y la condición de validez: (2 A)²×0.025 Ω = 0.1 W; no incluye conmutación ni temperatura."
+      },
+      {
+        "text": "0,05 W.",
+        "feedback": "Revisa la definición y la condición de validez: (2 A)²×0.025 Ω = 0.1 W; no incluye conmutación ni temperatura."
+      },
+      {
+        "text": "50 W.",
+        "feedback": "Revisa la definición y la condición de validez: (2 A)²×0.025 Ω = 0.1 W; no incluye conmutación ni temperatura."
+      }
+    ],
+    "answer": 0
+  },
+  {
+    "q": "En PWM, ¿qué propiedad de la puerta MOSFET influye en el esfuerzo del driver?",
+    "options": [
+      {
+        "text": "La carga total de puerta Qg.",
+        "feedback": "El driver entrega pulsos de corriente para cargar y descargar las capacitancias."
+      },
+      {
+        "text": "El color del encapsulado.",
+        "feedback": "Revisa la definición y la condición de validez: El driver entrega pulsos de corriente para cargar y descargar las capacitancias."
+      },
+      {
+        "text": "El número de patas del potenciómetro.",
+        "feedback": "Revisa la definición y la condición de validez: El driver entrega pulsos de corriente para cargar y descargar las capacitancias."
+      },
+      {
+        "text": "Solo la resistencia del motor.",
+        "feedback": "Revisa la definición y la condición de validez: El driver entrega pulsos de corriente para cargar y descargar las capacitancias."
+      }
+    ],
+    "answer": 0
+  },
+  {
+    "q": "En una carga inductiva DC conmutada, ¿qué debes prever?",
+    "options": [
+      {
+        "text": "Una ruta adecuada de corriente cuando se interrumpe la excitación.",
+        "feedback": "La topología de supresión depende de la carga, polaridad, velocidad y potencia."
+      },
+      {
+        "text": "Un cable de señal sin protección.",
+        "feedback": "Revisa la definición y la condición de validez: La topología de supresión depende de la carga, polaridad, velocidad y potencia."
+      },
+      {
+        "text": "Conectar un 1N4148 de forma universal sin verificar corriente.",
+        "feedback": "Revisa la definición y la condición de validez: La topología de supresión depende de la carga, polaridad, velocidad y potencia."
+      },
+      {
+        "text": "Eliminar el GND de referencia.",
+        "feedback": "Revisa la definición y la condición de validez: La topología de supresión depende de la carga, polaridad, velocidad y potencia."
+      }
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Si el punto de un MOSFET E cumple VGS>VT pero VDS<VGS−VT, se encuentra en:",
+    "options": [
+      {
+        "text": "Región óhmica/triodo.",
+        "feedback": "La condición corresponde a la región de triodo; no uses la ecuación cuadrática de saturación."
+      },
+      {
+        "text": "Corte ideal.",
+        "feedback": "Revisa la definición y la condición de validez: La condición corresponde a la región de triodo; no uses la ecuación cuadrática de saturación."
+      },
+      {
+        "text": "Saturación del modelo cuadrático de canal largo.",
+        "feedback": "Revisa la definición y la condición de validez: La condición corresponde a la región de triodo; no uses la ecuación cuadrática de saturación."
+      },
+      {
+        "text": "Avalancha inevitable.",
+        "feedback": "Revisa la definición y la condición de validez: La condición corresponde a la región de triodo; no uses la ecuación cuadrática de saturación."
+      }
+    ],
+    "answer": 0
+  },
+  {
+    "q": "En un amplificador fuente común con source desacoplada y sin carga, Av≈−gm·RD. ¿Qué indica el signo?",
+    "options": [
+      {
+        "text": "La salida se invierte respecto a la entrada.",
+        "feedback": "Un aumento de ID eleva la caída en RD y disminuye VD."
+      },
+      {
+        "text": "La etapa invierte la corriente del disipador.",
+        "feedback": "Revisa la definición y la condición de validez: Un aumento de ID eleva la caída en RD y disminuye VD."
+      },
+      {
+        "text": "El transistor es necesariamente PNP.",
+        "feedback": "Revisa la definición y la condición de validez: Un aumento de ID eleva la caída en RD y disminuye VD."
+      },
+      {
+        "text": "El voltaje de puerta se vuelve cero.",
+        "feedback": "Revisa la definición y la condición de validez: Un aumento de ID eleva la caída en RD y disminuye VD."
+      }
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Si un MOSFET se calienta, ¿por qué hay que revisar el cálculo de RDS(on)?",
+    "options": [
+      {
+        "text": "Porque depende de temperatura y de la polarización de puerta.",
+        "feedback": "La resistencia en conducción cambia con condiciones reales de operación."
+      },
+      {
+        "text": "Porque es siempre igual a cero.",
+        "feedback": "Revisa la definición y la condición de validez: La resistencia en conducción cambia con condiciones reales de operación."
+      },
+      {
+        "text": "Porque la potencia de conducción desaparece.",
+        "feedback": "Revisa la definición y la condición de validez: La resistencia en conducción cambia con condiciones reales de operación."
+      },
+      {
+        "text": "Porque deja de tener terminal fuente.",
+        "feedback": "Revisa la definición y la condición de validez: La resistencia en conducción cambia con condiciones reales de operación."
+      }
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Un proyecto quiere cambiar un 2N7000 por un MOSFET de motor de 10 A. ¿Cuál es la postura correcta?",
+    "options": [
+      {
+        "text": "Evaluar otra referencia diseñada para esa corriente y sus límites en datasheet.",
+        "feedback": "El 2N7000 es un MOSFET de pequeña señal, no un interruptor de motor de gran potencia."
+      },
+      {
+        "text": "Usar el 2N7000 sin cambiar nada.",
+        "feedback": "Revisa la definición y la condición de validez: El 2N7000 es un MOSFET de pequeña señal, no un interruptor de motor de gran potencia."
+      },
+      {
+        "text": "Conectar varios diodos y omitir térmica.",
+        "feedback": "Revisa la definición y la condición de validez: El 2N7000 es un MOSFET de pequeña señal, no un interruptor de motor de gran potencia."
+      },
+      {
+        "text": "Considerarlo capaz de 10 A por la etiqueta logic-level.",
+        "feedback": "Revisa la definición y la condición de validez: El 2N7000 es un MOSFET de pequeña señal, no un interruptor de motor de gran potencia."
+      }
+    ],
+    "answer": 0
+  },
+  {
+    "q": "¿Cuál es la forma correcta de interpretar una curva ideal de Shockley o parabólica?",
+    "options": [
+      {
+        "text": "Como modelo de estudio sujeto a hipótesis; contrastar con el datasheet.",
+        "feedback": "La curva es conceptual y no sustituye datos específicos de fabricación."
+      },
+      {
+        "text": "Como medida certificada de cualquier dispositivo.",
+        "feedback": "Revisa la definición y la condición de validez: La curva es conceptual y no sustituye datos específicos de fabricación."
+      },
+      {
+        "text": "Como permiso para ignorar VDS.",
+        "feedback": "Revisa la definición y la condición de validez: La curva es conceptual y no sustituye datos específicos de fabricación."
+      },
+      {
+        "text": "Como verificación de temperatura.",
+        "feedback": "Revisa la definición y la condición de validez: La curva es conceptual y no sustituye datos específicos de fabricación."
+      }
     ],
     "answer": 0
   }

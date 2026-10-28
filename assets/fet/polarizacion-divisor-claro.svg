@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="500" viewBox="0 0 920 500" role="img" aria-label="Circuito de polarización de MOSFET canal N con divisor de tensión a la puerta: R1 de VDD a VG, R2 de VG a tierra, RD de VDD a drenador, RS de fuente a tierra.">
+<style>text{font-family:Arial,sans-serif;fill:#172942}.cap{font-size:22px;font-weight:700}.lab{font-size:20px}.small{font-size:17px}.wire{stroke:#253a56;stroke-width:3.5;fill:none;stroke-linejoin:round}.node{fill:#253a56}.res{fill:white;stroke:#253a56;stroke-width:3}.fet{stroke:#1469b4;stroke-width:5;fill:none}</style>
+<rect width="920" height="500" rx="20" fill="#f7faff"/><text x="36" y="43" class="cap">Polarización DC · MOSFET canal N (enriquecimiento)</text>
+<path class="wire" d="M190 90H645"/><text x="658" y="96" class="lab">+VDD = 24 V</text>
+<!-- divider --> <path class="wire" d="M190 90V130 M190 184V245 M190 245V288 M190 348V410"/><rect x="172" y="130" width="36" height="54" rx="3" class="res"/><rect x="172" y="288" width="36" height="60" rx="3" class="res"/>
+<text x="105" y="161" class="lab">R1</text><text x="82" y="183" class="small">22 MΩ</text><text x="105" y="316" class="lab">R2</text><text x="82" y="340" class="small">10 MΩ</text><circle class="node" cx="190" cy="245" r="6"/><text x="110" y="237" class="lab">VG</text><path class="wire" d="M190 245H481"/>
+<!-- drain branch --> <path class="wire" d="M645 90V134 M645 195V240"/><rect x="626" y="134" width="38" height="61" class="res" rx="3"/><text x="671" y="158" class="lab">RD</text><text x="671" y="182" class="small">1,8 kΩ</text>
+<!-- proper gate isolated MOS conceptual symbol, channel separate -->
+<path class="fet" d="M481 214V290 M500 222V248 M500 257V283 M500 222H645 M500 283H645"/>
+<path class="wire" d="M645 240V222 M645 283V310"/>
+<text x="465" y="206" class="small">G</text><text x="657" y="218" class="small">D</text><text x="658" y="302" class="small">S</text><text x="493" y="336" class="lab">Q1 · NMOS</text>
+<path class="wire" d="M645 310V329 M645 389V410"/><rect x="626" y="329" width="38" height="60" rx="3" class="res"/><text x="671" y="356" class="lab">RS</text><text x="671" y="380" class="small">820 Ω</text>
+<!-- ground two branches same reference -->
+<path class="wire" d="M173 410H207 M180 419H200 M185 428H195 M628 410H662 M635 419H655 M640 428H650"/>
+<text x="217" y="420" class="small">0 V</text><text x="673" y="420" class="small">0 V</text>
+<rect x="40" y="448" width="840" height="36" rx="8" fill="#e6f0fd"/><text x="460" y="471" text-anchor="middle" class="small">Primero calcula VG; después relaciona VGS = VG − ID·RS y VDS = VDD − ID(RD + RS).</text></svg>

@@ -1,11 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="AnalogLab: capítulo universitario completo de transistores FET y MOSFET. Fundamentos físicos, E-MOSFET de enriquecimiento, polarización DC, raíces cuadráticas, pequeña señal AC, conmutación de potencia y drivers para microcontroladores.">
-<title>AnalogLab · Transistores FET & MOSFET</title>
-<link rel="stylesheet" href="css/styles.css?v=13.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="AnalogLab: capítulo universitario completo de transistores FET y MOSFET. Fundamentos físicos, E-MOSFET de enriquecimiento, polarización DC, raíces cuadráticas, pequeña señal AC, conmutación de potencia y drivers para microcontroladores." name="description"/>
+<title>AnalogLab · Transistores FET &amp; MOSFET</title>
+<link href="css/styles.css?v=13.0" rel="stylesheet"/>
 <script>
 window.MathJax = {
   tex: {
@@ -15,1028 +16,430 @@ window.MathJax = {
   svg: { fontCache: 'global' }
 };
 </script>
-<script id="MathJax-script" defer src="vendor/mathjax/tex-svg.js?v=3.2.1"></script>
+<script defer="" id="MathJax-script" src="vendor/mathjax/tex-svg.js?v=3.2.1"></script>
 </head>
 <body>
 <header>
 <button class="menu">☰</button>
 <a class="brand" href="index.html"><strong>AnalogLab</strong><span>Electrónica Analógica y Laboratorio</span></a>
-<nav class="topnav">
-  <a href="index.html">Inicio</a>
-  <a href="dc.html">Diodos DC</a>
-  <a href="ac.html">Diodos AC</a>
-  <a href="zener.html">Zener</a>
-  <a href="bjt-dc.html">BJT DC I</a>
-  <a href="bjt-dc2.html">BJT DC II</a>
-  <a href="bjt-ac.html">BJT AC</a>
-  <a class="active" href="fet.html">FET & MOSFET</a>
-  <a href="practica-pwm555.html">Práctica PWM</a>
-  <a href="taller.html">Taller 1</a>
-  <a href="taller-bjt-ac.html">Taller BJT AC</a>
-  <a href="datasheet.html">Datasheets</a>
-  <a href="proyecto1.html">Trabajo opcional</a>
-</nav>
+<nav aria-label="Navegación de AnalogLab" class="topnav" id="alCourseNav">
+<a class="nav-start" href="index.html">Inicio</a>
+<details class="al-nav-group"><summary>Diodos</summary><div class="al-nav-panel"><a href="dc.html">Diodos DC</a><a href="ac.html">Diodos AC</a><a href="zener.html">Diodo Zener</a></div></details>
+<details class="al-nav-group"><summary>Transistores BJT</summary><div class="al-nav-panel"><a href="bjt-dc.html">BJT DC I</a><a href="bjt-dc2.html">BJT DC II</a><a href="bjt-ac.html">BJT AC · pequeña señal</a></div></details>
+<details class="al-nav-group"><summary>FET y MOSFET</summary><div class="al-nav-panel"><a href="fet.html">Curso FET · JFET / MOSFET</a></div></details>
+<details class="al-nav-group"><summary>Prácticas</summary><div class="al-nav-panel"><a href="practica-pwm555.html">PWM 555 y puente H</a><a href="taller.html">Taller fundamentos</a><a href="taller-bjt-ac.html">Taller BJT en AC</a></div></details>
+<details class="al-nav-group"><summary>Recursos</summary><div class="al-nav-panel"><a href="datasheet.html">Lectura de datasheets</a><a href="proyecto1.html">Proyecto opcional</a></div></details>
+</nav><button aria-controls="alCourseNav" aria-expanded="false" class="al-course-toggle" type="button">Cursos <span aria-hidden="true">▾</span></button>
 <div class="header-actions"><button id="class">Modo clase</button><button id="theme">◐</button></div>
 </header>
-
 <div class="layout">
 <aside>
 <div class="progress-card">
-  <div><span>Progreso del capítulo</span><strong class="progress-value">0%</strong></div>
-  <div class="track"><span class="progress-fill"></span></div>
+<div><span>Progreso del capítulo</span><strong class="progress-value">0%</strong></div>
+<div class="track"><span class="progress-fill"></span></div>
 </div>
 <h4>FET · Contenido</h4>
 <nav>
-  <a href="#fpanorama">F1 · BJT vs FET</a>
-  <a href="#fjfet">F2 · JFET y Declive Histórico</a>
-  <a href="#fanatomia">F3 · Anatomía E-MOSFET</a>
-  <a href="#fregiones">F4 · Regiones y Modelo</a>
-  <a href="#fpolarizacion">F5 · Polarización DC</a>
-  <a href="#fraices">F6 · Criterio de Raíces</a>
-  <a href="#ffeedback">F7 · Autopolarización</a>
-  <a href="#fac">F8 · Pequeña Señal AC</a>
-  <a href="#fconmutacion">F9 · Conmutación y Eficiencia</a>
-  <a href="#fdriver">F10 · Driver 3.3V/5V</a>
-  <a href="#fcmos">F11 · Revolución CMOS</a>
-  <a href="#fsimulador">F12 · Simulador Interactivo</a>
-  <a href="#fejemplos">F13 · Problemas Resueltos</a>
-  <a href="#fdescargas">F14 · Material Docente ITM</a>
-  <a href="#fquiz">F15 · Autoevaluación</a>
+<a href="#fpanorama">F1 · BJT vs FET</a>
+<a href="#fjfet">F2 · JFET y Shockley</a>
+<a href="#fanatomia">F3 · MOSFET por dentro</a>
+<a href="#fregiones">F4 · Corte, triodo y saturación</a>
+<a href="#fpolarizacion">F5 · Montaje DC y polarización</a>
+<a href="#fraices">F6 · Qué raíz es correcta</a>
+<a href="#ffeedback">F7 · Autopolarización</a>
+<a href="#fac">F8 · Pequeña Señal AC</a>
+<a href="#fconmutacion">F9 · Conmutación y Eficiencia</a>
+<a href="#fdriver">F10 · Driver 3.3V/5V</a>
+<a href="#fcmos">F11 · Revolución CMOS</a>
+<a href="#fsimulador">F12 · Simulador Interactivo</a>
+<a href="#fejemplos">F13 · Problemas Resueltos</a>
+<a href="#fdescargas">F14 · Repaso y fuentes</a>
+<a href="#fet-practica-tutor">F15 · Ejercicios de aplicación</a>
+<a href="#fquiz">F16 · Autoevaluación</a>
 </nav>
-<div class="side-info">
-  Capítulo universitario alineado con <b>Boylestad & Nashelsky</b> (caps. 6, 7 y 8) y <b>Albert Malvino</b> (caps. 12, 13 y 14). Enfocado en E-MOSFET por su vigencia absoluta en la industria moderna.
-</div>
+<div class="side-info">Contenido guiado por Boylestad, capítulo 6–8, y Malvino, capítulos 13–14. La ruta empieza con JFET y desarrolla con más detalle el MOSFET de enriquecimiento.</div>
 </aside>
-
 <main>
 <section class="hero small">
 <span class="eyebrow">Dispositivos Unipolares de Efecto de Campo · Teoría, Laboratorio y Aplicaciones</span>
-<h1>Transistores FET y MOSFET</h1>
-<p>Del control por corriente del BJT al control electrostático por campo transversal. Explicación conceptual, modelos de corriente continua, resolución analítica de la ecuación cuadrática con criterio físico de raíces, transconductancia incremental en AC, conmutación de potencia con $R_{DS(on)}$ en miliohmios y diseño de circuitos drivers para microcontroladores modernos.</p>
-<div class="meta">
-  <span>$I_G \approx 0\text{ A}$</span>
-  <span>$Z_{in} \sim 10^{12}\,\Omega$</span>
-  <span>$V_{GS(th)}$</span>
-  <span>Parábola $I_D=k(V_{GS}-V_{th})^2$</span>
-  <span>$g_m = 2\sqrt{k I_D}$</span>
-  <span>Logic-Level (IRLZ44N)</span>
-  <span>Flyback Protection</span>
-  <span>Lógica CMOS</span>
-</div>
+<h1>FET sin enredos: de JFET a MOSFET</h1>
+<p>Ya conoces el BJT. Ahora vamos a descubrir otra forma de controlar corriente: el campo eléctrico. Aprenderás a reconocer la familia FET, distinguir JFET y MOSFET, escoger una región de operación y resolver circuitos sin saltos de cálculo. Terminaremos conectando la teoría con amplificadores, motores y sistemas digitales.</p>
+<div class="meta"><span>Del BJT al FET</span><span>JFET</span><span>MOSFET N/P</span><span>Polarización DC</span><span>Curvas y regiones</span><span>Pequeña señal</span><span>Aplicaciones</span><span>Parcial + quiz</span></div>
 </section>
-
 <div class="study-note">
-  <b>Enfoque pedagógico del capítulo.</b>
-  <span>El JFET se presenta como el antecedente histórico conceptual que demostró el control por campo eléctrico; sin embargo, como dispositivo normalmente encendido y con unión PN sin aislar, ha sido prácticamente superado por el <b>MOSFET de Enriquecimiento (E-MOSFET)</b>. En este capítulo estudiaremos por qué el MOSFET domina desde los convertidores de potencia hasta los microprocesadores nanométricos de telecomunicaciones.</span>
-</div>
-
+<b>Enfoque pedagógico del capítulo.</b>
+<span>Estudiaremos primero los JFET y luego los MOSFET de enriquecimiento y agotamiento. El énfasis en E-MOSFET responde a su uso frecuente en amplificación, conmutación y electrónica digital, <b>sin describir al JFET como obsoleto</b>. Veremos aplicaciones de conversión de potencia y circuitos digitales, conservando las diferencias entre dispositivos y sus límites.</span>
+</div><div class="fet152-route"><h2>Tu ruta de estudio</h2><p>Si faltaste a clase, sigue este orden. Si vas a presentar parcial, intenta cada reto antes de abrir la solución.</p><div class="fet152-steps"><a href="#fpanorama"><b>01</b><span>Entiende la familia</span><small>BJT, JFET y MOSFET</small></a><a href="#fregiones"><b>02</b><span>Reconoce la región</span><small>Corte, triodo, saturación</small></a><a href="#fpolarizacion"><b>03</b><span>Calcula el punto Q</span><small>Tensiones, mallas, raíces</small></a><a href="#fac"><b>04</b><span>Interpreta AC</span><small>gm, ganancia y carga</small></a><a href="#fet-practica-tutor"><b>05</b><span>Resuelve problemas</span><small>Con pistas progresivas</small></a><a href="#fquiz"><b>06</b><span>Comprueba tu avance</span><small>Evaluación con retroalimentación</small></a></div></div>
 <!-- ======================================================== -->
 <!-- F1: PANORAMA GENERAL -->
 <!-- ======================================================== -->
-<section class="module" id="fpanorama">
-<div class="module-head">
-  <div class="module-title">
-    <span class="no">F1</span>
-    <div><span class="eyebrow">Fundamentos</span><h2>El Gran Salto: BJT vs FET</h2></div>
-  </div>
-  <button class="mark" data-mark="fet-f1">Marcar estudiado</button>
-</div>
-
-<p class="lead">Para entender un transistor de efecto de campo, primero recordemos la limitación intrínseca del BJT: <b>el BJT es un dispositivo controlado por corriente</b>. Para que circule corriente de colector ($I_C$), es indispensable inyectar portadores continuamente a través de la base ($I_B = I_C / \beta$). Esto produce dos efectos: la entrada consume energía y presenta una impedancia finita relativamente baja ($Z_{in} \sim 1\text{ k}\Omega - 20\text{ k}\Omega$), cargando a la fuente de señal.</p>
-
-<div class="grid2">
-  <div class="panel paper">
-    <h3>BJT (Transistor Bipolar)</h3>
-    <ul class="clean-list">
-      <li><b>Principio:</b> Inyección de portadores minoritarios a través de dos uniones PN.</li>
-      <li><b>Control:</b> Por corriente de base: $I_C = \beta I_B$.</li>
-      <li><b>Impedancia de entrada:</b> Moderada/Baja ($h_{ie} \approx \beta r_e$). Hay corriente de base siempre que conduce.</li>
-      <li><b>Saturación:</b> Tensión de saturación fija no nula ($V_{CE(sat)} \approx 0.1\text{ V} - 0.3\text{ V}$). A altas corrientes disipa calor considerable ($P = I_C V_{CE(sat)}$).</li>
-      <li><b>Comportamiento térmico:</b> Coeficiente de temperatura negativo: si se calienta, conduce más, pudiendo sufrir <em>embalamiento térmico</em> si no se compensa.</li>
-    </ul>
-  </div>
-  <div class="panel paper">
-    <h3>FET (Efecto de Campo / Unipolar)</h3>
-    <ul class="clean-list">
-      <li><b>Principio:</b> Modulación del ancho de un canal conductor mediante un campo eléctrico transversal.</li>
-      <li><b>Control:</b> Por voltaje compuerta-fuente: $I_D = f(V_{GS})$.</li>
-      <li><b>Impedancia de entrada:</b> Gigantesca ($Z_{in} \sim 10^{12}\,\Omega - 10^{14}\,\Omega$). La compuerta está aislada por vidrio ($SiO_2$); por ende, $I_G \approx 0\text{ A}$.</li>
-      <li><b>Saturación / Conducción:</b> Actúa como una resistencia pura de valor pequeñísimo ($R_{DS(on)} \sim 1.5\text{ m}\Omega - 20\text{ m}\Omega$). Pérdidas por conducción mínimas.</li>
-      <li><b>Comportamiento térmico:</b> Coeficiente de temperatura positivo: al calentarse, su resistencia $R_{DS(on)}$ sube, equilibrando la corriente automáticamente. Permite conectar múltiples MOSFETs en paralelo directamente.</li>
-    </ul>
-  </div>
-</div>
-
-<div class="box key">
-  <small>Analogía visual de Albert Malvino</small>
-  Imagina una manguera de agua:
-  <br>• En un <b>BJT</b>, la válvula tiene un resorte mecánico tan duro que necesitas empujar continuamente con tu mano (corriente de base) para mantenerla abierta. Si te cansas o dejas de empujar, el agua se corta.
-  <br>• En un <b>MOSFET</b>, la válvula responde a un sensor de proximidad electrostático: simplemente colocas una placa cargada a cierta tensión (voltaje $V_{GS}$) y la válvula se abre por campo eléctrico sin que gotee ni una sola gota de agua a través del control ($I_G = 0$).
-</div>
+<section class="module" id="fpanorama"><div class="module-head"><div class="module-title"><span class="no">F1</span><div><span class="eyebrow">Fundamentos</span><h2>BJT y FET: dos formas distintas de controlar corriente</h2></div></div><button class="mark" data-mark="fet-f1">Marcar estudiado</button></div>
+<p class="lead"><b>Definición técnica.</b> El FET controla el paso de corriente entre drenador (D) y fuente (S) mediante el campo eléctrico asociado al voltaje puerta-fuente, \(V_{GS}=V_G-V_S\). En el MOSFET la puerta está aislada por un dieléctrico; en el JFET la puerta es una unión PN polarizada normalmente en inversa.</p>
+<div class="box remember"><small>Una explicación cercana</small>En una etapa con BJT necesitamos proporcionar una corriente de base para sostener determinada corriente de colector. En un MOSFET ideal, ajustamos el campo eléctrico con una tensión de puerta: en régimen DC circula muy poca corriente hacia ella, <b>pero al encender y apagar sí hay que cargar y descargar sus capacitancias</b>. No confundas «prácticamente sin corriente DC» con «sin esfuerzo de control».</div>
+<div class="ac-table-wrap"><table class="compare-table"><thead><tr><th>Pregunta</th><th>BJT</th><th>FET</th></tr></thead><tbody>
+<tr><td>¿Qué lo controla?</td><td>Corriente de base y tensión base-emisor.</td><td>Campo asociado a \(V_{GS}\).</td></tr>
+<tr><td>¿Cómo se llaman los terminales?</td><td>Base, colector, emisor.</td><td>Puerta, drenador, fuente.</td></tr>
+<tr><td>¿Qué ocurre en la entrada?</td><td>La unión B-E puede consumir corriente DC.</td><td>JFET: unión PN inversa; MOSFET: puerta aislada, con fugas y capacitancia.</td></tr>
+<tr><td>¿Qué usa el análisis AC?</td><td>\(r_e\), \(r_\pi\), \(g_m\).</td><td>\(g_m\), \(r_o\), capacidad de puerta y punto Q.</td></tr>
+<tr><td>¿Cómo puede conmutar?</td><td>Corte y saturación BJT.</td><td>Corte y región óhmica de baja \(R_{DS(on)}\).</td></tr>
+<tr><td>¿Qué se consulta antes de diseñar?</td><td>\(V_{CE(sat)}\), \(I_B\), potencia, SOA.</td><td>\(R_{DS(on)}\) a \(V_{GS}\) real, \(Q_g\), tensión, corriente, SOA.</td></tr>
+</tbody></table></div>
+<div class="grid2"><div class="panel paper"><h3>Mapa de familia FET</h3><figure class="fet15-figure"><img alt="Familia de los FET dividida en JFET y MOSFET, variantes enriquecimiento y agotamiento, N y P" loading="lazy" src="assets/fet/familia-fet-clara.svg"/><figcaption>Clasificación para estudiar: primero estructura de puerta, después canal N/P y finalmente modo de funcionamiento.</figcaption></figure><p>La clasificación depende de la estructura de la puerta, del tipo de canal y del modo de funcionamiento. No todos los FET están apagados a \(V_{GS}=0\).</p></div><div class="panel paper"><h3>Un detalle de taller</h3><p>En un MOSFET de canal N utilizado como interruptor de lado bajo, \(V_{GS}\) se mide <b>entre puerta y fuente</b>. Si la fuente cambia de potencial, la tensión de control también cambia aunque el GPIO permanezca fijo.</p><div class="box key"><small>Pregunta de parcial</small>¿Por qué \(V_G=5\,V\) no significa necesariamente que \(V_{GS}=5\,V\)? Porque \(V_{GS}=V_G-V_S\).</div></div></div>
+<p class="fet15-source">Lectura base: Boylestad y Nashelsky, capítulos de FET y polarización; Malvino y Bates, familia de FET y MOSFET; Pleite Guerra y colaboradores, estudio de FET.</p>
 </section>
-
 <!-- ======================================================== -->
 <!-- F2: EL JFET Y SU DECLIVE HISTÓRICO -->
 <!-- ======================================================== -->
-<section class="module" id="fjfet">
-<div class="module-head">
-  <div class="module-title">
-    <span class="no">F2</span>
-    <div><span class="eyebrow">Antecedente Histórico</span><h2>El JFET: Funcionamiento y Justificación de su Obsolescencia</h2></div>
-  </div>
-  <button class="mark" data-mark="fet-f2">Marcar estudiado</button>
-</div>
-
-<p>El <b>JFET (Junction Field-Effect Transistor)</b> fue el primer transistor de efecto de campo práctico. Consiste en una barra continua de silicio dopado (usualmente tipo N) con dos difusiones laterales fuertemente dopadas del tipo opuesto (P+) que actúan como compuerta (Gate).</p>
-
-<div class="grid2">
-  <div>
-    <p>Al aplicar una tensión inversa compuerta-fuente ($V_{GS} \le 0\text{ V}$ en canal N), las uniones PN se polarizan en reversa. La zona de empobrecimiento (desprovista de portadores libres) se ensancha hacia el centro del canal, estrangulando el paso de electrones entre Drenador (Drain) y Fuente (Source).</p>
-    <p>La corriente de drenador se modela mediante la clásica <b>Ecuación de Shockley</b> (Boylestad, Cap. 6):</p>
-    <div class="formula">\[\boxed{I_D = I_{DSS}\left(1 - \frac{V_{GS}}{V_P}\right)^2}\]</div>
-    <p>Donde:</p>
-    <ul class="clean-list">
-      <li><b>$I_{DSS}$:</b> Corriente máxima de saturación con compuerta unida a fuente ($V_{GS} = 0\text{ V}$).</li>
-      <li><b>$V_P$:</b> Tensión de estrangulamiento (*pinch-off*), negativa en canal N. Cuando $V_{GS} = V_P$, el canal se cierra por completo e $I_D = 0\text{ A}$.</li>
-    </ul>
-  </div>
-  <div class="panel paper" style="text-align:center;">
-    <h3>Símbolos Normalizados JFET</h3>
-    <svg viewBox="0 0 480 200" style="width:100%;max-width:440px;height:auto;display:inline-block;">
-      <!-- Canal N -->
-      <g transform="translate(40, 20)">
-        <line x1="100" y1="30" x2="100" y2="130" stroke="var(--blue)" stroke-width="4"/>
-        <line x1="100" y1="45" x2="150" y2="45" stroke="currentColor" stroke-width="2"/>
-        <line x1="150" y1="45" x2="150" y2="20" stroke="currentColor" stroke-width="2"/>
-        <text x="155" y="25" font-size="12" fill="currentColor">D</text>
-        <line x1="100" y1="115" x2="150" y2="115" stroke="currentColor" stroke-width="2"/>
-        <line x1="150" y1="115" x2="150" y2="140" stroke="currentColor" stroke-width="2"/>
-        <text x="155" y="145" font-size="12" fill="currentColor">S</text>
-        <line x1="30" y1="80" x2="100" y2="80" stroke="currentColor" stroke-width="2"/>
-        <polygon points="85,75 100,80 85,85" fill="var(--red)"/>
-        <text x="15" y="85" font-size="12" fill="currentColor">G</text>
-        <text x="80" y="170" text-anchor="middle" font-size="13" font-weight="bold" fill="var(--blue)">JFET Canal N</text>
-      </g>
-      <!-- Canal P -->
-      <g transform="translate(260, 20)">
-        <line x1="100" y1="30" x2="100" y2="130" stroke="var(--amber)" stroke-width="4"/>
-        <line x1="100" y1="45" x2="150" y2="45" stroke="currentColor" stroke-width="2"/>
-        <line x1="150" y1="45" x2="150" y2="20" stroke="currentColor" stroke-width="2"/>
-        <text x="155" y="25" font-size="12" fill="currentColor">D</text>
-        <line x1="100" y1="115" x2="150" y2="115" stroke="currentColor" stroke-width="2"/>
-        <line x1="150" y1="115" x2="150" y2="140" stroke="currentColor" stroke-width="2"/>
-        <text x="155" y="145" font-size="12" fill="currentColor">S</text>
-        <line x1="30" y1="80" x2="100" y2="80" stroke="currentColor" stroke-width="2"/>
-        <polygon points="55,80 40,75 40,85" fill="var(--red)"/>
-        <text x="15" y="85" font-size="12" fill="currentColor">G</text>
-        <text x="80" y="170" text-anchor="middle" font-size="13" font-weight="bold" fill="var(--amber)">JFET Canal P</text>
-      </g>
-    </svg>
-  </div>
-</div>
-
-<div class="panel" style="border-left: 5px solid var(--amber); margin-top:16px;">
-  <h3 style="color:var(--amber);">¿Por qué la industria moderna descartó el JFET y se volcó al MOSFET?</h3>
-  <p>Aunque el JFET fue vital en las décadas de 1960 y 1970, hoy se considera un dispositivo prácticamente legado o restringido a aplicaciones muy puntuales de nicho (como preamplificadores de audio analógico de muy bajo ruido o buffers de sensores piezoeléctricos). Las razones técnicas y pedagógicas son demoledoras:</p>
-  <ol>
-    <li><b>Es un dispositivo Normally ON (Modo de Empobrecimiento):</b> Con $V_{GS} = 0\text{ V}$, el JFET conduce su máxima corriente ($I_{DSS}$). En sistemas de control, si el microcontrolador se apaga, se resetea o se desconecta el cable de compuerta, el JFET queda conduciendo a fondo, lo que provocaría incendios o movimientos descontrolados en motores. La industria exige transistores <b>Normally OFF</b> (que arranquen apagados).</li>
-    <li><b>La compuerta no está aislada galvánicamente:</b> La compuerta es una unión PN directa. Si por ruido eléctrico, error de software o transitorio la compuerta supera $+0.7\text{ V}$, la unión se polariza en directa: ¡la compuerta comienza a conducir corriente masiva, se pierde la impedancia infinita y el circuito se destruye!</li>
-    <li><b>Imposibilidad de integración a ultra-alta escala (VLSI):</b> Para fabricar un JFET se requieren difusiones profundas en el silicio que ocupan una superficie gigantesca. Además, no es posible construir una lógica complementaria simétrica con consumo estático cero como el CMOS. Un procesador moderno con miles de millones de JFETs consumiría gigavatios y herviría en segundos.</li>
-    <li><b>Resistencia $R_{on}$ enorme y baja transconductancia:</b> La resistencia interna de un canal JFET suele ser de cientos o miles de ohmios ($100\,\Omega - 2\text{ k}\Omega$). Jamás podría conmutar 10 amperios eficientemente como lo hace un MOSFET de potencia con resistencias de miliohmios.</li>
-  </ol>
-</div>
+<section class="module" id="fjfet"><div class="module-head"><div class="module-title"><span class="no">F2</span><div><span class="eyebrow">Familia FET</span><h2>JFET: control mediante la zona de agotamiento</h2></div></div><button class="mark" data-mark="fet-f2">Marcar estudiado</button></div>
+<div class="grid2"><div><p><b>Definición técnica.</b> En un JFET de canal N, una puerta PN polarizada en inversa modifica la anchura disponible del canal. Hacer \(V_{GS}\) más negativo ensancha la región de agotamiento y reduce la corriente de drenador.</p>
+<div class="formula">\[I_D=I_{DSS}\left(1-\frac{V_{GS}}{V_{GS(off)}}\right)^2\]</div>
+<p>Esta ecuación de Shockley se emplea dentro del intervalo válido de control para un JFET en la región apropiada de funcionamiento: canal N, \(V_{GS(off)}\le V_{GS}\le 0\). No debe extrapolarse indiscriminadamente fuera de ese intervalo.</p><div class="box remember"><small>En palabras de laboratorio</small>Piensa en un canal que ya está abierto cuando la puerta y la fuente están al mismo potencial. La tensión inversa de la puerta estrecha gradualmente ese canal. Es diferente del MOSFET de <em>enriquecimiento</em>, que necesita una tensión de puerta apropiada para inducirlo.</div>
+<div class="example"><h3>Ejemplo guiado · Sensor de alta impedancia</h3><p>Para un JFET de canal N con \(I_{DSS}=8\,mA\), \(V_{GS(off)}=-4\,V\) y \(V_{GS}=-2\,V\):</p><p><b>1.</b> Comprueba que \(-4\le-2\le0\). <b>2.</b> Sustituye en Shockley:</p><div class="formula">\[I_D=8\left(1-\frac{-2}{-4}\right)^2=8(0.5)^2=2\,mA.\]</div><p><b>3.</b> Interpreta: la tensión inversa redujo la corriente a la cuarta parte del valor a puerta unida a fuente, según el modelo.</p></div></div><div class="panel paper"><h3>Curva de transferencia JFET N · modelo ilustrativo</h3>
+<figure class="fet15-figure"><img alt="Curva exacta del modelo Shockley, JFET canal N, IDSS 8 mA y VGS corte -4 V, punto -2 V y 2 mA" loading="lazy" src="assets/fet/jfet-transferencia-8ma.svg"/><figcaption>Modelo ideal de Shockley: cada punto de la curva se calculó con la ecuación. No es una medición de un JFET real.</figcaption></figure><p class="small">La curva ilustra la ecuación; no es una medición ni una curva de un componente comercial concreto.</p></div></div>
+<div class="box key"><small>¿Sigue utilizándose el JFET?</small>Sí. Se encuentra en etapas analógicas de entrada, sensores, instrumentación y aplicaciones de bajo ruido. Los MOSFET dominan muchas aplicaciones digitales y de potencia, pero eso no convierte al JFET en una tecnología «obsoleta» ni insegura por definición.</div>
+<p class="fet15-source">Referencia: modelo de Shockley en Boylestad y Malvino. Para usar un JFET real, sus parámetros \(I_{DSS}\) y \(V_{GS(off)}\) se obtienen de su hoja de datos y tienen dispersión.</p>
 </section>
-
 <!-- ======================================================== -->
 <!-- F3: ANATOMÍA DEL E-MOSFET -->
 <!-- ======================================================== -->
-<section class="module" id="fanatomia">
-<div class="module-head">
-  <div class="module-title">
-    <span class="no">F3</span>
-    <div><span class="eyebrow">Estructura Física</span><h2>Anatomía del E-MOSFET: La Capa de Inversión</h2></div>
-  </div>
-  <button class="mark" data-mark="fet-f3">Marcar estudiado</button>
-</div>
-
-<p class="lead">El <b>MOSFET de Enriquecimiento (Enhancement-Mode MOSFET o E-MOSFET)</b> es el dispositivo semiconductor más fabricado en la historia de la humanidad. Su funcionamiento se basa en <b>inducir un canal conductor que no existe físicamente en reposo</b>.</p>
-
-<div class="panel paper" style="text-align:center;padding:24px;">
-  <h3>Corte Transversal Físico de un E-MOSFET Canal N</h3>
-  <svg viewBox="0 0 760 300" style="width:100%;max-width:700px;height:auto;display:inline-block;">
-    <!-- Sustrato P -->
-    <rect x="40" y="80" width="680" height="190" fill="#1e293b" rx="8"/>
-    <text x="380" y="240" fill="#94a3b8" font-size="16" font-weight="bold" text-anchor="middle">Sustrato Semiconductor Tipo P (Substrate)</text>
-    
-    <!-- Pozos N+ de Fuente y Drenador -->
-    <rect x="90" y="80" width="140" height="90" fill="var(--blue)" rx="4"/>
-    <text x="160" y="130" fill="#ffffff" font-size="18" font-weight="bold" text-anchor="middle">N+ Fuente</text>
-    
-    <rect x="530" y="80" width="140" height="90" fill="var(--blue)" rx="4"/>
-    <text x="600" y="130" fill="#ffffff" font-size="18" font-weight="bold" text-anchor="middle">N+ Drenador</text>
-    
-    <!-- Capa de Inversión (Canal Inducido) -->
-    <rect x="230" y="80" width="300" height="28" fill="var(--green)" opacity="0.85"/>
-    <text x="380" y="100" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">Canal N Inducido (Capa de Inversión de Electrones)</text>
-    
-    <!-- Aislante Dieléctrico SiO2 -->
-    <rect x="210" y="48" width="340" height="32" fill="#cbd5e1" stroke="#64748b" stroke-width="2"/>
-    <text x="380" y="70" fill="#0f172a" font-size="13" font-weight="bold" text-anchor="middle">Dióxido de Silicio SiO2 (Vidrio Aislante Dieléctrico ~10-50 nm)</text>
-    
-    <!-- Electrodo Metálico / Polisilicio Compuerta -->
-    <rect x="240" y="16" width="280" height="32" fill="var(--amber)" rx="4"/>
-    <text x="380" y="38" fill="#0f172a" font-size="14" font-weight="bold" text-anchor="middle">Compuerta Metálica (Gate)</text>
-    
-    <!-- Terminales y contactos -->
-    <!-- Compuerta -->
-    <line x1="380" y1="16" x2="380" y2="0" stroke="currentColor" stroke-width="3"/>
-    <circle cx="380" cy="0" r="4" fill="var(--amber)"/>
-    <text x="395" y="10" font-size="14" font-weight="bold" fill="var(--amber)">G (Gate)</text>
-    
-    <!-- Fuente -->
-    <rect x="130" y="65" width="60" height="15" fill="#94a3b8"/>
-    <line x1="160" y1="65" x2="160" y2="20" stroke="currentColor" stroke-width="3"/>
-    <circle cx="160" cy="20" r="4" fill="var(--blue)"/>
-    <text x="175" y="25" font-size="14" font-weight="bold" fill="var(--blue)">S (Source)</text>
-    
-    <!-- Drenador -->
-    <rect x="570" y="65" width="60" height="15" fill="#94a3b8"/>
-    <line x1="600" y1="65" x2="600" y2="20" stroke="currentColor" stroke-width="3"/>
-    <circle cx="600" cy="20" r="4" fill="var(--blue)"/>
-    <text x="615" y="25" font-size="14" font-weight="bold" fill="var(--blue)">D (Drain)</text>
-  </svg>
-</div>
-
-<div class="grid2" style="margin-top:16px;">
-  <div>
-    <h4>Física de la Inversión Paso a Paso</h4>
-    <ol class="clean-list">
-      <li><b>1. Reposo ($V_{GS} = 0\text{ V}$):</b> Entre el pozo N+ de la fuente y el pozo N+ del drenador existe el sustrato tipo P. Forman dos diodos PN espalda con espalda ($N^+-P-N^+$). No puede circular corriente: el dispositivo está en <b>corte estricto</b> ($I_D = 0$).</li>
-      <li><b>2. Aplicación de tensión positiva ($V_{GS} > 0\text{ V}$):</b> El electrodo de compuerta actúa como la placa positiva de un condensador. El campo eléctrico transversal atraviesa el $SiO_2$ y empuja a los huecos del sustrato P lejos de la superficie.</li>
-      <li><b>3. Superación del Umbral ($V_{GS} > V_{GS(th)}$):</b> Cuando el campo es suficientemente intenso, atrae a electrones libres minoritarios hacia la superficie del silicio justo debajo del óxido. La densidad de electrones supera a la de huecos: <b>la superficie P se "invierte" convirtiéndose en un canal continuo tipo N</b>. ¡Ahora Fuente y Drenador están unidos por un camino conductor!</li>
-    </ol>
-  </div>
-  <div>
-    <div class="box warn">
-      <small>Alerta de Taller / Malvino: Fragilidad ESD</small>
-      La capa de dióxido de silicio ($SiO_2$) tiene un espesor de solo unas pocas decenas de nanómetros (¡apenas cientos de átomos de grosor!).
-      <br><br>
-      Si una persona camina sobre una alfombra o toca una mesa, acumula una carga electrostática de $2\,000\text{ V}$ a $10\,000\text{ V}$. Si tocas el pin de compuerta sin protección, el campo eléctrico supera la rigidez dieléctrica ($10^7\text{ V/cm}$):
-      $$\text{¡El vidrio se perfora microscópicamente y el MOSFET queda destruido para siempre!}$$
-      <b>Regla de laboratorio:</b> Trabaja con manilla antiestática conectada a tierra y almacena los MOSFETs clavados en espuma conductiva negra o bolsas antiestáticas de blindaje.
-    </div>
-  </div>
-</div>
+<section class="module" id="fanatomia"><div class="module-head"><div class="module-title"><span class="no">F3</span><div><span class="eyebrow">Del concepto al dispositivo</span><h2>¿Qué ocurre dentro de un MOSFET de enriquecimiento?</h2></div></div><button class="mark" data-mark="fet-f3">Marcar estudiado</button></div>
+<p class="lead">Un MOSFET de <b>enriquecimiento</b> normalmente no dispone de un canal conductor establecido cuando $V_{GS}=0$. Un campo eléctrico aplicado desde la puerta puede crear una capa de inversión que conecta eléctricamente fuente y drenador. Se trata de una explicación física para el dispositivo de canal N.</p>
+<div class="grid2"><div class="panel paper"><h3>La secuencia, sin saltos</h3><ol class="checklist"><li><b>Puerta sin excitación:</b> no se ha inducido el canal N que utiliza el modelo de encendido; hay pequeñas fugas reales aunque en el modelo elemental se usa $I_D\approx0$.</li><li><b>Se aplica $V_{GS}$ positiva:</b> la puerta, aislada por un dieléctrico, crea un campo eléctrico que reorganiza cargas cerca de la superficie del semiconductor.</li><li><b>Se supera el umbral:</b> aparece una capa de inversión. La corriente posible dependerá de $V_{GS}$, $V_{DS}$ y del dispositivo.</li><li><b>Se diseña una carga real:</b> llegar a $V_{GS(th)}$ no equivale a obtener una resistencia de encendido pequeña.</li></ol></div><div class="panel paper"><h3>Explicación de clase</h3><p>Imagina una pista conductora que no está lista para usarse. La tensión de la puerta <b>habilita el camino</b>; la tensión entre drenador y fuente impulsa la corriente por ese camino. Son dos tareas distintas.</p><div class="box remember"><small>Frase para recordar</small><b>Puerta: crea o modifica el canal. Drenador-fuente: establece la corriente de trabajo.</b> No basta con mirar solo el voltaje de puerta.</div><div class="box warn"><small>Protege la puerta</small>La estructura aislada puede ser sensible a descargas electrostáticas. Evita tocar directamente terminales cuando no sea necesario y utiliza almacenamiento y manipulación antiestáticos apropiados.</div></div></div>
+<div class="box key"><small>¿Y el MOSFET de agotamiento (D-MOSFET)?</small>Es otra variante de la familia: ya conduce a $V_{GS}=0$ bajo las condiciones habituales de uso. La tensión de puerta puede <b>reducir</b> o <b>aumentar</b> su corriente dentro de los límites especificados. Por eso «MOSFET» no siempre significa «normalmente apagado».</div>
+<p class="fet15-source">Fundamento: Boylestad y Nashelsky, capítulo 6 (dispositivos FET); Malvino y Bates, capítulo 14 (modos de agotamiento y enriquecimiento). La descripción es conceptual; la geometría y materiales dependen de la tecnología.</p>
 </section>
-
 <!-- ======================================================== -->
 <!-- F4: REGIONES DE OPERACIÓN Y CURVAS -->
 <!-- ======================================================== -->
-<section class="module" id="fregiones">
-<div class="module-head">
-  <div class="module-title">
-    <span class="no">F4</span>
-    <div><span class="eyebrow">Modelado Matemático</span><h2>Regiones de Operación y Curvas Características</h2></div>
-  </div>
-  <button class="mark" data-mark="fet-f4">Marcar estudiado</button>
-</div>
-
-<p>Un E-MOSFET de Canal N opera en tres regiones bien diferenciadas según las tensiones $V_{GS}$ y $V_{DS}$:</p>
-
-<div class="grid3">
-  <div class="panel paper">
-    <h3 style="color:var(--red);">1. Corte (Cutoff)</h3>
-    <div class="formula">\[V_{GS} < V_{GS(th)}\]</div>
-    <p>El campo electrostático no es suficiente para invertir el canal. No hay portadores libres entre drenador y fuente.</p>
-    <div class="formula">\[\boxed{I_D = 0\text{ A}}\]</div>
-    <p>El MOSFET se comporta como un <b>interruptor abierto</b> ideal.</p>
-  </div>
-
-  <div class="panel paper">
-    <h3 style="color:var(--amber);">2. Óhmica / Triodo / Lineal</h3>
-    <div class="formula">\[V_{GS} \ge V_{GS(th)}\]</div>
-    <div class="formula">\[V_{DS} < V_{GS} - V_{GS(th)}\]</div>
-    <p>El canal conductor existe de extremo a extremo. El transistor actúa como una <b>resistencia controlada por voltaje</b>:</p>
-    <div class="formula">\[I_D \approx 2k\left[(V_{GS}-V_{th})V_{DS} - \frac{V_{DS}^2}{2}\right]\]</div>
-    <p>Para $V_{DS}$ pequeño:</p>
-    <div class="formula">\[\boxed{R_{DS(on)} \approx \frac{1}{2k(V_{GS}-V_{GS(th)})}}\]</div>
-  </div>
-
-  <div class="panel paper">
-    <h3 style="color:var(--green);">3. Saturación / Activa</h3>
-    <div class="formula">\[V_{GS} \ge V_{GS(th)}\]</div>
-    <div class="formula">\[V_{DS} \ge V_{GS} - V_{GS(th)}\]</div>
-    <p>La tensión $V_{GD} \le V_{GS(th)}$, lo que provoca el <b>estrangulamiento (*pinch-off*)</b> del canal en el extremo del drenador. La corriente se satura y depende únicamente de $V_{GS}$:</p>
-    <div class="formula">\[\boxed{I_D = k\left(V_{GS} - V_{GS(th)}\right)^2}\]</div>
-    <p>Es la región empleada para <b>amplificación analógica</b>.</p>
-  </div>
-</div>
-
-<div class="box key" style="margin-top:16px;">
-  <small>Cálculo de la constante de transconducción del dispositivo (\(k\))</small>
-  A diferencia del BJT donde el fabricante entrega $\beta$ o $h_{FE}$, en un E-MOSFET el fabricante proporciona en el datasheet un punto de prueba específico: $V_{GS(th)}$ y un par de encendido $(V_{GS(on)}, I_{D(on)})$. Con esos datos calculamos $k$:
-  $$\boxed{k = \frac{I_{D(on)}}{\left(V_{GS(on)} - V_{GS(th)}\right)^2}} \quad \left[\text{con unidades en }\frac{\text{mA}}{\text{V}^2} \text{ o }\frac{\text{A}}{\text{V}^2}\right]$$
-  En física de semiconductores (Boylestad Cap. 6), $k = \frac{1}{2}\mu_n C_{ox}\left(\frac{W}{L}\right)$, donde $\mu_n$ es la movilidad de los electrones, $C_{ox}$ es la capacitancia por unidad de área del óxido y $W/L$ es la relación ancho/longitud del canal geométrico.
-</div>
+<section class="module" id="fregiones"><div class="module-head"><div class="module-title"><span class="no">F4</span><div><span class="eyebrow">Decisión antes de calcular</span><h2>Tres regiones: ¿qué fórmula corresponde?</h2></div></div><button class="mark" data-mark="fet-f4">Marcar estudiado</button></div>
+<p class="lead">No empieces sustituyendo números: <b>primero identifica la región</b>. El mismo MOSFET puede comportarse como circuito casi abierto, como una resistencia controlada o como una fuente de corriente aproximada. Para estudiar estas regiones usaremos un <b>modelo de canal largo</b>, con $V_T=V_{GS(th)}$ efectivo y $V_{OV}=V_{GS}-V_T$.</p>
+<div class="grid3"><div class="panel paper"><h3>1. Corte</h3><div class="formula">\[V_{GS}\le V_T\]</div><p>El canal de inversión no conduce de forma apreciable en el modelo básico.</p><div class="formula">\[I_D\approx 0\]</div><p><b>En lenguaje cotidiano:</b> el camino de corriente está prácticamente cerrado. En la realidad puede existir corriente subumbral y fuga.</p></div>
+<div class="panel paper"><h3>2. Óhmica (triodo)</h3><div class="formula">\[V_{OV}&gt;0,\quad 0\le V_{DS}\lt V_{OV}\]</div><p>La corriente cambia con $V_{DS}$ y el transistor puede funcionar como interruptor de baja resistencia.</p><div class="formula">\[I_D=k(2V_{OV}V_{DS}-V_{DS}^{2})\]</div><p><b>Traducción:</b> el canal conduce y la caída entre drenador y fuente importa mucho.</p></div>
+<div class="panel paper"><h3>3. Saturación (modelo MOS)</h3><div class="formula">\[V_{OV}&gt;0,\quad V_{DS}\ge V_{OV}\]</div><p>En un modelo ideal la corriente depende principalmente de $V_{GS}$. Es la región típica de la amplificación de pequeña señal.</p><div class="formula">\[I_D=kV_{OV}^{2}\]</div><p><b>Ojo:</b> «saturación MOS» <b>no</b> significa lo mismo que «saturación BJT» como interruptor.</p></div></div>
+<figure class="fet15-figure"><img alt="Curvas de drenador versus voltaje de drenador-fuente para el modelo MOSFET, con regiones triodo y saturación y ejes con unidades" loading="lazy" src="assets/fet/curvas-salida-modelo.svg"/><figcaption>Curvas ilustrativas calculadas con el modelo cuadrático de canal largo; no representan un dispositivo comercial ni son datos experimentales. La frontera de cada curva es $V_{DS}=V_{GS}-V_T$.</figcaption></figure>
+<div class="grid2"><div class="box remember"><small>Dato que salva puntos en el parcial</small><b>Comprueba la región después de resolver.</b> Una ecuación puede producir una raíz numérica válida y, aun así, contradecir la región que asumiste para obtenerla.</div><div class="box key"><small>¿Qué es $k$?</small>La constante $k$ mide el efecto del dispositivo en el modelo cuadrático y se expresa en A/V² o mA/V². En los ejercicios puede estimarse con datos de un mismo modelo: \(k=I_{D(on)}/[V_{GS(on)}-V_T]^2\). <b>No</b> es un valor genérico de cualquier MOSFET comercial.</div></div>
+<div class="example"><h3>Mini-ejemplo: escoger la región antes de calcular</h3><p>Datos de un ejercicio: $V_T=2\,V$, $V_{GS}=5\,V$, $V_{DS}=1\,V$ y $k=0.5\,mA/V^2$.</p><ol class="checklist"><li>Encuentra el exceso de tensión: $V_{OV}=5-2=3\,V$.</li><li>Compara: $0&lt;1&lt;3$. El punto está en <b>triodo</b>, no en saturación.</li><li>Utiliza $I_D=k(2V_{OV}V_{DS}-V_{DS}^2)=0.5[2(3)(1)-1^2]=\boxed{2.5\,mA}$.</li><li>Si hubieras usado $I_D=kV_{OV}^2$, habrías obtenido $4.5\,mA$; esa diferencia revela por qué la clasificación es indispensable.</li></ol></div>
+<p class="fet15-source">Modelo elemental tratado en Boylestad (construcción y características MOSFET) y Malvino (curvas y aplicaciones MOSFET). El término $k$ sigue la convención $I_D=k(V_{GS}-V_T)^2$ y la ecuación triodo se escribe de forma coherente con esa convención.</p>
 </section>
-
 <!-- ======================================================== -->
 <!-- F5: POLARIZACIÓN DC -->
 <!-- ======================================================== -->
 <section class="module" id="fpolarizacion">
 <div class="module-head">
-  <div class="module-title">
-    <span class="no">F5</span>
-    <div><span class="eyebrow">Análisis de Circuitos</span><h2>Polarización DC por Divisor de Tensión</h2></div>
-  </div>
-  <button class="mark" data-mark="fet-f5">Marcar estudiado</button>
+<div class="module-title">
+<span class="no">F5</span>
+<div><span class="eyebrow">Análisis de Circuitos</span><h2>Polarización DC: vamos a calcular el punto Q</h2></div>
 </div>
-
-<p class="lead">Analicemos el circuito clásico de polarización universal de un E-MOSFET: divisor de tensión en compuerta ($R_1, R_2$), resistencia de drenador ($R_D$) y resistencia de fuente ($R_S$).</p>
-
+<button class="mark" data-mark="fet-f5">Marcar estudiado</button>
+</div><div class="fet152-hint"><b>¿Para qué sirve esto?</b> Polarizar no es adivinar la corriente: es dejar al transistor en un estado de operación conocido antes de pedirle que amplifique una señal.</div>
+<p class="lead">La polarización DC sirve para establecer un punto de trabajo antes de conectar una señal variable. En esta topología, R1 y R2 fijan la tensión de puerta; RD y RS influyen en la corriente y en las tensiones disponibles para el MOSFET. Primero encontraremos VG; después la corriente; al final verificaremos la región.</p>
 <div class="grid2">
-  <div class="panel paper" style="text-align:center;">
-    <h3>Circuito de Polarización por Divisor</h3>
-    <svg viewBox="0 0 380 340" style="width:100%;max-width:340px;height:auto;display:inline-block;">
-      <!-- VDD rail -->
-      <line x1="60" y1="30" x2="300" y2="30" stroke="var(--red)" stroke-width="3"/>
-      <circle cx="180" cy="30" r="4" fill="var(--red)"/>
-      <text x="180" y="20" font-size="14" font-weight="bold" fill="var(--red)" text-anchor="middle">VDD (+24V)</text>
-      
-      <!-- Divisor R1 / R2 -->
-      <line x1="100" y1="30" x2="100" y2="70" stroke="currentColor" stroke-width="2"/>
-      <rect x="88" y="70" width="24" height="50" fill="var(--paper)" stroke="currentColor" stroke-width="2"/>
-      <text x="75" y="100" font-size="12" text-anchor="end" fill="currentColor">R1 (22 MΩ)</text>
-      
-      <line x1="100" y1="120" x2="100" y2="180" stroke="currentColor" stroke-width="2"/>
-      <circle cx="100" cy="180" r="4" fill="currentColor"/>
-      <text x="80" y="185" font-size="13" font-weight="bold" fill="var(--blue)">VG</text>
-      
-      <line x1="100" y1="180" x2="100" y2="230" stroke="currentColor" stroke-width="2"/>
-      <rect x="88" y="230" width="24" height="50" fill="var(--paper)" stroke="currentColor" stroke-width="2"/>
-      <text x="75" y="260" font-size="12" text-anchor="end" fill="currentColor">R2 (10 MΩ)</text>
-      <line x1="100" y1="280" x2="100" y2="310" stroke="currentColor" stroke-width="2"/>
-      <!-- Tierra izquierda -->
-      <line x1="85" y1="310" x2="115" y2="310" stroke="currentColor" stroke-width="2"/>
-      <line x1="90" y1="315" x2="110" y2="315" stroke="currentColor" stroke-width="2"/>
-      <line x1="95" y1="320" x2="105" y2="320" stroke="currentColor" stroke-width="2"/>
-      
-      <!-- Compuerta conexion -->
-      <line x1="100" y1="180" x2="200" y2="180" stroke="currentColor" stroke-width="2"/>
-      
-      <!-- MOSFET E-MOSFET Symbol -->
-      <g transform="translate(140, 70)">
-        <line x1="90" y1="80" x2="90" y2="140" stroke="var(--blue)" stroke-width="3" stroke-dasharray="8,4"/>
-        <line x1="75" y1="75" x2="75" y2="145" stroke="var(--amber)" stroke-width="3"/>
-        <line x1="60" y1="110" x2="75" y2="110" stroke="currentColor" stroke-width="2"/>
-        
-        <!-- Drain line -->
-        <line x1="90" y1="90" x2="120" y2="90" stroke="currentColor" stroke-width="2"/>
-        <line x1="120" y1="90" x2="120" y2="30" stroke="currentColor" stroke-width="2"/>
-        
-        <!-- Source line -->
-        <line x1="90" y1="130" x2="120" y2="130" stroke="currentColor" stroke-width="2"/>
-        <line x1="120" y1="130" x2="120" y2="170" stroke="currentColor" stroke-width="2"/>
-        <polygon points="100,127 115,130 100,133" fill="var(--red)"/>
-      </g>
-      
-      <!-- RD rama -->
-      <line x1="260" y1="30" x2="260" y2="50" stroke="currentColor" stroke-width="2"/>
-      <rect x="248" y="50" width="24" height="45" fill="var(--paper)" stroke="currentColor" stroke-width="2"/>
-      <text x="280" y="75" font-size="12" fill="currentColor">RD (1.8 kΩ)</text>
-      
-      <!-- RS rama -->
-      <rect x="248" y="240" width="24" height="45" fill="var(--paper)" stroke="currentColor" stroke-width="2"/>
-      <text x="280" y="265" font-size="12" fill="currentColor">RS (0.82 kΩ)</text>
-      <line x1="260" y1="285" x2="260" y2="310" stroke="currentColor" stroke-width="2"/>
-      <!-- Tierra derecha -->
-      <line x1="245" y1="310" x2="275" y2="310" stroke="currentColor" stroke-width="2"/>
-      <line x1="250" y1="315" x2="270" y2="315" stroke="currentColor" stroke-width="2"/>
-      <line x1="255" y1="320" x2="265" y2="320" stroke="currentColor" stroke-width="2"/>
-    </svg>
-  </div>
-  <div>
-    <h4>Desarrollo Metódico Paso a Paso</h4>
-    <p><b>Paso 1: Tensión de compuerta $V_G$</b></p>
-    <p>Dado que la corriente de compuerta es estrictamente nula ($I_G = 0\text{ A}$), el divisor formado por $R_1$ y $R_2$ es <b>completamente ideal</b>. No existe efecto de carga:</p>
-    <div class="formula">\[\boxed{V_G = V_{DD} \left(\frac{R_2}{R_1 + R_2}\right)}\]</div>
-    <div class="box remember">
-      <small>Diferencia crítica con BJT</small>
-      En BJT estábamos obligados a cumplir la regla $R_2 \le 0.1 \beta R_E$ para evitar que la corriente de base alterara el voltaje. En MOSFET, como $I_G = 0$, ¡podemos usar resistencias gigantescas de $10\text{ M}\Omega$ o $22\text{ M}\Omega$! Esto reduce el consumo estático de la fuente a solo microamperios.
-    </div>
-
-    <p><b>Paso 2: Malla compuerta-fuente</b></p>
-    <p>Aplicando KVL a la malla de entrada:</p>
-    <div class="formula">\[V_G - V_{GS} - V_S = 0 \implies \boxed{V_{GS} = V_G - I_D R_S}\]</div>
-  </div>
+<div class="panel paper" style="text-align:center;">
+<h3>Circuito de polarización, sin cruces ni etiquetas montadas</h3>
+<figure class="fet15-figure"><img alt="Esquemático didáctico de polarización E-MOSFET canal N con divisor R1 R2, RD y RS; conexiones con tierra y VDD claramente trazadas" loading="lazy" src="assets/fet/polarizacion-divisor-claro.svg"/><figcaption>Las conexiones del divisor y la rama drenador-fuente están separadas. Los dos símbolos de tierra comparten la misma referencia de 0 V.</figcaption></figure>
 </div>
-</section>
-
+<div>
+<h4>Desarrollo Metódico Paso a Paso</h4>
+<p><b>Paso 1: Tensión de compuerta $V_G$</b></p>
+<p>En el modelo DC se desprecia la corriente de puerta ($I_G\approx0$). Así, si las fugas son mucho menores que la corriente del divisor, el voltaje de puerta se aproxima por la relación: </p>
+<div class="formula">\[\boxed{V_G = V_{DD} \left(\frac{R_2}{R_1 + R_2}\right)}\]</div>
+<div class="box remember">
+<small>Diferencia crítica con BJT</small>
+      En un BJT la corriente de base puede alterar el divisor. En un MOSFET de puerta aislada suele ser mucho menor, pero <b>no es nula en la práctica</b>: resistencias de megaohmios reducen la corriente del divisor, aunque también pueden incrementar sensibilidad a fugas, ruido y humedad. Justifica el valor para cada montaje.
+    </div>
+<p><b>Paso 2: Malla compuerta-fuente</b></p>
+<p>Aplicando KVL a la malla de entrada:</p>
+<div class="formula">\[V_G - V_{GS} - V_S = 0 \implies \boxed{V_{GS} = V_G - I_D R_S}\]</div>
+</div>
+</div>
+<div class="box key"><small>Antes de pasar al siguiente apartado</small>¿Por qué no podemos calcular directamente $I_D$ con la ecuación cuadrática? Porque $V_{GS}$ todavía depende de la caída $I_DR_S$. El paso siguiente consiste justamente en resolver esa dependencia sin olvidar las unidades.</div><p class="fet15-source">Base y límites: Boylestad y Nashelsky, capítulo 7 (polarización FET); Malvino y Bates, capítulo 14, polarización MOSFET. Resistencia en megaohmios: valor didáctico que debe reevaluarse en circuitos reales por fugas y ruido.</p></section>
 <!-- ======================================================== -->
 <!-- F6: CRITERIO DE RAÍCES -->
 <!-- ======================================================== -->
 <section class="module" id="fraices">
 <div class="module-head">
-  <div class="module-title">
-    <span class="no">F6</span>
-    <div><span class="eyebrow">Rigor Pedagógico</span><h2>La Ecuación Cuadrática y el Criterio Físico de Selección de Raíces</h2></div>
-  </div>
-  <button class="mark" data-mark="fet-f6">Marcar estudiado</button>
+<div class="module-title">
+<span class="no">F6</span>
+<div><span class="eyebrow">Rigor Pedagógico</span><h2>Dos raíces en la calculadora: ¿cuál sirve en el circuito?</h2></div>
 </div>
-
+<button class="mark" data-mark="fet-f6">Marcar estudiado</button>
+</div><div class="fet152-hint"><b>Truco de parcial:</b> una calculadora puede resolver la ecuación; tú debes decidir si el resultado respeta la física del circuito.</div>
 <p>Sustituyendo la expresión de $V_{GS}$ en la ecuación de corriente de saturación del E-MOSFET:</p>
 <div class="formula">\[I_D = k \left(V_{GS} - V_{GS(th)}\right)^2 = k \left[\left(V_G - I_D R_S\right) - V_{GS(th)}\right]^2\]</div>
-
 <p>Agrupando los términos constantes $V_X = V_G - V_{GS(th)}$ y expandiendo el binomio:</p>
 <div class="formula">\[I_D = k \left[V_X - I_D R_S\right]^2 = k \left[V_X^2 - 2 V_X R_S I_D + R_S^2 I_D^2\right]\]</div>
 <div class="formula">\[\boxed{\left(k R_S^2\right) I_D^2 - \left[2 k R_S (V_G - V_{GS(th)}) + 1\right] I_D + k (V_G - V_{GS(th)})^2 = 0}\]</div>
-
 <div class="panel paper" style="border: 2px solid var(--gold-accent);">
-  <h3 style="color:var(--gold-accent);">La Regla de Oro del Profesor: ¿Cómo saber cuál raíz es la correcta?</h3>
-  <p>Al aplicar la fórmula cuadrática general, la calculadora arrojará dos valores matemáticos reales y positivos: $I_{D1}$ e $I_{D2}$. Muchos estudiantes se confunden e intentan adivinar o eligen la mayor al azar. <b>El criterio físico riguroso de Boylestad & Malvino es el siguiente:</b></p>
-  
-  <div class="steps">
-    <div class="step">
-      <i>1</i>
-      <b>Calcula $V_{GS}$ para cada raíz</b>
-      <p>Calcula $V_{GS1} = V_G - I_{D1} R_S$ y $V_{GS2} = V_G - I_{D2} R_S$.</p>
-    </div>
-    <div class="step">
-      <i>2</i>
-      <b>Verifica la condición física del canal</b>
-      <p>Un E-MOSFET solo puede conducir corriente si $V_{GS} > V_{GS(th)}$. Si una raíz produce un $V_{GS}$ menor que el umbral, significa que el transistor estaría apagado; por tanto, ¡esa corriente es físicamente imposible y se descarta!</p>
-    </div>
-    <div class="step">
-      <i>3</i>
-      <b>Selecciona la raíz válida</b>
-      <p>La raíz físicamente admisible es aquella donde $V_{GS} > V_{GS(th)}$. Esa corriente es tu punto de operación $I_{DQ}$.</p>
-    </div>
-    <div class="step">
-      <i>4</i>
-      <b>Comprueba la saturación</b>
-      <p>Halla $V_{DSQ} = V_{DD} - I_{DQ}(R_D + R_S)$. Comprueba que $V_{DSQ} \ge V_{GSQ} - V_{GS(th)}$.</p>
-    </div>
-  </div>
+<h3 style="color:var(--gold-accent);">Cómo elegir la raíz físicamente correcta</h3>
+<p>Al resolver una ecuación cuadrática pueden aparecer dos raíces reales, una raíz doble o valores complejos. <b>Una raíz algebraica no es automáticamente un punto físico del transistor.</b> Por eso hay que comprobarla con el circuito:</p>
+<div class="steps">
+<div class="step">
+<i>1</i>
+<b>Calcula $V_{GS}$ para cada raíz</b>
+<p>Calcula $V_{GS1} = V_G - I_{D1} R_S$ y $V_{GS2} = V_G - I_{D2} R_S$.</p>
 </div>
-</section>
-
+<div class="step">
+<i>2</i>
+<b>Verifica la condición física del canal</b>
+<p>Un E-MOSFET solo puede conducir corriente si $V_{GS} &gt; V_{GS(th)}$. Si una raíz produce un $V_{GS}$ menor que el umbral, significa que el transistor estaría apagado; por tanto, ¡esa corriente es físicamente imposible y se descarta!</p>
+</div>
+<div class="step">
+<i>3</i>
+<b>Selecciona la raíz válida</b>
+<p>La raíz físicamente admisible es aquella donde $V_{GS} &gt; V_{GS(th)}$. Esa corriente es tu punto de operación $I_{DQ}$.</p>
+</div>
+<div class="step">
+<i>4</i>
+<b>Comprueba la saturación</b>
+<p>Halla $V_{DSQ} = V_{DD} - I_{DQ}(R_D + R_S)$. Comprueba que $V_{DSQ} \ge V_{GSQ} - V_{GS(th)}$.</p>
+</div>
+</div>
+</div>
+<div class="box remember"><small>Una regla que vale más que memorizar la fórmula</small>Si una raíz te obliga a tener $V_{GS}\le V_T$ mientras calculaste una corriente de varios miliamperios con el modelo de saturación, te está avisando de una contradicción. Descártala, <b>pero después verifica también $V_{DS}\ge V_{GS}-V_T$</b> para la otra raíz.</div><p class="fet15-source">Base y límites: Metodología de análisis de polarización FET: Boylestad, capítulo 7; ecuación cuadrática y verificación de región. La raíz física debe cumplir simultáneamente umbral y región asumida.</p></section>
 <!-- ======================================================== -->
 <!-- F7: AUTOPOLARIZACIÓN -->
 <!-- ======================================================== -->
-<section class="module" id="ffeedback">
-<div class="module-head">
-  <div class="module-title">
-    <span class="no">F7</span>
-    <div><span class="eyebrow">Topología Elegante</span><h2>Autopolarización por Retroalimentación de Drenador</h2></div>
-  </div>
-  <button class="mark" data-mark="fet-f7">Marcar estudiado</button>
-</div>
-
-<p>Existe una topología extraordinariamente simple y robusta para polarizar un E-MOSFET en saturación: conectar una resistencia $R_G$ (típicamente de $10\text{ M}\Omega$) directamente entre el terminal de <b>Drenador</b> y el de <b>Compuerta</b>.</p>
-
-<div class="grid2">
-  <div>
-    <p>Dado que $I_G = 0\text{ A}$, por la ley de Ohm la caída de potencial en la resistencia de compuerta es:</p>
-    <div class="formula">\[V_{RG} = I_G \cdot R_G = 0\text{ A} \times 10\text{ M}\Omega = \mathbf{0\text{ V}}\]</div>
-    <p>Esto impone una igualdad fundamental:</p>
-    <div class="formula">\[\boxed{V_{GS} = V_{DS}}\]</div>
-    <p>Recordemos la condición que exige un E-MOSFET para operar en saturación:</p>
-    <div class="formula">\[V_{DS} \ge V_{GS} - V_{GS(th)}\]</div>
-    <p>Como $V_{DS} = V_{GS}$ y sabemos que $V_{GS(th)} > 0$, es matemáticamente imposible que $V_{GS}$ sea menor que $V_{GS} - V_{GS(th)}$. Por lo tanto:</p>
-    <div class="formula">\[\boxed{V_{DS} > V_{GS} - V_{GS(th)} \quad \text{¡SIEMPRE EN SATURACIÓN!}}\]</div>
-  </div>
-  <div class="panel paper">
-    <div class="box ok">
-      <small>Ventaja industrial de diseño</small>
-      Esta configuración garantiza que el transistor jamás entrará en la región óhmica (triodo), aun si el parámetro $k$ o el umbral $V_{GS(th)}$ varían entre lotes de fabricación o con la temperatura. Además, la retroalimentación negativa estabiliza automáticamente el punto $Q$.
-    </div>
-  </div>
-</div>
+<section class="module" id="ffeedback"><div class="module-head"><div class="module-title"><span class="no">F7</span><div><span class="eyebrow">Otra forma de polarizar</span><h2>Realimentación desde el drenador: el circuito se autorregula</h2></div></div><button class="mark" data-mark="fet-f7">Marcar estudiado</button></div>
+<p class="lead">En esta configuración se conecta una resistencia de valor elevado desde drenador hacia puerta. Como la corriente DC de puerta es muy pequeña, casi no hay caída en esa resistencia: <b>la puerta queda aproximadamente al mismo potencial que el drenador</b>.</p>
+<div class="grid2"><div class="panel paper"><h3>El argumento, paso a paso</h3><ol class="checklist"><li><b>Identifica la conexión:</b> $R_G$ une D y G. En DC, $I_G\approx0$.</li><li><b>Aplica Ohm:</b> $V_{RG}=I_G R_G\approx0$.</li><li><b>Obtén el nodo:</b> $V_G\approx V_D$.</li><li><b>Resta la fuente:</b> $V_{GS}=V_G-V_S\approx V_D-V_S=V_{DS}$.</li><li><b>Verifica la región:</b> si el MOSFET de enriquecimiento N está conduciendo y $V_T&gt;0$, entonces $V_{DS}\approx V_{GS}&gt;V_{GS}-V_T$, compatible con saturación del modelo.</li></ol></div><div class="panel paper"><h3>¿Por qué sirve la realimentación?</h3><p>Si la corriente de drenador intenta aumentar, la caída en $R_D$ crece y $V_D$ disminuye. Al estar conectada la puerta con el drenador por $R_G$, también tiende a disminuir $V_G$ y, con ello, $V_{GS}$. Ese efecto se opone parcialmente al aumento inicial.</p><div class="box remember"><small>Así se lo explicarías a un compañero</small>El circuito «se devuelve una parte de lo que ocurre a la salida» para estabilizar su operación. No es magia: son la ley de Ohm, los voltajes de nodo y la respuesta de la corriente a $V_{GS}$.</div></div></div>
+<div class="box warn"><small>No generalices</small>La igualdad $V_{GS}=V_{DS}$ es una <b>aproximación DC para este cableado</b>; no vale para todo MOSFET, ni asegura por sí sola un punto Q útil. Se debe calcular la corriente y comprobar que exista margen de tensión y potencia.</div>
 </section>
-
 <!-- ======================================================== -->
 <!-- F8: PEQUEÑA SEÑAL EN AC -->
 <!-- ======================================================== -->
-<section class="module" id="fac">
-<div class="module-head">
-  <div class="module-title">
-    <span class="no">F8</span>
-    <div><span class="eyebrow">Análisis Dinámico</span><h2>Modelo de Pequeña Señal en AC y Transconductancia</h2></div>
-  </div>
-  <button class="mark" data-mark="fet-f8">Marcar estudiado</button>
-</div>
-
-<p class="lead">Para pequeñas variaciones sinusoidales alrededor del punto $Q$, el E-MOSFET se linealiza mediante su parámetro clave: la <b>Transconductancia ($g_m$)</b>.</p>
-
-<div class="grid2">
-  <div>
-    <h4>Deducción de la Transconductancia $g_m$</h4>
-    <p>La transconductancia mide cuánto cambia la corriente de salida ($i_D$) por cada voltio que varía la tensión de compuerta ($v_{GS}$):</p>
-    <div class="formula">\[g_m = \left.\frac{\partial i_D}{\partial v_{gs}}\right|_Q = \frac{\partial}{\partial v_{GS}} \left[k(v_{GS} - V_{GS(th)})^2\right]\]</div>
-    <div class="formula">\[\boxed{g_m = 2k\left(V_{GSQ} - V_{GS(th)}\right) = 2\sqrt{k I_{DQ}}}\]</div>
-    <p>Nótese que a mayor corriente de polarización $I_{DQ}$, mayor es la ganancia transconductiva $g_m$.</p>
-  </div>
-  <div class="panel paper">
-    <h4>Modelo Equivalente en AC</h4>
-    <ul class="clean-list">
-      <li><b>Entrada (Gate):</b> Circuito abierto ($Z_{in(gate)} = \infty$).</li>
-      <li><b>Salida (Drain-Source):</b> Fuente de corriente dependiente $g_m v_{gs}$ en paralelo con la resistencia dinámica $r_d$ (donde $r_d \approx \frac{1}{\lambda I_{DQ}}$).</li>
-    </ul>
-    <div class="formula">\[i_d = g_m v_{gs} + \frac{v_{ds}}{r_d}\]</div>
-  </div>
-</div>
-
-<div class="grid2" style="margin-top:16px;">
-  <div class="panel paper">
-    <h3>Fuente Común (CS) con Bypass</h3>
-    <p>• <b>Impedancia de entrada:</b> $Z_{in} = R_1 \parallel R_2$ (¡en megaohmios!).</p>
-    <p>• <b>Impedancia de salida:</b> $Z_{out} = R_D \parallel r_d \approx R_D$.</p>
-    <p>• <b>Ganancia de voltaje:</b> Invierte la fase $180^\circ$:</p>
-    <div class="formula">\[\boxed{A_v = -g_m \left(R_D \parallel r_d \parallel R_L\right)}\]</div>
-  </div>
-  <div class="panel paper">
-    <h3>Seguidor de Fuente (Source Follower / CD)</h3>
-    <p>• <b>Salida por la fuente ($S$):</b> Señal en fase ($0^\circ$).</p>
-    <p>• <b>Ganancia de voltaje:</b> Ligeramente menor a la unidad:</p>
-    <div class="formula">\[\boxed{A_v = \frac{g_m(R_S \parallel R_L)}{1 + g_m(R_S \parallel R_L)} \approx 1}\]</div>
-    <p>• <b>Impedancia de salida:</b> Muy baja ($Z_{out} \approx \frac{1}{g_m} \parallel R_S$).</p>
-    <p>¡Es el <b>buffer analógico</b> por excelencia para sensores de telecomunicaciones de altísima impedancia!</p>
-  </div>
-</div>
+<section class="module" id="fac"><div class="module-head"><div class="module-title"><span class="no">F8</span><div><span class="eyebrow">Señales pequeñas</span><h2>Del punto Q al modelo AC: transconductancia y configuraciones</h2></div></div><button class="mark" data-mark="fet-f8">Marcar estudiado</button></div>
+<p class="lead">En BJT AC utilizaste un circuito equivalente alrededor del punto de operación. Aquí ocurre lo mismo: una señal pequeña modifica $v_{gs}$ y genera una variación de corriente de drenador. A esa sensibilidad se le llama <b>transconductancia</b>, $g_m$.</p>
+<div class="grid2"><div class="panel paper"><h3>Antes de aplicar una ganancia</h3><ol class="checklist"><li><b>Resuelve DC:</b> encuentra $I_{DQ}$ y $V_{GSQ}$.</li><li><b>Comprueba la región:</b> para este modelo de amplificación, el MOSFET debe estar en saturación analógica.</li><li><b>Calcula $g_m$:</b> es la pendiente local de la curva $I_D$ frente a $V_{GS}$.</li><li><b>Construye AC:</b> las fuentes DC de tensión independientes pasan a tierra de AC y los condensadores grandes se aproximan por cortos <b>solo en la banda de frecuencias donde sea válido</b>.</li><li><b>Conecta la carga:</b> evalúa el efecto de $R_L$, $R_S$ sin bypass y de la impedancia de la fuente de señal.</li></ol></div><div class="panel paper"><h3>De dónde sale $g_m$</h3><div class="formula">\[I_D=k(V_{GS}-V_T)^2\]</div><p>Una derivada indica cuánto cambia la corriente si la tensión de puerta cambia un poquito:</p><div class="formula">\[g_m=\left.\frac{dI_D}{dV_{GS}}\right|_Q=2k(V_{GSQ}-V_T)\]</div><div class="formula">\[g_m=2\sqrt{kI_{DQ}}\]</div><div class="box remember"><small>Analogía con BJT en AC</small>Antes calculabas $r_e\approx26\,mV/I_E$. Ahora la «llave» del modelo es $g_m$. Cuanto mayor sea la pendiente local, más cambia la corriente por cada pequeño voltio aplicado a la puerta.</div></div></div>
+<div class="ac-table-wrap"><table class="compare-table"><thead><tr><th>Configuración</th><th>Dónde sale la señal</th><th>Comportamiento</th><th>Aproximación útil</th></tr></thead><tbody><tr><td>Fuente común (CS)</td><td>Drenador</td><td>Amplifica e invierte fase</td><td>$A_v\approx-g_m(R_D\parallel R_L)$ con fuente desacoplada y $r_o$ grande</td></tr><tr><td>Drenador común (CD)</td><td>Fuente</td><td>Adaptador, no invierte</td><td>$A_v\approx g_m R_E'/(1+g_mR_E')$, $R_E'=R_S\parallel R_L$</td></tr><tr><td>Puerta común (CG)</td><td>Drenador</td><td>Ganancia no inversora; baja $R_{in}$</td><td>$A_v\approx +g_m(R_D\parallel R_L)$ bajo hipótesis de modelo</td></tr></tbody></table></div>
+<div class="example"><h3>Ejemplo guiado: amplificar la salida de un sensor</h3><p>Se tiene una fuente común con $I_{DQ}=2\,mA$, $V_{GSQ}-V_T=1\,V$, $R_D=2\,k\Omega$ y carga $R_L=2\,k\Omega$. Se ignora $r_o$ y la resistencia de fuente está desacoplada en AC.</p><ol class="checklist"><li><b>Primero $g_m$:</b> $g_m=2I_D/V_{OV}=2(2\,mA)/(1\,V)=4\,mS$.</li><li><b>Después carga efectiva:</b> $R_D\parallel R_L=(2k\cdot2k)/(2k+2k)=1\,k\Omega$.</li><li><b>Ahora la ganancia:</b> $A_v=-g_m(R_D\parallel R_L)=-(4\,mS)(1\,k\Omega)=\boxed{-4\,V/V}$.</li><li><b>Interpreta:</b> si entra una variación pequeña de $+10\,mV$, sale aproximadamente $-40\,mV$. El signo indica inversión de fase, no una tensión DC negativa obligatoria.</li></ol></div>
+<div class="box warn"><small>¿Por qué no usar siempre $A_v=-g_mR_D$?</small>Porque al conectar una carga, $R_L$ participa en el equivalente AC. Y si $R_S$ no está desacoplada, aparece realimentación local y el valor cambia. Primero dibuja el equivalente, luego escoge la fórmula.</div>
+<p class="fet15-source">Fuentes: Boylestad y Nashelsky, análisis AC de FET; Malvino y Bates, amplificadores JFET/MOSFET; Pleite Guerra y colaboradores, análisis en pequeña señal. Las fórmulas aquí indicadas usan un modelo incremental simplificado sin capacitancias parásitas.</p>
 </section>
-
 <!-- ======================================================== -->
 <!-- F9: CONMUTACIÓN Y EFICIENCIA -->
 <!-- ======================================================== -->
-<section class="module" id="fconmutacion">
-<div class="module-head">
-  <div class="module-title">
-    <span class="no">F9</span>
-    <div><span class="eyebrow">Potencia y Térmica</span><h2>Conmutación de Alta Eficiencia: $R_{DS(on)}$ vs $V_{CE(sat)}$</h2></div>
-  </div>
-  <button class="mark" data-mark="fet-f9">Marcar estudiado</button>
-</div>
-
-<p class="lead">En telecomunicaciones, vehículos eléctricos y robótica industrial, los transistores se usan primordialmente como <b>interruptores de conmutación</b> para fuentes conmutadas (SMPS) y control de motores mediante PWM.</p>
-
-<div class="panel paper" style="border: 2px solid var(--border-cyan);">
-  <h3 style="color:var(--border-cyan);">El Choque Cuantitativo Real: BJT vs MOSFET a 10 Amperios</h3>
-  <p>Imaginemos que necesitamos conmutar una carga de $10\text{ A}$ a $24\text{ V}$. Comparemos un BJT de potencia industrial (TIP35C) contra un MOSFET moderno de canal N (IPP015N04N):</p>
-  
-  <div class="grid2" style="margin-top:14px;">
-    <div class="sub-card coral" style="background:rgba(239,68,68,0.08);padding:16px;border-left:4px solid var(--red);">
-      <h4>Transistor BJT (TIP35C)</h4>
-      <p>• Caída de saturación fija: $V_{CE(sat)} = 1.2\text{ V}$.</p>
-      <div class="formula">\[P_{BJT} = I_C \cdot V_{CE(sat)} = 10\text{ A} \times 1.2\text{ V} = \mathbf{12.0\text{ W}}\]</div>
-      <p>• Además, requiere corriente de base: con $\beta_{sat} = 10$, $I_B = 1\text{ A}$, disipando potencia adicional en el circuito de control.</p>
-      <p>• <b>Consecuencia térmica:</b> Exige un disipador de aluminio masivo con grasa térmica y ventilador forzado.</p>
-    </div>
-    <div class="sub-card emerald" style="background:rgba(16,185,129,0.08);padding:16px;border-left:4px solid var(--green);">
-      <h4>Transistor MOSFET (IPP015N04N)</h4>
-      <p>• Resistencia en conducción: $R_{DS(on)} = 1.5\text{ m}\Omega = 0.0015\,\Omega$.</p>
-      <div class="formula">\[P_{MOS} = I_D^2 \cdot R_{DS(on)} = (10\text{ A})^2 \times 0.0015\,\Omega = \mathbf{0.15\text{ W}}\]</div>
-      <p>• Corriente de compuerta en régimen permanente: $I_G = 0\text{ A}$. Consumo de control despreciable.</p>
-      <p>• <b>Consecuencia térmica:</b> ¡Disipa 80 veces menos calor! Se refrigera directamente a través del cobre de la tarjeta PCB sin necesidad de disipador.</p>
-    </div>
-  </div>
-</div>
-</section>
-
+<section class="module" id="fconmutacion"><div class="module-head"><div class="module-title"><span class="no">F9</span><div><span class="eyebrow">Conmutación y pérdidas</span><h2>Por qué importan \(R_{DS(on)}\), la temperatura y la frecuencia</h2></div></div><button class="mark" data-mark="fet-f9">Marcar estudiado</button></div><div class="fet152-hint"><b>Conexión con la industria:</b> cuando un MOSFET controla una carga, nos interesa saber cuánto calor genera y qué ocurre durante cada cambio de estado.</div>
+<p>En una carga conmutada no buscamos mantener el MOSFET en saturación del modelo analógico. Queremos que esté <b>apagado</b> o bien que conduzca con una <b>resistencia efectiva pequeña</b> en región óhmica. La hoja de datos indica \(R_{DS(on)}\) para tensiones de puerta, corrientes y temperaturas específicas.</p>
+<div class="grid2"><div class="panel paper"><h3>Ejemplo comparable, no ensayo de componentes</h3><p>Supongamos dos interruptores hipotéticos que conducen \(I=5\,A\): uno BJT con \(V_{CE(sat)}=0.8\,V\) y un MOSFET con \(R_{DS(on)}=0.025\,\Omega\), ambos bajo condiciones de operación en que esos valores sean válidos.</p>
+<div class="formula">\[P_{BJT}=I\,V_{CE(sat)}=5(0.8)=4\,W\]</div>
+<div class="formula">\[P_{MOS}=I^2R_{DS(on)}=25(0.025)=0.625\,W\]</div><p>Interpretación: las pérdidas de conducción favorecen al MOSFET de este ejemplo. <b>No se concluye de aquí que cualquier MOSFET sea mejor que cualquier BJT.</b></p></div><div class="panel paper"><h3>Los tres controles antes de afirmar «es eficiente»</h3><ol class="checklist"><li>Busca \(R_{DS(on)}\) a la tensión efectiva de puerta y temperatura apropiada.</li><li>Verifica potencia y resistencia térmica del encapsulado y la placa.</li><li>Si conmutas PWM, estima además pérdidas de transición y la carga de puerta \(Q_g\); un GPIO puede necesitar un controlador.</li></ol><div class="box remember"><small>En palabras cercanas</small>Un interruptor con poca resistencia desperdicia menos energía mientras conduce; pero abrirlo y cerrarlo muchas veces también cuesta energía. Por eso el dato de un transistor no es solo «cuántos amperios aguanta».</div></div></div>
+<p class="fet15-source">Referencia de verificación: <a href="https://www.infineon.com/assets/row/public/documents/24/49/infineon-irlz44n-datasheet-en.pdf" rel="noopener" target="_blank">IRLZ44N, fabricante: \(R_{DS(on)}\) medido a \(V_{GS}=10\,V\), 5 V y 4 V</a>.</p></section>
 <!-- ======================================================== -->
 <!-- F10: DRIVER PARA MICROCONTROLADORES -->
 <!-- ======================================================== -->
-<section class="module" id="fdriver">
-<div class="module-head">
-  <div class="module-title">
-    <span class="no">F10</span>
-    <div><span class="eyebrow">Ingeniería Real</span><h2>Driver de Potencia con Microcontrolador (3.3V / 5V)</h2></div>
-  </div>
-  <button class="mark" data-mark="fet-f10">Marcar estudiado</button>
-</div>
-
-<p>Uno de los errores más frecuentes en estudiantes y desarrolladores es conectar un MOSFET estándar (como el popular <b>IRFZ44N</b> o <b>IRF540N</b>) directamente a un pin de $3.3\text{ V}$ de una ESP32, STM32 o Raspberry Pi Pico. ¿Por qué esto causa un desastre térmico?</p>
-
-<div class="box warn">
-  <small>La trampa del datasheet: Voltaje Umbral vs Saturación Completa</small>
-  El datasheet del IRFZ44N indica que $V_{GS(th)}$ está entre $2.0\text{ V}$ y $4.0\text{ V}$. Un estudiante desprevenido piensa: <em>"Mi ESP32 entrega 3.3V, como 3.3V es mayor que 2.0V, el transistor encenderá"</em>.
-  <br><br>
-  <b>¡Grave error!</b> $V_{GS(th)}$ es la tensión en la que apenas empiezan a circular $250\,\mu\text{A}$ de corriente. Para que el IRFZ44N alcance su resistencia de $17.5\text{ m}\Omega$ y maneje amperios, <b>exige obligatoriamente $V_{GS} = 10\text{ V}$</b>. Con 3.3V, el transistor opera en zona resistiva con $3\,\Omega$ a $10\,\Omega$: al circular $5\text{ A}$, disipará $5^2 \times 5 = 125\text{ W}$ y explotará en segundos.
-</div>
-
-<div class="panel paper" style="text-align:center;padding:24px;">
-  <h3>Circuito Driver Industrial Recomendado (4 Componentes Salvavidas)</h3>
-  <svg viewBox="0 0 740 340" style="width:100%;max-width:700px;height:auto;display:inline-block;">
-    <!-- Microcontroller -->
-    <rect x="20" y="80" width="130" height="150" fill="#1e293b" rx="8" stroke="var(--blue)" stroke-width="2"/>
-    <text x="85" y="120" fill="var(--blue)" font-size="14" font-weight="bold" text-anchor="middle">MCU / ESP32</text>
-    <text x="85" y="145" fill="#94a3b8" font-size="12" text-anchor="middle">GPIO 3.3V / 5V</text>
-    <line x1="150" y1="160" x2="190" y2="160" stroke="currentColor" stroke-width="2"/>
-    <circle cx="150" cy="160" r="4" fill="var(--blue)"/>
-    
-    <!-- RG Resistor -->
-    <rect x="190" y="148" width="50" height="24" fill="var(--paper)" stroke="currentColor" stroke-width="2"/>
-    <text x="215" y="140" font-size="11" fill="currentColor" text-anchor="middle">RG (100 Ω)</text>
-    <line x1="240" y1="160" x2="330" y2="160" stroke="currentColor" stroke-width="2"/>
-    
-    <!-- RPD Resistor Pull-Down -->
-    <circle cx="280" cy="160" r="4" fill="currentColor"/>
-    <line x1="280" y1="160" x2="280" y2="210" stroke="currentColor" stroke-width="2"/>
-    <rect x="268" y="210" width="24" height="50" fill="var(--paper)" stroke="currentColor" stroke-width="2"/>
-    <text x="260" y="240" font-size="11" fill="currentColor" text-anchor="end">RPD (100 kΩ)</text>
-    <line x1="280" y1="260" x2="280" y2="290" stroke="currentColor" stroke-width="2"/>
-    <!-- Ground RPD -->
-    <line x1="265" y1="290" x2="295" y2="290" stroke="currentColor" stroke-width="2"/>
-    <line x1="270" y1="295" x2="290" y2="295" stroke="currentColor" stroke-width="2"/>
-    
-    <!-- Logic-Level MOSFET Symbol -->
-    <g transform="translate(290, 70)">
-      <line x1="90" y1="60" x2="90" y2="120" stroke="var(--green)" stroke-width="4" stroke-dasharray="8,4"/>
-      <line x1="75" y1="55" x2="75" y2="125" stroke="var(--amber)" stroke-width="4"/>
-      <line x1="40" y1="90" x2="75" y2="90" stroke="currentColor" stroke-width="2"/>
-      
-      <!-- Drain line -->
-      <line x1="90" y1="70" x2="130" y2="70" stroke="currentColor" stroke-width="2"/>
-      <line x1="130" y1="70" x2="130" y2="0" stroke="currentColor" stroke-width="2"/>
-      
-      <!-- Source line -->
-      <line x1="90" y1="110" x2="130" y2="110" stroke="currentColor" stroke-width="2"/>
-      <line x1="130" y1="110" x2="130" y2="180" stroke="currentColor" stroke-width="2"/>
-      <polygon points="105,107 120,110 105,113" fill="var(--red)"/>
-      <text x="145" y="100" font-size="13" font-weight="bold" fill="var(--green)">IRLZ44N</text>
-      <text x="145" y="118" font-size="11" fill="var(--muted)">Logic-Level</text>
-    </g>
-    
-    <!-- Ground Source -->
-    <line x1="405" y1="290" x2="435" y2="290" stroke="currentColor" stroke-width="2"/>
-    <line x1="410" y1="295" x2="430" y2="295" stroke="currentColor" stroke-width="2"/>
-    
-    <!-- Load and Flyback Diode -->
-    <!-- Power Rail +24V -->
-    <line x1="380" y1="20" x2="680" y2="20" stroke="var(--red)" stroke-width="3"/>
-    <text x="685" y="25" font-size="13" font-weight="bold" fill="var(--red)">+24V (Fuerza)</text>
-    
-    <!-- Motor / Inductive Load -->
-    <line x1="420" y1="20" x2="420" y2="70" stroke="currentColor" stroke-width="2"/>
-    <circle cx="480" cy="50" r="22" fill="var(--paper)" stroke="currentColor" stroke-width="2"/>
-    <text x="480" y="55" font-size="14" font-weight="bold" fill="currentColor" text-anchor="middle">M</text>
-    <line x1="420" y1="50" x2="458" y2="50" stroke="currentColor" stroke-width="2"/>
-    <line x1="502" y1="50" x2="560" y2="50" stroke="currentColor" stroke-width="2"/>
-    <line x1="560" y1="20" x2="560" y2="70" stroke="currentColor" stroke-width="2"/>
-    
-    <!-- Flyback Diode (Schottky) in Parallel -->
-    <line x1="420" y1="70" x2="560" y2="70" stroke="currentColor" stroke-width="2"/>
-    <g transform="translate(470, 70)">
-      <!-- Diode symbol pointing up -->
-      <line x1="20" y1="35" x2="20" y2="0" stroke="currentColor" stroke-width="2"/>
-      <polygon points="10,25 30,25 20,5" fill="var(--amber)"/>
-      <line x1="10" y1="5" x2="30" y2="5" stroke="var(--amber)" stroke-width="2"/>
-      <text x="40" y="20" font-size="11" fill="var(--amber)">1N5822 (Schottky)</text>
-      <text x="40" y="32" font-size="10" fill="var(--muted)">Flyback Protection</text>
-    </g>
-    <line x1="420" y1="70" x2="420" y2="105" stroke="currentColor" stroke-width="2"/>
-    <line x1="560" y1="70" x2="420" y2="70" stroke="currentColor" stroke-width="2"/>
-  </svg>
-</div>
-
-<div class="grid2" style="margin-top:16px;">
-  <div class="panel paper">
-    <h4>Los 4 Componentes Indispensables</h4>
-    <ol class="clean-list">
-      <li><b>1. MOSFET Logic-Level (ej. IRLZ44N, AO3400):</b> La letra <b>"L"</b> identifica que fue diseñado para niveles lógicos. Alcanza saturación completa con apenas $3.3\text{ V} - 4.5\text{ V}$ en compuerta.</li>
-      <li><b>2. Resistencia Serie de Compuerta ($R_G \approx 47\,\Omega - 100\,\Omega$):</b> La compuerta es internamente un condensador parásito ($C_{iss} \sim 1\text{ nF} - 3\text{ nF}$). Al conmutar, demandaría una corriente instantánea de cientos de miliamperios que quemaría el pin GPIO del microcontrolador. $R_G$ limita esta corriente a valores seguros ($< 20\text{ mA}$) y amortigua oscilaciones parásitas de alta frecuencia ($LC$ ringing).</li>
-      <li><b>3. Resistencia de Pull-Down ($R_{PD} \approx 10\text{ k}\Omega - 100\text{ k}\Omega$):</b> Durante el arranque o reseteo de un microcontrolador, los pines quedan en estado de <em>alta impedancia (Hi-Z)</em>. Sin $R_{PD}$, el ruido ambiental cargaría la compuerta y el motor encendería espontáneamente. $R_{PD}$ drena la carga manteniendo el MOSFET firmemente apagado.</li>
-      <li><b>4. Diodo Flyback (Rueda Libre) Schottky:</b> Cuando el MOSFET se apaga, la inductancia del motor se opone al cese de corriente generando una sobretensión violenta: $v = -L \frac{di}{dt}$ (¡cientos de voltios!). El diodo ofrece un camino cerrado para recircular la corriente sin destruir el drenador.</li>
-    </ol>
-  </div>
-  <div class="panel paper">
-    <h4>Verificador de Compatibilidad Microcontrolador / MOSFET</h4>
-    <p>Selecciona tu microcontrolador y el transistor que planeas utilizar para verificar si es seguro conmutarlo de forma directa:</p>
-    <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px;">
-      <div>
-        <label><b>Microcontrolador:</b></label>
-        <select id="mcuSelect" class="btn" style="width:100%;margin-top:4px;">
-          <option value="esp32">ESP32 / ESP8266 (3.3V GPIO)</option>
-          <option value="arduino">Arduino Uno / Nano ATmega328P (5.0V GPIO)</option>
-          <option value="pico">Raspberry Pi Pico RP2040 (3.3V GPIO)</option>
-          <option value="stm32">STM32 ARM Cortex (3.3V GPIO)</option>
-        </select>
-      </div>
-      <div>
-        <label><b>Transistor MOSFET:</b></label>
-        <select id="mosSelect" class="btn" style="width:100%;margin-top:4px;">
-          <option value="irfz44n">IRFZ44N (Compuerta estándar 10V)</option>
-          <option value="irlz44n" selected>IRLZ44N (Logic-Level compuerta 3.3V/5V)</option>
-          <option value="2n7000">2N7000 (Pequeña señal Logic-Level)</option>
-          <option value="irf540n">IRF540N (Estándar 100V / 10V)</option>
-        </select>
-      </div>
-    </div>
-    <div id="mcuDiagOut" style="margin-top:16px;"></div>
-  </div>
-</div>
-</section>
-
+<section class="module" id="fdriver"><div class="module-head"><div class="module-title"><span class="no">F10</span><div><span class="eyebrow">Aplicación GPIO y motor</span><h2>Cómo seleccionar un MOSFET para Arduino, ESP32 o STM32</h2></div></div><button class="mark" data-mark="fet-f10">Marcar estudiado</button></div><div class="fet152-hint"><b>Del libro al protoboard:</b> el GPIO da la orden; el MOSFET maneja la carga. El datasheet decide si esa orden es suficiente.</div>
+<p><b>Idea de ingeniería:</b> primero se determina tensión y corriente real de la carga; luego se elige el MOSFET por \(V_{DS}\), \(I_D\), SOA, \(R_{DS(on)}\) a la tensión disponible en la puerta, temperatura y conmutación. <b>\(V_{GS(th)}\) no es la tensión que asegura conducción plena.</b></p>
+<div class="grid2"><div class="panel paper"><h3>Conexión conceptual de lado bajo</h3><figure class="fet15-figure"><img alt="Conexión de motor DC en lado bajo, MOSFET N con puerta desde GPIO a través de resistencia, resistencia pulldown, tierra común y diodo flyback" loading="lazy" src="assets/fet/mosfet-low-side-claro.svg"/><figcaption>Esquema didáctico de lado bajo: el motor está entre +V y el drenador; la fuente se conecta a tierra, y el cátodo del diodo de rueda libre va al positivo. Verifica el patillaje y dimensiona todos los componentes antes del montaje.</figcaption></figure><p>Es un <b>diagrama funcional</b>, no un circuito de cableado: se deben verificar polaridad, retorno común, protección y patillaje en el dispositivo concreto.</p></div><div class="panel paper"><h3>Checklist antes de conectar</h3><ol class="checklist"><li>¿Cuál es la corriente de régimen y arranque del motor?</li><li>¿Qué voltaje \(V_{GS}\) habrá realmente entre puerta y fuente?</li><li>¿Hay un máximo de \(R_{DS(on)}\) garantizado a ese voltaje?</li><li>¿La disipación \(I^2R\), el SOA y la temperatura son aceptables?</li><li>¿Qué corriente requiere la carga/descarga de \(Q_g\) a la frecuencia PWM?</li></ol><div class="box warn"><small>Umbral ≠ encendido completo</small>En el IRLZ44N el fabricante da condiciones de \(R_{DS(on)}\) a 4 y 5 V, no una garantía general para 3,3 V. En el 2N7000 tampoco puede suponerse automáticamente una carga de motor de alta corriente ni conducción plena a 3,3 V.</div></div></div>
+<div class="panel paper"><h3>Explora la compatibilidad de la tensión de control</h3><div class="grid2"><label>Controlador <select class="btn" id="mcuSelect" style="width:100%;margin-top:4px;">
+<option value="esp32">ESP32 / ESP8266 (3.3V GPIO)</option>
+<option value="arduino">Arduino Uno / Nano ATmega328P (5.0V GPIO)</option>
+<option value="pico">Raspberry Pi Pico RP2040 (3.3V GPIO)</option>
+<option value="stm32">STM32 ARM Cortex (3.3V GPIO)</option>
+</select></label><label>MOSFET <select class="btn" id="mosSelect" style="width:100%;margin-top:4px;">
+<option value="irfz44n">IRFZ44N (Compuerta estándar 10V)</option>
+<option selected="" value="irlz44n">IRLZ44N (RDS(on) a 4 y 5 V)</option>
+<option value="2n7000">2N7000 (pequeña señal; revisar VGS)</option>
+<option value="irf540n">IRF540N (Estándar 100V / 10V)</option>
+</select></label></div><div aria-live="polite" class="status-card" id="mcuDiagOut"></div><p class="small">Este comprobador es orientativo: no certifica por sí solo un montaje sin conocer la carga, temperatura y frecuencia.</p></div>
+<p class="fet15-source">Dato del fabricante: <a href="https://www.infineon.com/assets/row/public/documents/24/49/infineon-irlz44n-datasheet-en.pdf" rel="noopener" target="_blank">IRLZ44N · Infineon</a> y <a href="https://www.mouser.com/datasheet/2/308/2N7000-D-33553.pdf" rel="noopener" target="_blank">2N7000 · onsemi</a>. Verifica siempre fabricante y encapsulado reales.</p></section>
 <!-- ======================================================== -->
 <!-- F11: LA REVOLUCIÓN CMOS -->
 <!-- ======================================================== -->
-<section class="module" id="fcmos">
-<div class="module-head">
-  <div class="module-title">
-    <span class="no">F11</span>
-    <div><span class="eyebrow">Telecomunicaciones y Digital</span><h2>La Revolución CMOS: Por Qué Domina el Mundo</h2></div>
-  </div>
-  <button class="mark" data-mark="fet-f11">Marcar estudiado</button>
-</div>
-
-<p class="lead">Si te preguntas cómo es posible que tu teléfono móvil contenga un procesador con más de <b>15 mil millones de transistores</b> funcionando con una diminuta batería sin derretirse, la respuesta es una sola sigla: <b>CMOS (Complementary Metal-Oxide-Semiconductor)</b>.</p>
-
-<div class="grid2">
-  <div>
-    <h4>El Secreto del Par Complementario NMOS + PMOS</h4>
-    <p>Un inversor CMOS básico conecta un transistor de canal P (arriba hacia $V_{DD}$) y uno de canal N (abajo hacia tierra) con sus compuertas unidas:</p>
-    <ul class="clean-list">
-      <li><b>Entrada en ALTO ($V_{in} = V_{DD}$):</b> El NMOS inferior enciende conduciendo la salida a $0\text{ V}$ (tierra). El PMOS superior se apaga por completo. <b>No hay camino entre $V_{DD}$ y tierra: la corriente estática es CERO.</b></li>
-      <li><b>Entrada en BAJO ($V_{in} = 0\text{ V}$):</b> El PMOS superior enciende cargando la salida a $V_{DD}$. El NMOS inferior está en corte estricto. <b>Nuevamente, la corriente estática es CERO.</b></li>
-    </ul>
-    <div class="box ok">
-      <small>Consumo dinámico exclusivo</small>
-      Un circuito CMOS solo consume energía durante el brevísimo instante en que conmuta de 0 a 1 o viceversa (para cargar y descargar las diminutas capacitancias parásitas de compuerta). En reposo, el consumo es virtualmente nulo. ¡Por esto el BJT y el JFET quedaron fuera de la carrera de microprocesadores y telecomunicaciones digitales!
-    </div>
-  </div>
-  <div class="panel paper" style="text-align:center;">
-    <h3>Inversor Lógico CMOS Básico</h3>
-    <svg viewBox="0 0 320 280" style="width:100%;max-width:280px;height:auto;display:inline-block;">
-      <!-- VDD Rail -->
-      <line x1="80" y1="20" x2="240" y2="20" stroke="var(--red)" stroke-width="3"/>
-      <text x="160" y="14" font-size="12" font-weight="bold" fill="var(--red)" text-anchor="middle">VDD</text>
-      
-      <!-- PMOS -->
-      <line x1="160" y1="20" x2="160" y2="50" stroke="currentColor" stroke-width="2"/>
-      <g transform="translate(110, 50)">
-        <circle cx="20" cy="35" r="5" fill="none" stroke="currentColor" stroke-width="2"/>
-        <line x1="50" y1="15" x2="50" y2="55" stroke="var(--amber)" stroke-width="3"/>
-        <line x1="35" y1="10" x2="35" y2="60" stroke="currentColor" stroke-width="3"/>
-        <line x1="5" y1="35" x2="15" y2="35" stroke="currentColor" stroke-width="2"/>
-        <text x="70" y="40" font-size="11" fill="var(--amber)" font-weight="bold">PMOS</text>
-      </g>
-      
-      <!-- Output line -->
-      <line x1="160" y1="105" x2="160" y2="165" stroke="currentColor" stroke-width="2"/>
-      <circle cx="160" cy="135" r="4" fill="currentColor"/>
-      <line x1="160" y1="135" x2="250" y2="135" stroke="currentColor" stroke-width="2"/>
-      <circle cx="250" cy="135" r="4" fill="var(--blue)"/>
-      <text x="260" y="140" font-size="13" font-weight="bold" fill="var(--blue)">Vout</text>
-      
-      <!-- NMOS -->
-      <g transform="translate(110, 165)">
-        <line x1="50" y1="15" x2="50" y2="55" stroke="var(--blue)" stroke-width="3"/>
-        <line x1="35" y1="10" x2="35" y2="60" stroke="currentColor" stroke-width="3"/>
-        <line x1="5" y1="35" x2="35" y2="35" stroke="currentColor" stroke-width="2"/>
-        <text x="70" y="40" font-size="11" fill="var(--blue)" font-weight="bold">NMOS</text>
-      </g>
-      
-      <!-- Input Gate line -->
-      <line x1="115" y1="85" x2="80" y2="85" stroke="currentColor" stroke-width="2"/>
-      <line x1="115" y1="200" x2="80" y2="200" stroke="currentColor" stroke-width="2"/>
-      <line x1="80" y1="85" x2="80" y2="200" stroke="currentColor" stroke-width="2"/>
-      <circle cx="80" cy="142" r="4" fill="currentColor"/>
-      <line x1="80" y1="142" x2="30" y2="142" stroke="currentColor" stroke-width="2"/>
-      <circle cx="30" cy="142" r="4" fill="var(--green)"/>
-      <text x="20" y="146" font-size="13" font-weight="bold" fill="var(--green)" text-anchor="end">Vin</text>
-      
-      <!-- Ground Rail -->
-      <line x1="160" y1="220" x2="160" y2="250" stroke="currentColor" stroke-width="2"/>
-      <line x1="135" y1="250" x2="185" y2="250" stroke="currentColor" stroke-width="2"/>
-      <line x1="145" y1="255" x2="175" y2="255" stroke="currentColor" stroke-width="2"/>
-      <line x1="155" y1="260" x2="165" y2="260" stroke="currentColor" stroke-width="2"/>
-    </svg>
-  </div>
-</div>
+<section class="module" id="fcmos"><div class="module-head"><div class="module-title"><span class="no">F11</span><div><span class="eyebrow">Aplicación cotidiana</span><h2>CMOS: un par complementario detrás de la lógica digital</h2></div></div><button class="mark" data-mark="fet-f11">Marcar estudiado</button></div>
+<p class="lead">El nombre <b>CMOS</b> proviene de utilizar transistores MOS complementarios: uno de canal P y otro de canal N. Este es uno de los motivos por los cuales los MOSFET son fundamentales en circuitos digitales modernos.</p><div class="grid2"><div class="panel paper"><h3>El inversor CMOS en dos estados</h3><table class="compare-table"><thead><tr><th>Entrada</th><th>PMOS superior</th><th>NMOS inferior</th><th>Salida</th></tr></thead><tbody><tr><td>Baja (0 lógico)</td><td>Conduce</td><td>Apagado</td><td>Alta (1)</td></tr><tr><td>Alta (1 lógico)</td><td>Apagado</td><td>Conduce</td><td>Baja (0)</td></tr></tbody></table><p>Un solo nivel de entrada controla los dos dispositivos de forma complementaria. En el estado ideal estable no se forma una ruta DC directa y permanente entre las dos alimentaciones.</p></div><div class="panel paper"><h3>¿Por qué consume energía si idealmente casi no hay corriente estática?</h3><p>Las capacitancias internas tienen que cargarse y descargarse en las transiciones. En sistemas reales existen además fugas y consumo durante el cambio de estado.</p><div class="formula">\[P_{din}\approx\alpha C V_{DD}^{2}f\]</div><div class="box remember"><small>Para entenderlo</small>Un sistema que no cambia de estado suele gastar menos energía dinámica que otro que conmuta constantemente. ¡Cada conmutación también tiene su cuenta de energía!</div></div></div><p class="fet15-source">Referencia: Malvino y Bates, capítulo 14, secciones CMOS y conmutación digital. La fórmula es una estimación de potencia dinámica, no una predicción del consumo total de un procesador.</p>
 </section>
-
 <!-- ======================================================== -->
 <!-- F12: SIMULADOR INTERACTIVO -->
 <!-- ======================================================== -->
 <section class="module" id="fsimulador">
 <div class="module-head">
-  <div class="module-title">
-    <span class="no">F12</span>
-    <div><span class="eyebrow">Laboratorio Virtual</span><h2>Simulador de Polarización y Curva de Transferencia Interactiva</h2></div>
-  </div>
-  <button class="mark" data-mark="fet-f12">Marcar estudiado</button>
+<div class="module-title">
+<span class="no">F12</span>
+<div><span class="eyebrow">Laboratorio Virtual</span><h2>Simula, predice y comprueba el punto de trabajo</h2></div>
 </div>
-
-<p>Ajusta los parámetros del circuito de polarización por divisor de tensión y observa en tiempo real cómo se resuelve la ecuación cuadrática, se descarta la raíz no física, se calcula el punto $Q$ y se grafica la curva de transferencia.</p>
-
+<button class="mark" data-mark="fet-f12">Marcar estudiado</button>
+</div><div class="fet152-hint"><b>Explora sin miedo:</b> mueve un parámetro por vez, predice qué pasará con ID y comprueba el resultado. El simulador usa un modelo didáctico, no un transistor comercial exacto.</div>
+<p>Ajusta los parámetros y observa el punto Q. El cálculo prueba primero el modelo cuadrático de saturación y, si no se cumplen sus condiciones, busca el punto en región óhmica con un modelo por tramos. La curva de transferencia corresponde a un <b>modelo idealizado</b>, no a una hoja de datos real.</p>
 <div class="grid2">
-  <!-- Panel de Controles -->
-  <div class="panel paper">
-    <h4>Parámetros del Circuito</h4>
-    <div style="display:flex;flex-direction:column;gap:12px;margin-top:10px;">
-      <div>
-        <label>Alimentación $V_{DD}$: <b id="fetVddTxt">24.0</b> V</label>
-        <input type="range" id="fetVdd" min="5" max="30" step="0.5" value="24" style="width:100%;">
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-        <div>
-          <label>$R_1$: <b id="fetR1Txt">22.0</b> MΩ</label>
-          <input type="range" id="fetR1" min="1" max="40" step="1" value="22" style="width:100%;">
-        </div>
-        <div>
-          <label>$R_2$: <b id="fetR2Txt">10.0</b> MΩ</label>
-          <input type="range" id="fetR2" min="1" max="30" step="1" value="10" style="width:100%;">
-        </div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-        <div>
-          <label>$R_D$: <b id="fetRdTxt">1.80</b> kΩ</label>
-          <input type="range" id="fetRd" min="0.5" max="8" step="0.1" value="1.8" style="width:100%;">
-        </div>
-        <div>
-          <label>$R_S$: <b id="fetRsTxt">0.82</b> kΩ</label>
-          <input type="range" id="fetRs" min="0.1" max="4" step="0.05" value="0.82" style="width:100%;">
-        </div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-        <div>
-          <label>$V_{GS(th)}$: <b id="fetVthTxt">2.50</b> V</label>
-          <input type="range" id="fetVth" min="1.0" max="4.5" step="0.1" value="2.5" style="width:100%;">
-        </div>
-        <div>
-          <label>Parámetro $k$: <b id="fetKTxt">0.80</b> mA/V²</label>
-          <input type="range" id="fetK" min="0.2" max="3.0" step="0.05" value="0.8" style="width:100%;">
-        </div>
-      </div>
-    </div>
-
-    <!-- Lecturas de Salida -->
-    <div style="margin-top:18px;background:rgba(0,0,0,0.15);padding:14px;border-radius:8px;">
-      <h4 style="margin-bottom:8px;">Resultados Analíticos DC y AC</h4>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:0.95rem;">
-        <div>$V_G$: <strong id="fetResVg" style="color:var(--blue);">--</strong></div>
-        <div>$V_{GSQ}$: <strong id="fetResVgs" style="color:var(--blue);">--</strong></div>
-        <div>$I_{DQ}$: <strong id="fetResId" style="color:var(--red);">--</strong></div>
-        <div>$V_{DSQ}$: <strong id="fetResVds" style="color:var(--green);">--</strong></div>
-        <div>$V_{DS(sat)}$: <strong id="fetResVdssat">--</strong></div>
-        <div>$g_m$: <strong id="fetResGm" style="color:var(--amber);">--</strong></div>
-        <div style="grid-column: span 2;">$A_v$ etapa (aprox CS): <strong id="fetResAv">--</strong></div>
-      </div>
-      <div id="fetState" class="status-card ok" style="margin-top:12px;"></div>
-    </div>
-  </div>
-
-  <!-- Gráfica SVG -->
-  <div class="panel paper">
-    <h4>Curva de Transferencia y Punto Q</h4>
-    <div id="fetCurveChart" style="width:100%;min-height:380px;"></div>
-    <div id="fetRootExplanation" style="margin-top:12px;font-size:0.9rem;color:var(--muted);"></div>
-  </div>
+<!-- Panel de Controles -->
+<div class="panel paper">
+<h4>Parámetros del Circuito</h4>
+<div style="display:flex;flex-direction:column;gap:12px;margin-top:10px;">
+<div>
+<label>Alimentación $V_{DD}$: <b id="fetVddTxt">24.0</b> V</label>
+<input id="fetVdd" max="30" min="5" step="0.5" style="width:100%;" type="range" value="24"/>
 </div>
-
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+<div>
+<label>$R_1$: <b id="fetR1Txt">22.0</b> MΩ</label>
+<input id="fetR1" max="40" min="1" step="1" style="width:100%;" type="range" value="22"/>
+</div>
+<div>
+<label>$R_2$: <b id="fetR2Txt">10.0</b> MΩ</label>
+<input id="fetR2" max="30" min="1" step="1" style="width:100%;" type="range" value="10"/>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+<div>
+<label>$R_D$: <b id="fetRdTxt">1.80</b> kΩ</label>
+<input id="fetRd" max="8" min="0.5" step="0.1" style="width:100%;" type="range" value="1.8"/>
+</div>
+<div>
+<label>$R_S$: <b id="fetRsTxt">0.82</b> kΩ</label>
+<input id="fetRs" max="4" min="0.1" step="0.01" style="width:100%;" type="range" value="0.82"/>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+<div>
+<label>$V_{GS(th)}$: <b id="fetVthTxt">2.50</b> V</label>
+<input id="fetVth" max="4.5" min="1.0" step="0.1" style="width:100%;" type="range" value="2.5"/>
+</div>
+<div>
+<label>Parámetro $k$: <b id="fetKTxt">0.80</b> mA/V²</label>
+<input id="fetK" max="3.0" min="0.2" step="0.05" style="width:100%;" type="range" value="0.8"/>
+</div>
+</div>
+</div>
+<!-- Lecturas de Salida -->
+<div style="margin-top:18px;background:rgba(0,0,0,0.15);padding:14px;border-radius:8px;">
+<h4 style="margin-bottom:8px;">Resultados Analíticos DC y AC</h4>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:0.95rem;">
+<div>$V_G$: <strong id="fetResVg" style="color:var(--blue);">--</strong></div>
+<div>$V_{GSQ}$: <strong id="fetResVgs" style="color:var(--blue);">--</strong></div>
+<div>$I_{DQ}$: <strong id="fetResId" style="color:var(--red);">--</strong></div>
+<div>$V_{DSQ}$: <strong id="fetResVds" style="color:var(--green);">--</strong></div>
+<div>$V_{DS,frontera}$: <strong id="fetResVdssat">--</strong></div>
+<div>$g_m$: <strong id="fetResGm" style="color:var(--amber);">--</strong></div>
+<div style="grid-column: span 2;">$A_v$ (CS ideal con degeneración): <strong id="fetResAv">--</strong></div>
+</div>
+<div class="status-card ok" id="fetState" style="margin-top:12px;"></div>
+</div>
+</div>
+<!-- Gráfica SVG -->
+<div class="panel paper">
+<h4>Curva de Transferencia y Punto Q</h4>
+<div id="fetCurveChart" style="width:100%;min-height:380px;"></div>
+<div id="fetRootExplanation" style="margin-top:12px;font-size:0.9rem;color:var(--muted);"></div>
+</div>
+</div>
 <!-- Comparador Térmico de Potencia -->
 <div class="panel paper" style="margin-top:24px;">
-  <h3>Simulador Térmico: Eficiencia BJT vs MOSFET en Conmutación</h3>
-  <p>Selecciona la corriente que consumirá la carga para ver la diferencia de disipación de potencia y calor:</p>
-  <div style="max-width:400px;margin:12px 0;">
-    <label>Corriente de Carga ($I_{Load}$): <b id="pwrCurrentTxt">10.0 A</b></label>
-    <input type="range" id="pwrCurrent" min="1" max="25" step="0.5" value="10" style="width:100%;">
-  </div>
-  <div class="grid3" style="margin-top:12px;">
-    <div class="panel" style="background:rgba(239,68,68,0.1);border-left:4px solid var(--red);">
-      <h4>BJT TIP35C ($V_{CE(sat)} \approx 1.2\text{ V}$)</h4>
-      <div style="font-size:1.4rem;font-weight:bold;color:var(--red);margin:8px 0;" id="pwrBjt">12.00 W</div>
-      <p style="font-size:0.85rem;color:var(--muted);">Disipación lineal constante por tensión de saturación.</p>
-    </div>
-    <div class="panel" style="background:rgba(245,158,11,0.1);border-left:4px solid var(--amber);">
-      <h4>MOSFET Estándar IRFZ44N ($17.5\text{ m}\Omega$)</h4>
-      <div style="font-size:1.4rem;font-weight:bold;color:var(--amber);margin:8px 0;" id="pwrMosStd">1.75 W</div>
-      <p style="font-size:0.85rem;color:var(--muted);">Disipación cuadrática $I^2 R$.</p>
-    </div>
-    <div class="panel" style="background:rgba(16,185,129,0.1);border-left:4px solid var(--green);">
-      <h4>MOSFET Moderno IPP015N04N ($1.5\text{ m}\Omega$)</h4>
-      <div style="font-size:1.4rem;font-weight:bold;color:var(--green);margin:8px 0;" id="pwrMosMod">0.15 W</div>
-      <p style="font-size:0.85rem;color:var(--muted);">¡80 veces menos disipación! Opera frío.</p>
-    </div>
-  </div>
-  <div id="pwrThermalDiag" style="margin-top:14px;padding:12px;background:rgba(0,0,0,0.1);border-radius:6px;font-size:0.95rem;"></div>
+<h3>Comparador ilustrativo de pérdidas de conducción</h3>
+<p>Selecciona la corriente que consumirá la carga para ver la diferencia de disipación de potencia y calor:</p>
+<div style="max-width:400px;margin:12px 0;">
+<label>Corriente de Carga ($I_{Load}$): <b id="pwrCurrentTxt">10.0 A</b></label>
+<input id="pwrCurrent" max="25" min="1" step="0.5" style="width:100%;" type="range" value="10"/>
+</div>
+<div class="grid3" style="margin-top:12px;">
+<div class="panel" style="background:rgba(239,68,68,0.1);border-left:4px solid var(--red);">
+<h4>BJT hipotético (VCE(sat) = 0,8 V)</h4>
+<div id="pwrBjt" style="font-size:1.4rem;font-weight:bold;color:var(--red);margin:8px 0;">8.00 W</div>
+<p style="font-size:0.85rem;color:var(--muted);">Aproximación P = I·VCE(sat), bajo hipótesis de ejercicio.</p>
+</div>
+<div class="panel" style="background:rgba(245,158,11,0.1);border-left:4px solid var(--amber);">
+<h4>MOSFET hipotético (RDS(on) = 25 mΩ)</h4>
+<div id="pwrMosStd" style="font-size:1.4rem;font-weight:bold;color:var(--amber);margin:8px 0;">2.50 W</div>
+<p style="font-size:0.85rem;color:var(--muted);">Aproximación P = I²R a tensión y temperatura especificadas.</p>
+</div>
+<div class="panel" style="background:rgba(16,185,129,0.1);border-left:4px solid var(--green);">
+<h4>MOSFET hipotético (RDS(on) = 15 mΩ)</h4>
+<div id="pwrMosMod" style="font-size:1.4rem;font-weight:bold;color:var(--green);margin:8px 0;">1.50 W</div>
+<p style="font-size:0.85rem;color:var(--muted);">Comparación bajo condiciones supuestas; no predice temperatura.</p>
+</div>
+</div>
+<div id="pwrThermalDiag" style="margin-top:14px;padding:12px;background:rgba(0,0,0,0.1);border-radius:6px;font-size:0.95rem;"></div>
 </div>
 </section>
-
 <!-- ======================================================== -->
 <!-- F13: PROBLEMAS RESUELTOS -->
 <!-- ======================================================== -->
 <section class="module" id="fejemplos">
 <div class="module-head">
-  <div class="module-title">
-    <span class="no">F13</span>
-    <div><span class="eyebrow">Práctica Guiada</span><h2>Problemas de Examen Resueltos Paso a Paso</h2></div>
-  </div>
-  <button class="mark" data-mark="fet-f13">Marcar estudiado</button>
+<div class="module-title">
+<span class="no">F13</span>
+<div><span class="eyebrow">Práctica Guiada</span><h2>Problemas de Examen Resueltos Paso a Paso</h2></div>
 </div>
-
+<button class="mark" data-mark="fet-f13">Marcar estudiado</button>
+</div>
 <div class="example">
-  <span class="example-label">Problema 1 · Análisis Completo de Polarización con Descarte de Raíces</span>
-  <p><b>Enunciado:</b> Para un circuito con $V_{DD} = 24\text{ V}$, $R_1 = 22\text{ M}\Omega$, $R_2 = 10\text{ M}\Omega$, $R_D = 1.8\text{ k}\Omega$, $R_S = 820\,\Omega$. El transistor E-MOSFET presenta $V_{GS(th)} = 2.5\text{ V}$ y un punto de prueba $I_{D(on)} = 5.0\text{ mA}$ para $V_{GS(on)} = 5.0\text{ V}$.</p>
-  <p>Determina: <b>a)</b> El parámetro $k$, <b>b)</b> El punto de operación $Q(V_{GSQ}, I_{DQ}, V_{DSQ})$, <b>c)</b> Confirma la región de operación, <b>d)</b> Halla la transconductancia $g_m$.</p>
-
-  <div class="panel paper" style="margin-top:14px;">
-    <h4>Solución Detallada:</h4>
-    <p><b>Paso 1: Cálculo del parámetro tecnológico $k$</b></p>
-    <div class="formula">\[k = \frac{I_{D(on)}}{\left(V_{GS(on)} - V_{GS(th)}\right)^2} = \frac{5.0\text{ mA}}{\left(5.0\text{ V} - 2.5\text{ V}\right)^2} = \frac{5.0}{6.25} = \mathbf{0.80\text{ mA/V}^2}\]</div>
-
-    <p><b>Paso 2: Voltaje de compuerta $V_G$</b></p>
-    <div class="formula">\[V_G = 24\text{ V} \left(\frac{10\text{ M}\Omega}{22\text{ M}\Omega + 10\text{ M}\Omega}\right) = 24 \left(\frac{10}{32}\right) = \mathbf{7.50\text{ V}}\]</div>
-
-    <p><b>Paso 3: Malla compuerta-fuente y formulación cuadrática</b></p>
-    <div class="formula">\[V_{GS} = 7.50 - 0.82 I_D \quad (\text{con } I_D \text{ en mA})\]</div>
-    <div class="formula">\[I_D = 0.80 \left[(7.50 - 0.82 I_D) - 2.50\right]^2 = 0.80 \left[5.00 - 0.82 I_D\right]^2\]</div>
-    <div class="formula">\[I_D = 0.80 \left[25.0 - 8.20 I_D + 0.6724 I_D^2\right] = 20.0 - 6.56 I_D + 0.538 I_D^2\]</div>
-    <div class="formula">\[\mathbf{0.538 I_D^2 - 7.56 I_D + 20.0 = 0}\]</div>
-
-    <p><b>Paso 4: Raíces y descarte físico riguroso</b></p>
-    <div class="formula">\[I_D = \frac{7.56 \pm \sqrt{(-7.56)^2 - 4(0.538)(20.0)}}{2(0.538)} = \frac{7.56 \pm \sqrt{57.15 - 43.04}}{1.076} = \frac{7.56 \pm 3.756}{1.076}\]</div>
-    <ul class="clean-list">
-      <li><b>Raíz 1:</b> $I_{D1} = \frac{7.56 + 3.756}{1.076} = 10.52\text{ mA} \implies V_{GS1} = 7.50 - 10.52(0.82) = -1.13\text{ V}$.
-      <br><span style="color:var(--red);font-weight:bold;">¡SE DESCARTA!</span> $V_{GS1} < 2.5\text{ V}$ (es menor al umbral; el transistor no puede conducir apagado).</li>
-      <li><b>Raíz 2:</b> $I_{D2} = \frac{7.56 - 3.756}{1.076} = \mathbf{3.53\text{ mA}} \implies V_{GS2} = 7.50 - 3.53(0.82) = \mathbf{4.60\text{ V}}$.
-      <br><span style="color:var(--green);font-weight:bold;">¡RAÍZ FÍSICAMENTE VÁLIDA!</span> $V_{GS2} = 4.60\text{ V} > 2.5\text{ V}$ (canal inducido activo).</li>
-    </ul>
-
-    <p><b>Paso 5: Malla de drenador y confirmación de región</b></p>
-    <div class="formula">\[V_{DSQ} = V_{DD} - I_{DQ}(R_D + R_S) = 24 - 3.53\text{ mA}(1.8\text{ k}\Omega + 0.82\text{ k}\Omega) = 24 - 9.25 = \mathbf{14.75\text{ V}}\]</div>
-    <p>Frontera de estrangulamiento:</p>
-    <div class="formula">\[V_{DS(sat)} = V_{GSQ} - V_{GS(th)} = 4.60\text{ V} - 2.50\text{ V} = \mathbf{2.10\text{ V}}\]</div>
-    <p>Como $V_{DSQ} = 14.75\text{ V} \ge 2.10\text{ V}$, <b>¡se confirma matemáticamente la operación en SATURACIÓN!</b></p>
-
-    <p><b>Paso 6: Transconductancia $g_m$</b></p>
-    <div class="formula">\[g_m = 2k(V_{GSQ} - V_{GS(th)}) = 2(0.80)(4.60 - 2.50) = 1.60 \times 2.10 = \mathbf{3.36\text{ mS}}\]</div>
-  </div>
+<span class="example-label">Problema 1 · Análisis Completo de Polarización con Descarte de Raíces</span>
+<p><b>Enunciado:</b> Para un circuito con $V_{DD} = 24\text{ V}$, $R_1 = 22\text{ M}\Omega$, $R_2 = 10\text{ M}\Omega$, $R_D = 1.8\text{ k}\Omega$, $R_S = 820\,\Omega$. El transistor E-MOSFET presenta $V_{GS(th)} = 2.5\text{ V}$ y un punto de prueba $I_{D(on)} = 5.0\text{ mA}$ para $V_{GS(on)} = 5.0\text{ V}$.</p>
+<p>Determina: <b>a)</b> El parámetro $k$, <b>b)</b> El punto de operación $Q(V_{GSQ}, I_{DQ}, V_{DSQ})$, <b>c)</b> Confirma la región de operación, <b>d)</b> Halla la transconductancia $g_m$.</p>
+<div class="panel paper" style="margin-top:14px;">
+<h4>Solución Detallada:</h4>
+<p><b>Paso 1: Cálculo del parámetro tecnológico $k$</b></p>
+<div class="formula">\[k = \frac{I_{D(on)}}{\left(V_{GS(on)} - V_{GS(th)}\right)^2} = \frac{5.0\text{ mA}}{\left(5.0\text{ V} - 2.5\text{ V}\right)^2} = \frac{5.0}{6.25} = \mathbf{0.80\text{ mA/V}^2}\]</div>
+<p><b>Paso 2: Voltaje de compuerta $V_G$</b></p>
+<div class="formula">\[V_G = 24\text{ V} \left(\frac{10\text{ M}\Omega}{22\text{ M}\Omega + 10\text{ M}\Omega}\right) = 24 \left(\frac{10}{32}\right) = \mathbf{7.50\text{ V}}\]</div>
+<p><b>Paso 3: Malla compuerta-fuente y formulación cuadrática</b></p>
+<div class="formula">\[V_{GS} = 7.50 - 0.82 I_D \quad (\text{con } I_D \text{ en mA})\]</div>
+<div class="formula">\[I_D = 0.80 \left[(7.50 - 0.82 I_D) - 2.50\right]^2 = 0.80 \left[5.00 - 0.82 I_D\right]^2\]</div>
+<div class="formula">\[I_D = 0.80 \left[25.0 - 8.20 I_D + 0.6724 I_D^2\right] = 20.0 - 6.56 I_D + 0.538 I_D^2\]</div>
+<div class="formula">\[\mathbf{0.538 I_D^2 - 7.56 I_D + 20.0 = 0}\]</div>
+<p><b>Paso 4: Raíces y descarte físico riguroso</b></p>
+<div class="formula">\[I_D = \frac{7.56 \pm \sqrt{(-7.56)^2 - 4(0.538)(20.0)}}{2(0.538)} = \frac{7.56 \pm \sqrt{57.15 - 43.04}}{1.076} = \frac{7.56 \pm 3.756}{1.076}\]</div>
+<ul class="clean-list">
+<li><b>Raíz 1:</b> $I_{D1} = \frac{7.56 + 3.756}{1.076} = 10.52\text{ mA} \implies V_{GS1} = 7.50 - 10.52(0.82) = -1.13\text{ V}$.
+      <br/><span style="color:var(--red);font-weight:bold;">Se descarta.</span> $V_{GS1} &lt; 2.5\text{ V}$ (es menor al umbral; el transistor no puede conducir apagado).</li>
+<li><b>Raíz 2:</b> $I_{D2} = \frac{7.56 - 3.756}{1.076} = \mathbf{3.53\text{ mA}} \implies V_{GS2} = 7.50 - 3.53(0.82) = \mathbf{4.60\text{ V}}$.
+      <br/><span style="color:var(--green);font-weight:bold;">Raíz admisible:</span> $V_{GS2} = 4.60\text{ V} &gt; 2.5\text{ V}$ (canal inducido activo).</li>
+</ul>
+<p><b>Paso 5: Malla de drenador y confirmación de región</b></p>
+<div class="formula">\[V_{DSQ} = V_{DD} - I_{DQ}(R_D + R_S) = 24 - 3.53\text{ mA}(1.8\text{ k}\Omega + 0.82\text{ k}\Omega) = 24 - 9.25 = \mathbf{14.75\text{ V}}\]</div>
+<p>Frontera de estrangulamiento:</p>
+<div class="formula">\[V_{DS,frontera} = V_{GSQ} - V_{GS(th)} = 4.60\text{ V} - 2.50\text{ V} = \mathbf{2.10\text{ V}}\]</div>
+<p>Como $V_{DSQ} = 14.75\text{ V} \ge 2.10\text{ V}$, <b>se confirma la condición de saturación dentro del modelo ideal.</b></p>
+<p><b>Paso 6: Transconductancia $g_m$</b></p>
+<div class="formula">\[g_m = 2k(V_{GSQ} - V_{GS(th)}) = 2(0.80)(4.60 - 2.50) = 1.60 \times 2.10 = \mathbf{3.36\text{ mS}}\]</div>
 </div>
-</section>
-
+</div>
+<p class="fet15-source">Base y límites: El ejemplo presenta un MOSFET hipotético de canal largo con parámetros dados para aprendizaje. Los procedimientos son de polarización y pequeñas señales como en los capítulos FET de Boylestad y Malvino; no constituyen una simulación de dispositivo comercial.</p></section>
 <!-- ======================================================== -->
 <!-- F14: DESCARGAS Y MATERIAL DOCENTE ITM -->
 <!-- ======================================================== -->
-<section class="module" id="fdescargas">
-<div class="module-head">
-  <div class="module-title">
-    <span class="no">F14</span>
-    <div><span class="eyebrow">Recursos Académicos</span><h2>Material Oficial de Clase y Diapositivas ITM</h2></div>
-  </div>
-  <button class="mark" data-mark="fet-f14">Marcar estudiado</button>
-</div>
-
-<p>Todo el material complementario de esta unidad académica se encuentra organizado en la carpeta interna <code>modulo-fet/</code> de AnalogLab para consulta del docente y los estudiantes:</p>
-
-<div class="grid2">
-  <div class="panel paper" style="border: 2px solid var(--border-cyan);">
-    <h3 style="color:var(--border-cyan);">Diapositivas Oficiales de Clase (PowerPoint)</h3>
-    <p>Presentación universitaria completa de <b>24 diapositivas</b> con diseño profesional ITM, diagramas de alta resolución, guiones para el docente y comparativas de eficiencia.</p>
-    <div style="margin-top:14px;">
-      <a class="btn primary" href="modulo-fet/Transistores_MOSFET_Clase_ITM.pptx" download>📥 Descargar Presentación (.pptx)</a>
-    </div>
-  </div>
-  <div class="panel paper" style="border: 2px solid var(--gold-accent);">
-    <h3 style="color:var(--gold-accent);">Guía Maestra de Clase y Referencia Matemática</h3>
-    <p>Documento interactivo con guión pedagógico, alertas de taller ESD, fórmulas resumidas y tablas de disipación para el docente Fredy Torres.</p>
-    <div style="margin-top:14px;">
-      <a class="btn" href="modulo-fet/guia_mosfet_itm.html" target="_blank">🌐 Abrir Guía Maestra ITM →</a>
-    </div>
-  </div>
-</div>
-</section>
-
+<section class="module" id="fdescargas"><div class="module-head"><div class="module-title"><span class="no">F14</span><div><span class="eyebrow">Lectura y repaso</span><h2>Material de estudio: modelos, límites y fuentes</h2></div></div><button class="mark" data-mark="fet-f14">Marcar estudiado</button></div>
+<div class="grid2"><div class="panel paper"><h3>Estudia en este orden</h3><ol class="checklist"><li>Compara BJT con FET y clasifica JFET, E-MOSFET y D-MOSFET.</li><li>Resuelve un JFET con \(I_{DSS}\) y \(V_{GS(off)}\).</li><li>Resuelve un E-MOSFET: primero \(V_G\), luego \(V_{GS}\), después \(I_D\) y \(V_{DS}\).</li><li>Comprueba la región antes de usar \(g_m\) o la fórmula de ganancia.</li><li>Lee \(R_{DS(on)}\), \(V_{GS(th)}\), \(Q_g\) y condiciones de prueba en el datasheet.</li></ol></div><div class="panel paper"><h3>Bibliografía y comprobación externa</h3><p><b>Libros base del curso:</b> Boylestad y Nashelsky, <i>Teoría de circuitos y dispositivos electrónicos</i>, 10.ª ed., capítulos FET; Malvino y Bates, <i>Principios de electrónica</i>, 7.ª ed., capítulos FET; Pleite Guerra, Vergaz Benito y Ruiz de Marcos, <i>Electrónica analógica para ingenieros</i>, secciones de dispositivos de efecto de campo.</p><p><a href="https://www.infineon.com/assets/row/public/documents/24/49/infineon-irlz44n-datasheet-en.pdf" rel="noopener" target="_blank">Hoja de datos IRLZ44N</a> · <a href="https://www.mouser.com/datasheet/2/308/2N7000-D-33553.pdf" rel="noopener" target="_blank">Hoja de datos 2N7000</a></p><div class="box remember"><small>Uso responsable</small>La ecuación cuadrática de canal largo es un modelo para aprender a razonar. No reemplaza las curvas reales de potencia ni sus límites térmicos.</div></div></div></section>
 <!-- ======================================================== -->
 <!-- F15: AUTOEVALUACIÓN Y CUESTIONARIO -->
 <!-- ======================================================== -->
+<section class="module" id="fet-practica-tutor"><div class="module-head"><div class="module-title"><span class="no">F15</span><div><span class="eyebrow">Ejercicios situados y resoluciones</span><h2>Problemas aplicados con soluciones que explican cada decisión</h2></div></div><button class="mark" data-mark="fet15-problemas">Marcar estudiado</button></div>
+<p>Estos escenarios son propuestas de estudio originales que aplican los modelos de los libros. <b>Los valores didácticos no representan parámetros garantizados de un transistor comercial.</b> En cada uno identifica la hipótesis, calcula y verifica.</p>
+<div class="fet15-examples">
+<details open=""><summary>Problema 1 · Interfaz de un sensor: divisor y punto de trabajo</summary><div class="fet15-body"><p><b>Situación.</b> La etapa de acondicionamiento de un sensor utiliza un E-MOSFET idealizado de canal N con \(V_{DD}=12\,V\), divisor \(R_1=300\,k\Omega\), \(R_2=100\,k\Omega\), \(R_D=1\,k\Omega\), \(R_S=0.5\,k\Omega\), \(V_T=1\,V\) y \(k=1\,mA/V^2\). Determina \(V_G\), \(I_D\), \(V_{GS}\), \(V_{DS}\) y la región.</p><ol><li><b>Objetivo DC:</b> identificar qué tensión recibe la puerta. \(V_G=12(100/400)=3\,V\).</li><li><b>Relación de fuente:</b> \(V_{GS}=3-0.5I_D\), si \(I_D\) está en mA.</li><li><b>Modelo en saturación:</b> \(I_D=(2-0.5I_D)^2\); al expandir: \(0.25I_D^2-3I_D+4=0\).</li><li><b>Raíces:</b> \(I_D=6\pm2\sqrt5\), es decir 10.472 y 1.528 mA. La grande daría \(V_{GS}\lt V_T\) y se descarta.</li><li><b>Verificación:</b> \(V_{GS}=2.236\,V\), \(V_{DS}=12-1.528(1.5)=9.708\,V\). Como \(9.708&gt;V_{GS}-V_T=1.236\,V\), la suposición de saturación del modelo es coherente.</li></ol><p><b>Resultado:</b> \(Q\approx(1.528\,mA,9.708\,V)\) al indicar corriente y \(V_{DS}\). Recuerda que saturación MOSFET aquí significa región para amplificación, no «interruptor encendido al máximo».</p></div></details>
+<details><summary>Problema 2 · Amplificador FET: calcular y explicar la inversión</summary><div class="fet15-body"><p><b>Situación.</b> Una etapa fuente común debe amplificar la variación de un sensor. En su punto Q ya medido se obtiene \(I_D=2\,mA\), \(V_{GS}-V_T=1\,V\), \(R_D=2\,k\Omega\). Se considera \(r_o\) muy grande y \(R_S\) totalmente desacoplada para señal.</p><ol><li>Se linealiza la curva alrededor de Q: \(g_m=2I_D/(V_{GS}-V_T)=4\,mS\).</li><li>La corriente incremental del drenador crece con \(v_{gs}\): \(i_d=g_mv_{gs}\).</li><li>La caída incremental en \(R_D\) aumenta y la tensión de salida disminuye: \(A_v\approx-g_mR_D=-8\).</li><li>Si la entrada es una senoide de \(20\,mV\) pico, la salida ideal pequeña señal sería \(160\,mV\) pico e invertida 180°.</li></ol><p><b>Comprobación:</b> si existe una carga \(R_L\), usa \(R_D\parallel R_L\); si el resistor de fuente no está desacoplado, la ganancia en magnitud disminuye.</p></div></details>
+<details><summary>Problema 3 · MOSFET para motor: ¿tres coma tres voltios alcanzan?</summary><div class="fet15-body"><p><b>Situación.</b> Un controlador ESP32 entrega 3.3 V y se propone un IRLZ44N. Se necesita conmutar un motor que llega a 2 A en régimen.</p><ol><li><b>Dato conocido:</b> el datasheet del IRLZ44N especifica \(R_{DS(on)}\) para condiciones de puerta de 4 V y 5 V, entre otras.</li><li><b>Decisión:</b> no se puede garantizar desde ese dato el mismo \(R_{DS(on)}\) a 3.3 V. «Logic-level» tampoco es una aprobación universal.</li><li><b>Qué falta:</b> verificar curvas a 3.3 V, corriente de arranque, SOA, resistencia térmica, carga de puerta y PWM. Si no se garantizan márgenes, utiliza un driver de puerta o selecciona otro MOSFET especificado para 2.5/3.3 V.</li></ol><p><b>Respuesta correcta:</b> la ficha disponible no basta para aprobar la conexión directa. Lo que distingue a una decisión de ingeniería es explicar qué parámetro falta.</p></div></details>
+<details><summary>Problema 4 · JFET: calcular corriente e interpretar el signo</summary><div class="fet15-body"><p><b>Situación.</b> Para estudiar una etapa de entrada, el modelo de un JFET canal N presenta \(I_{DSS}=9\,mA\), \(V_{GS(off)}=-3\,V\), con \(V_{GS}=-1\,V\).</p><ol><li>Verifica que \(-3\le-1\le0\).</li><li>\(I_D=9(1-(-1)/(-3))^2=9(2/3)^2=4\,mA\).</li><li>El voltaje de puerta negativo reduce \(I_D\), no lo aumenta.</li></ol><p><b>Comprobación:</b> a \(V_{GS}=0\) el modelo da 9 mA; a \(V_{GS}=-3\) da 0 mA, coherente con la forma de la curva.</p></div></details>
+</div><div class="box remember"><small>Cómo estudiar antes del parcial</small>Intenta cada problema sin abrir la solución. Si te equivocas, identifica el <b>primer paso</b> que cambió la región, el signo de \(V_{GS}\) o la unidad de \(I_D\). No estudies memorizando solamente las cuatro cifras finales.</div><div class="fet152-extra"><h3>Más práctica: primero interpreta, después calcula</h3><p>Son problemas originales de estudio basados en procedimientos de Boylestad y Malvino. Los parámetros se proporcionan como datos de ejercicio y no son especificaciones garantizadas de un transistor comercial.</p>
+<details class="fet152-case"><summary>Reto 5 · Una carga conmutada: ¿cuánto calor disipa el MOSFET?</summary><div class="fet152-case-body"><p><b>Situación.</b> Una válvula DC consume $2\,A$. Se selecciona un MOSFET con $R_{DS(on)}=50\,m\Omega$ garantizado a la tensión de puerta empleada y se desprecia la pérdida de transición para este primer cálculo.</p><ol><li><b>Identifica la fórmula:</b> al conducir en región óhmica, la pérdida estática se aproxima por $P=I^2R$.</li><li><b>Convierte unidades:</b> $50\,m\Omega=0.050\,\Omega$.</li><li><b>Calcula:</b> $P=(2\,A)^2(0.050\,\Omega)=\boxed{0.20\,W}$.</li><li><b>Interpreta:</b> el dato no incluye la energía de transiciones PWM ni el aumento de $R_{DS(on)}$ con la temperatura. Para decidir si basta el encapsulado hacen falta límites térmicos.</li></ol><div class="box remember"><small>Comprueba</small>¿La potencia aumenta lineal o cuadráticamente con la corriente? Aquí es cuadrática: si duplicas corriente y R se mantiene, la pérdida se cuadruplica.</div></div></details>
+<details class="fet152-case"><summary>Reto 6 · Identificar una región sin memorizar la respuesta</summary><div class="fet152-case-body"><p><b>Situación.</b> Una etapa de amplificación utiliza el modelo $V_T=1.5\,V$, $V_{GS}=4.0\,V$, $V_{DS}=4.0\,V$ y $k=0.40\,mA/V^2$.</p><ol><li><b>Calcula exceso de puerta:</b> $V_{OV}=4.0-1.5=2.5\,V$.</li><li><b>Compara con drenador-fuente:</b> $4.0\ge2.5\,V$. Corresponde a saturación del modelo MOSFET.</li><li><b>Aplica la ecuación adecuada:</b> $I_D=kV_{OV}^2=0.40(2.5)^2=\boxed{2.50\,mA}$.</li><li><b>Evalúa la transconductancia:</b> $g_m=2kV_{OV}=2(0.40)(2.5)=\boxed{2.00\,mS}$.</li><li><b>Interpreta:</b> una variación pequeña de puerta de 10 mV puede cambiar la corriente cerca del punto Q aproximadamente en 20 µA, si se mantiene el régimen de pequeña señal.</li></ol></div></details>
+<details class="fet152-case"><summary>Reto 7 · ¿Qué pasa si conectas una carga a fuente común?</summary><div class="fet152-case-body"><p><b>Situación.</b> Una etapa de fuente común trabaja con $g_m=3\,mS$, $R_D=3\,k\Omega$ y se conecta a una entrada de medición de $R_L=6\,k\Omega$. Se desprecia $r_o$ y la resistencia de fuente queda desacoplada para AC.</p><ol><li><b>Antes de conectar la carga:</b> $A_{v0}\approx-g_mR_D=-(3\,mS)(3\,k\Omega)=-9\,V/V$.</li><li><b>Combina resistencias:</b> $R_D\parallel R_L=(3\cdot6)/(3+6)=2\,k\Omega$.</li><li><b>Recalcula ganancia:</b> $A_v\approx-(3\,mS)(2\,k\Omega)=\boxed{-6\,V/V}$.</li><li><b>Conclusión:</b> una carga finita reduce la magnitud de la ganancia. El signo menos indica inversión de fase.</li></ol><div class="box key"><small>¿Por qué es un problema real?</small>El circuito de medición no es invisible: al conectarlo, modifica el equivalente AC de la etapa.</div></div></details>
+</div></section>
 <section class="module" id="fquiz">
 <div class="module-head">
-  <div class="module-title">
-    <span class="no">F15</span>
-    <div><span class="eyebrow">Comprobación de Conocimiento</span><h2>Autoevaluación Interactiva del Capítulo</h2></div>
-  </div>
-  <button class="mark" data-mark="fet-f15">Marcar estudiado</button>
+<div class="module-title">
+<span class="no">F16</span>
+<div><span class="eyebrow">Prueba y vuelve a intentarlo</span><h2>Autoevaluación de lo aprendido</h2></div>
 </div>
-
+<button class="mark" data-mark="fet-f15">Marcar estudiado</button>
+</div><p>No memorices solo la respuesta: justifica el resultado de cada pregunta con la región, la tensión de puerta y el modelo adecuado. Los cuestionarios usan preguntas variadas; vuelve a intentarlo después de revisar tus errores.</p>
 <div class="grid2">
-  <div class="panel paper" data-quiz="fet_fundamentos" data-limit="4">
-    <!-- El script core.js renderizará el banco fet_fundamentos aquí -->
-  </div>
-  <div class="panel paper" data-quiz="fet_aplicaciones" data-limit="4">
-    <!-- El script core.js renderizará el banco fet_aplicaciones aquí -->
-  </div>
+<div class="panel paper" data-limit="6" data-quiz="fet_fundamentos">
+<!-- El script core.js renderizará el banco fet_fundamentos aquí -->
+</div>
+<div class="panel paper" data-limit="6" data-quiz="fet_aplicaciones">
+<!-- El script core.js renderizará el banco fet_aplicaciones aquí -->
+</div>
 </div>
 </section>
-
 <div class="footer">
-  <div><b>AnalogLab</b><span>Recurso interactivo de apoyo académico</span></div>
-  <span>Electrónica Analógica y Laboratorio · Docente: Fredy Torres</span>
+<div><b>AnalogLab</b><span>Recurso interactivo de apoyo académico</span></div>
+<span>Electrónica Analógica y Laboratorio · Material de estudio</span>
 </div>
 </main>
 </div>
-
 <script src="data/quizzes.js?v=13.0"></script>
 <script src="js/core.js?v=13.0"></script>
 <script src="js/fet.js?v=1.0"></script>
+<script defer="" src="js/menu-cursos.js?v=15.1"></script>
 </body>
 </html>

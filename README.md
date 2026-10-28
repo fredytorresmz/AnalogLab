@@ -1,3 +1,21 @@
+# Actualización v15.2 · Curso FET más claro y práctico (28 de octubre de 2026)
+
+Esta versión parte de AnalogLab v15.1 auditada y de las carpetas originales entregadas por el usuario. Reescribe secciones de `fet.html` en tono de curso, sin borrar los módulos existentes. **Conserva el menú agrupado y el taller BJT en AC**.
+
+- Nueva ruta de estudio en seis pasos, con enlaces internos y objetivos concretos.
+- Familia FET, JFET, E-MOSFET, agotamiento, regiones MOS y pequeña señal explicados con definiciones técnicas y lenguaje próximo.
+- Cinco ilustraciones SVG independientes: familia FET, curva calculada de Shockley, polarización por divisor, control de motor lado bajo y curvas MOS por regiones.
+- Nueva explicación de polarización, raíces físicas y realimentación de drenador. Ejercicios de fuente común y tres retos adicionales con soluciones desplegables.
+- Autoevaluación con Fisher–Yates y prioridad a preguntas no usadas en el intento anterior, cuando el banco lo permite.
+- Corrección de HTML en desigualdades matemáticas; todas las fórmulas se muestran mediante MathJax local.
+- Las simulaciones son **modelos de aprendizaje**, no datos medidos ni autorización para construir circuitos de potencia sin verificación.
+
+**Publicación:** extraer el ZIP directamente en la raíz del repositorio de GitHub Pages, respetando carpetas y nombres. La página FET se abre en `fet.html`. No se necesita ejecutar instalación ni compilar.
+
+**Bibliografía guía:** Boylestad y Nashelsky (10.ª ed.), capítulos 6 a 8; Malvino y Bates (7.ª ed.), capítulos 13 y 14; Pleite Guerra y colaboradores. Los ejemplos nuevos son desarrollos didácticos, no reproducción literal de sus ejercicios. Para componentes reales consulta el datasheet del fabricante.
+
+---
+
 # AnalogLab v14.5 · Preparación para el parcial de BJT en AC (15 octubre 2026)
 
 **Actualización educativa en `bjt-ac.html` exclusivamente.** Se conserva la versión de la práctica NE555/puente H de v14.4 sin cambiar su procedimiento.
@@ -239,3 +257,13 @@ Se reestructura `practica-pwm555.html` con un diseño didáctico propio, inspira
 - La fuente utilizada debe ser compatible con cada motor: para un motor 6 V o 9 V es necesario usar alimentación que no exceda lo que admite, no conectar 10–12 V directamente.
 
 **Nota técnica**: el HTML enseña la secuencia de laboratorio y permite registrar resultados; no constituye homologación eléctrica de todas las posibles combinaciones motor–transistores–diodos. Para pasar de esquema publicado a montaje concreto se debe contrastar con las hojas de datos y medir las condiciones de trabajo.
+
+## Actualización v15.1 · Auditoría FET y navegación (octubre de 2026)
+
+Esta versión se construye sobre la copia de AnalogLab facilitada en `AnalogLab.zip`, preservando el módulo BJT AC y su taller tal como fueron recibidos salvo el nuevo menú y los enlaces de transición entre temas. Las correcciones en `fet.html` cubren la familia FET/JFET, equivalencia BJT/FET, conmutación, interpretación de hoja de datos y cuatro casos resueltos. `js/fet.js` ahora verifica las regiones de saturación y triodo del modelo cuadrático simplificado antes de mostrar corriente y ganancia; no se debe interpretar como un simulador SPICE ni como garantía de un dispositivo real.
+
+Se incorpora un gráfico original, con ejes y unidades, en `assets/fet/curvas-salida-modelo.svg` y dos bancos de 12 preguntas actualizadas. El encabezado utiliza navegación compacta y desplegable y conserva el índice lateral de cada materia.
+
+Por prudencia, el ZIP destinado a **GitHub Pages** excluye el directorio `examen_parcial` —incluye solucionarios y documentos de evaluación no apropiados para publicación pública— y archivos auxiliares de elaboración destinados al docente. Esos originales permanecen en los ZIP que facilitó el autor del proyecto; no se han borrado de sus archivos originales.
+
+Puede consultarse el inventario de cambios y límites de validación en `AUDITORIA_v15_1.md`.

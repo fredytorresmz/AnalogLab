@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="375" viewBox="0 0 920 375" role="img" aria-label="Árbol de la familia FET: JFET canal N/P y MOSFET enriquecimiento/agotamiento con canal N/P">
+<style>text{font-family:Arial,sans-serif;fill:#17304a}.heading{font-size:21px;font-weight:700}.body{font-size:18px}.l{stroke:#7d95b1;stroke-width:3;fill:none}.b{fill:white;stroke:#c2d7ec;stroke-width:2}.mos{fill:#eaf5ff;stroke:#64a2dc;stroke-width:2}.jf{fill:#e8f6ef;stroke:#65b98f;stroke-width:2}</style><rect width="920" height="375" rx="20" fill="#f8fbff"/>
+<rect x="360" y="28" width="200" height="58" rx="11" class="b"/><text x="460" y="63" text-anchor="middle" class="heading">Familia FET</text>
+<path class="l" d="M460 86V108H235V126 M460 108H685V126"/>
+<rect x="78" y="126" width="314" height="64" rx="12" class="jf"/><text x="235" y="155" class="heading" text-anchor="middle">JFET</text><text x="235" y="177" class="body" text-anchor="middle">Puerta como unión PN</text>
+<rect x="524" y="126" width="314" height="64" rx="12" class="mos"/><text x="681" y="155" class="heading" text-anchor="middle">MOSFET</text><text x="681" y="177" class="body" text-anchor="middle">Puerta aislada</text>
+<path class="l" d="M235 190V216 M681 190V216H620V236 M681 216H758V236"/>
+<rect x="78" y="236" width="314" height="92" rx="12" class="jf"/><text x="235" y="268" class="heading" text-anchor="middle">Canal N o P</text><text x="235" y="294" class="body" text-anchor="middle">Normalmente conductor</text><text x="235" y="315" class="body" text-anchor="middle">en VGS = 0 (modelo)</text>
+<rect x="460" y="236" width="202" height="92" rx="12" class="mos"/><text x="561" y="268" class="heading" text-anchor="middle">Enriquecimiento</text><text x="561" y="294" class="body" text-anchor="middle">Normalmente OFF</text><text x="561" y="315" class="body" text-anchor="middle">Canal N / P</text>
+<rect x="689" y="236" width="199" height="92" rx="12" class="mos"/><text x="789" y="268" class="heading" text-anchor="middle">Agotamiento</text><text x="789" y="294" class="body" text-anchor="middle">Normalmente ON</text><text x="789" y="315" class="body" text-anchor="middle">Canal N / P</text>
+<text x="460" y="357" text-anchor="middle" class="body">La familia se clasifica por estructura, polaridad y modo de funcionamiento.</text></svg>

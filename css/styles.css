@@ -218,3 +218,38 @@ svg.diagram,svg.chart{min-height:220px;overflow:visible}
 #ac8 details.ac145>div{padding:10px 5px 2px}
 @media(max-width:750px){.ac145-challenge{grid-template-columns:1fr}.ac145-route a{font-size:.81rem}}
 @media print{.ac145-task{break-inside:avoid}#ac145New,#ac145Check{display:none}}
+
+/* v15.1 — navegación compacta agrupada y adaptable */
+header{gap:7px}header .topnav{margin-left:auto;gap:5px;align-items:center;flex-wrap:nowrap}header .topnav .nav-start,header .al-nav-group summary{display:block;padding:10px 11px;border-radius:11px;color:var(--ink);font-size:.86rem;font-weight:650;text-decoration:none;white-space:nowrap;cursor:pointer;list-style:none}header .al-nav-group summary::-webkit-details-marker{display:none}header .al-nav-group summary::after{content:'⌄';font-size:.75rem;margin-left:7px;color:var(--muted)}header .al-nav-group{position:relative}header .al-nav-group summary:hover,header .al-nav-group[open] summary,header .topnav .nav-start:hover{background:var(--blue2);color:var(--navy)}header .al-nav-panel{position:absolute;top:calc(100% + 9px);right:0;width:max-content;min-width:224px;max-width:300px;background:var(--paper);border:1px solid var(--line);border-radius:13px;box-shadow:var(--shadow);padding:8px;z-index:200;display:flex;flex-direction:column;gap:3px}header .al-nav-panel a{display:block;white-space:normal;font-size:.88rem;line-height:1.35;color:var(--ink);padding:10px 12px;border-radius:8px}header .al-nav-panel a:hover,header .al-nav-panel a[aria-current="page"]{background:var(--blue2);color:var(--navy);font-weight:700}header .al-course-toggle{display:none;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:8px 10px;border-radius:10px;font-weight:700;font-size:.86rem;cursor:pointer}header .header-actions{margin-left:3px}header .brand{flex-shrink:0}
+@media(max-width:1200px){header .brand span{display:none}header .topnav .nav-start,header .al-nav-group summary{padding:8px 7px;font-size:.83rem}}
+@media(max-width:980px){header .topnav{display:none!important}header .al-course-toggle{display:block;margin-left:auto}header .topnav.al-nav-open{display:flex!important;position:absolute;left:12px;right:12px;top:calc(100% + 5px);max-height:calc(100vh - 95px);overflow-y:auto;padding:12px;background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:14px;z-index:300;flex-direction:column;align-items:stretch;gap:4px}header .topnav.al-nav-open .al-nav-group{width:100%}header .topnav.al-nav-open .al-nav-group summary{width:100%;padding:12px}header .topnav.al-nav-open .al-nav-panel{position:static;width:100%;max-width:none;box-shadow:none;border:0;border-left:2px solid var(--blue);border-radius:2px;padding-left:10px}header .topnav.al-nav-open .nav-start{padding:12px}header .header-actions{margin-left:0}}
+@media(max-width:420px){header .brand strong{font-size:1.2rem}header .al-course-toggle{font-size:.79rem}header .header-actions button{padding:7px}}
+/* Tabla, notas, y problemas FET: editoriales sin rótulos docentes */
+.fet15-family{display:flex;flex-direction:column;gap:5px;padding:16px;border-radius:12px;background:var(--blue2);margin:8px 0 14px}.fet15-family b{font-size:1.2rem;color:var(--navy)}.fet15-family span{font-size:.92rem}.fet15-source{font-size:.82rem;color:var(--muted);margin-top:14px}.fet15-examples{display:grid;gap:12px;margin:14px 0}.fet15-examples details{border:1px solid var(--line);border-radius:13px;background:var(--paper);overflow:hidden}.fet15-examples summary{cursor:pointer;list-style:none;font-weight:750;padding:15px 18px;background:var(--blue2)}.fet15-examples summary::-webkit-details-marker{display:none}.fet15-examples summary::before{content:'＋';margin-right:8px}.fet15-examples details[open] summary::before{content:'−'}.fet15-body{padding:16px 20px}.fet15-body li{margin:8px 0}.fet15-body .formula{max-width:100%;overflow-x:auto}.fet15-examples p{line-height:1.65}
+/* Evita que MathJax aumente el ancho de las columnas al mostrar fórmulas largas. */
+.grid2>* ,.grid3>* ,main .panel,main .module{min-width:0}
+main .formula{max-width:100%;min-width:0;overflow-x:auto;overflow-y:hidden}
+main mjx-container[display="true"]{max-width:100%;overflow-x:auto;overflow-y:hidden}
+
+.fet15-figure{max-width:100%;margin:20px 0}.fet15-figure img{width:100%;height:auto;max-width:100%;border:1px solid var(--line);border-radius:13px;display:block}.fet15-figure figcaption{font-size:.88rem;color:var(--muted);line-height:1.6;margin-top:9px}
+
+
+/* v15.2: el contenido FET se organiza como un curso de estudio, conservando el tema del sitio. */
+.fet152-route{padding:21px 23px;margin:16px 0 25px;border:1px solid var(--line);background:var(--paper);border-radius:16px}
+.fet152-route h2{margin:0 0 7px;font-size:1.24rem;color:var(--navy)}
+.fet152-route p{color:var(--muted);line-height:1.55;margin:4px 0 15px}
+.fet152-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.fet152-steps a{display:grid;grid-template-columns:32px 1fr;column-gap:10px;align-items:center;text-decoration:none;color:var(--ink);padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--bg);transition:border-color .15s,background .15s}
+.fet152-steps a:hover,.fet152-steps a:focus-visible{border-color:var(--blue);background:var(--blue2)}
+.fet152-steps a b{grid-row:span 2;color:var(--blue);font-size:1.22rem;font-variant-numeric:tabular-nums}
+.fet152-steps a span{font-weight:750;line-height:1.3}.fet152-steps a small{font-size:.76rem;color:var(--muted)}
+.fet152-hint{border-left:4px solid var(--blue);background:var(--blue2);border-radius:0 10px 10px 0;padding:13px 17px;margin:12px 0 19px;line-height:1.65}
+.fet152-extra{margin-top:20px}.fet152-extra h3{margin:7px 0 10px}.fet152-extra>p{line-height:1.65}
+.fet152-case{border:1px solid var(--line);background:var(--paper);border-radius:13px;margin:12px 0;overflow:hidden}
+.fet152-case summary{cursor:pointer;font-weight:750;padding:16px 18px;background:var(--blue2);line-height:1.5;list-style:none}
+.fet152-case summary::before{content:'＋';margin-right:9px}.fet152-case[open] summary::before{content:'−'}
+.fet152-case-body{padding:16px 20px;line-height:1.65}.fet152-case-body li{margin:10px 0}.fet152-case-body ol{padding-left:23px}
+.fet15-figure img{background:white;object-fit:contain}.fet15-figure figcaption{font-size:.84rem}
+@media(max-width:800px){.fet152-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:530px){.fet152-steps{grid-template-columns:1fr}.fet152-route{padding:15px}.fet152-case-body{padding:13px 15px}}
+@media print{.fet152-steps{display:none}.fet152-case{break-inside:avoid}}

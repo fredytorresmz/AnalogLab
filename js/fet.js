@@ -1,370 +1,71 @@
-/**
- * AnalogLab - Módulo FET & MOSFET
- * Análisis DC, curvas de transferencia, selección de raíces, pequeña señal AC y conmutación eficiente.
- */
+/** AnalogLab FET: modelo de canal largo por tramos. La curva es formativa, no hoja de datos. */
 (() => {
-  "use strict";
-  const { $, $$ } = window.AL;
-
-  // Utilidad de trazado SVG
-  function pathPts(pts, x, y) {
-    return pts.map((p, i) => `${i ? 'L' : 'M'}${x(p[0]).toFixed(1)},${y(p[1]).toFixed(1)}`).join(' ');
+'use strict';
+const $=(s)=>document.querySelector(s);
+const set=(id,value)=>{const e=$('#'+id);if(e)e.textContent=value};
+const num=(id,def)=>{const e=$('#'+id); return e?Number(e.value):def};
+function parameters(){return {Vdd:num('fetVdd',24),R1:num('fetR1',22),R2:num('fetR2',10),Rd:num('fetRd',1.8),Rs:num('fetRs',.82),Vth:num('fetVth',2.5),k:num('fetK',.8)}};
+function solve(p){
+  // V en voltios, I en mA, resistencias de drenador y fuente en kΩ.
+  const Vg=p.Vdd*p.R2/(p.R1+p.R2),x=Vg-p.Vth;
+  let rejectedRoot=null;
+  if(x<=0)return {Vg,Vgs:Vg,Id:0,Vds:p.Vdd,frontier:0,gm:0,region:'corte',rejectedRoot};
+  // Ecuación intrínseca: región de saturación ID=k*Vov²; triodo ID=k*(2Vov VDS-VDS²).
+  // ID = Idispositivo(ID) con KVL: VGS=VG-ID*RS, VDS=VDD-ID*(RD+RS).
+  function intrinsic(i){const ov=Vg-i*p.Rs-p.Vth,ds=p.Vdd-i*(p.Rd+p.Rs);
+    if(ov<=0||ds<=0)return 0;
+    return ds>=ov?p.k*ov*ov:p.k*(2*ov*ds-ds*ds);
   }
-
-  // ==========================================
-  // 1. SIMULADOR DE POLARIZACIÓN Y CURVA ID-VGS
-  // ==========================================
-  function getFetParams() {
-    return {
-      Vdd: +$('#fetVdd')?.value || 24,
-      R1: +$('#fetR1')?.value || 22,    // MΩ
-      R2: +$('#fetR2')?.value || 10,    // MΩ
-      Rd: +$('#fetRd')?.value || 1.8,   // kΩ
-      Rs: +$('#fetRs')?.value || 0.82,  // kΩ
-      Vth: +$('#fetVth')?.value || 2.5, // V
-      k: +$('#fetK')?.value || 0.80     // mA/V^2
-    };
+  let lo=0,hi=p.Vdd/(p.Rd+p.Rs);
+  for(let it=0;it<110;it++){
+    const mid=(lo+hi)/2;
+    if(mid<intrinsic(mid))lo=mid;else hi=mid;
   }
-
-  function solveEMosfetDC(p) {
-    // 1. Voltaje de compuerta (divisor sin carga porque IG = 0)
-    const Vg = p.Vdd * (p.R2 / (p.R1 + p.R2));
-
-    // Si Vg < Vth, el transistor nunca enciende con Rs >= 0
-    if (Vg <= p.Vth) {
-      return {
-        Vg,
-        Vgs: Vg,
-        Id: 0,
-        Vds: p.Vdd,
-        Vdssat: 0,
-        gm: 0,
-        region: 'corte',
-        rejectedRoot: null,
-        desc: 'Compuerta por debajo del umbral: el canal de inversión no se forma.'
-      };
-    }
-
-    // Ecuación cuadrática: ID = k * ((Vg - ID*Rs) - Vth)^2
-    // k * Rs^2 * ID^2 - [2*k*Rs*(Vg - Vth) + 1] * ID + k*(Vg - Vth)^2 = 0
-    // con ID en mA, Rs en kΩ -> ID*Rs en V
-    const Vx = Vg - p.Vth;
-    const a = p.k * Math.pow(p.Rs, 2);
-    const b = -(2 * p.k * p.Rs * Vx + 1);
-    const c = p.k * Math.pow(Vx, 2);
-
-    const disc = b * b - 4 * a * c;
-    if (disc < 0) {
-      return {
-        Vg, Vgs: 0, Id: 0, Vds: p.Vdd, Vdssat: 0, gm: 0, region: 'corte',
-        rejectedRoot: null, desc: 'Sin solución real para la ecuación cuadrática.'
-      };
-    }
-
-    const sqrtDisc = Math.sqrt(disc);
-    const id1 = (-b + sqrtDisc) / (2 * a);
-    const id2 = (-b - sqrtDisc) / (2 * a);
-
-    const vgs1 = Vg - id1 * p.Rs;
-    const vgs2 = Vg - id2 * p.Rs;
-
-    // Criterio físico de descarte de Boylestad & Malvino:
-    // Para E-MOSFET, la conducción exige Vgs > Vth.
-    // La raíz que produzca Vgs < Vth es una solución parásita matemática.
-    let validId, validVgs, rejectedId, rejectedVgs, rejectReason;
-
-    if (vgs1 >= p.Vth && vgs2 < p.Vth) {
-      validId = id1; validVgs = vgs1;
-      rejectedId = id2; rejectedVgs = vgs2;
-      rejectReason = `Produce V_GS = ${vgs2.toFixed(2)} V < V_GS(th) = ${p.Vth.toFixed(2)} V`;
-    } else if (vgs2 >= p.Vth && vgs1 < p.Vth) {
-      validId = id2; validVgs = vgs2;
-      rejectedId = id1; rejectedVgs = vgs1;
-      rejectReason = `Produce V_GS = ${vgs1.toFixed(2)} V < V_GS(th) = ${p.Vth.toFixed(2)} V`;
-    } else {
-      // Ambas raíces dan Vgs >= Vth: escoger la que no sature la fuente en la malla de salida
-      validId = Math.min(id1, id2);
-      validVgs = Vg - validId * p.Rs;
-      rejectedId = Math.max(id1, id2);
-      rejectedVgs = Vg - rejectedId * p.Rs;
-      rejectReason = `Produce caída excesiva en la malla de salida`;
-    }
-
-    // Caída en malla de salida
-    const Vds = p.Vdd - validId * (p.Rd + p.Rs);
-    const Vdssat = validVgs - p.Vth;
-
-    let region = 'saturacion';
-    let desc = 'Saturación confirmada (V_DS >= V_GS - V_GS(th)). El canal está estrangulado en el drenador.';
-
-    if (Vds < Vdssat && Vds > 0) {
-      region = 'triodo';
-      desc = 'Operación en región Óhmica/Triodo (V_DS < V_GS - V_GS(th)). Canal no estrangulado.';
-    } else if (Vds <= 0) {
-      region = 'corte-extremo';
-      desc = 'Malla de salida colapsada: corriente excesiva para las resistencias seleccionadas.';
-    }
-
-    // Transconductancia gm = 2 * k * (Vgs - Vth) = 2 * sqrt(k * Id) en mS
-    const gm = 2 * p.k * (validVgs - p.Vth);
-
-    return {
-      Vg,
-      Vgs: validVgs,
-      Id: validId,
-      Vds,
-      Vdssat,
-      gm,
-      region,
-      rejectedRoot: { id: rejectedId, vgs: rejectedVgs, reason: rejectReason },
-      desc
-    };
+  const Id=(lo+hi)/2,Vgs=Vg-Id*p.Rs,Vds=p.Vdd-Id*(p.Rd+p.Rs);
+  const frontier=Math.max(0,Vgs-p.Vth);
+  const region=Vds+1e-8>=frontier?'saturacion':'triodo';
+  // Transconductancia incremental de la rama intrínseca a VDS constante.
+  const gm=region==='saturacion'?2*p.k*frontier:2*p.k*Vds;
+  // Ambas raíces de la hipótesis de saturación, sin asumir que esta región se verifica.
+  if(p.Rs>0){
+    const a=p.k*p.Rs*p.Rs,b=-(1+2*p.k*p.Rs*x),c=p.k*x*x,delta=Math.max(0,b*b-4*a*c);
+    const r1=(-b+Math.sqrt(delta))/(2*a),r2=(-b-Math.sqrt(delta))/(2*a);
+    const upper=Math.max(r1,r2),vgsUpper=Vg-upper*p.Rs;
+    rejectedRoot={id:upper,vgs:vgsUpper,reason:vgsUpper<p.Vth?'VGS cae por debajo del umbral':'requiere verificar el régimen de operación'};
   }
-
-  function drawTransferCurve(p, sol) {
-    const el = $('#fetCurveChart');
-    if (!el) return;
-
-    const maxVgs = Math.max(10, p.Vdd * 0.6);
-    const maxId = Math.max(8, p.k * Math.pow(maxVgs - p.Vth, 2) * 0.4);
-
-    const a = window.AL.axes(0, maxVgs, 0, maxId, 'V_GS (V)', 'I_D (mA)');
-    let h = a.h;
-
-    // Región de corte Vgs < Vth sombreada
-    const vthX = a.x(p.Vth);
-    h += `<rect x="${a.x(0)}" y="${a.T}" width="${Math.max(0, vthX - a.x(0))}" height="${a.gh}" fill="var(--red2)" opacity="0.35"/>`;
-    h += `<text x="${(a.x(0) + vthX) / 2}" y="${a.T + 20}" text-anchor="middle" font-size="11" fill="var(--red)" font-weight="bold">CORTE (V_GS < V_th)</text>`;
-
-    // Curva de transferencia teórica ID = k*(Vgs - Vth)^2
-    let curvePts = [];
-    for (let v = p.Vth; v <= maxVgs; v += 0.1) {
-      const id = p.k * Math.pow(v - p.Vth, 2);
-      if (id <= maxId * 1.05) {
-        curvePts.push([v, id]);
-      }
-    }
-    if (curvePts.length > 1) {
-      h += `<path d="${pathPts(curvePts, a.x, a.y)}" fill="none" stroke="var(--blue)" stroke-width="3"/>`;
-    }
-
-    // Recta de carga de compuerta: Vgs = Vg - Id * Rs  => Id = (Vg - Vgs) / Rs
-    let loadPts = [];
-    const idAtVgsZero = sol.Vg / p.Rs;
-    loadPts.push([0, idAtVgsZero]);
-    loadPts.push([sol.Vg, 0]);
-    h += `<path d="${pathPts(loadPts, a.x, a.y)}" fill="none" stroke="var(--amber)" stroke-width="2.5" stroke-dasharray="6,4"/>`;
-
-    // Punto Q
-    if (sol.region !== 'corte' && sol.Vgs <= maxVgs && sol.Id <= maxId) {
-      const qx = a.x(sol.Vgs);
-      const qy = a.y(sol.Id);
-
-      // Líneas punteadas hacia los ejes
-      h += `<line x1="${qx}" y1="${qy}" x2="${qx}" y2="${a.T + a.gh}" stroke="var(--red)" stroke-dasharray="3,3" stroke-width="1.5"/>`;
-      h += `<line x1="${qx}" y1="${qy}" x2="${a.x(0)}" y2="${qy}" stroke="var(--red)" stroke-dasharray="3,3" stroke-width="1.5"/>`;
-
-      h += `<circle cx="${qx}" cy="${qy}" r="7" fill="var(--red)"/>`;
-      h += `<text x="${qx + 12}" y="${qy - 10}" fill="var(--red)" font-size="13" font-weight="bold">Q (${sol.Vgs.toFixed(2)} V, ${sol.Id.toFixed(2)} mA)</text>`;
-    }
-
-    // Raíz descartada (si entra en el gráfico)
-    if (sol.rejectedRoot && sol.rejectedRoot.vgs >= 0 && sol.rejectedRoot.vgs <= maxVgs && sol.rejectedRoot.id <= maxId) {
-      const rx = a.x(sol.rejectedRoot.vgs);
-      const ry = a.y(sol.rejectedRoot.id);
-      h += `<circle cx="${rx}" cy="${ry}" r="6" fill="none" stroke="var(--muted)" stroke-width="2"/>`;
-      h += `<line x1="${rx - 5}" y1="${ry - 5}" x2="${rx + 5}" y2="${ry + 5}" stroke="var(--red)" stroke-width="2"/>`;
-      h += `<line x1="${rx - 5}" y1="${ry + 5}" x2="${rx + 5}" y2="${ry - 5}" stroke="var(--red)" stroke-width="2"/>`;
-      h += `<text x="${rx + 10}" y="${ry + 15}" fill="var(--muted)" font-size="11">Raíz descartada (${sol.rejectedRoot.vgs.toFixed(1)} V)</text>`;
-    }
-
-    el.innerHTML = h;
-  }
-
-  function updateFetSim() {
-    const p = getFetParams();
-
-    // Actualizar labels de sliders
-    $('#fetVddTxt') && ($('#fetVddTxt').textContent = p.Vdd.toFixed(1));
-    $('#fetR1Txt') && ($('#fetR1Txt').textContent = p.R1.toFixed(1));
-    $('#fetR2Txt') && ($('#fetR2Txt').textContent = p.R2.toFixed(1));
-    $('#fetRdTxt') && ($('#fetRdTxt').textContent = p.Rd.toFixed(2));
-    $('#fetRsTxt') && ($('#fetRsTxt').textContent = p.Rs.toFixed(2));
-    $('#fetVthTxt') && ($('#fetVthTxt').textContent = p.Vth.toFixed(2));
-    $('#fetKTxt') && ($('#fetKTxt').textContent = p.k.toFixed(2));
-
-    const sol = solveEMosfetDC(p);
-
-    // Actualizar lecturas en pantalla
-    $('#fetResVg') && ($('#fetResVg').textContent = sol.Vg.toFixed(2) + ' V');
-    $('#fetResVgs') && ($('#fetResVgs').textContent = sol.Vgs.toFixed(2) + ' V');
-    $('#fetResId') && ($('#fetResId').textContent = sol.Id.toFixed(2) + ' mA');
-    $('#fetResVds') && ($('#fetResVds').textContent = sol.Vds.toFixed(2) + ' V');
-    $('#fetResVdssat') && ($('#fetResVdssat').textContent = sol.Vdssat.toFixed(2) + ' V');
-    $('#fetResGm') && ($('#fetResGm').textContent = sol.gm.toFixed(2) + ' mS');
-
-    // Ganancia aproximada Av = -gm * (Rd || r_load)
-    const av = -sol.gm * p.Rd;
-    $('#fetResAv') && ($('#fetResAv').textContent = av.toFixed(2) + ' (V/V)');
-
-    // Estado / Región
-    const st = $('#fetState');
-    if (st) {
-      if (sol.region === 'corte') {
-        st.className = 'status-card off';
-        st.innerHTML = '<b>CORTE</b><span>' + sol.desc + '</span>';
-      } else if (sol.region === 'triodo') {
-        st.className = 'status-card danger';
-        st.innerHTML = '<b>REGIÓN ÓHMICA / TRIODO</b><span>' + sol.desc + '</span>';
-      } else {
-        st.className = 'status-card ok';
-        st.innerHTML = '<b>SATURACIÓN (ACTIVA)</b><span>' + sol.desc + '</span>';
-      }
-    }
-
-    // Explicación de la raíz descartada
-    const rEl = $('#fetRootExplanation');
-    if (rEl && sol.rejectedRoot) {
-      rEl.innerHTML = `<strong>Criterio de Raíces:</strong> La matemática cuadrática arroja dos raíces:
-        <span style="color:var(--green);font-weight:bold;">$I_{DQ} = ${sol.Id.toFixed(2)}\\text{ mA}$ ($V_{GS} = ${sol.Vgs.toFixed(2)}\\text{ V}$)</span> y
-        <span style="color:var(--red);text-decoration:line-through;">$I_{D2} = ${sol.rejectedRoot.id.toFixed(2)}\\text{ mA}$ ($V_{GS} = ${sol.rejectedRoot.vgs.toFixed(2)}\\text{ V}$)</span>.
-        Se descarta $I_{D2}$ porque <em>${sol.rejectedRoot.reason}</em>, lo que viola la condición física del canal inducido.`;
-      window.AL.typeset(rEl);
-    }
-
-    drawTransferCurve(p, sol);
-  }
-
-  // Event listeners para sliders
-  ['fetVdd', 'fetR1', 'fetR2', 'fetRd', 'fetRs', 'fetVth', 'fetK'].forEach(id => {
-    $('#' + id)?.addEventListener('input', updateFetSim);
-  });
-
-  // ==========================================
-  // 2. COMPARADOR TÉRMICO BJT VS MOSFET (POTENCIA)
-  // ==========================================
-  function updatePowerComparison() {
-    const iLoad = +$('#pwrCurrent')?.value || 10; // Amperios
-    $('#pwrCurrentTxt') && ($('#pwrCurrentTxt').textContent = iLoad.toFixed(1) + ' A');
-
-    // 1. BJT de Potencia (TIP35C): Vce(sat) ≈ 1.2V constante
-    const vceSat = 1.2;
-    const pBjt = iLoad * vceSat; // Watts
-
-    // 2. MOSFET Estándar (IRFZ44N): Rds(on) = 17.5 mΩ = 0.0175 Ω
-    const rdsStandard = 0.0175;
-    const pMosStandard = Math.pow(iLoad, 2) * rdsStandard;
-
-    // 3. MOSFET Ultra-Bajo Rds(on) (IPP015N04N): Rds(on) = 1.5 mΩ = 0.0015 Ω
-    const rdsModern = 0.0015;
-    const pMosModern = Math.pow(iLoad, 2) * rdsModern;
-
-    // Actualizar textos
-    $('#pwrBjt') && ($('#pwrBjt').textContent = pBjt.toFixed(2) + ' W');
-    $('#pwrMosStd') && ($('#pwrMosStd').textContent = pMosStandard.toFixed(2) + ' W');
-    $('#pwrMosMod') && ($('#pwrMosMod').textContent = pMosModern.toFixed(2) + ' W');
-
-    // Estimación de elevación térmica aproximada sin disipador (RthJA ≈ 62 °C/W para TO-220 al aire)
-    const rthJA = 62;
-    const tAmb = 25;
-    const tBjt = tAmb + pBjt * rthJA;
-    const tMosMod = tAmb + pMosModern * rthJA;
-
-    const tEl = $('#pwrThermalDiag');
-    if (tEl) {
-      if (tBjt > 150) {
-        tEl.innerHTML = `<span style="color:var(--red);font-weight:bold;">¡PELIGRO TÉRMICO BJT!</span> A ${iLoad} A, el BJT alcanzaría teóricamente <strong>${tBjt.toFixed(0)} °C</strong> (se funde sin un disipador gigante y ventilador). En cambio, el MOSFET moderno solo disipa <strong>${pMosModern.toFixed(2)} W</strong> alcanzando apenas <strong>${tMosMod.toFixed(1)} °C</strong>: ¡opera tibio sin disipador!`;
-      } else {
-        tEl.innerHTML = `A ${iLoad} A, el MOSFET moderno ahorra ${(pBjt - pMosModern).toFixed(2)} W comparado con el BJT (${((1 - pMosModern / pBjt) * 100).toFixed(1)}% de reducción de disipación).`;
-      }
-    }
-  }
-
-  $('#pwrCurrent')?.addEventListener('input', updatePowerComparison);
-
-  // ==========================================
-  // 3. DIAGNÓSTICO DE COMPUERTAS 3.3V / 5V
-  // ==========================================
-  const mcuData = {
-    'esp32': { name: 'ESP32 / ESP8266', vout: 3.3, maxI: 12 },
-    'arduino': { name: 'Arduino Uno / Nano (ATmega328P)', vout: 5.0, maxI: 20 },
-    'pico': { name: 'Raspberry Pi Pico (RP2040)', vout: 3.3, maxI: 12 },
-    'stm32': { name: 'STM32 (ARM Cortex-M)', vout: 3.3, maxI: 8 }
-  };
-
-  const mosfetData = {
-    'irfz44n': {
-      name: 'IRFZ44N (Estándar 10V Gate)',
-      vthMin: 2.0, vthMax: 4.0, vgsFull: 10.0, rdsNominal: '17.5 mΩ (a 10V)',
-      type: 'standard',
-      notes: 'No es Logic-Level. Con 3.3V apenas entra en conducción tenue (< 1A) con Rds de varios ohmios. ¡Se quemará si conmuta carga!'
-    },
-    'irlz44n': {
-      name: 'IRLZ44N (Logic-Level L)',
-      vthMin: 1.0, vthMax: 2.0, vgsFull: 4.5, rdsNominal: '22 mΩ (a 4.5V) / 35 mΩ (a 3.3V)',
-      type: 'logic',
-      notes: '¡Totalmente compatible con microcontroladores! Satura con 3.3V y 5V sin riesgo de sobrecalentamiento.'
-    },
-    '2n7000': {
-      name: '2N7000 (Pequeña señal Logic-Level)',
-      vthMin: 0.8, vthMax: 3.0, vgsFull: 4.5, rdsNominal: '1.2 Ω a 5V (máx 200 mA)',
-      type: 'logic-small',
-      notes: 'Ideal para señales de control, relés miniatura o conmutación lógica rápida a 3.3V y 5V.'
-    },
-    'irf540n': {
-      name: 'IRF540N (Estándar 100V)',
-      vthMin: 2.0, vthMax: 4.0, vgsFull: 10.0, rdsNominal: '44 mΩ (a 10V)',
-      type: 'standard',
-      notes: 'Requiere $V_{GS} = 10\\text{ V}$ obligatorios. Requiere driver intermediario (ej. TC4420 o un BJT previo).'
-    }
-  };
-
-  function updateMcuCheck() {
-    const mcuKey = $('#mcuSelect')?.value || 'esp32';
-    const mosKey = $('#mosSelect')?.value || 'irfz44n';
-
-    const mcu = mcuData[mcuKey];
-    const mos = mosfetData[mosKey];
-
-    const outEl = $('#mcuDiagOut');
-    if (!outEl) return;
-
-    let isSafe = false;
-    if (mos.type.startsWith('logic')) {
-      if (mcu.vout >= 4.5 || (mosKey === 'irlz44n' && mcu.vout >= 3.0)) {
-        isSafe = true;
-      }
-    }
-
-    let html = `<h4>Diagnóstico de Conexión Directa: ${mcu.name} → ${mos.name}</h4>`;
-    html += `<p>• <strong>Voltaje GPIO entregado:</strong> ${mcu.vout} V</p>`;
-    html += `<p>• <strong>Requisito de saturación completa del MOSFET:</strong> $V_{GS} \\ge ${mos.vgsFull}\\text{ V}$</p>`;
-    html += `<p>• <strong>Resistencia de canal esperada:</strong> ${mos.rdsNominal}</p>`;
-
-    if (isSafe) {
-      html += `<div class="status-card ok" style="margin-top:12px;">
-        <b>✓ COMPATIBILIDAD APROBADA</b>
-        <span>El transistor es Logic-Level. Con los ${mcu.vout} V del ${mcu.name}, el canal se abre plenamente en saturación con baja resistencia interna.</span>
-      </div>`;
-    } else {
-      html += `<div class="status-card danger" style="margin-top:12px;">
-        <b>⚠️ ALERTA DE DISEÑO CRÍTICA</b>
-        <span>${mos.notes} Para gobernar este MOSFET desde ${mcu.vout} V se debe emplear un <em>gate driver</em> (ej. TC4420, IR2104) o un transistor BJT previo como convertidor de nivel a 10 V o 12 V.</span>
-      </div>`;
-    }
-
-    outEl.innerHTML = html;
-    window.AL.typeset(outEl);
-  }
-
-  $('#mcuSelect')?.addEventListener('change', updateMcuCheck);
-  $('#mosSelect')?.addEventListener('change', updateMcuCheck);
-
-  // Inicializar todo al cargar
-  setTimeout(() => {
-    updateFetSim();
-    updatePowerComparison();
-    updateMcuCheck();
-  }, 100);
-
+  return {Vg,Vgs,Id,Vds,frontier,gm,region,rejectedRoot};
+}
+function plot(p,q){const el=$('#fetCurveChart');if(!el)return;
+ const W=720,H=390,L=75,R=28,T=45,B=75,maxX=Math.max(8,p.Vdd*.5),maxY=Math.max(8,p.k*Math.max(0,maxX-p.Vth)**2*.28,q.Id*1.55),w=W-L-R,h=H-T-B;
+ const xx=v=>L+v/maxX*w,yy=i=>T+h-i/maxY*h;
+ const line=[];for(let n=0;n<=220;n++){const v=p.Vth+(maxX-p.Vth)*n/220,id=p.k*(v-p.Vth)**2;if(id<=maxY)line.push([xx(v),yy(id)]);}
+ const path=line.map((pt,i)=>(i?'L':'M')+pt[0].toFixed(2)+','+pt[1].toFixed(2)).join(' ');
+ const ticks=[];for(let i=0;i<=4;i++){const v=i*maxX/4,ii=i*maxY/4;ticks.push(`<text x="${xx(v)}" y="${T+h+25}" text-anchor="middle" fill="currentColor" font-size="13">${v.toFixed(1)}</text><text x="${L-12}" y="${yy(ii)+4}" text-anchor="end" fill="currentColor" font-size="13">${ii.toFixed(1)}</text>`)}
+ let ref=`<rect width="${W}" height="${H}" rx="12" fill="var(--paper)"/><text x="25" y="27" fill="currentColor" font-size="17" font-weight="bold">I_D–V_GS: modelo cuadrático ilustrativo</text><path d="M${L} ${T}V${T+h}H${W-R}" fill="none" stroke="currentColor" stroke-width="2"/>${ticks.join('')}<text x="20" y="51" fill="currentColor" font-size="14">I_D (mA)</text><text x="${W/2}" y="${H-16}" fill="currentColor" font-size="14" text-anchor="middle">V_GS (V)</text><path d="${path}" fill="none" stroke="var(--blue)" stroke-width="3.5"/><path d="M${xx(p.Vth)} ${T}V${T+h}" stroke="var(--red)" stroke-width="1.5" stroke-dasharray="5 5"/><text x="${xx(p.Vth)+8}" y="${T+20}" fill="var(--red)" font-size="13">Vth=${p.Vth.toFixed(2)} V</text>`;
+ if(p.Rs>0){let pts=[];for(let i=0;i<=120;i++){const v=i*maxX/120,id=(q.Vg-v)/p.Rs;if(id>=0&&id<=maxY)pts.push([xx(v),yy(id)]);}ref+=`<path d="${pts.map((z,i)=>(i?'L':'M')+z[0].toFixed(1)+','+z[1].toFixed(1)).join(' ')}" fill="none" stroke="var(--amber)" stroke-width="2.5" stroke-dasharray="7 5"/>`}
+ if(q.Id>0&&q.Vgs>=0&&q.Vgs<=maxX&&q.Id<=maxY){ref+=`<circle cx="${xx(q.Vgs)}" cy="${yy(q.Id)}" r="7" fill="var(--red)"/><path d="M${xx(q.Vgs)} ${yy(q.Id)}V${T+h} M${xx(q.Vgs)} ${yy(q.Id)}H${L}" stroke="var(--red)" stroke-width="1.3" stroke-dasharray="4 4"/><text x="${Math.min(W-160,xx(q.Vgs)+12)}" y="${Math.max(40,yy(q.Id)-12)}" fill="var(--red)" font-size="14" font-weight="700">Q = ${q.Id.toFixed(2)} mA</text>`;}
+ ref+=`<text x="${L+12}" y="${T+h+52}" fill="currentColor" font-size="12">Azul: modelo de saturación · Amarillo: línea de polarización · Rojo: punto Q</text>`;
+ el.innerHTML=`<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Gráfica de transferencia del modelo ideal MOSFET con punto Q y línea de polarización">${ref}</svg>`;
+}
+function update(){const p=parameters(),q=solve(p);
+ [['fetVddTxt',p.Vdd,1],['fetR1Txt',p.R1,1],['fetR2Txt',p.R2,1],['fetRdTxt',p.Rd,2],['fetRsTxt',p.Rs,2],['fetVthTxt',p.Vth,2],['fetKTxt',p.k,2]].forEach(([id,v,n])=>set(id,v.toFixed(n)));
+ set('fetResVg',q.Vg.toFixed(2)+' V');set('fetResVgs',q.Vgs.toFixed(2)+' V');set('fetResId',q.Id.toFixed(3)+' mA');set('fetResVds',q.Vds.toFixed(2)+' V');set('fetResVdssat',q.frontier.toFixed(2)+' V');set('fetResGm',q.gm.toFixed(2)+' mS');
+ const av=q.region==='saturacion'?-q.gm*p.Rd/(1+q.gm*p.Rs):null;
+ set('fetResAv',av===null?'No aplicable en corte/triodo':av.toFixed(2)+' V/V (sin carga, ro→∞)');
+ const st=$('#fetState');if(st){st.className='status-card '+(q.region==='saturacion'?'ok':q.region==='triodo'?'danger':'off');st.innerHTML=`<b>${q.region==='saturacion'?'REGIÓN DE SATURACIÓN (MODELO ANALÓGICO)':q.region==='triodo'?'REGIÓN ÓHMICA / TRIODO':'CORTE'}</b><span>${q.region==='saturacion'?'Se cumple VDS ≥ VGS − Vth. La estimación de ganancia ideal es aplicable bajo las hipótesis indicadas.':q.region==='triodo'?'No se puede usar ID=k(VGS−Vth)² ni la fórmula de ganancia de saturación; se calculó ID con el modelo por tramos.':'En el modelo ideal VGS≤Vth; la corriente de drenador se aproxima a cero.'}</span>`;}
+ const root=$('#fetRootExplanation');if(root){root.textContent=q.rejectedRoot?`La ecuación cuadrática en saturación produce también la raíz ID=${q.rejectedRoot.id.toFixed(3)} mA, que implicaría VGS=${q.rejectedRoot.vgs.toFixed(2)} V: ${q.rejectedRoot.reason}. El punto mostrado se obtiene comprobando primero las regiones y resolviendo el modelo por tramos.`:'El transistor está en corte para estos parámetros: no es válido aplicar la ecuación de saturación como si existiera corriente de canal.';}
+ plot(p,q);
+}
+['fetVdd','fetR1','fetR2','fetRd','fetRs','fetVth','fetK'].forEach(id=>$('#'+id)?.addEventListener('input',update));
+function power(){const I=num('pwrCurrent',10),pB=I*.8,pS=I*I*.025,pM=I*I*.015;set('pwrCurrentTxt',I.toFixed(1)+' A');set('pwrBjt',pB.toFixed(2)+' W');set('pwrMosStd',pS.toFixed(2)+' W');set('pwrMosMod',pM.toFixed(2)+' W');const d=$('#pwrThermalDiag');if(d)d.textContent='Comparación didáctica: se supuso VCE(sat)=0,8 V, RDS(on)=25 mΩ y 15 mΩ. Las pérdidas de PWM y el aumento térmico no están incluidos. Ninguna de estas cifras autoriza un montaje sin revisar la hoja de datos.';}
+$('#pwrCurrent')?.addEventListener('input',power);
+function compatibility(){const m=$('#mcuSelect')?.value||'esp32', f=$('#mosSelect')?.value||'irlz44n';const voltage=m==='arduino'?5:3.3;const names={irfz44n:'IRFZ44N',irlz44n:'IRLZ44N','2n7000':'2N7000',irf540n:'IRF540N'};let msg='',cl='danger';
+if(f==='irlz44n'&&voltage===5){cl='ok';msg='El IRLZ44N cuenta con RDS(on) especificado a VGS=5 V (y también 4 V): la tensión de puerta es prometedora. No implica aprobación automática; comprueba corriente, temperatura, pérdidas, SOA, Qg y corriente del GPIO/driver.'}
+else if(f==='2n7000'&&voltage===5){cl='ok';msg='El 2N7000 puede servir para señal y cargas pequeñas según la hoja de datos, pero no se debe asignar aquí una corriente universal ni considerarlo un MOSFET de motor de potencia. La corriente y RDS(on) garantizadas dependen de las condiciones de ensayo.'}
+else if(f==='irlz44n'&&voltage===3.3){cl='danger';msg='El datasheet consultado no proporciona un máximo de RDS(on) garantizado exactamente a 3,3 V. Por tanto, no se puede certificar una carga de potencia con este selector: busca otro MOSFET especificado a 2,5/3,3 V o emplea un driver que entregue una tensión de puerta garantizada.'}
+else if(f==='2n7000'&&voltage===3.3){msg='VGS(th) no garantiza conducción suficiente. El 2N7000 se especifica para condiciones concretas (por ejemplo 4,5/10 V) y corrientes limitadas. Verifica si puede accionar esa carga o utiliza otro componente.'}
+else{msg='Este dispositivo suele tener sus valores bajos de RDS(on) especificados alrededor de VGS=10 V. No presupongas funcionamiento eficiente a 3,3/5 V; utiliza un controlador o elige un MOSFET con especificaciones apropiadas.'}
+const el=$('#mcuDiagOut');if(el){el.className='status-card '+cl;el.innerHTML=`<b>${voltage.toFixed(1)} V GPIO → ${names[f]}: ${cl==='ok'?'dato de puerta utilizable':'requiere verificación'}</b><span>${msg}</span>`}}
+$('#mcuSelect')?.addEventListener('change',compatibility);$('#mosSelect')?.addEventListener('change',compatibility);
+update();power();compatibility();
 })();
